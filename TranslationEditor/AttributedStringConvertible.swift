@@ -1,0 +1,15 @@
+//
+//  File.swift
+//  TranslationEditor
+//
+//  Created by Mikko Hilpinen on 29.9.2016.
+//  Copyright © 2016 Mikko Hilpinen. All rights reserved.
+//
+
+import Foundation
+
+// Instances conforming to this protocol can be parsed into attributed strings with existing USX attributes
+protocol AttributedStringConvertible
+{
+	func toAttributedString() -> NSAttributedString
+}
