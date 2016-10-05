@@ -18,7 +18,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 	
 	// Vars	--------------
 	
-	private var testContent = [Paragraph]()
+	private var testContent = [Para]()
 	
 	
 	// Overridden	-----
@@ -102,7 +102,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 	private func generateTestData()
 	{
 		let testString = "The first verse is here. #Followed by another.€A new paragraph starts. #asldkalsk dlka #asdjkkaj a#jasdkjadkj€ASdkkddkkdslkskd#asjddjddd€asdjdjdj"
-		var paragraphs = [Paragraph]()
+		var paragraphs = [Para]()
 		
 		var index = 0
 		for paraText in testString.components(separatedBy: "€")
@@ -116,7 +116,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 				index += 1
 			}
 			
-			paragraphs.append(Paragraph(contents: verses))
+			paragraphs.append(Para(content: verses))
 		}
 		
 		testContent = paragraphs

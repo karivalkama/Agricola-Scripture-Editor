@@ -8,12 +8,6 @@
 
 import Foundation
 
-enum CharStyle: String
-{
-	case quotation = "qt"
-	case keyTerm = "k"
-}
-
 // Chardata is used for storing text within a verse or another container. Character data may have specific styling associated with it (quotation, special meaning, etc.)
 struct CharData: AttributedStringConvertible
 {

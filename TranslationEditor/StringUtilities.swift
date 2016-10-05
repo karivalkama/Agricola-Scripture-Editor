@@ -56,6 +56,27 @@ extension String
 		
 		return regex.matches(in: self, options: [], range: trueRange).count
 	}
+	
+	// Finds a single digit at 'index' of 'self'. Nil if out of range or not a digit
+	func digit(at index: Int) -> Int?
+	{
+		return digit(at: NSMakeRange(index, 1))
+	}
+	
+	func digit(at range: NSRange) -> Int?
+	{
+		let nsStr = self as NSString
+		
+		// Checks the range first
+		if range.location < 0 || range.location + range.length > nsStr.length
+		{
+			return nil
+		}
+		
+		// Finds the 'character' at index
+		let subString = nsStr.substring(with: range)
+		return Int(subString)
+	}
 }
 
 extension NSAttributedString

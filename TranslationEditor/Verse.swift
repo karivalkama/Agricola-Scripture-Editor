@@ -16,7 +16,7 @@ class Verse: AttributedStringConvertible
 	// ATTRIBUTES	------
 	
 	let range: VerseRange
-	var charData: [CharData]
+	var content: [CharData]
 	
 	
 	// INIT	-------
@@ -24,18 +24,18 @@ class Verse: AttributedStringConvertible
 	init(range: VerseRange, contents: String? = nil)
 	{
 		self.range = range
-		self.charData = [CharData]()
+		self.content = [CharData]()
 		
 		if let contents = contents
 		{
-			self.charData.append(CharData(text: contents))
+			self.content.append(CharData(text: contents))
 		}
 	}
 	
 	init(range: VerseRange, contents: [CharData])
 	{
 		self.range = range
-		self.charData = contents
+		self.content = contents
 	}
 	
 	
@@ -66,7 +66,7 @@ class Verse: AttributedStringConvertible
 		}
 		
 		// Adds the verse content afterwards
-		for part in charData
+		for part in content
 		{
 			str.append(part.toAttributedString())
 		}
@@ -92,11 +92,11 @@ class Verse: AttributedStringConvertible
 		var combined = [CharData]()
 		if self.range.start < other.range.start
 		{
-			combined = self.charData + other.charData
+			combined = self.content + other.content
 		}
 		else
 		{
-			combined = other.charData + self.charData
+			combined = other.content + self.content
 		}
 		
 		// Fails if the ranges don't connect
