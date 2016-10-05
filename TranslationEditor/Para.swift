@@ -30,7 +30,7 @@ class Para: AttributedStringConvertible
 		
 		if let start = start, let end = end
 		{
-			return VerseRange(start: start, end: end)
+			return VerseRange(start, end)
 		}
 		else
 		{
@@ -88,6 +88,7 @@ class Para: AttributedStringConvertible
 	
 	// IMPLEMENTED -----
 	
+	// TODO: Add paraStyle information as well
 	func toAttributedString() -> NSAttributedString
 	{
 		let str = NSMutableAttributedString()
@@ -205,7 +206,7 @@ class Para: AttributedStringConvertible
 						// Otherwise completes and records the preceeding range
 					else
 					{
-						verseRanges.append((VerseRange(start: lastVerseIndex!.minIndex, end: newIndex), NSMakeRange(lastVerseIndex!.startPosition, range.location - lastVerseIndex!.startPosition)))
+						verseRanges.append((VerseRange(lastVerseIndex!.minIndex, newIndex), NSMakeRange(lastVerseIndex!.startPosition, range.location - lastVerseIndex!.startPosition)))
 						
 						lastVerseIndex = (newIndex, newIndex, range.location + range.length)
 					}
@@ -217,7 +218,7 @@ class Para: AttributedStringConvertible
 		if let lastVerseIndex = lastVerseIndex
 		{
 			let end = VerseIndex(lastVerseIndex.maxIndex.index, midVerse: true)
-			verseRanges.append((VerseRange(start: lastVerseIndex.minIndex, end: end), NSMakeRange(lastVerseIndex.startPosition, usxString.length - lastVerseIndex.startPosition)))
+			verseRanges.append((VerseRange(lastVerseIndex.minIndex, end), NSMakeRange(lastVerseIndex.startPosition, usxString.length - lastVerseIndex.startPosition)))
 		}
 			// The range can't remain ambiguous forever
 		else

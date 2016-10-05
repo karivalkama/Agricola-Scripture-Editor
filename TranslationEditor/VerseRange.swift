@@ -39,12 +39,12 @@ class VerseRange
 				while cursor < end
 				{
 					let nextVerseStart = VerseIndex(cursor.index + 1)
-					verses.append(VerseRange(start: cursor, end: nextVerseStart))
+					verses.append(VerseRange(cursor, nextVerseStart))
 					cursor = nextVerseStart
 				}
 				if end.midVerse
 				{
-					verses.append(VerseRange(start: cursor, end: end))
+					verses.append(VerseRange(cursor, end))
 				}
 				
 				_verses = verses
@@ -87,7 +87,7 @@ class VerseRange
 	
 	// Start is inclusive, end is exclusive
 	// For example, verse 1 would be [1, 2]. Verse 1a would be [1, 1mid] and 1-2 would be [1, 3]
-	init(start: VerseIndex, end: VerseIndex)
+	init(_ start: VerseIndex, _ end: VerseIndex)
 	{
 		// Start always comes before end
 		if end.isBefore(start)
@@ -126,26 +126,26 @@ class VerseRange
 			// Of course there are special cases where the right range is at the start or end of the left range, in which case the range is not split
 			if left.start == right.start
 			{
-				return [VerseRange(start: right.end, end: left.end)]
+				return [VerseRange(right.end, left.end)]
 			}
 			else if left.end == right.end
 			{
-				return [VerseRange(start: left.start, end: right.start)]
+				return [VerseRange(left.start, right.start)]
 			}
 			else
 			{
-				return [VerseRange(start: left.start, end: right.start), VerseRange(start: right.end, end: left.end)]
+				return [VerseRange(left.start, right.start), VerseRange(right.end, left.end)]
 			}
 		}
 		// If only the start of the right range is within left range, it is used as the new end point
 		else if left.contains(index: right.start, excludeEnd: true)
 		{
-			return [VerseRange(start: left.start, end: right.start)]
+			return [VerseRange(left.start, right.start)]
 		}
 		// If only the end of the right range is within left range, it is used as the new start point
 		else if left.contains(index: right.end, excludeEnd: false)
 		{
-			return [VerseRange(start: right.end, end: left.end)]
+			return [VerseRange(right.end, left.end)]
 		}
 		// If the two ranges don't overlap at all, no operation is required
 		else
@@ -190,11 +190,11 @@ class VerseRange
 	{
 		if start > index
 		{
-			return VerseRange(start: index, end: end)
+			return VerseRange(index, end)
 		}
 		else if end < index
 		{
-			return VerseRange(start: start, end: index)
+			return VerseRange(start, index)
 		}
 		else
 		{
@@ -211,7 +211,7 @@ class VerseRange
 	// Creates a diminished version of 'self' that is contained within 'range'
 	func within(range: VerseRange) -> VerseRange
 	{
-		return VerseRange(start: VerseIndex.max(start, range.start), end: VerseIndex.min(end, range.end))
+		return VerseRange(VerseIndex.max(start, range.start), VerseIndex.min(end, range.end))
 	}
 	
 	// Splits the verse range at 'index', creating 2 separate ranges. If the index falls out of range or is the start or end of the range, the range is not split and is returned whole
@@ -219,7 +219,7 @@ class VerseRange
 	{
 		if contains(index: index, excludeEnd: true) && start != index
 		{
-			return [VerseRange(start: start, end: index), VerseRange(start: index, end: end)]
+			return [VerseRange(start, index), VerseRange(index, end)]
 		}
 		else
 		{

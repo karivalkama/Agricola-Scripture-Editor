@@ -112,7 +112,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 			var verses = [Verse]()
 			for verseText in paraText.components(separatedBy: "#")
 			{
-				verses.append(Verse(range: VerseRange(start: VerseIndex(index), end: VerseIndex(index + 1)), contents: verseText))
+				verses.append(Verse(range: VerseRange(VerseIndex(index), VerseIndex(index + 1)), contents: verseText))
 				index += 1
 			}
 			
@@ -124,7 +124,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 	
 	private func test()
 	{
-		let range = VerseRange(start: VerseIndex(1), end: VerseIndex(2))
+		let range = VerseRange(VerseIndex(1), VerseIndex(2))
 		print("Range \(range.name) contains verses \(range.verses)")
 	}
 }
