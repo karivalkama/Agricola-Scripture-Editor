@@ -10,7 +10,7 @@ import Foundation
 
 // A para is a range of text separated from others. A para has specific styling information 
 // associated with it
-class Para: AttributedStringConvertible
+class Para: AttributedStringConvertible, PotentialVerseRangeable
 {
 	// ATTIRIBUTES	------
 	

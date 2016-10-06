@@ -211,7 +211,7 @@ class VerseRange
 	// Creates a diminished version of 'self' that is contained within 'range'
 	func within(range: VerseRange) -> VerseRange
 	{
-		return VerseRange(VerseIndex.max(start, range.start), VerseIndex.min(end, range.end))
+		return VerseRange(max(start, range.start), min(end, range.end))
 	}
 	
 	// Splits the verse range at 'index', creating 2 separate ranges. If the index falls out of range or is the start or end of the range, the range is not split and is returned whole

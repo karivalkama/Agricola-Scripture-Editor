@@ -8,6 +8,32 @@
 
 import Foundation
 
+// Min and max are global functions
+func max(_ first: VerseIndex, _ second: VerseIndex) -> VerseIndex
+{
+	if first > second
+	{
+		return first
+	}
+	else
+	{
+		return second
+	}
+}
+
+func min(_ first: VerseIndex, _ second: VerseIndex) -> VerseIndex
+{
+	if first < second
+	{
+		return first
+	}
+	else
+	{
+		return second
+	}
+}
+
+
 // A verseIndex is a way of indexing certain text ranges.
 // A single index may contain one, multiple, a half or multiple and a half verses
 struct VerseIndex
@@ -89,30 +115,6 @@ struct VerseIndex
 	static func != (left: VerseIndex, right: VerseIndex) -> Bool
 	{
 		return !(left == right)
-	}
-	
-	static func max(_ first: VerseIndex, _ second: VerseIndex) -> VerseIndex
-	{
-		if first > second
-		{
-			return first
-		}
-		else
-		{
-			return second
-		}
-	}
-	
-	static func min(_ first: VerseIndex, _ second: VerseIndex) -> VerseIndex
-	{
-		if first < second
-		{
-			return first
-		}
-		else
-		{
-			return second
-		}
 	}
 	
 	

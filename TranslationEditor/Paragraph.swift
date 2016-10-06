@@ -8,45 +8,18 @@
 
 import Foundation
 
-class Paragraph: AttributedStringConvertible
+class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
 {
 	// ATTRIBUTES	---------
 	
-	private var content = [Para]()
+	var content = [Para]()
 	
 	
 	// COMP. PROPS	---------
 	
 	var range: VerseRange?
 	{
-		var start: VerseIndex?
-		for para in content
-		{
-			if let range = para.range
-			{
-				start = range.start
-				break
-			}
-		}
-		
-		var end: VerseIndex?
-		for para in content.reversed()
-		{
-			if let range = para.range
-			{
-				end = range.end
-				break
-			}
-		}
-		
-		if let start = start, let end = end
-		{
-			return VerseRange(start, end)
-		}
-		else
-		{
-			return nil
-		}
+		return Paragraph.range(of: content)
 	}
 	
 	
