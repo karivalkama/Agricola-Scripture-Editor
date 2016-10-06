@@ -21,21 +21,22 @@ class Verse: AttributedStringConvertible
 	
 	// INIT	-------
 	
-	init(range: VerseRange, contents: String? = nil)
+	init(range: VerseRange, content: [CharData])
 	{
 		self.range = range
-		self.content = [CharData]()
-		
-		if let contents = contents
-		{
-			self.content.append(CharData(text: contents))
-		}
+		self.content = content
 	}
 	
-	init(range: VerseRange, contents: [CharData])
+	convenience init(range: VerseRange, content: String? = nil)
 	{
-		self.range = range
-		self.content = contents
+		if let content = content
+		{
+			self.init(range: range, content: [CharData(text: content)])
+		}
+		else
+		{
+			self.init(range: range, content: [])
+		}
 	}
 	
 	
@@ -100,6 +101,6 @@ class Verse: AttributedStringConvertible
 		}
 		
 		// Fails if the ranges don't connect
-		return try Verse(range: self.range + other.range, contents: combined)
+		return try Verse(range: self.range + other.range, content: combined)
 	}
 }

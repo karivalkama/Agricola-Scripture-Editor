@@ -66,10 +66,9 @@ class Para: AttributedStringConvertible
 		self.verseContent = content
 	}
 	
-	init(content: Verse, style: ParaStyle = .normal)
+	convenience init(content: Verse, style: ParaStyle = .normal)
 	{
-		self.style = style
-		self.verseContent = [content]
+		self.init(content: [content], style: style)
 	}
 	
 	// This initialiser doesn't specify any verse data in the para. Should be used only when verse range data is not available (headers, etc.)
@@ -88,7 +87,6 @@ class Para: AttributedStringConvertible
 	
 	// IMPLEMENTED -----
 	
-	// TODO: Add paraStyle information as well
 	func toAttributedString() -> NSAttributedString
 	{
 		let str = NSMutableAttributedString()
@@ -103,6 +101,9 @@ class Para: AttributedStringConvertible
 		{
 			str.append(charData.toAttributedString())
 		}
+		
+		// Sets paragraph style as well
+		str.addAttribute(ParaStyleAttributeName, value: style, range: NSMakeRange(0, str.length))
 		
 		return str
 	}
@@ -146,7 +147,7 @@ class Para: AttributedStringConvertible
 			{
 				usxString.enumerateAttribute(CharStyleAttributeName, in: stringRange, options: [], using: parseCharData)
 				
-				parsedVerses.append(Verse(range: verseRange, contents: parsedData))
+				parsedVerses.append(Verse(range: verseRange, content: parsedData))
 				parsedData = []
 			}
 			

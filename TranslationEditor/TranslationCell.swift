@@ -80,12 +80,40 @@ class TranslationCell: UITableViewCell, UITextViewDelegate
 	
 	func setContent(to text: NSAttributedString)
 	{
-		print("setting content")
-		
 		let newText = NSMutableAttributedString()
 		newText.append(text)
 		
-		// Adds visual attributes to each verse marker
+		// Adds visual attributes based on the existing attribute data
+		text.enumerateAttributes(in: NSMakeRange(0, text.length), options: [])
+		{
+			attributes, range, _ in
+			
+			for (attrName, value) in attributes
+			{
+				switch attrName
+				{
+				case VerseIndexMarkerAttributeName, ParaMarkerAttributeName:
+					newText.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: range)
+				case CharStyleAttributeName:
+					if let style = value as? CharStyle
+					{
+						switch style
+						{
+							// TODO: This font is just for testing purposes
+						case .quotation:
+							newText.addAttribute(NSFontAttributeName, value: UIFont(name: "Chalkduster", size: 18.0)!, range: range)
+							// TODO: Add exhaustive cases
+						default: break
+						}
+					}
+					// TODO: Add handling of paraStyle
+				default: break
+				}
+			}
+		}
+		
+		/*
+		// Adds visual attributes to each verse and paragraph marker
 		newText.enumerateAttribute(VerseIndexMarkerAttributeName, in: NSMakeRange(0, newText.length), options: [])
 		{
 			value, range, _ in
@@ -95,12 +123,7 @@ class TranslationCell: UITableViewCell, UITextViewDelegate
 			{
 				newText.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: range)
 			}
-		}
-		
-		
-		// Adds attributes to certain character styles
-		
-		// TODO: Format according to paragraph style
+		}*/
 		
 		// Sets text content
 		inputTextField.attributedText = newText

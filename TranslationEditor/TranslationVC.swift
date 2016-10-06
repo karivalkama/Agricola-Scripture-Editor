@@ -29,7 +29,6 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		
 		// Testing
 		generateTestData()
-		test()
 		
 		// (Epic hack which) Makes table view cells have automatic height
 		translationTableView.rowHeight = UITableViewAutomaticDimension
@@ -112,7 +111,9 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 			var verses = [Verse]()
 			for verseText in paraText.components(separatedBy: "#")
 			{
-				verses.append(Verse(range: VerseRange(VerseIndex(index), VerseIndex(index + 1)), contents: verseText))
+				let start = VerseIndex(index)
+				let end = VerseIndex(index + 1)
+				verses.append(Verse(range: VerseRange(start, end), content: verseText))
 				index += 1
 			}
 			
@@ -120,12 +121,6 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		}
 		
 		testContent = paragraphs
-	}
-	
-	private func test()
-	{
-		let range = VerseRange(VerseIndex(1), VerseIndex(2))
-		print("Range \(range.name) contains verses \(range.verses)")
 	}
 }
 
