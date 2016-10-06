@@ -57,6 +57,11 @@ struct Para: AttributedStringConvertible, PotentialVerseRangeable
 		}
 	}
 	
+	var text: String
+	{
+		return CharData.text(of: content)
+	}
+	
 	
 	// INIT	------
 	

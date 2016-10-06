@@ -26,12 +26,27 @@ struct CharData: AttributedStringConvertible
 	}
 	
 	
-	// CONFORMED
+	// CONFORMED	---
 	
 	func toAttributedString() -> NSAttributedString
 	{
 		// TODO: At some point one may wish to add other types of attributes based on the style
 		let attributes = [CharStyleAttributeName : style]
 		return NSAttributedString(string: text, attributes: attributes)
+	}
+	
+	
+	// OTHER	------
+	
+	static func text(of data: [CharData]) -> String
+	{
+		var text = ""
+		
+		for charData in data
+		{
+			text.append(charData.text)
+		}
+		
+		return text
 	}
 }

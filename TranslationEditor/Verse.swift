@@ -19,6 +19,14 @@ struct Verse: AttributedStringConvertible
 	var content: [CharData]
 	
 	
+	// COMP. PROPS	------
+	
+	var text: String
+	{
+		return CharData.text(of: content)
+	}
+	
+	
 	// INIT	-------
 	
 	init(range: VerseRange, content: [CharData])

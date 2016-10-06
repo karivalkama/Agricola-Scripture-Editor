@@ -22,6 +22,21 @@ struct Paragraph: AttributedStringConvertible, PotentialVerseRangeable
 		return Paragraph.range(of: content)
 	}
 	
+	var text: String
+	{
+		var text = ""
+		for i in 0 ..< content.count
+		{
+			if i != 0
+			{
+				text.append("\n")
+			}
+			text.append(content[i].text)
+		}
+		
+		return text
+	}
+	
 	
 	// INIT	----------
 	

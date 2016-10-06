@@ -26,13 +26,83 @@ struct Section: PotentialVerseRangeable
 	// The heading element of this section, if present
 	var heading: Para?
 	{
-		for paragraph in content
+		get
 		{
-			for para in paragraph.content
+			let index = headingIndex
+			if let (paragraphIndex, paraIndex) = index
 			{
-				if para.style.isSectionHeadingStyle()
+				return content[paragraphIndex].content[paraIndex]
+			}
+			else
+			{
+				return nil
+			}
+		}
+		set
+		{
+			// Finds the index of an existing heading
+			let index = headingIndex
+			if let (paragraphIndex, paraIndex) = index
+			{
+				// If heading is found and new value is provided, replaces the element
+				if let newValue = newValue
 				{
-					return para
+					content[paragraphIndex].content[paraIndex] = newValue
+				}
+				// If heading is found but new value is not provided, deletes the existing heading
+				else
+				{
+					var paragraph = content[paragraphIndex]
+					if paragraph.content.count <= 1
+					{
+						content.remove(at: paragraphIndex)
+					}
+					else
+					{
+						paragraph.content.remove(at: paraIndex)
+					}
+				}
+			}
+			// If heading is not found and new value is provided, inserts the provided heading as a new separate paragraph to the beginning of the section
+			else if let newValue = newValue
+			{
+				content.insert(Paragraph(content: newValue), at: 0)
+			}
+		}
+	}
+	
+	var name: String?
+	{
+		return heading?.text
+	}
+	
+	var text: String
+	{
+		var text = ""
+		
+		for i in 0 ..< content.count
+		{
+			if i != 0
+			{
+				text.append("\n\n")
+			}
+			text.append(content[i].text)
+		}
+		
+		return text
+	}
+	
+	private var headingIndex: (Int, Int)?
+	{
+		for paragraphIndex in 0 ..< content.count
+		{
+			let paragraph = content[paragraphIndex]
+			
+			for paraIndex in 0 ..< paragraph.content.count
+			{
+				if paragraph.content[paraIndex].style.isSectionHeadingStyle()
+				{
+					return (paragraphIndex, paraIndex)
 				}
 			}
 		}
