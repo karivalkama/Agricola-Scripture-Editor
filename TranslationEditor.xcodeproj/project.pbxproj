@@ -67,6 +67,12 @@
 		7CCC01281DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01271DA6501600F0562E /* PotentialVerseRangeable.swift */; };
 		7CCC01291DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01271DA6501600F0562E /* PotentialVerseRangeable.swift */; };
 		7CCC012A1DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01271DA6501600F0562E /* PotentialVerseRangeable.swift */; };
+		7CCC012C1DA6714B00F0562E /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC012B1DA6714B00F0562E /* Chapter.swift */; };
+		7CCC012D1DA6714B00F0562E /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC012B1DA6714B00F0562E /* Chapter.swift */; };
+		7CCC012E1DA6714B00F0562E /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC012B1DA6714B00F0562E /* Chapter.swift */; };
+		7CCC01301DA67B0E00F0562E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC012F1DA67B0E00F0562E /* Book.swift */; };
+		7CCC01311DA67B0E00F0562E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC012F1DA67B0E00F0562E /* Book.swift */; };
+		7CCC01321DA67B0E00F0562E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC012F1DA67B0E00F0562E /* Book.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +123,8 @@
 		7CCC011F1DA646F900F0562E /* USXParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXParser.swift; sourceTree = "<group>"; };
 		7CCC01231DA64A1A00F0562E /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		7CCC01271DA6501600F0562E /* PotentialVerseRangeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PotentialVerseRangeable.swift; sourceTree = "<group>"; };
+		7CCC012B1DA6714B00F0562E /* Chapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
+		7CCC012F1DA67B0E00F0562E /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +238,8 @@
 				7CCC010A1DA4DEC200F0562E /* Paragraph.swift */,
 				7CCC01231DA64A1A00F0562E /* Section.swift */,
 				7CCC01271DA6501600F0562E /* PotentialVerseRangeable.swift */,
+				7CCC012B1DA6714B00F0562E /* Chapter.swift */,
+				7CCC012F1DA67B0E00F0562E /* Book.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -380,6 +390,7 @@
 			files = (
 				7CCC010B1DA4DEC200F0562E /* Paragraph.swift in Sources */,
 				7C20D7E81D8BF9B100E84BA5 /* Para.swift in Sources */,
+				7CCC01301DA67B0E00F0562E /* Book.swift in Sources */,
 				7C20D7E31D8BF8D000E84BA5 /* TranslationCell.swift in Sources */,
 				7CCC00EA1D9BD3FC00F0562E /* VerseError.swift in Sources */,
 				7C20D7EC1D8C1B7200E84BA5 /* CellContentListener.swift in Sources */,
@@ -389,6 +400,7 @@
 				7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */,
 				7C20D7FA1D9A768700E84BA5 /* VerseRange.swift in Sources */,
 				7CCC01241DA64A1A00F0562E /* Section.swift in Sources */,
+				7CCC012C1DA6714B00F0562E /* Chapter.swift in Sources */,
 				7CCC00EE1D9D193F00F0562E /* CollectionUtilities.swift in Sources */,
 				7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */,
 				7CCC00F21D9D1B4E00F0562E /* AttributedStringConvertible.swift in Sources */,
@@ -406,6 +418,7 @@
 			files = (
 				7CCC010C1DA4DEC200F0562E /* Paragraph.swift in Sources */,
 				7C20D7E91D8BF9B100E84BA5 /* Para.swift in Sources */,
+				7CCC01311DA67B0E00F0562E /* Book.swift in Sources */,
 				7CCC00C71D9A98BE00F0562E /* StringUtilities.swift in Sources */,
 				7CCC00EF1D9D194700F0562E /* CollectionUtilities.swift in Sources */,
 				7CCC00F71D9D361000F0562E /* Verse.swift in Sources */,
@@ -415,6 +428,7 @@
 				7CCC00F31D9D223300F0562E /* AttributedStringConvertible.swift in Sources */,
 				7CCC00FF1D9D3A0800F0562E /* VerseError.swift in Sources */,
 				7CCC01251DA64A1A00F0562E /* Section.swift in Sources */,
+				7CCC012D1DA6714B00F0562E /* Chapter.swift in Sources */,
 				7CCC00F91D9D369100F0562E /* VerseRange.swift in Sources */,
 				7C18A1A41D8BBEBD00DD1B03 /* TranslationEditorTests.swift in Sources */,
 				7C20D7E41D8BF8D000E84BA5 /* TranslationCell.swift in Sources */,
@@ -432,6 +446,7 @@
 			files = (
 				7CCC010D1DA4DEC200F0562E /* Paragraph.swift in Sources */,
 				7C20D7EA1D8BF9B100E84BA5 /* Para.swift in Sources */,
+				7CCC01321DA67B0E00F0562E /* Book.swift in Sources */,
 				7CCC00C81D9A98BF00F0562E /* StringUtilities.swift in Sources */,
 				7CCC00F01D9D194700F0562E /* CollectionUtilities.swift in Sources */,
 				7CCC00F81D9D361000F0562E /* Verse.swift in Sources */,
@@ -441,6 +456,7 @@
 				7CCC00F41D9D223300F0562E /* AttributedStringConvertible.swift in Sources */,
 				7CCC01001D9D3A0800F0562E /* VerseError.swift in Sources */,
 				7CCC01261DA64A1A00F0562E /* Section.swift in Sources */,
+				7CCC012E1DA6714B00F0562E /* Chapter.swift in Sources */,
 				7CCC00FA1D9D369100F0562E /* VerseRange.swift in Sources */,
 				7C18A1AF1D8BBEBD00DD1B03 /* TranslationEditorUITests.swift in Sources */,
 				7C20D7E51D8BF8D000E84BA5 /* TranslationCell.swift in Sources */,

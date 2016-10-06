@@ -15,7 +15,7 @@ struct Para: AttributedStringConvertible, PotentialVerseRangeable
 	// ATTIRIBUTES	------
 	
 	// A para can have either defined verse content OR ambiguous text content. The two are exclusive.
-	private var verseContent: [Verse] = []
+	private var verses: [Verse] = []
 	private var ambiguousContent: [CharData] = []
 	var style: ParaStyle
 	
@@ -25,8 +25,8 @@ struct Para: AttributedStringConvertible, PotentialVerseRangeable
 	// The verse range of the para. Nil if the paragraph doesn't contain any verse markers
 	var range: VerseRange?
 	{
-		let start = verseContent.first?.range.start
-		let end = verseContent.last?.range.end
+		let start = verses.first?.range.start
+		let end = verses.last?.range.end
 		
 		if let start = start, let end = end
 		{
@@ -41,14 +41,14 @@ struct Para: AttributedStringConvertible, PotentialVerseRangeable
 	// A collection of the para contents, whether split between verses or not
 	var content: [CharData]
 	{
-		if verseContent.isEmpty
+		if verses.isEmpty
 		{
 			return ambiguousContent
 		}
 		else
 		{
 			var content = [CharData]()
-			for verse in verseContent
+			for verse in verses
 			{
 				content.append(contentsOf: verse.content)
 			}
@@ -68,7 +68,7 @@ struct Para: AttributedStringConvertible, PotentialVerseRangeable
 	init(content: [Verse] = [], style: ParaStyle = .normal)
 	{
 		self.style = style
-		self.verseContent = content
+		self.verses = content
 	}
 	
 	init(content: Verse, style: ParaStyle = .normal)
@@ -97,7 +97,7 @@ struct Para: AttributedStringConvertible, PotentialVerseRangeable
 		let str = NSMutableAttributedString()
 		
 		// Adds all verse data
-		for verse in verseContent
+		for verse in verses
 		{
 			str.append(verse.toAttributedString())
 		}
@@ -119,7 +119,7 @@ struct Para: AttributedStringConvertible, PotentialVerseRangeable
 	mutating func replaceContents(with usxString: NSAttributedString)
 	{
 		// Deletes previous contents
-		self.verseContent = []
+		self.verses = []
 		self.ambiguousContent = []
 		
 		// Function for parsing character data from the provided usxString
@@ -157,7 +157,7 @@ struct Para: AttributedStringConvertible, PotentialVerseRangeable
 			}
 			
 			// Replaces the existing data with parsed data
-			self.verseContent = parsedVerses
+			self.verses = parsedVerses
 		}
 		catch VerseError.ambiguousRange
 		{
