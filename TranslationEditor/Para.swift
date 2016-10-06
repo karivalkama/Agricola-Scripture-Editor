@@ -10,7 +10,7 @@ import Foundation
 
 // A para is a range of text separated from others. A para has specific styling information 
 // associated with it
-class Para: AttributedStringConvertible, PotentialVerseRangeable
+struct Para: AttributedStringConvertible, PotentialVerseRangeable
 {
 	// ATTIRIBUTES	------
 	
@@ -66,7 +66,7 @@ class Para: AttributedStringConvertible, PotentialVerseRangeable
 		self.verseContent = content
 	}
 	
-	convenience init(content: Verse, style: ParaStyle = .normal)
+	init(content: Verse, style: ParaStyle = .normal)
 	{
 		self.init(content: [content], style: style)
 	}
@@ -111,7 +111,7 @@ class Para: AttributedStringConvertible, PotentialVerseRangeable
 	
 	// OTHER	-------
 	
-	func replaceContents(with usxString: NSAttributedString)
+	mutating func replaceContents(with usxString: NSAttributedString)
 	{
 		// Deletes previous contents
 		self.verseContent = []

@@ -11,7 +11,7 @@ import Foundation
 // A verse has certain range but also text
 // The text on a verse is mutable
 // TODO: Struct or class?
-class Verse: AttributedStringConvertible
+struct Verse: AttributedStringConvertible
 {
 	// ATTRIBUTES	------
 	
@@ -27,7 +27,7 @@ class Verse: AttributedStringConvertible
 		self.content = content
 	}
 	
-	convenience init(range: VerseRange, content: String? = nil)
+	init(range: VerseRange, content: String? = nil)
 	{
 		if let content = content
 		{

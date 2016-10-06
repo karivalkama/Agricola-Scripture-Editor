@@ -10,11 +10,9 @@ import Foundation
 
 // A verseRange contains a text range from a certain verse index to another
 // TODO: Struct or class? (struct doesn't work with lazily se values)
-class VerseRange
+struct VerseRange
 {
 	// ATTRIBUTES	--------
-	
-	private var _verses: [VerseRange]!
 	
 	// Inclusive
 	let start: VerseIndex
@@ -28,30 +26,22 @@ class VerseRange
 	// Splits the range on verse markings. For example, range of 4b-7 would become [4b-5, 5-6, 6-7]
 	var verses: [VerseRange]
 	{
-		get
+		var verses = [VerseRange]()
+		
+		// The first and last verses may be incomplete (eg. 6b-7 or 10-10b)
+		var cursor = start
+		while cursor < end
 		{
-			if _verses == nil
-			{
-				var verses = [VerseRange]()
-				
-				// The first and last verses may be incomplete (eg. 6b-7 or 10-10b)
-				var cursor = start
-				while cursor < end
-				{
-					let nextVerseStart = VerseIndex(cursor.index + 1)
-					verses.append(VerseRange(cursor, nextVerseStart))
-					cursor = nextVerseStart
-				}
-				if end.midVerse
-				{
-					verses.append(VerseRange(cursor, end))
-				}
-				
-				_verses = verses
-			}
-			
-			return _verses
+			let nextVerseStart = VerseIndex(cursor.index + 1)
+			verses.append(VerseRange(cursor, nextVerseStart))
+			cursor = nextVerseStart
 		}
+		if end.midVerse
+		{
+			verses.append(VerseRange(cursor, end))
+		}
+		
+		return verses
 	}
 	
 	// The name of the range, for example '4b-7a' or '2'

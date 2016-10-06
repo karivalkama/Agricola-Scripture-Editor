@@ -9,7 +9,7 @@
 import Foundation
 
 // A section is a collection of paragraphs that creates a larger whole. Sections are placed inside chapters.
-class Section
+struct Section: PotentialVerseRangeable
 {
 	// ATTRIBUTES	------
 	
@@ -18,37 +18,26 @@ class Section
 	
 	// COMP. PROPS	------
 	
-	// TODO: Create a common protocol for this
 	var range: VerseRange?
 	{
-		var start: VerseIndex?
+		return Section.range(of: content)
+	}
+	
+	// The heading element of this section, if present
+	var heading: Para?
+	{
 		for paragraph in content
 		{
-			if let range = paragraph.range
+			for para in paragraph.content
 			{
-				start = range.start
-				break
+				if para.style.isSectionHeadingStyle()
+				{
+					return para
+				}
 			}
 		}
 		
-		var end: VerseIndex?
-		for paragraph in content.reversed()
-		{
-			if let range = paragraph.range
-			{
-				end = range.end
-				break
-			}
-		}
-		
-		if let start = start, let end = end
-		{
-			return VerseRange(start, end)
-		}
-		else
-		{
-			return nil
-		}
+		return nil
 	}
 	
 	
@@ -59,7 +48,7 @@ class Section
 		self.content = content
 	}
 	
-	convenience init(header: Paragraph, content: [Paragraph])
+	init(header: Paragraph, content: [Paragraph])
 	{
 		var allContent = [Paragraph]()
 		allContent.append(header)

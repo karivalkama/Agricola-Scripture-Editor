@@ -191,6 +191,15 @@ enum ParaStyle: USXStyle
 	// OTHER	-------
 	
 	// TODO: Keep these updated
+	func isSectionHeadingStyle() -> Bool
+	{
+		switch self
+		{
+		case .sectionHeading, .sectionHeadingMajor: return true
+		default: return false
+		}
+	}
+	
 	func isHeaderStyle() -> Bool
 	{
 		switch self

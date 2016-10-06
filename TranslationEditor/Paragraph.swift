@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
+struct Paragraph: AttributedStringConvertible, PotentialVerseRangeable
 {
 	// ATTRIBUTES	---------
 	
@@ -30,7 +30,7 @@ class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
 		self.content = content
 	}
 	
-	convenience init(content: Para)
+	init(content: Para)
 	{
 		self.init(content: [content])
 	}
@@ -76,7 +76,7 @@ class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
 		return str
 	}
 	
-	func replaceContents(with usxString: NSAttributedString)
+	mutating func replaceContents(with usxString: NSAttributedString)
 	{
 		// Deletes previous content
 		self.content = []
