@@ -9,7 +9,7 @@
 import Foundation
 
 // A section is a collection of paragraphs that creates a larger whole. Sections are placed inside chapters.
-struct Section: PotentialVerseRangeable
+class Section: PotentialVerseRangeable
 {
 	// ATTRIBUTES	------
 	
@@ -52,7 +52,7 @@ struct Section: PotentialVerseRangeable
 				// If heading is found but new value is not provided, deletes the existing heading
 				else
 				{
-					var paragraph = content[paragraphIndex]
+					let paragraph = content[paragraphIndex]
 					if paragraph.content.count <= 1
 					{
 						content.remove(at: paragraphIndex)
@@ -118,10 +118,10 @@ struct Section: PotentialVerseRangeable
 		self.content = content
 	}
 	
-	init(header: Paragraph, content: [Paragraph])
+	convenience init(header: Para, content: [Paragraph])
 	{
 		var allContent = [Paragraph]()
-		allContent.append(header)
+		allContent.append(Paragraph(content: header))
 		allContent.append(contentsOf: content)
 		
 		self.init(content: allContent)

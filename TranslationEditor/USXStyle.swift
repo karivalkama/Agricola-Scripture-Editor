@@ -13,7 +13,7 @@ import Foundation
 protocol USXStyle
 {
 	var code: String {get}
-	static func value(of code: String) -> USXStyle?
+	//static func value(of code: String) -> USXStyle?
 }
 
 enum CharStyle: String, USXStyle
@@ -32,7 +32,7 @@ enum CharStyle: String, USXStyle
 		return self.rawValue
 	}
 	
-	static func value(of code: String) -> USXStyle?
+	static func value(of code: String) -> CharStyle?
 	{
 		for value in values
 		{
@@ -137,7 +137,7 @@ enum ParaStyle: USXStyle
 		}
 	}
 	
-	static func value(of code: String) -> USXStyle?
+	static func value(of code: String) -> ParaStyle
 	{
 		// Parses the possible indentation level from the code
 		// First must find out how many digits there are at the end of the string

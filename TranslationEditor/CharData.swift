@@ -38,6 +38,11 @@ struct CharData: AttributedStringConvertible
 	
 	// OTHER	------
 	
+	func appended(_ text: String) -> CharData
+	{
+		return CharData(text: self.text + text, style: self.style)
+	}
+	
 	static func text(of data: [CharData]) -> String
 	{
 		var text = ""

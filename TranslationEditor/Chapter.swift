@@ -9,7 +9,7 @@
 import Foundation
 
 // Chapters consist of multiple sections
-struct Chapter: PotentialVerseRangeable
+class Chapter: PotentialVerseRangeable
 {
 	// ATTRIBUTES	----------
 	

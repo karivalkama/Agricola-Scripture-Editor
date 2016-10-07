@@ -8,10 +8,4 @@
 
 import Foundation
 
-class USXParser: NSObject, XMLParserDelegate
-{
-	// ATTRIBUTES	------
-	
-	// TODO: Implement
-	
-}
+// TODO: implement chapter, book / usx parsing
