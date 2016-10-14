@@ -8,7 +8,9 @@
 
 import Foundation
 
-// This parser collects character data. Functions properly only within para elements
+// This parser collects character data. Functions properly only within para elements.
+// Should be called on the start of a verse element or after the start of a para element
+// Returns either to the start of a new verse element or at the end of a para element
 class USXCharParser: TemporaryXMLParser
 {
 	// ATTRIBUTES	---------

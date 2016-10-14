@@ -9,12 +9,14 @@
 import Foundation
 
 // This temporary XML parser parses the contents of a single para element. Should be used only inside para elements
+// This parser is designed to be used for parsing a single para element only. The parser doesn't need to receive the start element tag for the para element.
+// Always returns on the end of the para element
 class USXParaParser: TemporaryXMLParser
 {
 	// ATTRIBUTES	--------
 	
 	private let style: ParaStyle
-	private let paraPointer: UnsafeMutablePointer<Para>
+	private let paraPointer: UnsafeMutablePointer<[Para]>
 	private let errorHandler: (USXParseError) -> ()
 	
 	private var initialCharData = [CharData]()
@@ -28,7 +30,7 @@ class USXParaParser: TemporaryXMLParser
 	
 	// INIT	------
 	
-	init(caller: XMLParserDelegate, style: ParaStyle, targetPointer: UnsafeMutablePointer<Para>, using errorHandler: @escaping (USXParseError) -> ())
+	init(caller: XMLParserDelegate, style: ParaStyle, targetPointer: UnsafeMutablePointer<[Para]>, using errorHandler: @escaping (USXParseError) -> ())
 	{
 		self.style = style
 		self.paraPointer = targetPointer
@@ -89,12 +91,12 @@ class USXParaParser: TemporaryXMLParser
 					parsedVerses.insert(Verse(range: VerseRange(VerseIndex(firstVerseIndex.index - 1, midVerse: true), firstVerseIndex), content: initialCharData), at: 0)
 				}
 				
-				paraPointer[0] = Para(content: parsedVerses, style: style)
+				paraPointer[0].append(Para(content: parsedVerses, style: style))
 			}
 				// If there were no verses, records content as it is
 			else
 			{
-				paraPointer[0] = Para(content: initialCharData, style: style)
+				paraPointer[0].append(Para(content: initialCharData, style: style))
 			}
 			
 			endParsingOnEndElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName)

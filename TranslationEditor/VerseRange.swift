@@ -22,7 +22,6 @@ struct VerseRange
 	
 	// COMPUTED PROPS.
 	
-	// Lazy getter for verse ranges
 	// Splits the range on verse markings. For example, range of 4b-7 would become [4b-5, 5-6, 6-7]
 	var verses: [VerseRange]
 	{
