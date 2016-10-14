@@ -20,7 +20,7 @@ class USXParagraphParser: TemporaryXMLParser
 	private let targetPointer: UnsafeMutablePointer<[Paragraph]>
 	
 	private var currentParas = [Para]()
-	private var contentParser: USXParaParser?
+	private var contentParser: XMLParserDelegate?
 	
 	private var paragraphStyleFound = false
 	private var sectionHeadingFound = false
@@ -82,7 +82,7 @@ class USXParagraphParser: TemporaryXMLParser
 			// Parses the contents of the para element
 			if parseContents
 			{
-				contentParser = USXParaParser(caller: self, style: style, targetPointer: &currentParas, using: errorHandler)
+				contentParser = USXParaProcessor.createParaParser(caller: self, style: style, targetPointer: &currentParas, using: errorHandler)
 				parser.delegate = contentParser
 			}
 		}

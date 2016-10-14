@@ -19,10 +19,13 @@ protocol USXContentProcessor
 	// Finds a suitable element parser for the provided element. 
 	// Also returns whether the provided element should be relayed to the parser
 	// Returns nil if no parser should be used for the element at this time
-	func getParser(_ parser: XMLParser, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
+	func getParser(_ caller: USXContentParser<Generated, Processed>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
 	
 	// Generates a piece of content based on the collected data
 	func generate(from content: [Processed], using errorHandler: (USXParseError) -> ()) -> Generated?
+	
+	// Finds a suitable element parser for found character data. The provided parser will be called based on the data after it has been provided.
+	func getCharacterParser(_ caller: USXContentParser<Generated, Processed>, into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: (USXParseError) -> ()) -> XMLParserDelegate?
 }
 
 // This is a type erasure implementation for protocol: USXContentProcessor
@@ -32,12 +35,14 @@ class AnyUSXContentProcessor<G, P>: USXContentProcessor
 	typealias Processed = P
 	
 	private let _generate: ([P], (USXParseError) -> ()) -> G?
-	private let _getParser: (XMLParser, String, [String : String], UnsafeMutablePointer<[P]>, (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
+	private let _getParser: (USXContentParser<G, P>, String, [String : String], UnsafeMutablePointer<[P]>, (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
+	private let _getCharacterParser: (USXContentParser<G, P>, UnsafeMutablePointer<[P]>, (USXParseError) -> ()) -> XMLParserDelegate?
 	
 	required init<A: USXContentProcessor>(_ processor: A) where A.Generated == G, A.Processed == P
 	{
 		self._generate = processor.generate
 		self._getParser = processor.getParser
+		self._getCharacterParser = processor.getCharacterParser
 	}
 	
 	func generate(from content: [P], using errorHandler: (USXParseError) -> ()) -> G?
@@ -45,9 +50,14 @@ class AnyUSXContentProcessor<G, P>: USXContentProcessor
 		return _generate(content, errorHandler)
 	}
 	
-	internal func getParser(_ parser: XMLParser, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[P]>, using errorHandler: (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
+	func getParser(_ caller: USXContentParser<G, P>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[P]>, using errorHandler: (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
 	{
-		return _getParser(parser, elementName, attributes, targetPointer, errorHandler)
+		return _getParser(caller, elementName, attributes, targetPointer, errorHandler)
+	}
+	
+	func getCharacterParser(_ caller: USXContentParser<G, P>, into targetPointer: UnsafeMutablePointer<[P]>, using errorHandler: (USXParseError) -> ()) -> XMLParserDelegate?
+	{
+		return _getCharacterParser(caller, targetPointer, errorHandler)
 	}
 }
 
@@ -96,7 +106,7 @@ class USXContentParser<Generated, Contained>: TemporaryXMLParser
 		// Otherwise delegates parsing to another temporary parser (processor's decision)
 		else
 		{
-			if let (delegateParser, shouldCallElement) = processor?.getParser(parser, forElement: elementName, attributes: attributeDict, into: &parsedContent, using: errorHandler)
+			if let (delegateParser, shouldCallElement) = processor?.getParser(self, forElement: elementName, attributes: attributeDict, into: &parsedContent, using: errorHandler)
 			{
 				self.contentParser = delegateParser
 				parser.delegate = delegateParser

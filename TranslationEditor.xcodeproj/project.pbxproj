@@ -88,9 +88,9 @@
 		7CCC013C1DA7BA2D00F0562E /* USXParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC013B1DA7BA2D00F0562E /* USXParseError.swift */; };
 		7CCC013D1DA7BA2D00F0562E /* USXParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC013B1DA7BA2D00F0562E /* USXParseError.swift */; };
 		7CCC013E1DA7BA2D00F0562E /* USXParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC013B1DA7BA2D00F0562E /* USXParseError.swift */; };
-		7CCC01401DA7D12800F0562E /* USXParaParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC013F1DA7D12800F0562E /* USXParaParser.swift */; };
-		7CCC01411DA7D12800F0562E /* USXParaParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC013F1DA7D12800F0562E /* USXParaParser.swift */; };
-		7CCC01421DA7D12800F0562E /* USXParaParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC013F1DA7D12800F0562E /* USXParaParser.swift */; };
+		7CCC01401DA7D12800F0562E /* USXParaProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC013F1DA7D12800F0562E /* USXParaProcessor.swift */; };
+		7CCC01411DA7D12800F0562E /* USXParaProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC013F1DA7D12800F0562E /* USXParaProcessor.swift */; };
+		7CCC01421DA7D12800F0562E /* USXParaProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC013F1DA7D12800F0562E /* USXParaProcessor.swift */; };
 		7CCC01441DAB7B0000F0562E /* USXParagraphParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01431DAB7B0000F0562E /* USXParagraphParser.swift */; };
 		7CCC01451DAB7B0000F0562E /* USXParagraphParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01431DAB7B0000F0562E /* USXParagraphParser.swift */; };
 		7CCC01461DAB7B0000F0562E /* USXParagraphParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01431DAB7B0000F0562E /* USXParagraphParser.swift */; };
@@ -154,7 +154,7 @@
 		7CCC01331DA7964000F0562E /* XmlParserUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParserUtil.swift; sourceTree = "<group>"; };
 		7CCC01371DA7B45A00F0562E /* USXCharParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXCharParser.swift; sourceTree = "<group>"; };
 		7CCC013B1DA7BA2D00F0562E /* USXParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXParseError.swift; sourceTree = "<group>"; };
-		7CCC013F1DA7D12800F0562E /* USXParaParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXParaParser.swift; sourceTree = "<group>"; };
+		7CCC013F1DA7D12800F0562E /* USXParaProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXParaProcessor.swift; sourceTree = "<group>"; };
 		7CCC01431DAB7B0000F0562E /* USXParagraphParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXParagraphParser.swift; sourceTree = "<group>"; };
 		7CCC01471DAB88AE00F0562E /* USXSectionParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXSectionParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -293,7 +293,7 @@
 			children = (
 				7CCC011F1DA646F900F0562E /* USXParser.swift */,
 				7CCC01371DA7B45A00F0562E /* USXCharParser.swift */,
-				7CCC013F1DA7D12800F0562E /* USXParaParser.swift */,
+				7CCC013F1DA7D12800F0562E /* USXParaProcessor.swift */,
 				7CCC01431DAB7B0000F0562E /* USXParagraphParser.swift */,
 				7CCC01471DAB88AE00F0562E /* USXSectionParser.swift */,
 				7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */,
@@ -446,7 +446,7 @@
 				7C20D7FC1D9A87F500E84BA5 /* Verse.swift in Sources */,
 				7CCC01441DAB7B0000F0562E /* USXParagraphParser.swift in Sources */,
 				7CCC01281DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */,
-				7CCC01401DA7D12800F0562E /* USXParaParser.swift in Sources */,
+				7CCC01401DA7D12800F0562E /* USXParaProcessor.swift in Sources */,
 				7C20D7F81D9A672800E84BA5 /* VerseIndex.swift in Sources */,
 				7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */,
 				7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
@@ -482,7 +482,7 @@
 				7C20D7ED1D8C1B7200E84BA5 /* CellContentListener.swift in Sources */,
 				7CCC01451DAB7B0000F0562E /* USXParagraphParser.swift in Sources */,
 				7CCC01291DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */,
-				7CCC01411DA7D12800F0562E /* USXParaParser.swift in Sources */,
+				7CCC01411DA7D12800F0562E /* USXParaProcessor.swift in Sources */,
 				7CCC01011D9D3A1400F0562E /* TranslationVC.swift in Sources */,
 				7CCC00F31D9D223300F0562E /* AttributedStringConvertible.swift in Sources */,
 				7C4CC1741DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
@@ -518,7 +518,7 @@
 				7C20D7EE1D8C1B7200E84BA5 /* CellContentListener.swift in Sources */,
 				7CCC01461DAB7B0000F0562E /* USXParagraphParser.swift in Sources */,
 				7CCC012A1DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */,
-				7CCC01421DA7D12800F0562E /* USXParaParser.swift in Sources */,
+				7CCC01421DA7D12800F0562E /* USXParaProcessor.swift in Sources */,
 				7CCC01021D9D3A1400F0562E /* TranslationVC.swift in Sources */,
 				7CCC00F41D9D223300F0562E /* AttributedStringConvertible.swift in Sources */,
 				7C4CC1751DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
