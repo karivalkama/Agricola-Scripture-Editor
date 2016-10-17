@@ -76,6 +76,13 @@ class USXContentParser<Generated, Contained>: TemporaryXMLParser
 	private var parsedContent = [Contained]()
 	private var contentParser: XMLParserDelegate?
 	
+	// This flag can be used for setting the parser to stop parsing once a specific marker is found
+	var nextStopMarker: USXMarkerElement?
+	// This flag can be used for setting the parser to stop parsing once the end of a certain container element is reached
+	var nextStopContainer: USXContainerElement?
+	// This flag can be used for forcing the parser to stop parsing as soon as possible
+	var stopsAfterCurrentParse = false
+	
 	var processor: AnyUSXContentProcessor<Generated, Contained>?
 	
 	
@@ -97,8 +104,9 @@ class USXContentParser<Generated, Contained>: TemporaryXMLParser
 	
 	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
 	{
-		// Ends parsing when finding a higher level 'marker' element
-		if let marker = USXMarkerElement(rawValue: elementName), marker >= lowestBreakMarker
+		// The parser may be set to stop parsing at a start of a certain marker
+		// Also ends parsing when finding a higher level 'marker' element
+		if let marker = USXMarkerElement(rawValue: elementName), marker >= lowestBreakMarker || marker == nextStopMarker
 		{
 			closeCurrentElement()
 			endParsingOnStartElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
@@ -108,12 +116,19 @@ class USXContentParser<Generated, Contained>: TemporaryXMLParser
 		{
 			if let (delegateParser, shouldCallElement) = processor?.getParser(self, forElement: elementName, attributes: attributeDict, into: &parsedContent, using: errorHandler)
 			{
-				self.contentParser = delegateParser
-				parser.delegate = delegateParser
+				delegateParsing(of: parser, to: delegateParser)
 				if shouldCallElement
 				{
 					delegateParser.parser?(parser, didStartElement: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
 				}
+			}
+			
+			// Stops after parsing if a flag was set during parsing
+			if stopsAfterCurrentParse
+			{
+				// TODO: there's a risk of stackoverflow here since calling super parser start element may lead to calling this parser again. At least a single element should always be parsed before setting the flag.
+				closeCurrentElement()
+				endParsingOnStartElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
 			}
 		}
 	}
@@ -121,15 +136,40 @@ class USXContentParser<Generated, Contained>: TemporaryXMLParser
 	func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
 	{
 		// Ends parsing at the end of the containing element
-		if let element = USXContainerElement(rawValue: elementName), element == containingElement
+		// Also may be set to end parsing at the end of a certain container element
+		if let element = USXContainerElement(rawValue: elementName), element == containingElement || element == nextStopContainer
 		{
 			closeCurrentElement()
 			endParsingOnEndElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName)
 		}
 	}
 	
+	func parser(_ parser: XMLParser, foundCharacters string: String)
+	{
+		// When character data is found, may assign a new deleage to handle the parsing
+		if let delegateParser = processor?.getCharacterParser(self, into: &parsedContent, using: errorHandler)
+		{
+			delegateParsing(of: parser, to: delegateParser)
+			delegateParser.parser?(parser, foundCharacters: string)
+		}
+		
+		// Stops after parsing if a flag was set
+		if stopsAfterCurrentParse
+		{
+			closeCurrentElement()
+			endParsingOnCharacters(parser: parser, characters: string)
+		}
+	}
+	
 	
 	// OTHER	-------------
+	
+	private func delegateParsing(of parser: XMLParser, to delegate: XMLParserDelegate)
+	{
+		// Assigns the new parser
+		self.contentParser = delegate
+		parser.delegate = delegate
+	}
 	
 	private func closeCurrentElement()
 	{
@@ -140,6 +180,9 @@ class USXContentParser<Generated, Contained>: TemporaryXMLParser
 			// Empties collected data
 			parsedContent = []
 			contentParser = nil
+			nextStopMarker = nil
+			nextStopContainer = nil
+			stopsAfterCurrentParse = false
 		}
 	}
 }

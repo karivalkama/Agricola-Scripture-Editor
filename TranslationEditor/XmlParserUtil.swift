@@ -44,6 +44,12 @@ class TemporaryXMLParser: NSObject, XMLParserDelegate
 		endParsing(parser: parser)
 		caller.parser?(parser, didEndElement: elementName, namespaceURI: namespaceURI, qualifiedName: qName)
 	}
+	
+	func endParsingOnCharacters(parser: XMLParser, characters: String)
+	{
+		endParsing(parser: parser)
+		caller.parser?(parser, foundCharacters: characters)
+	}
 }
 
 // This parser ignores all data until an element with a specific name is found, at which point the parsing is returned to the original delegate

@@ -8,6 +8,36 @@
 
 import Foundation
 
+class USXParagraphProcessor: USXContentProcessor
+{
+	typealias Generated = Paragraph
+	typealias Processed = Para
+	
+	
+	// ATTRIBUTES	------------
+	
+	private var paragraphStyleFound = false
+	private var sectionHeadingFound = false
+	
+	
+	// USX PROCESSING	--------
+	
+	func getParser(_ caller: USXContentParser<Generated, Processed>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
+	{
+		return nil
+	}
+	
+	func generate(from content: [Processed], using errorHandler: (USXParseError) -> ()) -> Generated?
+	{
+		return nil
+	}
+	
+	func getCharacterParser(_ caller: USXContentParser<Generated, Processed>, into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: (USXParseError) -> ()) -> XMLParserDelegate?
+	{
+		return nil
+	}
+}
+
 // This USX parser parses the contents of a single paragraph. A paragraph may contain multple para elements.
 // The starting point should be on a para element start.
 // Always returns on a start of a para element, except in the case where a chapter element ends and there is no new para element to start
