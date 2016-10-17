@@ -33,6 +33,9 @@
 		7C4CC1771DB0EE1800BCF24B /* USXContainerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */; };
 		7C4CC1781DB0EE1800BCF24B /* USXContainerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */; };
 		7C4CC1791DB0EE1800BCF24B /* USXContainerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */; };
+		7CAF6D821DB4F47700E10597 /* USXChapterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */; };
+		7CAF6D831DB4F47700E10597 /* USXChapterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */; };
+		7CAF6D841DB4F47700E10597 /* USXChapterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */; };
 		7CCC00C71D9A98BE00F0562E /* StringUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C20D7FE1D9A93AA00E84BA5 /* StringUtilities.swift */; };
 		7CCC00C81D9A98BF00F0562E /* StringUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C20D7FE1D9A93AA00E84BA5 /* StringUtilities.swift */; };
 		7CCC00EA1D9BD3FC00F0562E /* VerseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00E91D9BD3FC00F0562E /* VerseError.swift */; };
@@ -94,9 +97,9 @@
 		7CCC01441DAB7B0000F0562E /* USXParagraphProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01431DAB7B0000F0562E /* USXParagraphProcessor.swift */; };
 		7CCC01451DAB7B0000F0562E /* USXParagraphProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01431DAB7B0000F0562E /* USXParagraphProcessor.swift */; };
 		7CCC01461DAB7B0000F0562E /* USXParagraphProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01431DAB7B0000F0562E /* USXParagraphProcessor.swift */; };
-		7CCC01481DAB88AE00F0562E /* USXSectionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01471DAB88AE00F0562E /* USXSectionParser.swift */; };
-		7CCC01491DAB88AE00F0562E /* USXSectionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01471DAB88AE00F0562E /* USXSectionParser.swift */; };
-		7CCC014A1DAB88AE00F0562E /* USXSectionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01471DAB88AE00F0562E /* USXSectionParser.swift */; };
+		7CCC01481DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01471DAB88AE00F0562E /* USXSectionProcessor.swift */; };
+		7CCC01491DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01471DAB88AE00F0562E /* USXSectionProcessor.swift */; };
+		7CCC014A1DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC01471DAB88AE00F0562E /* USXSectionProcessor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +142,7 @@
 		7C20D7FE1D9A93AA00E84BA5 /* StringUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtilities.swift; sourceTree = "<group>"; };
 		7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXMarkerElement.swift; sourceTree = "<group>"; };
 		7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXContainerElement.swift; sourceTree = "<group>"; };
+		7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXChapterProcessor.swift; sourceTree = "<group>"; };
 		7CCC00E91D9BD3FC00F0562E /* VerseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseError.swift; sourceTree = "<group>"; };
 		7CCC00EB1D9D067C00F0562E /* CharData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharData.swift; sourceTree = "<group>"; };
 		7CCC00ED1D9D193F00F0562E /* CollectionUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionUtilities.swift; sourceTree = "<group>"; };
@@ -156,7 +160,7 @@
 		7CCC013B1DA7BA2D00F0562E /* USXParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXParseError.swift; sourceTree = "<group>"; };
 		7CCC013F1DA7D12800F0562E /* USXParaProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXParaProcessor.swift; sourceTree = "<group>"; };
 		7CCC01431DAB7B0000F0562E /* USXParagraphProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXParagraphProcessor.swift; sourceTree = "<group>"; };
-		7CCC01471DAB88AE00F0562E /* USXSectionParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXSectionParser.swift; sourceTree = "<group>"; };
+		7CCC01471DAB88AE00F0562E /* USXSectionProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXSectionProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,9 +299,10 @@
 				7CCC01371DA7B45A00F0562E /* USXCharParser.swift */,
 				7CCC013F1DA7D12800F0562E /* USXParaProcessor.swift */,
 				7CCC01431DAB7B0000F0562E /* USXParagraphProcessor.swift */,
-				7CCC01471DAB88AE00F0562E /* USXSectionParser.swift */,
+				7CCC01471DAB88AE00F0562E /* USXSectionProcessor.swift */,
 				7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */,
 				7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */,
+				7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */,
 			);
 			name = USXParsing;
 			sourceTree = "<group>";
@@ -437,6 +442,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CCC010B1DA4DEC200F0562E /* Paragraph.swift in Sources */,
+				7CAF6D821DB4F47700E10597 /* USXChapterProcessor.swift in Sources */,
 				7C20D7E81D8BF9B100E84BA5 /* Para.swift in Sources */,
 				7CCC01381DA7B45A00F0562E /* USXCharParser.swift in Sources */,
 				7CCC01301DA67B0E00F0562E /* Book.swift in Sources */,
@@ -456,7 +462,7 @@
 				7C4CC1771DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7CCC00EE1D9D193F00F0562E /* CollectionUtilities.swift in Sources */,
 				7CCC01341DA7964000F0562E /* XmlParserUtil.swift in Sources */,
-				7CCC01481DAB88AE00F0562E /* USXSectionParser.swift in Sources */,
+				7CCC01481DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
 				7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */,
 				7CCC00F21D9D1B4E00F0562E /* AttributedStringConvertible.swift in Sources */,
 				7CCC01201DA646F900F0562E /* USXParser.swift in Sources */,
@@ -473,6 +479,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CCC010C1DA4DEC200F0562E /* Paragraph.swift in Sources */,
+				7CAF6D831DB4F47700E10597 /* USXChapterProcessor.swift in Sources */,
 				7C20D7E91D8BF9B100E84BA5 /* Para.swift in Sources */,
 				7CCC01391DA7B45A00F0562E /* USXCharParser.swift in Sources */,
 				7CCC01311DA67B0E00F0562E /* Book.swift in Sources */,
@@ -492,7 +499,7 @@
 				7C4CC1781DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7CCC00F91D9D369100F0562E /* VerseRange.swift in Sources */,
 				7CCC01351DA7964000F0562E /* XmlParserUtil.swift in Sources */,
-				7CCC01491DAB88AE00F0562E /* USXSectionParser.swift in Sources */,
+				7CCC01491DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
 				7C18A1A41D8BBEBD00DD1B03 /* TranslationEditorTests.swift in Sources */,
 				7C20D7E41D8BF8D000E84BA5 /* TranslationCell.swift in Sources */,
 				7CCC01211DA646FA00F0562E /* USXParser.swift in Sources */,
@@ -509,6 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CCC010D1DA4DEC200F0562E /* Paragraph.swift in Sources */,
+				7CAF6D841DB4F47700E10597 /* USXChapterProcessor.swift in Sources */,
 				7C20D7EA1D8BF9B100E84BA5 /* Para.swift in Sources */,
 				7CCC013A1DA7B45A00F0562E /* USXCharParser.swift in Sources */,
 				7CCC01321DA67B0E00F0562E /* Book.swift in Sources */,
@@ -528,7 +536,7 @@
 				7C4CC1791DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7CCC00FA1D9D369100F0562E /* VerseRange.swift in Sources */,
 				7CCC01361DA7964000F0562E /* XmlParserUtil.swift in Sources */,
-				7CCC014A1DAB88AE00F0562E /* USXSectionParser.swift in Sources */,
+				7CCC014A1DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
 				7C18A1AF1D8BBEBD00DD1B03 /* TranslationEditorUITests.swift in Sources */,
 				7C20D7E51D8BF8D000E84BA5 /* TranslationCell.swift in Sources */,
 				7CCC01221DA646FA00F0562E /* USXParser.swift in Sources */,
