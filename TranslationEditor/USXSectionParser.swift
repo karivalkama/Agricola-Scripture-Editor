@@ -18,7 +18,7 @@ class USXSectionParser: TemporaryXMLParser
 	private let errorHandler: (USXParseError) -> ()
 	private let targetPointer: UnsafeMutablePointer<[Section]>
 	
-	private var contentParser: USXParagraphParser?
+	private var contentParser: XMLParserDelegate?
 	private var parsedContent = [Paragraph]()
 	
 	private var sectionHeadingFound = false
@@ -65,11 +65,11 @@ class USXSectionParser: TemporaryXMLParser
 			
 			if parseContents
 			{
-				contentParser = USXParagraphParser(caller: self, targetPointer: &parsedContent, using: errorHandler)
+				contentParser = USXParagraphProcessor.createParagraphParser(caller: self, targetPointer: &parsedContent, using: errorHandler)
 				parser.delegate = contentParser
 				
 				// Informs the paragraph parser about the first element
-				contentParser?.parser(parser, didStartElement: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
+				contentParser?.parser?(parser, didStartElement: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
 			}
 		}
 		if elementName == "chapter"

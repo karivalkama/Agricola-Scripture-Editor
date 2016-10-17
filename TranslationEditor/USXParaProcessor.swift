@@ -44,7 +44,7 @@ class USXParaProcessor: USXContentProcessor
 	
 	// USX PROCESSING	-----
 	
-	func getParser(_ caller: USXContentParser<Generated, Processed>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
+	func getParser(_ caller: USXContentParser<Para, CharData>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[CharData]>, using errorHandler: @escaping (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
 	{
 		// On a new verse marker, starts reading verse data
 		if elementName == USXMarkerElement.verse.rawValue
@@ -75,7 +75,7 @@ class USXParaProcessor: USXContentProcessor
 		}
 	}
 	
-	func generate(from content: [Processed], using errorHandler: (USXParseError) -> ()) -> Generated?
+	func generate(from content: [CharData], using errorHandler: (USXParseError) -> ()) -> Para?
 	{
 		// When the end is reached, finalises the collected data
 		// The last verse is closed
@@ -103,7 +103,7 @@ class USXParaProcessor: USXContentProcessor
 		}
 	}
 	
-	func getCharacterParser(_ caller: USXContentParser<Generated, Processed>, into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: (USXParseError) -> ()) -> XMLParserDelegate?
+	func getCharacterParser(_ caller: USXContentParser<Para, CharData>, into targetPointer: UnsafeMutablePointer<[CharData]>, using errorHandler: (USXParseError) -> ()) -> XMLParserDelegate?
 	{
 		return USXCharParser(caller: caller, targetData: targetPointer)
 	}

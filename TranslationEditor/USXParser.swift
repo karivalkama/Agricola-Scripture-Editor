@@ -19,7 +19,7 @@ protocol USXContentProcessor
 	// Finds a suitable element parser for the provided element. 
 	// Also returns whether the provided element should be relayed to the parser
 	// Returns nil if no parser should be used for the element at this time
-	func getParser(_ caller: USXContentParser<Generated, Processed>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
+	func getParser(_ caller: USXContentParser<Generated, Processed>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: @escaping (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
 	
 	// Generates a piece of content based on the collected data
 	func generate(from content: [Processed], using errorHandler: (USXParseError) -> ()) -> Generated?
@@ -35,7 +35,7 @@ class AnyUSXContentProcessor<G, P>: USXContentProcessor
 	typealias Processed = P
 	
 	private let _generate: ([P], (USXParseError) -> ()) -> G?
-	private let _getParser: (USXContentParser<G, P>, String, [String : String], UnsafeMutablePointer<[P]>, (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
+	private let _getParser: (USXContentParser<G, P>, String, [String : String], UnsafeMutablePointer<[P]>, @escaping (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
 	private let _getCharacterParser: (USXContentParser<G, P>, UnsafeMutablePointer<[P]>, (USXParseError) -> ()) -> XMLParserDelegate?
 	
 	required init<A: USXContentProcessor>(_ processor: A) where A.Generated == G, A.Processed == P
@@ -50,7 +50,7 @@ class AnyUSXContentProcessor<G, P>: USXContentProcessor
 		return _generate(content, errorHandler)
 	}
 	
-	func getParser(_ caller: USXContentParser<G, P>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[P]>, using errorHandler: (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
+	func getParser(_ caller: USXContentParser<G, P>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[P]>, using errorHandler: @escaping (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
 	{
 		return _getParser(caller, elementName, attributes, targetPointer, errorHandler)
 	}
