@@ -46,6 +46,7 @@ class USXSectionProcessor: USXContentProcessor
 			{
 				if ParaStyle.value(of: styleAttribute).isSectionHeadingStyle()
 				{
+					print("Section heading found")
 					sectionHeadingFound = true
 				}
 			}

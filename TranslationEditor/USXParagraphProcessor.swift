@@ -50,6 +50,7 @@ class USXParagraphProcessor: USXContentProcessor
 			// A section heading para is the last thing parsed by this parser (section heading paragraph can contain only that singe para)
 			if style.isSectionHeadingStyle()
 			{
+				print("Section heading found -> stops parsing after this para")
 				caller.nextStopContainer = .para
 			}
 			

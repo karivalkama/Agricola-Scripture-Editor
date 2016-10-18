@@ -181,6 +181,15 @@ enum ParaStyle: USXStyle
 					return nonIndentedStyle
 				}
 			}
+			
+			// A non-existing number may also be interpreted as 1
+			for indentedStyle in indentedStyles(with: 1)
+			{
+				if indentedStyle.code == code + "1"
+				{
+					return indentedStyle
+				}
+			}
 		}
 		
 		// If no other style could be parsed, the wild card 'other' is used

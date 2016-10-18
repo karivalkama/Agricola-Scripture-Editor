@@ -21,6 +21,36 @@ class TranslationEditorTests: XCTestCase
         super.tearDown()
     }
 	
+	func testParaStyleParsing()
+	{
+		let paraStyles: [ParaStyle] = [.normal, .other("ip"), .poeticLine(1), .poeticLine(2), .sectionHeading(1), .sectionHeading(2)]
+		
+		for style in paraStyles
+		{
+			let code = style.code
+			let parsed = ParaStyle.value(of: code)
+			
+			print("\(style) -> \(code) -> \(parsed)")
+			
+			assert(style.isHeaderStyle() == parsed.isHeaderStyle())
+			assert(style.isParagraphStyle() == parsed.isParagraphStyle())
+			assert(style.isSectionHeadingStyle() == parsed.isSectionHeadingStyle())
+			
+			if style.isHeaderStyle()
+			{
+				print("\t- Heading")
+			}
+			if style.isSectionHeadingStyle()
+			{
+				print("\t- Section heading")
+			}
+			if style.isParagraphStyle()
+			{
+				print("\t- Paragraph")
+			}
+		}
+	}
+	
 	func testUSXParsing()
 	{
 		guard let url = Bundle.main.url(forResource: "GAL", withExtension: "usx")
