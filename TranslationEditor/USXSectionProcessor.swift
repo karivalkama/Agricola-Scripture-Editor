@@ -25,7 +25,7 @@ class USXSectionProcessor: USXContentProcessor
 	// Creates a new USX parser for section data
 	// The parser should start right after a chapter element or at the start of a section heading para element
 	// The parser will stop parsing at the start of the next chapter or section heading para element (or at the end of the usx element)
-	static func createSectionParser(caller: XMLParserDelegate, targetPointer: UnsafeMutablePointer<[Section]>, using errorHandler: @escaping (USXParseError) -> ()) -> USXContentParser<Section, Paragraph>
+	static func createSectionParser(caller: XMLParserDelegate, targetPointer: UnsafeMutablePointer<[Section]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Section, Paragraph>
 	{
 		let parser = USXContentParser<Section, Paragraph>(caller: caller, containingElement: .usx, lowestBreakMarker: .chapter, targetPointer: targetPointer, using: errorHandler)
 		parser.processor = AnyUSXContentProcessor(USXSectionProcessor())
@@ -36,7 +36,7 @@ class USXSectionProcessor: USXContentProcessor
 	
 	// USX PARSING	---------
 	
-	func getParser(_ caller: USXContentParser<Section, Paragraph>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Paragraph]>, using errorHandler: @escaping (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
+	func getParser(_ caller: USXContentParser<Section, Paragraph>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Paragraph]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
 	{
 		if elementName == USXContainerElement.para.rawValue
 		{
@@ -69,14 +69,17 @@ class USXSectionProcessor: USXContentProcessor
 		}
 	}
 	
-	func getCharacterParser(_ caller: USXContentParser<Section, Paragraph>, into targetPointer: UnsafeMutablePointer<[Paragraph]>, using errorHandler: (USXParseError) -> ()) -> XMLParserDelegate?
+	func getCharacterParser(_ caller: USXContentParser<Section, Paragraph>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[Paragraph]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
 	{
 		// Character data is ignored. All character data should be inside para elements
 		return nil
 	}
 	
-	func generate(from content: [Paragraph], using errorHandler: (USXParseError) -> ()) -> Section?
+	func generate(from content: [Paragraph], using errorHandler: @escaping ErrorHandler) -> Section?
 	{
+		// Resets status for reuse
+		contentParsed = false
+		
 		// Wraps the paragraphs into a section
 		return Section(content: content)
 	}

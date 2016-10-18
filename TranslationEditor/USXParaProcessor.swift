@@ -34,7 +34,7 @@ class USXParaProcessor: USXContentProcessor
 	
 	// Creates a new para parser using an instance of USXParaProcessor. The parser should be used at or after the start of a para element. 
 	// It will stop parsing at the end of the para element
-	static func createParaParser(caller: XMLParserDelegate, style: ParaStyle, targetPointer: UnsafeMutablePointer<[Para]>, using errorHandler: @escaping (USXParseError) -> ()) -> USXContentParser<Para, CharData>
+	static func createParaParser(caller: XMLParserDelegate, style: ParaStyle, targetPointer: UnsafeMutablePointer<[Para]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Para, CharData>
 	{
 		let parser = USXContentParser<Para, CharData>(caller: caller, containingElement: .para, lowestBreakMarker: .chapter, targetPointer: targetPointer, using: errorHandler)
 		parser.processor = AnyUSXContentProcessor(USXParaProcessor(style: style))
@@ -44,7 +44,7 @@ class USXParaProcessor: USXContentProcessor
 	
 	// USX PROCESSING	-----
 	
-	func getParser(_ caller: USXContentParser<Para, CharData>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[CharData]>, using errorHandler: @escaping (USXParseError) -> ()) -> (XMLParserDelegate, Bool)?
+	func getParser(_ caller: USXContentParser<Para, CharData>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[CharData]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
 	{
 		// On a new verse marker, starts reading verse data
 		if elementName == USXMarkerElement.verse.rawValue
@@ -75,7 +75,7 @@ class USXParaProcessor: USXContentProcessor
 		}
 	}
 	
-	func generate(from content: [CharData], using errorHandler: (USXParseError) -> ()) -> Para?
+	func generate(from content: [CharData], using errorHandler: @escaping ErrorHandler) -> Para?
 	{
 		// When the end is reached, finalises the collected data
 		// The last verse is closed
@@ -84,6 +84,8 @@ class USXParaProcessor: USXContentProcessor
 			// The end index must be calculated based on the last index marker
 			closeCurrentVerse(endIndex: VerseIndex(lastVerseIndex.index, midVerse: true))
 		}
+		
+		var parsedPara: Para?
 		
 		// Parses the initial character data into a verse, if possible
 		if let firstVerse = parsedVerses.first
@@ -94,16 +96,23 @@ class USXParaProcessor: USXContentProcessor
 				parsedVerses.insert(Verse(range: VerseRange(VerseIndex(firstVerseIndex.index - 1, midVerse: true), firstVerseIndex), content: content), at: 0)
 			}
 			
-			return Para(content: parsedVerses, style: style)
+			parsedPara = Para(content: parsedVerses, style: style)
 		}
 		// If there were no verses, records content as it is
 		else
 		{
-			return Para(content: content, style: style)
+			parsedPara = Para(content: content, style: style)
 		}
+		
+		// Clears the memory so that the processor may be reused
+		parsedVerses = []
+		currentVerseIndex = nil
+		currentVerseData = []
+		
+		return parsedPara
 	}
 	
-	func getCharacterParser(_ caller: USXContentParser<Para, CharData>, into targetPointer: UnsafeMutablePointer<[CharData]>, using errorHandler: (USXParseError) -> ()) -> XMLParserDelegate?
+	func getCharacterParser(_ caller: USXContentParser<Para, CharData>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[CharData]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
 	{
 		return USXCharParser(caller: caller, targetData: targetPointer)
 	}

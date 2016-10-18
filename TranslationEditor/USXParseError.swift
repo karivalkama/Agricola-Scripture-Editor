@@ -11,4 +11,7 @@ import Foundation
 enum USXParseError: Error
 {
 	case verseIndexNotFound
+	case chapterIndexNotFound
+	case bookNameNotSpecified
+	case bookCodeNotFound
 }
