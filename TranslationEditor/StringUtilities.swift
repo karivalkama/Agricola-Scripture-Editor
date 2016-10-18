@@ -57,6 +57,30 @@ extension String
 		return regex.matches(in: self, options: [], range: trueRange).count
 	}
 	
+	func components(separatedBy regex: NSRegularExpression, trim: Bool = false) -> [String]
+	{
+		// Replaces all matches of regex with a certain string
+		let splitter = "<;splitter;>"
+		let temp = NSMutableString(string: self)
+		regex.replaceMatches(in: temp, options: [], range: NSMakeRange(0, temp.length), withTemplate: splitter)
+		
+		// Returns the components (may have to trim them first)
+		if trim
+		{
+			var trimmedComponents = [String]()
+			for component in temp.components(separatedBy: splitter)
+			{
+				trimmedComponents.append(component.trimmingCharacters(in: CharacterSet(charactersIn: " ")))
+			}
+			
+			return trimmedComponents
+		}
+		else
+		{
+			return temp.components(separatedBy: splitter)
+		}
+	}
+	
 	// Finds a single digit at 'index' of 'self'. Nil if out of range or not a digit
 	func digit(at index: Int) -> Int?
 	{

@@ -149,18 +149,22 @@ class USXContentParser<Generated, Contained>: TemporaryXMLParser
 	
 	func parser(_ parser: XMLParser, foundCharacters string: String)
 	{
-		// When character data is found, may assign a new deleage to handle the parsing
-		if let delegateParser = processor?.getCharacterParser(self, forCharacters: string, into: &parsedContent, using: handleErrorAndStop)
+		// Ignores characters which consist only of whitespace
+		if !string.trimmingCharacters(in: CharacterSet(charactersIn: " \t\n\r")).isEmpty
 		{
-			delegateParsing(of: parser, to: delegateParser)
-			delegateParser.parser?(parser, foundCharacters: string)
-		}
-		
-		// Stops after parsing if a flag was set
-		if stopsAfterCurrentParse
-		{
-			closeCurrentElement()
-			endParsingOnCharacters(parser: parser, characters: string)
+			// When character data is found, may assign a new deleage to handle the parsing
+			if let delegateParser = processor?.getCharacterParser(self, forCharacters: string, into: &parsedContent, using: handleErrorAndStop)
+			{
+				delegateParsing(of: parser, to: delegateParser)
+				delegateParser.parser?(parser, foundCharacters: string)
+			}
+			
+			// Stops after parsing if a flag was set
+			if stopsAfterCurrentParse
+			{
+				closeCurrentElement()
+				endParsingOnCharacters(parser: parser, characters: string)
+			}
 		}
 	}
 	

@@ -113,6 +113,9 @@
 		7CD8EA621DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD8EA611DB62BFD00364B70 /* USXVerseProcessor.swift */; };
 		7CD8EA631DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD8EA611DB62BFD00364B70 /* USXVerseProcessor.swift */; };
 		7CD8EA641DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD8EA611DB62BFD00364B70 /* USXVerseProcessor.swift */; };
+		7CD8EA661DB644E300364B70 /* GAL.usx in Resources */ = {isa = PBXBuildFile; fileRef = 7CD8EA651DB644E300364B70 /* GAL.usx */; };
+		7CD8EA671DB644E300364B70 /* GAL.usx in Resources */ = {isa = PBXBuildFile; fileRef = 7CD8EA651DB644E300364B70 /* GAL.usx */; };
+		7CD8EA681DB644E300364B70 /* GAL.usx in Resources */ = {isa = PBXBuildFile; fileRef = 7CD8EA651DB644E300364B70 /* GAL.usx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +182,7 @@
 		7CD8EA591DB60C5C00364B70 /* 019PSA.usx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 019PSA.usx; sourceTree = "<group>"; };
 		7CD8EA5A1DB60C5C00364B70 /* MAT.usx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MAT.usx; path = TranslationEditorTests/MAT.usx; sourceTree = SOURCE_ROOT; };
 		7CD8EA611DB62BFD00364B70 /* USXVerseProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXVerseProcessor.swift; sourceTree = "<group>"; };
+		7CD8EA651DB644E300364B70 /* GAL.usx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GAL.usx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +251,7 @@
 			children = (
 				7C18A1A31D8BBEBD00DD1B03 /* TranslationEditorTests.swift */,
 				7CD8EA5A1DB60C5C00364B70 /* MAT.usx */,
+				7CD8EA651DB644E300364B70 /* GAL.usx */,
 				7CD8EA591DB60C5C00364B70 /* 019PSA.usx */,
 				7C18A1A51D8BBEBD00DD1B03 /* Info.plist */,
 				7CD8EA581DB60C4800364B70 /* TestResources */,
@@ -449,6 +454,7 @@
 				7C18A1961D8BBEBD00DD1B03 /* Assets.xcassets in Resources */,
 				7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */,
 				7CD8EA5F1DB61A3C00364B70 /* MAT.usx in Resources */,
+				7CD8EA661DB644E300364B70 /* GAL.usx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +462,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CD8EA671DB644E300364B70 /* GAL.usx in Resources */,
 				7CD8EA5C1DB60C5C00364B70 /* MAT.usx in Resources */,
 				7CD8EA5B1DB60C5C00364B70 /* 019PSA.usx in Resources */,
 			);
@@ -466,6 +473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CD8EA601DB61A3D00364B70 /* MAT.usx in Resources */,
+				7CD8EA681DB644E300364B70 /* GAL.usx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

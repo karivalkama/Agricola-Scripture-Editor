@@ -23,7 +23,7 @@ class TranslationEditorTests: XCTestCase
 	
 	func testUSXParsing()
 	{
-		guard let url = Bundle.main.url(forResource: "MAT", withExtension: "usx")
+		guard let url = Bundle.main.url(forResource: "GAL", withExtension: "usx")
 		else
 		{
 			XCTFail("Couldn't find url")

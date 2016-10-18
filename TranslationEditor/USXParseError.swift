@@ -11,6 +11,8 @@ import Foundation
 enum USXParseError: Error
 {
 	case verseIndexNotFound
+	case verseIndexParsingFailed(indexAttribute: String)
+	case verseRangeParsingFailed
 	case chapterIndexNotFound
 	case bookNameNotSpecified
 	case bookCodeNotFound
