@@ -60,23 +60,6 @@ class TranslationEditorTests: XCTestCase
 			return
 		}
 		
-		/*
-		guard let path = Bundle(for: type(of: self)).path(forResource: "040MAT", ofType: "usx", inDirectory: "TestResources")
-		// Finds the test file
-		//guard let path = Bundle.main.path(forResource: "040MAT", ofType: "usx")
-		else
-		{
-			XCTFail("usx resource not found")
-			return
-		}
-		
-		guard let data = path.data(using: .utf8)
-		else
-		{
-			XCTFail("Failed to get usx data in utf8")
-			return
-		}*/
-		
 		// Creates the parser first
 		let parser = XMLParser(contentsOf: url)!
 		let usxParserDelegate = USXParser()

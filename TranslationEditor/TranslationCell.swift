@@ -56,12 +56,12 @@ class TranslationCell: UITableViewCell, UITextViewDelegate
 	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
 	{
 		// The new string can't remove verse markings
-		if textView.attributedText.containsAttribute(VerseIndexMarkerAttributeName, in: range)
+		if textView.attributedText.containsAttribute(VerseIndexMarkerAttributeName, in: range) || textView.attributedText.containsAttribute(ParaMarkerAttributeName, in: range)
 		{
 			return false
 		}
 		// The verse markins can't be split either
-		else if textView.attributedText.attribute(VerseIndexMarkerAttributeName, surrounding: range) != nil
+		else if textView.attributedText.attribute(VerseIndexMarkerAttributeName, surrounding: range) != nil || textView.attributedText.attribute(ParaMarkerAttributeName, surrounding: range) != nil
 		{
 			return false
 		}

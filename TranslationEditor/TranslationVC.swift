@@ -18,7 +18,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 	
 	// Vars	--------------
 	
-	private var testContent = [Para]()
+	private var testContent = [Paragraph]()
 	
 	
 	// Overridden	-----
@@ -28,7 +28,8 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		super.viewDidLoad()
 		
 		// Testing
-		generateTestData()
+		//generateTestData()
+		readTestDataFromUSX()
 		
 		// (Epic hack which) Makes table view cells have automatic height
 		translationTableView.rowHeight = UITableViewAutomaticDimension
@@ -98,6 +99,37 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		//translationTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.none)
 	}
 	
+	private func readTestDataFromUSX()
+	{
+		guard let url = Bundle.main.url(forResource: "GAL", withExtension: "usx")
+			else
+		{
+			fatalError("Couldn't find url")
+		}
+		
+		// Creates the parser first
+		let parser = XMLParser(contentsOf: url)!
+		let usxParserDelegate = USXParser()
+		parser.delegate = usxParserDelegate
+		
+		// Parses the xml
+		parser.parse()
+		
+		// Reads the data from the book(s)
+		testContent = []
+		for book in usxParserDelegate.parsedBooks
+		{
+			for chapter in book.chapters
+			{
+				for section in chapter.sections
+				{
+					testContent += section.content
+				}
+			}
+		}
+	}
+	
+	/*
 	private func generateTestData()
 	{
 		let testString = "The first verse is here. #Followed by another.€A new paragraph starts. #asldkalsk dlka #asdjkkaj a#jasdkjadkj€ASdkkddkkdslkskd#asjddjddd€asdjdjdj"
@@ -121,7 +153,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		}
 		
 		testContent = paragraphs
-	}
+	}*/
 }
 
 
