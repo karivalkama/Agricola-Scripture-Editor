@@ -21,6 +21,25 @@ class TranslationEditorTests: XCTestCase
         super.tearDown()
     }
 	
+	func testPropertyValues()
+	{
+		var set = PropertySet()
+		set["first"] = PropertyValue(1)
+		set["second"] = PropertyValue("2.0")
+		
+		var child = PropertySet()
+		child["name"] = PropertyValue("Jussi")
+		
+		set["child"] = PropertyValue(child)
+		
+		assert(set["second"].string == "2.0")
+		assert(set["child"]["name"].string == "Jussi")
+		assert(set["second"].double == 2.0)
+		
+		print(set.toDict)
+		print(PropertySet(set.toDict).toDict)
+	}
+	
 	func testParaStyleParsing()
 	{
 		let paraStyles: [ParaStyle] = [.normal, .other("ip"), .poeticLine(1), .poeticLine(2), .sectionHeading(1), .sectionHeading(2)]

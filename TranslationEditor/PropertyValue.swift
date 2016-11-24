@@ -226,6 +226,11 @@ struct PropertyValue
 	// If the provided value is not of any of those types, nil is returned
 	static func of(_ any: Any) -> PropertyValue?
 	{
+		// Propertyvalues are not wrapped further
+		if let value = any as? PropertyValue
+		{
+			return value
+		}
 		if any is String || any is Int || any is Double || any is Bool || any is PropertySet || any is [PropertyValue]
 		{
 			return PropertyValue(any: any)

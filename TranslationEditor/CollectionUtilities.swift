@@ -6,6 +6,7 @@
 //  Copyright © 2016 Mikko Hilpinen. All rights reserved.
 //
 
+import Swift
 import Foundation
 
 extension Array
