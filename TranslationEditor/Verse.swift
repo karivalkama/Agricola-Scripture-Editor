@@ -15,6 +15,10 @@ class Verse: AttributedStringConvertible
 {
 	// ATTRIBUTES	------
 	
+	// String conversion option defining whether verse markers should be included (default true)
+	// If you would set this to false, the string may not be parsed back to verse data anymore
+	static let OptionDisplayVerseNumber = "displayVerseNumber"
+	
 	var range: VerseRange
 	var content: [CharData]
 	
@@ -59,18 +63,27 @@ class Verse: AttributedStringConvertible
 	// IMPLEMENTED	----
 	
 	// Adds the verse marker(s) for the verse, then the contents
-	func toAttributedString() -> NSAttributedString
+	func toAttributedString(options: [String : Any]) -> NSAttributedString
 	{
 		let str = NSMutableAttributedString()
 		
-		// First adds the verse markers
-		// (each start of a complete verse is added)
-		for verse in range.verses
+		var displayVerseNumber = true
+		if let displayOption = options[Verse.OptionDisplayVerseNumber] as? Bool
 		{
-			if !verse.start.midVerse
+			displayVerseNumber = displayOption
+		}
+		
+		// by default, adds the verse markers
+		// (each start of a complete verse is added)
+		if displayVerseNumber
+		{
+			for verse in range.verses
 			{
-				// Eg. '23. '
-				str.append(NSAttributedString(string: "\(verse.start.index). ", attributes: [VerseIndexMarkerAttributeName : verse.start.index]))
+				if !verse.start.midVerse
+				{
+					// Eg. '23. '
+					str.append(NSAttributedString(string: "\(verse.start.index). ", attributes: [VerseIndexMarkerAttributeName : verse.start.index]))
+				}
 			}
 		}
 		

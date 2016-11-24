@@ -1,0 +1,6 @@
+framework module Pods_TranslationEditor {
+  umbrella header "Pods-TranslationEditor-umbrella.h"
+
+  export *
+  module * { export * }
+}

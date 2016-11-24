@@ -92,8 +92,8 @@ class TranslationCell: UITableViewCell, UITextViewDelegate
 			{
 				switch attrName
 				{
-				case VerseIndexMarkerAttributeName, ParaMarkerAttributeName:
-					newText.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: range)
+				case ChapterMarkerAttributeName: newText.addAttribute(NSFontAttributeName, value: UIFont(name: "Arial", size: 32.0)!, range: range)
+				case VerseIndexMarkerAttributeName, ParaMarkerAttributeName: newText.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: range)
 				case CharStyleAttributeName:
 					if let style = value as? CharStyle
 					{

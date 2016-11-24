@@ -12,5 +12,5 @@ import Foundation
 protocol AttributedStringConvertible
 {
 	// Converts the instance to an attributed string. The possible usx style and structure information should be presented withing the string as attribute data
-	func toAttributedString() -> NSAttributedString
+	func toAttributedString(options: [String : Any]) -> NSAttributedString
 }

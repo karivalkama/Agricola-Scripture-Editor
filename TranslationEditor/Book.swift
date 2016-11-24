@@ -19,7 +19,7 @@ class Book
 	var code: String
 	
 	
-	// INIT	------------
+	// INIT	---------------
 	
 	init(code: String, name: String, content: [Chapter], introduction: Paragraph = Paragraph(content: []))
 	{
@@ -27,5 +27,35 @@ class Book
 		self.name = name
 		self.chapters = content
 		self.introduction = introduction
+	}
+	
+	
+	// OTHER METHODS	--
+	
+	func toAttributedStringCollection(displayParagraphRanges: Bool = true) -> [NSAttributedString]
+	{
+		var strings = [NSAttributedString]()
+		
+		for chapter in chapters
+		{
+			var chapterMarkerAdded = false
+			
+			for section in chapter.sections
+			{
+				for paragraph in section.content
+				{
+					var options: [String : Any] = [Paragraph.optionDisplayParagraphRange : displayParagraphRanges]
+					if !chapterMarkerAdded
+					{
+						options[Paragraph.optionDisplayedChapterIndex] = chapter.index
+						chapterMarkerAdded = true
+					}
+					
+					strings.append(paragraph.toAttributedString(options: options))
+				}
+			}
+		}
+		
+		return strings
 	}
 }

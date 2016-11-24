@@ -1,0 +1,6 @@
+framework module Pods_TranslationEditorUITests {
+  umbrella header "Pods-TranslationEditorUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

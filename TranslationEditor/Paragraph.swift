@@ -12,6 +12,11 @@ class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
 {
 	// ATTRIBUTES	---------
 	
+	// Attributed string conversion option that defines the chapter index that is displayed at the start of the paragraph.
+	static let optionDisplayedChapterIndex = "chapterIndex"
+	// Attributed string conversion option that defines whether paragraph ranges are displayed at paragraph starts. Default true
+	static let optionDisplayParagraphRange = "displayParagraphRange"
+	
 	var content = [Para]()
 	
 	
@@ -58,9 +63,21 @@ class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
 	
 	// AttributedStringConvertible	-----
 	
-	func toAttributedString() -> NSAttributedString
+	func toAttributedString(options: [String : Any]) -> NSAttributedString
 	{
 		let str = NSMutableAttributedString()
+		
+		var displayParagraphRange = true
+		if let displayRangeOption = options[Paragraph.optionDisplayParagraphRange] as? Bool
+		{
+			displayParagraphRange = displayRangeOption
+		}
+		
+		var chapterIndex: Int?
+		if let chapterIndexOption = options[Paragraph.optionDisplayedChapterIndex] as? Int
+		{
+			chapterIndex = chapterIndexOption
+		}
 		
 		for para in content
 		{
@@ -71,21 +88,38 @@ class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
 			// At this point the paragraph range is used to mark the start. Replace with a better solution when possible
 			if str.length == 0
 			{
-				if let range = range
+				if let chapterIndex = chapterIndex
 				{
-					paraIdentifier = range.name + ". "
+					paraIdentifier = "\(chapterIndex). "
 				}
 				else
 				{
-					paraIdentifier = " "
+					if let range = range, displayParagraphRange
+					{
+						paraIdentifier = range.simpleName + ". "
+					}
+					else
+					{
+						paraIdentifier = " "
+					}
 				}
 			}
 			
-			let paraMarker = NSAttributedString(string: paraIdentifier, attributes: [ParaMarkerAttributeName : para.style, ParaStyleAttributeName : para.style])
+			
+			var attributes = [ParaStyleAttributeName : para.style] as [String : Any]
+			if let chapterIndex = chapterIndex
+			{
+				attributes[ChapterMarkerAttributeName] = chapterIndex
+				attributes[VerseIndexMarkerAttributeName] = 1
+			}
+			attributes[ParaMarkerAttributeName] = para.style
+			
+			let paraMarker = NSAttributedString(string: paraIdentifier, attributes: attributes)
 			str.append(paraMarker)
 			
 			// Adds para contents
-			str.append(para.toAttributedString())
+			str.append(para.toAttributedString(options: options))
+			
 		}
 		
 		return str

@@ -28,7 +28,7 @@ struct CharData: AttributedStringConvertible
 	
 	// CONFORMED	---
 	
-	func toAttributedString() -> NSAttributedString
+	func toAttributedString(options: [String : Any] = [:]) -> NSAttributedString
 	{
 		// TODO: At some point one may wish to add other types of attributes based on the style
 		let attributes = [CharStyleAttributeName : style]

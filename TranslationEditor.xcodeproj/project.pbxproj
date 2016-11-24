@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2DEB79E49FA6ACD739858FC4 /* Pods_TranslationEditorUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2CCD571AB68ECBDE6770270 /* Pods_TranslationEditorUITests.framework */; };
 		7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */; };
 		7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */; };
 		7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */; };
@@ -33,6 +34,12 @@
 		7C4CC1771DB0EE1800BCF24B /* USXContainerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */; };
 		7C4CC1781DB0EE1800BCF24B /* USXContainerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */; };
 		7C4CC1791DB0EE1800BCF24B /* USXContainerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */; };
+		7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE891DE6E1EA00C054EB /* PropertySet.swift */; };
+		7C82CE8B1DE6E1EA00C054EB /* PropertySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE891DE6E1EA00C054EB /* PropertySet.swift */; };
+		7C82CE8C1DE6E1EA00C054EB /* PropertySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE891DE6E1EA00C054EB /* PropertySet.swift */; };
+		7C82CE8E1DE6E29500C054EB /* PropertyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */; };
+		7C82CE8F1DE6E29500C054EB /* PropertyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */; };
+		7C82CE901DE6E29500C054EB /* PropertyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */; };
 		7CAF6D821DB4F47700E10597 /* USXChapterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */; };
 		7CAF6D831DB4F47700E10597 /* USXChapterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */; };
 		7CAF6D841DB4F47700E10597 /* USXChapterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */; };
@@ -116,6 +123,8 @@
 		7CD8EA661DB644E300364B70 /* GAL.usx in Resources */ = {isa = PBXBuildFile; fileRef = 7CD8EA651DB644E300364B70 /* GAL.usx */; };
 		7CD8EA671DB644E300364B70 /* GAL.usx in Resources */ = {isa = PBXBuildFile; fileRef = 7CD8EA651DB644E300364B70 /* GAL.usx */; };
 		7CD8EA681DB644E300364B70 /* GAL.usx in Resources */ = {isa = PBXBuildFile; fileRef = 7CD8EA651DB644E300364B70 /* GAL.usx */; };
+		89DB5B1F0997FCC7DC1FE193 /* Pods_TranslationEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A629A8BBB661036AD32A63 /* Pods_TranslationEditor.framework */; };
+		E34ED533901B5B0626CD192D /* Pods_TranslationEditorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D52CD448467628FBD04BFD /* Pods_TranslationEditorTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +145,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		118498FEE6B91FD449F5070B /* Pods-TranslationEditor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslationEditor.release.xcconfig"; path = "Pods/Target Support Files/Pods-TranslationEditor/Pods-TranslationEditor.release.xcconfig"; sourceTree = "<group>"; };
+		23A5C1BE2FD3B1EEAAC0DBBE /* Pods-TranslationEditorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslationEditorTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests.debug.xcconfig"; sourceTree = "<group>"; };
+		25759A7A73415E872B68474D /* Pods-TranslationEditorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslationEditorTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests.release.xcconfig"; sourceTree = "<group>"; };
+		41540BD188D4991E5C3B6D2F /* Pods-TranslationEditorUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslationEditorUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TranslationEditorUITests/Pods-TranslationEditorUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		44B3C4C46D2ADCA1D174BBF6 /* Pods-TranslationEditor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslationEditor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TranslationEditor/Pods-TranslationEditor.debug.xcconfig"; sourceTree = "<group>"; };
+		4F5FEC13745EFF5B25DB3C75 /* Pods-TranslationEditorUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslationEditorUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TranslationEditorUITests/Pods-TranslationEditorUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7C18A18B1D8BBEBD00DD1B03 /* TranslationEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslationEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationVC.swift; sourceTree = "<group>"; };
@@ -158,6 +173,11 @@
 		7C20D7FE1D9A93AA00E84BA5 /* StringUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtilities.swift; sourceTree = "<group>"; };
 		7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXMarkerElement.swift; sourceTree = "<group>"; };
 		7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXContainerElement.swift; sourceTree = "<group>"; };
+		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
+		7C82CE811DE6D91100C054EB /* TranslationEditorTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditorTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		7C82CE821DE6D91100C054EB /* TranslationEditorUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditorUITests-Bridging-Header.h"; sourceTree = "<group>"; };
+		7C82CE891DE6E1EA00C054EB /* PropertySet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertySet.swift; sourceTree = "<group>"; };
+		7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyValue.swift; sourceTree = "<group>"; };
 		7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXChapterProcessor.swift; sourceTree = "<group>"; };
 		7CAF6D851DB4F9AA00E10597 /* USXBookProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXBookProcessor.swift; sourceTree = "<group>"; };
 		7CAF6D891DB5F5FB00E10597 /* USXParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXParser.swift; sourceTree = "<group>"; };
@@ -183,6 +203,9 @@
 		7CD8EA5A1DB60C5C00364B70 /* MAT.usx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MAT.usx; path = TranslationEditorTests/MAT.usx; sourceTree = SOURCE_ROOT; };
 		7CD8EA611DB62BFD00364B70 /* USXVerseProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXVerseProcessor.swift; sourceTree = "<group>"; };
 		7CD8EA651DB644E300364B70 /* GAL.usx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GAL.usx; sourceTree = "<group>"; };
+		C1D52CD448467628FBD04BFD /* Pods_TranslationEditorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2CCD571AB68ECBDE6770270 /* Pods_TranslationEditorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4A629A8BBB661036AD32A63 /* Pods_TranslationEditor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +213,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89DB5B1F0997FCC7DC1FE193 /* Pods_TranslationEditor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E34ED533901B5B0626CD192D /* Pods_TranslationEditorTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,12 +229,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DEB79E49FA6ACD739858FC4 /* Pods_TranslationEditorUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1FA5EB7F5E5867A6AE1296DC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				44B3C4C46D2ADCA1D174BBF6 /* Pods-TranslationEditor.debug.xcconfig */,
+				118498FEE6B91FD449F5070B /* Pods-TranslationEditor.release.xcconfig */,
+				23A5C1BE2FD3B1EEAAC0DBBE /* Pods-TranslationEditorTests.debug.xcconfig */,
+				25759A7A73415E872B68474D /* Pods-TranslationEditorTests.release.xcconfig */,
+				41540BD188D4991E5C3B6D2F /* Pods-TranslationEditorUITests.debug.xcconfig */,
+				4F5FEC13745EFF5B25DB3C75 /* Pods-TranslationEditorUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4B74EFC4E90B6314A725CE04 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F4A629A8BBB661036AD32A63 /* Pods_TranslationEditor.framework */,
+				C1D52CD448467628FBD04BFD /* Pods_TranslationEditorTests.framework */,
+				D2CCD571AB68ECBDE6770270 /* Pods_TranslationEditorUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7C18A1821D8BBEBD00DD1B03 = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +266,8 @@
 				7C18A1A21D8BBEBD00DD1B03 /* TranslationEditorTests */,
 				7C18A1AD1D8BBEBD00DD1B03 /* TranslationEditorUITests */,
 				7C18A18C1D8BBEBD00DD1B03 /* Products */,
+				1FA5EB7F5E5867A6AE1296DC /* Pods */,
+				4B74EFC4E90B6314A725CE04 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -242,6 +293,9 @@
 				7C18A1951D8BBEBD00DD1B03 /* Assets.xcassets */,
 				7C18A1971D8BBEBD00DD1B03 /* LaunchScreen.storyboard */,
 				7C18A19A1D8BBEBD00DD1B03 /* Info.plist */,
+				7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */,
+				7C82CE811DE6D91100C054EB /* TranslationEditorTests-Bridging-Header.h */,
+				7C82CE821DE6D91100C054EB /* TranslationEditorUITests-Bridging-Header.h */,
 			);
 			path = TranslationEditor;
 			sourceTree = "<group>";
@@ -289,6 +343,7 @@
 		7C20D7E61D8BF99D00E84BA5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7C82CE881DE6E1C200C054EB /* Abstract */,
 				7C20D7E71D8BF9B100E84BA5 /* Para.swift */,
 				7C20D7F71D9A672800E84BA5 /* VerseIndex.swift */,
 				7C20D7F91D9A768700E84BA5 /* VerseRange.swift */,
@@ -336,6 +391,15 @@
 			name = USXParsing;
 			sourceTree = "<group>";
 		};
+		7C82CE881DE6E1C200C054EB /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				7C82CE891DE6E1EA00C054EB /* PropertySet.swift */,
+				7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */,
+			);
+			name = Abstract;
+			sourceTree = "<group>";
+		};
 		7CD8EA581DB60C4800364B70 /* TestResources */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,9 +414,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C18A1B31D8BBEBD00DD1B03 /* Build configuration list for PBXNativeTarget "TranslationEditor" */;
 			buildPhases = (
+				FA1CE695DEC867BF42B3769D /* [CP] Check Pods Manifest.lock */,
 				7C18A1871D8BBEBD00DD1B03 /* Sources */,
 				7C18A1881D8BBEBD00DD1B03 /* Frameworks */,
 				7C18A1891D8BBEBD00DD1B03 /* Resources */,
+				562E6159C8AB373DBA9AFCB2 /* [CP] Embed Pods Frameworks */,
+				0CCD92659C05011F2F6F9458 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -367,9 +434,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C18A1B61D8BBEBD00DD1B03 /* Build configuration list for PBXNativeTarget "TranslationEditorTests" */;
 			buildPhases = (
+				A54C92249DB0099A5435BF2C /* [CP] Check Pods Manifest.lock */,
 				7C18A19B1D8BBEBD00DD1B03 /* Sources */,
 				7C18A19C1D8BBEBD00DD1B03 /* Frameworks */,
 				7C18A19D1D8BBEBD00DD1B03 /* Resources */,
+				DC305038209FAB0300A911DC /* [CP] Embed Pods Frameworks */,
+				70C8ECF4F37F64ECA011CB56 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -385,9 +455,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C18A1B91D8BBEBD00DD1B03 /* Build configuration list for PBXNativeTarget "TranslationEditorUITests" */;
 			buildPhases = (
+				A5698BF2BD176D9196E1C739 /* [CP] Check Pods Manifest.lock */,
 				7C18A1A61D8BBEBD00DD1B03 /* Sources */,
 				7C18A1A71D8BBEBD00DD1B03 /* Frameworks */,
 				7C18A1A81D8BBEBD00DD1B03 /* Resources */,
+				49122C903E1892FA58456B07 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -411,15 +483,18 @@
 				TargetAttributes = {
 					7C18A18A1D8BBEBD00DD1B03 = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					7C18A19E1D8BBEBD00DD1B03 = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 7C18A18A1D8BBEBD00DD1B03;
 					};
 					7C18A1A91D8BBEBD00DD1B03 = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 7C18A18A1D8BBEBD00DD1B03;
 					};
@@ -479,6 +554,129 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0CCD92659C05011F2F6F9458 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TranslationEditor/Pods-TranslationEditor-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		49122C903E1892FA58456B07 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TranslationEditorUITests/Pods-TranslationEditorUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		562E6159C8AB373DBA9AFCB2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TranslationEditor/Pods-TranslationEditor-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		70C8ECF4F37F64ECA011CB56 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A54C92249DB0099A5435BF2C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A5698BF2BD176D9196E1C739 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DC305038209FAB0300A911DC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA1CE695DEC867BF42B3769D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7C18A1871D8BBEBD00DD1B03 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -511,8 +709,10 @@
 				7CCC01481DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
 				7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */,
 				7CCC00F21D9D1B4E00F0562E /* AttributedStringConvertible.swift in Sources */,
+				7C82CE8E1DE6E29500C054EB /* PropertyValue.swift in Sources */,
 				7CCC01201DA646F900F0562E /* USXContentParser.swift in Sources */,
 				7CCC013C1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
+				7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
 				7CCC00F61D9D235800F0562E /* USXAttributes.swift in Sources */,
 				7C20D7FF1D9A93AA00E84BA5 /* StringUtilities.swift in Sources */,
 				7CCC01071DA3C1C800F0562E /* USXStyle.swift in Sources */,
@@ -551,8 +751,10 @@
 				7CCC01491DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
 				7C18A1A41D8BBEBD00DD1B03 /* TranslationEditorTests.swift in Sources */,
 				7C20D7E41D8BF8D000E84BA5 /* TranslationCell.swift in Sources */,
+				7C82CE8F1DE6E29500C054EB /* PropertyValue.swift in Sources */,
 				7CCC01211DA646FA00F0562E /* USXContentParser.swift in Sources */,
 				7CCC013D1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
+				7C82CE8B1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
 				7CCC01031D9E365E00F0562E /* USXAttributes.swift in Sources */,
 				7CCC00FD1D9D39FE00F0562E /* VerseIndex.swift in Sources */,
 				7CCC01081DA3C1C800F0562E /* USXStyle.swift in Sources */,
@@ -591,8 +793,10 @@
 				7CCC014A1DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
 				7C18A1AF1D8BBEBD00DD1B03 /* TranslationEditorUITests.swift in Sources */,
 				7C20D7E51D8BF8D000E84BA5 /* TranslationCell.swift in Sources */,
+				7C82CE901DE6E29500C054EB /* PropertyValue.swift in Sources */,
 				7CCC01221DA646FA00F0562E /* USXContentParser.swift in Sources */,
 				7CCC013E1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
+				7C82CE8C1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
 				7CCC01041D9E365F00F0562E /* USXAttributes.swift in Sources */,
 				7CCC00FE1D9D39FF00F0562E /* VerseIndex.swift in Sources */,
 				7CCC01091DA3C1C800F0562E /* USXStyle.swift in Sources */,
@@ -730,37 +934,48 @@
 		};
 		7C18A1B41D8BBEBD00DD1B03 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44B3C4C46D2ADCA1D174BBF6 /* Pods-TranslationEditor.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TranslationEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TranslationEditor/TranslationEditor-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		7C18A1B51D8BBEBD00DD1B03 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 118498FEE6B91FD449F5070B /* Pods-TranslationEditor.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TranslationEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TranslationEditor/TranslationEditor-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		7C18A1B71D8BBEBD00DD1B03 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23A5C1BE2FD3B1EEAAC0DBBE /* Pods-TranslationEditorTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TranslationEditorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TranslationEditor/TranslationEditorTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TranslationEditor.app/TranslationEditor";
 			};
@@ -768,13 +983,16 @@
 		};
 		7C18A1B81D8BBEBD00DD1B03 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 25759A7A73415E872B68474D /* Pods-TranslationEditorTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TranslationEditorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TranslationEditor/TranslationEditorTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TranslationEditor.app/TranslationEditor";
 			};
@@ -782,12 +1000,16 @@
 		};
 		7C18A1BA1D8BBEBD00DD1B03 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41540BD188D4991E5C3B6D2F /* Pods-TranslationEditorUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TranslationEditorUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditorUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TranslationEditor/TranslationEditorUITests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = TranslationEditor;
 			};
@@ -795,12 +1017,15 @@
 		};
 		7C18A1BB1D8BBEBD00DD1B03 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F5FEC13745EFF5B25DB3C75 /* Pods-TranslationEditorUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TranslationEditorUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditorUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TranslationEditor/TranslationEditorUITests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = TranslationEditor;
 			};

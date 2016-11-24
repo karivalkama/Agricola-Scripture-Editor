@@ -14,3 +14,5 @@ let CharStyleAttributeName = "charStyle"
 let VerseIndexMarkerAttributeName = "verseIndexMarker"
 let ParaMarkerAttributeName = "paraMarker"
 let ParaStyleAttributeName = "paraStyle"
+// The value of this attribute should be the chapter index
+let ChapterMarkerAttributeName = "chapterMarker"

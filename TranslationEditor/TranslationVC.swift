@@ -18,7 +18,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 	
 	// Vars	--------------
 	
-	private var testContent = [Paragraph]()
+	private var testContent = [NSAttributedString]()
 	
 	
 	// Overridden	-----
@@ -79,7 +79,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		let cell = translationTableView.dequeueReusableCell(withIdentifier: "TranslationCell", for: indexPath) as! TranslationCell
 		
 		// Updates cell content
-		cell.setContent(to: testContent[indexPath.row].toAttributedString())
+		cell.setContent(to: testContent[indexPath.row])
 		cell.contentChangeListener = self
 		return cell
 	}
@@ -119,13 +119,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		testContent = []
 		for book in usxParserDelegate.parsedBooks
 		{
-			for chapter in book.chapters
-			{
-				for section in chapter.sections
-				{
-					testContent += section.content
-				}
-			}
+			testContent += book.toAttributedStringCollection(displayParagraphRanges: false)
 		}
 	}
 	

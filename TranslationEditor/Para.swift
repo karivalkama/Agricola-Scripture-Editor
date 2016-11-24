@@ -92,14 +92,14 @@ class Para: AttributedStringConvertible, PotentialVerseRangeable
 	
 	// IMPLEMENTED -----
 	
-	func toAttributedString() -> NSAttributedString
+	func toAttributedString(options: [String : Any]) -> NSAttributedString
 	{
 		let str = NSMutableAttributedString()
 		
 		// Adds all verse data
 		for verse in verses
 		{
-			str.append(verse.toAttributedString())
+			str.append(verse.toAttributedString(options: options))
 		}
 		// or ambiguous content
 		for charData in ambiguousContent

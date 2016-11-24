@@ -71,6 +71,19 @@ struct VerseRange
 		}
 	}
 	
+	// A simplified version of the range name (no 'a' or 'b' included)
+	var simpleName: String
+	{
+		if start.index != end.index
+		{
+			return "\(start.index)-\(end.index)"
+		}
+		else
+		{
+			return "\(start.index)"
+		}
+	}
+	
 	
 	// INIT	--------
 	
