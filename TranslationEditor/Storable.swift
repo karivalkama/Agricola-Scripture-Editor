@@ -20,6 +20,8 @@ protocol Storable
 
 extension Storable
 {
+	var id: String {return parseId(from: idProperties)}
+	
 	static func get(_ id: String) -> Self
 	{
 		let doc = DATABASE.document(withID: id)!
@@ -30,13 +32,6 @@ extension Storable
 	
 	static func get(_ idArray: [Any]) -> Self
 	{
-		if (idArray.isEmpty)
-		{
-			return get("")
-		}
-		else
-		{
-			return get(id(of: idArray))
-		}
+		return get(parseId(from: idArray))
 	}
 }

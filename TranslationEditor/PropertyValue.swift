@@ -9,7 +9,7 @@
 import Foundation
 
 // Property values are used for wrapping JSON compatible values into an easy-to-access general value
-struct PropertyValue
+struct PropertyValue: CustomStringConvertible
 {
 	// ATTRIBUTES	---------
 	
@@ -19,6 +19,8 @@ struct PropertyValue
 	
 	
 	// COMP. PROPS	----------
+	
+	var description: String {return string()}
 	
 	// Whether the value in this wrapper is nil
 	var isEmpty: Bool {return value == nil}

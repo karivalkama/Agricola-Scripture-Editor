@@ -22,7 +22,14 @@ var DATABASE: CBLDatabase
 
 let ID_SEPARATOR = "/"
 
-func id(of array: [Any]) -> String
+func parseId(from array: [Any]) -> String
 {
-	return array.dropFirst().reduce("\(array.first!)") {(current, part) in return current + ID_SEPARATOR + "\(part)"}
+	if (array.isEmpty)
+	{
+		return ""
+	}
+	else
+	{
+		return array.dropFirst().reduce("\(array.first!)") {(current, part) in return current + ID_SEPARATOR + "\(part)"}
+	}
 }
