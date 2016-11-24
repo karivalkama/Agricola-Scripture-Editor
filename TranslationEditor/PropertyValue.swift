@@ -15,7 +15,7 @@ struct PropertyValue
 	
 	static let empty = PropertyValue()
 	
-	let value: Any?
+	private let value: Any?
 	
 	
 	// COMP. PROPS	----------
@@ -25,6 +25,34 @@ struct PropertyValue
 	
 	// Whether the value in this wrapper is non-nill
 	var isDefined: Bool {return !isEmpty}
+	
+	var any: Any?
+	{
+		// Property set values are wrapped into dictionaries
+		if let object = value as? PropertySet
+		{
+			return object.toDict
+		}
+		// Property value arrays are wrapped into arrays of any
+		else if let array = value as? [PropertyValue]
+		{
+			var anyArray = [Any]()
+			for value in array
+			{
+				if let any = value.any
+				{
+					anyArray.append(any)
+				}
+			}
+			
+			return anyArray
+		}
+		// Other types stay as they are
+		else
+		{
+			return value
+		}
+	}
 	
 	var string: String?
 	{
@@ -113,6 +141,47 @@ struct PropertyValue
 		return nil
 	}
 	
+	var object: PropertySet?
+	{
+		if let object = value as? PropertySet
+		{
+			return object
+		}
+		
+		return nil
+	}
+	
+	var array: [PropertyValue]?
+	{
+		if let array = value as? [PropertyValue]
+		{
+			return array
+		}
+		
+		return nil
+	}
+	
+	
+	// SUBSCRIPT	------
+	
+	subscript(propertyName: String) -> PropertyValue
+	{
+		return object()[propertyName]
+	}
+	
+	subscript(index: Int) -> PropertyValue
+	{
+		if let array = array
+		{
+			if index >= 0 && index < array.count
+			{
+				return array[index]
+			}
+		}
+		
+		return PropertyValue.empty
+	}
+	
 	
 	// INIT	----------
 	
@@ -136,19 +205,47 @@ struct PropertyValue
 		value = double
 	}
 	
+	init(_ object: PropertySet)
+	{
+		value = object
+	}
+	
+	init(_ array: [PropertyValue])
+	{
+		value = array
+	}
+	
 	private init(any: Any? = nil)
 	{
 		value = any
 	}
 	
 	// Wraps an object into a property value, if possible
-	// Only strings, booleans, integers and double can be wrapped as property values
+	// Only strings, booleans, integers and double, property set (or [String : Any]) 
+	// and arrays ([PropertyValue] or [Any]) can be wrapped as property values
 	// If the provided value is not of any of those types, nil is returned
 	static func of(_ any: Any) -> PropertyValue?
 	{
-		if any is String || any is Int || any is Double || any is Bool
+		if any is String || any is Int || any is Double || any is Bool || any is PropertySet || any is [PropertyValue]
 		{
 			return PropertyValue(any: any)
+		}
+		else if let dict = any as? [String : Any]
+		{
+			return PropertyValue(PropertySet(dict))
+		}
+		else if let array = any as? [Any]
+		{
+			var propertyArray = [PropertyValue]()
+			for any in array
+			{
+				if let value = PropertyValue.of(any)
+				{
+					propertyArray.append(value)
+				}
+			}
+			
+			return PropertyValue(propertyArray)
 		}
 		else
 		{
@@ -204,6 +301,30 @@ struct PropertyValue
 		else
 		{
 			return defaultBool
+		}
+	}
+	
+	func object(or defaultObject: PropertySet = PropertySet.empty) -> PropertySet
+	{
+		if let object = object
+		{
+			return object
+		}
+		else
+		{
+			return defaultObject
+		}
+	}
+	
+	func array(or defaultArray: [PropertyValue] = []) -> [PropertyValue]
+	{
+		if let array = array
+		{
+			return array
+		}
+		else
+		{
+			return defaultArray
 		}
 	}
 }

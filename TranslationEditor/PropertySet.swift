@@ -15,6 +15,8 @@ struct PropertySet
 {
 	// ATTRIBUTES	-----------
 	
+	static let empty = PropertySet()
+	
 	private var properties = [String : PropertyValue]()
 	
 	
@@ -26,7 +28,7 @@ struct PropertySet
 		var dict = [String : Any]()
 		for (propertyName, propertyValue) in properties
 		{
-			if let value = propertyValue.value
+			if let value = propertyValue.any
 			{
 				dict[propertyName] = value
 			}
@@ -35,6 +37,14 @@ struct PropertySet
 		return dict
 	}
 	
+	/*
+	var isDefined: Bool
+	{
+		return properties.contains{(_, value) in value.isDefined}
+	}
+	
+	var isEmpty: Bool {return !isDefined}
+	*/
 	
 	// SUBSCRIPTS	-----------
 	
@@ -42,7 +52,7 @@ struct PropertySet
 	{
 		get
 		{
-			if let value = properties[propertyName]
+			if let value = properties[propertyName.lowercased()]
 			{
 				return value
 			}
@@ -54,7 +64,7 @@ struct PropertySet
 		
 		set
 		{
-			properties[propertyName] = newValue
+			properties[propertyName.lowercased()] = newValue
 		}
 	}
 	
@@ -72,8 +82,16 @@ struct PropertySet
 		{
 			if let parsedValue = PropertyValue.of(value)
 			{
-				self.properties[propertyName] = parsedValue
+				self.properties[propertyName.lowercased()] = parsedValue
 			}
 		}
+	}
+	
+	
+	// OTHER METHODS	------
+	
+	func contains(propertyWithName propertyName: String) -> Bool
+	{
+		return self[propertyName].isDefined
 	}
 }
