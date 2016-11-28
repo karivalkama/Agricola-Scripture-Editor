@@ -22,6 +22,8 @@ var DATABASE: CBLDatabase
 
 let ID_SEPARATOR = "/"
 
+let PROPERTY_TYPE = "type"
+
 func parseId(from array: [Any]) -> String
 {
 	if (array.isEmpty)
