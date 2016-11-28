@@ -23,7 +23,8 @@ protocol Storable: JSONConvertible
 	// The id properties should be created using the provided 'id'
 	// The other properties are based on 'properties'
 	// One can use the update(with properties) -method here as necessary
-	static func create(from properties: PropertySet, withId id: [PropertyValue]) -> Self
+	// Should throw a JSONParseError if the instance couldn't be created
+	static func create(from properties: PropertySet, withId id: [PropertyValue]) throws -> Self
 }
 
 extension Storable
@@ -38,8 +39,7 @@ extension Storable
 	// document that are not found in the instance at the time of this method call
 	func push(overwrite: Bool = false) throws
 	{
-		let document = DATABASE.document(withID: id)
-		try document?.update
+		try document.update
 		{
 			newRev in
 			
@@ -59,6 +59,33 @@ extension Storable
 		}
 	}
 	
+	// Pushes certain property data to the database
+	// If 'overwrite' is set to true, the property data will match the database data even if this model doesn't have a value for the provided property
+	func pushProperties(named propertyNames: [String], overwrite: Bool = false) throws
+	{
+		if !propertyNames.isEmpty
+		{
+			try document.update
+			{
+				newRev in
+				
+				for propertyName in propertyNames
+				{
+					if let property = self.properties[propertyName], let value = property.any
+					{
+						newRev[propertyName] = value
+					}
+					else if overwrite
+					{
+						newRev.properties?.removeObject(forKey: propertyName)
+					}
+				}
+				
+				return true
+			}
+		}
+	}
+	
 	// Updates the instance by reading its data from the database
 	func update()
 	{
@@ -66,23 +93,31 @@ extension Storable
 	}
 	
 	// Wraps a database document into an instance of this class
-	static func create(from document: CBLDocument) -> Self
+	static func create(from document: CBLDocument) throws -> Self
 	{
 		let idProperties = document.documentID.components(separatedBy: ID_SEPARATOR).map{PropertyValue($0)}
-		return create(from: PropertySet(document.properties!), withId: idProperties)
+		return try create(from: PropertySet(document.properties!), withId: idProperties)
 	}
 	
 	// Finds and creates an instance of this class for the provided id
 	// Returns nil if there wasn't a saved revision for the provided id
-	static func get(_ id: String) -> Self?
+	// Throws an error if instance generation failed
+	static func get(_ id: String) throws -> Self?
 	{
-		return create(from: DATABASE.existingDocument(withID: id)!)
+		if let document = DATABASE.existingDocument(withID: id)
+		{
+			return try create(from: document)
+		}
+		else
+		{
+			return nil
+		}
 	}
 	
 	// Finds or creates an instance of this class for the provided id
 	// Returns nil if there wasn't a saved revision for the provided id
-	static func get(_ idArray: [Any]) -> Self?
+	static func get(_ idArray: [Any]) throws -> Self?
 	{
-		return get(parseId(from: idArray))
+		return try get(parseId(from: idArray))
 	}
 }

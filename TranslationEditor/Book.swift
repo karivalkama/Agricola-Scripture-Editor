@@ -2,60 +2,72 @@
 //  Book.swift
 //  TranslationEditor
 //
-//  Created by Mikko Hilpinen on 6.10.2016.
+//  Created by Mikko Hilpinen on 28.11.2016.
 //  Copyright © 2016 Mikko Hilpinen. All rights reserved.
 //
 
 import Foundation
 
-// Books are translated units that contain a number of chapters each
-class Book
+// Books contain multiple chapters and paragraphs. A book is limited to a certain 
+// Language and project context
+final class Book: Storable
 {
-	// ATTRIBUTES	-------
+	// ATTRIBUTES	--------
 	
-	var chapters = [Chapter]()
-	var name: String
-	var introduction: Paragraph
-	var code: String
+	// The type attribute value for all book instances
+	static let type = "book"
+	
+	private let _id: String
+	let code: String
+	
+	var identifier: String
+	var language: String
 	
 	
-	// INIT	---------------
+	// COMP. PROPERTIES	----
 	
-	init(code: String, name: String, content: [Chapter], introduction: Paragraph = Paragraph(content: []))
+	var idProperties: [Any] {return [code, _id]}
+	
+	var properties: [String : PropertyValue]
 	{
-		self.code = code
-		self.name = name
-		self.chapters = content
-		self.introduction = introduction
+		return [PROPERTY_TYPE : PropertyValue(Book.type), "code" : PropertyValue(code), "identifier" : PropertyValue(identifier), "language" : PropertyValue(language)]
 	}
 	
 	
-	// OTHER METHODS	--
+	// INIT	----------------
 	
-	func toAttributedStringCollection(displayParagraphRanges: Bool = true) -> [NSAttributedString]
+	init(code: String, identifier: String, language: String, id: String = UUID().uuidString)
 	{
-		var strings = [NSAttributedString]()
+		self.code = code
+		self.identifier = identifier
+		self.language = language
+		self._id = id
 		
-		for chapter in chapters
+		// TODO: It would be possible to throw an error for invalid parameters
+	}
+	
+	static func create(from properties: PropertySet, withId id: [PropertyValue]) throws -> Book
+	{
+		if id.count < 2
 		{
-			var chapterMarkerAdded = false
-			
-			for section in chapter.sections
-			{
-				for paragraph in section.content
-				{
-					var options: [String : Any] = [Paragraph.optionDisplayParagraphRange : displayParagraphRanges]
-					if !chapterMarkerAdded
-					{
-						options[Paragraph.optionDisplayedChapterIndex] = chapter.index
-						chapterMarkerAdded = true
-					}
-					
-					strings.append(paragraph.toAttributedString(options: options))
-				}
-			}
+			throw JSONParseError(data: properties, message: "2 part id required, \(id) provided")
 		}
 		
-		return strings
+		return Book(code: id[0].string(), identifier: properties["identifier"].string(), language: properties["language"].string(), id: id[1].string())
+	}
+	
+	
+	// IMPLEMENTED METHODS	----
+	
+	func update(with properties: PropertySet)
+	{
+		if let identifier = properties["identifier"].string
+		{
+			self.identifier = identifier
+		}
+		if let language = properties["language"].string
+		{
+			self.language = language
+		}
 	}
 }

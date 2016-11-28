@@ -9,6 +9,7 @@
 import Foundation
 
 // This class is able to parse through all of usx data, creating a set of books
+@available (*, deprecated)
 class USXParser: NSObject, XMLParserDelegate
 {
 	// ATTRIBUTES	-----------
@@ -19,7 +20,7 @@ class USXParser: NSObject, XMLParserDelegate
 	private var contentParser: XMLParserDelegate?
 	
 	// The books parsed from the processed USX content
-	var parsedBooks = [Book]()
+	var parsedBooks = [BookPrev]()
 	
 	var success: Bool {return self._receivedError == nil}
 	

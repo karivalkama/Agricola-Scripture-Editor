@@ -9,10 +9,11 @@
 import Foundation
 
 // This USX processor is able to parse contents of a single book based on USX data
+@available (*, deprecated)
 class USXBookProcessor: USXContentProcessor
 {
-	typealias Generated = Book
-	typealias Processed = Chapter
+	typealias Generated = BookPrev
+	typealias Processed = ChapterPrev
 	
 	
 	// ATTRIBUTES	-------
@@ -33,9 +34,9 @@ class USXBookProcessor: USXContentProcessor
 	// Creates a new USX parser for book data
 	// The parser should be set to start after a book element start
 	// The parser will stop at the next book element start or at the end of usx
-	static func createBookParser(caller: XMLParserDelegate, bookCode: String, targetPointer: UnsafeMutablePointer<[Book]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Book, Chapter>
+	static func createBookParser(caller: XMLParserDelegate, bookCode: String, targetPointer: UnsafeMutablePointer<[BookPrev]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<BookPrev, ChapterPrev>
 	{
-		let parser = USXContentParser<Book, Chapter>(caller: caller, containingElement: .usx, lowestBreakMarker: .book, targetPointer: targetPointer, using: errorHandler)
+		let parser = USXContentParser<BookPrev, ChapterPrev>(caller: caller, containingElement: .usx, lowestBreakMarker: .book, targetPointer: targetPointer, using: errorHandler)
 		parser.processor = AnyUSXContentProcessor(USXBookProcessor(code: bookCode))
 		
 		return parser
@@ -44,7 +45,7 @@ class USXBookProcessor: USXContentProcessor
 	
 	// USX PARSING	-------
 	
-	func getParser(_ caller: USXContentParser<Book, Chapter>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Chapter]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
+	func getParser(_ caller: USXContentParser<BookPrev, ChapterPrev>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[ChapterPrev]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
 	{
 		// On chapter elements, parses using a chapter parser
 		if elementName == USXMarkerElement.chapter.rawValue
@@ -78,7 +79,7 @@ class USXBookProcessor: USXContentProcessor
 		}
 	}
 	
-	func getCharacterParser(_ caller: USXContentParser<Book, Chapter>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[Chapter]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
+	func getCharacterParser(_ caller: USXContentParser<BookPrev, ChapterPrev>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[ChapterPrev]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
 	{
 		// Only character data found by this parser is the book name inside the book element
 		// this information is parsed here and not delegated
@@ -86,15 +87,15 @@ class USXBookProcessor: USXContentProcessor
 		return nil
 	}
 	
-	func generate(from content: [Chapter], using errorHandler: @escaping ErrorHandler) -> Book?
+	func generate(from content: [ChapterPrev], using errorHandler: @escaping ErrorHandler) -> BookPrev?
 	{
 		// Creates the introduction paragraph
-		let introduction = Paragraph(content: introductionParas)
+		let introduction = ParagraphPrev(content: introductionParas)
 		// Creates the book
-		var book: Book?
+		var book: BookPrev?
 		if let bookName = bookName
 		{
-			book = Book(code: code, name: bookName, content: content, introduction: introduction)
+			book = BookPrev(code: code, name: bookName, content: content, introduction: introduction)
 		}
 		else
 		{

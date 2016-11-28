@@ -29,7 +29,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		
 		// Testing
 		//generateTestData()
-		readTestDataFromUSX()
+		//readTestDataFromUSX()
 		
 		// (Epic hack which) Makes table view cells have automatic height
 		translationTableView.rowHeight = UITableViewAutomaticDimension
@@ -99,6 +99,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		//translationTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.none)
 	}
 	
+	@available (*, deprecated)
 	private func readTestDataFromUSX()
 	{
 		guard let url = Bundle.main.url(forResource: "GAL", withExtension: "usx")

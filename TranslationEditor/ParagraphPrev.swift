@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
+@available (*, deprecated)
+class ParagraphPrev: AttributedStringConvertible, PotentialVerseRangeable
 {
 	// ATTRIBUTES	---------
 	
@@ -24,7 +25,7 @@ class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
 	
 	var range: VerseRange?
 	{
-		return Paragraph.range(of: content)
+		return ParagraphPrev.range(of: content)
 	}
 	
 	var text: String
@@ -68,13 +69,13 @@ class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
 		let str = NSMutableAttributedString()
 		
 		var displayParagraphRange = true
-		if let displayRangeOption = options[Paragraph.optionDisplayParagraphRange] as? Bool
+		if let displayRangeOption = options[ParagraphPrev.optionDisplayParagraphRange] as? Bool
 		{
 			displayParagraphRange = displayRangeOption
 		}
 		
 		var chapterIndex: Int?
-		if let chapterIndexOption = options[Paragraph.optionDisplayedChapterIndex] as? Int
+		if let chapterIndexOption = options[ParagraphPrev.optionDisplayedChapterIndex] as? Int
 		{
 			chapterIndex = chapterIndexOption
 		}

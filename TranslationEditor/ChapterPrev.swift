@@ -9,25 +9,26 @@
 import Foundation
 
 // Chapters consist of multiple sections
-class Chapter: PotentialVerseRangeable
+@available (*, deprecated)
+class ChapterPrev: PotentialVerseRangeable
 {
 	// ATTRIBUTES	----------
 	
 	let index: Int
-	var sections: [Section]
+	var sections: [SectionPrev]
 	
 	
 	// COMP. PORPS	----------
 	
 	var range: VerseRange?
 	{
-		return Chapter.range(of: sections)
+		return ChapterPrev.range(of: sections)
 	}
 	
 	
 	// INIT	-------
 	
-	init(index: Int, content: [Section])
+	init(index: Int, content: [SectionPrev])
 	{
 		self.index = index
 		self.sections = content

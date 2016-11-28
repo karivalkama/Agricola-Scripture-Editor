@@ -9,18 +9,19 @@
 import Foundation
 
 // A section is a collection of paragraphs that creates a larger whole. Sections are placed inside chapters.
-class Section: PotentialVerseRangeable
+@available (*, deprecated)
+class SectionPrev: PotentialVerseRangeable
 {
 	// ATTRIBUTES	------
 	
-	var content: [Paragraph]
+	var content: [ParagraphPrev]
 	
 	
 	// COMP. PROPS	------
 	
 	var range: VerseRange?
 	{
-		return Section.range(of: content)
+		return SectionPrev.range(of: content)
 	}
 	
 	// The heading element of this section, if present
@@ -66,7 +67,7 @@ class Section: PotentialVerseRangeable
 			// If heading is not found and new value is provided, inserts the provided heading as a new separate paragraph to the beginning of the section
 			else if let newValue = newValue
 			{
-				content.insert(Paragraph(content: newValue), at: 0)
+				content.insert(ParagraphPrev(content: newValue), at: 0)
 			}
 		}
 	}
@@ -113,15 +114,15 @@ class Section: PotentialVerseRangeable
 	
 	// INIT	--------------
 	
-	init(content: [Paragraph])
+	init(content: [ParagraphPrev])
 	{
 		self.content = content
 	}
 	
-	convenience init(header: Para, content: [Paragraph])
+	convenience init(header: Para, content: [ParagraphPrev])
 	{
-		var allContent = [Paragraph]()
-		allContent.append(Paragraph(content: header))
+		var allContent = [ParagraphPrev]()
+		allContent.append(ParagraphPrev(content: header))
 		allContent.append(contentsOf: content)
 		
 		self.init(content: allContent)

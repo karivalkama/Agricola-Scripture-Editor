@@ -8,9 +8,10 @@
 
 import Foundation
 
+@available (*, deprecated)
 class USXParagraphProcessor: USXContentProcessor
 {
-	typealias Generated = Paragraph
+	typealias Generated = ParagraphPrev
 	typealias Processed = Para
 	
 	
@@ -25,9 +26,9 @@ class USXParagraphProcessor: USXContentProcessor
 	// Creates a new xml parser that is used for parsing the contents of a single paragraph.
 	// The starting point for the parser should be at a para element.
 	// The parser will stop at the new chapter marker or before that, once a paragraph has been parsed
-	static func createParagraphParser(caller: XMLParserDelegate, targetPointer: UnsafeMutablePointer<[Paragraph]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Paragraph, Para>
+	static func createParagraphParser(caller: XMLParserDelegate, targetPointer: UnsafeMutablePointer<[ParagraphPrev]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<ParagraphPrev, Para>
 	{
-		let parser = USXContentParser<Paragraph, Para>(caller: caller, containingElement: .usx, lowestBreakMarker: .chapter, targetPointer: targetPointer, using: errorHandler)
+		let parser = USXContentParser<ParagraphPrev, Para>(caller: caller, containingElement: .usx, lowestBreakMarker: .chapter, targetPointer: targetPointer, using: errorHandler)
 		parser.processor = AnyUSXContentProcessor(USXParagraphProcessor())
 		
 		return parser
@@ -36,7 +37,7 @@ class USXParagraphProcessor: USXContentProcessor
 	
 	// USX PROCESSING	--------
 	
-	func getParser(_ caller: USXContentParser<Paragraph, Para>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Para]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
+	func getParser(_ caller: USXContentParser<ParagraphPrev, Para>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Para]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
 	{
 		if elementName == USXContainerElement.para.rawValue
 		{
@@ -79,17 +80,17 @@ class USXParagraphProcessor: USXContentProcessor
 		}
 	}
 	
-	func generate(from content: [Para], using errorHandler: @escaping ErrorHandler) -> Paragraph?
+	func generate(from content: [Para], using errorHandler: @escaping ErrorHandler) -> ParagraphPrev?
 	{
 		// Clears the status for reuse
 		contentParsed = false
 		paragraphStyleFound = false
 		
 		// Wraps the para content into a paragraph
-		return Paragraph(content: content)
+		return ParagraphPrev(content: content)
 	}
 	
-	func getCharacterParser(_ caller: USXContentParser<Paragraph, Para>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[Para]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
+	func getCharacterParser(_ caller: USXContentParser<ParagraphPrev, Para>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[Para]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
 	{
 		// This parser doesn't handle character data. All character data should be inside para elements.
 		return nil

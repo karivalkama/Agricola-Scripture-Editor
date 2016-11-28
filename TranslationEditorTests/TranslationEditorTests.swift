@@ -90,6 +90,7 @@ class TranslationEditorTests: XCTestCase
 		}
 	}
 	
+	@available (*, deprecated)
 	func testUSXParsing()
 	{
 		guard let url = Bundle.main.url(forResource: "GAL", withExtension: "usx")
