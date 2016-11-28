@@ -187,32 +187,32 @@ struct PropertyValue: CustomStringConvertible
 	
 	// INIT	----------
 	
-	init(_ str: String)
+	init(_ str: String?)
 	{
 		value = str
 	}
 	
-	init(_ bool: Bool)
+	init(_ bool: Bool?)
 	{
 		value = bool
 	}
 	
-	init(_ int: Int)
+	init(_ int: Int?)
 	{
 		value = int
 	}
 	
-	init(_ double: Double)
+	init(_ double: Double?)
 	{
 		value = double
 	}
 	
-	init(_ object: PropertySet)
+	init(_ object: PropertySet?)
 	{
 		value = object
 	}
 	
-	init(_ array: [PropertyValue])
+	init(_ array: [PropertyValue]?)
 	{
 		value = array
 	}

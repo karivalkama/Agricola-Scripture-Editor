@@ -9,12 +9,22 @@
 import Foundation
 
 // Chardata is used for storing text within a verse or another container. Character data may have specific styling associated with it (quotation, special meaning, etc.)
-struct CharData: AttributedStringConvertible
+struct CharData: AttributedStringConvertible, JSONConvertible
 {
 	// ATTRIBUTES	----
 	
 	var style: CharStyle?
 	var text: String
+	
+	
+	// COMP. PROPERTIES	--
+	
+	var properties: [String : PropertyValue]
+	{
+		return [
+			"style" : PropertyValue(style?.rawValue),
+			"text" : PropertyValue(text)]
+	}
 	
 	
 	// INIT	----
@@ -23,6 +33,16 @@ struct CharData: AttributedStringConvertible
 	{
 		self.text = text
 		self.style = style
+	}
+	
+	static func parse(from propertyData: PropertySet) -> CharData
+	{
+		var style: CharStyle? = nil
+		if let styleValue = propertyData["style"].string
+		{
+			style = CharStyle(rawValue: styleValue)
+		}
+		return CharData(text: propertyData["text"].string(), style: style)
 	}
 	
 	

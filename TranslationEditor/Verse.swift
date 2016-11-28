@@ -11,7 +11,7 @@ import Foundation
 // A verse has certain range but also text
 // The text on a verse is mutable
 // TODO: Struct or class?
-class Verse: AttributedStringConvertible
+class Verse: AttributedStringConvertible, JSONConvertible
 {
 	// ATTRIBUTES	------
 	
@@ -24,6 +24,11 @@ class Verse: AttributedStringConvertible
 	
 	
 	// COMP. PROPS	------
+	
+	var properties: [String : PropertyValue]
+	{
+		return ["range" : PropertyValue(range.toPropertySet), "content" : PropertyValue(content.map { PropertyValue($0.toPropertySet) } )]
+	}
 	
 	var text: String
 	{
@@ -48,6 +53,21 @@ class Verse: AttributedStringConvertible
 		else
 		{
 			self.init(range: range, content: [])
+		}
+	}
+	
+	// Parses verse data from property data
+	// Verse range must be defined and parseable in the 'range' element
+	static func parse(from propertyData: PropertySet) -> Verse?
+	{
+		// The range must be parseable
+		if let rangeValue = propertyData["range"].object, let range = VerseRange.parse(from: rangeValue)
+		{
+			return Verse(range: range, content: propertyData["content"].array().map { CharData.parse(from: $0.object())} )
+		}
+		else
+		{
+			return nil
 		}
 	}
 	

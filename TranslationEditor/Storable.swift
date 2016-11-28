@@ -9,13 +9,12 @@
 import Foundation
 
 // Classes implementing this protocol can be updated into and from the database
-protocol Storable
+protocol Storable: JSONConvertible
 {
 	// The properties that form the unique index of the instance
 	// These properties should always be constants
+	// Id properties don't need to (/ shouldn't) be part of the reqular object properties 
 	var idProperties: [Any] {get}
-	// The other properties that the istance has
-	var properties: [String : Any?] {get}
 	
 	// Updates the object's state based on the provided properties
 	func update(with properties: PropertySet)
@@ -46,7 +45,7 @@ extension Storable
 			
 			for (propertyName, propertyValue) in self.properties
 			{
-				if let propertyValue = propertyValue
+				if let propertyValue = propertyValue.any
 				{
 					newRev[propertyName] = propertyValue
 				}

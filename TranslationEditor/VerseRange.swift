@@ -10,7 +10,7 @@ import Foundation
 
 // A verseRange contains a text range from a certain verse index to another
 // TODO: Struct or class? (struct doesn't work with lazily se values)
-struct VerseRange
+struct VerseRange: JSONConvertible
 {
 	// ATTRIBUTES	--------
 	
@@ -20,7 +20,12 @@ struct VerseRange
 	let end: VerseIndex
 	
 	
-	// COMPUTED PROPS.
+	// COMPUTED PROPS.	---
+	
+	var properties: [String : PropertyValue]
+	{
+		return ["start" : PropertyValue(start.toPropertySet), "end" : PropertyValue(end.toPropertySet)]
+	}
 	
 	// Splits the range on verse markings. For example, range of 4b-7 would become [4b-5, 5-6, 6-7]
 	var verses: [VerseRange]
@@ -104,13 +109,21 @@ struct VerseRange
 		}
 	}
 	
-	// Wrapper that creates a range with length 0 at the provided 'index'
-	/*
-	init(_ index: VerseIndex)
+	// Parses a verse range from the provided data. Both start and end data must be present and parseable
+	// returns nil if there was not sufficient data to create a range
+	static func parse(from propertyData: PropertySet) -> VerseRange?
 	{
-		self.start = index
-		self.end = index
-	}*/
+		// Both start and end index must be parseable
+		if let startValue = propertyData["start"].object, let endValue = propertyData["end"].object
+		{
+			if let start = VerseIndex.parse(from: startValue), let end = VerseIndex.parse(from: endValue)
+			{
+				return VerseRange(start, end)
+			}
+		}
+		
+		return nil
+	}
 	
 	
 	// OPERATORS	----
