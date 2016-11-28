@@ -27,7 +27,7 @@ class Verse: AttributedStringConvertible, JSONConvertible
 	
 	var properties: [String : PropertyValue]
 	{
-		return ["range" : PropertyValue(range.toPropertySet), "content" : PropertyValue(content.map { PropertyValue($0.toPropertySet) } )]
+		return ["range" : PropertyValue(range.toPropertySet), "content" : PropertyValue(content)]
 	}
 	
 	var text: String
@@ -58,16 +58,17 @@ class Verse: AttributedStringConvertible, JSONConvertible
 	
 	// Parses verse data from property data
 	// Verse range must be defined and parseable in the 'range' element
-	static func parse(from propertyData: PropertySet) -> Verse?
+	// Throws a JSONParseError if the verse data couldn't be parsed
+	static func parse(from propertyData: PropertySet) throws -> Verse
 	{
 		// The range must be parseable
-		if let rangeValue = propertyData["range"].object, let range = VerseRange.parse(from: rangeValue)
+		if let rangeValue = propertyData["range"].object
 		{
-			return Verse(range: range, content: propertyData["content"].array().map { CharData.parse(from: $0.object())} )
+			return Verse(range: try VerseRange.parse(from: rangeValue), content: CharData.parseArray(from: propertyData["content"].array(), using: CharData.parse) )
 		}
 		else
 		{
-			return nil
+			throw JSONParseError(data: propertyData, message: "range property required")
 		}
 	}
 	

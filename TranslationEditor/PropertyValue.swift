@@ -20,7 +20,20 @@ struct PropertyValue: CustomStringConvertible
 	
 	// COMP. PROPS	----------
 	
-	var description: String {return string()}
+	// The JSON representation of this value
+	var description: String
+	{
+		// Pure string values are wrapped in ""
+		// For example, compare '"true"' and 'true' or '"Matti"' and 'Matti'
+		if let string = value as? String
+		{
+			return "\"" + string + "\""
+		}
+		else
+		{
+			return string()
+		}
+	}
 	
 	// Whether the value in this wrapper is nil
 	var isEmpty: Bool {return value == nil}
@@ -212,9 +225,19 @@ struct PropertyValue: CustomStringConvertible
 		value = object
 	}
 	
+	init(_ object: JSONConvertible?)
+	{
+		value = object?.toPropertySet
+	}
+	
 	init(_ array: [PropertyValue]?)
 	{
 		value = array
+	}
+	
+	init(_ array: [JSONConvertible]?)
+	{
+		value = array?.map { PropertyValue($0) }
 	}
 	
 	private init(any: Any? = nil)
@@ -225,6 +248,7 @@ struct PropertyValue: CustomStringConvertible
 	// Wraps an object into a property value, if possible
 	// Only strings, booleans, integers and double, property set (or [String : Any]) 
 	// and arrays ([PropertyValue] or [Any]) can be wrapped as property values
+	// Also JSON convertible objects and arrays consisting of them can be wrapped into values
 	// If the provided value is not of any of those types, nil is returned
 	static func of(_ any: Any) -> PropertyValue?
 	{
@@ -253,6 +277,14 @@ struct PropertyValue: CustomStringConvertible
 			}
 			
 			return PropertyValue(propertyArray)
+		}
+		else if let object = any as? JSONConvertible
+		{
+			return PropertyValue(object)
+		}
+		else if let array = any as? [JSONConvertible]
+		{
+			return PropertyValue(array)
 		}
 		else
 		{

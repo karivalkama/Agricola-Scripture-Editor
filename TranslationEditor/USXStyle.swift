@@ -46,7 +46,7 @@ enum CharStyle: String, USXStyle
 	}
 }
 
-enum ParaStyle: USXStyle
+enum ParaStyle: USXStyle, Equatable
 {
 	// Paragraph styles
 	case normal
@@ -102,6 +102,14 @@ enum ParaStyle: USXStyle
 	private static func styles(_ indentation: Int) -> [ParaStyle]
 	{
 		return nonIndentedStyles + indentedStyles(with: indentation)
+	}
+	
+	
+	// OPERATORS	-----
+	
+	static func == (left: ParaStyle, right: ParaStyle) -> Bool
+	{
+		return left.code == right.code
 	}
 
 	

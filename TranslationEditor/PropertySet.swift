@@ -11,7 +11,7 @@ import Foundation
 // This struct contains a set of named properties
 // All properties are kept in lowercase to avoid case-sensitivity issues
 // Property value class is used for property value wrapping
-struct PropertySet
+struct PropertySet: CustomStringConvertible
 {
 	// ATTRIBUTES	-----------
 	
@@ -37,14 +37,35 @@ struct PropertySet
 		return dict
 	}
 	
-	/*
-	var isDefined: Bool
+	// Converts the set into a JSON object
+	var description: String
 	{
-		return properties.contains{(_, value) in value.isDefined}
+		var s = ""
+		s.append("{")
+		
+		var isFirst = true
+		for (propertyName, propertyValue) in properties
+		{
+			if propertyValue.isDefined
+			{
+				if isFirst
+				{
+					isFirst = false
+				}
+				else
+				{
+					s += ", "
+				}
+				
+				s += "\"\(propertyName)\" : \(propertyValue)"
+			}
+		}
+		
+		s.append("}")
+		
+		return s
 	}
 	
-	var isEmpty: Bool {return !isDefined}
-	*/
 	
 	// SUBSCRIPTS	-----------
 	

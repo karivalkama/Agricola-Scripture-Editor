@@ -21,6 +21,26 @@ class TranslationEditorTests: XCTestCase
         super.tearDown()
     }
 	
+	func testParaParsing()
+	{
+		let chData1 = CharData(text: "Chardata 1")
+		assert(CharData.parse(from: chData1.toPropertySet).text == chData1.text)
+		let chData2 = CharData(text: "Chardata 2", style: CharStyle.quotation)
+		assert(CharData.parse(from: chData2.toPropertySet).style == CharStyle.quotation)
+		
+		let verse = Verse(range: VerseRange(1, 2), content: [chData1, chData2])
+		assert(try! Verse.parse(from: verse.toPropertySet).range == verse.range)
+		
+		let para1 = Para(content: [verse], style: .normal)
+		let para2 = Para(content: [chData1, chData2], style: .sectionHeading(1))
+		
+		assert(try! Para.parse(from: para1.toPropertySet).range == para1.range)
+		assert(try! Para.parse(from: para2.toPropertySet).style == para2.style)
+		
+		print(para1.toPropertySet.description)
+		print(para2.toPropertySet.description)
+	}
+	
 	func testPropertyValues()
 	{
 		var set = PropertySet()

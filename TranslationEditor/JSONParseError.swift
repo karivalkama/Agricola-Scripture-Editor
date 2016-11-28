@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+// These errors are thrown when some JSON data can't be parsed into desired format
+struct JSONParseError: Error
+{
+	let data: PropertySet
+	let message: String
+}

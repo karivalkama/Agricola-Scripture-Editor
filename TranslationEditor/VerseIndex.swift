@@ -36,7 +36,7 @@ func min(_ first: VerseIndex, _ second: VerseIndex) -> VerseIndex
 
 // A verseIndex is a way of indexing certain text ranges.
 // A single index may contain one, multiple, a half or multiple and a half verses
-struct VerseIndex: JSONConvertible
+struct VerseIndex: JSONConvertible, Equatable
 {
 	// ATTRIBUTES	----------
 	
@@ -62,7 +62,8 @@ struct VerseIndex: JSONConvertible
 	}
 	
 	// Parses a verse index from property data. Index required and must be > 0
-	static func parse(from propertyData: PropertySet) -> VerseIndex?
+	// Throws a JSON parse error if index couldn't be parsed
+	static func parse(from propertyData: PropertySet) throws -> VerseIndex
 	{
 		if let index = propertyData["index"].int, index > 0
 		{
@@ -70,7 +71,7 @@ struct VerseIndex: JSONConvertible
 		}
 		else
 		{
-			return nil
+			throw JSONParseError(data: propertyData, message: "Invalid index in verse index data")
 		}
 	}
 	

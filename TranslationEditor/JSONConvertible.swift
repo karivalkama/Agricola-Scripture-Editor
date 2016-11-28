@@ -20,4 +20,10 @@ extension JSONConvertible
 {
 	// This instance converted into a property set, containing all object properties
 	var toPropertySet: PropertySet {return PropertySet(properties)}
+	
+	// Parses an array of property data into an array of object data
+	static func parseArray(from array: [PropertyValue], using converter: (PropertySet) throws -> Self) rethrows -> [Self]
+	{
+		return try array.map { try converter($0.object()) }
+	}
 }

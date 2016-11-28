@@ -10,7 +10,7 @@ import Foundation
 
 // A para is a range of text separated from others. A para has specific styling information 
 // associated with it
-class Para: AttributedStringConvertible, PotentialVerseRangeable
+class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConvertible
 {
 	// ATTIRIBUTES	------
 	
@@ -36,6 +36,23 @@ class Para: AttributedStringConvertible, PotentialVerseRangeable
 		{
 			return nil
 		}
+	}
+	
+	var properties: [String : PropertyValue]
+	{
+		var properties = ["style" : PropertyValue(style.code)]
+		
+		// Verses and ambiguous content are mutually exclusive
+		if verses.isEmpty
+		{
+			properties["ambiguous_content"] = PropertyValue(ambiguousContent)
+		}
+		else
+		{
+			properties["verses"] = PropertyValue(verses)
+		}
+		
+		return properties
 	}
 	
 	// A collection of the para contents, whether split between verses or not
@@ -87,6 +104,27 @@ class Para: AttributedStringConvertible, PotentialVerseRangeable
 	{
 		self.style = style
 		replaceContents(with: content)
+	}
+	
+	// Parses a para element from JSON data
+	// Throws a JSONParseError if the contents of an optional 'verses' element were invalid or incomplete
+	static func parse(from propertyData: PropertySet) throws -> Para
+	{
+		var style = ParaStyle.normal
+		if let styleValue = propertyData["style"].string
+		{
+			style = ParaStyle.value(of: styleValue)
+		}
+		
+		// Some Paras contain 'verses' -element, others contain 'ambiguousContent' -element
+		if let versesValue = propertyData["verses"].array
+		{
+			return Para(content: try Verse.parseArray(from: versesValue, using: Verse.parse), style: style)
+		}
+		else
+		{
+			return Para(content: CharData.parseArray(from: propertyData["ambiguous_content"].array(), using: CharData.parse), style: style)
+		}
 	}
 	
 	
