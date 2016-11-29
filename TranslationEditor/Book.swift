@@ -22,7 +22,7 @@ final class Book: Storable
 	let code: String
 	
 	var identifier: String
-	var language: String
+	var languageId: String
 	
 	
 	// COMP. PROPERTIES	----
@@ -31,19 +31,19 @@ final class Book: Storable
 	
 	var properties: [String : PropertyValue]
 	{
-		return [PROPERTY_TYPE : PropertyValue(Book.TYPE), "identifier" : PropertyValue(identifier), "language" : PropertyValue(language)]
+		return [PROPERTY_TYPE : PropertyValue(Book.TYPE), "identifier" : PropertyValue(identifier), "language" : PropertyValue(languageId)]
 	}
 	
-	static var idIndexMap: [String : IdIndex] {return [PROPERTY_CODE : IdIndex(0), "uid" : IdIndex(1)]}
+	static var idIndexMap: [String : IdIndex] {return [PROPERTY_CODE : IdIndex(0), "book_uid" : IdIndex(1)]}
 	
 	
 	// INIT	----------------
 	
-	init(code: String, identifier: String, language: String, uid: String = UUID().uuidString)
+	init(code: String, identifier: String, languageId: String, uid: String = UUID().uuidString)
 	{
 		self.code = code
 		self.identifier = identifier
-		self.language = language
+		self.languageId = languageId
 		self._uid = uid
 		
 		// TODO: It would be possible to throw an error for invalid parameters
@@ -51,7 +51,7 @@ final class Book: Storable
 	
 	static func create(from properties: PropertySet, withId id: Id) -> Book
 	{
-		return Book(code: id[PROPERTY_CODE].string(), identifier: properties["identifier"].string(), language: properties["language"].string(), uid: id["uid"].string())
+		return Book(code: id[PROPERTY_CODE].string(), identifier: properties["identifier"].string(), languageId: properties["language"].string(), uid: id["book_uid"].string())
 	}
 	
 	
@@ -65,7 +65,7 @@ final class Book: Storable
 		}
 		if let language = properties["language"].string
 		{
-			self.language = language
+			self.languageId = language
 		}
 	}
 	

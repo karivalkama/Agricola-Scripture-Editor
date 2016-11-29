@@ -13,6 +13,8 @@ final class Language: Storable
 {
 	// ATTRIBUTES	-------
 	
+	static let TYPE = "language"
+	
 	private let uid: String
 	var name: String
 	
@@ -23,7 +25,7 @@ final class Language: Storable
 	
 	var idProperties: [Any] {return [uid]}
 	
-	var properties: [String : PropertyValue] {return ["name" : PropertyValue(name)]}
+	var properties: [String : PropertyValue] {return [PROPERTY_TYPE : PropertyValue(Language.TYPE), "name" : PropertyValue(name)]}
 	
 	
 	// INIT	---------------

@@ -18,23 +18,24 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	static let optionDisplayParagraphRange = "displayParagraphRange"
 	
 	static let PROPERTY_BOOK_ID = "bookid"
-	static let PROPERTY_PARAGRAPH_INDEX = "paragraphindex"
 	static let PROPERTY_CHAPTER_INDEX = "chapterindex"
 	
 	static let TYPE = "paragraph"
 	
 	let bookId: String
 	let chapterIndex: Int
-	let paragraphIndex: Int
+	let uid: String
 	
+	var index: Int
 	var content: [Para]
+	var sectionIndex: Int
 	
 	
 	// COMP. PROPERTIES	-----
 	
-	var idProperties: [Any] {return [bookId, chapterIndex, paragraphIndex]}
+	var idProperties: [Any] {return [bookId, chapterIndex, uid]}
 	
-	var properties: [String : PropertyValue] {return [PROPERTY_TYPE : PropertyValue(Paragraph.TYPE), "paras" : PropertyValue(content), "first_verse_marker" : PropertyValue(range?.firstVerseMarker), "last_verse_marker" : PropertyValue(range?.lastVerseMarker)]}
+	var properties: [String : PropertyValue] {return [PROPERTY_TYPE : PropertyValue(Paragraph.TYPE), "paras" : PropertyValue(content), "index" : PropertyValue(index), "section" : PropertyValue(sectionIndex)]}
 	
 	var range: VerseRange?
 	{
@@ -42,7 +43,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	}
 	
 	// Whether this is the first paragraph in the chapter
-	var isFirstInChapter: Bool {return paragraphIndex == 1}
+	var isFirstInChapter: Bool {return index == 1}
 	
 	// The code of the book this paragraph belongs to
 	var bookCode: String {return Book.code(fromId: bookId)}
@@ -62,22 +63,24 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		return text
 	}
 	
-	static var idIndexMap: [String : IdIndex] {return Book.idIndexMap + [PROPERTY_BOOK_ID : IdIndex(0, 2), PROPERTY_CHAPTER_INDEX : IdIndex(2), PROPERTY_PARAGRAPH_INDEX : IdIndex(3)]}
+	static var idIndexMap: [String : IdIndex] {return Book.idIndexMap + [PROPERTY_BOOK_ID : IdIndex(0, 2), PROPERTY_CHAPTER_INDEX : IdIndex(2), "paragraph_uid" : IdIndex(3)]}
 	
 	
 	// INIT	-----------------
 	
-	init(bookId: String, chapterIndex: Int, paragraphIndex: Int, content: [Para])
+	init(bookId: String, chapterIndex: Int, sectionIndex: Int, index: Int, content: [Para], uid: String = UUID().uuidString)
 	{
+		self.uid = uid
 		self.bookId = bookId
 		self.chapterIndex = chapterIndex
-		self.paragraphIndex = paragraphIndex
 		self.content = content
+		self.sectionIndex = sectionIndex
+		self.index = index
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> Paragraph
 	{
-		return try Paragraph(bookId: id[PROPERTY_BOOK_ID].string(), chapterIndex: id[PROPERTY_CHAPTER_INDEX].int(), paragraphIndex: id[PROPERTY_PARAGRAPH_INDEX].int(), content: Para.parseArray(from: properties["paras"].array(), using: Para.parse))
+		return try Paragraph(bookId: id[PROPERTY_BOOK_ID].string(), chapterIndex: id[PROPERTY_CHAPTER_INDEX].int(), sectionIndex: properties["section"].int(or: 1), index: properties["index"].int(), content: Para.parseArray(from: properties["paras"].array(), using: Para.parse), uid: id["paragraph_uid"].string())
 	}
 	
 	
@@ -88,6 +91,14 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		if let paras = properties["paras"].array
 		{
 			content = try Para.parseArray(from: paras, using: Para.parse)
+		}
+		if let index = properties["index"].int
+		{
+			self.index = index
+		}
+		if let sectionIndex = properties["section"].int
+		{
+			self.sectionIndex = sectionIndex
 		}
 	}
 	
@@ -173,12 +184,6 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	static func chapterIndex(fromId paragraphIdString: String) -> Int
 	{
 		return createId(from: paragraphIdString)[PROPERTY_CHAPTER_INDEX].int()
-	}
-	
-	// Finds the paragraph index from a paragraph id string
-	static func paragraphIndex(fromId paragraphIdString: String) -> Int
-	{
-		return createId(from: paragraphIdString)[PROPERTY_PARAGRAPH_INDEX].int()
 	}
 	
 	private func parseParaRanges(from usxString: NSAttributedString) -> [(ParaStyle, NSRange)]
