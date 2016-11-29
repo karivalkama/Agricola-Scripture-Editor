@@ -47,6 +47,21 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	// The code of the book this paragraph belongs to
 	var bookCode: String {return Book.code(fromId: bookId)}
 	
+	var text: String
+	{
+		var text = ""
+		for i in 0 ..< content.count
+		{
+			if i != 0
+			{
+				text.append("\n")
+			}
+			text.append(content[i].text)
+		}
+		
+		return text
+	}
+	
 	static var idIndexMap: [String : IdIndex] {return Book.idIndexMap + [PROPERTY_BOOK_ID : IdIndex(0, 2), PROPERTY_CHAPTER_INDEX : IdIndex(2), PROPERTY_PARAGRAPH_INDEX : IdIndex(3)]}
 	
 	

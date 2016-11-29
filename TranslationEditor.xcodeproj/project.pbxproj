@@ -52,6 +52,9 @@
 		7C40DF781DED6C530035B92E /* Paragraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF771DED6C530035B92E /* Paragraph.swift */; };
 		7C40DF791DED6C530035B92E /* Paragraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF771DED6C530035B92E /* Paragraph.swift */; };
 		7C40DF7A1DED6C530035B92E /* Paragraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF771DED6C530035B92E /* Paragraph.swift */; };
+		7C40DF7C1DED9FB90035B92E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF7B1DED9FB90035B92E /* Language.swift */; };
+		7C40DF7D1DED9FB90035B92E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF7B1DED9FB90035B92E /* Language.swift */; };
+		7C40DF7E1DED9FB90035B92E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF7B1DED9FB90035B92E /* Language.swift */; };
 		7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1741DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1751DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
@@ -203,6 +206,7 @@
 		7C40DF6F1DEC6AB00035B92E /* Id.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
 		7C40DF731DED64630035B92E /* Chapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
 		7C40DF771DED6C530035B92E /* Paragraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paragraph.swift; sourceTree = "<group>"; };
+		7C40DF7B1DED9FB90035B92E /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXMarkerElement.swift; sourceTree = "<group>"; };
 		7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXContainerElement.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -389,6 +393,7 @@
 				7C40DF6B1DEC59AB0035B92E /* Book.swift */,
 				7C40DF731DED64630035B92E /* Chapter.swift */,
 				7C40DF771DED6C530035B92E /* Paragraph.swift */,
+				7C40DF7B1DED9FB90035B92E /* Language.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -751,6 +756,7 @@
 				7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */,
 				7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
 				7CD8EA621DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,
+				7C40DF7C1DED9FB90035B92E /* Language.swift in Sources */,
 				7C20D7FA1D9A768700E84BA5 /* VerseRange.swift in Sources */,
 				7CCC01241DA64A1A00F0562E /* SectionPrev.swift in Sources */,
 				7CCC012C1DA6714B00F0562E /* ChapterPrev.swift in Sources */,
@@ -801,6 +807,7 @@
 				7CCC00F31D9D223300F0562E /* AttributedStringConvertible.swift in Sources */,
 				7C4CC1741DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
 				7CD8EA631DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,
+				7C40DF7D1DED9FB90035B92E /* Language.swift in Sources */,
 				7CCC00FF1D9D3A0800F0562E /* VerseError.swift in Sources */,
 				7CCC01251DA64A1A00F0562E /* SectionPrev.swift in Sources */,
 				7CCC012D1DA6714B00F0562E /* ChapterPrev.swift in Sources */,
@@ -851,6 +858,7 @@
 				7CCC00F41D9D223300F0562E /* AttributedStringConvertible.swift in Sources */,
 				7C4CC1751DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
 				7CD8EA641DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,
+				7C40DF7E1DED9FB90035B92E /* Language.swift in Sources */,
 				7CCC01001D9D3A0800F0562E /* VerseError.swift in Sources */,
 				7CCC01261DA64A1A00F0562E /* SectionPrev.swift in Sources */,
 				7CCC012E1DA6714B00F0562E /* ChapterPrev.swift in Sources */,

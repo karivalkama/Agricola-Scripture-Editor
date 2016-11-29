@@ -41,6 +41,11 @@ class TranslationEditorTests: XCTestCase
 		print(para2.toPropertySet.description)
 	}
 	
+	func testParagraphProperties()
+	{
+		//let book = Book(code: "GAL", identifier: "English: This and This Translation", language: "English")
+	}
+	
 	func testPropertyValues()
 	{
 		var set = PropertySet()
