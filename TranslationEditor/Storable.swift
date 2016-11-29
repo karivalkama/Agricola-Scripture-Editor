@@ -29,7 +29,7 @@ protocol Storable: JSONConvertible
 	// The other properties are based on 'properties'
 	// One can use the update(with properties) -method here as necessary
 	// Should throw a JSONParseError if the instance couldn't be created
-	static func create(from properties: PropertySet, withId id: [PropertyValue]) throws -> Self
+	static func create(from properties: PropertySet, withId id: Id) throws -> Self
 }
 
 extension Storable
@@ -111,8 +111,7 @@ extension Storable
 	// Wraps a database document into an instance of this class
 	static func create(from document: CBLDocument) throws -> Self
 	{
-		let idProperties = document.documentID.components(separatedBy: ID_SEPARATOR).map{PropertyValue($0)}
-		return try create(from: PropertySet(document.properties!), withId: idProperties)
+		return try create(from: PropertySet(document.properties!), withId: createId(from: document.documentID))
 	}
 	
 	// Finds and creates an instance of this class for the provided id

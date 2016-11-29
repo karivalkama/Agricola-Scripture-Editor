@@ -18,7 +18,7 @@ final class Book: Storable
 	static let TYPE = "book"
 	static let PROPERTY_CODE = "code"
 	
-	private let _id: String
+	private let _uid: String
 	let code: String
 	
 	var identifier: String
@@ -27,36 +27,31 @@ final class Book: Storable
 	
 	// COMP. PROPERTIES	----
 	
-	var idProperties: [Any] {return [code, _id]}
+	var idProperties: [Any] {return [code, _uid]}
 	
 	var properties: [String : PropertyValue]
 	{
 		return [PROPERTY_TYPE : PropertyValue(Book.TYPE), "identifier" : PropertyValue(identifier), "language" : PropertyValue(language)]
 	}
 	
-	static var idIndexMap: [String : IdIndex] {return [PROPERTY_CODE : IdIndex(0)]}
+	static var idIndexMap: [String : IdIndex] {return [PROPERTY_CODE : IdIndex(0), "uid" : IdIndex(1)]}
 	
 	
 	// INIT	----------------
 	
-	init(code: String, identifier: String, language: String, id: String = UUID().uuidString)
+	init(code: String, identifier: String, language: String, uid: String = UUID().uuidString)
 	{
 		self.code = code
 		self.identifier = identifier
 		self.language = language
-		self._id = id
+		self._uid = uid
 		
 		// TODO: It would be possible to throw an error for invalid parameters
 	}
 	
-	static func create(from properties: PropertySet, withId id: [PropertyValue]) throws -> Book
+	static func create(from properties: PropertySet, withId id: Id) -> Book
 	{
-		if id.count < 2
-		{
-			throw JSONParseError(data: properties, message: "2 part id required, \(id) provided")
-		}
-		
-		return Book(code: id[0].string(), identifier: properties["identifier"].string(), language: properties["language"].string(), id: id[1].string())
+		return Book(code: id[PROPERTY_CODE].string(), identifier: properties["identifier"].string(), language: properties["language"].string(), uid: id["uid"].string())
 	}
 	
 	
