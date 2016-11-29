@@ -43,7 +43,19 @@ class TranslationEditorTests: XCTestCase
 	
 	func testParagraphProperties()
 	{
-		//let book = Book(code: "GAL", identifier: "English: This and This Translation", language: "English")
+		let language = Language(name: "English")
+		let book = Book(code: "GAL", identifier: "English: This and This Translation", languageId: language.idString)
+		
+		let paragraph = Paragraph(bookId: book.idString, chapterIndex: 1, sectionIndex: 1, index: 1, content: [])
+		
+		assert(paragraph.bookCode == "GAL")
+		
+		let copyParagraph = try! Paragraph.create(from: paragraph.toPropertySet, withId: paragraph.id)
+		
+		assert(copyParagraph.bookId == paragraph.bookId)
+		assert(copyParagraph.chapterIndex == paragraph.chapterIndex)
+		assert(copyParagraph.sectionIndex == paragraph.sectionIndex)
+		assert(copyParagraph.index == paragraph.index)
 	}
 	
 	func testPropertyValues()

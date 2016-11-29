@@ -39,10 +39,10 @@ struct Id
 			if index.length > 1
 			{
 				var s = idParts[index.start]
-				for part in idParts.dropFirst()
+				for i in index.start + 1 ..< index.end
 				{
 					s += ID_SEPARATOR
-					s += part
+					s += idParts[i]
 				}
 				
 				return PropertyValue(s)
