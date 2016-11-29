@@ -15,7 +15,8 @@ final class Book: Storable
 	// ATTRIBUTES	--------
 	
 	// The type attribute value for all book instances
-	static let type = "book"
+	static let TYPE = "book"
+	static let PROPERTY_CODE = "code"
 	
 	private let _id: String
 	let code: String
@@ -30,8 +31,10 @@ final class Book: Storable
 	
 	var properties: [String : PropertyValue]
 	{
-		return [PROPERTY_TYPE : PropertyValue(Book.type), "code" : PropertyValue(code), "identifier" : PropertyValue(identifier), "language" : PropertyValue(language)]
+		return [PROPERTY_TYPE : PropertyValue(Book.TYPE), "identifier" : PropertyValue(identifier), "language" : PropertyValue(language)]
 	}
+	
+	static var idIndexMap: [String : IdIndex] {return [PROPERTY_CODE : IdIndex(0)]}
 	
 	
 	// INIT	----------------
