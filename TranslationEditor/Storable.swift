@@ -22,7 +22,7 @@ protocol Storable: JSONConvertible
 	static var idIndexMap : [String : IdIndex] {get}
 	
 	// Updates the object's state based on the provided properties
-	func update(with properties: PropertySet)
+	func update(with properties: PropertySet) throws
 	
 	// Creates a new instance from the provided data
 	// The id properties should be created using the provided 'id'
@@ -97,9 +97,9 @@ extension Storable
 	}
 	
 	// Updates the instance by reading its data from the database
-	func update()
+	func update() throws
 	{
-		update(with: PropertySet(document.properties!))
+		try update(with: PropertySet(document.properties!))
 	}
 	
 	// Parses an id compatible with this class from a unique id string

@@ -18,8 +18,8 @@ final class Chapter: Storable
 	let index: Int
 	
 	static let TYPE = "chapter"
-	static let PROPERTY_BOOK_ID = "bookId"
-	static let PROPERTY_CHAPTER_INDEX = "chapterIndex"
+	static let PROPERTY_BOOK_ID = "bookid"
+	static let PROPERTY_CHAPTER_INDEX = "chapterindex"
 	
 	
 	// COMP. PROPERTIES	---

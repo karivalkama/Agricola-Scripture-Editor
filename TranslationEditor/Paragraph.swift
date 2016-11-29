@@ -10,12 +10,15 @@ import Foundation
 
 // Paragraph are used as the base translation units
 // A paragraph contains certain text range, and has some resources associated with it
-class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
+final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Storable
 {
 	// ATTRIBUTES	---------
 	
 	// Attributed string conversion option that defines whether paragraph ranges are displayed at paragraph starts. Default true
 	static let optionDisplayParagraphRange = "displayParagraphRange"
+	static let PROPERTY_CHAPTER_ID = "chapterid"
+	static let PROPERTY_PARAGRAPH_INDEX = "paragraphindex"
+	static let TYPE = "paragraph"
 	
 	let chapterId: String
 	let paragraphIndex: Int
@@ -24,6 +27,10 @@ class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
 	
 	
 	// COMP. PROPERTIES	-----
+	
+	var idProperties: [Any] {return [chapterId, paragraphIndex]}
+	
+	var properties: [String : PropertyValue] {return [PROPERTY_TYPE : PropertyValue(Paragraph.TYPE), "paras" : PropertyValue(content), "first_verse_marker" : PropertyValue(range?.firstVerseMarker), "last_verse_marker" : PropertyValue(range?.lastVerseMarker)]}
 	
 	var range: VerseRange?
 	{
@@ -35,6 +42,8 @@ class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
 	
 	var isFirstInChapter: Bool {return paragraphIndex == 1}
 	
+	static var idIndexMap: [String : IdIndex] {return Chapter.idIndexMap + [PROPERTY_CHAPTER_ID : IdIndex(0, 3),  PROPERTY_PARAGRAPH_INDEX : IdIndex(3)]}
+	
 	
 	// INIT	-----------------
 	
@@ -43,6 +52,22 @@ class Paragraph: AttributedStringConvertible, PotentialVerseRangeable
 		self.chapterId = chapterId
 		self.paragraphIndex = index
 		self.content = content
+	}
+	
+	static func create(from properties: PropertySet, withId id: Id) throws -> Paragraph
+	{
+		return try Paragraph(chapterId: id[PROPERTY_CHAPTER_ID].string(), index: id[PROPERTY_PARAGRAPH_INDEX].int(), content: Para.parseArray(from: properties["paras"].array(), using: Para.parse))
+	}
+	
+	
+	// IMPLEMENTED METHODS	--
+	
+	func update(with properties: PropertySet) throws
+	{
+		if let paras = properties["paras"].array
+		{
+			content = try Para.parseArray(from: paras, using: Para.parse)
+		}
 	}
 	
 	

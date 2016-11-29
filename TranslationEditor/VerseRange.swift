@@ -89,6 +89,50 @@ struct VerseRange: JSONConvertible, Equatable
 		}
 	}
 	
+	// The first verse marker that is within this verse range. Nil if there are no verse markers within this range
+	var firstVerseMarker: Int?
+	{
+		if start.midVerse
+		{
+			let firstMarker = VerseIndex(start.index + 1)
+			if end > firstMarker
+			{
+				return firstMarker.index
+			}
+			else
+			{
+				return nil
+			}
+		}
+		else
+		{
+			return start.index
+		}
+	}
+	
+	// The last verse marker that is within this verse range. Nil if there are no verse markers within this range
+	var lastVerseMarker: Int?
+	{
+		var lastMarker: VerseIndex!
+		if end.midVerse
+		{
+			lastMarker = VerseIndex(end.index)
+		}
+		else
+		{
+			lastMarker = VerseIndex(end.index - 1)
+		}
+		
+		if start <= lastMarker
+		{
+			return lastMarker.index
+		}
+		else
+		{
+			return nil
+		}
+	}
+	
 	
 	// INIT	--------
 	
