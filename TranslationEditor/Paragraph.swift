@@ -16,11 +16,15 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	
 	// Attributed string conversion option that defines whether paragraph ranges are displayed at paragraph starts. Default true
 	static let optionDisplayParagraphRange = "displayParagraphRange"
-	static let PROPERTY_CHAPTER_ID = "chapterid"
+	
+	static let PROPERTY_BOOK_ID = "bookid"
 	static let PROPERTY_PARAGRAPH_INDEX = "paragraphindex"
+	static let PROPERTY_CHAPTER_INDEX = "chapterindex"
+	
 	static let TYPE = "paragraph"
 	
-	let chapterId: String
+	let bookId: String
+	let chapterIndex: Int
 	let paragraphIndex: Int
 	
 	var content: [Para]
@@ -28,7 +32,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	
 	// COMP. PROPERTIES	-----
 	
-	var idProperties: [Any] {return [chapterId, paragraphIndex]}
+	var idProperties: [Any] {return [bookId, chapterIndex, paragraphIndex]}
 	
 	var properties: [String : PropertyValue] {return [PROPERTY_TYPE : PropertyValue(Paragraph.TYPE), "paras" : PropertyValue(content), "first_verse_marker" : PropertyValue(range?.firstVerseMarker), "last_verse_marker" : PropertyValue(range?.lastVerseMarker)]}
 	
@@ -37,26 +41,28 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		return Paragraph.range(of: content)
 	}
 	
-	var chapterIndex: Int {return Chapter.chapterIndex(fromId: chapterId)}
-	var bookId: String {return Chapter.bookId(fromId: chapterId)}
-	
+	// Whether this is the first paragraph in the chapter
 	var isFirstInChapter: Bool {return paragraphIndex == 1}
 	
-	static var idIndexMap: [String : IdIndex] {return Chapter.idIndexMap + [PROPERTY_CHAPTER_ID : IdIndex(0, 3),  PROPERTY_PARAGRAPH_INDEX : IdIndex(3)]}
+	// The code of the book this paragraph belongs to
+	var bookCode: String {return Book.code(fromId: bookId)}
+	
+	static var idIndexMap: [String : IdIndex] {return Book.idIndexMap + [PROPERTY_BOOK_ID : IdIndex(0, 2), PROPERTY_CHAPTER_INDEX : IdIndex(2), PROPERTY_PARAGRAPH_INDEX : IdIndex(3)]}
 	
 	
 	// INIT	-----------------
 	
-	init(chapterId: String, index: Int, content: [Para])
+	init(bookId: String, chapterIndex: Int, paragraphIndex: Int, content: [Para])
 	{
-		self.chapterId = chapterId
-		self.paragraphIndex = index
+		self.bookId = bookId
+		self.chapterIndex = chapterIndex
+		self.paragraphIndex = paragraphIndex
 		self.content = content
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> Paragraph
 	{
-		return try Paragraph(chapterId: id[PROPERTY_CHAPTER_ID].string(), index: id[PROPERTY_PARAGRAPH_INDEX].int(), content: Para.parseArray(from: properties["paras"].array(), using: Para.parse))
+		return try Paragraph(bookId: id[PROPERTY_BOOK_ID].string(), chapterIndex: id[PROPERTY_CHAPTER_INDEX].int(), paragraphIndex: id[PROPERTY_PARAGRAPH_INDEX].int(), content: Para.parseArray(from: properties["paras"].array(), using: Para.parse))
 	}
 	
 	
@@ -140,6 +146,24 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		{
 			content.append(Para(content: usxString.attributedSubstring(from: contentRange), style: style))
 		}
+	}
+	
+	// Finds the book id from a paragraph id string
+	static func bookId(fromId paragraphIdString: String) -> String
+	{
+		return createId(from: paragraphIdString)[PROPERTY_BOOK_ID].string()
+	}
+	
+	// Finds the chapter index from a paragraph id string
+	static func chapterIndex(fromId paragraphIdString: String) -> Int
+	{
+		return createId(from: paragraphIdString)[PROPERTY_CHAPTER_INDEX].int()
+	}
+	
+	// Finds the paragraph index from a paragraph id string
+	static func paragraphIndex(fromId paragraphIdString: String) -> Int
+	{
+		return createId(from: paragraphIdString)[PROPERTY_PARAGRAPH_INDEX].int()
 	}
 	
 	private func parseParaRanges(from usxString: NSAttributedString) -> [(ParaStyle, NSRange)]

@@ -68,4 +68,13 @@ final class Book: Storable
 			self.language = language
 		}
 	}
+	
+	
+	// OTHER METHODS	--------
+	
+	// Parses the book code out of a book id string
+	static func code(fromId bookIdString: String) -> String
+	{
+		return createId(from: bookIdString)[PROPERTY_CODE].string()
+	}
 }

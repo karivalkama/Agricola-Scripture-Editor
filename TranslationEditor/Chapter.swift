@@ -10,6 +10,7 @@ import Foundation
 
 // A Chapter represents a single chapter in a book
 // Chapters are used for indexing / combining ranges of paragraphs together
+@available (*, deprecated)
 final class Chapter: Storable
 {
 	// ATTRIBUTES	-------
