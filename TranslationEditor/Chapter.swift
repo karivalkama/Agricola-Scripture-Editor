@@ -56,4 +56,16 @@ final class Chapter: Storable
 	{
 		// No mutable properties to update at this time
 	}
+	
+	// Finds the chapter index from a chapter id string
+	static func chapterIndex(fromId chapterIdString: String) -> Int
+	{
+		return createId(from: chapterIdString)[PROPERTY_CHAPTER_INDEX].int()
+	}
+	
+	// Finds the book id from a chapter id string
+	static func bookId(fromId chapterIdString: String) -> String
+	{
+		return createId(from: chapterIdString)[PROPERTY_BOOK_ID].string()
+	}
 }
