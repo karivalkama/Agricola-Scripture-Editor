@@ -67,6 +67,12 @@
 		7C4A4F8F1DEEF891009F890E /* ParagraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F8E1DEEF891009F890E /* ParagraphView.swift */; };
 		7C4A4F901DEEF891009F890E /* ParagraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F8E1DEEF891009F890E /* ParagraphView.swift */; };
 		7C4A4F911DEEF891009F890E /* ParagraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F8E1DEEF891009F890E /* ParagraphView.swift */; };
+		7C4A4F931DEEFC5F009F890E /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F921DEEFC5F009F890E /* Types.swift */; };
+		7C4A4F941DEEFC5F009F890E /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F921DEEFC5F009F890E /* Types.swift */; };
+		7C4A4F951DEEFC5F009F890E /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F921DEEFC5F009F890E /* Types.swift */; };
+		7C4A4F971DEF0CDE009F890E /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F961DEF0CDE009F890E /* LanguageView.swift */; };
+		7C4A4F981DEF0CDE009F890E /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F961DEF0CDE009F890E /* LanguageView.swift */; };
+		7C4A4F991DEF0CDE009F890E /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F961DEF0CDE009F890E /* LanguageView.swift */; };
 		7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1741DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1751DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
@@ -223,6 +229,8 @@
 		7C4A4F861DEEC0A6009F890E /* RowParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowParseError.swift; sourceTree = "<group>"; };
 		7C4A4F8A1DEEC4BD009F890E /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		7C4A4F8E1DEEF891009F890E /* ParagraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphView.swift; sourceTree = "<group>"; };
+		7C4A4F921DEEFC5F009F890E /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		7C4A4F961DEF0CDE009F890E /* LanguageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXMarkerElement.swift; sourceTree = "<group>"; };
 		7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXContainerElement.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -424,6 +432,7 @@
 				7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */,
 				7C40DF661DEC26340035B92E /* JSONParseError.swift */,
 				7C4A4F861DEEC0A6009F890E /* RowParseError.swift */,
+				7C4A4F921DEEFC5F009F890E /* Types.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -469,6 +478,7 @@
 				7C40DF6F1DEC6AB00035B92E /* Id.swift */,
 				7C4A4F8A1DEEC4BD009F890E /* View.swift */,
 				7C4A4F8E1DEEF891009F890E /* ParagraphView.swift */,
+				7C4A4F961DEF0CDE009F890E /* LanguageView.swift */,
 			);
 			name = Abstract;
 			sourceTree = "<group>";
@@ -772,6 +782,7 @@
 				7CCC01441DAB7B0000F0562E /* USXParagraphProcessor.swift in Sources */,
 				7CCC01281DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */,
 				7CCC01401DA7D12800F0562E /* USXParaProcessor.swift in Sources */,
+				7C4A4F931DEEFC5F009F890E /* Types.swift in Sources */,
 				7CAF6D8A1DB5F5FB00E10597 /* USXParser.swift in Sources */,
 				7C20D7F81D9A672800E84BA5 /* VerseIndex.swift in Sources */,
 				7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */,
@@ -798,6 +809,7 @@
 				7C4A4F831DEEBAF2009F890E /* Row.swift in Sources */,
 				7CCC00F61D9D235800F0562E /* USXAttributes.swift in Sources */,
 				7C20D7FF1D9A93AA00E84BA5 /* StringUtilities.swift in Sources */,
+				7C4A4F971DEF0CDE009F890E /* LanguageView.swift in Sources */,
 				7CCC01071DA3C1C800F0562E /* USXStyle.swift in Sources */,
 				7C4A4F871DEEC0A6009F890E /* RowParseError.swift in Sources */,
 				7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */,
@@ -827,6 +839,7 @@
 				7CCC01451DAB7B0000F0562E /* USXParagraphProcessor.swift in Sources */,
 				7CCC01291DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */,
 				7CCC01411DA7D12800F0562E /* USXParaProcessor.swift in Sources */,
+				7C4A4F941DEEFC5F009F890E /* Types.swift in Sources */,
 				7CAF6D8B1DB5F5FB00E10597 /* USXParser.swift in Sources */,
 				7CCC01011D9D3A1400F0562E /* TranslationVC.swift in Sources */,
 				7CCC00F31D9D223300F0562E /* AttributedStringConvertible.swift in Sources */,
@@ -853,6 +866,7 @@
 				7C4A4F841DEEBAF2009F890E /* Row.swift in Sources */,
 				7CCC01031D9E365E00F0562E /* USXAttributes.swift in Sources */,
 				7CCC00FD1D9D39FE00F0562E /* VerseIndex.swift in Sources */,
+				7C4A4F981DEF0CDE009F890E /* LanguageView.swift in Sources */,
 				7CCC01081DA3C1C800F0562E /* USXStyle.swift in Sources */,
 				7C4A4F881DEEC0A6009F890E /* RowParseError.swift in Sources */,
 				7CCC00FB1D9D39FA00F0562E /* CharData.swift in Sources */,
@@ -882,6 +896,7 @@
 				7CCC01461DAB7B0000F0562E /* USXParagraphProcessor.swift in Sources */,
 				7CCC012A1DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */,
 				7CCC01421DA7D12800F0562E /* USXParaProcessor.swift in Sources */,
+				7C4A4F951DEEFC5F009F890E /* Types.swift in Sources */,
 				7CAF6D8C1DB5F5FB00E10597 /* USXParser.swift in Sources */,
 				7CCC01021D9D3A1400F0562E /* TranslationVC.swift in Sources */,
 				7CCC00F41D9D223300F0562E /* AttributedStringConvertible.swift in Sources */,
@@ -908,6 +923,7 @@
 				7C4A4F851DEEBAF2009F890E /* Row.swift in Sources */,
 				7CCC01041D9E365F00F0562E /* USXAttributes.swift in Sources */,
 				7CCC00FE1D9D39FF00F0562E /* VerseIndex.swift in Sources */,
+				7C4A4F991DEF0CDE009F890E /* LanguageView.swift in Sources */,
 				7CCC01091DA3C1C800F0562E /* USXStyle.swift in Sources */,
 				7C4A4F891DEEC0A6009F890E /* RowParseError.swift in Sources */,
 				7CCC00FC1D9D39FA00F0562E /* CharData.swift in Sources */,

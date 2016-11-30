@@ -99,7 +99,8 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		//translationTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.none)
 	}
 	
-	@available (*, deprecated)
+	//@available (*, deprecated)
+	/*
 	private func readTestDataFromUSX()
 	{
 		guard let url = Bundle.main.url(forResource: "GAL", withExtension: "usx")
@@ -123,6 +124,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 			testContent += book.toAttributedStringCollection(displayParagraphRanges: false)
 		}
 	}
+*/
 	
 	/*
 	private func generateTestData()

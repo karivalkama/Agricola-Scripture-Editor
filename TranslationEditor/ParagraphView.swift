@@ -42,8 +42,8 @@ final class ParagraphView: View
 	
 	// OTHER METHODS	--
 	
-	func query(bookId: String?, chapterIndex: Int?, sectionIndex: Int?, paragraphIndex: Int?) -> CBLQuery
+	func createQuery(bookId: String?, chapterIndex: Int?, sectionIndex: Int?, paragraphIndex: Int?) -> CBLQuery
 	{
-		return query(forKeys: [bookId, chapterIndex, sectionIndex, paragraphIndex])
+		return createQuery(forKeys: [bookId, chapterIndex, sectionIndex, paragraphIndex])
 	}
 }

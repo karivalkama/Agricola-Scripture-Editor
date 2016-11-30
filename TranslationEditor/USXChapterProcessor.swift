@@ -8,32 +8,35 @@
 
 import Foundation
 
-@available (*, deprecated)
 class USXChapterProcessor: USXContentProcessor
 {
-	typealias Generated = ChapterPrev
-	typealias Processed = SectionPrev
+	typealias Generated = Chapter
+	typealias Processed = Section
 	
 	
 	// ATTRIBUTES	---------
 	
-	private var index: Int
+	private let bookId: String
+	private let chapterIndex: Int
+	
+	private var sectionIndex = 0
 	
 	
 	// INIT	-----------------
 	
-	init(index: Int)
+	init(bookId: String, index: Int)
 	{
-		self.index = index
+		self.bookId = bookId
+		self.chapterIndex = index
 	}
 	
 	// Creates a new USX parser for chapter contents
 	// The parser should start after a chapter element
 	// the parser will stop at the next chapter element (or at next book / end of usx)
-	static func createChapterParser(caller: XMLParserDelegate, index: Int, targetPointer: UnsafeMutablePointer<[ChapterPrev]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<ChapterPrev, SectionPrev>
+	static func createChapterParser(caller: XMLParserDelegate, bookId: String, index: Int, targetPointer: UnsafeMutablePointer<[Chapter]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Chapter, Section>
 	{
-		let parser = USXContentParser<ChapterPrev, SectionPrev>(caller: caller, containingElement: .usx, lowestBreakMarker: .chapter, targetPointer: targetPointer, using: errorHandler)
-		parser.processor = AnyUSXContentProcessor(USXChapterProcessor(index: index))
+		let parser = USXContentParser<Chapter, Section>(caller: caller, containingElement: .usx, lowestBreakMarker: .chapter, targetPointer: targetPointer, using: errorHandler)
+		parser.processor = AnyUSXContentProcessor(USXChapterProcessor(bookId: bookId, index: index))
 		
 		return parser
 	}
@@ -41,12 +44,13 @@ class USXChapterProcessor: USXContentProcessor
 	
 	// USX PARSING	---------
 	
-	func getParser(_ caller: USXContentParser<ChapterPrev, SectionPrev>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[SectionPrev]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
+	func getParser(_ caller: USXContentParser<Chapter, Section>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Section]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
 	{
 		// Delegates all para element parsing to section parsers
 		if elementName == USXContainerElement.para.rawValue
 		{
-			return (USXSectionProcessor.createSectionParser(caller: caller, targetPointer: targetPointer, using: errorHandler), true)
+			sectionIndex += 1
+			return (USXSectionProcessor.createSectionParser(caller: caller, bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, targetPointer: targetPointer, using: errorHandler), true)
 		}
 		else
 		{
@@ -54,15 +58,17 @@ class USXChapterProcessor: USXContentProcessor
 		}
 	}
 	
-	func getCharacterParser(_ caller: USXContentParser<ChapterPrev, SectionPrev>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[SectionPrev]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
+	func getCharacterParser(_ caller: USXContentParser<Chapter, Section>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[Section]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
 	{
 		// Character parsing is only handled below para level
 		return nil
 	}
 	
-	func generate(from content: [SectionPrev], using errorHandler: @escaping ErrorHandler) -> ChapterPrev?
+	func generate(from content: [Section], using errorHandler: @escaping ErrorHandler) -> Chapter?
 	{
-		// Wraps the collected sections into a character
-		return ChapterPrev(index: index, content: content)
+		// Resets status for reuse
+		sectionIndex = 0
+		
+		return content
 	}
 }

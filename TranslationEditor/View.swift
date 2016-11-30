@@ -58,7 +58,7 @@ extension View
 	// The keys that are specified (not nil) are required of the returned rows
 	// If there is a nil key, that means that any value is accepted for that key. That also means that the following keys won't be tested at all since they are hierarchical
 	// The query is ascending by default
-	func query(forKeys keys: [Any?], descending: Bool = false) -> CBLQuery
+	func createQuery(forKeys keys: [Any?], descending: Bool = false) -> CBLQuery
 	{
 		let query = view.createQuery()
 		

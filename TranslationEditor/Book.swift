@@ -18,7 +18,7 @@ final class Book: Storable
 	static let type = "book"
 	static let PROPERTY_CODE = "code"
 	
-	private let _uid: String
+	let uid: String
 	let code: String
 	
 	var identifier: String
@@ -27,7 +27,7 @@ final class Book: Storable
 	
 	// COMP. PROPERTIES	----
 	
-	var idProperties: [Any] {return [code, _uid]}
+	var idProperties: [Any] {return [code, uid]}
 	
 	var properties: [String : PropertyValue]
 	{
@@ -44,7 +44,7 @@ final class Book: Storable
 		self.code = code
 		self.identifier = identifier
 		self.languageId = languageId
-		self._uid = uid
+		self.uid = uid
 		
 		// TODO: It would be possible to throw an error for invalid parameters
 	}
