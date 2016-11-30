@@ -20,7 +20,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	static let PROPERTY_BOOK_ID = "bookid"
 	static let PROPERTY_CHAPTER_INDEX = "chapterindex"
 	
-	static let TYPE = "paragraph"
+	static let type = "paragraph"
 	
 	let bookId: String
 	let chapterIndex: Int
@@ -35,7 +35,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	
 	var idProperties: [Any] {return [bookId, chapterIndex, uid]}
 	
-	var properties: [String : PropertyValue] {return [PROPERTY_TYPE : PropertyValue(Paragraph.TYPE), "paras" : PropertyValue(content), "index" : PropertyValue(index), "section" : PropertyValue(sectionIndex)]}
+	var properties: [String : PropertyValue] {return [PROPERTY_TYPE : PropertyValue(Paragraph.type), "paras" : PropertyValue(content), "index" : PropertyValue(index), "section" : PropertyValue(sectionIndex)]}
 	
 	var range: VerseRange?
 	{

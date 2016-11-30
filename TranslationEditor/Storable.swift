@@ -21,6 +21,9 @@ protocol Storable: JSONConvertible
 	// Each property name should match a certain index / range of id parts, which must correspond with the idProperties values
 	static var idIndexMap : [String : IdIndex] {get}
 	
+	// The type of this storable instance. Should be stored as a property, always
+	static var type: String {get}
+	
 	// Updates the object's state based on the provided properties
 	func update(with properties: PropertySet) throws
 	
@@ -109,7 +112,7 @@ extension Storable
 	}
 	
 	// Wraps a database document into an instance of this class
-	static func create(from document: CBLDocument) throws -> Self
+	static func wrap(_ document: CBLDocument) throws -> Self
 	{
 		return try create(from: PropertySet(document.properties!), withId: createId(from: document.documentID))
 	}
@@ -121,7 +124,7 @@ extension Storable
 	{
 		if let document = DATABASE.existingDocument(withID: id)
 		{
-			return try create(from: document)
+			return try wrap(document)
 		}
 		else
 		{
