@@ -117,9 +117,25 @@ class TranslationEditorTests: XCTestCase
 			return
 		}
 		
+		// Finds the target language
+		let language = try! LanguageView.instance.language(withName: "English")
+		
+		// Book finding algorithm
+		func findBook(languageId: String, code: String, identifier: String) -> Book?
+		{
+			// Performs a database query
+			return try! Book.fromQuery(BookView.instance.createQuery(languageId: languageId, code: code, identifier: identifier))
+		}
+		
+		// Paragraph matching algorithm (incomplete)
+		func paragraphMatcher(existingParagraphs: [Paragraph], newParagraphs: [Paragraph]) -> [(Paragraph, Paragraph)]?
+		{
+			fatalError("Paragraph matcher not implemented")
+		}
+		
 		// Creates the parser first
 		let parser = XMLParser(contentsOf: url)!
-		let usxParserDelegate = USXParser()
+		let usxParserDelegate = USXParser(languageId: language.idString, findReplacedBook: findBook, matchParagraphs: paragraphMatcher)
 		parser.delegate = usxParserDelegate
 		
 		// Parses the xml
@@ -133,7 +149,7 @@ class TranslationEditorTests: XCTestCase
 		for book in usxParserDelegate.parsedBooks
 		{
 			print()
-			print("\(book.code): \(book.name) (\(book.chapters.count) chapters)")
+			print("\(book.code): \(book.identifier) (\(book.chapters.count) chapters)")
 			
 			for chapter in book.chapters
 			{

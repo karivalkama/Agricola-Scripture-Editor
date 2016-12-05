@@ -73,6 +73,9 @@
 		7C4A4F971DEF0CDE009F890E /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F961DEF0CDE009F890E /* LanguageView.swift */; };
 		7C4A4F981DEF0CDE009F890E /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F961DEF0CDE009F890E /* LanguageView.swift */; };
 		7C4A4F991DEF0CDE009F890E /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F961DEF0CDE009F890E /* LanguageView.swift */; };
+		7C4A4F9B1DF54914009F890E /* FunctionTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F9A1DF54914009F890E /* FunctionTypeAliases.swift */; };
+		7C4A4F9C1DF54914009F890E /* FunctionTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F9A1DF54914009F890E /* FunctionTypeAliases.swift */; };
+		7C4A4F9D1DF54914009F890E /* FunctionTypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4F9A1DF54914009F890E /* FunctionTypeAliases.swift */; };
 		7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1741DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1751DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
@@ -231,6 +234,7 @@
 		7C4A4F8E1DEEF891009F890E /* ParagraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphView.swift; sourceTree = "<group>"; };
 		7C4A4F921DEEFC5F009F890E /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		7C4A4F961DEF0CDE009F890E /* LanguageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
+		7C4A4F9A1DF54914009F890E /* FunctionTypeAliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionTypeAliases.swift; sourceTree = "<group>"; };
 		7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXMarkerElement.swift; sourceTree = "<group>"; };
 		7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXContainerElement.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -433,6 +437,7 @@
 				7C40DF661DEC26340035B92E /* JSONParseError.swift */,
 				7C4A4F861DEEC0A6009F890E /* RowParseError.swift */,
 				7C4A4F921DEEFC5F009F890E /* Types.swift */,
+				7C4A4F9A1DF54914009F890E /* FunctionTypeAliases.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -797,6 +802,7 @@
 				7C4CC1771DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7CCC00EE1D9D193F00F0562E /* CollectionUtilities.swift in Sources */,
 				7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */,
+				7C4A4F9B1DF54914009F890E /* FunctionTypeAliases.swift in Sources */,
 				7C4A4F8B1DEEC4BD009F890E /* View.swift in Sources */,
 				7CCC01341DA7964000F0562E /* XmlParserUtil.swift in Sources */,
 				7CCC01481DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
@@ -854,6 +860,7 @@
 				7C4CC1781DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7CCC00F91D9D369100F0562E /* VerseRange.swift in Sources */,
 				7C40DF5C1DE718DA0035B92E /* Storable.swift in Sources */,
+				7C4A4F9C1DF54914009F890E /* FunctionTypeAliases.swift in Sources */,
 				7C4A4F8C1DEEC4BD009F890E /* View.swift in Sources */,
 				7CCC01351DA7964000F0562E /* XmlParserUtil.swift in Sources */,
 				7CCC01491DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
@@ -911,6 +918,7 @@
 				7C4CC1791DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7CCC00FA1D9D369100F0562E /* VerseRange.swift in Sources */,
 				7C40DF5D1DE718DA0035B92E /* Storable.swift in Sources */,
+				7C4A4F9D1DF54914009F890E /* FunctionTypeAliases.swift in Sources */,
 				7C4A4F8D1DEEC4BD009F890E /* View.swift in Sources */,
 				7CCC01361DA7964000F0562E /* XmlParserUtil.swift in Sources */,
 				7CCC014A1DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,

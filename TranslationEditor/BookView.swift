@@ -47,4 +47,14 @@ final class BookView: View
 	{
 		return createQuery(forKeys: [languageId, code, identifier])
 	}
+	
+	func findBook(languageId: String, code: String, identifier: String) -> Book?
+	{
+		let query = createQuery(languageId: languageId, code: code, identifier: identifier)
+		query.limit = 1
+		
+		//let results =
+		
+		return nil
+	}
 }

@@ -15,7 +15,8 @@ class USXParser: NSObject, XMLParserDelegate
 	// ATTRIBUTES	-----------
 	
 	private let languageId: String
-	private let findReplacedBook: (String, String, String) -> (Book?)
+	private let findReplacedBook: FindBook
+	private let matchParagraphs: MatchParagraphs
 	
 	private var _receivedError: Error?
 	var error: Error? {return _receivedError}
@@ -31,10 +32,11 @@ class USXParser: NSObject, XMLParserDelegate
 	// INIT	-------------------
 	
 	// Language id + code + identifier -> Book to replace / update
-	init(languageId: String, findReplacedBook: @escaping (String, String, String) -> (Book?))
+	init(languageId: String, findReplacedBook: @escaping FindBook, matchParagraphs: @escaping MatchParagraphs)
 	{
 		self.languageId = languageId
 		self.findReplacedBook = findReplacedBook
+		self.matchParagraphs = matchParagraphs
 	}
 	
 	
@@ -49,7 +51,7 @@ class USXParser: NSObject, XMLParserDelegate
 			if let code = attributeDict["code"]
 			{
 				// Delegates parsing to book parser
-				contentParser = USXBookProcessor.createBookParser(caller: self, languageId: languageId, bookCode: code, findReplacedBook: findReplacedBook, targetPointer: &parsedBooks, using: parsingFailed)
+				contentParser = USXBookProcessor.createBookParser(caller: self, languageId: languageId, bookCode: code, findReplacedBook: findReplacedBook, matchParagraphs: matchParagraphs, targetPointer: &parsedBooks, using: parsingFailed)
 				parser.delegate = contentParser
 			}
 			else

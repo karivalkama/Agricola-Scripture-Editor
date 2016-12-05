@@ -41,7 +41,8 @@ final class LanguageView: View
 	
 	// OTHER METHODS	----
 	
-	func language(withName name: String) throws -> Language?
+	// Finds or creates a language with the specified name
+	func language(withName name: String) throws -> Language
 	{
 		let query = createQuery(forKeys: [name.lowercased()])
 		query.limit = 1
@@ -54,7 +55,9 @@ final class LanguageView: View
 		}
 		else
 		{
-			return nil
+			let newLanguage = Language(name: name)
+			try newLanguage.push()
+			return newLanguage
 		}
 	}
 }

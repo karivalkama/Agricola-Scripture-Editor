@@ -11,6 +11,13 @@ import Foundation
 
 extension Array
 {
+	// Checks that the provided condition is true for all elements in the array
+	// Returns true if the array is empty
+	func forAll(_ condition: (Element) throws -> Bool) rethrows -> Bool
+	{
+		return try filter({ !(try condition($0)) }).isEmpty
+	}
+
 	// Arrays can be combined together to form a new array with both elements. The left side
 	// elements will be placed before the right side elements
 	static func + (left: Array<Element>, right: Array<Element>) -> Array<Element>
@@ -19,6 +26,21 @@ extension Array
 		combined.append(contentsOf: left)
 		combined.append(contentsOf: right)
 		return combined
+	}
+}
+
+extension Array where Element: AnyObject
+{
+	// Checks if the array contains a reference to the provided object instance
+	func containsReference(to element: Element) -> Bool
+	{
+		return contains(where: { $0 === element })
+	}
+	
+	// Checks if the array contains references to each of the provided object instances
+	func containsReferences(to elements: [Element]) -> Bool
+	{
+		return elements.forAll(containsReference)
 	}
 }
 

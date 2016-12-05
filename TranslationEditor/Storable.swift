@@ -105,6 +105,18 @@ extension Storable
 		try update(with: PropertySet(document.properties!))
 	}
 	
+	// Updates this instance with the data of another instance
+	func update(with other: JSONConvertible) throws
+	{
+		try update(with: other.toPropertySet)
+	}
+	
+	// Deletes the instance from the database
+	func delete() throws
+	{
+		try document.delete()
+	}
+	
 	// Parses an id compatible with this class from a unique id string
 	static func createId(from idString: String) -> Id
 	{
@@ -137,5 +149,53 @@ extension Storable
 	static func get(_ idArray: [Any]) throws -> Self?
 	{
 		return try get(parseId(from: idArray))
+	}
+	
+	// Retrieves a single instance of this class by using the provided query
+	// The query limit is automatically set to 1
+	// If the query results were empty, returns nil
+	static func fromQuery(_ query: CBLQuery) throws -> Self?
+	{
+		query.limit = 1
+		
+		var foundInstance: Self?
+		try enumerateQuery(query)
+		{
+			foundInstance = $0
+			return false
+		}
+		
+		return foundInstance
+	}
+	
+	// Retrieves a list of objects from a single database query
+	static func arrayFromQuery(_ query: CBLQuery) throws -> [Self]
+	{
+		var foundInstances = [Self]()
+		try enumerateQuery(query)
+		{
+			foundInstances.append($0)
+			return true
+		}
+		
+		return foundInstances
+	}
+	
+	// Goes through the results of the provided query using the provided enumerator
+	// A parsed instance is passed to the enumerator for each results row
+	// The return value of the enumerator decides, whether the next row will be parsed
+	static func enumerateQuery(_ query: CBLQuery, using enumerator: (Self) throws -> Bool) throws
+	{
+		query.prefetch = true
+		
+		let results = try query.run()
+		
+		while let row = results.nextRow()
+		{
+			if try !enumerator(try Row<Self>(row).object)
+			{
+				break
+			}
+		}
 	}
 }

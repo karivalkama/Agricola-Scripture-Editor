@@ -54,16 +54,23 @@ extension View
 		return mapBlock
 	}
 	
+	// Creates a query that returns each row of this view
+	func createAllQuery(descending: Bool = false) -> CBLQuery
+	{
+		let query = view.createQuery()
+		query.descending = descending
+		query.prefetch = true
+		
+		return query
+	}
+	
 	// Creates a query that fetches the results from a certain key range
 	// The keys that are specified (not nil) are required of the returned rows
 	// If there is a nil key, that means that any value is accepted for that key. That also means that the following keys won't be tested at all since they are hierarchical
 	// The query is ascending by default
 	func createQuery(forKeys keys: [Any?], descending: Bool = false) -> CBLQuery
 	{
-		let query = view.createQuery()
-		
-		query.descending = descending
-		query.prefetch = true
+		let query = createAllQuery(descending: descending)
 		
 		// A specified key limits the results to certain range. A nil value (end) is used to specify which keys can have any value
 		var min = [Any]()

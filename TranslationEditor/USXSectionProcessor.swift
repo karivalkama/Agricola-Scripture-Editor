@@ -20,29 +20,38 @@ class USXSectionProcessor: USXContentProcessor
 	private let bookId: String
 	private let chapterIndex: Int
 	private let sectionIndex: Int
+	private let lastParagraphIndex: Int
 	
 	private var contentParsed = false
-	private var paragraphIndex = 0
+	var paragraphIndex: Int
 	
 	
 	// INIT	-----------------
 	
-	init(bookId: String, chapterIndex: Int, sectionIndex: Int)
+	init(bookId: String, chapterIndex: Int, sectionIndex: Int, lastParagraphIndex: Int)
 	{
 		self.bookId = bookId
 		self.chapterIndex = chapterIndex
 		self.sectionIndex = sectionIndex
+		self.lastParagraphIndex = lastParagraphIndex
+		
+		self.paragraphIndex = lastParagraphIndex
+	}
+	
+	static func createSectionParser(caller: XMLParserDelegate, processor: USXSectionProcessor, targetPointer: UnsafeMutablePointer<[Section]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Section, Paragraph>
+	{
+		let parser = USXContentParser<Section, Paragraph>(caller: caller, containingElement: .usx, lowestBreakMarker: .chapter, targetPointer: targetPointer, using: errorHandler)
+		parser.processor = AnyUSXContentProcessor(processor)
+		return parser
 	}
 	
 	// Creates a new USX parser for section data
 	// The parser should start right after a chapter element or at the start of a section heading para element
 	// The parser will stop parsing at the start of the next chapter or section heading para element (or at the end of the usx element)
-	static func createSectionParser(caller: XMLParserDelegate, bookId: String, chapterIndex: Int, sectionIndex: Int, targetPointer: UnsafeMutablePointer<[Section]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Section, Paragraph>
+	static func createSectionParser(caller: XMLParserDelegate, bookId: String, chapterIndex: Int, sectionIndex: Int, lastParagraphIndex: Int, targetPointer: UnsafeMutablePointer<[Section]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Section, Paragraph>
 	{
-		let parser = USXContentParser<Section, Paragraph>(caller: caller, containingElement: .usx, lowestBreakMarker: .chapter, targetPointer: targetPointer, using: errorHandler)
-		parser.processor = AnyUSXContentProcessor(USXSectionProcessor(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex))
-		
-		return parser
+		let processor = USXSectionProcessor(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, lastParagraphIndex: lastParagraphIndex)
+		return createSectionParser(caller: caller, processor: processor, targetPointer: targetPointer, using: errorHandler)
 	}
 	
 	
@@ -92,7 +101,7 @@ class USXSectionProcessor: USXContentProcessor
 	{
 		// Resets status for reuse
 		contentParsed = false
-		paragraphIndex = 0
+		paragraphIndex = lastParagraphIndex
 		
 		// Wraps the paragraphs into a section
 		return content

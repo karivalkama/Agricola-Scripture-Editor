@@ -20,6 +20,9 @@ class USXChapterProcessor: USXContentProcessor
 	private let chapterIndex: Int
 	
 	private var sectionIndex = 0
+	private var paragraphIndex = 0
+	
+	private var sectionProcessor: USXSectionProcessor?
 	
 	
 	// INIT	-----------------
@@ -49,8 +52,17 @@ class USXChapterProcessor: USXContentProcessor
 		// Delegates all para element parsing to section parsers
 		if elementName == USXContainerElement.para.rawValue
 		{
+			// Counts the paragraphs parsed by the last processor
+			if let lastProcessor = sectionProcessor
+			{
+				paragraphIndex = lastProcessor.paragraphIndex
+			}
+			
 			sectionIndex += 1
-			return (USXSectionProcessor.createSectionParser(caller: caller, bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, targetPointer: targetPointer, using: errorHandler), true)
+			
+			// Creates the new processor and parser
+			sectionProcessor = USXSectionProcessor(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, lastParagraphIndex: paragraphIndex)
+			return (USXSectionProcessor.createSectionParser(caller: caller, processor: sectionProcessor!, targetPointer: targetPointer, using: errorHandler), true)
 		}
 		else
 		{
