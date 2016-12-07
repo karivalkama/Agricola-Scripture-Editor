@@ -22,6 +22,7 @@ class LiveQueryManager<Listener: LiveQueryListener>: NSObject
 	
 	// INIT	--------------
 	
+	// Creates a new query manager for the provided query
 	init(query: CBLLiveQuery)
 	{
 		self.query = query
@@ -69,6 +70,7 @@ class LiveQueryManager<Listener: LiveQueryListener>: NSObject
 	
 	// OTHER METHODS	----
 	
+	// Starts the query (if not started already) and the listening process
 	func start()
 	{
 		if !observes
@@ -79,11 +81,13 @@ class LiveQueryManager<Listener: LiveQueryListener>: NSObject
 		query.start()
 	}
 	
+	// Pauses the query temporarily but doesn't stop observing process
 	func pause()
 	{
 		query.stop()
 	}
 	
+	// Stops the query and the observation process
 	func stop()
 	{
 		if observes
@@ -95,13 +99,32 @@ class LiveQueryManager<Listener: LiveQueryListener>: NSObject
 		query.stop()
 	}
 	
-	/*
+	// Adds a new listener that will be informed when the query updates
+	// The query id is sent along the rows to the listener, if present
 	func addListener(_ listener: Listener, withQueryId queryId: String? = nil)
 	{
-		if !listeners.contains(where: { $0 === listener })
+		// No duplicates allowed
+		for (existingListener, _) in listeners
 		{
-			
+			if existingListener === listener
+			{
+				return
+			}
+		}
+		
+		listeners.append((listener, queryId))
+	}
+
+	// Removes a listener from this manager. This manager won't be calling the listener in the future
+	func removeListener(_ listener: Listener)
+	{
+		for i in 0 ..< listeners.count
+		{
+			if listeners[i].0 === listener
+			{
+				listeners.remove(at: i)
+				break
+			}
 		}
 	}
-*/
 }

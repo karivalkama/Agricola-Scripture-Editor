@@ -9,7 +9,7 @@
 import Foundation
 
 // This protocol is implemented by objects interested in real time database content changes
-protocol LiveQueryListener
+protocol LiveQueryListener: class
 {
 	// The type of the objects the object is using
 	associatedtype Queried: Storable
