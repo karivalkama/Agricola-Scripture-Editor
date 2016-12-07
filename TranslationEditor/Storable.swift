@@ -189,13 +189,26 @@ extension Storable
 		query.prefetch = true
 		
 		let results = try query.run()
-		
+		try enumerateResults(results, using: enumerator)
+	}
+	
+	// Enumerates through the rows of a result set and parses them into storable instances
+	// The return value of the passed enumerator will define whether the next row is parsed
+	static func enumerateResults(_ results: CBLQueryEnumerator, using enumerator: (Self) throws -> Bool) throws
+	{
 		while let row = results.nextRow()
 		{
-			if try !enumerator(try Row<Self>(row).object)
+			if try !enumerator(try fromRow(row))
 			{
 				break
 			}
 		}
+	}
+	
+	// Parses an object from the contents of a query row
+	// this method is useful in simple use cases where only row object data is used
+	static func fromRow(_ row: CBLQueryRow) throws -> Self
+	{
+		return try Row<Self>(row).object
 	}
 }

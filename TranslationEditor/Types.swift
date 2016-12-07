@@ -12,3 +12,15 @@ import Foundation
 typealias Section = [Paragraph]
 // A chapter is a collection of sections
 typealias Chapter = [Section]
+
+
+// These functions are used for finding existing book data for
+// a certain language, code and identifier
+// Returns nil if no such book exists
+typealias FindBook = (String, String, String) -> Book?
+
+// This function / algorithm matches paragraphs with each other
+// Multiple matches can be formed from / to a single paragraph
+// Returns nil if the matching couldn't be done
+// The left side is always an existing paragraph, while the right side is always a new paragraph
+typealias MatchParagraphs = ([Paragraph], [Paragraph]) -> [(Paragraph, Paragraph)]?

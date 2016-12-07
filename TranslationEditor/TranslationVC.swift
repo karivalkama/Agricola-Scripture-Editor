@@ -18,7 +18,23 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 	
 	// Vars	--------------
 	
+	// Temporary test vars
+	private var book: Book!
+	
+	// TODO: Remove
 	private var testContent = [NSAttributedString]()
+	
+	// Current paragraph status in database
+	private var currentData = [Paragraph]()
+	
+	// paragraph data modified, but not committed by user
+	// Key = paragraph id
+	private var inputData = [String : NSAttributedString]()
+	
+	// The live query used for retrieving translation data
+	private var translationQuery: CBLLiveQuery?
+	
+	private var committing = false
 	
 	
 	// Overridden	-----
@@ -27,9 +43,9 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 	{
 		super.viewDidLoad()
 		
-		// Testing
-		//generateTestData()
-		//readTestDataFromUSX()
+		// Reads necessary data (TEST)
+		let language = try! LanguageView.instance.language(withName: "English")
+		book = try! Book.fromQuery(BookView.instance.createQuery(languageId: language.idString, code: "GAL", identifier: nil))!
 		
 		// (Epic hack which) Makes table view cells have automatic height
 		translationTableView.rowHeight = UITableViewAutomaticDimension
@@ -38,12 +54,41 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		//translationTableView.delegate = self
 		translationTableView.dataSource = self
 	}
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		// Starts the database listening process, if not yet started
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		// Ends the database listening process, if present
+	}
 
 	override func didReceiveMemoryWarning()
 	{
 		super.didReceiveMemoryWarning()
 		
 		// Dispose of any resources that can be recreated.
+	}
+	
+	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
+	{
+		// Reacts to database updates
+		if keyPath == "rows"
+		{
+			if let query = object as? CBLLiveQuery
+			{
+				if let rows = query.rows
+				{
+					print("DB: Rows changed. New amount: \(rows.count)")
+				}
+			}
+		}
+		else
+		{
+			super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+		}
 	}
 	
 	

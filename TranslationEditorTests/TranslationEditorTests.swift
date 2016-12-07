@@ -149,49 +149,17 @@ class TranslationEditorTests: XCTestCase
 		for book in usxParserDelegate.parsedBooks
 		{
 			print()
-			print("\(book.code): \(book.identifier) (\(book.chapters.count) chapters)")
+			print("\(book.code): \(book.identifier)")
 			
-			for chapter in book.chapters
+			// Finds the first 7 paragraphs and prints them
+			let query = ParagraphView.instance.createQuery(bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil)
+			query.limit = 7
+			let paragraphs = try! Paragraph.arrayFromQuery(query)
+			
+			for paragraph in paragraphs
 			{
-				print("\tChapter \(chapter.index) (\(chapter.sections.count) sections)")
-				
-				for section in chapter.sections
-				{
-					var sectionName = "First section"
-					if let heading = section.name
-					{
-						sectionName = heading
-					}
-					
-					var rangeString = "---"
-					if let range = section.range
-					{
-						rangeString = range.name
-					}
-					
-					print("\t\t\(rangeString): \(sectionName)")
-				}
-			}
-		}
-		
-		// Prints the contents of the first paragraph
-		if let firstParagraph = usxParserDelegate.parsedBooks.first?.chapters.first?.sections.first?.content.first
-		{
-			print("\nThe first paragraph:")
-			for para in firstParagraph.content
-			{
-				if para.verses.isEmpty
-				{
-					print("\t- \(para.text)")
-				}
-				else
-				{
-					print("\t- \(para.range!.name)")
-					for verse in para.verses
-					{
-						print("\t\t- \(verse.range.name): \(verse.text)")
-					}
-				}
+				print()
+				print(paragraph.text)
 			}
 		}
 	}
