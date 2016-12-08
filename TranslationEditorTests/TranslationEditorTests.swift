@@ -145,7 +145,17 @@ class TranslationEditorTests: XCTestCase
 			
 			for book in books
 			{
-				print("- \(book.code) - \(book.identifier)")
+				let paragraphQuery = ParagraphView.instance.createQuery(bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil)
+				let paragraphs = try! Paragraph.arrayFromQuery(paragraphQuery)
+				
+				print("- \(book.code) - \(book.identifier) (\(paragraphs.count) paragraphs)")
+				
+				for paragraph in paragraphs
+				{
+					let text = paragraph.text
+					let maxIndex = text.index(text.startIndex, offsetBy: min(text.characters.count, 32))
+					print("\t- \(paragraph.chapterIndex).\(paragraph.sectionIndex).\(paragraph.index): \(paragraph.text.substring(to: maxIndex))")
+				}
 			}
 		}
 	}

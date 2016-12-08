@@ -23,9 +23,6 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	
 	// Vars	--------------
 	
-	// Temporary test vars
-	private var book: Book!
-	
 	// Current paragraph status in database
 	private var currentData = [Paragraph]()
 	
@@ -34,7 +31,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	private var inputData = [String : NSAttributedString]()
 	
 	// The live query used for retrieving translation data
-	private var translationQueryManager: LiveQueryManager<Paragraph>!
+	private var translationQueryManager: LiveQueryManager<Paragraph>?
 	
 	private var committing = false
 	
@@ -45,10 +42,6 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	{
 		super.viewDidLoad()
 		
-		// Reads necessary data (TEST)
-		//let language = try! LanguageView.instance.language(withName: "English")
-		//book = try! Book.fromQuery(BookView.instance.createQuery(languageId: language.idString, code: "GAL", identifier: nil))!
-		
 		// (Epic hack which) Makes table view cells have automatic height
 		translationTableView.rowHeight = UITableViewAutomaticDimension
 		translationTableView.estimatedRowHeight = 160
@@ -57,21 +50,26 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		translationTableView.dataSource = self
 		
 		// TODO: Use certain ranges, which should be changeable
-		//let query = ParagraphView.instance.createQuery(bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil).asLive()
-		//translationQueryManager = LiveQueryManager<Paragraph>(query: query)
-		//translationQueryManager.addListener(AnyLiveQueryListener(self))
+		// Reads necessary data (TEST)
+		let language = try! LanguageView.instance.language(withName: "English")
+		if let book = try! Book.fromQuery(BookView.instance.createQuery(languageId: language.idString, code: "GAL", identifier: nil))
+		{
+			let query = ParagraphView.instance.createQuery(bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil).asLive()
+			translationQueryManager = LiveQueryManager<Paragraph>(query: query)
+			translationQueryManager?.addListener(AnyLiveQueryListener(self))
+		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
 		// Starts the database listening process, if not yet started
-		//translationQueryManager.start()
+		translationQueryManager?.start()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{
 		// Ends the database listening process, if present
-		//translationQueryManager.stop()
+		translationQueryManager?.stop()
 	}
 
 	override func didReceiveMemoryWarning()

@@ -43,7 +43,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	}
 	
 	// Whether this is the first paragraph in the chapter
-	var isFirstInChapter: Bool {return index == 1}
+	var isFirstInChapter: Bool {return sectionIndex == 1 && index == 1}
 	
 	// The code of the book this paragraph belongs to
 	var bookCode: String {return Book.code(fromId: bookId)}

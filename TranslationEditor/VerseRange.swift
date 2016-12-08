@@ -10,7 +10,7 @@ import Foundation
 
 // A verseRange contains a text range from a certain verse index to another
 // TODO: Struct or class? (struct doesn't work with lazily se values)
-struct VerseRange: JSONConvertible, Equatable
+struct VerseRange: JSONConvertible, Equatable, CustomStringConvertible
 {
 	// ATTRIBUTES	--------
 	
@@ -26,6 +26,8 @@ struct VerseRange: JSONConvertible, Equatable
 	{
 		return ["start" : PropertyValue(start.toPropertySet), "end" : PropertyValue(end.toPropertySet)]
 	}
+	
+	var description: String {return name}
 	
 	// Splits the range on verse markings. For example, range of 4b-7 would become [4b-5, 5-6, 6-7]
 	var verses: [VerseRange]
