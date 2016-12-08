@@ -72,6 +72,15 @@ extension View
 	{
 		let query = createAllQuery(descending: descending)
 		
+		// If only a single key is used, doesn't use array format
+		if keys.count == 1
+		{
+			query.startKey = keys[0]
+			query.endKey = keys[0]
+			
+			return query
+		}
+		
 		// A specified key limits the results to certain range. A nil value (end) is used to specify which keys can have any value
 		var min = [Any]()
 		var max = [Any]()

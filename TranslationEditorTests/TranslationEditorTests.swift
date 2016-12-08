@@ -109,7 +109,7 @@ class TranslationEditorTests: XCTestCase
 	
 	func testFindEnglish()
 	{
-		let query = LanguageView.instance.createQuery(forKeys: ["english", nil])
+		let query = LanguageView.instance.createQuery(forKeys: ["english"])
 		print("query statistics: start = \(query.startKey!), end = \(query.endKey!)")
 		
 		let languages = try! Language.arrayFromQuery(query)
