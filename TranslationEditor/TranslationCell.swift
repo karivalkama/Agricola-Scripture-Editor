@@ -17,9 +17,9 @@ class TranslationCell: UITableViewCell, UITextViewDelegate
 	
 	// Vars	-------------
 	
-	// TODO: Replace with an implementatio where numerous listeners are supported
-	// TODO: Make this better. There's no real need for a complex system like this
-	var contentChangeListener: CellContentListener?
+	var inputListener: CellInputListener?
+	
+	private var contentId: String?
 	
 	
 	// Overridden	-----
@@ -44,12 +44,10 @@ class TranslationCell: UITableViewCell, UITextViewDelegate
 	
 	func textViewDidChange(_ textView: UITextView)
 	{
-		// TODO: Update calculated height and inform table if necessary
-		
 		// Informs the listeners, if present
-		if let listener = contentChangeListener
+		if let listener = inputListener, let contentId = contentId
 		{
-			listener.cellContentChanged(in: self)
+			listener.cellContentChanged(id: contentId, newContent: textView.attributedText)
 		}
 	}
 	
@@ -78,8 +76,10 @@ class TranslationCell: UITableViewCell, UITextViewDelegate
 	
 	// Other	---------
 	
-	func setContent(to text: NSAttributedString)
+	func setContent(to text: NSAttributedString, withId contentId: String)
 	{
+		self.contentId = contentId
+		
 		let newText = NSMutableAttributedString()
 		newText.append(text)
 		

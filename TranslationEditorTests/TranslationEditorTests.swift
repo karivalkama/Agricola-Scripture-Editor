@@ -107,6 +107,49 @@ class TranslationEditorTests: XCTestCase
 		}
 	}
 	
+	func testFindEnglish()
+	{
+		let query = LanguageView.instance.createQuery(forKeys: ["english", nil])
+		print("query statistics: start = \(query.startKey!), end = \(query.endKey!)")
+		
+		let languages = try! Language.arrayFromQuery(query)
+		print("Found \(languages.count) languages named 'english'")
+		languages.forEach { print("- \($0.name): \($0.idString)") }
+	}
+	
+	/*
+	func testDeleteUnnecessaryLanguages()
+	{
+		try! Language.delete("93C141FE-C8AD-4607-955A-37E12246E43F")
+	}*/
+	
+	func testReadDatabaseData()
+	{
+		// Finds all languages first
+		let languageQuery = LanguageView.instance.createAllQuery()
+		let languages = try! Language.arrayFromQuery(languageQuery)
+		
+		print("Languages in database: ")
+		for language in languages
+		{
+			print("- \(language.name) (\(language.idString))")
+		}
+		
+		// Next finds all books
+		for language in languages
+		{
+			print("Books in \(language.name):")
+			
+			let bookQuery = BookView.instance.createQuery(languageId: language.idString, code: nil, identifier: nil)
+			let books = try! Book.arrayFromQuery(bookQuery)
+			
+			for book in books
+			{
+				print("- \(book.code) - \(book.identifier)")
+			}
+		}
+	}
+	
 	@available (*, deprecated)
 	func testUSXParsing()
 	{

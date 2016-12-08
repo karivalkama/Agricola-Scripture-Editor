@@ -105,6 +105,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	
 	// OTHER METHODS	-----
 	
+	// Display paragraph range option available
 	func toAttributedString(options: [String : Any]) -> NSAttributedString
 	{
 		let str = NSMutableAttributedString()

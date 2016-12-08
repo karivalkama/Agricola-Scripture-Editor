@@ -9,8 +9,13 @@
 import UIKit
 
 // TranslationVC is the view controller used in the translation / review / work view
-class TranslationVC: UIViewController, UITableViewDataSource, CellContentListener
+class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener, CellInputListener
 {
+	// TYPES	----------
+	
+	typealias Queried = Paragraph
+	
+	
 	// Outlets	----------
 	
 	@IBOutlet weak var translationTableView: UITableView!
@@ -21,9 +26,6 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 	// Temporary test vars
 	private var book: Book!
 	
-	// TODO: Remove
-	private var testContent = [NSAttributedString]()
-	
 	// Current paragraph status in database
 	private var currentData = [Paragraph]()
 	
@@ -32,7 +34,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 	private var inputData = [String : NSAttributedString]()
 	
 	// The live query used for retrieving translation data
-	private var translationQuery: CBLLiveQuery?
+	private var translationQueryManager: LiveQueryManager<Paragraph>!
 	
 	private var committing = false
 	
@@ -44,8 +46,8 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		super.viewDidLoad()
 		
 		// Reads necessary data (TEST)
-		let language = try! LanguageView.instance.language(withName: "English")
-		book = try! Book.fromQuery(BookView.instance.createQuery(languageId: language.idString, code: "GAL", identifier: nil))!
+		//let language = try! LanguageView.instance.language(withName: "English")
+		//book = try! Book.fromQuery(BookView.instance.createQuery(languageId: language.idString, code: "GAL", identifier: nil))!
 		
 		// (Epic hack which) Makes table view cells have automatic height
 		translationTableView.rowHeight = UITableViewAutomaticDimension
@@ -53,16 +55,23 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		
 		//translationTableView.delegate = self
 		translationTableView.dataSource = self
+		
+		// TODO: Use certain ranges, which should be changeable
+		//let query = ParagraphView.instance.createQuery(bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil).asLive()
+		//translationQueryManager = LiveQueryManager<Paragraph>(query: query)
+		//translationQueryManager.addListener(AnyLiveQueryListener(self))
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
 		// Starts the database listening process, if not yet started
+		//translationQueryManager.start()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{
 		// Ends the database listening process, if present
+		//translationQueryManager.stop()
 	}
 
 	override func didReceiveMemoryWarning()
@@ -72,50 +81,12 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		// Dispose of any resources that can be recreated.
 	}
 	
-	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
-	{
-		// Reacts to database updates
-		if keyPath == "rows"
-		{
-			if let query = object as? CBLLiveQuery
-			{
-				if let rows = query.rows
-				{
-					print("DB: Rows changed. New amount: \(rows.count)")
-				}
-			}
-		}
-		else
-		{
-			super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-		}
-	}
 	
-	
-	// Table view delegate	------------
-	
-	/*
-	public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-	{
-		// Scales the cell height based on the calculated content height (calculation made at cell)
-		if let cell = translationTableView.cellForRow(at: indexPath)
-		{
-			return (cell as! TranslationCell).calculatedHeight
-		}
-		else
-		{
-			return 32
-		}
-	}
-*/
-	
-	
-	// Table View Data Source	------
+	// TABLE VIEW DATASOURCE	------
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		// TODO: Test implementation
-		return testContent.count
+		return currentData.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -123,26 +94,50 @@ class TranslationVC: UIViewController, UITableViewDataSource, CellContentListene
 		// Finds a reusable cell
 		let cell = translationTableView.dequeueReusableCell(withIdentifier: "TranslationCell", for: indexPath) as! TranslationCell
 		
-		// Updates cell content
-		cell.setContent(to: testContent[indexPath.row])
-		cell.contentChangeListener = self
+		// Updates cell content (either from current data or from current input status)
+		let paragraph = currentData[indexPath.row]
+		
+		var stringContents: NSAttributedString!
+		if let inputVersion = inputData[paragraph.idString]
+		{
+			stringContents = inputVersion
+		}
+		else
+		{
+			stringContents = paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
+		}
+		
+		cell.setContent(to: stringContents, withId: paragraph.idString)
+		cell.inputListener = self
 		return cell
 	}
 	
 	
-	// Cell Content Listener	-----------
+	// QUERY LISTENING	-------------
 	
-	func cellContentChanged(in cell: UITableViewCell)
+	func rowsUpdated(rows: [Row<Paragraph>], forQuery queryId: String?)
 	{
-		// Finds the cell index and updates it
-		// Updates the data as well
-		//let indexPath = translationTableView.indexPath(for: cell)!
-		//testContent[indexPath.row] = content
+		// Updates paragraph data (unless committing is in progress)
+		if !committing
+		{
+			// TODO: Check for conflicts
+			currentData = rows.map { $0.object }
+			translationTableView.reloadData()
+		}
+	}
+	
+	
+	// CELL LISTENING	-------------
+	
+	func cellContentChanged(id: String, newContent: NSAttributedString)
+	{
+		inputData[id] = newContent
 		
+		// Resets cell height
 		translationTableView.beginUpdates()
 		translationTableView.endUpdates()
-		//translationTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.none)
 	}
+	
 	
 	//@available (*, deprecated)
 	/*

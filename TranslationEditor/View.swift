@@ -76,6 +76,7 @@ extension View
 		var min = [Any]()
 		var max = [Any]()
 		
+		var allKeysSpecified = true
 		for key in keys
 		{
 			if let key = key
@@ -87,6 +88,8 @@ extension View
 			{
 				min.append(NSNull())
 				max.append([:])
+				
+				allKeysSpecified = false
 				break
 			}
 		}
@@ -102,6 +105,10 @@ extension View
 			query.startKey = min
 			query.endKey = max
 		}
+		
+		// If all keys have been specified, the query is inclusive, otherwise it is exclusive
+		query.inclusiveStart = allKeysSpecified
+		query.inclusiveEnd = allKeysSpecified
 		
 		return query
 	}

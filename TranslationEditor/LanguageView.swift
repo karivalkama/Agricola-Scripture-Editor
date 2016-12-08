@@ -33,9 +33,9 @@ final class LanguageView: View
 			(language, emit) in
 			
 			// Key = language name (lowercase)
-			emit(language.name, nil)
+			emit(language.name.lowercased(), nil)
 			
-		}, version: "1")
+		}, version: "2")
 	}
 	
 	

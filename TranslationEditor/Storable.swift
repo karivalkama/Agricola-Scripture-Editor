@@ -151,6 +151,15 @@ extension Storable
 		return try get(parseId(from: idArray))
 	}
 	
+	// Deletes a document with the specified id
+	static func delete(_ id: String) throws
+	{
+		if let document = DATABASE.existingDocument(withID: id)
+		{
+			try document.delete()
+		}
+	}
+	
 	// Retrieves a single instance of this class by using the provided query
 	// The query limit is automatically set to 1
 	// If the query results were empty, returns nil

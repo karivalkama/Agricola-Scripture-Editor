@@ -9,13 +9,13 @@
 import Foundation
 
 // This class is used for managing and listening to a live query
-class LiveQueryManager<Listener: LiveQueryListener>: NSObject
+class LiveQueryManager<Queried: Storable>: NSObject
 {
 	// PROPERTIES	------
 	
 	private let query: CBLLiveQuery
-	private var listeners = [(Listener, String?)]()
-	private(set) var rows = [Row<Listener.Queried>]()
+	private var listeners = [(AnyLiveQueryListener<Queried>, String?)]()
+	private(set) var rows = [Row<Queried>]()
 	
 	private var observes = false
 	
@@ -45,7 +45,7 @@ class LiveQueryManager<Listener: LiveQueryListener>: NSObject
 						// Parses the results
 						while let row = results.nextRow()
 						{
-							rows.append(try Row<Listener.Queried>(row))
+							rows.append(try Row<Queried>(row))
 						}
 						
 						// Informs the listeners
@@ -101,7 +101,7 @@ class LiveQueryManager<Listener: LiveQueryListener>: NSObject
 	
 	// Adds a new listener that will be informed when the query updates
 	// The query id is sent along the rows to the listener, if present
-	func addListener(_ listener: Listener, withQueryId queryId: String? = nil)
+	func addListener(_ listener: AnyLiveQueryListener<Queried>, withQueryId queryId: String? = nil)
 	{
 		// No duplicates allowed
 		for (existingListener, _) in listeners
@@ -116,7 +116,7 @@ class LiveQueryManager<Listener: LiveQueryListener>: NSObject
 	}
 
 	// Removes a listener from this manager. This manager won't be calling the listener in the future
-	func removeListener(_ listener: Listener)
+	func removeListener(_ listener: AnyLiveQueryListener<Queried>)
 	{
 		for i in 0 ..< listeners.count
 		{
@@ -126,5 +126,10 @@ class LiveQueryManager<Listener: LiveQueryListener>: NSObject
 				break
 			}
 		}
+	}
+	
+	func removeListeners()
+	{
+		listeners = []
 	}
 }

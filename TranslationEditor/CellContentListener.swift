@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 // TODO: Refactor
+@available(*, deprecated) // Please use cellInputListener instead
 protocol CellContentListener
 {
 	// This function is called each time cell content is changed but not when cell content is initialised for the first time
