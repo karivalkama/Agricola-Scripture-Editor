@@ -10,7 +10,7 @@ import Foundation
 
 // Paragraph are used as the base translation units
 // A paragraph contains certain text range, and has some resources associated with it
-final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Storable
+final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Storable, Copyable
 {
 	// ATTRIBUTES	---------
 	
@@ -82,6 +82,11 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		self.content = content
 		self.sectionIndex = sectionIndex
 		self.index = index
+	}
+	
+	func copy() -> Paragraph
+	{
+		return Paragraph(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, index: index, content: content.copy(), uid: uid)
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> Paragraph

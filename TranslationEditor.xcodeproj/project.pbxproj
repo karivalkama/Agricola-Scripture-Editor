@@ -102,6 +102,12 @@
 		7C4A4FC41DFAB0AA009F890E /* ColorUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FC31DFAB0AA009F890E /* ColorUtilities.swift */; };
 		7C4A4FC51DFAB0AA009F890E /* ColorUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FC31DFAB0AA009F890E /* ColorUtilities.swift */; };
 		7C4A4FC61DFAB0AA009F890E /* ColorUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FC31DFAB0AA009F890E /* ColorUtilities.swift */; };
+		7C4A4FC81DFACAF5009F890E /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FC71DFACAF5009F890E /* Commit.swift */; };
+		7C4A4FC91DFACAF5009F890E /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FC71DFACAF5009F890E /* Commit.swift */; };
+		7C4A4FCA1DFACAF5009F890E /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FC71DFACAF5009F890E /* Commit.swift */; };
+		7C4A4FCC1DFACC58009F890E /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FCB1DFACC58009F890E /* Copyable.swift */; };
+		7C4A4FCD1DFACC58009F890E /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FCB1DFACC58009F890E /* Copyable.swift */; };
+		7C4A4FCE1DFACC58009F890E /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FCB1DFACC58009F890E /* Copyable.swift */; };
 		7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1741DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1751DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
@@ -269,6 +275,8 @@
 		7C4A4FB91DF99490009F890E /* ProgramStatusListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramStatusListener.swift; sourceTree = "<group>"; };
 		7C4A4FBF1DFAA60E009F890E /* Colours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 		7C4A4FC31DFAB0AA009F890E /* ColorUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtilities.swift; sourceTree = "<group>"; };
+		7C4A4FC71DFACAF5009F890E /* Commit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
+		7C4A4FCB1DFACC58009F890E /* Copyable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Copyable.swift; sourceTree = "<group>"; };
 		7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXMarkerElement.swift; sourceTree = "<group>"; };
 		7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXContainerElement.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -458,6 +466,8 @@
 				7C40DF7B1DED9FB90035B92E /* Language.swift */,
 				7CCC01061DA3C1C700F0562E /* USXStyle.swift */,
 				7C4A4FB11DF95FE3009F890E /* ParagraphEdit.swift */,
+				7C4A4FC71DFACAF5009F890E /* Commit.swift */,
+				7C4A4FCB1DFACC58009F890E /* Copyable.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -836,6 +846,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C4A4FC81DFACAF5009F890E /* Commit.swift in Sources */,
 				7CCC010B1DA4DEC200F0562E /* ParagraphPrev.swift in Sources */,
 				7C4A4FB61DF96730009F890E /* ParagraphEditView.swift in Sources */,
 				7CAF6D821DB4F47700E10597 /* USXChapterProcessor.swift in Sources */,
@@ -858,6 +869,7 @@
 				7C4A4F931DEEFC5F009F890E /* Types.swift in Sources */,
 				7CAF6D8A1DB5F5FB00E10597 /* USXParser.swift in Sources */,
 				7C20D7F81D9A672800E84BA5 /* VerseIndex.swift in Sources */,
+				7C4A4FCC1DFACC58009F890E /* Copyable.swift in Sources */,
 				7C4A4FAA1DF836F1009F890E /* LiveQueryListener.swift in Sources */,
 				7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */,
 				7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
@@ -918,6 +930,7 @@
 				7C4A4FC11DFAA60E009F890E /* Colours.swift in Sources */,
 				7C4A4FAF1DF93B75009F890E /* AnyLiveQueryListener.swift in Sources */,
 				7CCC00F71D9D361000F0562E /* Verse.swift in Sources */,
+				7C4A4FCD1DFACC58009F890E /* Copyable.swift in Sources */,
 				7C20D7ED1D8C1B7200E84BA5 /* CellContentListener.swift in Sources */,
 				7CAF6D871DB4F9AA00E10597 /* USXBookProcessor.swift in Sources */,
 				7C4A4FC51DFAB0AA009F890E /* ColorUtilities.swift in Sources */,
@@ -938,6 +951,7 @@
 				7C40DF601DE71E490035B92E /* DatabaseUtilities.swift in Sources */,
 				7C40DF681DEC26340035B92E /* JSONParseError.swift in Sources */,
 				7C4A4FBB1DF99490009F890E /* ProgramStatusListener.swift in Sources */,
+				7C4A4FC91DFACAF5009F890E /* Commit.swift in Sources */,
 				7C4CC1781DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7CCC00F91D9D369100F0562E /* VerseRange.swift in Sources */,
 				7C4A4FA31DF829C5009F890E /* CellInputListener.swift in Sources */,
@@ -985,6 +999,7 @@
 				7C4A4FC21DFAA60E009F890E /* Colours.swift in Sources */,
 				7C4A4FB01DF93B75009F890E /* AnyLiveQueryListener.swift in Sources */,
 				7CCC00F81D9D361000F0562E /* Verse.swift in Sources */,
+				7C4A4FCE1DFACC58009F890E /* Copyable.swift in Sources */,
 				7C20D7EE1D8C1B7200E84BA5 /* CellContentListener.swift in Sources */,
 				7CAF6D881DB4F9AA00E10597 /* USXBookProcessor.swift in Sources */,
 				7C4A4FC61DFAB0AA009F890E /* ColorUtilities.swift in Sources */,
@@ -1005,6 +1020,7 @@
 				7C40DF611DE71E490035B92E /* DatabaseUtilities.swift in Sources */,
 				7C40DF691DEC26340035B92E /* JSONParseError.swift in Sources */,
 				7C4A4FBC1DF99490009F890E /* ProgramStatusListener.swift in Sources */,
+				7C4A4FCA1DFACAF5009F890E /* Commit.swift in Sources */,
 				7C4CC1791DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7CCC00FA1D9D369100F0562E /* VerseRange.swift in Sources */,
 				7C4A4FA41DF829C5009F890E /* CellInputListener.swift in Sources */,

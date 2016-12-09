@@ -10,7 +10,7 @@ import Foundation
 
 // A para is a range of text separated from others. A para has specific styling information 
 // associated with it
-class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConvertible
+final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConvertible, Copyable
 {
 	// ATTIRIBUTES	------
 	
@@ -104,6 +104,18 @@ class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConvertibl
 	{
 		self.style = style
 		replaceContents(with: content)
+	}
+	
+	func copy() -> Para
+	{
+		if verses.isEmpty
+		{
+			return Para(content: ambiguousContent, style: style)
+		}
+		else
+		{
+			return Para(content: verses.copy(), style: style)
+		}
 	}
 	
 	// Parses a para element from JSON data

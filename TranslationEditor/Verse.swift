@@ -11,7 +11,7 @@ import Foundation
 // A verse has certain range but also text
 // The text on a verse is mutable
 // TODO: Struct or class?
-class Verse: AttributedStringConvertible, JSONConvertible
+final class Verse: AttributedStringConvertible, JSONConvertible, Copyable
 {
 	// ATTRIBUTES	------
 	
@@ -82,6 +82,11 @@ class Verse: AttributedStringConvertible, JSONConvertible
 	
 	
 	// IMPLEMENTED	----
+	
+	func copy() -> Verse
+	{
+		return Verse(range: range, content: content)
+	}
 	
 	// Adds the verse marker(s) for the verse, then the contents
 	func toAttributedString(options: [String : Any]) -> NSAttributedString

@@ -44,6 +44,15 @@ extension Array where Element: AnyObject
 	}
 }
 
+extension Array where Element: Copyable
+{
+	// Copies the array. This creates a new value even with reference type contents
+	func copy() -> [Element]
+	{
+		return map { return $0.copy() }
+	}
+}
+
 extension Dictionary
 {
 	// Combines two dictionaries together to form a single, larger dictionary
