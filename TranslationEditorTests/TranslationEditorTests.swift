@@ -107,6 +107,32 @@ class TranslationEditorTests: XCTestCase
 		}
 	}
 	
+	func testRemoveNonTypeData()
+	{
+		let query = DATABASE.createAllDocumentsQuery()
+		let results = try! query.run()
+		
+		while let row = results.nextRow(), let document = row.document
+		{
+			if document[PROPERTY_TYPE] == nil
+			{
+				print("REMOVING TYPELESS INSTANCE \(document.documentID)")
+				try! document.delete()
+			}
+		}
+	}
+	
+	func testRemoveEdits()
+	{
+		let edits = try! ParagraphEdit.arrayFromQuery(ParagraphEditView.instance.createAllQuery())
+		
+		print("There are \(edits.count) edits in total. Deleting.")
+		
+		edits.forEach { try! $0.delete() }
+		
+		print("Done")
+	}
+	
 	func testFindEnglish()
 	{
 		let query = LanguageView.instance.createQuery(forKeys: ["english"])
@@ -155,6 +181,14 @@ class TranslationEditorTests: XCTestCase
 					let text = paragraph.text
 					let maxIndex = text.index(text.startIndex, offsetBy: min(text.characters.count, 32))
 					print("\t- \(paragraph.chapterIndex).\(paragraph.sectionIndex).\(paragraph.index): \(paragraph.text.substring(to: maxIndex))")
+				}
+				
+				let editQuery = ParagraphEditView.instance.createQuery(userId: "testuserid", bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil)
+				let edits = try! ParagraphEdit.arrayFromQuery(editQuery)
+				
+				if !edits.isEmpty
+				{
+					print("There are also \(edits.count) edits")
 				}
 			}
 		}

@@ -56,6 +56,7 @@ extension Storable
 		{
 			newRev in
 			
+			// Writes the basic properties
 			for (propertyName, propertyValue) in self.properties
 			{
 				if let propertyValue = propertyValue.any
@@ -67,6 +68,9 @@ extension Storable
 					newRev.properties?.removeObject(forKey: propertyName)
 				}
 			}
+			
+			// Also writes the type
+			newRev[PROPERTY_TYPE] = Self.type
 			
 			return true
 		}
@@ -82,6 +86,7 @@ extension Storable
 			{
 				newRev in
 				
+				// Writes the basic properties
 				for propertyName in propertyNames
 				{
 					if let property = self.properties[propertyName], let value = property.any
@@ -93,6 +98,9 @@ extension Storable
 						newRev.properties?.removeObject(forKey: propertyName)
 					}
 				}
+				
+				// Also writes the type
+				newRev[PROPERTY_TYPE] = Self.type
 				
 				return true
 			}

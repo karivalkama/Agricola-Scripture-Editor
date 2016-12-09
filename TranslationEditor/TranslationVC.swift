@@ -9,7 +9,7 @@
 import UIKit
 
 // TranslationVC is the view controller used in the translation / review / work view
-class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener, CellInputListener
+class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener, CellInputListener, AppStatusListener
 {
 	// TYPES	----------
 	
@@ -21,7 +21,11 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	@IBOutlet weak var translationTableView: UITableView!
 	
 	
-	// Vars	--------------
+	// PROPERTIES	---------
+	
+	// Testing data
+	private var book: Book?
+	private let userId = "testuserid"
 	
 	// Current paragraph status in database
 	private var currentData = [Paragraph]()
@@ -29,6 +33,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	// paragraph data modified, but not committed by user
 	// Key = paragraph id
 	private var inputData = [String : NSAttributedString]()
+	private var active = false
 	
 	// The live query used for retrieving translation data
 	private var translationQueryManager: LiveQueryManager<Paragraph>?
@@ -54,6 +59,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		let language = try! LanguageView.instance.language(withName: "English")
 		if let book = try! Book.fromQuery(BookView.instance.createQuery(languageId: language.idString, code: "GAL", identifier: nil))
 		{
+			self.book = book
 			let query = ParagraphView.instance.createQuery(bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil).asLive()
 			translationQueryManager = LiveQueryManager<Paragraph>(query: query)
 			translationQueryManager?.addListener(AnyLiveQueryListener(self))
@@ -62,14 +68,14 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
-		// Starts the database listening process, if not yet started
-		translationQueryManager?.start()
+		AppStatusHandler.instance.registerListener(self)
+		activate()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{
-		// Ends the database listening process, if present
-		translationQueryManager?.stop()
+		AppStatusHandler.instance.removeListener(self)
+		deactivate()
 	}
 
 	override func didReceiveMemoryWarning()
@@ -120,6 +126,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		{
 			// TODO: Check for conflicts
 			currentData = rows.map { $0.object }
+			print("STATUS: UPDATES ROWS")
 			translationTableView.reloadData()
 		}
 	}
@@ -134,6 +141,97 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		// Resets cell height
 		translationTableView.beginUpdates()
 		translationTableView.endUpdates()
+	}
+	
+	
+	// APP STATUS LISTENING	---------
+	
+	func appWillClose()
+	{
+		deactivate()
+	}
+	
+	func appWillContinue()
+	{
+		activate()
+	}
+	
+	
+	// OTHER	---------------------
+	
+	private func activate()
+	{
+		if !active
+		{
+			print("STATUS: ACTIVATING")
+			active = true
+			
+			// Retrieves edit data from the database
+			// TODO: rework after user data and book data are in place
+			if inputData.isEmpty
+			{
+				if let book = book
+				{
+					let paragraphEdits = try! ParagraphEdit.arrayFromQuery(ParagraphEditView.instance.createQuery(userId: userId, bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil))
+					
+					print("STATUS: FOUND \(paragraphEdits.count) edits")
+					
+					for edit in paragraphEdits
+					{
+						inputData[edit.targetId] = edit.paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
+					}
+				}
+			}
+			
+			// Starts the database listening process, if not yet started
+			translationQueryManager?.start()
+		}
+	}
+	
+	private func deactivate()
+	{
+		if active
+		{
+			print("STATUS: DEACTIVATING")
+			active = false
+			
+			// Ends the database listening process, if present
+			translationQueryManager?.stop()
+			
+			// Saves paragraph edit status to the database
+			do
+			{
+				// Deletes previous data
+				if let book = book
+				{
+					let paragraphEdits = try! ParagraphEdit.arrayFromQuery(ParagraphEditView.instance.createQuery(userId: userId, bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil))
+					paragraphEdits.forEach { try? $0.delete() }
+				}
+				
+				for (paragraphId, attString) in inputData
+				{
+					if let paragraph = try Paragraph.get(paragraphId)
+					{
+						print("STATUS: SAVING PARAGRAPH EDIT")
+						
+						paragraph.replaceContents(with: attString)
+						
+						let edit = ParagraphEdit(userId: userId, paragraph: paragraph)
+						
+						print("STATUS: SAVED EDIT: \(edit.toPropertySet)")
+						
+						try edit.push()
+						
+						print("STATUS: NEW EDIT WITH ID: " + edit.idString)
+					}
+				}
+			}
+			catch
+			{
+				// TODO: Add better error handling
+				print("DB: Failed to save edit status \(error)")
+			}
+		}
 	}
 	
 	

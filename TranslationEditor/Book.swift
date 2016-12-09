@@ -31,7 +31,7 @@ final class Book: Storable
 	
 	var properties: [String : PropertyValue]
 	{
-		return [PROPERTY_TYPE : PropertyValue(Book.type), "identifier" : PropertyValue(identifier), "language" : PropertyValue(languageId)]
+		return ["identifier" : PropertyValue(identifier), "language" : PropertyValue(languageId)]
 	}
 	
 	static var idIndexMap: [String : IdIndex] {return [PROPERTY_CODE : IdIndex(0), "book_uid" : IdIndex(1)]}

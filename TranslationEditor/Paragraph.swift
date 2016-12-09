@@ -35,7 +35,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	
 	var idProperties: [Any] {return [bookId, chapterIndex, uid]}
 	
-	var properties: [String : PropertyValue] {return [PROPERTY_TYPE : PropertyValue(Paragraph.type), "paras" : PropertyValue(content), "index" : PropertyValue(index), "section" : PropertyValue(sectionIndex)]}
+	var properties: [String : PropertyValue] {return ["paras" : PropertyValue(content), "index" : PropertyValue(index), "section" : PropertyValue(sectionIndex)]}
 	
 	var range: VerseRange?
 	{
