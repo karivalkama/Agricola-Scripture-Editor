@@ -154,9 +154,26 @@ extension Storable
 	
 	// Finds or creates an instance of this class for the provided id
 	// Returns nil if there wasn't a saved revision for the provided id
+	/*
 	static func get(_ idArray: [Any]) throws -> Self?
 	{
 		return try get(parseId(from: idArray))
+	}*/
+	
+	// Retrieves and parses a number of instances from a set of document ids
+	static func getArray(_ ids: [String]) throws -> [Self]
+	{
+		var parsed = [Self]()
+		
+		for idString in ids
+		{
+			if let instance = try get(idString)
+			{
+				parsed.append(instance)
+			}
+		}
+
+		return parsed
 	}
 	
 	// Deletes a document with the specified id

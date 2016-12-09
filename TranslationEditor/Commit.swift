@@ -71,4 +71,17 @@ final class Commit: Storable
 			self.content = try Para.parseArray(from: contentArray, using: Para.parse)
 		}
 	}
+	
+	
+	// OTHER	------------
+	
+	static func paragraphId(from idString: String) -> String
+	{
+		return createId(from: idString)[PROPERTY_PARAGRAPH_ID].string()
+	}
+	
+	static func creationTime(from idString: String) -> Double
+	{
+		return createId(from: idString)[PROPERTY_CREATION_TIME].double(or: Date().timeIntervalSince1970)
+	}
 }

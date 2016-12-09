@@ -108,6 +108,9 @@
 		7C4A4FCC1DFACC58009F890E /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FCB1DFACC58009F890E /* Copyable.swift */; };
 		7C4A4FCD1DFACC58009F890E /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FCB1DFACC58009F890E /* Copyable.swift */; };
 		7C4A4FCE1DFACC58009F890E /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FCB1DFACC58009F890E /* Copyable.swift */; };
+		7C4A4FD01DFADA4A009F890E /* CommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FCF1DFADA4A009F890E /* CommitView.swift */; };
+		7C4A4FD11DFADA4A009F890E /* CommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FCF1DFADA4A009F890E /* CommitView.swift */; };
+		7C4A4FD21DFADA4A009F890E /* CommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FCF1DFADA4A009F890E /* CommitView.swift */; };
 		7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1741DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1751DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
@@ -277,6 +280,7 @@
 		7C4A4FC31DFAB0AA009F890E /* ColorUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtilities.swift; sourceTree = "<group>"; };
 		7C4A4FC71DFACAF5009F890E /* Commit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
 		7C4A4FCB1DFACC58009F890E /* Copyable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Copyable.swift; sourceTree = "<group>"; };
+		7C4A4FCF1DFADA4A009F890E /* CommitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitView.swift; sourceTree = "<group>"; };
 		7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXMarkerElement.swift; sourceTree = "<group>"; };
 		7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXContainerElement.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -504,6 +508,7 @@
 				7C40DF7F1DEDB4C10035B92E /* BookView.swift */,
 				7C4A4F961DEF0CDE009F890E /* LanguageView.swift */,
 				7C4A4FB51DF96730009F890E /* ParagraphEditView.swift */,
+				7C4A4FCF1DFADA4A009F890E /* CommitView.swift */,
 			);
 			name = DatabaseViews;
 			sourceTree = "<group>";
@@ -907,6 +912,7 @@
 				7C4A4FB21DF95FE3009F890E /* ParagraphEdit.swift in Sources */,
 				7C40DF701DEC6AB00035B92E /* Id.swift in Sources */,
 				7C4A4F8F1DEEF891009F890E /* ParagraphView.swift in Sources */,
+				7C4A4FD01DFADA4A009F890E /* CommitView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,6 +973,7 @@
 				7CCC013D1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
 				7C82CE8B1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
 				7C4A4F841DEEBAF2009F890E /* Row.swift in Sources */,
+				7C4A4FD11DFADA4A009F890E /* CommitView.swift in Sources */,
 				7CCC01031D9E365E00F0562E /* USXAttributes.swift in Sources */,
 				7CCC00FD1D9D39FE00F0562E /* VerseIndex.swift in Sources */,
 				7C4A4F981DEF0CDE009F890E /* LanguageView.swift in Sources */,
@@ -1036,6 +1043,7 @@
 				7CCC013E1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
 				7C82CE8C1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
 				7C4A4F851DEEBAF2009F890E /* Row.swift in Sources */,
+				7C4A4FD21DFADA4A009F890E /* CommitView.swift in Sources */,
 				7CCC01041D9E365F00F0562E /* USXAttributes.swift in Sources */,
 				7CCC00FE1D9D39FF00F0562E /* VerseIndex.swift in Sources */,
 				7C4A4F991DEF0CDE009F890E /* LanguageView.swift in Sources */,
