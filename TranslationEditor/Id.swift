@@ -59,6 +59,52 @@ struct Id
 	}
 }
 
+func max(_ left: IdIndex, _ right: IdIndex) -> IdIndex
+{
+	if left.end == right.end
+	{
+		if left.start >= right.start
+		{
+			return left
+		}
+		else
+		{
+			return right
+		}
+	}
+	else if left.end > right.end
+	{
+		return left
+	}
+	else
+	{
+		return right
+	}
+}
+
+func min(_ left: IdIndex, _ right: IdIndex) -> IdIndex
+{
+	if left.end == right.end
+	{
+		if left.start < right.start
+		{
+			return left
+		}
+		else
+		{
+			return right
+		}
+	}
+	else if left.end < right.end
+	{
+		return left
+	}
+	else
+	{
+		return right
+	}
+}
+
 struct IdIndex: Hashable
 {
 	let start: Int // Inclusive
@@ -80,6 +126,27 @@ struct IdIndex: Hashable
 		{
 			self.end = start + 1
 		}
+	}
+	
+	static func of(indexMap: [String : IdIndex]) -> IdIndex
+	{
+		return IdIndex(minIndex(of: indexMap).start, maxIndex(of: indexMap).end)
+	}
+	
+	static func minIndex(of indexMap: [String : IdIndex]) -> IdIndex
+	{
+		if indexMap.isEmpty
+		{
+			return IdIndex(0)
+		}
+		
+		let values = indexMap.values
+		return values.dropFirst().reduce(values.first!, { return min($0, $1) })
+	}
+	
+	static func maxIndex(of indexMap: [String : IdIndex]) -> IdIndex
+	{
+		return indexMap.values.reduce(IdIndex(0), { return max($0, $1) })
 	}
 	
 	static func == (left: IdIndex, right: IdIndex) -> Bool

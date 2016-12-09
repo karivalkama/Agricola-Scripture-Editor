@@ -63,7 +63,13 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		return text
 	}
 	
-	static var idIndexMap: [String : IdIndex] {return Book.idIndexMap + [PROPERTY_BOOK_ID : IdIndex(0, 2), PROPERTY_CHAPTER_INDEX : IdIndex(2), "paragraph_uid" : IdIndex(3)]}
+	static var idIndexMap: [String : IdIndex]
+	{
+		let bookMap = Book.idIndexMap
+		let bookIdIndex = IdIndex.of(indexMap: bookMap)
+		
+		return bookMap + [PROPERTY_BOOK_ID : bookIdIndex, PROPERTY_CHAPTER_INDEX : IdIndex(bookIdIndex.end), "paragraph_uid" : IdIndex(bookIdIndex.end + 1)]
+	}
 	
 	
 	// INIT	-----------------

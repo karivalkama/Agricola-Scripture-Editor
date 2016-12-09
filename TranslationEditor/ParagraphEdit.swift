@@ -28,7 +28,7 @@ final class ParagraphEdit: Storable
 	
 	static var idIndexMap: [String : IdIndex]
 	{
-		return [ParagraphEdit.PROPERTY_USER_ID : IdIndex(1), ParagraphEdit.PROPERTY_CREATED : IdIndex(2)]
+		return ["edit" : IdIndex(0), ParagraphEdit.PROPERTY_USER_ID : IdIndex(1), ParagraphEdit.PROPERTY_CREATED : IdIndex(2)]
 	}
 	
 	var idProperties: [Any] {return ["Edit", userId, created]}

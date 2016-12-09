@@ -17,6 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 	{
 		// Override point for customization after application launch.
 		// TODO: Setup database and start replication process
+		
+		let navigationBarAppearance = UINavigationBar.appearance()
+		navigationBarAppearance.tintColor = Colour.Text.White.asColour
+		navigationBarAppearance.barTintColor = Colour.Primary.dark.asColour
+		navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName : Colour.Text.White.asColour]
+		
 		return true
 	}
 
