@@ -117,6 +117,9 @@
 		7C4A4FDC1DFAE273009F890E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FDB1DFAE273009F890E /* Theme.swift */; };
 		7C4A4FDD1DFAE273009F890E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FDB1DFAE273009F890E /* Theme.swift */; };
 		7C4A4FDE1DFAE273009F890E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FDB1DFAE273009F890E /* Theme.swift */; };
+		7C4A4FE41DFE7C87009F890E /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FE31DFE7C87009F890E /* UIUtilities.swift */; };
+		7C4A4FE51DFE7C87009F890E /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FE31DFE7C87009F890E /* UIUtilities.swift */; };
+		7C4A4FE61DFE7C87009F890E /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FE31DFE7C87009F890E /* UIUtilities.swift */; };
 		7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1741DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1751DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
@@ -289,6 +292,7 @@
 		7C4A4FCF1DFADA4A009F890E /* CommitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitView.swift; sourceTree = "<group>"; };
 		7C4A4FD71DFAE0AA009F890E /* BasicButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicButton.swift; sourceTree = "<group>"; };
 		7C4A4FDB1DFAE273009F890E /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		7C4A4FE31DFE7C87009F890E /* UIUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXMarkerElement.swift; sourceTree = "<group>"; };
 		7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXContainerElement.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -495,6 +499,7 @@
 				7CCC00ED1D9D193F00F0562E /* CollectionUtilities.swift */,
 				7CCC01331DA7964000F0562E /* XmlParserUtil.swift */,
 				7C4A4FC31DFAB0AA009F890E /* ColorUtilities.swift */,
+				7C4A4FE31DFE7C87009F890E /* UIUtilities.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -890,6 +895,7 @@
 				7C4A4FAA1DF836F1009F890E /* LiveQueryListener.swift in Sources */,
 				7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */,
 				7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
+				7C4A4FE41DFE7C87009F890E /* UIUtilities.swift in Sources */,
 				7CD8EA621DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,
 				7C40DF7C1DED9FB90035B92E /* Language.swift in Sources */,
 				7C20D7FA1D9A768700E84BA5 /* VerseRange.swift in Sources */,
@@ -984,6 +990,7 @@
 				7C4A4FA71DF835E1009F890E /* LiveQueryManager.swift in Sources */,
 				7C82CE8F1DE6E29500C054EB /* PropertyValue.swift in Sources */,
 				7CCC01211DA646FA00F0562E /* USXContentParser.swift in Sources */,
+				7C4A4FE51DFE7C87009F890E /* UIUtilities.swift in Sources */,
 				7CCC013D1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
 				7C82CE8B1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
 				7C4A4F841DEEBAF2009F890E /* Row.swift in Sources */,
@@ -1056,6 +1063,7 @@
 				7C4A4FA81DF835E1009F890E /* LiveQueryManager.swift in Sources */,
 				7C82CE901DE6E29500C054EB /* PropertyValue.swift in Sources */,
 				7CCC01221DA646FA00F0562E /* USXContentParser.swift in Sources */,
+				7C4A4FE61DFE7C87009F890E /* UIUtilities.swift in Sources */,
 				7CCC013E1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
 				7C82CE8C1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
 				7C4A4F851DEEBAF2009F890E /* Row.swift in Sources */,

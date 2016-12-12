@@ -19,9 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		// TODO: Setup database and start replication process
 		
 		let navigationBarAppearance = UINavigationBar.appearance()
-		navigationBarAppearance.tintColor = Colour.Text.White.asColour
-		navigationBarAppearance.barTintColor = Colour.Primary.dark.asColour
-		navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName : Colour.Text.White.asColour]
+		let barTheme = Themes.Primary.secondary
+		
+		navigationBarAppearance.tintColor = barTheme.textColour
+		navigationBarAppearance.barTintColor = barTheme.colour
+		navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName : barTheme.textColour]
 		
 		return true
 	}

@@ -14,19 +14,49 @@ class BasicButton: UIButton
 {
 	// PROPERTIES	-----------
 	
-	override var isEnabled: Bool
+	private var _isAccessory = false
+	@IBInspectable var isAccessory: Bool
 	{
-		get {return super.isEnabled}
-		set {super.isEnabled = newValue}
+		get { return _isAccessory }
+		set
+		{
+			_isAccessory = newValue
+			setVisualTheme(theme)
+		}
 	}
 	
 	
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+	// COMP. PROPERTIES	-------
+	
+	override var isEnabled: Bool
+	{
+		get {return super.isEnabled}
+		set
+		{
+			super.isEnabled = newValue
+			setVisualTheme(theme)
+		}
+	}
+	
+	var theme: Theme
+	{
+		if _isAccessory
+		{
+			return isEnabled ? Themes.Accessory.normal : Themes.Accessory.disabled
+		}
+		else
+		{
+			return isEnabled ? Themes.Primary.normal : Themes.Primary.disabled
+		}
+	}
+	
+	
+	// IMPLEMENTED	----------
+	
+	override func awakeFromNib()
+	{
+		super.awakeFromNib()
+		
+		setVisualTheme(theme)
+	}
 }
