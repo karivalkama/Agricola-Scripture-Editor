@@ -178,6 +178,8 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 					
 					for edit in paragraphEdits
 					{
+						print("STATUS: '\(edit.paragraph.text)'")
+						
 						inputData[edit.targetId] = edit.paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
 					}
 				}

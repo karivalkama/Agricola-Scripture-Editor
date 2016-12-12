@@ -178,16 +178,18 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 		func parseCharData(style: Any?, in range: NSRange, stop: UnsafeMutablePointer<ObjCBool>)
 		{
 			let string = (usxString.string as NSString).substring(with: range)
+			let style = style as? CharStyle
 			
 			// if the consecutive data have the same styling, they are appended to each other
-			if var lastData = parsedData.last, lastData.style == style as? CharStyle
+			if let lastData = parsedData.last, lastData.style == style
 			{
-				lastData.text.append(string)
+				let combinedText = lastData.text.appending(string)
+				parsedData[parsedData.count - 1] = CharData(text: combinedText, style: style)
 			}
-				// Otherwise a new charData section is added
+			// Otherwise a new charData section is added
 			else
 			{
-				parsedData.append(CharData(text: string, style: style as? CharStyle))
+				parsedData.append(CharData(text: string, style: style))
 			}
 		}
 		

@@ -215,9 +215,9 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 				if let lastStyle = lastStyle
 				{
 					parsedRanges.append((lastStyle, NSMakeRange(lastRangeStart, range.location - lastRangeStart)))
-					lastRangeStart = range.location + range.length
 				}
 				
+				lastRangeStart = range.location + range.length
 				lastStyle = style
 			}
 		}
