@@ -16,7 +16,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	typealias Queried = Paragraph
 	
 	
-	// Outlets	----------
+	// OUTLETS	----------
 	
 	@IBOutlet weak var translationTableView: UITableView!
 	
@@ -41,7 +41,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	private var committing = false
 	
 	
-	// Overridden	-----
+	// VIEW CONTROLLER	-----
 	
 	override func viewDidLoad()
 	{
@@ -159,6 +159,13 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	
 	// OTHER	---------------------
 	
+	private func commit()
+	{
+		// TODO: Prompt the user to handle edit conflicts
+		// Makes changes to the actual paragraphs (where edited)
+		// And saves new commits
+	}
+	
 	private func activate()
 	{
 		if !active
@@ -170,18 +177,15 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 			// TODO: rework after user data and book data are in place
 			if inputData.isEmpty
 			{
-				if let book = book
+				let paragraphEdits = try! getParagraphEdits()
+				
+				print("STATUS: FOUND \(paragraphEdits.count) edits")
+				
+				for edit in paragraphEdits
 				{
-					let paragraphEdits = try! ParagraphEdit.arrayFromQuery(ParagraphEditView.instance.createQuery(userId: userId, bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil))
+					print("STATUS: '\(edit.paragraph.text)'")
 					
-					print("STATUS: FOUND \(paragraphEdits.count) edits")
-					
-					for edit in paragraphEdits
-					{
-						print("STATUS: '\(edit.paragraph.text)'")
-						
-						inputData[edit.targetId] = edit.paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
-					}
+					inputData[edit.targetId] = edit.paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
 				}
 			}
 			
@@ -204,11 +208,8 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 			do
 			{
 				// Deletes previous data
-				if let book = book
-				{
-					let paragraphEdits = try! ParagraphEdit.arrayFromQuery(ParagraphEditView.instance.createQuery(userId: userId, bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil))
-					paragraphEdits.forEach { try? $0.delete() }
-				}
+				let paragraphEdits = try! getParagraphEdits()
+				paragraphEdits.forEach { try? $0.delete() }
 				
 				for (paragraphId, attString) in inputData
 				{
@@ -234,6 +235,12 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 				print("DB: Failed to save edit status \(error)")
 			}
 		}
+	}
+	
+	private func getParagraphEdits() throws -> [ParagraphEdit]
+	{
+		guard let book = book else { return [] }
+		return try ParagraphEdit.arrayFromQuery(ParagraphEditView.instance.createQuery(userId: userId, bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil))
 	}
 	
 	

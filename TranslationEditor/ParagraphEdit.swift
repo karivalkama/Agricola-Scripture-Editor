@@ -22,6 +22,7 @@ final class ParagraphEdit: Storable
 	let created: Double
 	
 	var paragraph: Paragraph
+	var isConflict: Bool
 	
 	
 	// COMP. PROPERTIES	-----
@@ -33,18 +34,19 @@ final class ParagraphEdit: Storable
 	
 	var idProperties: [Any] {return ["Edit", userId, created]}
 	
-	var properties: [String : PropertyValue] {return ["targetId" : PropertyValue(targetId), "paragraph" : PropertyValue(paragraph)]}
+	var properties: [String : PropertyValue] {return ["targetId" : PropertyValue(targetId), "paragraph" : PropertyValue(paragraph), "conflict" : PropertyValue(isConflict)]}
 	
 	var targetId: String {return paragraph.idString}
 	
 	
 	// INIT	-----------------
 	
-	init(userId: String, paragraph: Paragraph, created: Double = Date().timeIntervalSince1970)
+	init(userId: String, paragraph: Paragraph, isConflict: Bool = false, created: Double = Date().timeIntervalSince1970)
 	{
 		self.userId = userId
 		self.paragraph = paragraph
 		self.created = created
+		self.isConflict = isConflict
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> ParagraphEdit
@@ -52,7 +54,7 @@ final class ParagraphEdit: Storable
 		// Parses the paragraph first
 		let paragraph = try Paragraph.create(from: properties["paragraph"].object(), withId: Paragraph.createId(from: properties["targetId"].string()))
 		
-		return ParagraphEdit(userId: id[PROPERTY_USER_ID].string(), paragraph: paragraph, created: id[PROPERTY_CREATED].double(or: Date().timeIntervalSince1970))
+		return ParagraphEdit(userId: id[PROPERTY_USER_ID].string(), paragraph: paragraph, isConflict: properties["conflict"].bool(or: false), created: id[PROPERTY_CREATED].double(or: Date().timeIntervalSince1970))
 	}
 	
 	
@@ -60,27 +62,34 @@ final class ParagraphEdit: Storable
 	
 	func update(with properties: PropertySet) throws
 	{
-		var newParagraphId: String!
-		if let targetId = properties["targetId"].string
+		if let isConflict = properties["conflict"].bool
 		{
-			newParagraphId = targetId
+			self.isConflict = isConflict
 		}
-		else
+		if properties["targetId"].isDefined || properties["paragraph"].isDefined
 		{
-			newParagraphId = self.targetId
+			var newParagraphId: String!
+			if let targetId = properties["targetId"].string
+			{
+				newParagraphId = targetId
+			}
+			else
+			{
+				newParagraphId = self.targetId
+			}
+			
+			var newParagraphProperties: PropertySet!
+			if let paragraphData = properties["paragraph"].object
+			{
+				newParagraphProperties = paragraphData
+			}
+			else
+			{
+				newParagraphProperties = self.paragraph.toPropertySet
+			}
+			
+			self.paragraph = try Paragraph.create(from: newParagraphProperties, withId: Paragraph.createId(from: newParagraphId))
 		}
-		
-		var newParagraphProperties: PropertySet!
-		if let paragraphData = properties["paragraph"].object
-		{
-			newParagraphProperties = paragraphData
-		}
-		else
-		{
-			newParagraphProperties = self.paragraph.toPropertySet
-		}
-		
-		self.paragraph = try Paragraph.create(from: newParagraphProperties, withId: Paragraph.createId(from: newParagraphId))
 	}
 	
 	
