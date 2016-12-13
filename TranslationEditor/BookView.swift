@@ -45,16 +45,6 @@ final class BookView: View
 	// Creates a new query for book data. The identifiers should be specified from left to right. If code is specified but language is not, that is considered a programming error.
 	func createQuery(languageId: String?, code: String?, identifier: String?) -> CBLQuery
 	{
-		return createQuery(forKeys: [languageId, code, identifier])
-	}
-	
-	func findBook(languageId: String, code: String, identifier: String) -> Book?
-	{
-		let query = createQuery(languageId: languageId, code: code, identifier: identifier)
-		query.limit = 1
-		
-		//let results =
-		
-		return nil
+		return createQuery(forKeys: [Key(languageId), Key(code), Key(identifier)])
 	}
 }

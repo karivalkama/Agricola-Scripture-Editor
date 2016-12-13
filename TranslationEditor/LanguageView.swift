@@ -44,7 +44,7 @@ final class LanguageView: View
 	// Finds or creates a language with the specified name
 	func language(withName name: String) throws -> Language
 	{
-		let query = createQuery(forKeys: [name.lowercased()])
+		let query = createQuery(forKeys: [Key(name.lowercased())])
 		query.limit = 1
 		
 		let result = try query.run()

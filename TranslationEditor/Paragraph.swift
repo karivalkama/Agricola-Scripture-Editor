@@ -19,6 +19,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	
 	static let PROPERTY_BOOK_ID = "bookid"
 	static let PROPERTY_CHAPTER_INDEX = "chapterindex"
+	static let PROPERTY_CREATED = "paragraph_created"
 	
 	static let type = "paragraph"
 	
@@ -26,16 +27,23 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	let chapterIndex: Int
 	let uid: String
 	
-	var index: Int
+	let sectionIndex: Int
+	let index: Int
+	
+	private(set) var created = Date().timeIntervalSince1970
+	private(set) var creatorId: String
+	private(set) var createdFrom: String?
+	
 	var content: [Para]
-	var sectionIndex: Int
+	var isDeprecated = false
+	var isMostRecent = true
 	
 	
 	// COMP. PROPERTIES	-----
 	
-	var idProperties: [Any] {return [bookId, chapterIndex, uid]}
+	var idProperties: [Any] {return [bookId, chapterIndex, uid, created]}
 	
-	var properties: [String : PropertyValue] {return ["paras" : PropertyValue(content), "index" : PropertyValue(index), "section" : PropertyValue(sectionIndex)]}
+	var properties: [String : PropertyValue] {return ["paras" : PropertyValue(content), "index" : PropertyValue(index), "section" : PropertyValue(sectionIndex), "creator" : PropertyValue(creatorId), "created_from" : PropertyValue(createdFrom), "deprecated" : PropertyValue(isDeprecated), "most_recent" : PropertyValue(isMostRecent)]}
 	
 	var range: VerseRange?
 	{
@@ -68,13 +76,13 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		let bookMap = Book.idIndexMap
 		let bookIdIndex = IdIndex.of(indexMap: bookMap)
 		
-		return bookMap + [PROPERTY_BOOK_ID : bookIdIndex, PROPERTY_CHAPTER_INDEX : IdIndex(bookIdIndex.end), "paragraph_uid" : IdIndex(bookIdIndex.end + 1)]
+		return bookMap + [PROPERTY_BOOK_ID : bookIdIndex, PROPERTY_CHAPTER_INDEX : IdIndex(bookIdIndex.end), "paragraph_uid" : IdIndex(bookIdIndex.end + 1), PROPERTY_CREATED : IdIndex(bookIdIndex.end + 2)]
 	}
 	
 	
 	// INIT	-----------------
 	
-	init(bookId: String, chapterIndex: Int, sectionIndex: Int, index: Int, content: [Para], uid: String = UUID().uuidString)
+	init(bookId: String, chapterIndex: Int, sectionIndex: Int, index: Int, content: [Para], creatorId: String, createdFrom: String? = nil, created: TimeInterval = Date().timeIntervalSince1970, uid: String = UUID().uuidString, mostRecent: Bool = true, deprecated: Bool = false)
 	{
 		self.uid = uid
 		self.bookId = bookId
@@ -82,16 +90,21 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		self.content = content
 		self.sectionIndex = sectionIndex
 		self.index = index
+		self.created = created
+		self.creatorId = creatorId
+		self.createdFrom = createdFrom
+		self.isDeprecated = deprecated
+		self.isMostRecent = mostRecent
 	}
 	
 	func copy() -> Paragraph
 	{
-		return Paragraph(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, index: index, content: content.copy(), uid: uid)
+		return Paragraph(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, index: index, content: content.copy(), creatorId: creatorId, createdFrom: createdFrom, created: created,uid: uid, mostRecent: isMostRecent, deprecated: isDeprecated)
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> Paragraph
 	{
-		return try Paragraph(bookId: id[PROPERTY_BOOK_ID].string(), chapterIndex: id[PROPERTY_CHAPTER_INDEX].int(), sectionIndex: properties["section"].int(or: 1), index: properties["index"].int(), content: Para.parseArray(from: properties["paras"].array(), using: Para.parse), uid: id["paragraph_uid"].string())
+		return try Paragraph(bookId: id[PROPERTY_BOOK_ID].string(), chapterIndex: id[PROPERTY_CHAPTER_INDEX].int(), sectionIndex: properties["section"].int(or: 1), index: properties["index"].int(), content: Para.parseArray(from: properties["paras"].array(), using: Para.parse), creatorId: properties["creator"].string(), createdFrom: properties["created_from"].string, created: id[PROPERTY_CREATED].time(), uid: id["paragraph_uid"].string(), mostRecent: properties["most_recent"].bool(or: true),deprecated: properties["deprecated"].bool(or: false))
 	}
 	
 	
@@ -103,18 +116,41 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		{
 			content = try Para.parseArray(from: paras, using: Para.parse)
 		}
-		if let index = properties["index"].int
+		if let deprecated = properties["deprecated"].bool
 		{
-			self.index = index
+			self.isDeprecated = deprecated
 		}
-		if let sectionIndex = properties["section"].int
+		if let mostRecent = properties["most_recent"].bool
 		{
-			self.sectionIndex = sectionIndex
+			self.isMostRecent = mostRecent
+		}
+		if let createdFrom = properties["createdFrom"].string
+		{
+			self.createdFrom = createdFrom
+		}
+		if let creatorId = properties["creator"].string
+		{
+			self.creatorId = creatorId
 		}
 	}
 	
 	
 	// OTHER METHODS	-----
+	
+	// Creates a new version of this paragraph and saves it to the database
+	// Returns the created commit version
+	func commit(userId: String, sectionIndex: Int? = nil, paragraphIndex: Int? = nil, content: [Para]? = nil) throws -> Paragraph
+	{
+		let newVersion = Paragraph(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex.or(self.sectionIndex), index: paragraphIndex.or(self.index), content: content.or(self.content.copy()), creatorId: userId, createdFrom: idString, uid: uid)
+		
+		try newVersion.push()
+		
+		// This version is no longer the most recent out there
+		isMostRecent = false
+		try pushProperties(named: ["most_recent"])
+		
+		return newVersion
+	}
 	
 	// Display paragraph range option available
 	func toAttributedString(options: [String : Any]) -> NSAttributedString
@@ -196,6 +232,12 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	static func chapterIndex(fromId paragraphIdString: String) -> Int
 	{
 		return createId(from: paragraphIdString)[PROPERTY_CHAPTER_INDEX].int()
+	}
+	
+	// Finds the paragraph creation time from a paragraph id string
+	static func created(from paragraphIdString: String) -> TimeInterval
+	{
+		return createId(from: paragraphIdString)[PROPERTY_CREATED].time()
 	}
 	
 	private func parseParaRanges(from usxString: NSAttributedString) -> [(ParaStyle, NSRange)]

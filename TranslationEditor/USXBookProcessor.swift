@@ -13,8 +13,8 @@ import Foundation
 // Saves paragraph information by overwriting an old version
 fileprivate func handleSingleMatch(existing: Paragraph, newVersion: Paragraph) throws
 {
-	try existing.update(with: newVersion)
-	try existing.push()
+	// Creates a new commit over the existing paragraph version
+	_ = try existing.commit(userId: newVersion.creatorId, sectionIndex: newVersion.sectionIndex, paragraphIndex: newVersion.index, content: newVersion.content)
 }
 
 // Saves a bunch of single paragraph matches to the database
@@ -32,6 +32,7 @@ class USXBookProcessor: USXContentProcessor
 	
 	// ATTRIBUTES	-------
 	
+	private let userId: String
 	private let code: String
 	private let languageId: String
 	
@@ -46,8 +47,9 @@ class USXBookProcessor: USXContentProcessor
 	
 	// INIT	---------------
 	
-	init(languageId: String, code: String, findReplacedBook: @escaping FindBook, matchParagraphs: @escaping MatchParagraphs)
+	init(userId: String, languageId: String, code: String, findReplacedBook: @escaping FindBook, matchParagraphs: @escaping MatchParagraphs)
 	{
+		self.userId = userId
 		self.languageId = languageId
 		self.code = code
 		self.findReplacedBook = findReplacedBook
@@ -57,10 +59,10 @@ class USXBookProcessor: USXContentProcessor
 	// Creates a new USX parser for book data
 	// The parser should be set to start after a book element start
 	// The parser will stop at the next book element start or at the end of usx
-	static func createBookParser(caller: XMLParserDelegate, languageId: String, bookCode: String, findReplacedBook: @escaping FindBook, matchParagraphs: @escaping MatchParagraphs, targetPointer: UnsafeMutablePointer<[Book]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Book, Chapter>
+	static func createBookParser(caller: XMLParserDelegate, userId: String, languageId: String, bookCode: String, findReplacedBook: @escaping FindBook, matchParagraphs: @escaping MatchParagraphs, targetPointer: UnsafeMutablePointer<[Book]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Book, Chapter>
 	{
 		let parser = USXContentParser<Book, Chapter>(caller: caller, containingElement: .usx, lowestBreakMarker: .book, targetPointer: targetPointer, using: errorHandler)
-		parser.processor = AnyUSXContentProcessor(USXBookProcessor(languageId: languageId, code: bookCode, findReplacedBook: findReplacedBook, matchParagraphs: matchParagraphs))
+		parser.processor = AnyUSXContentProcessor(USXBookProcessor(userId: userId, languageId: languageId, code: bookCode, findReplacedBook: findReplacedBook, matchParagraphs: matchParagraphs))
 		
 		return parser
 	}
@@ -79,7 +81,7 @@ class USXBookProcessor: USXContentProcessor
 				do
 				{
 					let book = try getBook()
-					return (USXChapterProcessor.createChapterParser(caller: caller, bookId: book.idString, index: index, targetPointer: targetPointer, using: errorHandler), false)
+					return (USXChapterProcessor.createChapterParser(caller: caller, userId: userId, bookId: book.idString, index: index, targetPointer: targetPointer, using: errorHandler), false)
 				}
 				catch
 				{
@@ -143,7 +145,8 @@ class USXBookProcessor: USXContentProcessor
 				let chapterParagraphs = chapter.flatMap {(section) in section.flatMap { $0 } }
 				
 				// Finds all paragraphs already existing in this chapter
-				let existingParagraphs = try ParagraphView.instance.getChapterParagraphs(bookId: book.idString, chapterIndex: chapterIndex)
+				let existingParagraphs = try Paragraph.arrayFromQuery(ParagraphView.instance.latestParagraphQuery(bookId: book.idString, chapterIndex: chapterIndex))
+				// TODO: Should fail if there are conflicts in the target group
 				
 				// If there are no existing paragraphs, simply pushes the new ones to the database
 				if existingParagraphs.isEmpty
@@ -241,6 +244,7 @@ class USXBookProcessor: USXContentProcessor
 								else
 								{
 									try newParagraph.push()
+									// TODO: Delete whole commit path (or mark as deprecated)
 									for existing in matchingExisting
 									{
 										try existing.delete()
@@ -252,6 +256,7 @@ class USXBookProcessor: USXContentProcessor
 							// Finally, goes through all of the existing paragraphs and deletes those that weren't matched
 							for leftWithoutMatch in unmatchedExisting.filter({ !matchedExisting.containsReference(to: $0) })
 							{
+								// TODO: Again, delete whole path
 								try leftWithoutMatch.delete()
 							}
 						}
@@ -265,6 +270,7 @@ class USXBookProcessor: USXContentProcessor
 					{
 						try handleSingleMatches(singleMatches)
 						
+						// TODO: Delete whole path here
 						// In case some existing paragraphs were left unmatched, removes them
 						try unmatchedExisting.forEach { try $0.delete() }
 						// And if some paragraphs were introduced, inserts them

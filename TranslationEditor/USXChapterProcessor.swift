@@ -16,19 +16,18 @@ class USXChapterProcessor: USXContentProcessor
 	
 	// ATTRIBUTES	---------
 	
+	private let userId: String
 	private let bookId: String
 	private let chapterIndex: Int
 	
 	private var sectionIndex = 0
-	private var paragraphIndex = 0
-	
-	private var sectionProcessor: USXSectionProcessor?
 	
 	
 	// INIT	-----------------
 	
-	init(bookId: String, index: Int)
+	init(userId: String, bookId: String, index: Int)
 	{
+		self.userId = userId
 		self.bookId = bookId
 		self.chapterIndex = index
 	}
@@ -36,10 +35,10 @@ class USXChapterProcessor: USXContentProcessor
 	// Creates a new USX parser for chapter contents
 	// The parser should start after a chapter element
 	// the parser will stop at the next chapter element (or at next book / end of usx)
-	static func createChapterParser(caller: XMLParserDelegate, bookId: String, index: Int, targetPointer: UnsafeMutablePointer<[Chapter]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Chapter, Section>
+	static func createChapterParser(caller: XMLParserDelegate, userId: String, bookId: String, index: Int, targetPointer: UnsafeMutablePointer<[Chapter]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Chapter, Section>
 	{
 		let parser = USXContentParser<Chapter, Section>(caller: caller, containingElement: .usx, lowestBreakMarker: .chapter, targetPointer: targetPointer, using: errorHandler)
-		parser.processor = AnyUSXContentProcessor(USXChapterProcessor(bookId: bookId, index: index))
+		parser.processor = AnyUSXContentProcessor(USXChapterProcessor(userId: userId, bookId: bookId, index: index))
 		
 		return parser
 	}
@@ -52,17 +51,10 @@ class USXChapterProcessor: USXContentProcessor
 		// Delegates all para element parsing to section parsers
 		if elementName == USXContainerElement.para.rawValue
 		{
-			// Counts the paragraphs parsed by the last processor
-			if let lastProcessor = sectionProcessor
-			{
-				paragraphIndex = lastProcessor.paragraphIndex
-			}
-			
 			sectionIndex += 1
 			
 			// Creates the new processor and parser
-			sectionProcessor = USXSectionProcessor(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, lastParagraphIndex: paragraphIndex)
-			return (USXSectionProcessor.createSectionParser(caller: caller, processor: sectionProcessor!, targetPointer: targetPointer, using: errorHandler), true)
+			return (USXSectionProcessor.createSectionParser(caller: caller, userId: userId, bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, targetPointer: targetPointer, using: errorHandler), true)
 		}
 		else
 		{

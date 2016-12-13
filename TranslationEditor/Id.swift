@@ -57,6 +57,33 @@ struct Id
 		
 		return PropertyValue.empty
 	}
+	
+	
+	// OTHER	-----------
+	
+	// Shortens a string id by the specified amount of parts
+	// For example, "a/b/c/d" shortened by 2 is "a/b"
+	static func shorten(_ idString: String, by n: Int = 1) -> String
+	{
+		if n <= 0
+		{
+			return idString
+		}
+		else
+		{
+			let components = idString.components(separatedBy: ID_SEPARATOR).dropLast(n)
+			if components.isEmpty
+			{
+				return ""
+			}
+			else
+			{
+				var s = components.first!
+				components.dropFirst().forEach { s += ID_SEPARATOR + $0 }
+				return s
+			}
+		}
+	}
 }
 
 func max(_ left: IdIndex, _ right: IdIndex) -> IdIndex

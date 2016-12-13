@@ -60,7 +60,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		if let book = try! Book.fromQuery(BookView.instance.createQuery(languageId: language.idString, code: "GAL", identifier: nil))
 		{
 			self.book = book
-			let query = ParagraphView.instance.createQuery(bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil).asLive()
+			let query = ParagraphView.instance.latestParagraphQuery(bookId: book.idString).asLive()
 			translationQueryManager = LiveQueryManager<Paragraph>(query: query)
 			translationQueryManager?.addListener(AnyLiveQueryListener(self))
 		}

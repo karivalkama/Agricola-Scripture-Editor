@@ -32,38 +32,83 @@ final class ParagraphView: View
 		{
 			(paragraph, emit) in
 			
-			// Key = Book id + chapter index + section index + paragraph index
-			let key = [paragraph.bookId, paragraph.chapterIndex, paragraph.sectionIndex, paragraph.index] as [Any]
+			// Key = is deprecated + is latest version + bookid + chapter index + section index + paragraph index + created
+			let key = [paragraph.isDeprecated, paragraph.isMostRecent, paragraph.bookId, paragraph.chapterIndex, paragraph.sectionIndex, paragraph.index, paragraph.created] as [Any]
+			
 			emit(key, nil)
 			
-		}, version: "1")
+		}, reduce:
+		{
+			(_, values, rereduce) in
+			
+			// Simply counts the rows
+			if rereduce
+			{
+				if let values = values as? [Int]
+				{
+					var total = 0
+					values.forEach { total += $0 }
+					return total
+				}
+				else
+				{
+					return 0
+				}
+			}
+			else
+			{
+				return values.count
+			}
+			
+		}, version: "3")
 	}
 	
 	
 	// OTHER METHODS	--
 	
-	func createQuery(bookId: String?, chapterIndex: Int?, sectionIndex: Int?, paragraphIndex: Int?) -> CBLQuery
+	func latestParagraphQuery(bookId: String, chapterIndex: Int) -> CBLQuery
 	{
-		return createQuery(forKeys: [bookId, chapterIndex, sectionIndex, paragraphIndex])
+		return latestParagraphQuery(bookId: bookId, firstChapter: chapterIndex, lastChapter: chapterIndex)
 	}
 	
-	func getChapterParagraphs(bookId: String, chapterIndex: Int) throws -> [Paragraph]
+	func latestParagraphQuery(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) -> CBLQuery
 	{
-		let query = createQuery(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: nil, paragraphIndex: nil)
-		return try ParagraphView.paragraphsFromQuery(query: query)
+		// Deprecated = false, latest version = true
+		// Section index, paragraph index and created unspecified
+		return createQuery(forKeys: [Key(false), Key(true), Key(bookId), Key(min: firstChapter, max: lastChapter), nil, nil, nil])
 	}
 	
-	static func paragraphsFromQuery(query: CBLQuery) throws -> [Paragraph]
+	func conflictsInRange(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) throws -> [[Paragraph]]
 	{
-		var paragraphs = [Paragraph]()
+		let query = latestParagraphQuery(bookId: bookId, firstChapter: firstChapter, lastChapter: lastChapter)
 		
-		let result = try query.run()
-		while let rawRow = result.nextRow()
+		// Uses reduce & grouping to find row amount for each paragraph index
+		query.mapOnly = false
+		query.prefetch = false
+		query.groupLevel = 6
+		
+		var conflicts = [[Paragraph]]()
+		let results = try query.run()
+		while let row = results.nextRow()
 		{
-			let paragraphRow = try Row<Paragraph>(rawRow)
-			paragraphs.append(paragraphRow.object)
+			// A conflict is a index with more than one option for the latest paragraph
+			if row.value as! Int > 1
+			{
+				let bookId = row.key(at: 2)!
+				let chapterIndex = row.key(at: 3)!
+				let sectionIndex = row.key(at: 4)!
+				let paragraphIndex = row.key(at: 5)!
+				
+				// Retrieves the conflicting paragraphs from the database
+				let conflictQuery = createQuery(forKeys: [Key(false), Key(true), Key(bookId), Key(chapterIndex), Key(sectionIndex), Key(paragraphIndex), nil])
+				let paragraphs = try Paragraph.arrayFromQuery(conflictQuery)
+				if paragraphs.count > 1
+				{
+					conflicts.append(paragraphs)
+				}
+			}
 		}
 		
-		return paragraphs
+		return conflicts
 	}
 }

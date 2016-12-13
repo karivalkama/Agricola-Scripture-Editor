@@ -331,6 +331,11 @@ struct PropertyValue: CustomStringConvertible
 		}
 	}
 	
+	func time(or defaultTime: TimeInterval = Date().timeIntervalSince1970) -> TimeInterval
+	{
+		return double(or: defaultTime)
+	}
+	
 	func bool(or defaultBool: Bool = false) -> Bool
 	{
 		if let bool = bool

@@ -44,7 +44,7 @@ final class CommitView: View
 	
 	func createQuery(paragraphId: String?, created: Double? = nil, descending: Bool = false) -> CBLQuery
 	{
-		return createQuery(forKeys: [paragraphId, created], descending: descending)
+		return createQuery(forKeys: [Key(paragraphId), Key(created)], descending: descending)
 	}
 	
 	func lastCommit(of paragraphId: String) throws -> Commit?

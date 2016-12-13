@@ -9,11 +9,11 @@
 import Foundation
 
 // This class is able to parse through all of usx data, creating a set of books
-@available (*, deprecated)
 class USXParser: NSObject, XMLParserDelegate
 {
 	// ATTRIBUTES	-----------
 	
+	private let userId: String
 	private let languageId: String
 	private let findReplacedBook: FindBook
 	private let matchParagraphs: MatchParagraphs
@@ -32,8 +32,9 @@ class USXParser: NSObject, XMLParserDelegate
 	// INIT	-------------------
 	
 	// Language id + code + identifier -> Book to replace / update
-	init(languageId: String, findReplacedBook: @escaping FindBook, matchParagraphs: @escaping MatchParagraphs)
+	init(userId: String, languageId: String, findReplacedBook: @escaping FindBook, matchParagraphs: @escaping MatchParagraphs)
 	{
+		self.userId = userId
 		self.languageId = languageId
 		self.findReplacedBook = findReplacedBook
 		self.matchParagraphs = matchParagraphs
@@ -51,7 +52,7 @@ class USXParser: NSObject, XMLParserDelegate
 			if let code = attributeDict["code"]
 			{
 				// Delegates parsing to book parser
-				contentParser = USXBookProcessor.createBookParser(caller: self, languageId: languageId, bookCode: code, findReplacedBook: findReplacedBook, matchParagraphs: matchParagraphs, targetPointer: &parsedBooks, using: parsingFailed)
+				contentParser = USXBookProcessor.createBookParser(caller: self, userId: userId, languageId: languageId, bookCode: code, findReplacedBook: findReplacedBook, matchParagraphs: matchParagraphs, targetPointer: &parsedBooks, using: parsingFailed)
 				parser.delegate = contentParser
 			}
 			else

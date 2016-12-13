@@ -46,6 +46,6 @@ final class ParagraphEditView: View
 	// Creates a query that can be used for retrieving paragraph edit data
 	func createQuery(userId: String?, bookId: String?, chapterIndex: Int?, sectionIndex: Int?, paragraphIndex: Int?, created: Double? = nil, descending: Bool = false) -> CBLQuery
 	{
-		return createQuery(forKeys: [userId, bookId, chapterIndex, paragraphIndex, created], descending: descending)
+		return createQuery(forKeys: [Key(userId), Key(bookId), Key(chapterIndex), Key(paragraphIndex), Key(created)], descending: descending)
 	}
 }

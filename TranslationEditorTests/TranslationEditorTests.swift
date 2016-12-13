@@ -46,7 +46,7 @@ class TranslationEditorTests: XCTestCase
 		let language = Language(name: "English")
 		let book = Book(code: "GAL", identifier: "English: This and This Translation", languageId: language.idString)
 		
-		let paragraph = Paragraph(bookId: book.idString, chapterIndex: 1, sectionIndex: 1, index: 1, content: [])
+		let paragraph = Paragraph(bookId: book.idString, chapterIndex: 1, sectionIndex: 1, index: 1, content: [], creatorId: "testuserid")
 		
 		assert(paragraph.bookCode == "GAL")
 		
@@ -222,7 +222,7 @@ class TranslationEditorTests: XCTestCase
 		
 		// Creates the parser first
 		let parser = XMLParser(contentsOf: url)!
-		let usxParserDelegate = USXParser(languageId: language.idString, findReplacedBook: findBook, matchParagraphs: paragraphMatcher)
+		let usxParserDelegate = USXParser(userId: "testuserid", languageId: language.idString, findReplacedBook: findBook, matchParagraphs: paragraphMatcher)
 		parser.delegate = usxParserDelegate
 		
 		// Parses the xml

@@ -59,7 +59,9 @@ extension View
 	{
 		let query = view.createQuery()
 		query.descending = descending
+		
 		query.prefetch = true
+		query.mapOnly = true
 		
 		return query
 	}
@@ -68,38 +70,60 @@ extension View
 	// The keys that are specified (not nil) are required of the returned rows
 	// If there is a nil key, that means that any value is accepted for that key. That also means that the following keys won't be tested at all since they are hierarchical
 	// The query is ascending by default
-	func createQuery(forKeys keys: [Any?], descending: Bool = false) -> CBLQuery
+	func createQuery(forKeys keys: [Key?], descending: Bool = false) -> CBLQuery
 	{
 		let query = createAllQuery(descending: descending)
+		
+		if keys.isEmpty
+		{
+			return query
+		}
 		
 		// If only a single key is used, doesn't use array format
 		if keys.count == 1
 		{
-			query.startKey = keys[0]
-			query.endKey = keys[0]
+			let first = keys.first!.or(Key.undefined)
+			let key = descending ? first.inverted : first
 			
+			if key.isDefined
+			{
+				query.startKey = key.min
+				query.endKey = key.max
+			}
+				
 			return query
 		}
 		
-		// A specified key limits the results to certain range. A nil value (end) is used to specify which keys can have any value
+		// A specified key limits the results to certain range. A nil value is used to specify which keys can have any value
 		var min = [Any]()
 		var max = [Any]()
 		
-		var allKeysSpecified = true
-		for key in keys
+		var lastSpecifiedIndex = -1
+		for i in 0 ..< keys.count
 		{
-			if let key = key
+			let key = keys[i].or(Key.undefined)
+			min.append(key.min)
+			max.append(key.max)
+			
+			if key.isDefined
 			{
-				min.append(key)
-				max.append(key)
+				lastSpecifiedIndex = i
 			}
-			else
+		}
+		
+		// If no keys were specified, uses a allQuery
+		if lastSpecifiedIndex < 0
+		{
+			return query
+		}
+		// May also drop a certain amount of unnecessary keys at the end
+		else
+		{
+			let unnecessaryKeys = keys.count - lastSpecifiedIndex - 2
+			if unnecessaryKeys > 0
 			{
-				min.append(NSNull())
-				max.append([:])
-				
-				allKeysSpecified = false
-				break
+				min = Array(min.dropLast(unnecessaryKeys))
+				max = Array(max.dropLast(unnecessaryKeys))
 			}
 		}
 		
@@ -116,8 +140,10 @@ extension View
 		}
 		
 		// If all keys have been specified, the query is inclusive, otherwise it is exclusive
+		/*
 		query.inclusiveStart = allKeysSpecified
 		query.inclusiveEnd = allKeysSpecified
+		*/
 		
 		return query
 	}
