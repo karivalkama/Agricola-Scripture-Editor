@@ -32,7 +32,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	
 	// paragraph data modified, but not committed by user
 	// Key = paragraph id
-	private var inputData = [String : NSAttributedString]()
+	private var inputData = [String : EditState]()
 	private var active = false
 	
 	// The live query used for retrieving translation data
@@ -102,9 +102,10 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		let paragraph = currentData[indexPath.row]
 		
 		var stringContents: NSAttributedString!
-		if let inputVersion = inputData[paragraph.idString]
+		if let inputState = inputData[paragraph.idString]
 		{
-			stringContents = inputVersion
+			stringContents = inputState.text
+			// TODO: Set cell state to conflicted if necessary
 		}
 		else
 		{
@@ -136,7 +137,8 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	
 	func cellContentChanged(id: String, newContent: NSAttributedString)
 	{
-		inputData[id] = newContent
+		let wasConflict = (inputData[id]?.isConflict).or(false)
+		inputData[id] = EditState(text: newContent, isConflict: wasConflict)
 		
 		// Resets cell height
 		translationTableView.beginUpdates()
@@ -159,11 +161,21 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	
 	// OTHER	---------------------
 	
-	private func commit()
+	private func commit() throws
 	{
-		// TODO: Prompt the user to handle edit conflicts
-		// Makes changes to the actual paragraphs (where edited)
-		// And saves new commits
+		for (paragraphId, editState) in inputData
+		{
+			if let paragraph = try Paragraph.get(paragraphId)
+			{
+				// TODO: Prompt the user to handle edit conflicts
+				// Makes changes to the actual paragraphs (where edited)
+				paragraph.replaceContents(with: editState.text)
+				try paragraph.push()
+				
+				// And saves new commits
+				// TODO: Change paragraph model structure to use versioning instead of mutable instances
+			}
+		}
 	}
 	
 	private func activate()
@@ -185,7 +197,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 				{
 					print("STATUS: '\(edit.paragraph.text)'")
 					
-					inputData[edit.targetId] = edit.paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
+					inputData[edit.targetId] = EditState(text: edit.paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false]), isConflict: edit.isConflict)
 				}
 			}
 			
@@ -211,15 +223,15 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 				let paragraphEdits = try! getParagraphEdits()
 				paragraphEdits.forEach { try? $0.delete() }
 				
-				for (paragraphId, attString) in inputData
+				for (paragraphId, editState) in inputData
 				{
 					if let paragraph = try Paragraph.get(paragraphId)
 					{
 						print("STATUS: SAVING PARAGRAPH EDIT")
 						
-						paragraph.replaceContents(with: attString)
+						paragraph.replaceContents(with: editState.text)
 						
-						let edit = ParagraphEdit(userId: userId, paragraph: paragraph)
+						let edit = ParagraphEdit(userId: userId, paragraph: paragraph, isConflict: editState.isConflict)
 						
 						print("STATUS: SAVED EDIT: \(edit.toPropertySet)")
 						
@@ -243,59 +255,6 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		return try ParagraphEdit.arrayFromQuery(ParagraphEditView.instance.createQuery(userId: userId, bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil))
 	}
 	
-	
-	//@available (*, deprecated)
-	/*
-	private func readTestDataFromUSX()
-	{
-		guard let url = Bundle.main.url(forResource: "GAL", withExtension: "usx")
-			else
-		{
-			fatalError("Couldn't find url")
-		}
-		
-		// Creates the parser first
-		let parser = XMLParser(contentsOf: url)!
-		let usxParserDelegate = USXParser()
-		parser.delegate = usxParserDelegate
-		
-		// Parses the xml
-		parser.parse()
-		
-		// Reads the data from the book(s)
-		testContent = []
-		for book in usxParserDelegate.parsedBooks
-		{
-			testContent += book.toAttributedStringCollection(displayParagraphRanges: false)
-		}
-	}
-*/
-	
-	/*
-	private func generateTestData()
-	{
-		let testString = "The first verse is here. #Followed by another.€A new paragraph starts. #asldkalsk dlka #asdjkkaj a#jasdkjadkj€ASdkkddkkdslkskd#asjddjddd€asdjdjdj"
-		var paragraphs = [Para]()
-		
-		var index = 0
-		for paraText in testString.components(separatedBy: "€")
-		{
-			index += 1
-			
-			var verses = [Verse]()
-			for verseText in paraText.components(separatedBy: "#")
-			{
-				let start = VerseIndex(index)
-				let end = VerseIndex(index + 1)
-				verses.append(Verse(range: VerseRange(start, end), content: verseText))
-				index += 1
-			}
-			
-			paragraphs.append(Para(content: verses))
-		}
-		
-		testContent = paragraphs
-	}*/
 }
 
 

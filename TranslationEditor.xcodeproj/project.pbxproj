@@ -120,6 +120,12 @@
 		7C4A4FE41DFE7C87009F890E /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FE31DFE7C87009F890E /* UIUtilities.swift */; };
 		7C4A4FE51DFE7C87009F890E /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FE31DFE7C87009F890E /* UIUtilities.swift */; };
 		7C4A4FE61DFE7C87009F890E /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FE31DFE7C87009F890E /* UIUtilities.swift */; };
+		7C4A4FEC1DFED73D009F890E /* EditState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FEB1DFED73D009F890E /* EditState.swift */; };
+		7C4A4FED1DFED73D009F890E /* EditState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FEB1DFED73D009F890E /* EditState.swift */; };
+		7C4A4FEE1DFED73D009F890E /* EditState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FEB1DFED73D009F890E /* EditState.swift */; };
+		7C4A4FF01DFEDA59009F890E /* OptionalUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FEF1DFEDA59009F890E /* OptionalUtils.swift */; };
+		7C4A4FF11DFEDA59009F890E /* OptionalUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FEF1DFEDA59009F890E /* OptionalUtils.swift */; };
+		7C4A4FF21DFEDA59009F890E /* OptionalUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FEF1DFEDA59009F890E /* OptionalUtils.swift */; };
 		7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1741DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1751DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
@@ -293,6 +299,8 @@
 		7C4A4FD71DFAE0AA009F890E /* BasicButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicButton.swift; sourceTree = "<group>"; };
 		7C4A4FDB1DFAE273009F890E /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		7C4A4FE31DFE7C87009F890E /* UIUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
+		7C4A4FEB1DFED73D009F890E /* EditState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditState.swift; sourceTree = "<group>"; };
+		7C4A4FEF1DFEDA59009F890E /* OptionalUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalUtils.swift; sourceTree = "<group>"; };
 		7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXMarkerElement.swift; sourceTree = "<group>"; };
 		7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXContainerElement.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -486,6 +494,7 @@
 				7C4A4FB11DF95FE3009F890E /* ParagraphEdit.swift */,
 				7C4A4FC71DFACAF5009F890E /* Commit.swift */,
 				7C4A4FCB1DFACC58009F890E /* Copyable.swift */,
+				7C4A4FEB1DFED73D009F890E /* EditState.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -500,6 +509,7 @@
 				7CCC01331DA7964000F0562E /* XmlParserUtil.swift */,
 				7C4A4FC31DFAB0AA009F890E /* ColorUtilities.swift */,
 				7C4A4FE31DFE7C87009F890E /* UIUtilities.swift */,
+				7C4A4FEF1DFEDA59009F890E /* OptionalUtils.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -882,6 +892,7 @@
 				7C4A4FAE1DF93B75009F890E /* AnyLiveQueryListener.swift in Sources */,
 				7C20D7EC1D8C1B7200E84BA5 /* CellContentListener.swift in Sources */,
 				7C20D7FC1D9A87F500E84BA5 /* Verse.swift in Sources */,
+				7C4A4FF01DFEDA59009F890E /* OptionalUtils.swift in Sources */,
 				7CAF6D861DB4F9AA00E10597 /* USXBookProcessor.swift in Sources */,
 				7CCC01441DAB7B0000F0562E /* USXParagraphProcessor.swift in Sources */,
 				7CCC01281DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */,
@@ -925,6 +936,7 @@
 				7C20D7FF1D9A93AA00E84BA5 /* StringUtilities.swift in Sources */,
 				7C4A4F971DEF0CDE009F890E /* LanguageView.swift in Sources */,
 				7CCC01071DA3C1C800F0562E /* USXStyle.swift in Sources */,
+				7C4A4FEC1DFED73D009F890E /* EditState.swift in Sources */,
 				7C4A4F871DEEC0A6009F890E /* RowParseError.swift in Sources */,
 				7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */,
 				7C4A4FB21DF95FE3009F890E /* ParagraphEdit.swift in Sources */,
@@ -991,6 +1003,7 @@
 				7C82CE8F1DE6E29500C054EB /* PropertyValue.swift in Sources */,
 				7CCC01211DA646FA00F0562E /* USXContentParser.swift in Sources */,
 				7C4A4FE51DFE7C87009F890E /* UIUtilities.swift in Sources */,
+				7C4A4FED1DFED73D009F890E /* EditState.swift in Sources */,
 				7CCC013D1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
 				7C82CE8B1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
 				7C4A4F841DEEBAF2009F890E /* Row.swift in Sources */,
@@ -1002,6 +1015,7 @@
 				7C4A4F881DEEC0A6009F890E /* RowParseError.swift in Sources */,
 				7CCC00FB1D9D39FA00F0562E /* CharData.swift in Sources */,
 				7C4A4FB31DF95FE3009F890E /* ParagraphEdit.swift in Sources */,
+				7C4A4FF11DFEDA59009F890E /* OptionalUtils.swift in Sources */,
 				7C40DF711DEC6AB00035B92E /* Id.swift in Sources */,
 				7C4A4F901DEEF891009F890E /* ParagraphView.swift in Sources */,
 			);
@@ -1064,6 +1078,7 @@
 				7C82CE901DE6E29500C054EB /* PropertyValue.swift in Sources */,
 				7CCC01221DA646FA00F0562E /* USXContentParser.swift in Sources */,
 				7C4A4FE61DFE7C87009F890E /* UIUtilities.swift in Sources */,
+				7C4A4FEE1DFED73D009F890E /* EditState.swift in Sources */,
 				7CCC013E1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
 				7C82CE8C1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
 				7C4A4F851DEEBAF2009F890E /* Row.swift in Sources */,
@@ -1075,6 +1090,7 @@
 				7C4A4F891DEEC0A6009F890E /* RowParseError.swift in Sources */,
 				7CCC00FC1D9D39FA00F0562E /* CharData.swift in Sources */,
 				7C4A4FB41DF95FE3009F890E /* ParagraphEdit.swift in Sources */,
+				7C4A4FF21DFEDA59009F890E /* OptionalUtils.swift in Sources */,
 				7C40DF721DEC6AB00035B92E /* Id.swift in Sources */,
 				7C4A4F911DEEF891009F890E /* ParagraphView.swift in Sources */,
 			);
