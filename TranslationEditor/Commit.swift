@@ -9,6 +9,7 @@
 import Foundation
 
 // A commit is a saved version of a paragraph
+@available(*, deprecated)
 final class Commit: Storable
 {
 	// PROPERTIES	---------

@@ -487,22 +487,9 @@
 			isa = PBXGroup;
 			children = (
 				7C40DF6A1DEC547F0035B92E /* OldVersion */,
-				7C82CE881DE6E1C200C054EB /* Abstract */,
-				7CCC00F11D9D1B4E00F0562E /* AttributedStringConvertible.swift */,
-				7CCC01271DA6501600F0562E /* PotentialVerseRangeable.swift */,
-				7C20D7F71D9A672800E84BA5 /* VerseIndex.swift */,
-				7C20D7F91D9A768700E84BA5 /* VerseRange.swift */,
-				7CCC00EB1D9D067C00F0562E /* CharData.swift */,
-				7C20D7FB1D9A87F500E84BA5 /* Verse.swift */,
-				7C20D7E71D8BF9B100E84BA5 /* Para.swift */,
-				7C40DF771DED6C530035B92E /* Paragraph.swift */,
-				7C40DF6B1DEC59AB0035B92E /* Book.swift */,
-				7C40DF7B1DED9FB90035B92E /* Language.swift */,
-				7CCC01061DA3C1C700F0562E /* USXStyle.swift */,
-				7C4A4FB11DF95FE3009F890E /* ParagraphEdit.swift */,
-				7C4A4FC71DFACAF5009F890E /* Commit.swift */,
+				7C82CE881DE6E1C200C054EB /* Database */,
+				7C4A4FFE1E01685C009F890E /* Translation */,
 				7C4A4FCB1DFACC58009F890E /* Copyable.swift */,
-				7C4A4FEB1DFED73D009F890E /* EditState.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -511,13 +498,8 @@
 			isa = PBXGroup;
 			children = (
 				7C4A4FA01DF595B6009F890E /* Globals */,
+				7C4A4FFC1E01677E009F890E /* Extensions */,
 				7C4A4F9F1DF59594009F890E /* Errors */,
-				7C20D7FE1D9A93AA00E84BA5 /* StringUtilities.swift */,
-				7CCC00ED1D9D193F00F0562E /* CollectionUtilities.swift */,
-				7CCC01331DA7964000F0562E /* XmlParserUtil.swift */,
-				7C4A4FC31DFAB0AA009F890E /* ColorUtilities.swift */,
-				7C4A4FE31DFE7C87009F890E /* UIUtilities.swift */,
-				7C4A4FEF1DFEDA59009F890E /* OptionalUtils.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -525,6 +507,7 @@
 		7C40DF6A1DEC547F0035B92E /* OldVersion */ = {
 			isa = PBXGroup;
 			children = (
+				7C4A4FC71DFACAF5009F890E /* Commit.swift */,
 				7CCC012F1DA67B0E00F0562E /* BookPrev.swift */,
 				7CCC012B1DA6714B00F0562E /* ChapterPrev.swift */,
 				7CCC01231DA64A1A00F0562E /* SectionPrev.swift */,
@@ -578,38 +561,79 @@
 			name = Database;
 			sourceTree = "<group>";
 		};
+		7C4A4FFC1E01677E009F890E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7C20D7FE1D9A93AA00E84BA5 /* StringUtilities.swift */,
+				7CCC00ED1D9D193F00F0562E /* CollectionUtilities.swift */,
+				7C4A4FE31DFE7C87009F890E /* UIUtilities.swift */,
+				7C4A4FEF1DFEDA59009F890E /* OptionalUtils.swift */,
+				7C4A4FC31DFAB0AA009F890E /* ColorUtilities.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		7C4A4FFD1E01681F009F890E /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				7C40DF621DEC14C80035B92E /* JSONConvertible.swift */,
+				7C40DF5A1DE718DA0035B92E /* Storable.swift */,
+				7C82CE891DE6E1EA00C054EB /* PropertySet.swift */,
+				7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */,
+				7C40DF6F1DEC6AB00035B92E /* Id.swift */,
+			);
+			name = Documents;
+			sourceTree = "<group>";
+		};
+		7C4A4FFE1E01685C009F890E /* Translation */ = {
+			isa = PBXGroup;
+			children = (
+				7CCC01271DA6501600F0562E /* PotentialVerseRangeable.swift */,
+				7CCC00F11D9D1B4E00F0562E /* AttributedStringConvertible.swift */,
+				7CCC01061DA3C1C700F0562E /* USXStyle.swift */,
+				7CCC00EB1D9D067C00F0562E /* CharData.swift */,
+				7C20D7F71D9A672800E84BA5 /* VerseIndex.swift */,
+				7C20D7F91D9A768700E84BA5 /* VerseRange.swift */,
+				7C20D7FB1D9A87F500E84BA5 /* Verse.swift */,
+				7C20D7E71D8BF9B100E84BA5 /* Para.swift */,
+				7C40DF771DED6C530035B92E /* Paragraph.swift */,
+				7C4A4FB11DF95FE3009F890E /* ParagraphEdit.swift */,
+				7C4A4FEB1DFED73D009F890E /* EditState.swift */,
+				7C40DF6B1DEC59AB0035B92E /* Book.swift */,
+				7C40DF7B1DED9FB90035B92E /* Language.swift */,
+			);
+			name = Translation;
+			sourceTree = "<group>";
+		};
 		7C4CC1711DB0ED6200BCF24B /* USXParsing */ = {
 			isa = PBXGroup;
 			children = (
+				7CCC01331DA7964000F0562E /* XmlParserUtil.swift */,
 				7CCC011F1DA646F900F0562E /* USXContentParser.swift */,
-				7CCC01371DA7B45A00F0562E /* USXCharParser.swift */,
-				7CCC013F1DA7D12800F0562E /* USXParaProcessor.swift */,
-				7CCC01431DAB7B0000F0562E /* USXParagraphProcessor.swift */,
+				7CAF6D891DB5F5FB00E10597 /* USXParser.swift */,
+				7CAF6D851DB4F9AA00E10597 /* USXBookProcessor.swift */,
+				7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */,
 				7CCC01471DAB88AE00F0562E /* USXSectionProcessor.swift */,
+				7CCC01431DAB7B0000F0562E /* USXParagraphProcessor.swift */,
+				7CCC013F1DA7D12800F0562E /* USXParaProcessor.swift */,
+				7CD8EA611DB62BFD00364B70 /* USXVerseProcessor.swift */,
+				7CCC01371DA7B45A00F0562E /* USXCharParser.swift */,
 				7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */,
 				7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */,
-				7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */,
-				7CAF6D851DB4F9AA00E10597 /* USXBookProcessor.swift */,
-				7CAF6D891DB5F5FB00E10597 /* USXParser.swift */,
-				7CD8EA611DB62BFD00364B70 /* USXVerseProcessor.swift */,
 			);
 			name = USXParsing;
 			sourceTree = "<group>";
 		};
-		7C82CE881DE6E1C200C054EB /* Abstract */ = {
+		7C82CE881DE6E1C200C054EB /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				7C82CE891DE6E1EA00C054EB /* PropertySet.swift */,
+				7C4A4FFD1E01681F009F890E /* Documents */,
 				7C4A4F821DEEBAF2009F890E /* Row.swift */,
-				7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */,
-				7C40DF5A1DE718DA0035B92E /* Storable.swift */,
-				7C40DF621DEC14C80035B92E /* JSONConvertible.swift */,
-				7C40DF6F1DEC6AB00035B92E /* Id.swift */,
 				7C4A4FA51DF835E1009F890E /* LiveQueryManager.swift */,
 				7C4A4FA91DF836F1009F890E /* LiveQueryListener.swift */,
 				7C4A4FAD1DF93B75009F890E /* AnyLiveQueryListener.swift */,
 			);
-			name = Abstract;
+			name = Database;
 			sourceTree = "<group>";
 		};
 		7CD8EA581DB60C4800364B70 /* TestResources */ = {
