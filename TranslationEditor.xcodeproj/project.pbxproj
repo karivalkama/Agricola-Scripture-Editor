@@ -129,6 +129,9 @@
 		7C4A4FF41E00105B009F890E /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FF31E00105B009F890E /* Key.swift */; };
 		7C4A4FF51E00105B009F890E /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FF31E00105B009F890E /* Key.swift */; };
 		7C4A4FF61E00105B009F890E /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FF31E00105B009F890E /* Key.swift */; };
+		7C4A4FF91E012375009F890E /* ConflictResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FF81E012375009F890E /* ConflictResolver.swift */; };
+		7C4A4FFA1E012375009F890E /* ConflictResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FF81E012375009F890E /* ConflictResolver.swift */; };
+		7C4A4FFB1E012375009F890E /* ConflictResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A4FF81E012375009F890E /* ConflictResolver.swift */; };
 		7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1741DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1751DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
@@ -305,6 +308,7 @@
 		7C4A4FEB1DFED73D009F890E /* EditState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditState.swift; sourceTree = "<group>"; };
 		7C4A4FEF1DFEDA59009F890E /* OptionalUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalUtils.swift; sourceTree = "<group>"; };
 		7C4A4FF31E00105B009F890E /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		7C4A4FF81E012375009F890E /* ConflictResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConflictResolver.swift; sourceTree = "<group>"; };
 		7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXMarkerElement.swift; sourceTree = "<group>"; };
 		7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXContainerElement.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -469,7 +473,7 @@
 		7C20D7E11D8BF89200E84BA5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				7C4A4F9E1DF594FB009F890E /* DatabaseViews */,
+				7C4A4FF71E012328009F890E /* Database */,
 				7C4CC1711DB0ED6200BCF24B /* USXParsing */,
 				7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */,
 				7C20D7EB1D8C1B7200E84BA5 /* CellContentListener.swift */,
@@ -529,7 +533,7 @@
 			name = OldVersion;
 			sourceTree = "<group>";
 		};
-		7C4A4F9E1DF594FB009F890E /* DatabaseViews */ = {
+		7C4A4F9E1DF594FB009F890E /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				7C4A4F8A1DEEC4BD009F890E /* View.swift */,
@@ -540,7 +544,7 @@
 				7C4A4FCF1DFADA4A009F890E /* CommitView.swift */,
 				7C4A4FF31E00105B009F890E /* Key.swift */,
 			);
-			name = DatabaseViews;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		7C4A4F9F1DF59594009F890E /* Errors */ = {
@@ -563,6 +567,15 @@
 				7C4A4FBF1DFAA60E009F890E /* Colours.swift */,
 			);
 			name = Globals;
+			sourceTree = "<group>";
+		};
+		7C4A4FF71E012328009F890E /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				7C4A4F9E1DF594FB009F890E /* Views */,
+				7C4A4FF81E012375009F890E /* ConflictResolver.swift */,
+			);
+			name = Database;
 			sourceTree = "<group>";
 		};
 		7C4CC1711DB0ED6200BCF24B /* USXParsing */ = {
@@ -898,6 +911,7 @@
 				7C20D7EC1D8C1B7200E84BA5 /* CellContentListener.swift in Sources */,
 				7C20D7FC1D9A87F500E84BA5 /* Verse.swift in Sources */,
 				7C4A4FF01DFEDA59009F890E /* OptionalUtils.swift in Sources */,
+				7C4A4FF91E012375009F890E /* ConflictResolver.swift in Sources */,
 				7CAF6D861DB4F9AA00E10597 /* USXBookProcessor.swift in Sources */,
 				7CCC01441DAB7B0000F0562E /* USXParagraphProcessor.swift in Sources */,
 				7CCC01281DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */,
@@ -999,6 +1013,7 @@
 				7C4CC1781DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7C4A4FF51E00105B009F890E /* Key.swift in Sources */,
 				7CCC00F91D9D369100F0562E /* VerseRange.swift in Sources */,
+				7C4A4FFA1E012375009F890E /* ConflictResolver.swift in Sources */,
 				7C4A4FA31DF829C5009F890E /* CellInputListener.swift in Sources */,
 				7C40DF5C1DE718DA0035B92E /* Storable.swift in Sources */,
 				7C4A4F8C1DEEC4BD009F890E /* View.swift in Sources */,
@@ -1075,6 +1090,7 @@
 				7C4CC1791DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7C4A4FF61E00105B009F890E /* Key.swift in Sources */,
 				7CCC00FA1D9D369100F0562E /* VerseRange.swift in Sources */,
+				7C4A4FFB1E012375009F890E /* ConflictResolver.swift in Sources */,
 				7C4A4FA41DF829C5009F890E /* CellInputListener.swift in Sources */,
 				7C40DF5D1DE718DA0035B92E /* Storable.swift in Sources */,
 				7C4A4F8D1DEEC4BD009F890E /* View.swift in Sources */,

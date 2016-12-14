@@ -18,12 +18,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		// Override point for customization after application launch.
 		// TODO: Setup database and start replication process
 		
+		// Updates navigation bar visuals
 		let navigationBarAppearance = UINavigationBar.appearance()
 		let barTheme = Themes.Primary.secondary
 		
 		navigationBarAppearance.tintColor = barTheme.textColour
 		navigationBarAppearance.barTintColor = barTheme.colour
 		navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName : barTheme.textColour]
+		
+		// Sets up the conflict handler
+		ConflictResolver.instance.addMerger(
+		{
+			idString, conflicts in
+			
+			let id = Paragraph.createId(from: idString)
+			let paragraphs = try conflicts.map { try Paragraph.create(from: $0, withId: id) }
+			
+			// If any of the paragraphs is the most recent, the merged is too
+			let isMostRecent = paragraphs.contains(where: { $0.isMostRecent })
+			
+			// If any of the paragraphs is not deprecated, the merged isn't either
+			let isDeprecated = paragraphs.forAll { $0.isDeprecated }
+			
+			// Other properties should stay the same (taken from the first paragraph)
+			let merged = paragraphs.first!
+			merged.isDeprecated = isDeprecated
+			merged.isMostRecent = isMostRecent
+			
+			return merged.toPropertySet
+		},
+		forType: Paragraph.type)
 		
 		return true
 	}

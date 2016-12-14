@@ -73,3 +73,24 @@ extension Dictionary
 		return combined
 	}
 }
+
+extension NSDictionary
+{
+	// Converts this dictionary into a swift dictionary
+	// Only string keys are recognised
+	// Keys with null values are also not included in the returned dictionary
+	var toDict: [String : Any]
+	{
+		var dict = [String : Any]()
+		
+		for (key, value) in self
+		{
+			if let key = key as? String, !(value is NSNull)
+			{
+				dict[key] = value
+			}
+		}
+		
+		return dict
+	}
+}

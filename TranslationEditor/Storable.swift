@@ -22,6 +22,7 @@ protocol Storable: JSONConvertible
 	static var idIndexMap : [String : IdIndex] {get}
 	
 	// The type of this storable instance. Should be stored as a property, always
+	// TODO: Modify the toPropertySet to include this
 	static var type: String {get}
 	
 	// Updates the object's state based on the provided properties

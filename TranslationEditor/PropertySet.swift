@@ -111,6 +111,25 @@ struct PropertySet: CustomStringConvertible
 	
 	// OTHER METHODS	------
 	
+	// Creates a new property set with one value appended
+	static func +(_ set: PropertySet, _ property: (String, PropertyValue)) -> PropertySet
+	{
+		var newSet = set
+		newSet[property.0] = property.1
+		
+		return newSet
+	}
+	
+	// Combines two property sets together to form a single larger set.
+	// The properties of the left set will be overwritten by right side properties where they have the same name
+	static func +(_ left: PropertySet, _ right: PropertySet) -> PropertySet
+	{
+		return PropertySet(left.properties + right.properties)
+	}
+	
+	
+	// OTHER METHODS	------
+	
 	func contains(propertyWithName propertyName: String) -> Bool
 	{
 		return self[propertyName].isDefined

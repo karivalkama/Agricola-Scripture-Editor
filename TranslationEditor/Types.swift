@@ -24,3 +24,8 @@ typealias FindBook = (String, String, String) -> Book?
 // Returns nil if the matching couldn't be done
 // The left side is always an existing paragraph, while the right side is always a new paragraph
 typealias MatchParagraphs = ([Paragraph], [Paragraph]) -> [(Paragraph, Paragraph)]?
+
+// This function merges the properties of multiple conflicting revisions into a single revision
+// Input: Document id string, Conflicting revision properties
+// Output: Merged revision properties
+typealias Merge = (String, [PropertySet]) throws -> PropertySet
