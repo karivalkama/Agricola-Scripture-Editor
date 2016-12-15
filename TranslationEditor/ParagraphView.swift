@@ -18,6 +18,16 @@ final class ParagraphView: View
 	
 	// ATTRIBUTES	----
 	
+	static let KEY_DEPRECATED = "deprecated"
+	static let KEY_MOST_RECENT = "most_recent"
+	static let KEY_BOOK_ID = "book_id"
+	static let KEY_CHAPTER_INDEX = "chapter_index"
+	static let KEY_SECTION_INDEX = "section_index"
+	static let KEY_PARAGRAPH_INDEX = "paragraph_index"
+	static let KEY_CREATED = "created"
+	
+	static let keyNames = [KEY_DEPRECATED, KEY_MOST_RECENT, KEY_BOOK_ID, KEY_CHAPTER_INDEX, KEY_SECTION_INDEX, KEY_PARAGRAPH_INDEX, KEY_CREATED]
+	
 	static let instance = ParagraphView()
 	
 	let view: CBLView
@@ -37,30 +47,7 @@ final class ParagraphView: View
 			
 			emit(key, nil)
 			
-		}, reduce:
-		{
-			(_, values, rereduce) in
-			
-			// Simply counts the rows
-			if rereduce
-			{
-				if let values = values as? [Int]
-				{
-					var total = 0
-					values.forEach { total += $0 }
-					return total
-				}
-				else
-				{
-					return 0
-				}
-			}
-			else
-			{
-				return values.count
-			}
-			
-		}, version: "3")
+		}, reduce: countRowsReduce, version: "3")
 	}
 	
 	
@@ -73,9 +60,27 @@ final class ParagraphView: View
 	
 	func latestParagraphQuery(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) -> CBLQuery
 	{
-		// Deprecated = false, latest version = true
-		// Section index, paragraph index and created unspecified
-		return createQuery(forKeys: [Key(false), Key(true), Key(bookId), Key(min: firstChapter, max: lastChapter), nil, nil, nil])
+		let keys = [
+			ParagraphView.KEY_DEPRECATED : Key(false),
+			ParagraphView.KEY_MOST_RECENT : Key(true),
+			ParagraphView.KEY_BOOK_ID : Key(bookId),
+			ParagraphView.KEY_CHAPTER_INDEX : Key(min: firstChapter, max: lastChapter)
+		]
+		return createQuery(forKeys: keys)
+	}
+	
+	func paragraphIndexQuery(bookId: String, chapterIndex: Int, sectionIndex: Int, paragraphIndex: Int) -> CBLQuery
+	{
+		let keys = [
+			ParagraphView.KEY_DEPRECATED : Key(false),
+			ParagraphView.KEY_MOST_RECENT : Key(true),
+			ParagraphView.KEY_BOOK_ID : Key(bookId),
+			ParagraphView.KEY_CHAPTER_INDEX : Key(chapterIndex),
+			ParagraphView.KEY_SECTION_INDEX : Key(sectionIndex),
+			ParagraphView.KEY_PARAGRAPH_INDEX : Key(paragraphIndex)
+		]
+		
+		return createQuery(forKeys: keys)
 	}
 	
 	func conflictsInRange(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) throws -> [[Paragraph]]
@@ -85,7 +90,7 @@ final class ParagraphView: View
 		// Uses reduce & grouping to find row amount for each paragraph index
 		query.mapOnly = false
 		query.prefetch = false
-		query.groupLevel = 6
+		query.groupLevel = ParagraphView.groupLevel(for: ParagraphView.KEY_PARAGRAPH_INDEX)!
 		
 		var conflicts = [[Paragraph]]()
 		let results = try query.run()
@@ -94,13 +99,13 @@ final class ParagraphView: View
 			// A conflict is a index with more than one option for the latest paragraph
 			if row.value as! Int > 1
 			{
-				let bookId = row.key(at: 2)!
-				let chapterIndex = row.key(at: 3)!
-				let sectionIndex = row.key(at: 4)!
-				let paragraphIndex = row.key(at: 5)!
+				let bookId = row.key(at: 2) as! String
+				let chapterIndex = row.key(at: 3) as! Int
+				let sectionIndex = row.key(at: 4) as! Int
+				let paragraphIndex = row.key(at: 5) as! Int
 				
 				// Retrieves the conflicting paragraphs from the database
-				let conflictQuery = createQuery(forKeys: [Key(false), Key(true), Key(bookId), Key(chapterIndex), Key(sectionIndex), Key(paragraphIndex), nil])
+				let conflictQuery = paragraphIndexQuery(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, paragraphIndex: paragraphIndex)
 				let paragraphs = try Paragraph.arrayFromQuery(conflictQuery)
 				if paragraphs.count > 1
 				{

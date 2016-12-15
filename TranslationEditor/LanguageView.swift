@@ -18,6 +18,9 @@ final class LanguageView: View
 	
 	// ATTRIBUTES	---------
 	
+	static let KEY_LANGUAGE_NAME = "language_name"
+	static let keyNames = [KEY_LANGUAGE_NAME]
+	
 	static let instance = LanguageView()
 	
 	let view: CBLView
@@ -44,7 +47,7 @@ final class LanguageView: View
 	// Finds or creates a language with the specified name
 	func language(withName name: String) throws -> Language
 	{
-		let query = createQuery(forKeys: [Key(name.lowercased())])
+		let query = createQuery(forKeys: [LanguageView.KEY_LANGUAGE_NAME : Key(name.lowercased())])
 		query.limit = 1
 		
 		let result = try query.run()

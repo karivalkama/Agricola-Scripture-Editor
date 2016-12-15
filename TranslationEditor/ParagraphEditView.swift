@@ -18,6 +18,15 @@ final class ParagraphEditView: View
 	
 	// PROPERTIES	---------
 	
+	static let KEY_USER_ID = "user_id"
+	static let KEY_BOOK_ID = "book_id"
+	static let KEY_CHAPTER_INDEX = "chapter_index"
+	static let KEY_SECTION_INDEX = "section_index"
+	static let KEY_PARAGRAPH_INDEX = "paragraph_index"
+	static let KEY_CREATED = "created"
+	
+	static let keyNames = [KEY_USER_ID, KEY_BOOK_ID, KEY_CHAPTER_INDEX, KEY_SECTION_INDEX, KEY_PARAGRAPH_INDEX, KEY_CREATED]
+	
 	static let instance = ParagraphEditView()
 	
 	let view: CBLView
@@ -43,9 +52,15 @@ final class ParagraphEditView: View
 	
 	// OTHER METHODS	---
 	
-	// Creates a query that can be used for retrieving paragraph edit data
-	func createQuery(userId: String?, bookId: String?, chapterIndex: Int?, sectionIndex: Int?, paragraphIndex: Int?, created: Double? = nil, descending: Bool = false) -> CBLQuery
+	// Finds all paragraph edits in certain character range. Ordered.
+	func editsForRangeQuery(userId: String?, bookId: String?, firstChapterIndex: Int? = nil, lastChapterIndex: Int? = nil) -> CBLQuery
 	{
-		return createQuery(forKeys: [Key(userId), Key(bookId), Key(chapterIndex), Key(paragraphIndex), Key(created)], descending: descending)
+		let keys = [
+			ParagraphEditView.KEY_USER_ID : Key(userId),
+			ParagraphEditView.KEY_BOOK_ID : Key(bookId),
+			ParagraphEditView.KEY_CHAPTER_INDEX : Key(min: firstChapterIndex, max: lastChapterIndex)
+		]
+		
+		return createQuery(forKeys: keys)
 	}
 }

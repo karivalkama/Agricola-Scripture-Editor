@@ -18,6 +18,9 @@ protocol View
 	// All classes implementing this protocol must be globally accessible as singular instances
 	static var instance: Self {get}
 	
+	// The names of the keys. Ordered.
+	static var keyNames: [String] {get}
+	
 	// The cbl view used by this view
 	var view: CBLView {get}
 }
@@ -66,23 +69,31 @@ extension View
 		return query
 	}
 	
+	// Creates a query for a set of specified keys
+	// Not all keys need to be specified
+	func createQuery(forKeys keys: [String : Key], descending: Bool = false) -> CBLQuery
+	{
+		let key = Self.keyNames.map { keys[$0].or(Key.undefined) }
+		return createQuery(key, descending: descending)
+	}
+	
 	// Creates a query that fetches the results from a certain key range
 	// The keys that are specified (not nil) are required of the returned rows
 	// If there is a nil key, that means that any value is accepted for that key. That also means that the following keys won't be tested at all since they are hierarchical
 	// The query is ascending by default
-	func createQuery(forKeys keys: [Key?], descending: Bool = false) -> CBLQuery
+	func createQuery(_ key: [Key], descending: Bool = false) -> CBLQuery
 	{
 		let query = createAllQuery(descending: descending)
 		
-		if keys.isEmpty
+		if key.isEmpty
 		{
 			return query
 		}
 		
 		// If only a single key is used, doesn't use array format
-		if keys.count == 1
+		if key.count == 1
 		{
-			let first = keys.first!.or(Key.undefined)
+			let first = key.first!
 			let key = descending ? first.inverted : first
 			
 			if key.isDefined
@@ -99,9 +110,9 @@ extension View
 		var max = [Any]()
 		
 		var lastSpecifiedIndex = -1
-		for i in 0 ..< keys.count
+		for i in 0 ..< key.count
 		{
-			let key = keys[i].or(Key.undefined)
+			let key = key[i]
 			min.append(key.min)
 			max.append(key.max)
 			
@@ -119,7 +130,7 @@ extension View
 		// May also drop a certain amount of unnecessary keys at the end
 		else
 		{
-			let unnecessaryKeys = keys.count - lastSpecifiedIndex - 2
+			let unnecessaryKeys = key.count - lastSpecifiedIndex - 2
 			if unnecessaryKeys > 0
 			{
 				min = Array(min.dropLast(unnecessaryKeys))
@@ -146,5 +157,45 @@ extension View
 		*/
 		
 		return query
+	}
+	
+	// Finds the correct index for a certain key name, if present within the keys
+	static func indexOfKey(_ key: String) -> UInt?
+	{
+		for i in 0 ..< keyNames.count
+		{
+			if keyNames[i] == key
+			{
+				return UInt(i)
+			}
+		}
+		
+		return nil
+	}
+	
+	// Finds the correct group level to use for grouping by the specified key
+	static func groupLevel(for key: String) -> UInt?
+	{
+		// If there is only a single key, only grouplevel 1 is allowed
+		if keyNames.count == 1
+		{
+			return 1
+		}
+		else if let index = indexOfKey(key)
+		{
+			// Also, last index can't be grouped
+			if index == UInt(keyNames.count - 1)
+			{
+				return 0
+			}
+			else
+			{
+				return index + 1
+			}
+		}
+		else
+		{
+			return nil
+		}
 	}
 }

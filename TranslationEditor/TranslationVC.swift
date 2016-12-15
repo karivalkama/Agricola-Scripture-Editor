@@ -252,7 +252,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	private func getParagraphEdits() throws -> [ParagraphEdit]
 	{
 		guard let book = book else { return [] }
-		return try ParagraphEdit.arrayFromQuery(ParagraphEditView.instance.createQuery(userId: userId, bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil))
+		return try ParagraphEdit.arrayFromQuery(ParagraphEditView.instance.editsForRangeQuery(userId: userId, bookId: book.idString))
 	}
 	
 }
