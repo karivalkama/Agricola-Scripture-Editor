@@ -53,7 +53,7 @@ final class ParagraphEditView: View
 	// OTHER METHODS	---
 	
 	// Finds all paragraph edits in certain character range. Ordered.
-	func editsForRangeQuery(userId: String?, bookId: String?, firstChapterIndex: Int? = nil, lastChapterIndex: Int? = nil) -> CBLQuery
+	func editsForRangeQuery(userId: String?, bookId: String?, firstChapterIndex: Int? = nil, lastChapterIndex: Int? = nil) -> Query<ParagraphEditView>
 	{
 		let keys = [
 			ParagraphEditView.KEY_USER_ID : Key(userId),
@@ -61,6 +61,6 @@ final class ParagraphEditView: View
 			ParagraphEditView.KEY_CHAPTER_INDEX : Key(min: firstChapterIndex, max: lastChapterIndex)
 		]
 		
-		return createQuery(forKeys: keys)
+		return Query<ParagraphEditView>(range: keys)
 	}
 }

@@ -9,13 +9,13 @@
 import Foundation
 
 // This class is used for managing and listening to a live query
-class LiveQueryManager<Queried: Storable>: NSObject
+class LiveQueryManager<QueryTarget: View>: NSObject
 {
 	// PROPERTIES	------
 	
 	private let query: CBLLiveQuery
-	private var listeners = [(AnyLiveQueryListener<Queried>, String?)]()
-	private(set) var rows = [Row<Queried>]()
+	private var listeners = [AnyLiveQueryListener<QueryTarget>]()
+	private(set) var rows = [Row<QueryTarget>]()
 	
 	private var observes = false
 	
@@ -40,23 +40,17 @@ class LiveQueryManager<Queried: Storable>: NSObject
 				if let results = query.rows
 				{
 					rows = []
-					do
+					
+					// Parses the results
+					while let row = results.nextRow()
 					{
-						// Parses the results
-						while let row = results.nextRow()
-						{
-							rows.append(try Row<Queried>(row))
-						}
-						
-						// Informs the listeners
-						for (listener, queryId) in listeners
-						{
-							listener.rowsUpdated(rows: rows, forQuery: queryId)
-						}
+						rows.append(Row<QueryTarget>(row))
 					}
-					catch
+					
+					// Informs the listeners
+					for listener in listeners
 					{
-						print("ERROR: Failed to parse live query results \(error)")
+						listener.rowsUpdated(rows: rows)
 					}
 				}
 			}
@@ -101,26 +95,21 @@ class LiveQueryManager<Queried: Storable>: NSObject
 	
 	// Adds a new listener that will be informed when the query updates
 	// The query id is sent along the rows to the listener, if present
-	func addListener(_ listener: AnyLiveQueryListener<Queried>, withQueryId queryId: String? = nil)
+	func addListener(_ listener: AnyLiveQueryListener<QueryTarget>)
 	{
 		// No duplicates allowed
-		for (existingListener, _) in listeners
+		if !listeners.containsReference(to: listener)
 		{
-			if existingListener === listener
-			{
-				return
-			}
+			listeners.append(listener)
 		}
-		
-		listeners.append((listener, queryId))
 	}
 
 	// Removes a listener from this manager. This manager won't be calling the listener in the future
-	func removeListener(_ listener: AnyLiveQueryListener<Queried>)
+	func removeListener(_ listener: AnyLiveQueryListener<QueryTarget>)
 	{
 		for i in 0 ..< listeners.count
 		{
-			if listeners[i].0 === listener
+			if listeners[i] === listener
 			{
 				listeners.remove(at: i)
 				break

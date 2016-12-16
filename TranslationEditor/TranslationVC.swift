@@ -13,7 +13,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 {
 	// TYPES	----------
 	
-	typealias Queried = Paragraph
+	typealias QueryTarget = ParagraphView
 	
 	
 	// OUTLETS	----------
@@ -36,7 +36,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	private var active = false
 	
 	// The live query used for retrieving translation data
-	private var translationQueryManager: LiveQueryManager<Paragraph>?
+	private var translationQueryManager: LiveQueryManager<ParagraphView>?
 	
 	private var committing = false
 	
@@ -57,12 +57,12 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		// TODO: Use certain ranges, which should be changeable
 		// Reads necessary data (TEST)
 		let language = try! LanguageView.instance.language(withName: "English")
-		if let book = try! Book.fromQuery(BookView.instance.createQuery(languageId: language.idString, code: "GAL", identifier: nil))
+		if let book = try! BookView.instance.booksQuery(languageId: language.idString, code: "GAL", identifier: nil).firstResultObject()
 		{
 			self.book = book
-			let query = ParagraphView.instance.latestParagraphQuery(bookId: book.idString).asLive()
-			translationQueryManager = LiveQueryManager<Paragraph>(query: query)
-			translationQueryManager?.addListener(AnyLiveQueryListener(self))
+			let query = ParagraphView.instance.latestParagraphQuery(bookId: book.idString)
+			translationQueryManager = query.liveQueryManager
+			translationQueryManager!.addListener(AnyLiveQueryListener(self))
 		}
 	}
 	
@@ -120,7 +120,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	
 	// QUERY LISTENING	-------------
 	
-	func rowsUpdated(rows: [Row<Paragraph>], forQuery queryId: String?)
+	func rowsUpdated(rows: [Row<ParagraphView>], forQuery queryId: String?)
 	{
 		// Updates paragraph data (unless committing is in progress)
 		if !committing

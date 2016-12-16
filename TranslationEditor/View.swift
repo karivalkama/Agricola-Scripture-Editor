@@ -57,6 +57,53 @@ extension View
 		return mapBlock
 	}
 	
+	// Finds the correct index for a certain key name, if present within the keys
+	static func indexOfKey(_ key: String) -> UInt?
+	{
+		for i in 0 ..< keyNames.count
+		{
+			if keyNames[i] == key
+			{
+				return UInt(i)
+			}
+		}
+		
+		return nil
+	}
+	
+	// Finds the correct group level to use for grouping by the specified key
+	static func groupLevel(for key: String) -> UInt?
+	{
+		// If there is only a single key, only grouplevel 1 is allowed
+		if keyNames.count == 1
+		{
+			return 1
+		}
+		else if let index = indexOfKey(key)
+		{
+			// Also, last index can't be grouped
+			if index == UInt(keyNames.count - 1)
+			{
+				return 0
+			}
+			else
+			{
+				return index + 1
+			}
+		}
+		else
+		{
+			return nil
+		}
+	}
+	
+	// Creates a new query of this view
+	static func createQuery(ofType type: QueryType = .object) -> Query<Self>
+	{
+		return Query<Self>(type: type)
+	}
+	
+	/*
 	// Creates a query that returns each row of this view
 	func createAllQuery(descending: Bool = false) -> CBLQuery
 	{
@@ -67,20 +114,22 @@ extension View
 		query.mapOnly = true
 		
 		return query
-	}
+	}*/
 	
 	// Creates a query for a set of specified keys
 	// Not all keys need to be specified
+	/*
 	func createQuery(forKeys keys: [String : Key], descending: Bool = false) -> CBLQuery
 	{
 		let key = Self.keyNames.map { keys[$0].or(Key.undefined) }
 		return createQuery(key, descending: descending)
-	}
+	}*/
 	
 	// Creates a query that fetches the results from a certain key range
 	// The keys that are specified (not nil) are required of the returned rows
 	// If there is a nil key, that means that any value is accepted for that key. That also means that the following keys won't be tested at all since they are hierarchical
 	// The query is ascending by default
+	/*
 	func createQuery(_ key: [Key], descending: Bool = false) -> CBLQuery
 	{
 		let query = createAllQuery(descending: descending)
@@ -157,45 +206,5 @@ extension View
 		*/
 		
 		return query
-	}
-	
-	// Finds the correct index for a certain key name, if present within the keys
-	static func indexOfKey(_ key: String) -> UInt?
-	{
-		for i in 0 ..< keyNames.count
-		{
-			if keyNames[i] == key
-			{
-				return UInt(i)
-			}
-		}
-		
-		return nil
-	}
-	
-	// Finds the correct group level to use for grouping by the specified key
-	static func groupLevel(for key: String) -> UInt?
-	{
-		// If there is only a single key, only grouplevel 1 is allowed
-		if keyNames.count == 1
-		{
-			return 1
-		}
-		else if let index = indexOfKey(key)
-		{
-			// Also, last index can't be grouped
-			if index == UInt(keyNames.count - 1)
-			{
-				return 0
-			}
-			else
-			{
-				return index + 1
-			}
-		}
-		else
-		{
-			return nil
-		}
-	}
+	}*/
 }

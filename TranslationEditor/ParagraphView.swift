@@ -14,6 +14,7 @@ final class ParagraphView: View
 	// TYPES	--------
 	
 	typealias Queried = Paragraph
+	typealias MyQuery = Query<ParagraphView>
 	
 	
 	// ATTRIBUTES	----
@@ -53,12 +54,12 @@ final class ParagraphView: View
 	
 	// OTHER METHODS	--
 	
-	func latestParagraphQuery(bookId: String, chapterIndex: Int) -> CBLQuery
+	func latestParagraphQuery(bookId: String, chapterIndex: Int) -> MyQuery
 	{
 		return latestParagraphQuery(bookId: bookId, firstChapter: chapterIndex, lastChapter: chapterIndex)
 	}
 	
-	func latestParagraphQuery(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) -> CBLQuery
+	func latestParagraphQuery(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) -> MyQuery
 	{
 		let keys = [
 			ParagraphView.KEY_DEPRECATED : Key(false),
@@ -66,10 +67,10 @@ final class ParagraphView: View
 			ParagraphView.KEY_BOOK_ID : Key(bookId),
 			ParagraphView.KEY_CHAPTER_INDEX : Key(min: firstChapter, max: lastChapter)
 		]
-		return createQuery(forKeys: keys)
+		return MyQuery(range: keys)
 	}
 	
-	func paragraphIndexQuery(bookId: String, chapterIndex: Int, sectionIndex: Int, paragraphIndex: Int) -> CBLQuery
+	func paragraphIndexQuery(bookId: String, chapterIndex: Int, sectionIndex: Int, paragraphIndex: Int) -> MyQuery
 	{
 		let keys = [
 			ParagraphView.KEY_DEPRECATED : Key(false),
@@ -80,38 +81,36 @@ final class ParagraphView: View
 			ParagraphView.KEY_PARAGRAPH_INDEX : Key(paragraphIndex)
 		]
 		
-		return createQuery(forKeys: keys)
+		return MyQuery(range: keys)
 	}
 	
 	func conflictsInRange(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) throws -> [[Paragraph]]
 	{
-		let query = latestParagraphQuery(bookId: bookId, firstChapter: firstChapter, lastChapter: lastChapter)
-		
-		// Uses reduce & grouping to find row amount for each paragraph index
-		query.mapOnly = false
-		query.prefetch = false
-		query.groupLevel = ParagraphView.groupLevel(for: ParagraphView.KEY_PARAGRAPH_INDEX)!
+		var reduceQuery = latestParagraphQuery(bookId: bookId, firstChapter: firstChapter, lastChapter: lastChapter).asQueryOfType(QueryType.reduce)
+		reduceQuery.groupByKey = ParagraphView.KEY_PARAGRAPH_INDEX
 		
 		var conflicts = [[Paragraph]]()
-		let results = try query.run()
-		while let row = results.nextRow()
+		try reduceQuery.enumerateResult
 		{
-			// A conflict is a index with more than one option for the latest paragraph
-			if row.value as! Int > 1
+			row in
+			
+			// Finds all rows that have a conflict (more than 1 option for index)
+			if row.value.int() > 1
 			{
-				let bookId = row.key(at: 2) as! String
-				let chapterIndex = row.key(at: 3) as! Int
-				let sectionIndex = row.key(at: 4) as! Int
-				let paragraphIndex = row.key(at: 5) as! Int
+				let bookId = row[ParagraphView.KEY_BOOK_ID].string()
+				let chapterIndex = row[ParagraphView.KEY_CHAPTER_INDEX].int()
+				let sectionIndex = row[ParagraphView.KEY_SECTION_INDEX].int()
+				let paragraphIndex = row[ParagraphView.KEY_PARAGRAPH_INDEX].int()
 				
-				// Retrieves the conflicting paragraphs from the database
-				let conflictQuery = paragraphIndexQuery(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, paragraphIndex: paragraphIndex)
-				let paragraphs = try Paragraph.arrayFromQuery(conflictQuery)
-				if paragraphs.count > 1
+				// Finds the paragraphs for those indices
+				let paragraphsAtIndex = try paragraphIndexQuery(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, paragraphIndex: paragraphIndex).resultObjects()
+				if paragraphsAtIndex.count > 1
 				{
-					conflicts.append(paragraphs)
+					conflicts.append(paragraphsAtIndex)
 				}
 			}
+			
+			return true
 		}
 		
 		return conflicts

@@ -12,9 +12,8 @@ import Foundation
 protocol LiveQueryListener: class
 {
 	// The type of the objects the object is using
-	associatedtype Queried: Storable
+	associatedtype QueryTarget: View
 	
 	// This method is called each time the results of the live query update
-	// The queryId is used for differentiating between different queries
-	func rowsUpdated(rows: [Row<Queried>], forQuery queryId: String?)
+	func rowsUpdated(rows: [Row<QueryTarget>])
 }

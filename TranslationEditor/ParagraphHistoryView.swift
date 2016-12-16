@@ -52,7 +52,7 @@ final class ParagraphHistoryView: View
 	
 	// Creates a query that will search for the next version(s) of a paragraph
 	// If includeDeprecated is set to true, also returns possible deprecated versions
-	func nextVersionQuery(paragraphId: String, includeDeprecated: Bool = false) -> CBLQuery
+	func nextVersionQuery(paragraphId: String, includeDeprecated: Bool = false) -> Query<ParagraphHistoryView>
 	{
 		var keys = [ParagraphHistoryView.KEY_PARAGRAPH_ID : Key(paragraphId)]
 		if !includeDeprecated
@@ -60,14 +60,31 @@ final class ParagraphHistoryView: View
 			keys[ParagraphHistoryView.KEY_DEPRECATED] = Key(false)
 		}
 		
-		return createQuery(forKeys: keys)
+		return Query<ParagraphHistoryView>(range: keys)
 	}
 	
+	// Finds the paragraph ids of the versions following the provided paragraph version
 	func nextVersionIds(paragraphId: String, includeDeprecated: Bool = false) throws -> [String]
 	{
-		let query = nextVersionQuery(paragraphId: paragraphId, includeDeprecated: includeDeprecated)
-		query.prefetch = false
+		let query = nextVersionQuery(paragraphId: paragraphId, includeDeprecated: includeDeprecated).asQueryOfType(QueryType.noObjects)
+		let rows = try query.resultRows()
 		
-		return []
+		return rows.map { $0.id! }
+	}
+	
+	// Checks whether the version 'tree' splits on this paragraph id / version
+	// This can be used for determining whether a paragraph version is the root of a conlict
+	func versionSplits(paragraphId: String, includeDeprecated: Bool = false) throws -> Bool
+	{
+		let query = nextVersionQuery(paragraphId: paragraphId, includeDeprecated: includeDeprecated).asQueryOfType(QueryType.reduce)
+		
+		if let row = try query.firstResultRow()
+		{
+			return row.value.int() > 1
+		}
+		else
+		{
+			return false
+		}
 	}
 }
