@@ -120,13 +120,13 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	
 	// QUERY LISTENING	-------------
 	
-	func rowsUpdated(rows: [Row<ParagraphView>], forQuery queryId: String?)
+	func rowsUpdated(rows: [Row<ParagraphView>])
 	{
 		// Updates paragraph data (unless committing is in progress)
 		if !committing
 		{
-			// TODO: Check for conflicts
-			currentData = rows.map { $0.object }
+			// TODO: Check for conflicts. Make safer
+			currentData = rows.map { try! $0.object() }
 			print("STATUS: UPDATES ROWS")
 			translationTableView.reloadData()
 		}
@@ -252,10 +252,6 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	private func getParagraphEdits() throws -> [ParagraphEdit]
 	{
 		guard let book = book else { return [] }
-		return try ParagraphEdit.arrayFromQuery(ParagraphEditView.instance.editsForRangeQuery(userId: userId, bookId: book.idString))
+		return try ParagraphEditView.instance.editsForRangeQuery(userId: userId, bookId: book.idString).resultObjects()
 	}
-	
 }
-
-
-

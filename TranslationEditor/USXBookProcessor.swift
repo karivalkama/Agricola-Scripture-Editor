@@ -134,6 +134,12 @@ class USXBookProcessor: USXContentProcessor
 			// And stores it to the database
 			try book.push()
 			
+			// Checks if there are any conflicts in the book's range
+			if try ParagraphView.instance.hasConflictsInRange(bookId: book.idString)
+			{
+				throw USXParseError.paragraphsAreConflicted
+			}
+			
 			// Also stores / updates all the collected documents
 			var paragraphInsertFailed = false
 			var chapterIndex = 0
@@ -145,8 +151,7 @@ class USXBookProcessor: USXContentProcessor
 				let chapterParagraphs = chapter.flatMap {(section) in section.flatMap { $0 } }
 				
 				// Finds all paragraphs already existing in this chapter
-				let existingParagraphs = try Paragraph.arrayFromQuery(ParagraphView.instance.latestParagraphQuery(bookId: book.idString, chapterIndex: chapterIndex))
-				// TODO: Should fail if there are conflicts in the target group
+				let existingParagraphs = try ParagraphView.instance.latestParagraphQuery(bookId: book.idString, chapterIndex: chapterIndex).resultObjects()
 				
 				// If there are no existing paragraphs, simply pushes the new ones to the database
 				if existingParagraphs.isEmpty
@@ -244,10 +249,9 @@ class USXBookProcessor: USXContentProcessor
 								else
 								{
 									try newParagraph.push()
-									// TODO: Delete whole commit path (or mark as deprecated)
 									for existing in matchingExisting
 									{
-										try existing.delete()
+										try existing.deprecateWithHistory()
 										matchedExisting.append(existing)
 									}
 								}
@@ -256,8 +260,7 @@ class USXBookProcessor: USXContentProcessor
 							// Finally, goes through all of the existing paragraphs and deletes those that weren't matched
 							for leftWithoutMatch in unmatchedExisting.filter({ !matchedExisting.containsReference(to: $0) })
 							{
-								// TODO: Again, delete whole path
-								try leftWithoutMatch.delete()
+								try leftWithoutMatch.deprecateWithHistory()
 							}
 						}
 						// Which may fail
@@ -270,9 +273,8 @@ class USXBookProcessor: USXContentProcessor
 					{
 						try handleSingleMatches(singleMatches)
 						
-						// TODO: Delete whole path here
 						// In case some existing paragraphs were left unmatched, removes them
-						try unmatchedExisting.forEach { try $0.delete() }
+						try unmatchedExisting.forEach { try $0.deprecateWithHistory() }
 						// And if some paragraphs were introduced, inserts them
 						try unmatchedNew.forEach { try $0.push() }
 					}

@@ -153,14 +153,6 @@ extension Storable
 		}
 	}
 	
-	// Finds or creates an instance of this class for the provided id
-	// Returns nil if there wasn't a saved revision for the provided id
-	/*
-	static func get(_ idArray: [Any]) throws -> Self?
-	{
-		return try get(parseId(from: idArray))
-	}*/
-	
 	// Retrieves and parses a number of instances from a set of document ids
 	static func getArray(_ ids: [String]) throws -> [Self]
 	{
@@ -183,6 +175,37 @@ extension Storable
 		if let document = DATABASE.existingDocument(withID: id)
 		{
 			try document.delete()
+		}
+	}
+	
+	// Updates certain properties to a specific document, if one exists
+	// Will not create a new document
+	static func pushProperties(_ properties: [String : PropertyValue], forId idString: String, overwrite: Bool = false) throws
+	{
+		if !properties.isEmpty, let document = DATABASE.existingDocument(withID: idString)
+		{
+			try document.update
+			{
+				newRev in
+				
+				// Writes the basic properties
+				for (propertyName, propertyValue) in properties
+				{
+					if let propertyValue = propertyValue.any
+					{
+						newRev[propertyName] = propertyValue
+					}
+					else if overwrite
+					{
+						newRev.properties?.removeObject(forKey: propertyName)
+					}
+				}
+				
+				// Also writes the type
+				newRev[PROPERTY_TYPE] = type
+				
+				return true
+			}
 		}
 	}
 }

@@ -16,4 +16,5 @@ enum USXParseError: Error
 	case chapterIndexNotFound
 	case bookNameNotSpecified
 	case bookCodeNotFound
+	case paragraphsAreConflicted
 }

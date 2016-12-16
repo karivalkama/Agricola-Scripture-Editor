@@ -137,6 +137,18 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	
 	// OTHER METHODS	-----
 	
+	func deprecateWithHistory() throws
+	{
+		// Deprecates this paragraph as well as any previous version
+		isDeprecated = true
+		try pushProperties(named: ["deprecated"])
+		
+		if let previousVersionId = createdFrom, let previousVersion = try Paragraph.get(previousVersionId)
+		{
+			try previousVersion.deprecateWithHistory()
+		}
+	}
+	
 	// Creates a new version of this paragraph and saves it to the database
 	// Returns the created commit version
 	func commit(userId: String, sectionIndex: Int? = nil, paragraphIndex: Int? = nil, content: [Para]? = nil) throws -> Paragraph
