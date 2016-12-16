@@ -142,6 +142,26 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 	
 	// IMPLEMENTED -----
 	
+	func contentEquals(with other: Para) -> Bool
+	{
+		if style == other.style && ambiguousContent == other.ambiguousContent, verses.count == other.verses.count
+		{
+			for i in 0 ..< verses.count
+			{
+				if !verses[i].contentEquals(with: other.verses[i])
+				{
+					return false
+				}
+			}
+			
+			return true
+		}
+		else
+		{
+			return false
+		}
+	}
+	
 	func toAttributedString(options: [String : Any]) -> NSAttributedString
 	{
 		let str = NSMutableAttributedString()

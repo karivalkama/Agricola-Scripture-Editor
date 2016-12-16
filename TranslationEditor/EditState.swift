@@ -9,6 +9,14 @@
 import Foundation
 
 // These structs define a runtime editing state of a paragraph
+/*
+enum EditState
+{
+	case notChanged
+	case edited(originalId: String, text: NSAttributedString)
+}*/
+
+
 struct EditState
 {
 	var text: NSAttributedString

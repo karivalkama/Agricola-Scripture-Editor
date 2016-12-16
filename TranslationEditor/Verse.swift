@@ -150,4 +150,9 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable
 		// Fails if the ranges don't connect
 		return try Verse(range: self.range + other.range, content: combined)
 	}
+	
+	func contentEquals(with other: Verse) -> Bool
+	{
+		return range == other.range && content == other.content
+	}
 }

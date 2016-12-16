@@ -23,6 +23,18 @@ fileprivate func handleSingleMatches(_ matches: [(Paragraph, Paragraph)]) throws
 	try matches.forEach{ existing, newVersion in try handleSingleMatch(existing: existing, newVersion: newVersion) }
 }
 
+fileprivate func paragraphsHaveEqualRange(_ first: Paragraph, _ second: Paragraph) -> Bool
+{
+	if let range1 = first.range, let range2 = second.range
+	{
+		return range1 == range2
+	}
+	else
+	{
+		return false
+	}
+}
+
 // This USX processor is able to parse contents of a single book based on USX data
 class USXBookProcessor: USXContentProcessor
 {
@@ -173,7 +185,7 @@ class USXBookProcessor: USXContentProcessor
 							singleMatches.append((existingParagraphs[i], chapterParagraphs[i]))
 						}
 					}
-					// Otherwise tries to map paragraphs with equal content
+					// Otherwise tries to map paragraphs with equal content (or range)
 					else
 					{
 						var lastStoredNewIndex = -1
@@ -186,7 +198,7 @@ class USXBookProcessor: USXContentProcessor
 							{
 								let newParagraph = chapterParagraphs[newIndex]
 								
-								if existing.text == newParagraph.text
+								if paragraphsHaveEqualRange(existing, newParagraph) || existing.paraContentsEqual(with: newParagraph)
 								{
 									matchingNewIndex = newIndex
 									singleMatches.append((existing, newParagraph))

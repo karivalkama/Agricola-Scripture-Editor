@@ -234,6 +234,26 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		}
 	}
 	
+	func paraContentsEqual(with other: Paragraph) -> Bool
+	{
+		if content.count == other.content.count
+		{
+			for i in 0 ..< content.count
+			{
+				if !content[i].contentEquals(with: other.content[i])
+				{
+					return false
+				}
+			}
+			
+			return true
+		}
+		else
+		{
+			return false
+		}
+	}
+	
 	// Finds the book id from a paragraph id string
 	static func bookId(fromId paragraphIdString: String) -> String
 	{
