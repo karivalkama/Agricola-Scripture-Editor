@@ -48,7 +48,7 @@ final class BookView: View
 	// OTHER METHODS	-----
 	
 	// Creates a new query for book data
-	func booksQuery(languageId: String?, code: String?, identifier: String?) -> Query<BookView>
+	func booksQuery(languageId: String? = nil, code: String? = nil, identifier: String? = nil) -> Query<BookView>
 	{
 		let keys = [
 			BookView.KEY_LANGUAGE : Key(languageId),

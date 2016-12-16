@@ -98,7 +98,7 @@ extension View
 	}
 	
 	// Creates a new query of this view
-	static func createQuery(ofType type: QueryType = .object) -> Query<Self>
+	func createQuery(ofType type: QueryType = .object) -> Query<Self>
 	{
 		return Query<Self>(type: type)
 	}

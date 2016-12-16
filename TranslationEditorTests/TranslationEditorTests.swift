@@ -124,36 +124,28 @@ class TranslationEditorTests: XCTestCase
 	
 	func testRemoveEdits()
 	{
-		let edits = try! ParagraphEdit.arrayFromQuery(ParagraphEditView.instance.createAllQuery())
+		let editRows = try! ParagraphEditView.instance.createQuery().resultRows()
 		
-		print("There are \(edits.count) edits in total. Deleting.")
+		print("There are \(editRows.count) edits in total. Deleting.")
 		
-		edits.forEach { try! $0.delete() }
+		editRows.forEach { try! ParagraphEdit.delete($0.id!) }
 		
 		print("Done")
 	}
 	
 	func testFindEnglish()
 	{
-		let query = LanguageView.instance.createQuery(forKeys: ["english"])
-		print("query statistics: start = \(query.startKey!), end = \(query.endKey!)")
+		let query = LanguageView.instance.languageQuery(name: "english")
 		
-		let languages = try! Language.arrayFromQuery(query)
+		let languages = try! query.resultObjects()
 		print("Found \(languages.count) languages named 'english'")
 		languages.forEach { print("- \($0.name): \($0.idString)") }
 	}
 	
-	/*
-	func testDeleteUnnecessaryLanguages()
-	{
-		try! Language.delete("93C141FE-C8AD-4607-955A-37E12246E43F")
-	}*/
-	
 	func testReadDatabaseData()
 	{
 		// Finds all languages first
-		let languageQuery = LanguageView.instance.createAllQuery()
-		let languages = try! Language.arrayFromQuery(languageQuery)
+		let languages = try! LanguageView.instance.createQuery().resultObjects()
 		
 		print("Languages in database: ")
 		for language in languages
@@ -166,13 +158,11 @@ class TranslationEditorTests: XCTestCase
 		{
 			print("Books in \(language.name):")
 			
-			let bookQuery = BookView.instance.createQuery(languageId: language.idString, code: nil, identifier: nil)
-			let books = try! Book.arrayFromQuery(bookQuery)
+			let books = try! BookView.instance.booksQuery(languageId: language.idString).resultObjects()
 			
 			for book in books
 			{
-				let paragraphQuery = ParagraphView.instance.createQuery(bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil)
-				let paragraphs = try! Paragraph.arrayFromQuery(paragraphQuery)
+				let paragraphs = try! ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
 				
 				print("- \(book.code) - \(book.identifier) (\(paragraphs.count) paragraphs)")
 				
@@ -183,12 +173,10 @@ class TranslationEditorTests: XCTestCase
 					print("\t- \(paragraph.chapterIndex).\(paragraph.sectionIndex).\(paragraph.index): \(paragraph.text.substring(to: maxIndex))")
 				}
 				
-				let editQuery = ParagraphEditView.instance.createQuery(userId: "testuserid", bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil)
-				let edits = try! ParagraphEdit.arrayFromQuery(editQuery)
-				
-				if !edits.isEmpty
+				let editAmount = try! ParagraphEditView.instance.editsForRangeQuery(bookId: book.idString).resultRows().count
+				if editAmount != 0
 				{
-					print("There are also \(edits.count) edits")
+					print("There are also \(editAmount) edits")
 				}
 			}
 		}
@@ -211,7 +199,7 @@ class TranslationEditorTests: XCTestCase
 		func findBook(languageId: String, code: String, identifier: String) -> Book?
 		{
 			// Performs a database query
-			return try! Book.fromQuery(BookView.instance.createQuery(languageId: languageId, code: code, identifier: identifier))
+			return try! BookView.instance.booksQuery(languageId: languageId, code: code, identifier: identifier).firstResultObject()
 		}
 		
 		// Paragraph matching algorithm (incomplete)
@@ -239,9 +227,7 @@ class TranslationEditorTests: XCTestCase
 			print("\(book.code): \(book.identifier)")
 			
 			// Finds the first 7 paragraphs and prints them
-			let query = ParagraphView.instance.createQuery(bookId: book.idString, chapterIndex: nil, sectionIndex: nil, paragraphIndex: nil)
-			query.limit = 7
-			let paragraphs = try! Paragraph.arrayFromQuery(query)
+			let paragraphs = try! ParagraphView.instance.latestParagraphQuery(bookId: book.idString).limitedTo(7).resultObjects()
 			
 			for paragraph in paragraphs
 			{
