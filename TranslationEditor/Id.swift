@@ -38,22 +38,36 @@ struct Id
 		{
 			if index.length > 1
 			{
-				var s = idParts[index.start]
-				for i in index.start + 1 ..< index.end
+				var partsInRange = [String]()
+				for i in index.start ..< index.end
 				{
-					s += ID_SEPARATOR
-					s += idParts[i]
+					if let part = idPart(i)
+					{
+						partsInRange.append(part)
+					}
 				}
 				
-				return PropertyValue(s)
+				if partsInRange.isEmpty
+				{
+					return PropertyValue.empty
+				}
+				else
+				{
+					var s = partsInRange.first!
+					for part in partsInRange.dropFirst()
+					{
+						s += ID_SEPARATOR
+						s += part
+					}
+					
+					return PropertyValue(s)
+				}
 			}
 			else if index.length == 1
 			{
-				return PropertyValue(idParts[index.start])
+				return PropertyValue(idPart(index.start))
 			}
 		}
-		
-		// TODO: Possibly add error handling
 		
 		return PropertyValue.empty
 	}
@@ -82,6 +96,18 @@ struct Id
 				components.dropFirst().forEach { s += ID_SEPARATOR + $0 }
 				return s
 			}
+		}
+	}
+	
+	private func idPart(_ index: Int) -> String?
+	{
+		if index < 0 || index >= idParts.count
+		{
+			return nil
+		}
+		else
+		{
+			return idParts[index]
 		}
 	}
 }

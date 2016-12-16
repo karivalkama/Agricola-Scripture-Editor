@@ -67,7 +67,7 @@ final class ParagraphView: View
 			ParagraphView.KEY_DEPRECATED : Key(false),
 			ParagraphView.KEY_MOST_RECENT : Key(true),
 			ParagraphView.KEY_BOOK_ID : Key(bookId),
-			ParagraphView.KEY_CHAPTER_INDEX : Key(min: firstChapter, max: lastChapter)
+			ParagraphView.KEY_CHAPTER_INDEX : Key([firstChapter, lastChapter])
 		]
 		return MyQuery(range: keys)
 	}

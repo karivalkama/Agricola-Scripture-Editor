@@ -22,7 +22,7 @@ struct Key
 	
 	static var undefined = Key(nil)
 	
-	init(min: Any, max: Any, defined: Bool = true)
+	private init(min: Any, max: Any, defined: Bool = true)
 	{
 		self.min = min
 		self.max = max

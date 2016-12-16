@@ -58,7 +58,7 @@ final class ParagraphEditView: View
 		let keys = [
 			ParagraphEditView.KEY_USER_ID : Key(userId),
 			ParagraphEditView.KEY_BOOK_ID : Key(bookId),
-			ParagraphEditView.KEY_CHAPTER_INDEX : Key(min: firstChapterIndex, max: lastChapterIndex)
+			ParagraphEditView.KEY_CHAPTER_INDEX : Key([firstChapterIndex, lastChapterIndex])
 		]
 		
 		return Query<ParagraphEditView>(range: keys)
