@@ -59,7 +59,7 @@ struct CharData: AttributedStringConvertible, JSONConvertible, Equatable
 	func toAttributedString(options: [String : Any] = [:]) -> NSAttributedString
 	{
 		// TODO: At some point one may wish to add other types of attributes based on the style
-		let attributes = [CharStyleAttributeName : style]
+		let attributes = [CharStyleAttributeName : style as Any]
 		return NSAttributedString(string: text, attributes: attributes)
 	}
 	

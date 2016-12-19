@@ -250,7 +250,7 @@ struct PropertyValue: CustomStringConvertible
 	// and arrays ([PropertyValue] or [Any]) can be wrapped as property values
 	// Also JSON convertible objects and arrays consisting of them can be wrapped into values
 	// If the provided value is not of any of those types, nil is returned
-	static func of(_ any: Any) -> PropertyValue?
+	static func of(_ any: Any?) -> PropertyValue?
 	{
 		// Propertyvalues are not wrapped further
 		if let value = any as? PropertyValue
