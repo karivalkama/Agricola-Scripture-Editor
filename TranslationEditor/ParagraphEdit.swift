@@ -15,46 +15,60 @@ final class ParagraphEdit: Storable
 	
 	static let type = "edit"
 	
+	static let PROPERTY_BOOK_ID = "book_id"
+	static let PROPERTY_CHAPTER_INDEX = "chapter_index"
 	static let PROPERTY_USER_ID = "creator_user"
-	static let PROPERTY_CREATED = "created"
 	
+	let bookId: String
+	let chapterIndex: Int
 	let userId: String
-	let created: Double
+	let created: TimeInterval
 	
-	var paragraph: Paragraph
-	var isConflict: Bool
+	// Key = paragraph id, value = paragraph
+	var edits: [String : Paragraph]
 	
 	
 	// COMP. PROPERTIES	-----
 	
 	static var idIndexMap: [String : IdIndex]
 	{
-		return ["edit" : IdIndex(0), ParagraphEdit.PROPERTY_USER_ID : IdIndex(1), ParagraphEdit.PROPERTY_CREATED : IdIndex(2)]
+		let bookMap = Book.idIndexMap
+		let bookIdIndex = IdIndex.of(indexMap: bookMap)
+		
+		return bookMap + [PROPERTY_BOOK_ID : bookIdIndex, "edit" : IdIndex(bookIdIndex.end), PROPERTY_CHAPTER_INDEX : IdIndex(bookIdIndex.end + 1), PROPERTY_USER_ID : IdIndex(bookIdIndex.end + 2)]
 	}
 	
-	var idProperties: [Any] {return ["Edit", userId, created]}
+	var idProperties: [Any] {return [bookId, "edit", chapterIndex, userId]}
 	
-	var properties: [String : PropertyValue] {return ["targetId" : PropertyValue(targetId), "paragraph" : PropertyValue(paragraph), "conflict" : PropertyValue(isConflict)]}
-	
-	var targetId: String {return paragraph.idString}
+	var properties: [String : PropertyValue]
+	{
+		return ["created" : PropertyValue(created), "edits" : PropertyValue(PropertySet(edits))]
+	}
 	
 	
 	// INIT	-----------------
 	
-	init(userId: String, paragraph: Paragraph, isConflict: Bool = false, created: Double = Date().timeIntervalSince1970)
+	init(bookId: String, chapterIndex: Int, userId: String, edits: [String : Paragraph], created: Double = Date().timeIntervalSince1970)
 	{
+		self.bookId = bookId
+		self.chapterIndex = chapterIndex
 		self.userId = userId
-		self.paragraph = paragraph
+		self.edits = edits
 		self.created = created
-		self.isConflict = isConflict
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> ParagraphEdit
 	{
-		// Parses the paragraph first
-		let paragraph = try Paragraph.create(from: properties["paragraph"].object(), withId: Paragraph.createId(from: properties["targetId"].string()))
+		// Parses the edit data
+		let editSet = properties["edits"].object()
+		var edit = [String : Paragraph]()
 		
-		return ParagraphEdit(userId: id[PROPERTY_USER_ID].string(), paragraph: paragraph, isConflict: properties["conflict"].bool(or: false), created: id[PROPERTY_CREATED].double(or: Date().timeIntervalSince1970))
+		for (paragraphId, paragraphData) in editSet.properties
+		{
+			edit[paragraphId] = try Paragraph.create(from: paragraphData.object(), withId: Paragraph.createId(from: paragraphId))
+		}
+		
+		return ParagraphEdit(bookId: id[ParagraphEdit.PROPERTY_BOOK_ID].string(), chapterIndex: id[ParagraphEdit.PROPERTY_CHAPTER_INDEX].int(), userId: id[ParagraphEdit.PROPERTY_USER_ID].string(), edits: edit, created: properties["created"].time())
 	}
 	
 	
@@ -62,46 +76,31 @@ final class ParagraphEdit: Storable
 	
 	func update(with properties: PropertySet) throws
 	{
-		if let isConflict = properties["conflict"].bool
+		if let editData = properties["edits"].object
 		{
-			self.isConflict = isConflict
-		}
-		if properties["targetId"].isDefined || properties["paragraph"].isDefined
-		{
-			var newParagraphId: String!
-			if let targetId = properties["targetId"].string
+			edits = [:]
+			for (paragraphId, paragraphData) in editData.properties
 			{
-				newParagraphId = targetId
+				edits[paragraphId] = try Paragraph.create(from: paragraphData.object(), withId: Paragraph.createId(from: paragraphId))
 			}
-			else
-			{
-				newParagraphId = self.targetId
-			}
-			
-			var newParagraphProperties: PropertySet!
-			if let paragraphData = properties["paragraph"].object
-			{
-				newParagraphProperties = paragraphData
-			}
-			else
-			{
-				newParagraphProperties = self.paragraph.toPropertySet
-			}
-			
-			self.paragraph = try Paragraph.create(from: newParagraphProperties, withId: Paragraph.createId(from: newParagraphId))
 		}
 	}
 	
 	
 	// OTHER	------------
 	
-	static func userId(fromId idString: String) -> String
+	static func bookId(fromId idString: String) -> String
 	{
-		return createId(from: idString)[PROPERTY_USER_ID].string()
+		return property(withName: PROPERTY_BOOK_ID, fromId: idString).string()
 	}
 	
-	static func creationTime(fromId idString: String) -> Double
+	static func chapterIndex(fromId idString: String) -> Int
 	{
-		return createId(from: idString)[PROPERTY_CREATED].double(or: Date().timeIntervalSince1970)
+		return property(withName: PROPERTY_CHAPTER_INDEX, fromId: idString).int()
+	}
+	
+	static func userId(fromId idString: String) -> String
+	{
+		return property(withName: PROPERTY_USER_ID, fromId: idString).string()
 	}
 }

@@ -18,14 +18,11 @@ final class ParagraphEditView: View
 	
 	// PROPERTIES	---------
 	
-	static let KEY_USER_ID = "user_id"
 	static let KEY_BOOK_ID = "book_id"
 	static let KEY_CHAPTER_INDEX = "chapter_index"
-	static let KEY_SECTION_INDEX = "section_index"
-	static let KEY_PARAGRAPH_INDEX = "paragraph_index"
-	static let KEY_CREATED = "created"
+	static let KEY_USER_ID = "user_id"
 	
-	static let keyNames = [KEY_USER_ID, KEY_BOOK_ID, KEY_CHAPTER_INDEX, KEY_SECTION_INDEX, KEY_PARAGRAPH_INDEX, KEY_CREATED]
+	static let keyNames = [KEY_BOOK_ID, KEY_USER_ID, KEY_CHAPTER_INDEX]
 	
 	static let instance = ParagraphEditView()
 	
@@ -41,23 +38,23 @@ final class ParagraphEditView: View
 		{
 			(edit, emit) in
 			
-			// Key = user id + book id + chapter id + section id + paragraph index + creation millis
-			let key = [edit.userId, edit.paragraph.bookId, edit.paragraph.chapterIndex, edit.paragraph.sectionIndex, edit.paragraph.index, edit.created] as [Any]
+			// Key = book id + user id + chapter id
+			let key = [edit.bookId, edit.userId, edit.chapterIndex] as [Any]
 			
 			emit(key, nil)
 			
-		}, version: "1")
+		}, version: "3")
 	}
 	
 	
 	// OTHER METHODS	---
 	
 	// Finds all paragraph edits in certain character range. Ordered.
-	func editsForRangeQuery(userId: String? = nil, bookId: String? = nil, firstChapterIndex: Int? = nil, lastChapterIndex: Int? = nil) -> Query<ParagraphEditView>
+	func editsForRangeQuery(bookId: String, userId: String? = nil, firstChapterIndex: Int? = nil, lastChapterIndex: Int? = nil) -> Query<ParagraphEditView>
 	{
 		let keys = [
-			ParagraphEditView.KEY_USER_ID : Key(userId),
 			ParagraphEditView.KEY_BOOK_ID : Key(bookId),
+			ParagraphEditView.KEY_USER_ID : Key(userId),
 			ParagraphEditView.KEY_CHAPTER_INDEX : Key([firstChapterIndex, lastChapterIndex])
 		]
 		

@@ -29,6 +29,17 @@ extension Array
 	}
 }
 
+extension Array
+{
+	// Adds an element to this array and returns the new array
+	static func + (left: Array<Element>, right: Element) -> Array<Element>
+	{
+		var copy = left
+		copy.append(right)
+		return copy
+	}
+}
+
 extension Array where Element: AnyObject
 {
 	// Checks if the array contains a reference to the provided object instance

@@ -132,6 +132,12 @@ extension Storable
 		return Id(id: idString, indexMap: idIndexMap)
 	}
 	
+	// Parses a single property value from an id string
+	static func property(withName propertyName: String, fromId idString: String) -> PropertyValue
+	{
+		return createId(from: idString)[propertyName]
+	}
+	
 	// Wraps a database document into an instance of this class
 	static func wrap(_ document: CBLDocument) throws -> Self
 	{

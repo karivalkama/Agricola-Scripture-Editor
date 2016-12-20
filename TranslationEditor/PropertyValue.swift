@@ -261,6 +261,14 @@ struct PropertyValue: CustomStringConvertible
 		{
 			return PropertyValue(any: any)
 		}
+		else if let object = any as? JSONConvertible
+		{
+			return PropertyValue(object)
+		}
+		else if let array = any as? [JSONConvertible]
+		{
+			return PropertyValue(array)
+		}
 		else if let dict = any as? [String : Any]
 		{
 			return PropertyValue(PropertySet(dict))
@@ -277,14 +285,6 @@ struct PropertyValue: CustomStringConvertible
 			}
 			
 			return PropertyValue(propertyArray)
-		}
-		else if let object = any as? JSONConvertible
-		{
-			return PropertyValue(object)
-		}
-		else if let array = any as? [JSONConvertible]
-		{
-			return PropertyValue(array)
 		}
 		else
 		{

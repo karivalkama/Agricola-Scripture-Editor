@@ -31,8 +31,10 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	private var currentData = [Paragraph]()
 	
 	// paragraph data modified, but not committed by user
-	// Key = paragraph id
-	private var inputData = [String : EditState]()
+	// Key = paragraph path id, value = edited text
+	private var inputData = [String : NSAttributedString]()
+	// Key = path id, value = corresponding index in current paragraph data
+	private var pathIndex = [String : Int]()
 	private var active = false
 	
 	// The live query used for retrieving translation data
@@ -104,17 +106,16 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		let paragraph = currentData[indexPath.row]
 		
 		var stringContents: NSAttributedString!
-		if let inputState = inputData[paragraph.idString]
+		if let input = inputData[paragraph.pathId]
 		{
-			stringContents = inputState.text
-			// TODO: Set cell state to conflicted if necessary
+			stringContents = input
 		}
 		else
 		{
 			stringContents = paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
 		}
 		
-		cell.setContent(to: stringContents, withId: paragraph.idString)
+		cell.setContent(to: stringContents, withId: paragraph.pathId)
 		cell.inputListener = self
 		return cell
 	}
@@ -129,6 +130,13 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		{
 			// TODO: Check for conflicts. Make safer
 			currentData = rows.map { try! $0.object() }
+			// Updates the path index too
+			pathIndex = [:]
+			for i in 0 ..< currentData.count
+			{
+				pathIndex[currentData[i].pathId] = i
+			}
+			
 			print("STATUS: UPDATES ROWS")
 			translationTableView.reloadData()
 		}
@@ -139,8 +147,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	
 	func cellContentChanged(id: String, newContent: NSAttributedString)
 	{
-		let wasConflict = (inputData[id]?.isConflict).or(false)
-		inputData[id] = EditState(text: newContent, isConflict: wasConflict)
+		inputData[id] = newContent
 		
 		// Resets cell height
 		translationTableView.beginUpdates()
@@ -165,19 +172,20 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	
 	private func commit() throws
 	{
+		/*
 		for (paragraphId, editState) in inputData
 		{
 			if let paragraph = try Paragraph.get(paragraphId)
 			{
 				// TODO: Prompt the user to handle edit conflicts
 				// Makes changes to the actual paragraphs (where edited)
-				paragraph.replaceContents(with: editState.text)
-				try paragraph.push()
+				//paragraph.replaceContents(with: editState.text)
+				//try paragraph.push()
 				
 				// And saves new commits
 				// TODO: Change paragraph model structure to use versioning instead of mutable instances
 			}
-		}
+		}*/
 	}
 	
 	private func activate()
@@ -197,9 +205,10 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 				
 				for edit in paragraphEdits
 				{
-					print("STATUS: '\(edit.paragraph.text)'")
-					
-					inputData[edit.targetId] = EditState(text: edit.paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false]), isConflict: edit.isConflict)
+					for paragraph in edit.edits.values
+					{
+						inputData[paragraph.pathId] = paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
+					}
 				}
 			}
 			
@@ -218,35 +227,61 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 			// Ends the database listening process, if present
 			translationQueryManager?.stop()
 			
-			// Saves paragraph edit status to the database
-			do
+			// TODO: Test. modify later
+			guard let book = book else
 			{
-				// Deletes previous data
-				let paragraphEdits = try! getParagraphEdits()
-				paragraphEdits.forEach { try? $0.delete() }
-				
-				for (paragraphId, editState) in inputData
+				return
+			}
+			
+			// Parses the input data into paragraphs, grouped by chapter index
+			var chapterData = [Int : [Paragraph]]()
+			for (pathId, inputText) in self.inputData
+			{
+				if let index = self.pathIndex[pathId]
 				{
-					if let paragraph = try Paragraph.get(paragraphId)
-					{
-						print("STATUS: SAVING PARAGRAPH EDIT")
-						
-						paragraph.replaceContents(with: editState.text)
-						
-						let edit = ParagraphEdit(userId: userId, paragraph: paragraph, isConflict: editState.isConflict)
-						
-						print("STATUS: SAVED EDIT: \(edit.toPropertySet)")
-						
-						try edit.push()
-						
-						print("STATUS: NEW EDIT WITH ID: " + edit.idString)
-					}
+					let paragraphCopy = self.currentData[index].copy()
+					paragraphCopy.replaceContents(with: inputText)
+					
+					let chapterIndex = paragraphCopy.chapterIndex
+					chapterData[chapterIndex] = chapterData[chapterIndex].or([]) + paragraphCopy
 				}
 			}
-			catch
+			
+			// Saves paragraph edit status to the database
+			DATABASE.inTransaction
 			{
-				// TODO: Add better error handling
-				print("DB: Failed to save edit status \(error)")
+				do
+				{
+					// Finds existing edit data
+					let previousEdits = try ParagraphEditView.instance.editsForRangeQuery(bookId: book.idString).resultObjects()
+					
+					// Inserts new data to the database
+					var insertedIds = [String]()
+					for (chapterIndex, paragraphs) in chapterData
+					{
+						var edits = [String : Paragraph]()
+						for paragraph in paragraphs
+						{
+							edits[paragraph.idString] = paragraph
+						}
+						
+						let edit = ParagraphEdit(bookId: book.idString, chapterIndex: chapterIndex, userId: self.userId, edits: edits)
+						try edit.push(overwrite: true)
+						insertedIds.append(edit.idString)
+						
+						print("STATUS: SAVING EDIT \(edit.idString)")
+					}
+					
+					// Removes the old data that wasn't overwritten
+					try previousEdits.filter { !insertedIds.contains($0.idString) }.forEach { try $0.delete() }
+					
+					return true
+				}
+				catch
+				{
+					print("DB: Failed to save edit status \(error)")
+					return false
+				}
 			}
 		}
 	}
@@ -254,6 +289,6 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	private func getParagraphEdits() throws -> [ParagraphEdit]
 	{
 		guard let book = book else { return [] }
-		return try ParagraphEditView.instance.editsForRangeQuery(userId: userId, bookId: book.idString).resultObjects()
+		return try ParagraphEditView.instance.editsForRangeQuery(bookId: book.idString, userId: userId).resultObjects()
 	}
 }

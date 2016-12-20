@@ -17,7 +17,7 @@ struct PropertySet: CustomStringConvertible
 	
 	static let empty = PropertySet()
 	
-	private var properties = [String : PropertyValue]()
+	private(set) var properties = [String : PropertyValue]()
 	
 	
 	// COMP. PROPERTIES	-------

@@ -311,6 +311,13 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		}
 	}
 	
+	// Creates a new id that combines the provided data
+	/*
+	static func createId(bookId: String, chapterIndex: Int, pathId: String, created: TimeInterval) -> Id
+	{
+		return createId(from: parseId(from: [bookId, chapterIndex, pathId, created]))
+	}*/
+	
 	// Finds the book id from a paragraph id string
 	static func bookId(fromId paragraphIdString: String) -> String
 	{
