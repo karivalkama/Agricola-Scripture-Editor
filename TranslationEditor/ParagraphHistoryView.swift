@@ -106,9 +106,47 @@ final class ParagraphHistoryView: View
 	
 	// OTHER METHODS	---
 	
-	func conflictsInChapter(bookId: String, chapterIndex: Int) throws -> [String : [String]]
+	// A query for the whole history of a paragraph, from oldest to the most recent
+	func historyQuery(bookId: String, chapterIndex: Int, pathId: String) -> Query<ParagraphHistoryView>
 	{
-		let query = Query<ParagraphHistoryView>.reduceQuery(groupBy: ParagraphHistoryView.KEY_PATH_ID).withRange(createKey(bookId: bookId, chapterIndex: chapterIndex, pathId: nil))
+		return createQuery().withRange(createKey(bookId: bookId, firstChapter: chapterIndex, lastChapter: chapterIndex, pathId: pathId))
+	}
+	
+	// A query for the whole history of a specific paragraph instance, from the oldest to the most recent
+	func historyQuery(paragraphId: String) -> Query<ParagraphHistoryView>
+	{
+		// Parses the search data from the id first
+		let id = Paragraph.createId(from: paragraphId)
+		let bookId = id[Paragraph.PROPERTY_BOOK_ID].string()
+		let chapterIndex = id[Paragraph.PROPERTY_CHAPTER_INDEX].int()
+		let pathId = id[Paragraph.PROPERTY_PATH_ID].string()
+		
+		return historyQuery(bookId: bookId, chapterIndex: chapterIndex, pathId: pathId)
+	}
+	
+	// The backwards or forwards history of a certain paragraph instance
+	func historyOfParagraphQuery(paragraphId: String, limit: Int, goForward: Bool = false) -> Query<ParagraphHistoryView>
+	{
+		var query = historyQuery(paragraphId: paragraphId)
+		query.limit = limit
+		
+		if goForward
+		{
+			query.minId = (paragraphId, false)
+		}
+		else
+		{
+			query.maxId = (paragraphId, false)
+		}
+		
+		return query
+	}
+	
+	// Finds all conflicting paragraphs in certain chapter range
+	// Returns a map for each conflicting paragraph path that has all conflicting ids as values
+	func conflictsInRange(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) throws -> [String : [String]]
+	{
+		let query = Query<ParagraphHistoryView>.reduceQuery(groupBy: ParagraphHistoryView.KEY_PATH_ID).withRange(createKey(bookId: bookId, firstChapter: firstChapter, lastChapter: lastChapter, pathId: nil))
 		
 		// Runs the query and finds the rows where there are multiple latest versions
 		var conflictPaths = [String : [String]]()
@@ -128,11 +166,106 @@ final class ParagraphHistoryView: View
 		return conflictPaths
 	}
 	
-	private func createKey(bookId: String?, chapterIndex: Int?, pathId: String?) -> [String : Key]
+	// Finds the latest common ancestor of all the provided paragraph ids
+	// This method should be called only for paragraphs that share a path / history together. Usually for paragraphs returned by the conflictsInRange -method
+	func commonAncestorOf(paragraphIds: [String]) throws -> Paragraph?
+	{
+		if paragraphIds.count < 2
+		{
+			return nil
+		}
+		
+		// Finds the history of the paragraphs (assumes that they have the same history)
+		var query = historyQuery(paragraphId: paragraphIds.first!).asQueryOfType(.noObjects)
+		query.descending = true
+		
+		var pathLeaves = [String : Paragraph]()
+		var conflictsFound = false
+		var timeLimit: TimeInterval!
+		var commonAncestor: Paragraph?
+		
+		// Enumerates through the history back in time
+		try query.enumerateResult
+		{
+			row in
+			
+			// Until all of the conflicts are found, searches for the marked nodes
+			if !conflictsFound
+			{
+				if paragraphIds.contains(row.id!)
+				{
+					let paragraph = try row.object()
+					pathLeaves[row.id!] = paragraph
+					
+					if pathLeaves.count == paragraphIds.count
+					{
+						conflictsFound = true
+						timeLimit = paragraph.created
+						
+						// Finds the last nodes before the provided limit
+						for paragraphId in paragraphIds
+						{
+							if let ancestor = try pathLeaves[paragraphId]?.latestVersionBefore(timeLimit)
+							{
+								pathLeaves[paragraphId] = ancestor
+							}
+							else
+							{
+								return false
+							}
+						}
+						
+						// It may be that the common ancestor was already found
+						let id = row.id!
+						if pathLeaves.filter({ $0.1.idString == id }).count == pathLeaves.count
+						{
+							commonAncestor = paragraph
+							return false
+						}
+					}
+				}
+			}
+			// After all of the conflicts (but not the common ancestor) are found, 
+			// Checks if any of the following paragraphs suffices as the common ancestor
+			else
+			{
+				let paragraph = try row.object()
+				var thisIsTheOne = true
+				
+				for paragraphId in paragraphIds
+				{
+					if let ancestor = try pathLeaves[paragraphId]!.latestVersionBefore(paragraph.created)
+					{
+						pathLeaves[paragraphId] = ancestor
+						if ancestor.idString != paragraph.idString
+						{
+							thisIsTheOne = false
+						}
+					}
+					else
+					{
+						return false
+					}
+				}
+				
+				if thisIsTheOne
+				{
+					commonAncestor = paragraph
+					return false
+				}
+			}
+			
+			return true
+		}
+		
+		return commonAncestor
+	}
+	
+	private func createKey(bookId: String?, firstChapter: Int?, lastChapter: Int?, pathId: String?) -> [String : Key]
 	{
 		return [
 			ParagraphHistoryView.KEY_BOOK_ID : Key(bookId),
-			ParagraphHistoryView.KEY_CHAPTER_INDEX : Key(chapterIndex),
+			ParagraphHistoryView.KEY_CHAPTER_INDEX : Key([firstChapter, lastChapter]),
 			ParagraphHistoryView.KEY_PATH_ID : Key(pathId)
 		]
 	}

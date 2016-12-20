@@ -18,6 +18,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	static let optionDisplayParagraphRange = "displayParagraphRange"
 	
 	static let PROPERTY_BOOK_ID = "bookid"
+	static let PROPERTY_CHAPTER_INDEX = "chapter_index"
 	static let PROPERTY_PATH_ID = "pathId"
 	static let PROPERTY_CREATED = "paragraph_created"
 	
@@ -41,11 +42,10 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	
 	// COMP. PROPERTIES	-----
 	
-	var idProperties: [Any] {return [bookId, pathId, created]}
+	var idProperties: [Any] {return [bookId, chapterIndex, pathId, created]}
 	
 	var properties: [String : PropertyValue] {return [
 		"paras" : PropertyValue(content),
-		"chapter" : PropertyValue(chapterIndex),
 		"section" : PropertyValue(sectionIndex),
 		"index" : PropertyValue(index),
 		"creator" : PropertyValue(creatorId),
@@ -84,7 +84,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		let bookMap = Book.idIndexMap
 		let bookIdIndex = IdIndex.of(indexMap: bookMap)
 		
-		return bookMap + [PROPERTY_BOOK_ID : bookIdIndex, PROPERTY_PATH_ID : IdIndex(bookIdIndex.end), PROPERTY_CREATED : IdIndex(bookIdIndex.end + 1)]
+		return bookMap + [PROPERTY_BOOK_ID : bookIdIndex, PROPERTY_CHAPTER_INDEX : IdIndex(bookIdIndex.end), PROPERTY_PATH_ID : IdIndex(bookIdIndex.end + 1), PROPERTY_CREATED : IdIndex(bookIdIndex.end + 2)]
 	}
 	
 	
@@ -121,7 +121,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	static func create(from properties: PropertySet, withId id: Id) throws -> Paragraph
 	{
 		return try Paragraph(
-			bookId: id[PROPERTY_BOOK_ID].string(), chapterIndex: properties["chapter"].int(), sectionIndex: properties["section"].int(or: 1), index: properties["index"].int(),
+			bookId: id[PROPERTY_BOOK_ID].string(), chapterIndex: id["chapter"].int(), sectionIndex: properties["section"].int(or: 1), index: properties["index"].int(),
 			content: Para.parseArray(from: properties["paras"].array(), using: Para.parse), creatorId: properties["creator"].string(),
 			createdFrom: properties["created_from"].string, pathId: id[PROPERTY_PATH_ID].string(),
 			created: id[PROPERTY_CREATED].time(), mostRecent: properties["most_recent"].bool(or: true),deprecated: properties["deprecated"].bool(or: false))
@@ -166,6 +166,26 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		if let previousVersionId = createdFrom, let previousVersion = try Paragraph.get(previousVersionId)
 		{
 			try previousVersion.deprecateWithHistory()
+		}
+	}
+	
+	// Finds the latest version (going back only) of this paragraph that was created at or before the provided time limit (inclusive)
+	func latestVersionBefore(_ timeLimit: TimeInterval) throws -> Paragraph?
+	{
+		// If this paragraph was created before, it will suffice
+		if created <= timeLimit
+		{
+			return self
+		}
+		// Otherwise, if this paragraph has a history, searches that using recursion
+		else if let createdFrom = createdFrom, let lastVersion = try Paragraph.get(createdFrom)
+		{
+			return try lastVersion.latestVersionBefore(timeLimit)
+		}
+		// It is possible there is no sufficient version available
+		else
+		{
+			return nil
 		}
 	}
 	
@@ -281,6 +301,12 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	static func bookId(fromId paragraphIdString: String) -> String
 	{
 		return createId(from: paragraphIdString)[PROPERTY_BOOK_ID].string()
+	}
+	
+	// Finds the chapter index from a paragraph id string
+	static func chapterIndex(fromId paragraphIdString: String) -> Int
+	{
+		return createId(from: paragraphIdString)[PROPERTY_CHAPTER_INDEX].int()
 	}
 	
 	// Finds the path id from a paragraph id string

@@ -18,8 +18,8 @@ struct Query<V: View>
 	private var min: Any?
 	private var max: Any?
 	
-	var minId: String?
-	var maxId: String?
+	var minId: (String, Bool)?
+	var maxId: (String, Bool)?
 	
 	var descending = false
 	
@@ -41,18 +41,34 @@ struct Query<V: View>
 		if descending
 		{
 			query.startKey = max
-			query.startKeyDocID = maxId
-			
 			query.endKey = min
-			query.endKeyDocID = minId
+			
+			if let (minId, inclusive) = minId
+			{
+				query.endKeyDocID = minId
+				query.inclusiveEnd = inclusive
+			}
+			if let (maxId, inclusive) = maxId
+			{
+				query.startKeyDocID = maxId
+				query.inclusiveStart = inclusive
+			}
 		}
 		else
 		{
 			query.startKey = min
-			query.startKeyDocID = minId
-			
 			query.endKey = max
-			query.endKeyDocID = maxId
+			
+			if let (minId, inclusive) = minId
+			{
+				query.startKeyDocID = minId
+				query.inclusiveStart = inclusive
+			}
+			if let (maxId, inclusive) = maxId
+			{
+				query.endKeyDocID = maxId
+				query.inclusiveEnd = inclusive
+			}
 		}
 		
 		if let limit = limit
@@ -111,18 +127,30 @@ struct Query<V: View>
 		if descending
 		{
 			self.min = query.endKey
-			self.minId = query.endKeyDocID
-			
 			self.max = query.startKey
-			self.maxId = query.startKeyDocID
+			
+			if let startKey = query.startKeyDocID
+			{
+				maxId = (startKey, query.inclusiveStart)
+			}
+			if let endKey = query.endKeyDocID
+			{
+				minId = (endKey, query.inclusiveEnd)
+			}
 		}
 		else
 		{
 			self.min = query.startKey
-			self.minId = query.startKeyDocID
-			
 			self.max = query.endKey
-			self.maxId = query.endKeyDocID
+			
+			if let startKey = query.startKeyDocID
+			{
+				minId = (startKey, query.inclusiveStart)
+			}
+			if let endKey = query.endKeyDocID
+			{
+				maxId = (endKey, query.inclusiveEnd)
+			}
 		}
 		
 		if query.mapOnly
