@@ -142,6 +142,22 @@ final class ParagraphHistoryView: View
 		return query
 	}
 	
+	// Deprecates the whole path of a paragraph
+	func deprecatePath(ofId paragraphId: String) throws
+	{
+		// Finds the ids to deprecate
+		let ids = try historyQuery(paragraphId: paragraphId).resultRows().map { $0.id! }
+		
+		// Deprecates the ids, if there are any
+		if !ids.isEmpty
+		{
+			try DATABASE.tryTransaction
+			{
+				try Paragraph.deprecate(ids: ids)
+			}
+		}
+	}
+	
 	// Finds all conflicting paragraphs in certain chapter range
 	// Returns a map for each conflicting paragraph path that has all conflicting ids as values
 	func conflictsInRange(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) throws -> [String : [String]]

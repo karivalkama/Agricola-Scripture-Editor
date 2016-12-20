@@ -158,6 +158,7 @@ class USXBookProcessor: USXContentProcessor
 			for chapter in content
 			{
 				chapterIndex += 1
+				// TODO: The chapter indices are all wrong
 				
 				// Collects the new paragraphs into a single array
 				let chapterParagraphs = chapter.flatMap {(section) in section.flatMap { $0 } }
@@ -267,7 +268,7 @@ class USXBookProcessor: USXContentProcessor
 										try newParagraph.push()
 										for existing in matchingExisting
 										{
-											try existing.deprecateWithHistory()
+											try ParagraphHistoryView.instance.deprecatePath(ofId: existing.idString)
 											matchedExisting.append(existing)
 										}
 									}
@@ -276,7 +277,7 @@ class USXBookProcessor: USXContentProcessor
 								// Finally, goes through all of the existing paragraphs and deletes those that weren't matched
 								for leftWithoutMatch in unmatchedExisting.filter({ !matchedExisting.containsReference(to: $0) })
 								{
-									try leftWithoutMatch.deprecateWithHistory()
+									try ParagraphHistoryView.instance.deprecatePath(ofId: leftWithoutMatch.idString)
 								}
 							}
 						}
@@ -294,7 +295,7 @@ class USXBookProcessor: USXContentProcessor
 							try handleSingleMatches(singleMatches)
 							
 							// In case some existing paragraphs were left unmatched, removes them
-							try unmatchedExisting.forEach { try $0.deprecateWithHistory() }
+							try unmatchedExisting.forEach { try ParagraphHistoryView.instance.deprecatePath(ofId: $0.idString) }
 							// And if some paragraphs were introduced, inserts them
 							try unmatchedNew.forEach { try $0.push() }
 						}

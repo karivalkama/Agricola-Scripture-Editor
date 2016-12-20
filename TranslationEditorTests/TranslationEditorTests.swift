@@ -122,6 +122,25 @@ class TranslationEditorTests: XCTestCase
 		}
 	}
 	
+	func testRemoveDataOfType()
+	{
+		let type = Paragraph.type
+		
+		let query = DATABASE.createAllDocumentsQuery()
+		let results = try! query.run()
+		
+		while let row = results.nextRow(), let document = row.document
+		{
+			if document[PROPERTY_TYPE] as? String == type
+			{
+				print("deleting...")
+				try! document.delete()
+			}
+		}
+		
+		print("done!")
+	}
+	
 	func testRemoveEdits()
 	{
 		let editRows = try! ParagraphEditView.instance.createQuery().resultRows()

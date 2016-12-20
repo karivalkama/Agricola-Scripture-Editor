@@ -56,6 +56,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		
 		// TODO: Use certain ranges, which should be changeable
 		// Reads necessary data (TEST)
+		
 		let language = try! LanguageView.instance.language(withName: "English")
 		if let book = try! BookView.instance.booksQuery(languageId: language.idString, code: "GAL", identifier: nil).firstResultObject()
 		{
@@ -64,6 +65,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 			translationQueryManager = query.liveQueryManager
 			translationQueryManager!.addListener(AnyLiveQueryListener(self))
 		}
+
 	}
 	
 	override func viewDidAppear(_ animated: Bool)

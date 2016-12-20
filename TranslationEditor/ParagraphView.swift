@@ -50,7 +50,7 @@ final class ParagraphView: View
 				emit(key, nil)
 			}
 				
-		}, version: "4")
+		}, version: "5")
 	}
 	
 	

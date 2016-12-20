@@ -121,7 +121,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	static func create(from properties: PropertySet, withId id: Id) throws -> Paragraph
 	{
 		return try Paragraph(
-			bookId: id[PROPERTY_BOOK_ID].string(), chapterIndex: id["chapter"].int(), sectionIndex: properties["section"].int(or: 1), index: properties["index"].int(),
+			bookId: id[PROPERTY_BOOK_ID].string(), chapterIndex: id[PROPERTY_CHAPTER_INDEX].int(), sectionIndex: properties["section"].int(or: 1), index: properties["index"].int(),
 			content: Para.parseArray(from: properties["paras"].array(), using: Para.parse), creatorId: properties["creator"].string(),
 			createdFrom: properties["created_from"].string, pathId: id[PROPERTY_PATH_ID].string(),
 			created: id[PROPERTY_CREATED].time(), mostRecent: properties["most_recent"].bool(or: true),deprecated: properties["deprecated"].bool(or: false))
@@ -157,15 +157,20 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	
 	// OTHER METHODS	-----
 	
-	func deprecateWithHistory() throws
+	// Deprecates the paragraph's history until a specific instance
+	// If whole history should be deprecated, please use paragraphHistoryView instead
+	func deprecateWithHistory(until versionId: String) throws
 	{
-		// Deprecates this paragraph as well as any previous version
-		isDeprecated = true
-		try pushProperties(named: ["deprecated"])
-		
-		if let previousVersionId = createdFrom, let previousVersion = try Paragraph.get(previousVersionId)
+		if idString != versionId
 		{
-			try previousVersion.deprecateWithHistory()
+			// Deprecates this paragraph as well as any previous version
+			isDeprecated = true
+			try pushProperties(named: ["deprecated"])
+			
+			if let previousVersionId = createdFrom, let previousVersion = try Paragraph.get(previousVersionId)
+			{
+				try previousVersion.deprecateWithHistory(until: versionId)
+			}
 		}
 	}
 	
@@ -294,6 +299,15 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		else
 		{
 			return false
+		}
+	}
+	
+	// Marks each of the provided ids as deprecated
+	static func deprecate(ids: [String]) throws
+	{
+		try DATABASE.tryTransaction
+		{
+			try ids.forEach { try pushProperties(["deprecated" : PropertyValue(true)], forId: $0) }
 		}
 	}
 	
