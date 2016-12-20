@@ -18,16 +18,14 @@ final class ParagraphView: View
 	
 	
 	// ATTRIBUTES	----
-	
-	static let KEY_DEPRECATED = "deprecated"
-	static let KEY_MOST_RECENT = "most_recent"
+
 	static let KEY_BOOK_ID = "book_id"
 	static let KEY_CHAPTER_INDEX = "chapter_index"
 	static let KEY_SECTION_INDEX = "section_index"
 	static let KEY_PARAGRAPH_INDEX = "paragraph_index"
 	static let KEY_CREATED = "created"
 	
-	static let keyNames = [KEY_DEPRECATED, KEY_MOST_RECENT, KEY_BOOK_ID, KEY_CHAPTER_INDEX, KEY_SECTION_INDEX, KEY_PARAGRAPH_INDEX, KEY_CREATED]
+	static let keyNames = [KEY_BOOK_ID, KEY_CHAPTER_INDEX, KEY_SECTION_INDEX, KEY_PARAGRAPH_INDEX, KEY_CREATED]
 	
 	static let instance = ParagraphView()
 	
@@ -43,12 +41,16 @@ final class ParagraphView: View
 		{
 			(paragraph, emit) in
 			
-			// Key = is deprecated + is latest version + bookid + chapter index + section index + paragraph index + created
-			let key = [paragraph.isDeprecated, paragraph.isMostRecent, paragraph.bookId, paragraph.chapterIndex, paragraph.sectionIndex, paragraph.index, paragraph.created] as [Any]
-			
-			emit(key, nil)
-			
-		}, reduce: countRowsReduce, version: "3")
+			// Only counts paragraphs that are considered most recent and not deprecated
+			if paragraph.isMostRecent && !paragraph.isDeprecated
+			{
+				// Key = bookid + chapter index + section index + paragraph index + created
+				let key = [paragraph.bookId, paragraph.chapterIndex, paragraph.sectionIndex, paragraph.index, paragraph.created] as [Any]
+				
+				emit(key, nil)
+			}
+				
+		}, version: "4")
 	}
 	
 	
@@ -64,8 +66,6 @@ final class ParagraphView: View
 	func latestParagraphQuery(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) -> MyQuery
 	{
 		let keys = [
-			ParagraphView.KEY_DEPRECATED : Key(false),
-			ParagraphView.KEY_MOST_RECENT : Key(true),
 			ParagraphView.KEY_BOOK_ID : Key(bookId),
 			ParagraphView.KEY_CHAPTER_INDEX : Key([firstChapter, lastChapter])
 		]
@@ -76,8 +76,6 @@ final class ParagraphView: View
 	func paragraphIndexQuery(bookId: String, chapterIndex: Int, sectionIndex: Int, paragraphIndex: Int) -> MyQuery
 	{
 		let keys = [
-			ParagraphView.KEY_DEPRECATED : Key(false),
-			ParagraphView.KEY_MOST_RECENT : Key(true),
 			ParagraphView.KEY_BOOK_ID : Key(bookId),
 			ParagraphView.KEY_CHAPTER_INDEX : Key(chapterIndex),
 			ParagraphView.KEY_SECTION_INDEX : Key(sectionIndex),
@@ -87,6 +85,7 @@ final class ParagraphView: View
 		return MyQuery(range: keys)
 	}
 	
+	/*
 	// Checks whether the provided range contains at least a single conflict
 	func hasConflictsInRange(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) throws -> Bool
 	{
@@ -150,4 +149,5 @@ final class ParagraphView: View
 			return true
 		}
 	}
+*/
 }

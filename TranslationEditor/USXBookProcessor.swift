@@ -147,7 +147,7 @@ class USXBookProcessor: USXContentProcessor
 			try book.push()
 			
 			// Checks if there are any conflicts in the book's range
-			if try ParagraphView.instance.hasConflictsInRange(bookId: book.idString)
+			if try !ParagraphHistoryView.instance.conflictsInRange(bookId: book.idString).isEmpty
 			{
 				throw USXParseError.paragraphsAreConflicted
 			}
@@ -168,7 +168,8 @@ class USXBookProcessor: USXContentProcessor
 				// If there are no existing paragraphs, simply pushes the new ones to the database
 				if existingParagraphs.isEmpty
 				{
-					try chapterParagraphs.forEach { try $0.push() }
+					// Performs the pushes in a single transaction
+					try DATABASE.tryTransaction { try chapterParagraphs.forEach { try $0.push() } }
 				}
 				// Matches existing paragraphs to new paragraphs and operates on those
 				else
@@ -234,45 +235,49 @@ class USXBookProcessor: USXContentProcessor
 						// Matches the unmatched paragraphs using a special algorithm
 						if let matchResults = matchParagraphs(unmatchedExisting, unmatchedNew)
 						{
-							// Handles the single matches first
-							try handleSingleMatches(singleMatches)
-							
-							var matchedExisting = [Paragraph]()
-							
-							// Goes through all new paragraphs
-							for newParagraph in unmatchedNew
+							// Makes the database changes in a single transaction
+							try DATABASE.tryTransaction
 							{
-								// Finds out how many connections were made to that paragraph
-								let matchingExisting = matchResults.filter { (_, new) in return new === newParagraph }.map { (existing, _) in return existing }
+								// Handles the single matches first
+								try handleSingleMatches(singleMatches)
 								
-								// If there are 0 or if all of the existing paragraphs were already matched, saves as a new paragraph
-								if matchedExisting.containsReferences(to: matchingExisting)
+								var matchedExisting = [Paragraph]()
+								
+								// Goes through all new paragraphs
+								for newParagraph in unmatchedNew
 								{
-									try newParagraph.push()
-								}
-								// Otherwise, if there is only a single match, overwrites that version
-								else if matchingExisting.count == 1
-								{
-									let existing = matchingExisting.first!
-									try handleSingleMatch(existing: existing, newVersion: newParagraph)
-									matchedExisting.append(existing)
-								}
-								// If there are multiple matches, inserts the paragraph as new and removes the old versions
-								else
-								{
-									try newParagraph.push()
-									for existing in matchingExisting
+									// Finds out how many connections were made to that paragraph
+									let matchingExisting = matchResults.filter { (_, new) in return new === newParagraph }.map { (existing, _) in return existing }
+									
+									// If there are 0 or if all of the existing paragraphs were already matched, saves as a new paragraph
+									if matchedExisting.containsReferences(to: matchingExisting)
 									{
-										try existing.deprecateWithHistory()
+										try newParagraph.push()
+									}
+										// Otherwise, if there is only a single match, overwrites that version
+									else if matchingExisting.count == 1
+									{
+										let existing = matchingExisting.first!
+										try handleSingleMatch(existing: existing, newVersion: newParagraph)
 										matchedExisting.append(existing)
 									}
+										// If there are multiple matches, inserts the paragraph as new and removes the old versions
+									else
+									{
+										try newParagraph.push()
+										for existing in matchingExisting
+										{
+											try existing.deprecateWithHistory()
+											matchedExisting.append(existing)
+										}
+									}
 								}
-							}
-							
-							// Finally, goes through all of the existing paragraphs and deletes those that weren't matched
-							for leftWithoutMatch in unmatchedExisting.filter({ !matchedExisting.containsReference(to: $0) })
-							{
-								try leftWithoutMatch.deprecateWithHistory()
+								
+								// Finally, goes through all of the existing paragraphs and deletes those that weren't matched
+								for leftWithoutMatch in unmatchedExisting.filter({ !matchedExisting.containsReference(to: $0) })
+								{
+									try leftWithoutMatch.deprecateWithHistory()
+								}
 							}
 						}
 						// Which may fail
@@ -283,12 +288,16 @@ class USXBookProcessor: USXContentProcessor
 					}
 					else
 					{
-						try handleSingleMatches(singleMatches)
-						
-						// In case some existing paragraphs were left unmatched, removes them
-						try unmatchedExisting.forEach { try $0.deprecateWithHistory() }
-						// And if some paragraphs were introduced, inserts them
-						try unmatchedNew.forEach { try $0.push() }
+						// Makes the database changes in a single transaction
+						try DATABASE.tryTransaction
+						{
+							try handleSingleMatches(singleMatches)
+							
+							// In case some existing paragraphs were left unmatched, removes them
+							try unmatchedExisting.forEach { try $0.deprecateWithHistory() }
+							// And if some paragraphs were introduced, inserts them
+							try unmatchedNew.forEach { try $0.push() }
+						}
 					}
 				}
 			}
