@@ -40,8 +40,6 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	// The live query used for retrieving translation data
 	private var translationQueryManager: LiveQueryManager<ParagraphView>?
 	
-	private var committing = false
-	
 	
 	// VIEW CONTROLLER	-----
 	
@@ -131,20 +129,17 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	{
 		print("STATUS: ROWS UPDATING")
 		
-		// Updates paragraph data (unless committing is in progress)
-		if !committing
+		// Updates paragraph data
+		// TODO: Check for conflicts. Make safer
+		currentData = rows.map { try! $0.object() }
+		// Updates the path index too
+		pathIndex = [:]
+		for i in 0 ..< currentData.count
 		{
-			// TODO: Check for conflicts. Make safer
-			currentData = rows.map { try! $0.object() }
-			// Updates the path index too
-			pathIndex = [:]
-			for i in 0 ..< currentData.count
-			{
-				pathIndex[currentData[i].pathId] = i
-			}
-			
-			translationTableView.reloadData()
+			pathIndex[currentData[i].pathId] = i
 		}
+		
+		translationTableView.reloadData()
 	}
 	
 	
@@ -173,14 +168,25 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	}
 	
 	
+	// IB ACTIONS	-----------------
+	
+	@IBAction func commitPressed(_ sender: Any)
+	{
+		// Makes a new commit
+		commit()
+	}
+	
+	
 	// OTHER	---------------------
 	
-	private func commit() throws
+	private func commit()
 	{
 		guard !inputData.isEmpty else
 		{
 			return
 		}
+		
+		print("STATUS: STARTING COMMIT")
 		
 		DATABASE.inTransaction
 		{
@@ -198,6 +204,8 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 				
 				// Clears the input afterwards
 				self.inputData = [:]
+				
+				print("STATUS: COMMIT COMPLETE")
 				
 				return true
 			}
