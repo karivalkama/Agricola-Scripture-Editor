@@ -52,7 +52,7 @@ final class BookView: View
 	{
 		let keys = [
 			BookView.KEY_LANGUAGE : Key(languageId),
-			BookView.KEY_BOOK_CODE : Key(code),
+			BookView.KEY_BOOK_CODE : Key(code?.lowercased()),
 			BookView.KEY_BOOK_IDENTIFIER : Key(identifier)
 		]
 		return Query<BookView>(range: keys)

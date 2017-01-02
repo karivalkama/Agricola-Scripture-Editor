@@ -103,9 +103,14 @@ struct PropertySet: CustomStringConvertible
 		{
 			if let parsedValue = PropertyValue.of(value)
 			{
-				self.properties[propertyName.lowercased()] = parsedValue
+				self[propertyName] = parsedValue
 			}
 		}
+	}
+	
+	private init(properties: [String : PropertyValue])
+	{
+		self.properties = properties
 	}
 	
 	
@@ -124,7 +129,7 @@ struct PropertySet: CustomStringConvertible
 	// The properties of the left set will be overwritten by right side properties where they have the same name
 	static func +(_ left: PropertySet, _ right: PropertySet) -> PropertySet
 	{
-		return PropertySet(left.properties + right.properties)
+		return PropertySet(properties: left.properties + right.properties)
 	}
 	
 	

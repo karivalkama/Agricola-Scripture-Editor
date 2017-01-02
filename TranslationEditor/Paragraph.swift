@@ -19,7 +19,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	
 	static let PROPERTY_BOOK_ID = "bookid"
 	static let PROPERTY_CHAPTER_INDEX = "chapter_index"
-	static let PROPERTY_PATH_ID = "pathId"
+	static let PROPERTY_PATH_ID = "path_id"
 	static let PROPERTY_CREATED = "paragraph_created"
 	
 	static let type = "paragraph"
@@ -93,7 +93,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	init(
 		bookId: String, chapterIndex: Int, sectionIndex: Int, index: Int,
 		content: [Para], creatorId: String,
-		createdFrom: String? = nil, pathId: String = UUID().uuidString,
+		createdFrom: String? = nil, pathId: String = UUID().uuidString.lowercased(),
 		created: TimeInterval = Date().timeIntervalSince1970, mostRecent: Bool = true, deprecated: Bool = false)
 	{
 		self.pathId = pathId

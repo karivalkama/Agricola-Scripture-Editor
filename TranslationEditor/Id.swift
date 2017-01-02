@@ -24,9 +24,9 @@ struct Id
 	
 	init(id: String, indexMap: [String : IdIndex])
 	{
-		self.idString = id
+		self.idString = id.lowercased()
 		self.indexMap = indexMap
-		self.idParts = id.components(separatedBy: ID_SEPARATOR)
+		self.idParts = idString.components(separatedBy: ID_SEPARATOR)
 	}
 	
 	

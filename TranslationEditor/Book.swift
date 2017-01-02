@@ -39,9 +39,9 @@ final class Book: Storable
 	
 	// INIT	----------------
 	
-	init(code: String, identifier: String, languageId: String, uid: String = UUID().uuidString)
+	init(code: String, identifier: String, languageId: String, uid: String = UUID().uuidString.lowercased())
 	{
-		self.code = code
+		self.code = code.lowercased()
 		self.identifier = identifier
 		self.languageId = languageId
 		self.uid = uid

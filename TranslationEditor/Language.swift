@@ -30,7 +30,7 @@ final class Language: Storable
 	
 	// INIT	---------------
 	
-	init(name: String, uid: String = UUID().uuidString)
+	init(name: String, uid: String = UUID().uuidString.lowercased())
 	{
 		self.uid = uid
 		self.name = name

@@ -122,6 +122,17 @@ class TranslationEditorTests: XCTestCase
 		}
 	}
 	
+	func testClearDatabase()
+	{
+		let query = DATABASE.createAllDocumentsQuery()
+		let results = try! query.run()
+		
+		while let row = results.nextRow(), let doc = row.document
+		{
+			try! doc.delete()
+		}
+	}
+	
 	func testRemoveDataOfType()
 	{
 		let type = Paragraph.type
@@ -201,7 +212,6 @@ class TranslationEditorTests: XCTestCase
 		}
 	}
 	
-	@available (*, deprecated)
 	func testUSXParsing()
 	{
 		guard let url = Bundle.main.url(forResource: "GAL", withExtension: "usx")

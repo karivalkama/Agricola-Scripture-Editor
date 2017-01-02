@@ -24,6 +24,8 @@ extension JSONConvertible
 	// Parses an array of property data into an array of object data
 	static func parseArray(from array: [PropertyValue], using converter: (PropertySet) throws -> Self) rethrows -> [Self]
 	{
+		//array.forEach { print("\($0.any)") }
+		
 		return try array.map { try converter($0.object()) }
 	}
 }

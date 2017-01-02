@@ -105,10 +105,14 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		// Updates cell content (either from current data or from current input status)
 		let paragraph = currentData[indexPath.row]
 		
+		print("STATUS: Finding input for \(paragraph.pathId)")
+		
 		var stringContents: NSAttributedString!
 		if let input = inputData[paragraph.pathId]
 		{
 			stringContents = input
+			print("STATUS: Presenting input data")
+			// TODO: This doesn't get called
 		}
 		else
 		{
@@ -125,6 +129,8 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	
 	func rowsUpdated(rows: [Row<ParagraphView>])
 	{
+		print("STATUS: ROWS UPDATING")
+		
 		// Updates paragraph data (unless committing is in progress)
 		if !committing
 		{
@@ -137,7 +143,6 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 				pathIndex[currentData[i].pathId] = i
 			}
 			
-			print("STATUS: UPDATES ROWS")
 			translationTableView.reloadData()
 		}
 	}
@@ -205,11 +210,16 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 				
 				for edit in paragraphEdits
 				{
+					print("STATUS: Edit status: \(edit.idString), \(edit.toPropertySet)")
+					
 					for paragraph in edit.edits.values
 					{
+						print("Updating input for paragraph \(paragraph.pathId)")
 						inputData[paragraph.pathId] = paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
 					}
 				}
+				
+				print("There are now \(inputData.count) inputs")
 			}
 			
 			// Starts the database listening process, if not yet started
