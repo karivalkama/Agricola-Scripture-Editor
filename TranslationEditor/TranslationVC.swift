@@ -177,20 +177,37 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	
 	private func commit() throws
 	{
-		/*
-		for (paragraphId, editState) in inputData
+		guard !inputData.isEmpty else
 		{
-			if let paragraph = try Paragraph.get(paragraphId)
+			return
+		}
+		
+		DATABASE.inTransaction
+		{
+			do
 			{
-				// TODO: Prompt the user to handle edit conflicts
-				// Makes changes to the actual paragraphs (where edited)
-				//paragraph.replaceContents(with: editState.text)
-				//try paragraph.push()
+				// Saves each user input as a commit
+				for (pathId, text) in self.inputData
+				{
+					if let index = self.pathIndex[pathId]
+					{
+						let paragraph = self.currentData[index]
+						_ = try paragraph.commit(userId: self.userId, text: text)
+					}
+				}
 				
-				// And saves new commits
-				// TODO: Change paragraph model structure to use versioning instead of mutable instances
+				// Clears the input afterwards
+				self.inputData = [:]
+				
+				return true
 			}
-		}*/
+			catch
+			{
+				// TODO: Create better error handling
+				print("STATUS: ERROR WHILE COMMITTING \(error)")
+				return false
+			}
+		}
 	}
 	
 	private func activate()

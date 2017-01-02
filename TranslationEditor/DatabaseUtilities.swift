@@ -32,6 +32,6 @@ func parseId(from array: [Any]) -> String
 	}
 	else
 	{
-		return array.dropFirst().reduce("\(array.first!)") {(current, part) in return current + ID_SEPARATOR + "\(part)"}
+		return array.dropFirst().reduce("\(array.first!)".lowercased()) {(current, part) in return current + ID_SEPARATOR + "\(part)".lowercased()}
 	}
 }

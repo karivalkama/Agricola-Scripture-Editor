@@ -195,21 +195,37 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	}
 	
 	// Creates a new version of this paragraph and saves it to the database
-	// Returns the created commit version
-	func commit(userId: String, chapterIndex: Int? = nil, sectionIndex: Int? = nil, paragraphIndex: Int? = nil, content: [Para]? = nil) throws -> Paragraph
+	// Returns the created commit version (or this version if no changes were made)
+	// Parameters content and text are mutually exclusive
+	func commit(userId: String, chapterIndex: Int? = nil, sectionIndex: Int? = nil, paragraphIndex: Int? = nil, content: [Para]? = nil, text: NSAttributedString? = nil) throws -> Paragraph
 	{
+		let content = content.or(text == nil ? self.content.copy() : [])
+		
 		let newVersion = Paragraph(
 			bookId: bookId, chapterIndex: chapterIndex.or(self.chapterIndex), sectionIndex: sectionIndex.or(self.sectionIndex), index: paragraphIndex.or(self.index),
-			content: content.or(self.content.copy()), creatorId: userId,
+			content: content, creatorId: userId,
 			createdFrom: idString, pathId: pathId)
 		
-		try newVersion.push()
+		if let text = text
+		{
+			newVersion.replaceContents(with: text)
+		}
 		
-		// This version is no longer the most recent out there
-		isMostRecent = false
-		try pushProperties(named: ["most_recent"])
-		
-		return newVersion
+		// Only saves changes if there were any
+		if newVersion.chapterIndex != self.chapterIndex || newVersion.sectionIndex != self.sectionIndex || newVersion.index != self.index || !paraContentsEqual(with: newVersion)
+		{
+			try newVersion.push()
+			
+			// This version is no longer the most recent out there
+			isMostRecent = false
+			try pushProperties(named: ["most_recent"])
+			
+			return newVersion
+		}
+		else
+		{
+			return self
+		}
 	}
 	
 	// Display paragraph range option available
