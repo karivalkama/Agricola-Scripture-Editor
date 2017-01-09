@@ -128,10 +128,10 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yBB-ki-v5F">
                                 <rect key="frame" x="8" y="56" width="1008" height="704"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="apn-1P-Iz2" userLabel="Resource Stack View">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="apn-1P-Iz2" userLabel="Resource Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="500" height="704"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="King James II" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XY4-ep-Zjb">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English - Good News" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XY4-ep-Zjb">
                                                 <rect key="frame" x="0.0" y="0.0" width="500" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="UtD-wg-3Wi"/>
@@ -140,9 +140,45 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2EI-Mh-Uso">
-                                                <rect key="frame" x="0.0" y="32" width="500" height="672"/>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ree-vj-F6F">
+                                                <rect key="frame" x="0.0" y="40" width="500" height="33"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="AHj-DG-JMh"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="English - Good News"/>
+                                                    <segment title="Notes"/>
+                                                </segments>
+                                                <color key="tintColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </segmentedControl>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2EI-Mh-Uso">
+                                                <rect key="frame" x="0.0" y="80" width="500" height="624"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sourceCell" rowHeight="86" id="fKr-Fz-xVH">
+                                                        <rect key="frame" x="0.0" y="28" width="500" height="86"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fKr-Fz-xVH" id="4ys-Pw-Kah">
+                                                            <rect key="frame" x="0.0" y="0.0" width="500" height="85"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HeG-UF-hqZ">
+                                                                    <rect key="frame" x="8" y="0.0" width="484" height="85.5"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                </textView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="HeG-UF-hqZ" firstAttribute="leading" secondItem="4ys-Pw-Kah" secondAttribute="leading" constant="8" id="MGQ-c8-ggb"/>
+                                                                <constraint firstAttribute="trailing" secondItem="HeG-UF-hqZ" secondAttribute="trailing" constant="8" id="WNg-rV-9An"/>
+                                                                <constraint firstItem="HeG-UF-hqZ" firstAttribute="top" secondItem="4ys-Pw-Kah" secondAttribute="top" id="c6C-tB-CTF"/>
+                                                                <constraint firstAttribute="bottom" secondItem="HeG-UF-hqZ" secondAttribute="bottom" id="glw-5d-2Uy"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                </prototypes>
                                             </tableView>
                                         </subviews>
                                         <constraints>
@@ -269,7 +305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="116" y="125.4872563718141"/>
+            <point key="canvasLocation" x="115.42968749999999" y="125"/>
         </scene>
     </scenes>
     <resources>
