@@ -238,6 +238,69 @@ class TranslationEditorTests: XCTestCase
 		print("Done")
 	}
 	
+	func testMakeBind()
+	{
+		let bookCode = "gal"
+		let sourceLanguageName = "English"
+		let targetLanguageName = "Finnish"
+		let userId = "testuserid"
+		
+		// Reads language data
+		let sourceLanguage = try! LanguageView.instance.language(withName: sourceLanguageName)
+		let targetLanguage = try! LanguageView.instance.language(withName: targetLanguageName)
+		
+		// Finds book data
+		guard let sourceBookId = try! BookView.instance.booksQuery(languageId: sourceLanguage.idString, code: bookCode).firstResultRow()?.id else
+		{
+			assertionFailure("TEST: No book \(bookCode) for language \(sourceLanguageName)")
+			return
+		}
+		
+		guard let targetBookId = try! BookView.instance.booksQuery(languageId: targetLanguage.idString, code: bookCode).firstResultRow()?.id else
+		{
+			assertionFailure("TEST: No book \(bookCode) for language \(targetLanguageName)")
+			return
+		}
+		
+		// Checks if there already exists a non-deprecated binding
+		guard try! ParagraphBindingView.instance.latestBinding(from: sourceBookId, to: targetBookId) == nil else
+		{
+			assertionFailure("TEST: Binding already exists")
+			return
+		}
+		
+		// Finds the paragraphs
+		let sourceParagraphIds = try! ParagraphView.instance.latestParagraphQuery(bookId: sourceBookId).resultRows().map { $0.id! }
+		let targetParagraphIds = try! ParagraphView.instance.latestParagraphQuery(bookId: targetBookId).resultRows().map { $0.id! }
+		
+		print("TEST: Found \(sourceParagraphIds.count) -> \(targetParagraphIds.count) paragraphs")
+		
+		guard !sourceParagraphIds.isEmpty && !targetParagraphIds.isEmpty else
+		{
+			assertionFailure("Didn't didn't find any paragraphs!")
+			return
+		}
+		
+		// This simple algorithm only works if there is equal amount of paragraphs on both sides
+		guard sourceParagraphIds.count == targetParagraphIds.count else
+		{
+			assertionFailure("Different amount of paragraphs on different sides -> Can't make a simple binding")
+			return
+		}
+		
+		// Creates the binding
+		var bindings = [(String, String)]()
+		for i in 0 ..< sourceParagraphIds.count
+		{
+			bindings.append((sourceParagraphIds[i], targetParagraphIds[i]))
+		}
+		
+		let binding = ParagraphBinding(sourceBookId: sourceBookId, targetBookId: targetBookId, bindings: bindings, creatorId: userId)
+		try! binding.push()
+		
+		print("TEST: DONE")
+	}
+	
 	func testUSXParsing()
 	{
 		guard let url = Bundle.main.url(forResource: "GAL", withExtension: "usx")
