@@ -98,9 +98,9 @@ extension View
 	}
 	
 	// Creates a new query of this view
-	func createQuery(ofType type: QueryType = .object) -> Query<Self>
+	func createQuery(ofType type: QueryType = .object, withKeys keys: [String : Key] = [:]) -> Query<Self>
 	{
-		return Query<Self>(type: type)
+		return Query<Self>(type: type, range: keys)
 	}
 	
 	/*

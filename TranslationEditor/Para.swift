@@ -186,6 +186,12 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 	
 	// OTHER	-------
 	
+	// Creates a copy of this para element without any character data content
+	func emptyCopy() -> Para
+	{
+		return Para(content: verses.map { $0.emptyCopy() }, style: style)
+	}
+	
 	func replaceContents(with usxString: NSAttributedString)
 	{
 		// Deletes previous contents

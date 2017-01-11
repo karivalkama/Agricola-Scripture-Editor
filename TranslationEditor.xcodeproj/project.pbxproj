@@ -248,6 +248,12 @@
 		7CDBD6B41E2391CE00912320 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6B31E2391CE00912320 /* Resource.swift */; };
 		7CDBD6B51E2391CE00912320 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6B31E2391CE00912320 /* Resource.swift */; };
 		7CDBD6B61E2391CE00912320 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6B31E2391CE00912320 /* Resource.swift */; };
+		7CDBD6B81E26200200912320 /* ParagraphBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6B71E26200200912320 /* ParagraphBinding.swift */; };
+		7CDBD6B91E26200200912320 /* ParagraphBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6B71E26200200912320 /* ParagraphBinding.swift */; };
+		7CDBD6BA1E26200200912320 /* ParagraphBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6B71E26200200912320 /* ParagraphBinding.swift */; };
+		7CDBD6BC1E2657F900912320 /* ParagraphBindingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6BB1E2657F900912320 /* ParagraphBindingView.swift */; };
+		7CDBD6BD1E2657F900912320 /* ParagraphBindingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6BB1E2657F900912320 /* ParagraphBindingView.swift */; };
+		7CDBD6BE1E2657F900912320 /* ParagraphBindingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6BB1E2657F900912320 /* ParagraphBindingView.swift */; };
 		89DB5B1F0997FCC7DC1FE193 /* Pods_TranslationEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A629A8BBB661036AD32A63 /* Pods_TranslationEditor.framework */; };
 		E34ED533901B5B0626CD192D /* Pods_TranslationEditorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D52CD448467628FBD04BFD /* Pods_TranslationEditorTests.framework */; };
 /* End PBXBuildFile section */
@@ -369,6 +375,8 @@
 		7CDBD6AB1E238ACB00912320 /* ResourceCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceCollection.swift; sourceTree = "<group>"; };
 		7CDBD6AF1E23900B00912320 /* SourceTranslationParagraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceTranslationParagraph.swift; sourceTree = "<group>"; };
 		7CDBD6B31E2391CE00912320 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		7CDBD6B71E26200200912320 /* ParagraphBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphBinding.swift; sourceTree = "<group>"; };
+		7CDBD6BB1E2657F900912320 /* ParagraphBindingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphBindingView.swift; sourceTree = "<group>"; };
 		C1D52CD448467628FBD04BFD /* Pods_TranslationEditorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2CCD571AB68ECBDE6770270 /* Pods_TranslationEditorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A629A8BBB661036AD32A63 /* Pods_TranslationEditor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -554,6 +562,7 @@
 				7C40DF7F1DEDB4C10035B92E /* BookView.swift */,
 				7C4A4F961DEF0CDE009F890E /* LanguageView.swift */,
 				7C4A4FFF1E016A3B009F890E /* ParagraphHistoryView.swift */,
+				7CDBD6BB1E2657F900912320 /* ParagraphBindingView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -630,6 +639,7 @@
 				7C4A4FB11DF95FE3009F890E /* ParagraphEdit.swift */,
 				7C40DF6B1DEC59AB0035B92E /* Book.swift */,
 				7C40DF7B1DED9FB90035B92E /* Language.swift */,
+				7CDBD6B71E26200200912320 /* ParagraphBinding.swift */,
 			);
 			name = Translation;
 			sourceTree = "<group>";
@@ -1004,6 +1014,7 @@
 				7CD8EA621DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,
 				7C40DF7C1DED9FB90035B92E /* Language.swift in Sources */,
 				7C20D7FA1D9A768700E84BA5 /* VerseRange.swift in Sources */,
+				7CDBD6BC1E2657F900912320 /* ParagraphBindingView.swift in Sources */,
 				7CCC01241DA64A1A00F0562E /* SectionPrev.swift in Sources */,
 				7CCC012C1DA6714B00F0562E /* ChapterPrev.swift in Sources */,
 				7C40DF5F1DE71E490035B92E /* DatabaseUtilities.swift in Sources */,
@@ -1013,6 +1024,7 @@
 				7C4A4FC41DFAB0AA009F890E /* ColorExtension.swift in Sources */,
 				7C4CC1771DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7CCC00EE1D9D193F00F0562E /* CollectionExtension.swift in Sources */,
+				7CDBD6B81E26200200912320 /* ParagraphBinding.swift in Sources */,
 				7C4A4FA21DF829C5009F890E /* CellInputListener.swift in Sources */,
 				7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */,
 				7CDBD6B01E23900B00912320 /* SourceTranslationParagraph.swift in Sources */,
@@ -1051,6 +1063,7 @@
 				7CDBD6AD1E238ACB00912320 /* ResourceCollection.swift in Sources */,
 				7C20D7E91D8BF9B100E84BA5 /* Para.swift in Sources */,
 				7C4A4FBD1DFA897F009F890E /* AppDelegate.swift in Sources */,
+				7CDBD6BD1E2657F900912320 /* ParagraphBindingView.swift in Sources */,
 				7CCC01391DA7B45A00F0562E /* USXCharParser.swift in Sources */,
 				7CCC01311DA67B0E00F0562E /* BookPrev.swift in Sources */,
 				7C40DF641DEC14C80035B92E /* JSONConvertible.swift in Sources */,
@@ -1060,6 +1073,7 @@
 				7C40DF811DEDB4C10035B92E /* BookView.swift in Sources */,
 				7C40DF6D1DEC59AB0035B92E /* Book.swift in Sources */,
 				7C40DF791DED6C530035B92E /* Paragraph.swift in Sources */,
+				7CDBD6B91E26200200912320 /* ParagraphBinding.swift in Sources */,
 				7C4A4FC11DFAA60E009F890E /* Colours.swift in Sources */,
 				7C4A4FAF1DF93B75009F890E /* AnyLiveQueryListener.swift in Sources */,
 				7CCC00F71D9D361000F0562E /* Verse.swift in Sources */,
@@ -1135,6 +1149,7 @@
 				7CDBD6AE1E238ACB00912320 /* ResourceCollection.swift in Sources */,
 				7C20D7EA1D8BF9B100E84BA5 /* Para.swift in Sources */,
 				7C4A4FBE1DFA8980009F890E /* AppDelegate.swift in Sources */,
+				7CDBD6BE1E2657F900912320 /* ParagraphBindingView.swift in Sources */,
 				7CCC013A1DA7B45A00F0562E /* USXCharParser.swift in Sources */,
 				7CCC01321DA67B0E00F0562E /* BookPrev.swift in Sources */,
 				7C40DF651DEC14C80035B92E /* JSONConvertible.swift in Sources */,
@@ -1144,6 +1159,7 @@
 				7C40DF821DEDB4C10035B92E /* BookView.swift in Sources */,
 				7C40DF6E1DEC59AB0035B92E /* Book.swift in Sources */,
 				7C40DF7A1DED6C530035B92E /* Paragraph.swift in Sources */,
+				7CDBD6BA1E26200200912320 /* ParagraphBinding.swift in Sources */,
 				7C4A4FC21DFAA60E009F890E /* Colours.swift in Sources */,
 				7C4A4FB01DF93B75009F890E /* AnyLiveQueryListener.swift in Sources */,
 				7CCC00F81D9D361000F0562E /* Verse.swift in Sources */,

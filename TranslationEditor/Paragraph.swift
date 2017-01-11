@@ -228,6 +228,13 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		}
 	}
 	
+	// Creates a copy of this paragraph that has no content (layout and index are preserved)
+	// The book, uid, creator and created values are also different
+	func emptyCopy(forBook bookId: String, creatorId: String) -> Paragraph
+	{
+		return Paragraph(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, index: index, content: content.map { $0.emptyCopy() }, creatorId: creatorId)
+	}
+	
 	// Display paragraph range option available
 	func toAttributedString(options: [String : Any]) -> NSAttributedString
 	{

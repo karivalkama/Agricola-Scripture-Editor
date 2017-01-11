@@ -212,6 +212,32 @@ class TranslationEditorTests: XCTestCase
 		}
 	}
 	
+	func testMakeFinnishCopies()
+	{
+		let userId = "testuserid"
+		let sourceLanguageName = "English"
+		let targetLanguageName = "Finnish"
+		
+		// Finds / makes language data
+		let sourceLanguage = try! LanguageView.instance.language(withName: sourceLanguageName)
+		let targetLanguage = try! LanguageView.instance.language(withName: targetLanguageName)
+		
+		// Finds source books
+		let sourceBooks = try! BookView.instance.booksQuery(languageId: sourceLanguage.idString).resultObjects()
+		
+		// Makes an empty copy of each, if there isn't one already
+		for sourceBook in sourceBooks
+		{
+			if try! BookView.instance.booksQuery(languageId: targetLanguage.idString, code: sourceBook.code).firstResultRow() == nil
+			{
+				print("Creating a \(targetLanguageName) copy of \(sourceLanguageName) book \(sourceBook.code): \(sourceBook.identifier)")
+				_ = try! sourceBook.makeEmptyCopy(identifier: "Test Version", languageId: targetLanguage.idString, userId: userId)
+			}
+		}
+		
+		print("Done")
+	}
+	
 	func testUSXParsing()
 	{
 		guard let url = Bundle.main.url(forResource: "GAL", withExtension: "usx")

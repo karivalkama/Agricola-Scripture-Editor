@@ -155,4 +155,10 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable
 	{
 		return range == other.range && content == other.content
 	}
+	
+	// Creates a copy of this verse that has no character data in it
+	func emptyCopy() -> Verse
+	{
+		return Verse(range: range)
+	}
 }

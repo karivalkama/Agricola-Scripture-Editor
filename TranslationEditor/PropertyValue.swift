@@ -240,6 +240,11 @@ struct PropertyValue: CustomStringConvertible
 		value = array?.map { PropertyValue($0) }
 	}
 	
+	init(_ array: [PropertySet]?)
+	{
+		value = array?.map { PropertyValue($0) }
+	}
+	
 	private init(any: Any? = nil)
 	{
 		value = any

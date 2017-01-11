@@ -72,6 +72,29 @@ final class Book: Storable
 	
 	// OTHER METHODS	--------
 	
+	// Creates a copy of this book that contains the same paragraph formatting but none of the original content
+	// The resulting book data is saved into database as part of this operation
+	func makeEmptyCopy(identifier: String, languageId: String, userId: String) throws -> Book
+	{
+		// Creates the new book instance
+		let newBook = Book(code: self.code, identifier: identifier, languageId: languageId)
+		
+		// Finds the existing paragraphs
+		let existingParagraphs = try ParagraphView.instance.latestParagraphQuery(bookId: idString).resultObjects()
+		
+		// Creates a copy of each paragraph with no existing content
+		let newParagraphs = existingParagraphs.map { $0.emptyCopy(forBook: newBook.idString, creatorId: userId) }
+		
+		// Saves the newly generated data into the database
+		try DATABASE.tryTransaction
+		{
+			try newBook.push()
+			try newParagraphs.forEach { try $0.push() }
+		}
+		
+		return newBook
+	}
+	
 	// Parses the book code out of a book id string
 	static func code(fromId bookIdString: String) -> String
 	{
