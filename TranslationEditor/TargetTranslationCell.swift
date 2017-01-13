@@ -38,7 +38,7 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 	func textViewDidChange(_ textView: UITextView)
 	{
 		// Informs the listeners, if present
-		if let listener = inputListener, let contentPathId = contentPathId
+		if let listener = inputListener, let contentPathId = pathId
 		{
 			listener.cellContentChanged(id: contentPathId, newContent: textView.attributedText)
 		}

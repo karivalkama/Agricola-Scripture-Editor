@@ -19,6 +19,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	// OUTLETS	----------
 	
 	@IBOutlet weak var translationTableView: UITableView!
+	@IBOutlet weak var resourceTableView: UITableView!
 	
 	
 	// PROPERTIES	---------
@@ -29,6 +30,13 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	
 	// Target translation managing
 	private var targetTranslationDS: TranslationTableViewDS?
+	
+	// Source translation managing
+	private var sourceTranslationDS: TranslationTableViewDS?
+	
+	// Table binding
+	private var binding: ParagraphBinding?
+	private var scrollManager: ScrollSyncManager?
 	
 	// paragraph data modified, but not committed by user
 	// Key = paragraph path id, value = edited text
@@ -47,19 +55,62 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		translationTableView.rowHeight = UITableViewAutomaticDimension
 		translationTableView.estimatedRowHeight = 160
 		
-		//translationTableView.delegate = self
-		//translationTableView.dataSource = self
+		resourceTableView.rowHeight = UITableViewAutomaticDimension
+		resourceTableView.estimatedRowHeight = 160
 		
 		// TODO: Use certain ranges, which should be changeable
 		// Reads necessary data (TEST)
-		
 		let language = try! LanguageView.instance.language(withName: "Finnish")
-		if let book = try! BookView.instance.booksQuery(languageId: language.idString, code: "gal", identifier: nil).firstResultObject()
+		if let book = try! BookView.instance.booksQuery(languageId: language.idString, code: "gal").firstResultObject()
 		{
 			self.book = book
 			
 			targetTranslationDS = TranslationTableViewDS(tableView: translationTableView, cellReuseId: "TranslationCell", bookId: book.idString)
 			targetTranslationDS?.cellManager = self
+		}
+		
+		let sourceLanguage = try! LanguageView.instance.language(withName: "English")
+		if let sourceBook = try! BookView.instance.booksQuery(languageId: sourceLanguage.idString, code: "gal").firstResultObject()
+		{
+			sourceTranslationDS = TranslationTableViewDS(tableView: resourceTableView, cellReuseId: "sourceCell", bookId: sourceBook.idString)
+			
+			// Sets up scroll management
+			if let book = book, let binding = try? ParagraphBindingView.instance.latestBinding(from: sourceBook.idString, to: book.idString)
+			{
+				self.binding = binding
+				
+				self.scrollManager = ScrollSyncManager(resourceTableView, translationTableView)
+				{
+					tableView, pathId in
+					
+					if tableView === self.resourceTableView
+					{
+						print("STATUS: FINDING PATH ID FROM RESOURCE TABLE")
+						
+						if let sourcePathId = self.binding?.sourcePath(forPath: pathId)
+						{
+							return self.sourceTranslationDS?.indexForPath(sourcePathId)
+						}
+						else
+						{
+							return nil
+						}
+					}
+					else
+					{
+						print("STATUS: FINDING PATH ID FROM TARGET TABLE")
+						
+						if let targetPathId = self.binding?.targetPath(forPath: pathId)
+						{
+							return self.targetTranslationDS?.indexForPath(targetPathId)
+						}
+						else
+						{
+							return nil
+						}
+					}
+				}
+			}
 		}
 	}
 	
@@ -205,6 +256,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			
 			// Starts the database listening process, if not yet started
 			targetTranslationDS?.activate()
+			sourceTranslationDS?.activate()
 		}
 	}
 	
@@ -217,6 +269,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			
 			// Ends the database listening process, if present
 			targetTranslationDS?.pause()
+			sourceTranslationDS?.pause()
 			
 			// TODO: Test. modify later
 			guard let book = book else

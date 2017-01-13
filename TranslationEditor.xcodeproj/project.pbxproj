@@ -266,6 +266,12 @@
 		7CDBD6CD1E28C1E700912320 /* TranslationCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6CC1E28C1E700912320 /* TranslationCellManager.swift */; };
 		7CDBD6CE1E28C1E700912320 /* TranslationCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6CC1E28C1E700912320 /* TranslationCellManager.swift */; };
 		7CDBD6CF1E28C1E700912320 /* TranslationCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6CC1E28C1E700912320 /* TranslationCellManager.swift */; };
+		7CDBD6D11E28E53500912320 /* ScrollSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6D01E28E53500912320 /* ScrollSyncManager.swift */; };
+		7CDBD6D21E28E53500912320 /* ScrollSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6D01E28E53500912320 /* ScrollSyncManager.swift */; };
+		7CDBD6D31E28E53500912320 /* ScrollSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6D01E28E53500912320 /* ScrollSyncManager.swift */; };
+		7CDBD6EA1E28FCD400912320 /* ParagraphAssociated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6E91E28FCD400912320 /* ParagraphAssociated.swift */; };
+		7CDBD6EB1E28FCD400912320 /* ParagraphAssociated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6E91E28FCD400912320 /* ParagraphAssociated.swift */; };
+		7CDBD6EC1E28FCD400912320 /* ParagraphAssociated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6E91E28FCD400912320 /* ParagraphAssociated.swift */; };
 		89DB5B1F0997FCC7DC1FE193 /* Pods_TranslationEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A629A8BBB661036AD32A63 /* Pods_TranslationEditor.framework */; };
 		E34ED533901B5B0626CD192D /* Pods_TranslationEditorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D52CD448467628FBD04BFD /* Pods_TranslationEditorTests.framework */; };
 /* End PBXBuildFile section */
@@ -393,6 +399,8 @@
 		7CDBD6C31E28B35100912320 /* SourceTranslationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceTranslationCell.swift; sourceTree = "<group>"; };
 		7CDBD6C71E28B69B00912320 /* TranslationTableViewDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationTableViewDS.swift; sourceTree = "<group>"; };
 		7CDBD6CC1E28C1E700912320 /* TranslationCellManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationCellManager.swift; sourceTree = "<group>"; };
+		7CDBD6D01E28E53500912320 /* ScrollSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollSyncManager.swift; sourceTree = "<group>"; };
+		7CDBD6E91E28FCD400912320 /* ParagraphAssociated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphAssociated.swift; sourceTree = "<group>"; };
 		C1D52CD448467628FBD04BFD /* Pods_TranslationEditorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2CCD571AB68ECBDE6770270 /* Pods_TranslationEditorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A629A8BBB661036AD32A63 /* Pods_TranslationEditor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -520,6 +528,7 @@
 				7CDBD6C31E28B35100912320 /* SourceTranslationCell.swift */,
 				7C4A4FD71DFAE0AA009F890E /* BasicButton.swift */,
 				7C4A4FDB1DFAE273009F890E /* Theme.swift */,
+				7CDBD6E91E28FCD400912320 /* ParagraphAssociated.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -720,6 +729,7 @@
 				7C20D7EB1D8C1B7200E84BA5 /* CellContentListener.swift */,
 				7C4A4FA11DF829C5009F890E /* CellInputListener.swift */,
 				7CDBD6CC1E28C1E700912320 /* TranslationCellManager.swift */,
+				7CDBD6D01E28E53500912320 /* ScrollSyncManager.swift */,
 			);
 			name = TranslationView;
 			sourceTree = "<group>";
@@ -1009,6 +1019,7 @@
 				7CCC01301DA67B0E00F0562E /* BookPrev.swift in Sources */,
 				7C40DF631DEC14C80035B92E /* JSONConvertible.swift in Sources */,
 				7C20D7E31D8BF8D000E84BA5 /* TargetTranslationCell.swift in Sources */,
+				7CDBD6EA1E28FCD400912320 /* ParagraphAssociated.swift in Sources */,
 				7CCC00EA1D9BD3FC00F0562E /* VerseError.swift in Sources */,
 				7C40DF801DEDB4C10035B92E /* BookView.swift in Sources */,
 				7C40DF6C1DEC59AB0035B92E /* Book.swift in Sources */,
@@ -1034,6 +1045,7 @@
 				7C20D7F81D9A672800E84BA5 /* VerseIndex.swift in Sources */,
 				7C4A4FF41E00105B009F890E /* Key.swift in Sources */,
 				7CD9ACF31E0914470032A7F8 /* DatabaseExtension.swift in Sources */,
+				7CDBD6D11E28E53500912320 /* ScrollSyncManager.swift in Sources */,
 				7C4A4FCC1DFACC58009F890E /* Copyable.swift in Sources */,
 				7C4A4FDC1DFAE273009F890E /* Theme.swift in Sources */,
 				7C4A4FAA1DF836F1009F890E /* LiveQueryListener.swift in Sources */,
@@ -1138,6 +1150,7 @@
 				7C40DF681DEC26340035B92E /* JSONParseError.swift in Sources */,
 				7C4A4FBB1DF99490009F890E /* ProgramStatusListener.swift in Sources */,
 				7C4A4FC91DFACAF5009F890E /* Commit.swift in Sources */,
+				7CDBD6EB1E28FCD400912320 /* ParagraphAssociated.swift in Sources */,
 				7C4CC1781DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7C4A4FF51E00105B009F890E /* Key.swift in Sources */,
 				7CCC00F91D9D369100F0562E /* VerseRange.swift in Sources */,
@@ -1149,6 +1162,7 @@
 				7CCC01351DA7964000F0562E /* XmlParserUtil.swift in Sources */,
 				7CCC01491DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
 				7C18A1A41D8BBEBD00DD1B03 /* TranslationEditorTests.swift in Sources */,
+				7CDBD6D21E28E53500912320 /* ScrollSyncManager.swift in Sources */,
 				7C20D7E41D8BF8D000E84BA5 /* TargetTranslationCell.swift in Sources */,
 				7C4A4FA71DF835E1009F890E /* LiveQueryManager.swift in Sources */,
 				7C82CE8F1DE6E29500C054EB /* PropertyValue.swift in Sources */,
@@ -1228,6 +1242,7 @@
 				7C40DF691DEC26340035B92E /* JSONParseError.swift in Sources */,
 				7C4A4FBC1DF99490009F890E /* ProgramStatusListener.swift in Sources */,
 				7C4A4FCA1DFACAF5009F890E /* Commit.swift in Sources */,
+				7CDBD6EC1E28FCD400912320 /* ParagraphAssociated.swift in Sources */,
 				7C4CC1791DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7C4A4FF61E00105B009F890E /* Key.swift in Sources */,
 				7CCC00FA1D9D369100F0562E /* VerseRange.swift in Sources */,
@@ -1239,6 +1254,7 @@
 				7CCC01361DA7964000F0562E /* XmlParserUtil.swift in Sources */,
 				7CCC014A1DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
 				7C18A1AF1D8BBEBD00DD1B03 /* TranslationEditorUITests.swift in Sources */,
+				7CDBD6D31E28E53500912320 /* ScrollSyncManager.swift in Sources */,
 				7C20D7E51D8BF8D000E84BA5 /* TargetTranslationCell.swift in Sources */,
 				7C4A4FA81DF835E1009F890E /* LiveQueryManager.swift in Sources */,
 				7C82CE901DE6E29500C054EB /* PropertyValue.swift in Sources */,

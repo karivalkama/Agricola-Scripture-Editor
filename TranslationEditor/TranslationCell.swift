@@ -9,12 +9,12 @@
 import Foundation
 
 // This is the superclass for different translation cells (source and target)
-class TranslationCell: UITableViewCell
+class TranslationCell: UITableViewCell, ParagraphAssociated
 {
 	// ATTRIBUTES	-----------------
 	
 	weak var textView: UITextView?
-	var contentPathId: String?
+	var pathId: String?
 	
 	
 	// IMPLEMENTED METHODS	---------
@@ -37,7 +37,7 @@ class TranslationCell: UITableViewCell
 	
 	func setContent(_ text: NSAttributedString, withId pathId: String)
 	{
-		contentPathId = pathId
+		self.pathId = pathId
 		
 		guard let textView = textView else
 		{

@@ -137,4 +137,16 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 			return nil
 		}
 	}
+	
+	func indexForPath(_ pathId: String) -> IndexPath?
+	{
+		if let index = pathIndex[pathId]
+		{
+			return IndexPath(row: index, section: 0)
+		}
+		else
+		{
+			return nil
+		}
+	}
 }
