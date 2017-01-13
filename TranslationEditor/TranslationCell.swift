@@ -1,84 +1,49 @@
 //
-//  TranslationCell.swift
+//  ParagraphCell.swift
 //  TranslationEditor
 //
-//  Created by Mikko Hilpinen on 16.9.2016.
-//  Copyright © 2016 Mikko Hilpinen. All rights reserved.
+//  Created by Mikko Hilpinen on 13.1.2017.
+//  Copyright © 2017 Mikko Hilpinen. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class TranslationCell: UITableViewCell, UITextViewDelegate
+// This is the superclass for different translation cells (source and target)
+class TranslationCell: UITableViewCell
 {
-	// Outlets ----------
+	// ATTRIBUTES	-----------------
 	
-	@IBOutlet weak var inputTextField: UITextView!
-	
-	
-	// Vars	-------------
-	
-	var inputListener: CellInputListener?
-	
-	private var contentId: String?
+	weak var textView: UITextView?
+	var contentPathId: String?
 	
 	
-	// Overridden	-----
+	// IMPLEMENTED METHODS	---------
 	
-    override func awakeFromNib()
+	// TODO: Test override to implement simultaneous scrolling
+	/*
+	override func setSelected(_ selected: Bool, animated: Bool)
 	{
-        super.awakeFromNib()
+		super.setSelected(selected, animated: animated)
 		
-		// Listens to changes in text view
-		inputTextField.delegate = self
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool)
-	{
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-	
-	
-	// Text view delegate
-	
-	func textViewDidChange(_ textView: UITextView)
-	{
-		// Informs the listeners, if present
-		if let listener = inputListener, let contentId = contentId
+		if let contentPathId = contentPathId
 		{
-			listener.cellContentChanged(id: contentId, newContent: textView.attributedText)
+			print("STATUS: CELL \(contentPathId) SELECTED")
 		}
-	}
+		// Configure the view for the selected state
+	}*/
 	
-	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+	
+	// OTHER METHODS	-------------
+	
+	func setContent(_ text: NSAttributedString, withId pathId: String)
 	{
-		// The new string can't remove verse markings
-		if textView.attributedText.containsAttribute(VerseIndexMarkerAttributeName, in: range) || textView.attributedText.containsAttribute(ParaMarkerAttributeName, in: range)
-		{
-			return false
-		}
-		// The verse markins can't be split either
-		else if textView.attributedText.attribute(VerseIndexMarkerAttributeName, surrounding: range) != nil || textView.attributedText.attribute(ParaMarkerAttributeName, surrounding: range) != nil
-		{
-			return false
-		}
+		contentPathId = pathId
 		
-		// TODO: Determine the attributes for the inserted text
-		inputTextField.typingAttributes = [:]
-		return true
-		
-		// TODO: Implement uneditable verse markings here
-		//return textView.text.occurences(of: TranslationCell.verseRegex, within: range) == text.occurences(of: TranslationCell.verseRegex)
-		//return textView.text.occurrences(of: "#", within: range) == text.occurrences(of: "#")
-	}
-	
-	
-	// Other	---------
-	
-	func setContent(to text: NSAttributedString, withId contentId: String)
-	{
-		self.contentId = contentId
+		guard let textView = textView else
+		{
+			print("ERROR: Text view hasn't been defined for new content")
+			return
+		}
 		
 		let newText = NSMutableAttributedString()
 		newText.append(text)
@@ -99,14 +64,14 @@ class TranslationCell: UITableViewCell, UITextViewDelegate
 					{
 						switch style
 						{
-							// TODO: This font is just for testing purposes
+						// TODO: This font is just for testing purposes
 						case .quotation:
 							newText.addAttribute(NSFontAttributeName, value: UIFont(name: "Chalkduster", size: 18.0)!, range: range)
-							// TODO: Add exhaustive cases
+						// TODO: Add exhaustive cases
 						default: break
 						}
 					}
-					// TODO: Add handling of paraStyle
+				// TODO: Add handling of paraStyle
 				default: break
 				}
 			}
@@ -116,16 +81,16 @@ class TranslationCell: UITableViewCell, UITextViewDelegate
 		// Adds visual attributes to each verse and paragraph marker
 		newText.enumerateAttribute(VerseIndexMarkerAttributeName, in: NSMakeRange(0, newText.length), options: [])
 		{
-			value, range, _ in
-			
-			// Makes each verse marker gray
-			if value != nil
-			{
-				newText.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: range)
-			}
+		value, range, _ in
+		
+		// Makes each verse marker gray
+		if value != nil
+		{
+		newText.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: range)
+		}
 		}*/
 		
 		// Sets text content
-		inputTextField.attributedText = newText
+		textView.attributedText = newText
 	}
 }

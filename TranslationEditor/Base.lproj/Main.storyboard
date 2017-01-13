@@ -155,7 +155,7 @@
                                                 <rect key="frame" x="0.0" y="80" width="500" height="624"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sourceCell" rowHeight="86" id="fKr-Fz-xVH">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sourceCell" rowHeight="86" id="fKr-Fz-xVH" customClass="SourceTranslationCell" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="500" height="86"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fKr-Fz-xVH" id="4ys-Pw-Kah">
@@ -177,6 +177,9 @@
                                                                 <constraint firstAttribute="bottom" secondItem="HeG-UF-hqZ" secondAttribute="bottom" id="glw-5d-2Uy"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="sourceTextView" destination="HeG-UF-hqZ" id="79Z-Fc-2vB"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
@@ -236,7 +239,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="separatorColor" red="0.97114283379999999" green="0.83987052299999998" blue="0.75408471980000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TranslationCell" rowHeight="158" id="3St-S3-RBA" customClass="TranslationCell" customModule="TranslationEditor" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TranslationCell" rowHeight="158" id="3St-S3-RBA" customClass="TargetTranslationCell" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="500" height="158"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3St-S3-RBA" id="EBA-h2-6EZ">

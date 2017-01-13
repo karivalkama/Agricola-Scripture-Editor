@@ -80,12 +80,13 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		deactivate()
 	}
 
+	/*
 	override func didReceiveMemoryWarning()
 	{
 		super.didReceiveMemoryWarning()
 		
 		// Dispose of any resources that can be recreated.
-	}
+	}*/
 	
 	
 	// TABLE VIEW DATASOURCE	------
@@ -98,7 +99,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
 		// Finds a reusable cell
-		let cell = translationTableView.dequeueReusableCell(withIdentifier: "TranslationCell", for: indexPath) as! TranslationCell
+		let cell = translationTableView.dequeueReusableCell(withIdentifier: "TranslationCell", for: indexPath) as! TargetTranslationCell
 		
 		// Updates cell content (either from current data or from current input status)
 		let paragraph = currentData[indexPath.row]
@@ -117,7 +118,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 			stringContents = paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
 		}
 		
-		cell.setContent(to: stringContents, withId: paragraph.pathId)
+		cell.setContent(stringContents, withId: paragraph.pathId)
 		cell.inputListener = self
 		return cell
 	}
