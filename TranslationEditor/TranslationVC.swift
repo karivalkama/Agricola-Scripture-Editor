@@ -9,7 +9,7 @@
 import UIKit
 
 // TranslationVC is the view controller used in the translation / review / work view
-class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener, CellInputListener, AppStatusListener
+class TranslationVC: UIViewController, CellInputListener, AppStatusListener, TranslationCellManager
 {
 	// TYPES	----------
 	
@@ -27,18 +27,14 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	private var book: Book?
 	private let userId = "testuserid"
 	
-	// Current paragraph status in database
-	private var currentData = [Paragraph]()
+	// Target translation managing
+	private var targetTranslationDS: TranslationTableViewDS?
 	
 	// paragraph data modified, but not committed by user
 	// Key = paragraph path id, value = edited text
 	private var inputData = [String : NSAttributedString]()
-	// Key = path id, value = corresponding index in current paragraph data
-	private var pathIndex = [String : Int]()
-	private var active = false
 	
-	// The live query used for retrieving translation data
-	private var translationQueryManager: LiveQueryManager<ParagraphView>?
+	private var active = false
 	
 	
 	// VIEW CONTROLLER	-----
@@ -52,7 +48,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		translationTableView.estimatedRowHeight = 160
 		
 		//translationTableView.delegate = self
-		translationTableView.dataSource = self
+		//translationTableView.dataSource = self
 		
 		// TODO: Use certain ranges, which should be changeable
 		// Reads necessary data (TEST)
@@ -61,11 +57,10 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		if let book = try! BookView.instance.booksQuery(languageId: language.idString, code: "gal", identifier: nil).firstResultObject()
 		{
 			self.book = book
-			let query = ParagraphView.instance.latestParagraphQuery(bookId: book.idString)
-			translationQueryManager = query.liveQueryManager
-			translationQueryManager!.addListener(AnyLiveQueryListener(self))
+			
+			targetTranslationDS = TranslationTableViewDS(tableView: translationTableView, cellReuseId: "TranslationCell", bookId: book.idString)
+			targetTranslationDS?.cellManager = self
 		}
-
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -89,61 +84,6 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 	}*/
 	
 	
-	// TABLE VIEW DATASOURCE	------
-	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-	{
-		return currentData.count
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-	{
-		// Finds a reusable cell
-		let cell = translationTableView.dequeueReusableCell(withIdentifier: "TranslationCell", for: indexPath) as! TargetTranslationCell
-		
-		// Updates cell content (either from current data or from current input status)
-		let paragraph = currentData[indexPath.row]
-		
-		print("STATUS: Finding input for \(paragraph.pathId)")
-		
-		var stringContents: NSAttributedString!
-		if let input = inputData[paragraph.pathId]
-		{
-			stringContents = input
-			print("STATUS: Presenting input data")
-			// TODO: This doesn't get called
-		}
-		else
-		{
-			stringContents = paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
-		}
-		
-		cell.setContent(stringContents, withId: paragraph.pathId)
-		cell.inputListener = self
-		return cell
-	}
-	
-	
-	// QUERY LISTENING	-------------
-	
-	func rowsUpdated(rows: [Row<ParagraphView>])
-	{
-		print("STATUS: ROWS UPDATING")
-		
-		// Updates paragraph data
-		// TODO: Check for conflicts. Make safer
-		currentData = rows.map { try! $0.object() }
-		// Updates the path index too
-		pathIndex = [:]
-		for i in 0 ..< currentData.count
-		{
-			pathIndex[currentData[i].pathId] = i
-		}
-		
-		translationTableView.reloadData()
-	}
-	
-	
 	// CELL LISTENING	-------------
 	
 	func cellContentChanged(id: String, newContent: NSAttributedString)
@@ -153,6 +93,22 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 		// Resets cell height
 		translationTableView.beginUpdates()
 		translationTableView.endUpdates()
+	}
+	
+	
+	// CELL MANAGEMENT	-------------
+	
+	func overrideContentForPath(_ pathId: String) -> NSAttributedString?
+	{
+		return inputData[pathId]
+	}
+	
+	func cellUpdated(_ cell: TranslationCell)
+	{
+		if let cell = cell as? TargetTranslationCell
+		{
+			cell.inputListener = self
+		}
 	}
 	
 	
@@ -196,9 +152,8 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 				// Saves each user input as a commit
 				for (pathId, text) in self.inputData
 				{
-					if let index = self.pathIndex[pathId]
+					if let paragraph = self.targetTranslationDS?.paragraphForPath(pathId)
 					{
-						let paragraph = self.currentData[index]
 						_ = try paragraph.commit(userId: self.userId, text: text)
 					}
 				}
@@ -249,7 +204,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 			}
 			
 			// Starts the database listening process, if not yet started
-			translationQueryManager?.start()
+			targetTranslationDS?.activate()
 		}
 	}
 	
@@ -261,7 +216,7 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 			active = false
 			
 			// Ends the database listening process, if present
-			translationQueryManager?.stop()
+			targetTranslationDS?.pause()
 			
 			// TODO: Test. modify later
 			guard let book = book else
@@ -273,9 +228,8 @@ class TranslationVC: UIViewController, UITableViewDataSource, LiveQueryListener,
 			var chapterData = [Int : [Paragraph]]()
 			for (pathId, inputText) in self.inputData
 			{
-				if let index = self.pathIndex[pathId]
+				if let paragraphCopy = targetTranslationDS?.paragraphForPath(pathId)?.copy()
 				{
-					let paragraphCopy = self.currentData[index].copy()
 					paragraphCopy.replaceContents(with: inputText)
 					
 					let chapterIndex = paragraphCopy.chapterIndex

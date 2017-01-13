@@ -40,7 +40,23 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		self.tableView = tableView
 		self.cellReuseId = cellReuseId
 		
-		self.queryManager = ParagraphView.instance.latestParagraphQuery(bookId: bookId).liveQueryManager
+		let query = ParagraphView.instance.latestParagraphQuery(bookId: bookId)
+		
+		/* TEST
+		do
+		{
+			try query.resultRows().forEach { print($0.id!) }
+		}
+		catch
+		{
+			print("ERROR: FAILED TO REQUEST PARAGRAPH DATA \(error)")
+		}*/
+		
+		self.queryManager = query.liveQueryManager
+		
+		super.init()
+		
+		self.queryManager.addListener(AnyLiveQueryListener(self))
 	}
 	
 	
@@ -57,6 +73,8 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		{
 			pathIndex[currentData[i].pathId] = i
 		}
+		
+		print("STATUS: Paragraph data updated (\(rows.count) rows)")
 		
 		tableView.reloadData()
 	}
@@ -98,6 +116,8 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	{
 		tableView.dataSource = self
 		queryManager.start()
+		
+		print("STATUS: Paragraph data retrieval started")
 	}
 	
 	// Temporarily pauses the live querying

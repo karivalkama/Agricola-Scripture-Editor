@@ -33,6 +33,8 @@ class LiveQueryManager<QueryTarget: View>: NSObject
 	
 	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
 	{
+		print("STATUS: Query update")
+		
 		if keyPath == "rows"
 		{
 			if let query = object as? CBLLiveQuery
