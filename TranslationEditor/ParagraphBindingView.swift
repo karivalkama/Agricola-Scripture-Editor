@@ -40,7 +40,7 @@ final class ParagraphBindingView: View
 			binding, emit in
 			
 			let key = [binding.isDeprecated, binding.targetBookId, binding.sourceBookId, binding.created] as [Any]
-			let value = (binding.idString, binding.created)
+			let value = [binding.idString, binding.created] as [Any]
 			
 			emit(key, value)
 			
@@ -49,19 +49,25 @@ final class ParagraphBindingView: View
 			// Finds the most recent id
 			keys, values, rereduce in
 			
-			var mostRecent = values.first as! (String, TimeInterval)
+			var mostRecentId = ""
+			var mostRecentTime = 0.0
+			
 			for value in values
 			{
-				let value = value as! (String, TimeInterval)
-				if value.1 > mostRecent.1
+				let value = value as! [Any]
+				let created = value[1] as! TimeInterval
+				
+				if created > mostRecentTime
 				{
-					mostRecent = value
+					let id = value[0] as! String
+					mostRecentId = id
+					mostRecentTime = created
 				}
 			}
 			
-			return mostRecent
+			return [mostRecentId, mostRecentTime]
 			
-		}, version: "1")
+		}, version: "3")
 	}
 	
 	

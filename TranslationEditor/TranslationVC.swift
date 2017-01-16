@@ -75,39 +75,50 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			sourceTranslationDS = TranslationTableViewDS(tableView: resourceTableView, cellReuseId: "sourceCell", bookId: sourceBook.idString)
 			
 			// Sets up scroll management
-			if let book = book, let binding = try? ParagraphBindingView.instance.latestBinding(from: sourceBook.idString, to: book.idString)
+			guard let book = book else
 			{
-				self.binding = binding
+				print("STATUS: NO BOOK FOR BINDING")
+				return
+			}
+			
+			// TODO: FIX
+			guard let binding = try! ParagraphBindingView.instance.latestBinding(from: sourceBook.idString, to: book.idString) else
+			{
+				print("STATUS: NO BINDING FOR SCROLL SYNC")
+				return
+			}
+			
+			self.binding = binding
+			print("STATUS: USING BINDING \(binding.toPropertySet)")
+			
+			self.scrollManager = ScrollSyncManager(resourceTableView, translationTableView)
+			{
+				tableView, pathId in
 				
-				self.scrollManager = ScrollSyncManager(resourceTableView, translationTableView)
+				if tableView === self.resourceTableView
 				{
-					tableView, pathId in
+					print("STATUS: FINDING PATH ID FROM RESOURCE TABLE")
 					
-					if tableView === self.resourceTableView
+					if let sourcePathId = self.binding?.sourcePath(forPath: pathId)
 					{
-						print("STATUS: FINDING PATH ID FROM RESOURCE TABLE")
-						
-						if let sourcePathId = self.binding?.sourcePath(forPath: pathId)
-						{
-							return self.sourceTranslationDS?.indexForPath(sourcePathId)
-						}
-						else
-						{
-							return nil
-						}
+						return self.sourceTranslationDS?.indexForPath(sourcePathId)
 					}
 					else
 					{
-						print("STATUS: FINDING PATH ID FROM TARGET TABLE")
-						
-						if let targetPathId = self.binding?.targetPath(forPath: pathId)
-						{
-							return self.targetTranslationDS?.indexForPath(targetPathId)
-						}
-						else
-						{
-							return nil
-						}
+						return nil
+					}
+				}
+				else
+				{
+					print("STATUS: FINDING PATH ID FROM TARGET TABLE")
+					
+					if let targetPathId = self.binding?.targetPath(forPath: pathId)
+					{
+						return self.targetTranslationDS?.indexForPath(targetPathId)
+					}
+					else
+					{
+						return nil
 					}
 				}
 			}

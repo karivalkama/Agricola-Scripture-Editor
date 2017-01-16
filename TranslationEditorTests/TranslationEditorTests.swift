@@ -152,6 +152,26 @@ class TranslationEditorTests: XCTestCase
 		print("done!")
 	}
 	
+	func testReadDataOfType()
+	{
+		let type = ParagraphBinding.type
+		
+		let query = DATABASE.createAllDocumentsQuery()
+		let results = try! query.run()
+		
+		print("TEST: Reading database data")
+		
+		while let row = results.nextRow(), let properties = row.document?.properties
+		{
+			if properties[PROPERTY_TYPE] as? String == type
+			{
+				print("TEST: Row \(row.documentID!): \(properties)")
+			}
+		}
+		
+		print("TEST: DONE")
+	}
+	
 	func testRemoveEdits()
 	{
 		let editRows = try! ParagraphEditView.instance.createQuery().resultRows()
@@ -297,6 +317,55 @@ class TranslationEditorTests: XCTestCase
 		
 		let binding = ParagraphBinding(sourceBookId: sourceBookId, targetBookId: targetBookId, bindings: bindings, creatorId: userId)
 		try! binding.push()
+		
+		print("TEST: DONE")
+	}
+	
+	func testReadBind()
+	{
+		let bookCode = "gal"
+		let sourceLanguageName = "English"
+		let targetLanguageName = "Finnish"
+		
+		// Reads language data
+		let sourceLanguage = try! LanguageView.instance.language(withName: sourceLanguageName)
+		let targetLanguage = try! LanguageView.instance.language(withName: targetLanguageName)
+		
+		// Finds book data
+		guard let sourceBookId = try! BookView.instance.booksQuery(languageId: sourceLanguage.idString, code: bookCode).firstResultRow()?.id else
+		{
+			assertionFailure("TEST: No book \(bookCode) for language \(sourceLanguageName)")
+			return
+		}
+		
+		guard let targetBookId = try! BookView.instance.booksQuery(languageId: targetLanguage.idString, code: bookCode).firstResultRow()?.id else
+		{
+			assertionFailure("TEST: No book \(bookCode) for language \(targetLanguageName)")
+			return
+		}
+
+		// Finds the existing binding between the books
+		if let binding = try! ParagraphBindingView.instance.latestBinding(from: sourceBookId, to: targetBookId)
+		{
+			print("TEST: Binding exists")
+			print(binding.toPropertySet)
+		}
+		else
+		{
+			print("TEST: No binding exists")
+		}
+	}
+	
+	// 0456c66d-fd56-43f1-986c-8b8eb538b093
+	func testReadBinds()
+	{
+		print("TEST: STARTED")
+		
+		let bindings = try! ParagraphBindingView.instance.createQuery().resultObjects()
+		for binding in bindings
+		{
+			print("TEST: \(binding.idString): \(binding.toPropertySet)")
+		}
 		
 		print("TEST: DONE")
 	}
