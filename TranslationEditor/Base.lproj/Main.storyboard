@@ -131,17 +131,8 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="apn-1P-Iz2" userLabel="Resource Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="500" height="704"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English - Good News" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XY4-ep-Zjb">
-                                                <rect key="frame" x="0.0" y="0.0" width="500" height="32"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="32" id="UtD-wg-3Wi"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ree-vj-F6F">
-                                                <rect key="frame" x="0.0" y="40" width="500" height="33"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="500" height="33"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="AHj-DG-JMh"/>
                                                 </constraints>
@@ -152,7 +143,7 @@
                                                 <color key="tintColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </segmentedControl>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2EI-Mh-Uso">
-                                                <rect key="frame" x="0.0" y="80" width="500" height="624"/>
+                                                <rect key="frame" x="0.0" y="40" width="500" height="664"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sourceCell" rowHeight="86" id="fKr-Fz-xVH" customClass="SourceTranslationCell" customModule="TranslationEditor" customModuleProvider="target">
@@ -184,10 +175,6 @@
                                                 </prototypes>
                                             </tableView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="XY4-ep-Zjb" secondAttribute="trailing" id="ZeP-yF-mdN"/>
-                                            <constraint firstItem="XY4-ep-Zjb" firstAttribute="leading" secondItem="apn-1P-Iz2" secondAttribute="leading" id="eLX-oA-xNZ"/>
-                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="akX-uh-vvq" userLabel="Translation Stack View">
                                         <rect key="frame" x="508" y="0.0" width="500" height="704"/>
