@@ -285,7 +285,7 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 					// (ie. The later index is simply ignored and added to the previous one(s) after the end of that range is reached)
 					if lastVerseIndex!.startPosition >= range.location
 					{
-						lastVerseIndex = (lastVerseIndex!.minIndex, newIndex, lastVerseIndex!.startPosition)
+						lastVerseIndex = (lastVerseIndex!.minIndex, newIndex, range.location + range.length)
 					}
 						// Otherwise completes and records the preceeding range
 					else

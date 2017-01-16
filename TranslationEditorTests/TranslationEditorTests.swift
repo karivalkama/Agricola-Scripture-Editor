@@ -41,6 +41,33 @@ class TranslationEditorTests: XCTestCase
 		print(para2.toPropertySet.description)
 	}
 	
+	func testParagraphAttStrConsistency()
+	{
+		let verse1 = Verse(range: VerseRange(1, 2), content: "Testing testing")
+		let verse23 = Verse(range: VerseRange(2, 4), content: "Testing moar and moar testing")
+		let verse4 = Verse(range: VerseRange(VerseIndex(4), VerseIndex(4, midVerse: true)), content: "Testing testing")
+		
+		var paras = [Para]()
+		paras.append(Para(content: [CharData(text: "Ambiguous poetic line")], style: .poeticLine(1)))
+		paras.append(Para(content: [verse1, verse23, verse4], style: .normal))
+		
+		let paragraphOriginal = Paragraph(bookId: "no_book", chapterIndex: 1, sectionIndex: 1, index: 1, content: paras, creatorId: "test")
+		var converted = paragraphOriginal.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
+		
+		for i in 0 ..< 10
+		{
+			let convertedBack = Paragraph(bookId: "no_book", chapterIndex: 1, sectionIndex: 1, index: 1, content: [], creatorId: "test")
+			convertedBack.replaceContents(with: converted)
+			
+			print("TEST: Iteration \(i)")
+			assert(convertedBack.paraContentsEqual(with: paragraphOriginal))
+			
+			converted = convertedBack.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
+		}
+		
+		print("TEST: DONE")
+	}
+	
 	func testParagraphProperties()
 	{
 		let language = Language(name: "English")

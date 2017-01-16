@@ -89,7 +89,6 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			}
 			
 			self.binding = binding
-			print("STATUS: USING BINDING \(binding.toPropertySet)")
 			
 			self.scrollManager = ScrollSyncManager(resourceTableView, translationTableView)
 			{
