@@ -44,6 +44,9 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	private var syncScrolling: Side?
 	
+	private var cellHeights: [Side : [IndexPath : CGFloat]]
+	private let defaultCellHeight: CGFloat = 640
+	
 	
 	// INIT	---------------------
 	
@@ -54,6 +57,10 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		
 		self.pathFinder = pathFinder
 		
+		cellHeights = [Side : [IndexPath : CGFloat]]()
+		cellHeights[.left] = [:]
+		cellHeights[.right] = [:]
+		
 		super.init()
 		
 		rightTable.delegate = self
@@ -62,6 +69,11 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	
 	// IMPLEMENTED METHODS	----
+	
+	func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat
+	{
+		return (cellHeights[sideOfTable(tableView)]?[indexPath]).or(defaultCellHeight)
+	}
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView)
 	{
@@ -98,9 +110,10 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		updateOffSets()
 		*/
 		
-		guard let newCell = centerCell(ofTable: tableOfSide(scrolledSide)) else
+		let scrolledTable = tableOfSide(scrolledSide)
+		guard let newCell = centerCell(ofTable: scrolledTable) else
 		{
-			print("ERROR: No visible cells")
+			print("ERROR: No visible cells at \(scrolledSide)")
 			return
 		}
 		
@@ -116,6 +129,8 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 			print("ERROR: Path id of the cell is not available")
 			return
 		}
+		
+		updateVisibleRowHeights(forTable: scrolledTable)
 		
 		print("STATUS: FINDING TARGET CELL")
 		
@@ -139,6 +154,15 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		syncScrolling = nil
 	}
 	
+	func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
+	{
+		if syncScrolling == sideOfTable(scrollView)
+		{
+			syncScrolling = nil
+		}
+	}
+	
+	/*
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
 	{
 		if !decelerate
@@ -146,10 +170,23 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 			syncScrolling = nil
 		}
 		//updateOffSets()
-	}
+	}*/
 	
 	
 	// OTHER METHODS	------
+	
+	func updateVisibleRowHeights(forTable tableView: UITableView)
+	{
+		let side = sideOfTable(tableView)
+		
+		if let paths = tableView.indexPathsForVisibleRows
+		{
+			for indexPath in paths
+			{
+				cellHeights[side]?[indexPath] = tableView.rectForRow(at: indexPath).height
+			}
+		}
+	}
 	
 	private func sideOfTable(_ table: AnyObject) -> Side
 	{
@@ -184,16 +221,21 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	private func centerCell(ofTable tableView: UITableView) -> UITableViewCell?
 	{
-		// Finds the visible cells
-		let visibleCells = tableView.visibleCells
-		
 		// Finds the index path of each cell
 		let indexPaths = tableView.indexPathsForVisibleRows.or([])
 		
-		guard !visibleCells.isEmpty && indexPaths.count >= visibleCells.count else
+		guard !indexPaths.isEmpty else
 		{
+			print("ERROR: No visible cells available")
 			return nil
 		}
+		
+		/*
+		guard indexPaths.count >= visibleCells.count else
+		{
+			print("ERROR: Not enough index paths available (\(indexPaths.count) / \(visibleCells.count))")
+			return nil
+		}*/
 		
 		// Finds the height of each cell
 		let cellHeights = indexPaths.map { tableView.rectForRow(at: $0).height }
@@ -210,12 +252,13 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 			
 			if nextY > centerY
 			{
-				return visibleCells[i]
+				return tableView.cellForRow(at: indexPaths[i])
 			}
 			
 			y = nextY
 		}
 		
+		print("ERROR: Couldn't find a cell that would contain y of \(centerY)")
 		return nil
 	}
 }

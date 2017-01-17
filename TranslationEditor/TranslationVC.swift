@@ -53,10 +53,10 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		
 		// (Epic hack which) Makes table view cells have automatic height
 		translationTableView.rowHeight = UITableViewAutomaticDimension
-		translationTableView.estimatedRowHeight = 160
+		translationTableView.estimatedRowHeight = 640
 		
 		resourceTableView.rowHeight = UITableViewAutomaticDimension
-		resourceTableView.estimatedRowHeight = 160
+		resourceTableView.estimatedRowHeight = 640
 		
 		// TODO: Use certain ranges, which should be changeable
 		// Reads necessary data (TEST)
@@ -96,7 +96,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 				
 				if tableView === self.resourceTableView
 				{
-					print("STATUS: FINDING PATH ID FROM RESOURCE TABLE")
+					//print("STATUS: FINDING PATH ID FROM RESOURCE TABLE")
 					
 					if let sourcePathId = self.binding?.sourcePath(forPath: pathId)
 					{
@@ -109,7 +109,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 				}
 				else
 				{
-					print("STATUS: FINDING PATH ID FROM TARGET TABLE")
+					//print("STATUS: FINDING PATH ID FROM TARGET TABLE")
 					
 					if let targetPathId = self.binding?.targetPath(forPath: pathId)
 					{
@@ -152,8 +152,10 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		inputData[id] = newContent
 		
 		// Resets cell height
+		UIView.setAnimationsEnabled(false)
 		translationTableView.beginUpdates()
 		translationTableView.endUpdates()
+		UIView.setAnimationsEnabled(true)
 	}
 	
 	
