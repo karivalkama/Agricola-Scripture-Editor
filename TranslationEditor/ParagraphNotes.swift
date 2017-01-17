@@ -29,7 +29,7 @@ final class ParagraphNotes: Storable
 	var idProperties: [Any] { return [uid] }
 	var properties: [String : PropertyValue]
 	{
-		return ["collection": PropertyValue(collectionId), "chapter": PropertyValue(chapterIndex), "pathId": PropertyValue(pathId)]
+		return ["collection": PropertyValue(collectionId), "chapter": PropertyValue(chapterIndex), "path_id": PropertyValue(pathId)]
 	}
 	
 	
@@ -45,7 +45,7 @@ final class ParagraphNotes: Storable
 	
 	static func create(from properties: PropertySet, withId id: Id) -> ParagraphNotes
 	{
-		return ParagraphNotes(collectionId: properties["collection"].string(), chapterIndex: properties["chapter"].int(), pathId: properties["pathId"].string(), uid: id["pnote_uid"].string())
+		return ParagraphNotes(collectionId: properties["collection"].string(), chapterIndex: properties["chapter"].int(), pathId: properties["path_id"].string(), uid: id["pnote_uid"].string())
 	}
 	
 	

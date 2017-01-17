@@ -20,6 +20,7 @@ final class NotesThread: Storable
 	
 	let uid: String
 	
+	let collectionId: String
 	let noteId: String
 	let creatorId: String
 	let created: TimeInterval
@@ -33,14 +34,15 @@ final class NotesThread: Storable
 	var idProperties: [Any] { return [uid, created] }
 	var properties: [String : PropertyValue]
 	{
-		return ["note": PropertyValue(noteId), "creator": PropertyValue(creatorId), "created": PropertyValue(created), "resolved": PropertyValue(resolved), "name": PropertyValue(name)]
+		return ["collection": PropertyValue(collectionId), "note": PropertyValue(noteId), "creator": PropertyValue(creatorId), "created": PropertyValue(created), "resolved": PropertyValue(resolved), "name": PropertyValue(name)]
 	}
 	
 	
 	// INIT	-------------------
 	
-	init(noteId: String, creatorId: String, name: String, resolved: Bool = false, uid: String = UUID().uuidString.lowercased(), created: TimeInterval = Date().timeIntervalSince1970)
+	init(collectionId: String, noteId: String, creatorId: String, name: String, resolved: Bool = false, uid: String = UUID().uuidString.lowercased(), created: TimeInterval = Date().timeIntervalSince1970)
 	{
+		self.collectionId = collectionId
 		self.uid = uid
 		self.noteId = noteId
 		self.creatorId = creatorId
@@ -51,7 +53,7 @@ final class NotesThread: Storable
 	
 	static func create(from properties: PropertySet, withId id: Id) -> NotesThread
 	{
-		return NotesThread(noteId: properties["note"].string(), creatorId: properties["creator"].string(), name: properties["name"].string(), resolved: properties["resolved"].bool(), uid: id["thread_uid"].string(), created: id[PROPERTY_CREATED].time())
+		return NotesThread(collectionId: properties["collection"].string(), noteId: properties["note"].string(), creatorId: properties["creator"].string(), name: properties["name"].string(), resolved: properties["resolved"].bool(), uid: id["thread_uid"].string(), created: id[PROPERTY_CREATED].time())
 	}
 	
 	
