@@ -9,6 +9,7 @@
 import Foundation
 
 // Source translation paragraph is a non-editable paragraph that is used as a resource, tied to a certain target translation paragraph
+@available(*, deprecated)
 final class SourceTranslationParagraph: Resource
 {
 	// ATTRIBUTES	-----------

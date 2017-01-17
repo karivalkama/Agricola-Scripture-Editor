@@ -9,6 +9,7 @@
 import Foundation
 
 // This protocol is implemented by all the resource models
+@available(*, deprecated)
 protocol Resource: Storable
 {
 	var collectionId: String { get }
