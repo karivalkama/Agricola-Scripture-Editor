@@ -43,7 +43,8 @@ final class NotesPost: Storable
 	
 	var collectionId: String { return ParagraphNotes.collectionId(fromId: threadId) }
 	var chapterIndex: Int { return ParagraphNotes.chapterIndex(fromId: threadId) }
-	var noteId: String { return NotesThread.noteId(from: threadId) }
+	var noteId: String { return NotesThread.noteId(fromId: threadId) }
+	var threadCreated: TimeInterval { return NotesThread.created(fromId: threadId) }
 	
 	
 	// INIT	--------------------

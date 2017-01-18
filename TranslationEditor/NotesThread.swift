@@ -14,10 +14,9 @@ final class NotesThread: Storable
 	// ATTRIBUTES	-----------
 	
 	static let PROPERTY_NOTE = "note"
+	static let PROPERTY_CREATED = "created"
 	
 	static let type = "thread"
-	
-	let uid: String
 	
 	let noteId: String
 	let creatorId: String
@@ -34,13 +33,13 @@ final class NotesThread: Storable
 		let noteMap = ParagraphNotes.idIndexMap
 		let noteIndex = IdIndex.of(indexMap: noteMap)
 		
-		return noteMap + [PROPERTY_NOTE: noteIndex, "thread_uid": noteIndex + 1]
+		return noteMap + [PROPERTY_NOTE: noteIndex, PROPERTY_CREATED: noteIndex + 1]
 	}
 	
-	var idProperties: [Any] { return [noteId, uid] }
+	var idProperties: [Any] { return [noteId, created] }
 	var properties: [String : PropertyValue]
 	{
-		return ["creator": PropertyValue(creatorId), "created": PropertyValue(created), "resolved": PropertyValue(resolved), "name": PropertyValue(name)]
+		return ["creator": PropertyValue(creatorId), "resolved": PropertyValue(resolved), "name": PropertyValue(name)]
 	}
 	
 	var collectionId: String { return ParagraphNotes.collectionId(fromId: noteId) }
@@ -49,9 +48,8 @@ final class NotesThread: Storable
 	
 	// INIT	-------------------
 	
-	init(noteId: String, creatorId: String, name: String, resolved: Bool = false, uid: String = UUID().uuidString.lowercased(), created: TimeInterval = Date().timeIntervalSince1970)
+	init(noteId: String, creatorId: String, name: String, resolved: Bool = false, created: TimeInterval = Date().timeIntervalSince1970)
 	{
-		self.uid = uid
 		self.noteId = noteId
 		self.creatorId = creatorId
 		self.created = created
@@ -61,7 +59,7 @@ final class NotesThread: Storable
 	
 	static func create(from properties: PropertySet, withId id: Id) -> NotesThread
 	{
-		return NotesThread(noteId: id[PROPERTY_NOTE].string(), creatorId: properties["creator"].string(), name: properties["name"].string(), resolved: properties["resolved"].bool(), uid: id["thread_uid"].string(), created: properties["created"].time())
+		return NotesThread(noteId: id[PROPERTY_NOTE].string(), creatorId: properties["creator"].string(), name: properties["name"].string(), resolved: properties["resolved"].bool(), created: id[PROPERTY_CREATED].time())
 	}
 	
 	
@@ -82,8 +80,13 @@ final class NotesThread: Storable
 
 	// OTHER METHODS	--------
 
-	static func noteId(from idString: String) -> String
+	static func noteId(fromId idString: String) -> String
 	{
 		return property(withName: PROPERTY_NOTE, fromId: idString).string()
+	}
+	
+	static func created(fromId idString: String) -> TimeInterval
+	{
+		return property(withName: PROPERTY_CREATED, fromId: idString).time()
 	}
 }

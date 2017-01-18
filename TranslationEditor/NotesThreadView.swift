@@ -66,7 +66,7 @@ final class NotesThreadView: View
 	
 	func countThreadsForNote(withId noteId: String) throws -> Int
 	{
-		let count = try threadsForNoteQuery(noteId: noteId).asQueryOfType(.reduce).resultRows().first?.value.int
+		let count = try createQuery(ofType: .reduce, withKeys: NotesThreadView.keysForNote(withId: noteId)).resultRows().first?.value.int
 		return count.or(0)
 	}
 	
