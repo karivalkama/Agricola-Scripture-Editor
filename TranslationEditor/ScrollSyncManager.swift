@@ -38,7 +38,13 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	private var pathFinder: IndexForPath
 	
-	//private var lastOffsetY: [Side : CGFloat] = [.left: 0, .right: 0]
+	private var lastOffsetY: [Side : CGFloat] = [.left: 0, .right: 0]
+	private var lastOffsetTime: [Side : TimeInterval] = [.left: 0, .right: 0]
+	private var lastVelocity: [Side : CGFloat] = [.left: 0, .right: 0]
+	private var lastAcceleration: [Side : CGFloat] = [.left: 0, .right: 0]
+	private var isDragging = false
+	
+	//private var lastDragVelocity: CGFloat = 0
 	//private var lastNewCell: AnyObject?
 	private var lastCenterCell: AnyObject?
 	
@@ -79,6 +85,47 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	{
 		let scrolledSide = sideOfTable(scrollView)
 		
+		// Records the scroll speed
+		let currentTime = Date().timeIntervalSince1970
+		let duration = currentTime - lastOffsetTime[scrolledSide]!
+		
+		// Doesn't record very short intervals
+		if duration >= 0.1
+		{
+			let offsetY = scrollView.contentOffset.y
+			
+			// If the interval is very long, there hasn't been a scroll for a while and the program needs to recollect the material
+			if duration <= 1
+			{
+				// x = x0 + v*t
+				// -> v = (x - x0) / t
+				let velocity = (offsetY - lastOffsetY[scrolledSide]!) / CGFloat(duration)
+				
+				// Calculates the deceleration as well
+				// a = (v - v0) / t
+				let acceleration = (velocity - lastVelocity[scrolledSide]!) / CGFloat(duration)
+				
+				lastAcceleration[scrolledSide] = acceleration
+				lastVelocity[scrolledSide] = velocity
+			}
+			else
+			{
+				lastAcceleration[scrolledSide] = 0
+				lastVelocity[scrolledSide] = 0
+			}
+			
+			lastOffsetY[scrolledSide] = offsetY
+			lastOffsetTime[scrolledSide] = currentTime
+		}
+		
+		/*
+		let dragVelocity = scrollView.panGestureRecognizer.velocity(in: scrollView).y
+		if dragVelocity != 0
+		{
+			lastDragVelocity = dragVelocity
+			print("Dragging with \(dragVelocity) velocity")
+		}*/
+		
 		// Doesn't react to scrolls caused by sync scrolling
 		guard scrolledSide != syncScrolling else
 		{
@@ -111,7 +158,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		*/
 		
 		let scrolledTable = tableOfSide(scrolledSide)
-		guard let newCell = centerCell(ofTable: scrolledTable) else
+		guard let newCell = centerCell(ofTable: scrolledTable, withVelocity: lastVelocity[scrolledSide]!, andAcceleration: lastAcceleration[scrolledSide]!) else
 		{
 			print("ERROR: No visible cells at \(scrolledSide)")
 			return
@@ -156,21 +203,24 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
 	{
+		isDragging = true
+		
 		if syncScrolling == sideOfTable(scrollView)
 		{
 			syncScrolling = nil
 		}
 	}
 	
-	/*
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
 	{
+		isDragging = false
+		/*
 		if !decelerate
 		{
 			syncScrolling = nil
-		}
+		}*/
 		//updateOffSets()
-	}*/
+	}
 	
 	
 	// OTHER METHODS	------
@@ -219,8 +269,11 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		lastOffsetY[.right] = rightTableView.contentOffset.y
 	}*/
 	
-	private func centerCell(ofTable tableView: UITableView) -> UITableViewCell?
+	// Velocity is in pixels per second
+	private func centerCell(ofTable tableView: UITableView, withVelocity velocity: CGFloat, andAcceleration acceleration: CGFloat) -> UITableViewCell?
 	{
+		print("Using velocity \(velocity) and acceleration \(acceleration)")
+		
 		// Finds the index path of each cell
 		let indexPaths = tableView.indexPathsForVisibleRows.or([])
 		
@@ -240,9 +293,16 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		// Finds the height of each cell
 		let cellHeights = indexPaths.map { tableView.rectForRow(at: $0).height }
 		
+		// Calculates the velocity modifier, which depends from dragging state, velocity and deceleration values
+		let duration: CGFloat = isDragging ? 0 : 0.5
+		// a = dv / dt
+		// s = vt + at^2 / 2
+		let travelDistance = velocity * duration + acceleration * duration * duration / 2
+		
 		// Calculates the height of the visible area
 		let totalHeight = cellHeights.reduce(0, { result, h in return result + h })
-		let centerY = totalHeight / 2
+		// The targeted center cell is at the center, but velocity is also taken into account (counts 0.5 second reaction time)
+		let centerY = max(0, min(totalHeight / 2 + travelDistance, totalHeight - 1))
 		
 		// Finds the centermost cell
 		var y:CGFloat = 0
