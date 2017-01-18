@@ -206,4 +206,9 @@ struct IdIndex: Hashable
 	{
 		return left.start == right.start && left.end == right.end
 	}
+	
+	static func + (index: IdIndex, amount: Int) -> IdIndex
+	{
+		return IdIndex(index.end + amount)
+	}
 }

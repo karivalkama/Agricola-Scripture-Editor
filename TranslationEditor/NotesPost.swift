@@ -14,12 +14,10 @@ final class NotesPost: Storable
 	// ATTRIBUTES	------------
 	
 	static let type = "post"
+	
+	static let PROPERTY_THREAD = "thread"
 	static let PROPERTY_CREATED = "created"
-	static let idIndexMap = ["post_uid": IdIndex(0), PROPERTY_CREATED: IdIndex(1)]
 	
-	let uid: String
-	
-	let collectionId: String
 	let threadId: String
 	let creatorId: String
 	let created: TimeInterval
@@ -29,28 +27,38 @@ final class NotesPost: Storable
 	
 	// COMP. PROPERTIES	--------
 	
-	var idProperties: [Any] { return [uid, created] }
+	static var idIndexMap: [String : IdIndex]
+	{
+		let threadMap = NotesThread.idIndexMap
+		let threadIndex = IdIndex.of(indexMap: threadMap)
+		
+		return threadMap + [PROPERTY_THREAD: threadIndex, PROPERTY_CREATED: threadIndex + 1]
+	}
+	
+	var idProperties: [Any] { return [threadId, created] }
 	var properties: [String : PropertyValue]
 	{
-		return ["collection": PropertyValue(collectionId), "thread": PropertyValue(threadId), "creator": PropertyValue(creatorId), "content": PropertyValue(content)]
+		return ["creator": PropertyValue(creatorId), "content": PropertyValue(content)]
 	}
+	
+	var collectionId: String { return ParagraphNotes.collectionId(fromId: threadId) }
+	var chapterIndex: Int { return ParagraphNotes.chapterIndex(fromId: threadId) }
+	var noteId: String { return NotesThread.noteId(from: threadId) }
 	
 	
 	// INIT	--------------------
 	
-	init(collectionId: String, threadId: String, creatorId: String, content: String, uid: String = UUID().uuidString.lowercased(), created: TimeInterval = Date().timeIntervalSince1970)
+	init(threadId: String, creatorId: String, content: String, created: TimeInterval = Date().timeIntervalSince1970)
 	{
-		self.collectionId = collectionId
 		self.threadId = threadId
 		self.creatorId = creatorId
 		self.content = content
-		self.uid = uid
 		self.created = created
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) -> NotesPost
 	{
-		return NotesPost(collectionId: properties["collection"].string(), threadId: properties["thread"].string(), creatorId: properties["creator"].string(), content: properties["content"].string(), uid: id["post_uid"].string(), created: id[PROPERTY_CREATED].time())
+		return NotesPost(threadId: id[PROPERTY_THREAD].string(), creatorId: properties["creator"].string(), content: properties["content"].string(), created: id[PROPERTY_CREATED].time())
 	}
 	
 	

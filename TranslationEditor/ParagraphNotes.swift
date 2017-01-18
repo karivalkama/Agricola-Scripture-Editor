@@ -13,11 +13,12 @@ final class ParagraphNotes: Storable
 {
 	// ATTRIBUTES	---------
 	
+	static let PROPERTY_COLLECTION = "collection"
+	static let PROPERTY_CHAPTER = "chapter"
+	
 	static let type = "paragraph_notes"
-	static let idIndexMap = ["pnote_uid": IdIndex(0)]
 	
 	let uid: String
-	
 	let collectionId: String
 	let chapterIndex: Int
 	
@@ -26,10 +27,18 @@ final class ParagraphNotes: Storable
 	
 	// COMP. PROPERTIES	-----
 	
-	var idProperties: [Any] { return [uid] }
+	static var idIndexMap: [String : IdIndex]
+	{
+		let collectionMap = ResourceCollection.idIndexMap
+		let cIndex = IdIndex.of(indexMap: collectionMap)
+
+		return collectionMap + [PROPERTY_COLLECTION: cIndex, PROPERTY_CHAPTER: cIndex + 1, "notes_uid": cIndex + 2]
+	}
+	
+	var idProperties: [Any] { return [collectionId, chapterIndex, uid] }
 	var properties: [String : PropertyValue]
 	{
-		return ["collection": PropertyValue(collectionId), "chapter": PropertyValue(chapterIndex), "path_id": PropertyValue(pathId)]
+		return ["path_id": PropertyValue(pathId)]
 	}
 	
 	
@@ -45,7 +54,7 @@ final class ParagraphNotes: Storable
 	
 	static func create(from properties: PropertySet, withId id: Id) -> ParagraphNotes
 	{
-		return ParagraphNotes(collectionId: properties["collection"].string(), chapterIndex: properties["chapter"].int(), pathId: properties["path_id"].string(), uid: id["pnote_uid"].string())
+		return ParagraphNotes(collectionId: id[PROPERTY_COLLECTION].string(), chapterIndex: id[PROPERTY_CHAPTER].int(), pathId: properties["path_id"].string(), uid: id["notes_uid"].string())
 	}
 	
 	
@@ -57,5 +66,18 @@ final class ParagraphNotes: Storable
 		{
 			self.pathId = pathId
 		}
+	}
+	
+	
+	// OTHER METHODS	------
+	
+	static func collectionId(fromId idString: String) -> String
+	{
+		return property(withName: PROPERTY_COLLECTION, fromId: idString).string()
+	}
+	
+	static func chapterIndex(fromId idString: String) -> Int
+	{
+		return property(withName: PROPERTY_CHAPTER, fromId: idString).int()
 	}
 }
