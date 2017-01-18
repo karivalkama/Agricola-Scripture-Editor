@@ -28,7 +28,7 @@ func countRowsReduce(keys: [Any], values: [Any], rereduce: Bool) -> Any
 	}
 	else
 	{
-		return values.count
+		return keys.count
 	}
 
 }

@@ -15,6 +15,7 @@ final class ParagraphNotes: Storable
 	
 	static let PROPERTY_COLLECTION = "collection"
 	static let PROPERTY_CHAPTER = "chapter"
+	static let PROPERTY_UID = "notes_uid"
 	
 	static let type = "paragraph_notes"
 	
@@ -32,7 +33,7 @@ final class ParagraphNotes: Storable
 		let collectionMap = ResourceCollection.idIndexMap
 		let cIndex = IdIndex.of(indexMap: collectionMap)
 
-		return collectionMap + [PROPERTY_COLLECTION: cIndex, PROPERTY_CHAPTER: cIndex + 1, "notes_uid": cIndex + 2]
+		return collectionMap + [PROPERTY_COLLECTION: cIndex, PROPERTY_CHAPTER: cIndex + 1, PROPERTY_UID: cIndex + 2]
 	}
 	
 	var idProperties: [Any] { return [collectionId, chapterIndex, uid] }
@@ -54,7 +55,7 @@ final class ParagraphNotes: Storable
 	
 	static func create(from properties: PropertySet, withId id: Id) -> ParagraphNotes
 	{
-		return ParagraphNotes(collectionId: id[PROPERTY_COLLECTION].string(), chapterIndex: id[PROPERTY_CHAPTER].int(), pathId: properties["path_id"].string(), uid: id["notes_uid"].string())
+		return ParagraphNotes(collectionId: id[PROPERTY_COLLECTION].string(), chapterIndex: id[PROPERTY_CHAPTER].int(), pathId: properties["path_id"].string(), uid: id[PROPERTY_UID].string())
 	}
 	
 	
@@ -79,5 +80,10 @@ final class ParagraphNotes: Storable
 	static func chapterIndex(fromId idString: String) -> Int
 	{
 		return property(withName: PROPERTY_CHAPTER, fromId: idString).int()
+	}
+	
+	static func uid(fromId idString: String) -> String
+	{
+		return property(withName: PROPERTY_UID, fromId: idString).string()
 	}
 }
