@@ -22,7 +22,7 @@ final class NotesThread: Storable
 	let creatorId: String
 	let created: TimeInterval
 	
-	var resolved: Bool
+	var isResolved: Bool
 	var name: String
 	
 	
@@ -39,7 +39,7 @@ final class NotesThread: Storable
 	var idProperties: [Any] { return [noteId, created] }
 	var properties: [String : PropertyValue]
 	{
-		return ["creator": PropertyValue(creatorId), "resolved": PropertyValue(resolved), "name": PropertyValue(name)]
+		return ["creator": PropertyValue(creatorId), "resolved": PropertyValue(isResolved), "name": PropertyValue(name)]
 	}
 	
 	var collectionId: String { return ParagraphNotes.collectionId(fromId: noteId) }
@@ -53,7 +53,7 @@ final class NotesThread: Storable
 		self.noteId = noteId
 		self.creatorId = creatorId
 		self.created = created
-		self.resolved = resolved
+		self.isResolved = resolved
 		self.name = name
 	}
 	
@@ -69,7 +69,7 @@ final class NotesThread: Storable
 	{
 		if let resolved = properties["resolved"].bool
 		{
-			self.resolved = resolved
+			self.isResolved = resolved
 		}
 		if let name = properties["name"].string
 		{
