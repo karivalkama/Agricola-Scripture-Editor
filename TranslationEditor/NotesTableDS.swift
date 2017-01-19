@@ -20,13 +20,15 @@ fileprivate struct IndexStatus
 	let noteStartIndices: [Int]
 }
 
-class NotesTableDS: NSObject
+class NotesTableDS: NSObject, UITableViewDataSource
 {
 	// ATTRIBUTES	---------
 	
 	private static let NOTE_CELL_ID = "NoteCell"
 	private static let THREAD_CELL_ID = "ThreadCell"
 	private static let POST_CELL_ID = "PostCell"
+	
+	private weak var tableView: UITableView!
 	
 	// Path ids, ordered
 	private var pathIds = [String]()
@@ -44,6 +46,81 @@ class NotesTableDS: NSObject
 	private var indexStatus = IndexStatus(rowCount: 0, pathIndex: [:], orderedNotes: [], noteStartIndices: [])
 	
 	
+	// INIT	-----------------
+	
+	init(tableView: UITableView)
+	{
+		self.tableView = tableView
+	}
+	
+	
+	// IMPLEMENTED METHODS	--
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+	{
+		return indexStatus.rowCount
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+	{
+		// Finds the note and the desired index within that note
+		var note: ParagraphNotes!
+		var remainingIndex = 0
+		
+		for i in 0 ..< indexStatus.noteStartIndices.count
+		{
+			// Checks if the index is in this note's range
+			if indexStatus.noteStartIndices.count >= i + 1 || indexStatus.noteStartIndices[i + 1] > indexPath.row
+			{
+				note = indexStatus.orderedNotes[i]
+				remainingIndex = indexPath.row - indexStatus.noteStartIndices[i]
+				
+				break
+			}
+		}
+		
+		// In case the index is right on the note row, creates a row of that type
+		if remainingIndex == 0
+		{
+			// TODO: Set the cell contents, etc.
+			return tableView.dequeueReusableCell(withIdentifier: NotesTableDS.NOTE_CELL_ID)!
+		}
+		// Otherwise finds the thread that contains the specified index
+		else
+		{
+			remainingIndex -= 1
+			
+			for thread in threads[note.idString]!
+			{
+				// In the index is on a specific thread, displays a thread cell
+				if remainingIndex == 0
+				{
+					// TODO: Set the cell contents, etc.
+					return tableView.dequeueReusableCell(withIdentifier: NotesTableDS.THREAD_CELL_ID)!
+				}
+				else
+				{
+					let threadCellCount = cellsForThread(thread)
+					
+					// Checks if the displayed cell is within this thread
+					if remainingIndex < threadCellCount
+					{
+						// TODO: Find the correct post (remaining - 1 :th) and set up the cell
+						return tableView.dequeueReusableCell(withIdentifier: NotesTableDS.POST_CELL_ID)!
+					}
+					// Otherwise moves to the next thread
+					else
+					{
+						remainingIndex -= threadCellCount
+					}
+				}
+			}
+		}
+		
+		return UITableViewCell()
+	}
+	
+	
 	// OTHER METHDODS	-----
 	
 	// This method should be called each time the displayed paragraphs change
@@ -53,7 +130,7 @@ class NotesTableDS: NSObject
 		if self.pathIds != pathIds
 		{
 			self.pathIds = pathIds
-			updateIndexStatus()
+			update()
 		}
 	}
 	
@@ -112,9 +189,9 @@ class NotesTableDS: NSObject
 		}
 	}
 	
-	// Updates the basic indexing information
+	// Updates the basic indexing information, as well as the table
 	// This method should be called each time the contents of the table change
-	private func updateIndexStatus()
+	private func update()
 	{
 		var orderedNotes = [ParagraphNotes]()
 		var noteStartIndices = [Int]()
@@ -137,5 +214,7 @@ class NotesTableDS: NSObject
 		}
 		
 		indexStatus = IndexStatus(rowCount: index, pathIndex: pathIndex, orderedNotes: orderedNotes, noteStartIndices: noteStartIndices)
+		// Also updates the table contents
+		tableView.reloadData()
 	}
 }
