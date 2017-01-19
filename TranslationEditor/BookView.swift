@@ -21,7 +21,7 @@ final class BookView: View
 	static let KEY_LANGUAGE = "languageid"
 	static let KEY_BOOK_CODE = "code"
 	static let KEY_BOOK_IDENTIFIER = "identifier"
-	static let keyNames = [KEY_LANGUAGE, KEY_BOOK_CODE, KEY_BOOK_IDENTIFIER]
+	static let keyNames = [KEY_BOOK_CODE, KEY_LANGUAGE, KEY_BOOK_IDENTIFIER]
 	
 	static let instance = BookView()
 	
@@ -37,18 +37,18 @@ final class BookView: View
 		{
 			(book, emit) in
 			
-			// Key = language id + code + iddentifier
-			let key = [book.languageId, book.code, book.identifier]
+			// Key = code + language id + identifier
+			let key = [book.code, book.languageId, book.identifier]
 			emit(key, nil)
 			
-		}, version: "1")
+		}, version: "2")
 	}
 	
 	
 	// OTHER METHODS	-----
 	
 	// Creates a new query for book data
-	func booksQuery(languageId: String? = nil, code: String? = nil, identifier: String? = nil) -> Query<BookView>
+	func booksQuery(code: String? = nil, languageId: String? = nil, identifier: String? = nil) -> Query<BookView>
 	{
 		let keys = [
 			BookView.KEY_LANGUAGE : Key(languageId),

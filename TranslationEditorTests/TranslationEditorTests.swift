@@ -231,36 +231,32 @@ class TranslationEditorTests: XCTestCase
 		}
 		
 		// Next finds all books
-		for language in languages
+		let books = try! BookView.instance.createQuery().resultObjects()
+		
+		for book in books
 		{
-			print("Books in \(language.name):")
+			let paragraphs = try! ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
 			
-			let books = try! BookView.instance.booksQuery(languageId: language.idString).resultObjects()
+			print("- \(book.code) - \(book.identifier) (\(paragraphs.count) paragraphs)")
 			
-			for book in books
+			for paragraph in paragraphs
 			{
-				let paragraphs = try! ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
-				
-				print("- \(book.code) - \(book.identifier) (\(paragraphs.count) paragraphs)")
-				
-				for paragraph in paragraphs
-				{
-					let text = paragraph.text
-					let maxIndex = text.index(text.startIndex, offsetBy: min(text.characters.count, 32))
-					print("\t- \(paragraph.chapterIndex).\(paragraph.sectionIndex).\(paragraph.index): \(paragraph.text.substring(to: maxIndex))")
-				}
-				
-				let editAmount = try! ParagraphEditView.instance.editsForRangeQuery(bookId: book.idString).resultRows().count
-				if editAmount != 0
-				{
-					print("There are also \(editAmount) edits")
-				}
+				let text = paragraph.text
+				let maxIndex = text.index(text.startIndex, offsetBy: min(text.characters.count, 32))
+				print("\t- \(paragraph.chapterIndex).\(paragraph.sectionIndex).\(paragraph.index): \(paragraph.text.substring(to: maxIndex))")
+			}
+			
+			let editAmount = try! ParagraphEditView.instance.editsForRangeQuery(bookId: book.idString).resultRows().count
+			if editAmount != 0
+			{
+				print("There are also \(editAmount) edits")
 			}
 		}
 	}
 	
-	func testMakeFinnishCopies()
+	func testMakeFinnishCopy()
 	{
+		let code = "gal"
 		let userId = "testuserid"
 		let sourceLanguageName = "English"
 		let targetLanguageName = "Finnish"
@@ -270,17 +266,21 @@ class TranslationEditorTests: XCTestCase
 		let targetLanguage = try! LanguageView.instance.language(withName: targetLanguageName)
 		
 		// Finds source books
-		let sourceBooks = try! BookView.instance.booksQuery(languageId: sourceLanguage.idString).resultObjects()
+		guard let sourceBook = try! BookView.instance.booksQuery(code: code, languageId: sourceLanguage.idString).firstResultObject() else
+		{
+			print("TEST: No source book material with code \(code) and language \(sourceLanguage.name)")
+			return
+		}
 		
 		// Makes an empty copy of each, if there isn't one already
-		for sourceBook in sourceBooks
+		guard try! BookView.instance.booksQuery(code: sourceBook.code, languageId: targetLanguage.idString).firstResultRow() == nil else
 		{
-			if try! BookView.instance.booksQuery(languageId: targetLanguage.idString, code: sourceBook.code).firstResultRow() == nil
-			{
-				print("Creating a \(targetLanguageName) copy of \(sourceLanguageName) book \(sourceBook.code): \(sourceBook.identifier)")
-				_ = try! sourceBook.makeEmptyCopy(identifier: "Test Version", languageId: targetLanguage.idString, userId: userId)
-			}
+			print("TEST: There already exists a \(targetLanguageName) copy of book \(code)")
+			return
 		}
+		
+		print("Creating a \(targetLanguageName) copy of \(sourceLanguageName) book \(sourceBook.code): \(sourceBook.identifier)")
+		_ = try! sourceBook.makeEmptyCopy(identifier: "Test Version", languageId: targetLanguage.idString, userId: userId)
 		
 		print("Done")
 	}
@@ -297,13 +297,13 @@ class TranslationEditorTests: XCTestCase
 		let targetLanguage = try! LanguageView.instance.language(withName: targetLanguageName)
 		
 		// Finds book data
-		guard let sourceBookId = try! BookView.instance.booksQuery(languageId: sourceLanguage.idString, code: bookCode).firstResultRow()?.id else
+		guard let sourceBookId = try! BookView.instance.booksQuery(code: bookCode, languageId: sourceLanguage.idString).firstResultRow()?.id else
 		{
 			assertionFailure("TEST: No book \(bookCode) for language \(sourceLanguageName)")
 			return
 		}
 		
-		guard let targetBookId = try! BookView.instance.booksQuery(languageId: targetLanguage.idString, code: bookCode).firstResultRow()?.id else
+		guard let targetBookId = try! BookView.instance.booksQuery(code: bookCode, languageId: targetLanguage.idString).firstResultRow()?.id else
 		{
 			assertionFailure("TEST: No book \(bookCode) for language \(targetLanguageName)")
 			return
@@ -359,13 +359,13 @@ class TranslationEditorTests: XCTestCase
 		let targetLanguage = try! LanguageView.instance.language(withName: targetLanguageName)
 		
 		// Finds book data
-		guard let sourceBookId = try! BookView.instance.booksQuery(languageId: sourceLanguage.idString, code: bookCode).firstResultRow()?.id else
+		guard let sourceBookId = try! BookView.instance.booksQuery(code: bookCode, languageId: sourceLanguage.idString).firstResultRow()?.id else
 		{
 			assertionFailure("TEST: No book \(bookCode) for language \(sourceLanguageName)")
 			return
 		}
 		
-		guard let targetBookId = try! BookView.instance.booksQuery(languageId: targetLanguage.idString, code: bookCode).firstResultRow()?.id else
+		guard let targetBookId = try! BookView.instance.booksQuery(code: bookCode, languageId: targetLanguage.idString).firstResultRow()?.id else
 		{
 			assertionFailure("TEST: No book \(bookCode) for language \(targetLanguageName)")
 			return
@@ -413,7 +413,7 @@ class TranslationEditorTests: XCTestCase
 		func findBook(languageId: String, code: String, identifier: String) -> Book?
 		{
 			// Performs a database query
-			return try! BookView.instance.booksQuery(languageId: languageId, code: code, identifier: identifier).firstResultObject()
+			return try! BookView.instance.booksQuery(code: code, languageId: languageId, identifier: identifier).firstResultObject()
 		}
 		
 		// Paragraph matching algorithm (incomplete)

@@ -61,7 +61,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		// TODO: Use certain ranges, which should be changeable
 		// Reads necessary data (TEST)
 		let language = try! LanguageView.instance.language(withName: "Finnish")
-		if let book = try! BookView.instance.booksQuery(languageId: language.idString, code: "gal").firstResultObject()
+		if let book = try! BookView.instance.booksQuery(code: "gal", languageId: language.idString).firstResultObject()
 		{
 			self.book = book
 			
@@ -70,7 +70,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		}
 		
 		let sourceLanguage = try! LanguageView.instance.language(withName: "English")
-		if let sourceBook = try! BookView.instance.booksQuery(languageId: sourceLanguage.idString, code: "gal").firstResultObject()
+		if let sourceBook = try! BookView.instance.booksQuery(code: "gal", languageId: sourceLanguage.idString).firstResultObject()
 		{
 			sourceTranslationDS = TranslationTableViewDS(tableView: resourceTableView, cellReuseId: "sourceCell", bookId: sourceBook.idString)
 			

@@ -28,6 +28,7 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	
 	let cellReuseId: String
 	
+	// The instance that manages content change listening and overwrites content when necessary
 	var cellManager: TranslationCellManager?
 	
 	
