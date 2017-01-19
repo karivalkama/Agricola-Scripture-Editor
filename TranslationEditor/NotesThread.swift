@@ -89,4 +89,9 @@ final class NotesThread: Storable
 	{
 		return property(withName: PROPERTY_CREATED, fromId: idString).time()
 	}
+	
+	static func makeId(noteId: String, created: TimeInterval) -> String
+	{
+		return parseId(from: [noteId, created])
+	}
 }

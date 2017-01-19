@@ -20,11 +20,12 @@ final class NotesPostView: View
 	
 	static let KEY_COLLECTION = "collection"
 	static let KEY_CHAPTER = "chapter"
+	static let KEY_NOTE = "note"
 	static let KEY_THREAD_CREATED = "thread_created"
 	static let KEY_CREATED = "created"
 	
 	static let instance = NotesPostView()
-	static let keyNames = [KEY_COLLECTION, KEY_CHAPTER, KEY_THREAD_CREATED, KEY_CREATED]
+	static let keyNames = [KEY_COLLECTION, KEY_CHAPTER, KEY_NOTE, KEY_THREAD_CREATED, KEY_CREATED]
 	
 	let view: CBLView
 	
@@ -38,8 +39,8 @@ final class NotesPostView: View
 		{
 			post, emit in
 			
-			// Key = collection id + chapter index + thread created + created
-			let key: [Any] = [post.collectionId, post.chapterIndex, post.threadCreated, post.created]
+			// Key = collection id + chapter index + note uid + thread created + created
+			let key: [Any] = [post.collectionId, post.chapterIndex, ParagraphNotes.uid(fromId: post.threadId),post.threadCreated, post.created]
 			emit(key, nil)
 		
 		}, reduce: countRowsReduce, version: "1")
@@ -71,7 +72,50 @@ final class NotesPostView: View
 		return count.or(0)
 	}
 	
-	// TODO: Add thead post count query application
+	// Counts the number of posts for each thread in the result set of provided query
+	// Key = thread id, value = number of queried posts for that thread.
+	// Does not include threads with 0 queried posts.
+	func countPostsPerThread(fromQuery query: MyQuery) throws -> [String : Int]
+	{
+		var reduceQuery = query.asQueryOfType(.reduce)
+		reduceQuery.groupByKey = NotesPostView.KEY_THREAD_CREATED
+		
+		let rows = try reduceQuery.resultRows()
+		
+		var counts = [String : Int]()
+		
+		for row in rows
+		{
+			let noteId = ParagraphNotes.makeId(collectionId: row[NotesPostView.KEY_COLLECTION].string(), chapterIndex: row[NotesPostView.KEY_CHAPTER].int(), uid: row[NotesPostView.KEY_NOTE].string())
+			let threadId = NotesThread.makeId(noteId: noteId, created: row[NotesPostView.KEY_THREAD_CREATED].time())
+			
+			counts[threadId] = row.value.int()
+		}
+		
+		return counts
+	}
+	
+	// Counts the number of posts for each paragraph in the result set of provided query
+	// Key = note id, value = number of queried posts for that paragraph
+	// Does not include any paragraphs without queried posts
+	func countPostsPerParagraph(fromQuery query: MyQuery) throws -> [String : Int]
+	{
+		var reduceQuery = query.asQueryOfType(.reduce)
+		reduceQuery.groupByKey = NotesPostView.KEY_NOTE
+		
+		let rows = try reduceQuery.resultRows()
+		
+		var counts = [String : Int]()
+		
+		for row in rows
+		{
+			let noteId = ParagraphNotes.makeId(collectionId: row[NotesPostView.KEY_COLLECTION].string(), chapterIndex: row[NotesPostView.KEY_CHAPTER].int(), uid: row[NotesPostView.KEY_NOTE].string())
+			
+			counts[noteId] = row.value.int()
+		}
+		
+		return counts
+	}
 	
 	static func keysForThread(withId threadId: String) -> [String : Key]
 	{

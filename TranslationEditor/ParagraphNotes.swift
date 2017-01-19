@@ -86,4 +86,9 @@ final class ParagraphNotes: Storable
 	{
 		return property(withName: PROPERTY_UID, fromId: idString).string()
 	}
+	
+	static func makeId(collectionId: String, chapterIndex: Int, uid: String) -> String
+	{
+		return parseId(from: [collectionId, chapterIndex, uid])
+	}
 }

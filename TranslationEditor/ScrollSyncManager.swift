@@ -44,8 +44,6 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	private var lastAcceleration: [Side : CGFloat] = [.left: 0, .right: 0]
 	private var isDragging = false
 	
-	//private var lastDragVelocity: CGFloat = 0
-	//private var lastNewCell: AnyObject?
 	private var lastCenterCell: AnyObject?
 	
 	private var syncScrolling: Side?
@@ -118,44 +116,11 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 			lastOffsetTime[scrolledSide] = currentTime
 		}
 		
-		/*
-		let dragVelocity = scrollView.panGestureRecognizer.velocity(in: scrollView).y
-		if dragVelocity != 0
-		{
-			lastDragVelocity = dragVelocity
-			print("Dragging with \(dragVelocity) velocity")
-		}*/
-		
 		// Doesn't react to scrolls caused by sync scrolling
 		guard scrolledSide != syncScrolling else
 		{
 			return
 		}
-		
-		//print("STATUS: SCROLLING \(scrolledSide)")
-		/*
-		
-		// Keeps track of the direction of the drag / scroll
-		let directionIsUp = scrollView.contentOffset.y < lastOffsetY[scrolledSide]!
-		
-		// Finds the cell that was last displayed / made visible
-		let visibleCells = tableOfSide(scrolledSide).visibleCells
-		
-		guard !visibleCells.isEmpty else
-		{
-			return
-		}
-		
-		let newCell = directionIsUp ? visibleCells.first! : visibleCells.last!
-		
-		guard !(newCell === lastNewCell) else
-		{
-			return
-		}
-		lastNewCell = newCell
-		
-		updateOffSets()
-		*/
 		
 		let scrolledTable = tableOfSide(scrolledSide)
 		guard let newCell = centerCell(ofTable: scrolledTable, withVelocity: lastVelocity[scrolledSide]!, andAcceleration: lastAcceleration[scrolledSide]!) else
@@ -195,8 +160,6 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
 	{
-		//updateOffSets()
-		
 		print("STATUS: SCROLLING ENDED")
 		syncScrolling = nil
 	}
@@ -214,12 +177,6 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
 	{
 		isDragging = false
-		/*
-		if !decelerate
-		{
-			syncScrolling = nil
-		}*/
-		//updateOffSets()
 	}
 	
 	
@@ -262,18 +219,9 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		}
 	}
 	
-	/*
-	private func updateOffSets()
-	{
-		lastOffsetY[.left] = leftTableView.contentOffset.y
-		lastOffsetY[.right] = rightTableView.contentOffset.y
-	}*/
-	
 	// Velocity is in pixels per second
 	private func centerCell(ofTable tableView: UITableView, withVelocity velocity: CGFloat, andAcceleration acceleration: CGFloat) -> UITableViewCell?
 	{
-		print("Using velocity \(velocity) and acceleration \(acceleration)")
-		
 		// Finds the index path of each cell
 		let indexPaths = tableView.indexPathsForVisibleRows.or([])
 		
