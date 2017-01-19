@@ -85,6 +85,34 @@ extension Dictionary
 	}
 }
 
+protocol Appending
+{
+	associatedtype Addable
+	
+	mutating func add(_ e: Addable)
+}
+
+extension Dictionary where Value: Appending
+{
+	mutating func append(key: Key, value: Value.Addable, empty: Value)
+	{
+		var array = self[key].or(empty)
+		array.add(value)
+		
+		self[key] = array
+	}
+}
+
+extension Array: Appending
+{
+	typealias Addable = Element
+	
+	mutating func add(_ e: Addable)
+	{
+		self.append(e)
+	}
+}
+
 extension NSDictionary
 {
 	// Converts this dictionary into a swift dictionary

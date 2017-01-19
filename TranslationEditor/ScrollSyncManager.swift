@@ -28,7 +28,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	// TYPES	-----------------
 	
 	// Target table view, associated path id -> index of the target table view's associated cell
-	typealias IndexForPath = (UITableView, String) -> IndexPath?
+	typealias IndexForPath = (UITableView, String) -> [IndexPath]
 	
 	
 	// ATTRIBUTES	-------------
@@ -142,16 +142,14 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 			return
 		}
 		
-		updateVisibleRowHeights(forTable: scrolledTable)
-		
-		print("STATUS: FINDING TARGET CELL")
-		
 		let syncScrollSide = scrolledSide.opposite
 		let syncTarget = tableOfSide(syncScrollSide)
-		if let targetIndex = pathFinder(syncTarget, pathId)
+		
+		updateVisibleRowHeights(forTable: scrolledTable)
+		updateVisibleRowHeights(forTable: syncTarget)
+		
+		if let targetIndex = centerIndex(of: pathFinder(syncTarget, pathId), onSide: syncScrollSide)
 		{
-			print("STATUS: SYNC SCROLL \(syncScrollSide)")
-			
 			// Scrolls the other table so that the matching cell is visible
 			syncScrolling = syncScrollSide
 			syncTarget.scrollToRow(at: targetIndex, at: .middle, animated: true)
@@ -219,6 +217,34 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		}
 	}
 	
+	private func centerIndex(of indexes: [IndexPath], onSide side: Side) -> IndexPath?
+	{
+		guard !indexes.isEmpty else
+		{
+			return nil
+		}
+		
+		let heights = indexes.map { cellHeights[side]![$0].or(defaultCellHeight) }
+		let totalHeight = heights.reduce(0, { $0 + $1 })
+		
+		let centerY = totalHeight / 2
+		
+		var y: CGFloat = 0
+		for i in 0 ..< indexes.count
+		{
+			let nextY = y + heights[i]
+			
+			if nextY > centerY
+			{
+				return indexes[i]
+			}
+			
+			y = nextY
+		}
+		
+		return nil
+	}
+	
 	// Velocity is in pixels per second
 	private func centerCell(ofTable tableView: UITableView, withVelocity velocity: CGFloat, andAcceleration acceleration: CGFloat) -> UITableViewCell?
 	{
@@ -230,13 +256,6 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 			print("ERROR: No visible cells available")
 			return nil
 		}
-		
-		/*
-		guard indexPaths.count >= visibleCells.count else
-		{
-			print("ERROR: Not enough index paths available (\(indexPaths.count) / \(visibleCells.count))")
-			return nil
-		}*/
 		
 		// Finds the height of each cell
 		let cellHeights = indexPaths.map { tableView.rectForRow(at: $0).height }

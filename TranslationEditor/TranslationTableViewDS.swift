@@ -20,8 +20,8 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	
 	private weak var tableView: UITableView!
 	
-	// Path id -> Current Data index
-	private var pathIndex = [String : Int]()
+	// Path id -> Current Data index(es)
+	private var pathIndex = [String : [Int]]()
 	private var queryManager: LiveQueryManager<ParagraphView>
 	
 	private(set) var currentData = [Paragraph]()
@@ -41,17 +41,6 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		self.cellReuseId = cellReuseId
 		
 		let query = ParagraphView.instance.latestParagraphQuery(bookId: bookId)
-		
-		/* TEST
-		do
-		{
-			try query.resultRows().forEach { print($0.id!) }
-		}
-		catch
-		{
-			print("ERROR: FAILED TO REQUEST PARAGRAPH DATA \(error)")
-		}*/
-		
 		self.queryManager = query.liveQueryManager
 		
 		super.init()
@@ -71,7 +60,7 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		pathIndex = [:]
 		for i in 0 ..< currentData.count
 		{
-			pathIndex[currentData[i].pathId] = i
+			pathIndex.append(key: currentData[i].pathId, value: i, empty: [])
 		}
 		
 		print("STATUS: Paragraph data updated (\(rows.count) rows)")
@@ -126,27 +115,13 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		queryManager.pause()
 	}
 	
-	func paragraphForPath(_ pathId: String) -> Paragraph?
+	func paragraphsForPath(_ pathId: String) -> [Paragraph]
 	{
-		if let index = pathIndex[pathId]
-		{
-			return currentData[index]
-		}
-		else
-		{
-			return nil
-		}
+		return pathIndex[pathId].or([]).map { currentData[$0] }
 	}
 	
-	func indexForPath(_ pathId: String) -> IndexPath?
+	func indexesForPath(_ pathId: String) -> [IndexPath]
 	{
-		if let index = pathIndex[pathId]
-		{
-			return IndexPath(row: index, section: 0)
-		}
-		else
-		{
-			return nil
-		}
+		return pathIndex[pathId].or([]).map { IndexPath(row: $0, section: 0) }
 	}
 }

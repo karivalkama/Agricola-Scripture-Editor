@@ -100,11 +100,12 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 					
 					if let sourcePathId = self.binding?.sourcePath(forPath: pathId)
 					{
-						return self.sourceTranslationDS?.indexForPath(sourcePathId)
+						// TODO: Make DS usage safer. Why optional?
+						return (self.sourceTranslationDS?.indexesForPath(sourcePathId)).or([])
 					}
 					else
 					{
-						return nil
+						return []
 					}
 				}
 				else
@@ -113,11 +114,12 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 					
 					if let targetPathId = self.binding?.targetPath(forPath: pathId)
 					{
-						return self.targetTranslationDS?.indexForPath(targetPathId)
+						// TODO: Again. Why optional?
+						return (self.targetTranslationDS?.indexesForPath(targetPathId)).or([])
 					}
 					else
 					{
-						return nil
+						return []
 					}
 				}
 			}
@@ -215,7 +217,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 				// Saves each user input as a commit
 				for (pathId, text) in self.inputData
 				{
-					if let paragraph = self.targetTranslationDS?.paragraphForPath(pathId)
+					if let paragraph = self.targetTranslationDS?.paragraphsForPath(pathId).first
 					{
 						_ = try paragraph.commit(userId: self.userId, text: text)
 					}
@@ -293,7 +295,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			var chapterData = [Int : [Paragraph]]()
 			for (pathId, inputText) in self.inputData
 			{
-				if let paragraphCopy = targetTranslationDS?.paragraphForPath(pathId)?.copy()
+				if let paragraphCopy = targetTranslationDS?.paragraphsForPath(pathId).first?.copy()
 				{
 					paragraphCopy.replaceContents(with: inputText)
 					
