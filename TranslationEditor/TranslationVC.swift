@@ -94,33 +94,20 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			{
 				tableView, pathId in
 				
+				// Uses the correct binding
+				guard let binding = self.binding else
+				{
+					return []
+				}
+				
+				// TODO: Slightly WET WET
 				if tableView === self.resourceTableView
 				{
-					//print("STATUS: FINDING PATH ID FROM RESOURCE TABLE")
-					
-					if let sourcePathId = self.binding?.sourcePath(forPath: pathId)
-					{
-						// TODO: Make DS usage safer. Why optional?
-						return (self.sourceTranslationDS?.indexesForPath(sourcePathId)).or([])
-					}
-					else
-					{
-						return []
-					}
+					return binding.sourcesForTarget(pathId).flatMap { self.sourceTranslationDS?.indexForPath($0) }
 				}
 				else
 				{
-					//print("STATUS: FINDING PATH ID FROM TARGET TABLE")
-					
-					if let targetPathId = self.binding?.targetPath(forPath: pathId)
-					{
-						// TODO: Again. Why optional?
-						return (self.targetTranslationDS?.indexesForPath(targetPathId)).or([])
-					}
-					else
-					{
-						return []
-					}
+					return binding.targetsForSource(pathId).flatMap { self.targetTranslationDS?.indexForPath($0) }
 				}
 			}
 		}
@@ -217,7 +204,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 				// Saves each user input as a commit
 				for (pathId, text) in self.inputData
 				{
-					if let paragraph = self.targetTranslationDS?.paragraphsForPath(pathId).first
+					if let paragraph = self.targetTranslationDS?.paragraphForPath(pathId)
 					{
 						_ = try paragraph.commit(userId: self.userId, text: text)
 					}
@@ -295,7 +282,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			var chapterData = [Int : [Paragraph]]()
 			for (pathId, inputText) in self.inputData
 			{
-				if let paragraphCopy = targetTranslationDS?.paragraphsForPath(pathId).first?.copy()
+				if let paragraphCopy = targetTranslationDS?.paragraphForPath(pathId)?.copy()
 				{
 					paragraphCopy.replaceContents(with: inputText)
 					

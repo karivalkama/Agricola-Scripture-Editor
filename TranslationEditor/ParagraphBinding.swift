@@ -38,8 +38,8 @@ final class ParagraphBinding: Storable
 	}
 	
 	// path id <-> path id
-	private var sourceToTarget: [String : String]!
-	private var targetToSource: [String : String]!
+	private var sourceToTarget: [String : [String]]!
+	private var targetToSource: [String : [String]]!
 	
 	
 	// COMPUTED PROPERTIES	--
@@ -99,14 +99,14 @@ final class ParagraphBinding: Storable
 	
 	// OTHER METHODS	-----
 	
-	func targetPath(forPath sourcePath: String) -> String?
+	func targetsForSource(_ sourcePath: String) -> [String]
 	{
-		return sourceToTarget[sourcePath]
+		return sourceToTarget[sourcePath].or([])
 	}
 	
-	func sourcePath(forPath targetPath: String) -> String?
+	func sourcesForTarget(_ targetPath: String) -> [String]
 	{
-		return targetToSource[targetPath]
+		return targetToSource[targetPath].or([])
 	}
 	
 	private func updateIdMaps()
@@ -119,8 +119,8 @@ final class ParagraphBinding: Storable
 			let sourcePathId = Paragraph.pathId(fromId: sourceId)
 			let targetPathId = Paragraph.pathId(fromId: targetId)
 			
-			sourceToTarget[sourcePathId] = targetPathId
-			targetToSource[targetPathId] = sourcePathId
+			sourceToTarget.append(key: sourcePathId, value: targetPathId, empty: [])
+			targetToSource.append(key: targetPathId, value: sourcePathId, empty: [])
 		}
 	}
 	
