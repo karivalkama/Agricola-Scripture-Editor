@@ -285,6 +285,43 @@ class TranslationEditorTests: XCTestCase
 		print("Done")
 	}
 	
+	func testMakeNotes()
+	{
+		let code = "gal"
+		let languageName = "Finnish"
+		let resourceName = "Notes"
+		
+		let language = try! LanguageView.instance.language(withName: languageName)
+		guard let book = try! BookView.instance.booksQuery(code: code, languageId: language.idString).firstResultObject() else
+		{
+			print("TEST: No book \(code) for language \(languageName)")
+			return
+		}
+		
+		// Makes sure there doesn't exist a notes resource already
+		guard try! ResourceCollectionView.instance.collectionQuery(bookId: book.idString, languageId: language.idString, category: .notes).firstResultRow() == nil else
+		{
+			print("TEST: Notes already exist for book \(book.identifier)")
+			return
+		}
+		
+		// Creates the resource
+		let resource = ResourceCollection(languageId: language.idString, bookId: book.idString, category: .notes, name: resourceName)
+		
+		// Creates the notes
+		let paragraphs = try! ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
+		let notes = paragraphs.map { ParagraphNotes(collectionId: resource.idString, chapterIndex: $0.chapterIndex, pathId: $0.pathId) }
+		
+		// Pushes the new data to the database
+		try! DATABASE.tryTransaction
+		{
+			try resource.push()
+			try notes.forEach { try $0.push() }
+		}
+		
+		print("TEST: DONE (inserted \(notes.count) notes)")
+	}
+	
 	func testMakeBind()
 	{
 		let bookCode = "gal"
