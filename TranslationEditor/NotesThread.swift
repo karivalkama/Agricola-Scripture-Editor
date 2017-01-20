@@ -80,6 +80,16 @@ final class NotesThread: Storable
 
 	// OTHER METHODS	--------
 
+	// Marks the thread as resolved, if it isn't already. Saves the changes to the database
+	func resolve() throws
+	{
+		if !isResolved
+		{
+			isResolved = true
+			try pushProperties(named: ["resolved"])
+		}
+	}
+	
 	static func noteId(fromId idString: String) -> String
 	{
 		return property(withName: PROPERTY_NOTE, fromId: idString).string()

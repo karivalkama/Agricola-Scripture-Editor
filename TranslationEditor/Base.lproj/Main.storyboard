@@ -227,7 +227,7 @@
                                                             <outlet property="nameLabel" destination="64G-83-vHx" id="JIv-YL-9vu"/>
                                                         </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ThreadCell" rowHeight="40" id="ut6-oO-hAA">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ThreadCell" rowHeight="40" id="ut6-oO-hAA" customClass="ThreadCell" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="154" width="488" height="40"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ut6-oO-hAA" id="pde-an-CsQ">
@@ -256,6 +256,9 @@
                                                                             </constraints>
                                                                             <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <state key="normal" title="Resolve"/>
+                                                                            <connections>
+                                                                                <action selector="resolveButtonPressed:" destination="ut6-oO-hAA" eventType="touchUpInside" id="NKg-Ci-sXl"/>
+                                                                            </connections>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzF-Wu-GvK">
                                                                             <rect key="frame" x="360" y="0.0" width="64" height="31.5"/>
@@ -264,6 +267,9 @@
                                                                             </constraints>
                                                                             <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <state key="normal" title="Hide"/>
+                                                                            <connections>
+                                                                                <action selector="hideShowButtonPressed:" destination="ut6-oO-hAA" eventType="touchUpInside" id="OgG-3f-7pR"/>
+                                                                            </connections>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jsF-JY-Ibp">
                                                                             <rect key="frame" x="432" y="0.0" width="32" height="31.5"/>
@@ -285,8 +291,14 @@
                                                                 <constraint firstItem="4sB-RW-ygB" firstAttribute="top" secondItem="pde-an-CsQ" secondAttribute="top" constant="4" id="f8o-LJ-HFH"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="flagImageView" destination="bcF-P5-kbW" id="zeh-tz-4zj"/>
+                                                            <outlet property="hideShowButton" destination="rzF-Wu-GvK" id="rwx-dF-HT0"/>
+                                                            <outlet property="nameLabel" destination="EEv-dU-6C3" id="iB5-20-5Rr"/>
+                                                            <outlet property="resolveButton" destination="6CS-Kk-egI" id="LRf-PW-BWh"/>
+                                                        </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="113" id="wmu-Nz-Dxx">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="113" id="wmu-Nz-Dxx" customClass="PostCell" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="194" width="488" height="113"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wmu-Nz-Dxx" id="353-Ln-6RY">
@@ -339,6 +351,10 @@
                                                                 <constraint firstItem="wQC-qP-041" firstAttribute="top" secondItem="cYA-DS-lBG" secondAttribute="bottom" constant="8" id="klF-jD-UtZ"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="postTextView" destination="wQC-qP-041" id="Scp-dX-YvC"/>
+                                                            <outlet property="timeLabel" destination="nt7-kO-jlq" id="Agu-FJ-J18"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>

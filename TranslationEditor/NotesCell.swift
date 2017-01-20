@@ -18,7 +18,12 @@ class NotesCell: UITableViewCell, ParagraphAssociated
 	
 	// ATTRIBUTES	------------
 	
-	var pathId: String?
+	private var note: ParagraphNotes?
+	
+	
+	// COMP. PROPERTIES	--------
+	
+	var pathId: String? { return note?.pathId }
 	
 	
 	// ACTIONS	----------------
@@ -32,11 +37,11 @@ class NotesCell: UITableViewCell, ParagraphAssociated
 	
 	// OTHER METHODS	-------
 	
-	func setContent(name: String, pathId: String, displayHideShowButton: Bool, useShowOption: Bool)
+	func setContent(note: ParagraphNotes, name: String, displayHideShowButton: Bool, useShowOption: Bool)
 	{
+		self.note = note
 		nameLabel.text = name
 		hideShowButton.isHidden = !displayHideShowButton
 		hideShowButton.setTitle(useShowOption ? "Show" : "Hide" , for: .normal)
-		self.pathId = pathId
 	}
 }
