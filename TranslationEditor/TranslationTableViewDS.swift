@@ -9,7 +9,7 @@
 import Foundation
 
 // This class handles data management for a single table view containing translation cell data
-class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
+class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener, LiveResource
 {
 	// TYPES	---------------------
 	

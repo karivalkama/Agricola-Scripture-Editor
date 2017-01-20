@@ -56,7 +56,7 @@ fileprivate class UpdateListener<QueryTarget: View>: LiveQueryListener
 	}
 }
 
-class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener
+class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, LiveResource
 {
 	// ATTRIBUTES	---------
 	
