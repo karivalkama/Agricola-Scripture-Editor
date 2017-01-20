@@ -19,6 +19,8 @@ class NotesCell: UITableViewCell, ParagraphAssociated
 	// ATTRIBUTES	------------
 	
 	private var note: ParagraphNotes?
+	private var visibleListener: NotesShowHideListener?
+	private var showStatus = false
 	
 	
 	// COMP. PROPERTIES	--------
@@ -30,16 +32,19 @@ class NotesCell: UITableViewCell, ParagraphAssociated
 	
 	@IBAction func hideShowButtonPressed(_ sender: Any)
 	{
-		// TODO: Show or hide notes contents
-		// (inform listener / content manager)
+		// Informs the listener that a status change was requested
+		visibleListener?.showHideStatusRequested(forId: note!.idString, status: !showStatus)
 	}
 	
 	
 	// OTHER METHODS	-------
 	
-	func setContent(note: ParagraphNotes, name: String, displayHideShowButton: Bool, useShowOption: Bool)
+	func setContent(note: ParagraphNotes, name: String, displayHideShowButton: Bool, useShowOption: Bool, listener: NotesShowHideListener)
 	{
 		self.note = note
+		self.visibleListener = listener
+		self.showStatus = !useShowOption
+		
 		nameLabel.text = name
 		hideShowButton.isHidden = !displayHideShowButton
 		hideShowButton.setTitle(useShowOption ? "Show" : "Hide" , for: .normal)

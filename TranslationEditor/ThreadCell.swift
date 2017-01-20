@@ -24,12 +24,16 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	private var thread: NotesThread?
 	private(set) var pathId: String?
 	
+	private var visibleListener: NotesShowHideListener?
+	private var showStatus = false
+	
 	
 	// ACTIONS	--------------
 	
 	@IBAction func hideShowButtonPressed(_ sender: Any)
 	{
-		// TODO: Change the visibility status of the thread (inform listener)
+		// Informs the visibility listener
+		visibleListener?.showHideStatusRequested(forId: thread!.idString, status: !showStatus)
 	}
 	
 	@IBAction func resolveButtonPressed(_ sender: Any)
@@ -51,10 +55,12 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	
 	// OTHER METHODS	-----
 	
-	func setContent(thread: NotesThread, pathId: String, displayHideShowButton: Bool, useShowOption: Bool)
+	func setContent(thread: NotesThread, pathId: String, displayHideShowButton: Bool, useShowOption: Bool, listener: NotesShowHideListener)
 	{
 		self.pathId = pathId
 		self.thread = thread
+		self.visibleListener = listener
+		self.showStatus = !useShowOption
 		
 		nameLabel.text = thread.isResolved ? "Resolved: \(thread.name)" : thread.name
 		

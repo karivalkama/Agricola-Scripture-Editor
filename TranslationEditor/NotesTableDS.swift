@@ -20,7 +20,7 @@ fileprivate struct IndexStatus
 	let noteStartIndices: [Int]
 }
 
-class NotesTableDS: NSObject, UITableViewDataSource
+class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener
 {
 	// ATTRIBUTES	---------
 	
@@ -32,6 +32,8 @@ class NotesTableDS: NSObject, UITableViewDataSource
 	
 	// Path ids, ordered
 	private var pathIds = [String]()
+	// Path id -> Paragraph name
+	private var paragraphNames = [String : String]()
 	
 	// Path id -> Note
 	private var notes = [String : ParagraphNotes]()
@@ -82,8 +84,15 @@ class NotesTableDS: NSObject, UITableViewDataSource
 		// In case the index is right on the note row, creates a row of that type
 		if remainingIndex == 0
 		{
-			// TODO: Set the cell contents, etc.
-			return tableView.dequeueReusableCell(withIdentifier: NotesTableDS.NOTE_CELL_ID)!
+			var cell: NotesCell! = tableView.dequeueReusableCell(withIdentifier: NotesTableDS.NOTE_CELL_ID, for: indexPath) as? NotesCell
+			if cell == nil
+			{
+				cell = NotesCell()
+			}
+			
+			cell.setContent(note: note, name: paragraphNames[note.pathId].or(""), displayHideShowButton: threads[note.idString] != nil, useShowOption: shouldDisplayThreadsForNote(withId: note.idString), listener: self)
+			
+			return cell
 		}
 		// Otherwise finds the thread that contains the specified index
 		else
@@ -95,8 +104,15 @@ class NotesTableDS: NSObject, UITableViewDataSource
 				// In the index is on a specific thread, displays a thread cell
 				if remainingIndex == 0
 				{
-					// TODO: Set the cell contents, etc.
-					return tableView.dequeueReusableCell(withIdentifier: NotesTableDS.THREAD_CELL_ID)!
+					var cell: ThreadCell! = tableView.dequeueReusableCell(withIdentifier: NotesTableDS.THREAD_CELL_ID, for: indexPath) as? ThreadCell
+					if cell == nil
+					{
+						cell = ThreadCell()
+					}
+					
+					cell.setContent(thread: thread, pathId: note.pathId, displayHideShowButton: posts[thread.idString] != nil, useShowOption: shouldDisplayPostsForThread(thread), listener: self)
+					
+					return cell
 				}
 				else
 				{
@@ -105,8 +121,17 @@ class NotesTableDS: NSObject, UITableViewDataSource
 					// Checks if the displayed cell is within this thread
 					if remainingIndex < threadCellCount
 					{
-						// TODO: Find the correct post (remaining - 1 :th) and set up the cell
-						return tableView.dequeueReusableCell(withIdentifier: NotesTableDS.POST_CELL_ID)!
+						let post = posts[thread.idString]![remainingIndex - 1]
+						
+						var cell: PostCell! = tableView.dequeueReusableCell(withIdentifier: NotesTableDS.POST_CELL_ID, for: indexPath) as? PostCell
+						if cell == nil
+						{
+							cell = PostCell()
+						}
+						
+						cell.setContent(pathId: note.pathId, postText: post.content, postCreated: Date(timeIntervalSince1970: post.created))
+						
+						return cell
 					}
 					// Otherwise moves to the next thread
 					else
@@ -120,16 +145,48 @@ class NotesTableDS: NSObject, UITableViewDataSource
 		return UITableViewCell()
 	}
 	
+	func showHideStatusRequested(forId id: String, status: Bool)
+	{
+		if visibleState[id] != status
+		{
+			visibleState[id] = status
+			update()
+		}
+	}
+	
 	
 	// OTHER METHDODS	-----
 	
 	// This method should be called each time the displayed paragraphs change
 	// The notes will be ordered based on this path data
-	func updateDisplayPaths(pathIds: [String])
+	func displayParagraphsUpdated(paragraphs: [Paragraph])
 	{
+		let pathIds = paragraphs.map { $0.pathId }
+		
 		if self.pathIds != pathIds
 		{
 			self.pathIds = pathIds
+			
+			// Sets the paragraph names as well
+			for paragraph in paragraphs
+			{
+				// If the paragraph has a range, uses that
+				if let range = paragraph.range
+				{
+					paragraphNames[paragraph.pathId] = "\(paragraph.chapterIndex).\(paragraph.sectionIndex): \(range.simpleName)"
+				}
+				// If the paragraph contains a section heading, tells taht
+				else if (paragraph.content.first?.style.isSectionHeadingStyle()).or(false)
+				{
+					let headingText = paragraph.text
+					paragraphNames[paragraph.pathId] = "\(paragraph.chapterIndex).\(paragraph.sectionIndex) - \(headingText.isEmpty ? "Heading" : headingText)"
+				}
+				else
+				{
+					paragraphNames[paragraph.pathId] = "\(paragraph.chapterIndex).\(paragraph.sectionIndex) - ..."
+				}
+			}
+			
 			update()
 		}
 	}
