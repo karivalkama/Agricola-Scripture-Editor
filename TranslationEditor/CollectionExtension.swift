@@ -31,6 +31,37 @@ extension Array
 
 extension Array
 {
+	// Converts the array into a dictionary
+	// If there are duplicate keys, only the latter will remain in effect
+	// The provided function returns key value pair for each element
+	func toDictionary<Key: Hashable, Value>(using converter: (Element) -> (Key, Value)) -> [Key : Value]
+	{
+		var dict = [Key : Value]()
+		
+		for element in self
+		{
+			let (key, value) = converter(element)
+			dict[key] = value
+		}
+		
+		return dict
+	}
+	
+	// Converts the array into a dictionary that supports multiple values for a single key
+	// The provided function returns key value pair for each element
+	func toArrayDictionary<Key: Hashable, Value>(using converter: (Element) -> (Key, Value)) -> [Key : [Value]]
+	{
+		var dict = [Key : [Value]]()
+		
+		for element in self
+		{
+			let (key, value) = converter(element)
+			dict.append(key: key, value: value, empty: [])
+		}
+		
+		return dict
+	}
+	
 	// Adds an element to this array and returns the new array
 	static func + (left: Array<Element>, right: Element) -> Array<Element>
 	{

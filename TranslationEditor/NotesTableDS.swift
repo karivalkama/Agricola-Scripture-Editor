@@ -20,6 +20,42 @@ fileprivate struct IndexStatus
 	let noteStartIndices: [Int]
 }
 
+// This listener type is used when one has to implement listening for multiple live queries
+fileprivate class UpdateListener<QueryTarget: View>: LiveQueryListener
+{
+	// TYPES	---------------
+	
+	typealias Updator = ([QueryTarget.Queried]) -> ()
+	
+	
+	// ATTRIBUTES	-----------
+	
+	private let updator: Updator
+	
+	
+	// INIT	-------------------
+	
+	init(using updator: @escaping Updator)
+	{
+		self.updator = updator
+	}
+	
+	
+	// IMPLEMENTED METHODS	---
+	
+	fileprivate func rowsUpdated(rows: [Row<QueryTarget>])
+	{
+		do
+		{
+			try updator(rows.map { try $0.object() })
+		}
+		catch
+		{
+			print("ERROR: Failed to read live object data \(error)")
+		}
+	}
+}
+
 class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener
 {
 	// ATTRIBUTES	---------
@@ -30,11 +66,6 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener
 	
 	private weak var tableView: UITableView!
 	
-	// Path ids, ordered
-	private var pathIds = [String]()
-	// Path id -> Paragraph name
-	private var paragraphNames = [String : String]()
-	
 	// Path id -> Note
 	private var notes = [String : ParagraphNotes]()
 	// Note id -> Threads
@@ -42,17 +73,56 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener
 	// Thread if -> posts
 	private var posts = [String : [NotesPost]]()
 	
+	// Path ids, ordered
+	private var pathIds = [String]()
+	// Path id -> Paragraph name
+	private var paragraphNames = [String : String]()
+	
 	// Instance id -> Custom visibility state
 	private var visibleState = [String : Bool]()
 	
 	private var indexStatus = IndexStatus(rowCount: 0, pathIndex: [:], orderedNotes: [], noteStartIndices: [])
 	
+	private let notesQueryManager: LiveQueryManager<ParagraphNotesView>
+	private let threadQueryManager: LiveQueryManager<NotesThreadView>
+	private let postQueryManager: LiveQueryManager<NotesPostView>
+	
 	
 	// INIT	-----------------
 	
-	init(tableView: UITableView)
+	// TODO: Add chapter parameters after translation range is used
+	init(tableView: UITableView, resourceCollectionId: String)
 	{
 		self.tableView = tableView
+		
+		notesQueryManager = ParagraphNotesView.instance.notesQuery(collectionId: resourceCollectionId).liveQueryManager
+		threadQueryManager = NotesThreadView.instance.threadQuery(collectionId: resourceCollectionId).liveQueryManager
+		postQueryManager = NotesPostView.instance.postsQuery(collectionId: resourceCollectionId).liveQueryManager
+		
+		super.init()
+		
+		notesQueryManager.addListener(AnyLiveQueryListener(UpdateListener
+		{
+			notes in
+			self.notes = notes.toDictionary { ($0.pathId, $0) }
+			self.update()
+		}))
+		
+		threadQueryManager.addListener(AnyLiveQueryListener(UpdateListener
+		{
+			threads in
+			self.threads = threads.toArrayDictionary { ($0.noteId, $0) }
+			self.update()
+		}))
+		
+		postQueryManager.addListener(AnyLiveQueryListener(UpdateListener
+		{
+			posts in
+			self.posts = posts.toArrayDictionary { ($0.threadId, $0) }
+			self.update()
+		}))
+		
+		// TODO: Thread listening should probably be started right away
 	}
 	
 	
@@ -157,6 +227,21 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener
 	
 	// OTHER METHDODS	-----
 	
+	func activate()
+	{
+		notesQueryManager.start()
+		threadQueryManager.start()
+		postQueryManager.start()
+	}
+	
+	func pause()
+	{
+		// TODO: Don't stop the thread queries (for the flags)
+		notesQueryManager.pause()
+		threadQueryManager.pause()
+		postQueryManager.pause()
+	}
+	
 	// This method should be called each time the displayed paragraphs change
 	// The notes will be ordered based on this path data
 	func displayParagraphsUpdated(paragraphs: [Paragraph])
@@ -204,6 +289,35 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener
 		}
 	}
 	
+	// Updates the basic indexing information, as well as the table
+	// This method should be called each time the contents of the table change
+	private func update()
+	{
+		var orderedNotes = [ParagraphNotes]()
+		var noteStartIndices = [Int]()
+		
+		var pathIndex = [String : (Int, Int)]()
+		
+		var index = 0
+		for pathId in pathIds
+		{
+			if let note = notes[pathId]
+			{
+				orderedNotes.append(note)
+				noteStartIndices.append(index)
+				
+				let nextIndex = index + cellsForNote(withId: note.idString)
+				
+				pathIndex[pathId] = (index, nextIndex)
+				index = nextIndex
+			}
+		}
+		
+		indexStatus = IndexStatus(rowCount: index, pathIndex: pathIndex, orderedNotes: orderedNotes, noteStartIndices: noteStartIndices)
+		// Also updates the table contents
+		tableView.reloadData()
+	}
+	
 	private func shouldDisplayPostsForThread(_ thread: NotesThread) -> Bool
 	{
 		// If there is a custom visibility state, uses that. 
@@ -244,34 +358,5 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener
 		{
 			return 1
 		}
-	}
-	
-	// Updates the basic indexing information, as well as the table
-	// This method should be called each time the contents of the table change
-	private func update()
-	{
-		var orderedNotes = [ParagraphNotes]()
-		var noteStartIndices = [Int]()
-		
-		var pathIndex = [String : (Int, Int)]()
-		
-		var index = 0
-		for pathId in pathIds
-		{
-			if let note = notes[pathId]
-			{
-				orderedNotes.append(note)
-				noteStartIndices.append(index)
-				
-				let nextIndex = index + cellsForNote(withId: note.idString)
-				
-				pathIndex[pathId] = (index, nextIndex)
-				index = nextIndex
-			}
-		}
-		
-		indexStatus = IndexStatus(rowCount: index, pathIndex: pathIndex, orderedNotes: orderedNotes, noteStartIndices: noteStartIndices)
-		// Also updates the table contents
-		tableView.reloadData()
 	}
 }
