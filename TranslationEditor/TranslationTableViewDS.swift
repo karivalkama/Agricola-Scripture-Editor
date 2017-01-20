@@ -104,7 +104,7 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	// Activates the live querying and makes this the active data source for the table view
 	func activate()
 	{
-		tableView.dataSource = self
+		//tableView.dataSource = self
 		queryManager.start()
 		
 		print("STATUS: Paragraph data retrieval started")

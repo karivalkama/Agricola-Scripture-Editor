@@ -67,12 +67,14 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			
 			targetTranslationDS = TranslationTableViewDS(tableView: translationTableView, cellReuseId: "TranslationCell", bookId: book.idString)
 			targetTranslationDS?.cellManager = self
+			translationTableView.dataSource = targetTranslationDS
 		}
 		
 		let sourceLanguage = try! LanguageView.instance.language(withName: "English")
 		if let sourceBook = try! BookView.instance.booksQuery(code: "gal", languageId: sourceLanguage.idString).firstResultObject()
 		{
 			sourceTranslationDS = TranslationTableViewDS(tableView: resourceTableView, cellReuseId: "sourceCell", bookId: sourceBook.idString)
+			resourceTableView.dataSource = sourceTranslationDS
 			
 			// Sets up scroll management
 			guard let book = book else

@@ -26,13 +26,21 @@ class ResourceManager
 {
 	// ATTRIBUTES	-----------
 	
-	private weak var resourceTableView: UITableView?
+	private weak var resourceTableView: UITableView!
 	
 	private var sourceBooks = [BookData]()
 	private var notes = [NotesData]()
 	
 	private var currentLiveResource: LiveResource?
 	private var currentResourceIndex: Int?
+	
+	
+	// COMPUTED PROPERTIES	---
+	
+	var resourceTitles: [String]
+	{
+		return sourceBooks.map { $0.book.identifier } + notes.map { $0.resource.name }
+	}
 	
 	
 	// INIT	-------------------
@@ -57,6 +65,8 @@ class ResourceManager
 		}
 		
 		self.notes = notes.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString)) }
+		
+		selectResource(atIndex: 0)
 	}
 	
 	func indexPathsForTargetPathId(_ targetPathId: String) -> [IndexPath]
@@ -97,5 +107,39 @@ class ResourceManager
 		{
 			return [sourcePathId]
 		}
+	}
+	
+	func selectResource(atIndex index: Int)
+	{
+		guard index != currentResourceIndex else
+		{
+			return
+		}
+		
+		guard index >= 0 && index < sourceBooks.count + notes.count else
+		{
+			print("ERROR: Trying to activate a resource at non-existing index")
+			return
+		}
+		
+		// Stops the listening for the current resource
+		currentLiveResource?.pause()
+		
+		// Finds the new resource and activates it
+		if index < sourceBooks.count
+		{
+			let datasource = sourceBooks[index].datasource
+			currentLiveResource = datasource
+			resourceTableView.dataSource = datasource
+		}
+		else
+		{
+			let datasource = notes[index - sourceBooks.count].datasource
+			currentLiveResource = datasource
+			resourceTableView.dataSource = datasource
+		}
+		
+		currentResourceIndex = index
+		currentLiveResource?.activate()
 	}
 }
