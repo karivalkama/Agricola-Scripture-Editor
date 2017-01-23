@@ -31,12 +31,11 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	// Target translation managing
 	private var targetTranslationDS: TranslationTableViewDS?
 	
-	// Source translation managing
-	private var sourceTranslationDS: TranslationTableViewDS?
+	// resource table managing
+	private var resourceManager: ResourceManager!
 	
-	// Table binding
-	private var binding: ParagraphBinding?
-	private var scrollManager: ScrollSyncManager?
+	// Scroll management
+	private var scrollManager: ScrollSyncManager!
 	
 	// paragraph data modified, but not committed by user
 	// Key = paragraph path id, value = edited text
@@ -70,47 +69,28 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			translationTableView.dataSource = targetTranslationDS
 		}
 		
+		resourceManager = ResourceManager(resourceTableView: resourceTableView)
+		
+		// Sets initial resources (TEST)
 		let sourceLanguage = try! LanguageView.instance.language(withName: "English")
-		if let sourceBook = try! BookView.instance.booksQuery(code: "gal", languageId: sourceLanguage.idString).firstResultObject()
+		if let sourceBook = try! BookView.instance.booksQuery(code: "gal", languageId: sourceLanguage.idString).firstResultObject(), let targetBook = book, let binding = try! ParagraphBindingView.instance.latestBinding(from: sourceBook.idString, to: targetBook.idString)
 		{
-			sourceTranslationDS = TranslationTableViewDS(tableView: resourceTableView, cellReuseId: "sourceCell", bookId: sourceBook.idString)
-			resourceTableView.dataSource = sourceTranslationDS
+			// TODO: Add notes later
+			resourceManager.setResources(sourceBooks: [(sourceBook, binding)], notes: [])
+		}
+		
+		// Sets scroll syncing
+		scrollManager = ScrollSyncManager(resourceTableView, translationTableView)
+		{
+			tableView, oppositePathId in
 			
-			// Sets up scroll management
-			guard let book = book else
+			if tableView === self.resourceTableView
 			{
-				print("STATUS: NO BOOK FOR BINDING")
-				return
+				return self.resourceManager.indexPathsForTargetPathId(oppositePathId)
 			}
-			
-			// TODO: FIX
-			guard let binding = try! ParagraphBindingView.instance.latestBinding(from: sourceBook.idString, to: book.idString) else
+			else
 			{
-				print("STATUS: NO BINDING FOR SCROLL SYNC")
-				return
-			}
-			
-			self.binding = binding
-			
-			self.scrollManager = ScrollSyncManager(resourceTableView, translationTableView)
-			{
-				tableView, pathId in
-				
-				// Uses the correct binding
-				guard let binding = self.binding else
-				{
-					return []
-				}
-				
-				// TODO: Slightly WET WET
-				if tableView === self.resourceTableView
-				{
-					return binding.sourcesForTarget(pathId).flatMap { self.sourceTranslationDS?.indexForPath($0) }
-				}
-				else
-				{
-					return binding.targetsForSource(pathId).flatMap { self.targetTranslationDS?.indexForPath($0) }
-				}
+				return self.resourceManager.targetPathsForSourcePath(oppositePathId).flatMap { self.targetTranslationDS?.indexForPath($0) }
 			}
 		}
 	}
@@ -259,7 +239,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			
 			// Starts the database listening process, if not yet started
 			targetTranslationDS?.activate()
-			sourceTranslationDS?.activate()
+			resourceManager.activate()
 		}
 	}
 	
@@ -272,7 +252,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			
 			// Ends the database listening process, if present
 			targetTranslationDS?.pause()
-			sourceTranslationDS?.pause()
+			resourceManager.pause()
 			
 			// TODO: Test. modify later
 			guard let book = book else

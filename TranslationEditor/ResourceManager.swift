@@ -142,4 +142,14 @@ class ResourceManager
 		currentResourceIndex = index
 		currentLiveResource?.activate()
 	}
+	
+	func pause()
+	{
+		currentLiveResource?.pause()
+	}
+	
+	func activate()
+	{
+		currentLiveResource?.activate()
+	}
 }
