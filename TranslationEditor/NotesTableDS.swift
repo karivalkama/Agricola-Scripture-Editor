@@ -56,7 +56,7 @@ fileprivate class UpdateListener<QueryTarget: View>: LiveQueryListener
 	}
 }
 
-class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, LiveResource
+class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, LiveResource, TranslationParagraphListener
 {
 	// ATTRIBUTES	---------
 	
@@ -104,6 +104,8 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 		notesQueryManager.addListener(AnyLiveQueryListener(UpdateListener
 		{
 			notes in
+			
+			print("STATUS: Received input of \(notes.count) notes")
 			self.notes = notes.toDictionary { ($0.pathId, $0) }
 			self.update()
 		}))
@@ -111,6 +113,8 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 		threadQueryManager.addListener(AnyLiveQueryListener(UpdateListener
 		{
 			threads in
+			
+			print("STATUS: Received input of \(threads.count) threads")
 			self.threads = threads.toArrayDictionary { ($0.noteId, $0) }
 			self.update()
 		}))
@@ -118,6 +122,8 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 		postQueryManager.addListener(AnyLiveQueryListener(UpdateListener
 		{
 			posts in
+			
+			print("STATUS: Received input of \(posts.count) posts")
 			self.posts = posts.toArrayDictionary { ($0.threadId, $0) }
 			self.update()
 		}))
@@ -142,8 +148,9 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 		for i in 0 ..< indexStatus.noteStartIndices.count
 		{
 			// Checks if the index is in this note's range
-			if indexStatus.noteStartIndices.count >= i + 1 || indexStatus.noteStartIndices[i + 1] > indexPath.row
+			if indexStatus.noteStartIndices.count <= i + 1 || indexStatus.noteStartIndices[i + 1] > indexPath.row
 			{
+				//print("STATUS: Uses starting index of \(indexStatus.noteStartIndices[i]) - \(indexStatus.noteStartIndices.count <= i + 1 ? "" : "\(indexStatus.noteStartIndices[i + 1])") for row \(indexPath.row). There are total of \(indexStatus.noteStartIndices.count) note starts")
 				note = indexStatus.orderedNotes[i]
 				remainingIndex = indexPath.row - indexStatus.noteStartIndices[i]
 				
@@ -224,6 +231,41 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 		}
 	}
 	
+	// This method should be called each time the displayed paragraphs change
+	// The notes will be ordered based on this path data
+	func translationParagraphsUpdated(_ paragraphs: [Paragraph])
+	{
+		let pathIds = paragraphs.map { $0.pathId }
+		
+		if self.pathIds != pathIds
+		{
+			self.pathIds = pathIds
+			
+			// Sets the paragraph names as well
+			for paragraph in paragraphs
+			{
+				// If the paragraph has a range, uses that
+				if let range = paragraph.range
+				{
+					paragraphNames[paragraph.pathId] = "\(paragraph.chapterIndex): \(range.simpleName)"
+				}
+					// If the paragraph contains a section heading, tells taht
+				else if (paragraph.content.first?.style.isSectionHeadingStyle()).or(false)
+				{
+					let headingText = paragraph.text
+					paragraphNames[paragraph.pathId] = "\(paragraph.chapterIndex) - \(headingText.isEmpty ? "Heading" : headingText)"
+				}
+				else
+				{
+					paragraphNames[paragraph.pathId] = "\(paragraph.chapterIndex) - ..."
+				}
+			}
+			
+			update()
+		}
+	}
+
+	
 	
 	// OTHER METHDODS	-----
 	
@@ -240,40 +282,6 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 		notesQueryManager.pause()
 		threadQueryManager.pause()
 		postQueryManager.pause()
-	}
-	
-	// This method should be called each time the displayed paragraphs change
-	// The notes will be ordered based on this path data
-	func displayParagraphsUpdated(paragraphs: [Paragraph])
-	{
-		let pathIds = paragraphs.map { $0.pathId }
-		
-		if self.pathIds != pathIds
-		{
-			self.pathIds = pathIds
-			
-			// Sets the paragraph names as well
-			for paragraph in paragraphs
-			{
-				// If the paragraph has a range, uses that
-				if let range = paragraph.range
-				{
-					paragraphNames[paragraph.pathId] = "\(paragraph.chapterIndex).\(paragraph.sectionIndex): \(range.simpleName)"
-				}
-				// If the paragraph contains a section heading, tells taht
-				else if (paragraph.content.first?.style.isSectionHeadingStyle()).or(false)
-				{
-					let headingText = paragraph.text
-					paragraphNames[paragraph.pathId] = "\(paragraph.chapterIndex).\(paragraph.sectionIndex) - \(headingText.isEmpty ? "Heading" : headingText)"
-				}
-				else
-				{
-					paragraphNames[paragraph.pathId] = "\(paragraph.chapterIndex).\(paragraph.sectionIndex) - ..."
-				}
-			}
-			
-			update()
-		}
 	}
 	
 	// Finds the IndexPaths that match the provided path id
@@ -314,6 +322,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 		}
 		
 		indexStatus = IndexStatus(rowCount: index, pathIndex: pathIndex, orderedNotes: orderedNotes, noteStartIndices: noteStartIndices)
+		//print("STATUS: Notes updated: \(indexStatus)")
 		// Also updates the table contents
 		tableView.reloadData()
 	}

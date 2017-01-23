@@ -22,7 +22,7 @@ fileprivate struct NotesData
 }
 
 // This class handles the functions concerning the resource table
-class ResourceManager
+class ResourceManager: TranslationParagraphListener
 {
 	// ATTRIBUTES	-----------
 	
@@ -48,6 +48,19 @@ class ResourceManager
 	init(resourceTableView: UITableView)
 	{
 		self.resourceTableView = resourceTableView
+	}
+	
+	
+	// IMPLEMENTED METHODS	---
+	
+	// This method should be called whenever the paragraph data on the translation side is updated
+	// Makes sure right notes resources are displayed
+	func translationParagraphsUpdated(_ paragraphs: [Paragraph])
+	{
+		for noteData in notes
+		{
+			noteData.datasource.translationParagraphsUpdated(paragraphs)
+		}
 	}
 	
 	
@@ -141,6 +154,8 @@ class ResourceManager
 		
 		currentResourceIndex = index
 		currentLiveResource?.activate()
+		
+		resourceTableView.reloadData()
 	}
 	
 	func pause()

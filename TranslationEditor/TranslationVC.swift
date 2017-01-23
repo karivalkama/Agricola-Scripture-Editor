@@ -20,6 +20,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	
 	@IBOutlet weak var translationTableView: UITableView!
 	@IBOutlet weak var resourceTableView: UITableView!
+	@IBOutlet weak var resourceSegmentControl: UISegmentedControl!
 	
 	
 	// PROPERTIES	---------
@@ -75,8 +76,19 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		let sourceLanguage = try! LanguageView.instance.language(withName: "English")
 		if let sourceBook = try! BookView.instance.booksQuery(code: "gal", languageId: sourceLanguage.idString).firstResultObject(), let targetBook = book, let binding = try! ParagraphBindingView.instance.latestBinding(from: sourceBook.idString, to: targetBook.idString)
 		{
-			// TODO: Add notes later
-			resourceManager.setResources(sourceBooks: [(sourceBook, binding)], notes: [])
+			// TODO: Use a better query (more languages, etc.) (catch errors too)
+			let notesResources = try! ResourceCollectionView.instance.collectionQuery(bookId: targetBook.idString, languageId: language.idString, category: .notes).resultObjects()
+			resourceManager.setResources(sourceBooks: [(sourceBook, binding)], notes: notesResources)
+		}
+		
+		// Makes resource manager listen to paragraph content changes
+		targetTranslationDS?.contentListener = resourceManager
+		
+		resourceSegmentControl.removeAllSegments()
+		let resourceTitles = resourceManager.resourceTitles
+		for i in 0 ..< resourceTitles.count
+		{
+			resourceSegmentControl.insertSegment(withTitle: resourceTitles[i], at: i, animated: false)
 		}
 		
 		// Sets scroll syncing
@@ -167,6 +179,10 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		commit()
 	}
 	
+	@IBAction func resouceSegmentChanged(_ sender: Any)
+	{
+		resourceManager.selectResource(atIndex: resourceSegmentControl.selectedSegmentIndex)
+	}
 	
 	// OTHER	---------------------
 	

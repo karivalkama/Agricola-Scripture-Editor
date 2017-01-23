@@ -64,7 +64,7 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 		
 		nameLabel.text = thread.isResolved ? "Resolved: \(thread.name)" : thread.name
 		
-		resolveButton.isHidden = thread.isResolved
+		resolveButton.isEnabled = thread.isResolved
 		flagImageView.isHidden = thread.isResolved
 		
 		hideShowButton.setTitle(useShowOption ? "Show" : "Hide", for: .normal)

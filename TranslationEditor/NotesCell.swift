@@ -46,7 +46,7 @@ class NotesCell: UITableViewCell, ParagraphAssociated
 		self.showStatus = !useShowOption
 		
 		nameLabel.text = name
-		hideShowButton.isHidden = !displayHideShowButton
+		hideShowButton.isEnabled = displayHideShowButton
 		hideShowButton.setTitle(useShowOption ? "Show" : "Hide" , for: .normal)
 	}
 }

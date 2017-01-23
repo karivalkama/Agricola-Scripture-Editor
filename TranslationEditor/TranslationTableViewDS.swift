@@ -30,6 +30,7 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	
 	// The instance that manages content change listening and overwrites content when necessary
 	var cellManager: TranslationCellManager?
+	var contentListener: TranslationParagraphListener?
 	
 	
 	// INIT	-------------------------
@@ -67,6 +68,8 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		print("STATUS: Paragraph data updated (\(rows.count) rows)")
 		
 		tableView.reloadData()
+		
+		contentListener?.translationParagraphsUpdated(currentData)
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
