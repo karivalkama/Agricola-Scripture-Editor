@@ -92,7 +92,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		}
 		
 		// Sets scroll syncing
-		scrollManager = ScrollSyncManager(resourceTableView, translationTableView)
+		scrollManager = ScrollSyncManager(leftTable: resourceTableView, rightTable: translationTableView, leftResourceId: resourceTitles.isEmpty ? "none" : resourceTitles.first!, rightResourceId: "target")
 		{
 			tableView, oppositePathId in
 			
@@ -182,6 +182,12 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	@IBAction func resouceSegmentChanged(_ sender: Any)
 	{
 		resourceManager.selectResource(atIndex: resourceSegmentControl.selectedSegmentIndex)
+		if let newTitle = resourceSegmentControl.titleForSegment(at: resourceSegmentControl.selectedSegmentIndex)
+		{
+			print("STATUS: Switching to \(newTitle)")
+			scrollManager.leftResourceId = newTitle
+		}
+		scrollManager.syncScrollToRight()
 	}
 	
 	// OTHER	---------------------

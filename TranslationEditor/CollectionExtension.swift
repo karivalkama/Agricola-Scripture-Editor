@@ -97,6 +97,12 @@ extension Array where Element: Copyable
 
 extension Dictionary
 {
+	// Checks whether the dictionary contains a value for the provided key
+	func containsKey(_ key: Key) -> Bool
+	{
+		return self[key] != nil
+	}
+	
 	// Combines two dictionaries together to form a single, larger dictionary
 	// If both dictionaries contain equal keys, the values of the right dictionary will overwrite the values of the left dictionary for those keys in the returned dictionary
 	// For example: ["dog" : "woof", "cat" : "meow"] + ["dog" : "rawr!", "mouse" : "squeek"] => ["dog" : "rawr!", "cat" : "meow", "mouse" : "squeek"]

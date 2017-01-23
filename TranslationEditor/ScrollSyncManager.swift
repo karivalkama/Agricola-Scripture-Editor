@@ -48,22 +48,41 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	private var syncScrolling: Side?
 	
-	private var cellHeights: [Side : [IndexPath : CGFloat]]
+	private var cellHeights: [String : [IndexPath : CGFloat]]
 	private let defaultCellHeight: CGFloat = 640
+	private var currentHeightIds: [Side : String]
+	
+	
+	// COMPUTED PROPERTIES	-----
+	
+	var leftResourceId: String
+	{
+		get { return currentHeightIds[.left]! }
+		set
+		{
+			if !cellHeights.containsKey(newValue)
+			{
+				cellHeights[newValue] = [:]
+			}
+			currentHeightIds[.left] = newValue
+		}
+	}
 	
 	
 	// INIT	---------------------
 	
-	init(_ leftTable: UITableView, _ rightTable: UITableView, using pathFinder: @escaping IndexForPath)
+	init(leftTable: UITableView, rightTable: UITableView, leftResourceId: String, rightResourceId: String, using pathFinder: @escaping IndexForPath)
 	{
 		leftTableView = leftTable
 		rightTableView = rightTable
 		
 		self.pathFinder = pathFinder
 		
-		cellHeights = [Side : [IndexPath : CGFloat]]()
-		cellHeights[.left] = [:]
-		cellHeights[.right] = [:]
+		cellHeights = [String : [IndexPath : CGFloat]]()
+		cellHeights[leftResourceId] = [:]
+		cellHeights[rightResourceId] = [:]
+		
+		currentHeightIds = [Side.left: leftResourceId, Side.right: rightResourceId]
 		
 		super.init()
 		
@@ -76,7 +95,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat
 	{
-		return (cellHeights[sideOfTable(tableView)]?[indexPath]).or(defaultCellHeight)
+		return cellHeight(side: sideOfTable(tableView), index: indexPath)
 	}
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView)
@@ -122,38 +141,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 			return
 		}
 		
-		let scrolledTable = tableOfSide(scrolledSide)
-		guard let newCell = centerCell(ofTable: scrolledTable, withVelocity: lastVelocity[scrolledSide]!, andAcceleration: lastAcceleration[scrolledSide]!) else
-		{
-			print("ERROR: No visible cells at \(scrolledSide)")
-			return
-		}
-		
-		guard !(newCell === lastCenterCell) else
-		{
-			return
-		}
-		lastCenterCell = newCell
-		
-		// finds the matching cell in the other table
-		guard let pathId = (newCell as? ParagraphAssociated)?.pathId else
-		{
-			print("ERROR: Path id of the cell is not available")
-			return
-		}
-		
-		let syncScrollSide = scrolledSide.opposite
-		let syncTarget = tableOfSide(syncScrollSide)
-		
-		updateVisibleRowHeights(forTable: scrolledTable)
-		updateVisibleRowHeights(forTable: syncTarget)
-		
-		if let targetIndex = centerIndex(of: pathFinder(syncTarget, pathId), onSide: syncScrollSide)
-		{
-			// Scrolls the other table so that the matching cell is visible
-			syncScrolling = syncScrollSide
-			syncTarget.scrollToRow(at: targetIndex, at: .middle, animated: true)
-		}
+		syncScroll(toSide: scrolledSide, velocity: lastVelocity[scrolledSide]!, acceleration: lastAcceleration[scrolledSide]!, skipIfAnchorStill: true)
 	}
 	
 	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
@@ -180,15 +168,56 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	// OTHER METHODS	------
 	
-	func updateVisibleRowHeights(forTable tableView: UITableView)
+	func syncScrollToRight()
 	{
-		let side = sideOfTable(tableView)
+		syncScroll(toSide: .right)
+	}
+	
+	private func syncScroll(toSide anchorSide: Side, velocity: CGFloat = 0, acceleration: CGFloat = 0, skipIfAnchorStill: Bool = false)
+	{
+		let scrolledTable = tableOfSide(anchorSide)
+		guard let newCell = centerCell(ofTable: scrolledTable, withVelocity: velocity, andAcceleration: acceleration) else
+		{
+			print("ERROR: No visible cells at \(anchorSide)")
+			return
+		}
+		
+		guard !(skipIfAnchorStill && newCell === lastCenterCell) else
+		{
+			return
+		}
+		lastCenterCell = newCell
+		
+		// finds the matching cell in the other table
+		guard let pathId = (newCell as? ParagraphAssociated)?.pathId else
+		{
+			print("ERROR: Path id of the cell is not available")
+			return
+		}
+		
+		let syncScrollSide = anchorSide.opposite
+		let syncTarget = tableOfSide(syncScrollSide)
+		
+		updateVisibleRowHeights(forTable: scrolledTable)
+		updateVisibleRowHeights(forTable: syncTarget)
+		
+		if let targetIndex = centerIndex(of: pathFinder(syncTarget, pathId), onSide: syncScrollSide)
+		{
+			// Scrolls the other table so that the matching cell is visible
+			syncScrolling = syncScrollSide
+			syncTarget.scrollToRow(at: targetIndex, at: .middle, animated: true)
+		}
+	}
+	
+	private func updateVisibleRowHeights(forTable tableView: UITableView)
+	{
+		let heightId = currentHeightIds[sideOfTable(tableView)]!
 		
 		if let paths = tableView.indexPathsForVisibleRows
 		{
 			for indexPath in paths
 			{
-				cellHeights[side]?[indexPath] = tableView.rectForRow(at: indexPath).height
+				cellHeights[heightId]?[indexPath] = tableView.rectForRow(at: indexPath).height
 			}
 		}
 	}
@@ -217,6 +246,11 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		}
 	}
 	
+	private func cellHeight(side: Side, index: IndexPath) -> CGFloat
+	{
+		return cellHeights[currentHeightIds[side]!]![index].or(defaultCellHeight)
+	}
+	
 	private func centerIndex(of indexes: [IndexPath], onSide side: Side) -> IndexPath?
 	{
 		guard !indexes.isEmpty else
@@ -224,7 +258,8 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 			return nil
 		}
 		
-		let heights = indexes.map { cellHeights[side]![$0].or(defaultCellHeight) }
+		let heightId = currentHeightIds[side]!
+		let heights = indexes.map { cellHeights[heightId]![$0].or(defaultCellHeight) }
 		let totalHeight = heights.reduce(0, { $0 + $1 })
 		
 		let centerY = totalHeight / 2
