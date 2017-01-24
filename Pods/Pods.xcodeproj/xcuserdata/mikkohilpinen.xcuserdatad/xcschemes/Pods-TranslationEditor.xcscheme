@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "13D73A3992591821656E4761961C0B71"
+               BlueprintIdentifier = "57E05A95B3560F694932BB53B660B6F6"
                BuildableName = "Pods_TranslationEditor.framework"
                BlueprintName = "Pods-TranslationEditor"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13D73A3992591821656E4761961C0B71"
+            BlueprintIdentifier = "57E05A95B3560F694932BB53B660B6F6"
             BuildableName = "Pods_TranslationEditor.framework"
             BlueprintName = "Pods-TranslationEditor"
             ReferencedContainer = "container:Pods.xcodeproj">

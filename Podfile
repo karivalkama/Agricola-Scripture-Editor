@@ -7,6 +7,7 @@ target 'TranslationEditor' do
 
   # Pods for TranslationEditor
   pod 'couchbase-lite-ios', '~> 1.3'
+  pod 'HTagView'
 
   target 'TranslationEditorTests' do
     inherit! :search_paths
