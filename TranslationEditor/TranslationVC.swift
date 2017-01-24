@@ -190,7 +190,19 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		scrollManager.syncScrollToRight()
 	}
 	
+	
 	// OTHER	---------------------
+	
+	private func displayAlert(withIdentifier alertId: String)
+	{
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let myAlert = storyboard.instantiateViewController(withIdentifier: alertId)
+		myAlert.modalPresentationStyle = .overCurrentContext
+		myAlert.modalTransitionStyle = .crossDissolve
+		
+		print("STATUS: Presenting view with id \(alertId)")
+		present(myAlert, animated: true, completion: nil)
+	}
 	
 	private func commit()
 	{
