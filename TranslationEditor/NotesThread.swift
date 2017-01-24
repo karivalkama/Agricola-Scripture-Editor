@@ -24,6 +24,7 @@ final class NotesThread: Storable
 	
 	var isResolved: Bool
 	var name: String
+	var targetVerseIndex: VerseIndex?
 	
 	
 	// COMP. PROPERTIES	-------
@@ -39,7 +40,7 @@ final class NotesThread: Storable
 	var idProperties: [Any] { return [noteId, created] }
 	var properties: [String : PropertyValue]
 	{
-		return ["creator": PropertyValue(creatorId), "resolved": PropertyValue(isResolved), "name": PropertyValue(name)]
+		return ["creator": PropertyValue(creatorId), "resolved": PropertyValue(isResolved), "name": PropertyValue(name), "verse": PropertyValue(targetVerseIndex)]
 	}
 	
 	var collectionId: String { return ParagraphNotes.collectionId(fromId: noteId) }
@@ -48,18 +49,22 @@ final class NotesThread: Storable
 	
 	// INIT	-------------------
 	
-	init(noteId: String, creatorId: String, name: String, resolved: Bool = false, created: TimeInterval = Date().timeIntervalSince1970)
+	init(noteId: String, creatorId: String, name: String, targetVerseIndex: VerseIndex? = nil, resolved: Bool = false, created: TimeInterval = Date().timeIntervalSince1970)
 	{
 		self.noteId = noteId
 		self.creatorId = creatorId
 		self.created = created
 		self.isResolved = resolved
 		self.name = name
+		self.targetVerseIndex = targetVerseIndex
 	}
 	
-	static func create(from properties: PropertySet, withId id: Id) -> NotesThread
+	static func create(from properties: PropertySet, withId id: Id) throws -> NotesThread
 	{
-		return NotesThread(noteId: id[PROPERTY_NOTE].string(), creatorId: properties["creator"].string(), name: properties["name"].string(), resolved: properties["resolved"].bool(), created: id[PROPERTY_CREATED].time())
+		let verseIndexData = properties["verse"].object
+		let verseIndex = verseIndexData == nil ? nil : try VerseIndex.parse(from: verseIndexData!)
+		
+		return NotesThread(noteId: id[PROPERTY_NOTE].string(), creatorId: properties["creator"].string(), name: properties["name"].string(), targetVerseIndex: verseIndex, resolved: properties["resolved"].bool(), created: id[PROPERTY_CREATED].time())
 	}
 	
 	

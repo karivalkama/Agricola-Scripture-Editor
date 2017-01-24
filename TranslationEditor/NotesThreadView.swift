@@ -20,10 +20,11 @@ final class NotesThreadView: View
 	static let KEY_COLLECTION = "collection"
 	static let KEY_CHAPTER = "chapter"
 	static let KEY_NOTE = "note"
+	static let KEY_VERSE = "verse"
 	static let KEY_CREATED = "created"
 	
 	static let instance = NotesThreadView()
-	static let keyNames = [KEY_COLLECTION, KEY_CHAPTER, KEY_NOTE, KEY_CREATED]
+	static let keyNames = [KEY_COLLECTION, KEY_CHAPTER, KEY_NOTE, KEY_VERSE, KEY_CREATED]
 	
 	let view: CBLView
 	
@@ -38,10 +39,10 @@ final class NotesThreadView: View
 			thread, emit in
 			
 			// Key = collection id + chapter index + note uid + created
-			let key: [Any] = [thread.collectionId, thread.chapterIndex, ParagraphNotes.uid(fromId: thread.noteId), thread.created]
+			let key: [Any] = [thread.collectionId, thread.chapterIndex, ParagraphNotes.uid(fromId: thread.noteId), (thread.targetVerseIndex?.index).or(0), thread.created]
 			emit(key, nil)
 			
-		}, reduce: countRowsReduce, version: "1")
+		}, reduce: countRowsReduce, version: "2")
 	}
 	
 	
