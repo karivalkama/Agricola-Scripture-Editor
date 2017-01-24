@@ -27,6 +27,7 @@ class ResourceManager: TranslationParagraphListener
 	// ATTRIBUTES	-----------
 	
 	private weak var resourceTableView: UITableView!
+	private weak var addNotesDelegate: AddNotesDelegate!
 	
 	private var sourceBooks = [BookData]()
 	private var notes = [NotesData]()
@@ -45,9 +46,10 @@ class ResourceManager: TranslationParagraphListener
 	
 	// INIT	-------------------
 	
-	init(resourceTableView: UITableView)
+	init(resourceTableView: UITableView, addNotesDelegate: AddNotesDelegate)
 	{
 		self.resourceTableView = resourceTableView
+		self.addNotesDelegate = addNotesDelegate
 	}
 	
 	
@@ -77,7 +79,7 @@ class ResourceManager: TranslationParagraphListener
 			return BookData(book: book, binding: binding, datasource: TranslationTableViewDS(tableView: resourceTableView!, cellReuseId: "sourceCell", bookId: book.idString))
 		}
 		
-		self.notes = notes.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString)) }
+		self.notes = notes.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString, delegate: addNotesDelegate)) }
 		
 		selectResource(atIndex: 0)
 	}

@@ -186,16 +186,19 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zFj-Ji-pr4">
-                                                                    <rect key="frame" x="8" y="4" width="472" height="32"/>
+                                                                    <rect key="frame" x="8" y="4" width="472" height="31.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1: 3 - 8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64G-83-vHx">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="368" height="32"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="368" height="31.5"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="32" id="jZ9-M9-Kqv"/>
+                                                                            </constraints>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZf-qR-CYB">
-                                                                            <rect key="frame" x="376" y="0.0" width="48" height="32"/>
+                                                                            <rect key="frame" x="376" y="0.0" width="48" height="31.5"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="48" id="Qba-Qg-hDQ"/>
                                                                             </constraints>
@@ -206,21 +209,22 @@
                                                                             </connections>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBr-fY-SGn">
-                                                                            <rect key="frame" x="432" y="0.0" width="40" height="32"/>
+                                                                            <rect key="frame" x="432" y="0.0" width="40" height="31.5"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="40" id="QCw-d8-7Xt"/>
                                                                             </constraints>
                                                                             <color key="tintColor" red="0.92156862745098034" green="0.33725490196078434" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <state key="normal" title="Post"/>
+                                                                            <connections>
+                                                                                <action selector="postButtonPressed:" destination="8ee-jT-DwW" eventType="touchUpInside" id="ahP-Zg-9R5"/>
+                                                                            </connections>
                                                                         </button>
                                                                     </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="32" id="VLI-zd-QNd"/>
-                                                                    </constraints>
                                                                 </stackView>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="zFj-Ji-pr4" firstAttribute="top" secondItem="JnG-ji-Fah" secondAttribute="top" constant="4" id="8KS-pp-Xay"/>
+                                                                <constraint firstAttribute="bottom" secondItem="zFj-Ji-pr4" secondAttribute="bottom" constant="4" id="gdg-sR-3Nv"/>
                                                                 <constraint firstAttribute="trailing" secondItem="zFj-Ji-pr4" secondAttribute="trailing" constant="8" id="hP0-YD-f8F"/>
                                                                 <constraint firstItem="zFj-Ji-pr4" firstAttribute="leading" secondItem="JnG-ji-Fah" secondAttribute="leading" constant="8" id="wOn-nF-vWp"/>
                                                             </constraints>
@@ -243,11 +247,15 @@
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag" translatesAutoresizingMaskIntoConstraints="NO" id="bcF-P5-kbW">
                                                                             <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                                                                             <constraints>
+                                                                                <constraint firstAttribute="height" constant="32" id="9xy-MM-xXF"/>
                                                                                 <constraint firstAttribute="width" constant="32" id="YYg-Y9-Frv"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translation for Keruso?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEv-dU-6C3">
                                                                             <rect key="frame" x="40" y="0.0" width="248" height="32"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="32" id="ouQ-U5-Bo9"/>
+                                                                            </constraints>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -283,11 +291,11 @@
                                                                             <state key="normal" title="Post">
                                                                                 <color key="titleColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             </state>
+                                                                            <connections>
+                                                                                <action selector="postButtonPressed:" destination="ut6-oO-hAA" eventType="touchUpInside" id="qZx-ek-Laf"/>
+                                                                            </connections>
                                                                         </button>
                                                                     </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="32" id="din-1s-Qgp"/>
-                                                                    </constraints>
                                                                 </stackView>
                                                             </subviews>
                                                             <constraints>

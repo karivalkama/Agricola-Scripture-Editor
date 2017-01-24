@@ -9,7 +9,7 @@
 import UIKit
 
 // TranslationVC is the view controller used in the translation / review / work view
-class TranslationVC: UIViewController, CellInputListener, AppStatusListener, TranslationCellManager
+class TranslationVC: UIViewController, CellInputListener, AppStatusListener, TranslationCellManager, AddNotesDelegate
 {
 	// TYPES	----------
 	
@@ -70,7 +70,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			translationTableView.dataSource = targetTranslationDS
 		}
 		
-		resourceManager = ResourceManager(resourceTableView: resourceTableView)
+		resourceManager = ResourceManager(resourceTableView: resourceTableView, addNotesDelegate: self)
 		
 		// Sets initial resources (TEST)
 		let sourceLanguage = try! LanguageView.instance.language(withName: "English")
@@ -141,6 +141,14 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		UIView.setAnimationsEnabled(true)
 	}
 	
+	func insertThread(noteId: String, pathId: String)
+	{
+		displayAlert(withIdentifier: "PostThread")
+		{
+			($0 as! PostThreadVC).configure(userId: self.userId, noteId: noteId, paragraphRange: self.targetTranslationDS?.paragraphForPath(pathId)?.range)
+		}
+	}
+	
 	
 	// CELL MANAGEMENT	-------------
 	
@@ -193,12 +201,14 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	
 	// OTHER	---------------------
 	
-	private func displayAlert(withIdentifier alertId: String)
+	private func displayAlert(withIdentifier alertId: String, using configurer: (UIViewController) -> ())
 	{
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let myAlert = storyboard.instantiateViewController(withIdentifier: alertId)
 		myAlert.modalPresentationStyle = .overCurrentContext
 		myAlert.modalTransitionStyle = .crossDissolve
+		
+		configurer(myAlert)
 		
 		print("STATUS: Presenting view with id \(alertId)")
 		present(myAlert, animated: true, completion: nil)

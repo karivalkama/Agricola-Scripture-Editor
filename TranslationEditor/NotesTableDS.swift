@@ -65,6 +65,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 	private static let POST_CELL_ID = "PostCell"
 	
 	private weak var tableView: UITableView!
+	private weak var delegate: AddNotesDelegate!
 	
 	// Path id -> Note
 	private var notes = [String : ParagraphNotes]()
@@ -91,9 +92,10 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 	// INIT	-----------------
 	
 	// TODO: Add chapter parameters after translation range is used
-	init(tableView: UITableView, resourceCollectionId: String)
+	init(tableView: UITableView, resourceCollectionId: String, delegate: AddNotesDelegate)
 	{
 		self.tableView = tableView
+		self.delegate = delegate
 		
 		notesQueryManager = ParagraphNotesView.instance.notesQuery(collectionId: resourceCollectionId).liveQueryManager
 		threadQueryManager = NotesThreadView.instance.threadQuery(collectionId: resourceCollectionId).liveQueryManager
@@ -167,7 +169,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 				cell = NotesCell()
 			}
 			
-			cell.setContent(note: note, name: paragraphNames[note.pathId].or(""), displayHideShowButton: threads[note.idString] != nil, useShowOption: shouldDisplayThreadsForNote(withId: note.idString), listener: self)
+			cell.setContent(note: note, name: paragraphNames[note.pathId].or(""), displayHideShowButton: threads[note.idString] != nil, useShowOption: shouldDisplayThreadsForNote(withId: note.idString), listener: self, addDelegate: delegate)
 			
 			return cell
 		}
@@ -187,7 +189,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 						cell = ThreadCell()
 					}
 					
-					cell.setContent(thread: thread, pathId: note.pathId, displayHideShowButton: posts[thread.idString] != nil, useShowOption: shouldDisplayPostsForThread(thread), listener: self)
+					cell.setContent(thread: thread, pathId: note.pathId, displayHideShowButton: posts[thread.idString] != nil, useShowOption: shouldDisplayPostsForThread(thread), listener: self, addDelegate: delegate)
 					
 					return cell
 				}
@@ -241,7 +243,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 		{
 			self.pathIds = pathIds
 			
-			// Sets the paragraph names as well
+			// Sets the paragraph names
 			for paragraph in paragraphs
 			{
 				// If the paragraph has a range, uses that
@@ -249,7 +251,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 				{
 					paragraphNames[paragraph.pathId] = "\(paragraph.chapterIndex): \(range.simpleName)"
 				}
-					// If the paragraph contains a section heading, tells taht
+				// If the paragraph contains a section heading, tells that
 				else if (paragraph.content.first?.style.isSectionHeadingStyle()).or(false)
 				{
 					let headingText = paragraph.text

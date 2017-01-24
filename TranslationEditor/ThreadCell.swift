@@ -21,14 +21,23 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	
 	// ATTRIBUTES	----------
 	
-	private var thread: NotesThread?
+	private var thread: NotesThread!
 	private(set) var pathId: String?
 	
-	private var visibleListener: NotesShowHideListener?
+	private var visibleListener: NotesShowHideListener!
 	private var showStatus = false
+	
+	private weak var addPostDelegate: AddNotesDelegate!
 	
 	
 	// ACTIONS	--------------
+	
+	@IBAction func postButtonPressed(_ sender: Any)
+	{
+		print("Post button pressed")
+		// TODO: Add a post
+		//addPostDelegate.insertThread(noteId: thread.noteId, pathId: pathId!)
+	}
 	
 	@IBAction func hideShowButtonPressed(_ sender: Any)
 	{
@@ -55,12 +64,13 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	
 	// OTHER METHODS	-----
 	
-	func setContent(thread: NotesThread, pathId: String, displayHideShowButton: Bool, useShowOption: Bool, listener: NotesShowHideListener)
+	func setContent(thread: NotesThread, pathId: String, displayHideShowButton: Bool, useShowOption: Bool, listener: NotesShowHideListener, addDelegate: AddNotesDelegate)
 	{
 		self.pathId = pathId
 		self.thread = thread
 		self.visibleListener = listener
 		self.showStatus = !useShowOption
+		self.addPostDelegate = addDelegate
 		
 		nameLabel.text = thread.isResolved ? "Resolved: \(thread.name)" : thread.name
 		

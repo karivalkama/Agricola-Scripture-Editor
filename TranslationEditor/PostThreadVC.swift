@@ -25,7 +25,7 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	private var configured = false
 	private var userId: String!
 	private var availableVerseRange: VerseRange?
-	private var notesResourceId: String!
+	private var noteId: String!
 	
 	private let tags = ["These", "Are", "Just", "Placeholder", "Tags"]
 	
@@ -60,7 +60,7 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	{
 		// Creates a new thread (and post) instance, then dismisses the view
 		// TODO: Add support for tags and verse index
-		let thread = NotesThread(noteId: notesResourceId, creatorId: userId, name: subjectTextField.text!)
+		let thread = NotesThread(noteId: noteId, creatorId: userId, name: subjectTextField.text!)
 		let post = commentTextView.text.isEmpty ? nil : NotesPost(threadId: thread.idString, creatorId: userId, content: commentTextView.text)
 		
 		do
@@ -142,11 +142,11 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	
 	// OTHER METHODS	------
 	
-	func configure(userId: String, notesResourceId: String, paragraphRange: VerseRange?)
+	func configure(userId: String, noteId: String, paragraphRange: VerseRange?)
 	{
 		self.userId = userId
 		self.availableVerseRange = paragraphRange
-		self.notesResourceId = notesResourceId
+		self.noteId = noteId
 		
 		self.configured = true
 	}
