@@ -149,6 +149,14 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		}
 	}
 	
+	func insertPost(threadId: String)
+	{
+		displayAlert(withIdentifier: "AddPost")
+		{
+			($0 as! PostCommentVC).configure(userId: self.userId, threadId: threadId)
+		}
+	}
+	
 	
 	// CELL MANAGEMENT	-------------
 	

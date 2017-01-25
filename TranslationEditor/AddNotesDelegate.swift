@@ -13,4 +13,7 @@ protocol AddNotesDelegate: class
 {
 	// Should finalise thread creation for the provided note and paragraph
 	func insertThread(noteId: String, pathId: String)
+	
+	// Should create a new post for the provided thread
+	func insertPost(threadId: String)
 }

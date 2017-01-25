@@ -34,9 +34,7 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	
 	@IBAction func postButtonPressed(_ sender: Any)
 	{
-		print("Post button pressed")
-		// TODO: Add a post
-		//addPostDelegate.insertThread(noteId: thread.noteId, pathId: pathId!)
+		addPostDelegate.insertPost(threadId: thread.idString)
 	}
 	
 	@IBAction func hideShowButtonPressed(_ sender: Any)
