@@ -25,6 +25,7 @@ final class NotesThread: Storable
 	var isResolved: Bool
 	var name: String
 	var targetVerseIndex: VerseIndex?
+	var tags: [String]
 	
 	
 	// COMP. PROPERTIES	-------
@@ -40,7 +41,7 @@ final class NotesThread: Storable
 	var idProperties: [Any] { return [noteId, created] }
 	var properties: [String : PropertyValue]
 	{
-		return ["creator": PropertyValue(creatorId), "resolved": PropertyValue(isResolved), "name": PropertyValue(name), "verse": PropertyValue(targetVerseIndex)]
+		return ["creator": PropertyValue(creatorId), "resolved": PropertyValue(isResolved), "name": PropertyValue(name), "verse": PropertyValue(targetVerseIndex), "tags": PropertyValue(tags.map { PropertyValue($0) })]
 	}
 	
 	var collectionId: String { return ParagraphNotes.collectionId(fromId: noteId) }
@@ -49,7 +50,7 @@ final class NotesThread: Storable
 	
 	// INIT	-------------------
 	
-	init(noteId: String, creatorId: String, name: String, targetVerseIndex: VerseIndex? = nil, resolved: Bool = false, created: TimeInterval = Date().timeIntervalSince1970)
+	init(noteId: String, creatorId: String, name: String, targetVerseIndex: VerseIndex? = nil, tags: [String] = [], resolved: Bool = false, created: TimeInterval = Date().timeIntervalSince1970)
 	{
 		self.noteId = noteId
 		self.creatorId = creatorId
@@ -57,6 +58,7 @@ final class NotesThread: Storable
 		self.isResolved = resolved
 		self.name = name
 		self.targetVerseIndex = targetVerseIndex
+		self.tags = tags
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> NotesThread
@@ -64,13 +66,13 @@ final class NotesThread: Storable
 		let verseIndexData = properties["verse"].object
 		let verseIndex = verseIndexData == nil ? nil : try VerseIndex.parse(from: verseIndexData!)
 		
-		return NotesThread(noteId: id[PROPERTY_NOTE].string(), creatorId: properties["creator"].string(), name: properties["name"].string(), targetVerseIndex: verseIndex, resolved: properties["resolved"].bool(), created: id[PROPERTY_CREATED].time())
+		return NotesThread(noteId: id[PROPERTY_NOTE].string(), creatorId: properties["creator"].string(), name: properties["name"].string(), targetVerseIndex: verseIndex, tags: properties["tags"].array().flatMap { $0.string }, resolved: properties["resolved"].bool(), created: id[PROPERTY_CREATED].time())
 	}
 	
 	
 	// IMPLEMENTED METHODS	----
 	
-	func update(with properties: PropertySet)
+	func update(with properties: PropertySet) throws
 	{
 		if let resolved = properties["resolved"].bool
 		{
@@ -79,6 +81,14 @@ final class NotesThread: Storable
 		if let name = properties["name"].string
 		{
 			self.name = name
+		}
+		if let indexData = properties["verse"].object
+		{
+			self.targetVerseIndex = try VerseIndex.parse(from: indexData)
+		}
+		if let tags = properties["tags"].array
+		{
+			self.tags = tags.flatMap { $0.string }
 		}
 	}
 

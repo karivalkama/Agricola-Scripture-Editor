@@ -14,6 +14,10 @@ extension UIButton
 	func setVisualTheme(_ theme: Theme)
 	{
 		backgroundColor = theme.colour
+		
+		titleLabel?.textColor = theme.textColour
 		tintColor = theme.textColour
+		setTitleColor(theme.textColour, for: .normal)
+		setTitleColor(theme.textColour, for: .disabled)
 	}
 }

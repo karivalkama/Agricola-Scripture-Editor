@@ -9,7 +9,7 @@
 import UIKit
 import HTagView
 
-class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, HTagViewDataSource, UITextFieldDelegate
+class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, HTagViewDataSource
 {
 	// IB OUTLETS	-----------
 	
@@ -43,12 +43,15 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		}
 		
 		// Configures UI elements
-		subjectTextField.delegate = self
-		
 		versePickerView.dataSource = self
 		versePickerView.delegate = self
 		
 		tagView.dataSource = self
+		tagView.tagMainTextColor = Colour.Text.Black.primary.asColour
+		tagView.tagMainBackColor = Colour.Primary.asColour
+		tagView.tagSecondTextColor = Colour.Text.Black.secondary.asColour
+		tagView.tagSecondBackColor = Colour.Primary.light.asColour
+		tagView.tagBorderColor = Colour.Text.Black.secondary.asColour.cgColor
 		
 		postButton.isEnabled = false
     }
@@ -58,9 +61,11 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	
 	@IBAction func postButtonPressed(_ sender: Any)
 	{
+		let verseIndex = availableVerseRange?.verses[versePickerView.selectedRow(inComponent: 0) - 1].start
+		
 		// Creates a new thread (and post) instance, then dismisses the view
-		// TODO: Add support for tags and verse index
-		let thread = NotesThread(noteId: noteId, creatorId: userId, name: subjectTextField.text!)
+		// TODO: Add support for tags
+		let thread = NotesThread(noteId: noteId, creatorId: userId, name: subjectTextField.text!, targetVerseIndex: verseIndex)
 		let post = commentTextView.text.isEmpty ? nil : NotesPost(threadId: thread.idString, creatorId: userId, content: commentTextView.text)
 		
 		do
@@ -86,6 +91,30 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		dismiss(animated: true, completion: nil)
 	}
 	
+	/*
+	// Post button is enabled only when there is a subject
+	if subjectTextField.text == nil || subjectTextField.text!.isEmpty
+	{
+	postButton.isEnabled = false
+	}
+	else
+	{
+	postButton.isEnabled = true
+	}
+	*/
+	
+	@IBAction func subjectChanged(_ sender: Any)
+	{
+		if subjectTextField.text == nil || subjectTextField.text!.isEmpty
+		{
+			postButton.isEnabled = false
+		}
+		else
+		{
+			postButton.isEnabled = true
+		}
+	}
+	
 	
 	// IMPLEMENTED METHODS	---
 	
@@ -103,7 +132,7 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	{
 		if row == 0
 		{
-			return "Whole paragraph"
+			return "All"
 		}
 		else
 		{
@@ -124,19 +153,6 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	func tagView(_ tagView: HTagView, tagTypeAtIndex index: Int) -> HTagType
 	{
 		return .select
-	}
-	
-	func textFieldDidEndEditing(_ textField: UITextField)
-	{
-		// Post button is enabled only when there is a subject
-		if textField.text == nil || textField.text!.isEmpty
-		{
-			postButton.isEnabled = false
-		}
-		else
-		{
-			postButton.isEnabled = true
-		}
 	}
 	
 	

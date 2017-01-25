@@ -21,6 +21,36 @@ class TranslationEditorTests: XCTestCase
         super.tearDown()
     }
 	
+	func testVerseRanges()
+	{
+		let range1 = VerseRange(1, 2)
+		let range2 = VerseRange(VerseIndex(2), VerseIndex(4))
+		
+		print("Range 1: \(range1.description) AKA \(range1.simpleName): \(range1.verses)")
+		print("Range 2: \(range2.description) AKA \(range2.simpleName): \(range2.verses)")
+		
+		assert(range1.verses.count == 1)
+		assert(range2.verses.count == 2)
+		
+		let range3 = VerseRange(VerseIndex(4), VerseIndex(5, midVerse: true))
+		let range4 = VerseRange(VerseIndex(5, midVerse: true), VerseIndex(8))
+		
+		print("Range 3: \(range3.description) AKA \(range3.simpleName): \(range3.verses)")
+		print("Range 4: \(range4.description) AKA \(range4.simpleName): \(range4.verses)")
+		
+		assert(range3.verses.count == 2)
+		assert(range4.verses.count == 3)
+		
+		let range5 = VerseRange(VerseIndex(8), VerseIndex(8, midVerse: true))
+		let range6 = VerseRange(VerseIndex(8, midVerse: true), VerseIndex(9))
+		
+		print("Range 5: \(range5.description) AKA \(range5.simpleName): \(range5.verses)")
+		print("Range 6: \(range6.description) AKA \(range6.simpleName): \(range6.verses)")
+		
+		assert(range5.verses.count == 1)
+		assert(range6.verses.count == 1)
+	}
+	
 	func testParaParsing()
 	{
 		let chData1 = CharData(text: "Chardata 1")

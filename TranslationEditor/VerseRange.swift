@@ -35,16 +35,19 @@ struct VerseRange: JSONConvertible, Equatable, CustomStringConvertible
 		var verses = [VerseRange]()
 		
 		// The first and last verses may be incomplete (eg. 6b-7 or 10-10b)
-		var cursor = start
-		while cursor < end
+		var nextStart = start
+		var nextEnd = VerseIndex(nextStart.index + 1)
+		
+		while nextEnd <= end
 		{
-			let nextVerseStart = VerseIndex(cursor.index + 1)
-			verses.append(VerseRange(cursor, nextVerseStart))
-			cursor = nextVerseStart
+			verses.append(VerseRange(nextStart, nextEnd))
+			
+			nextStart = nextEnd
+			nextEnd = nextEnd + 1
 		}
 		if end.midVerse
 		{
-			verses.append(VerseRange(cursor, end))
+			verses.append(VerseRange(nextStart, end))
 		}
 		
 		return verses
@@ -54,40 +57,46 @@ struct VerseRange: JSONConvertible, Equatable, CustomStringConvertible
 	// The name is inclusive (no exclusive end is added)
 	var name: String
 	{
-		get
+		// The start may contain 'b' if it starts mid-verse
+		var str = "\(start.index)"
+		if start.midVerse
 		{
-			// The start may contain 'b' if it starts mid-verse
-			var str = "\(start.index)"
-			if start.midVerse
-			{
-				str.append("b")
-			}
-			
-			// If the range goes over verse boundaries, adds the end part
-			if verses.count > 1
-			{
-				str.append("-\(end.index)")
-				// The end may contain 'a' if it ends mid-verse
-				if end.midVerse
-				{
-					str.append("a")
-				}
-			}
-			
-			return str
+			str.append("b")
 		}
+		
+		// If the range goes over verse boundaries, adds the end part (only the inclusive)
+		let verses = self.verses
+		if verses.count > 1
+		{
+			str.append("-\(verses.last!.start.index)")
+		}
+		
+		// The end may contain 'a' if it ends mid-verse
+		if end.midVerse
+		{
+			str.append("a")
+		}
+		
+		return str
 	}
 	
-	// A simplified version of the range name (no 'a' or 'b' included)
+	// A simplified version of the range name (The verse markers within the range, with the exception of ranges with no markers (eg. 7b))
 	var simpleName: String
 	{
-		if start.index != end.index
+		let startIndex = start.midVerse ? start.index + 1 : start.index
+		let endIndex = end.midVerse ? end.index + 1 : end.index
+		
+		if startIndex == endIndex
 		{
-			return "\(start.index)-\(end.index)"
+			return name
+		}
+		else if startIndex == endIndex - 1
+		{
+			return "\(startIndex)"
 		}
 		else
 		{
-			return "\(start.index)"
+			return "\(startIndex)-\(endIndex - 1)"
 		}
 	}
 	
