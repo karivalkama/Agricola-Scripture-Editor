@@ -192,7 +192,7 @@ class TranslationEditorTests: XCTestCase
 	
 	func testRemoveDataOfType()
 	{
-		let type = Paragraph.type
+		let type = NotesThread.type
 		
 		let query = DATABASE.createAllDocumentsQuery()
 		let results = try! query.run()

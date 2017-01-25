@@ -146,7 +146,6 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
 	{
-		print("STATUS: SCROLLING ENDED")
 		syncScrolling = nil
 	}
 	

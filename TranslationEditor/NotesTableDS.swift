@@ -152,7 +152,6 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 			// Checks if the index is in this note's range
 			if indexStatus.noteStartIndices.count <= i + 1 || indexStatus.noteStartIndices[i + 1] > indexPath.row
 			{
-				//print("STATUS: Uses starting index of \(indexStatus.noteStartIndices[i]) - \(indexStatus.noteStartIndices.count <= i + 1 ? "" : "\(indexStatus.noteStartIndices[i + 1])") for row \(indexPath.row). There are total of \(indexStatus.noteStartIndices.count) note starts")
 				note = indexStatus.orderedNotes[i]
 				remainingIndex = indexPath.row - indexStatus.noteStartIndices[i]
 				
@@ -169,7 +168,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 				cell = NotesCell()
 			}
 			
-			cell.setContent(note: note, name: paragraphNames[note.pathId].or(""), displayHideShowButton: threads[note.idString] != nil, useShowOption: shouldDisplayThreadsForNote(withId: note.idString), listener: self, addDelegate: delegate)
+			cell.setContent(note: note, name: paragraphNames[note.pathId].or(""), displayHideShowButton: threads[note.idString] != nil, useShowOption: !shouldDisplayThreadsForNote(withId: note.idString), listener: self, addDelegate: delegate)
 			
 			return cell
 		}
@@ -189,7 +188,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 						cell = ThreadCell()
 					}
 					
-					cell.setContent(thread: thread, pathId: note.pathId, displayHideShowButton: posts[thread.idString] != nil, useShowOption: shouldDisplayPostsForThread(thread), listener: self, addDelegate: delegate)
+					cell.setContent(thread: thread, pathId: note.pathId, displayHideShowButton: posts[thread.idString] != nil, useShowOption: !shouldDisplayPostsForThread(thread), listener: self, addDelegate: delegate)
 					
 					return cell
 				}

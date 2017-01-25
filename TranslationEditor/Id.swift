@@ -10,7 +10,7 @@ import Foundation
 
 // Ids are used for converting between id strings and property sets
 // Ids are unique and used for differentiating between documents and instances
-struct Id
+struct Id: CustomStringConvertible
 {
 	// ATTRIBUTES	---------
 	
@@ -18,6 +18,11 @@ struct Id
 	
 	private let idParts: [String]
 	private let indexMap: [String : IdIndex]
+	
+	
+	// COMP. PROPERTIES	-----
+	
+	var description: String { return idString }
 	
 	
 	// INIT	-----------------
@@ -209,6 +214,18 @@ struct IdIndex: Hashable
 	
 	static func + (index: IdIndex, amount: Int) -> IdIndex
 	{
-		return IdIndex(index.end + amount)
+		if amount == 0
+		{
+			return index
+		}
+		else if amount > 0
+		{
+			return IdIndex(index.end + amount - 1)
+		}
+		else
+		{
+			print("WARNING: Using a negative number on id index addition.")
+			return index
+		}
 	}
 }
