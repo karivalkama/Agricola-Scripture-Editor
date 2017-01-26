@@ -21,6 +21,17 @@ class TranslationEditorTests: XCTestCase
         super.tearDown()
     }
 	
+	func testString()
+	{
+		let numberRegex = try! NSRegularExpression(pattern: "[0-9]", options: [])
+		let str1 = "M01kk4 001k222"
+		
+		let stripped = str1.limited(toExpression: numberRegex)
+		
+		print("\(str1) -> \(stripped)")
+		assert(stripped == "014001222")
+	}
+	
 	func testVerseRanges()
 	{
 		let range1 = VerseRange(1, 2)

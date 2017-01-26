@@ -153,6 +153,8 @@
 		7C82CE8F1DE6E29500C054EB /* PropertyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */; };
 		7C82CE901DE6E29500C054EB /* PropertyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */; };
 		7C942A2B1E38C7E2000C614A /* PostCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */; };
+		7C942A2E1E38DD80000C614A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C942A2D1E38DD80000C614A /* User.swift */; };
+		7C942A2F1E38DD8E000C614A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C942A2D1E38DD80000C614A /* User.swift */; };
 		7CA1BAA01E2F9C2100611FED /* NotesThreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BA9F1E2F9C2100611FED /* NotesThreadView.swift */; };
 		7CA1BAA11E2F9C2100611FED /* NotesThreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BA9F1E2F9C2100611FED /* NotesThreadView.swift */; };
 		7CA1BAA21E2F9C2100611FED /* NotesThreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BA9F1E2F9C2100611FED /* NotesThreadView.swift */; };
@@ -407,6 +409,7 @@
 		7C82CE891DE6E1EA00C054EB /* PropertySet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertySet.swift; sourceTree = "<group>"; };
 		7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyValue.swift; sourceTree = "<group>"; };
 		7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCommentVC.swift; sourceTree = "<group>"; };
+		7C942A2D1E38DD80000C614A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7CA1BA9F1E2F9C2100611FED /* NotesThreadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesThreadView.swift; sourceTree = "<group>"; };
 		7CA1BAA31E2FA5A500611FED /* NotesPostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesPostView.swift; sourceTree = "<group>"; };
 		7CA1BAA71E30C15B00611FED /* NotesTableDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableDS.swift; sourceTree = "<group>"; };
@@ -611,6 +614,7 @@
 			isa = PBXGroup;
 			children = (
 				7C40DF6A1DEC547F0035B92E /* OldVersion */,
+				7C942A2C1E38DD49000C614A /* Project */,
 				7C82CE881DE6E1C200C054EB /* Database */,
 				7C4A4FFE1E01685C009F890E /* Translation */,
 				7CDBD6A61E23895000912320 /* Resource */,
@@ -769,6 +773,14 @@
 				7C2390C81E0280CC0074BBA7 /* QueryType.swift */,
 			);
 			name = Database;
+			sourceTree = "<group>";
+		};
+		7C942A2C1E38DD49000C614A /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				7C942A2D1E38DD80000C614A /* User.swift */,
+			);
+			name = Project;
 			sourceTree = "<group>";
 		};
 		7CD8EA581DB60C4800364B70 /* TestResources */ = {
@@ -1140,6 +1152,7 @@
 				7C2390C91E0280CC0074BBA7 /* QueryType.swift in Sources */,
 				7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
 				7C4A4FE41DFE7C87009F890E /* UIExtension.swift in Sources */,
+				7C942A2E1E38DD80000C614A /* User.swift in Sources */,
 				7CDBD6EE1E2E30DD00912320 /* ParagraphNotes.swift in Sources */,
 				7CD8EA621DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,
 				7C40DF7C1DED9FB90035B92E /* Language.swift in Sources */,
@@ -1238,6 +1251,7 @@
 				7C4A4FAB1DF836F1009F890E /* LiveQueryListener.swift in Sources */,
 				7CCC00F31D9D223300F0562E /* AttributedStringConvertible.swift in Sources */,
 				7C4CC1741DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
+				7C942A2F1E38DD8E000C614A /* User.swift in Sources */,
 				7C4A50051E016E31009F890E /* Reduce.swift in Sources */,
 				7CA1BABD1E32037B00611FED /* NotesShowHideListener.swift in Sources */,
 				7CD8EA631DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,

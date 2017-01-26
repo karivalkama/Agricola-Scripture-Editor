@@ -11,6 +11,9 @@ import Foundation
 // A global set of utility functions
 extension String
 {
+	// The range of this string instance
+	var nsRange: NSRange { return NSMakeRange(0, (self as NSString).length) }
+	
 	// Counts the number of 'substring' within 'self'
 	// Search 'range' can be specified. Full string (nil) by default
 	// Case sensitive by default
@@ -51,7 +54,7 @@ extension String
 		}
 		else
 		{
-			trueRange = NSMakeRange(0, (self as NSString).length)
+			trueRange = nsRange
 		}
 		
 		return regex.matches(in: self, options: [], range: trueRange).count
@@ -100,6 +103,26 @@ extension String
 		// Finds the 'character' at index
 		let subString = nsStr.substring(with: range)
 		return Int(subString)
+	}
+	
+	// Finds the matches for the regular expression in this string
+	func matches(for regex: NSRegularExpression) -> [String]
+	{
+		let nsStr = self as NSString
+		let results = regex.matches(in: self, options: [], range: nsRange)
+		return results.map { nsStr.substring(with: $0.range) }
+	}
+	
+	// Strips this string out of elements that do not belong to the provided regular expression
+	func limited(toExpression regex: NSRegularExpression) -> String
+	{
+		return matches(for: regex).reduce("") { $0 + $1 }
+	}
+	
+	// Returns a version of this string that contains only specified characters
+	func limited(toCharacterSet characterSet: Set<Character>) -> String
+	{
+		return String(characters.filter { characterSet.contains($0) })
 	}
 }
 
