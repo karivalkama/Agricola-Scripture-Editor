@@ -16,7 +16,6 @@ final class AgricolaAccount: Storable
 	
 	static let type = "user"
 	static let idIndexMap = [PROPERTY_CB_USERNAME: IdIndex(1)]
-	private static let userRegex = try! NSRegularExpression(pattern: "[a-z0-9_@]", options: [.caseInsensitive])
 	
 	let cbUserName: String
 	let isShared: Bool
@@ -39,7 +38,7 @@ final class AgricolaAccount: Storable
 	init(name: String, projectId: String? = nil)
 	{
 		self.displayName = name
-		self.cbUserName = name.limited(toExpression: AgricolaAccount.userRegex).lowercased()
+		self.cbUserName = name.toKey
 		self.isShared = projectId != nil
 		self.projectId = projectId
 	}

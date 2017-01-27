@@ -9,6 +9,7 @@
 import Foundation
 
 fileprivate var _database: CBLDatabase?
+
 // The database used in the project
 var DATABASE: CBLDatabase
 {

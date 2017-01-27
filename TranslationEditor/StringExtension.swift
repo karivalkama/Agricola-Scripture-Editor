@@ -8,11 +8,16 @@
 
 import Foundation
 
+fileprivate let keyRegex = try! NSRegularExpression(pattern: "[a-z0-9_@\\-\\+\\.:]")
+
 // A global set of utility functions
 extension String
 {
 	// The range of this string instance
 	var nsRange: NSRange { return NSMakeRange(0, (self as NSString).length) }
+	
+	// A key-compatible version of this string
+	var toKey: String { return lowercased().replacingOccurrences(of: " ", with: "_").limited(toExpression: keyRegex) }
 	
 	// Counts the number of 'substring' within 'self'
 	// Search 'range' can be specified. Full string (nil) by default

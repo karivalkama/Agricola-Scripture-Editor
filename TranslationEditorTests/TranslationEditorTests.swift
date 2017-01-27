@@ -23,13 +23,13 @@ class TranslationEditorTests: XCTestCase
 	
 	func testString()
 	{
-		let numberRegex = try! NSRegularExpression(pattern: "[0-9]", options: [])
-		let str1 = "M01kk4 001k222"
+		let numberRegex = try! NSRegularExpression(pattern: "[0-9\\-]", options: [])
+		let str1 = "M01kk4 -001k222"
 		
 		let stripped = str1.limited(toExpression: numberRegex)
 		
 		print("\(str1) -> \(stripped)")
-		assert(stripped == "014001222")
+		assert(stripped == "014-001222")
 	}
 	
 	func testVerseRanges()
