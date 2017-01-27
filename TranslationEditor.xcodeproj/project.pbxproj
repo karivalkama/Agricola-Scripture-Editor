@@ -784,8 +784,8 @@
 		7C942A2C1E38DD49000C614A /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				7C942A2D1E38DD80000C614A /* AgricolaAccount.swift */,
 				7C0130B41E3B5A100053C5C2 /* Project.swift */,
+				7C942A2D1E38DD80000C614A /* AgricolaAccount.swift */,
 				7C0130B71E3B6A1D0053C5C2 /* Avatar.swift */,
 			);
 			name = Project;

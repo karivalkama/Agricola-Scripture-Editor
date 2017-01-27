@@ -61,3 +61,32 @@ final class Avatar: Storable
 		// No mutable fields
 	}
 }
+
+// This class contains avatar info that is only visible in the project scope
+final class AvatarInfo
+{
+	// ATTRIBUTES	-------------
+	
+	static let type = "avatar_info"
+	
+	let avatarId: String
+	
+	var accountId: String
+	var openName: String?
+	var password: String?
+	
+	// Phase id -> Carousel id
+	var carousels: [String : String]
+	
+	
+	// INIT	--------------------
+	
+	init(avatarId: String, accountId: String, openName: String? = nil, password: String? = nil, carousels: [String : String] = [:])
+	{
+		self.avatarId = avatarId
+		self.accountId = accountId
+		self.openName = openName
+		self.password = password
+		self.carousels = carousels
+	}
+}
