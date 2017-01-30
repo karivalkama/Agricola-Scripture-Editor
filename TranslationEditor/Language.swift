@@ -21,11 +21,11 @@ final class Language: Storable
 	
 	// COMP. PROPERTIES	----
 	
-	static var idIndexMap: [String : IdIndex] {return ["lang_uid" : IdIndex(0)]}
+	static let idIndexMap: IdIndexMap = ["lang_uid"]
 	
-	var idProperties: [Any] {return [uid]}
+	var idProperties: [Any] { return [uid] }
 	
-	var properties: [String : PropertyValue] {return ["name" : PropertyValue(name)]}
+	var properties: [String : PropertyValue] { return ["name" : PropertyValue(name)] }
 	
 	
 	// INIT	---------------

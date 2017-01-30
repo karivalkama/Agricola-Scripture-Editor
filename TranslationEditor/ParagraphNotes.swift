@@ -28,12 +28,9 @@ final class ParagraphNotes: Storable
 	
 	// COMP. PROPERTIES	-----
 	
-	static var idIndexMap: [String : IdIndex]
+	static var idIndexMap: IdIndexMap
 	{
-		let collectionMap = ResourceCollection.idIndexMap
-		let cIndex = IdIndex.of(indexMap: collectionMap)
-
-		return collectionMap + [PROPERTY_COLLECTION: cIndex, PROPERTY_CHAPTER: cIndex + 1, PROPERTY_UID: cIndex + 2]
+		return ResourceCollection.idIndexMap.makeChildPath(parentPathName: PROPERTY_COLLECTION, childPath: [PROPERTY_CHAPTER, PROPERTY_UID])
 	}
 	
 	var idProperties: [Any] { return [collectionId, chapterIndex, uid] }

@@ -79,12 +79,9 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		return text
 	}
 	
-	static var idIndexMap: [String : IdIndex]
+	static var idIndexMap: IdIndexMap
 	{
-		let bookMap = Book.idIndexMap
-		let bookIdIndex = IdIndex.of(indexMap: bookMap)
-		
-		return bookMap + [PROPERTY_BOOK_ID : bookIdIndex, PROPERTY_CHAPTER_INDEX : IdIndex(bookIdIndex.end), PROPERTY_PATH_ID : IdIndex(bookIdIndex.end + 1), PROPERTY_CREATED : IdIndex(bookIdIndex.end + 2)]
+		return Book.idIndexMap.makeChildPath(parentPathName: PROPERTY_BOOK_ID, childPath: [PROPERTY_CHAPTER_INDEX, PROPERTY_PATH_ID, PROPERTY_CREATED])
 	}
 	
 	

@@ -34,12 +34,9 @@ final class ProjectSettings: Storable
 	
 	// COMPUTED PROPERTIES	-------------
 	
-	static var idIndexMap: [String : IdIndex]
+	static var idIndexMap: IdIndexMap
 	{
-		let projectIndexMap = Project.idIndexMap
-		let projectIndex = IdIndex.of(indexMap: projectIndexMap)
-
-		return projectIndexMap + [PROPERTY_PROJECT: projectIndex]
+		return Project.idIndexMap.makeChildPath(parentPathName: PROPERTY_PROJECT, childPath: ["settings_separator"])
 	}
 	
 	var idProperties: [Any] { return [projectId, "settings"] }

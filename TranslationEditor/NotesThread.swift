@@ -30,18 +30,15 @@ final class NotesThread: Storable
 	
 	// COMP. PROPERTIES	-------
 	
-	static var idIndexMap: [String : IdIndex]
+	static var idIndexMap: IdIndexMap
 	{
-		let noteMap = ParagraphNotes.idIndexMap
-		let noteIndex = IdIndex.of(indexMap: noteMap)
-		
-		return noteMap + [PROPERTY_NOTE: noteIndex, PROPERTY_CREATED: noteIndex + 1]
+		return ParagraphNotes.idIndexMap.makeChildPath(parentPathName: PROPERTY_NOTE, childPath: [PROPERTY_CREATED])
 	}
 	
 	var idProperties: [Any] { return [noteId, created] }
 	var properties: [String : PropertyValue]
 	{
-		return ["creator": PropertyValue(creatorId), "resolved": PropertyValue(isResolved), "name": PropertyValue(name), "verse": PropertyValue(targetVerseIndex), "tags": PropertyValue(tags.map { PropertyValue($0) })]
+		return ["creator": PropertyValue(creatorId), "resolved": PropertyValue(isResolved), "name": PropertyValue(name), "verse": targetVerseIndex.value, "tags": PropertyValue(tags.map { PropertyValue($0) })]
 	}
 	
 	var collectionId: String { return ParagraphNotes.collectionId(fromId: noteId) }

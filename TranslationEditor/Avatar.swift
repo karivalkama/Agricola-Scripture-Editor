@@ -25,12 +25,9 @@ final class Avatar: Storable
 	
 	// COMPUTED PROPERTIES	-----
 	
-	static var idIndexMap: [String : IdIndex]
+	static var idIndexMap: IdIndexMap
 	{
-		let projectMap = Project.idIndexMap
-		let projectIndex = IdIndex.of(indexMap: projectMap)
-		
-		return projectMap + [PROPERTY_PROJECT: projectIndex, "avatar_name_key": projectIndex + 2]
+		return Project.idIndexMap.makeChildPath(parentPathName: PROPERTY_PROJECT, childPath: ["avatar_separator", "avatar_name_key"])
 	}
 	
 	var idProperties: [Any] { return [projectId, "avatar", name.toKey] }
@@ -94,10 +91,9 @@ final class AvatarInfo: Storable
 	
 	// COMPUTED PROPERTIES	----
 	
-	static var idIndexMap: [String : IdIndex]
+	static var idIndexMap: IdIndexMap
 	{
-		let avatarIndexMap = Avatar.idIndexMap
-		return avatarIndexMap + [PROPERTY_AVATAR: IdIndex.of(indexMap: avatarIndexMap)]
+		return Avatar.idIndexMap.makeChildPath(parentPathName: PROPERTY_AVATAR, childPath: ["private_separator"])
 	}
 	
 	var idProperties: [Any] { return [avatarId, "private"] }

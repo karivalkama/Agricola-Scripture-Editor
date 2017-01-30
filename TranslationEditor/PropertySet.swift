@@ -11,7 +11,7 @@ import Foundation
 // This struct contains a set of named properties
 // All properties are kept in lowercase to avoid case-sensitivity issues
 // Property value class is used for property value wrapping
-struct PropertySet: CustomStringConvertible
+struct PropertySet: CustomStringConvertible, PropertyValueWrapable
 {
 	// ATTRIBUTES	-----------
 	
@@ -21,6 +21,8 @@ struct PropertySet: CustomStringConvertible
 	
 	
 	// COMP. PROPERTIES	-------
+	
+	var value: PropertyValue { return PropertyValue(self) }
 	
 	// Wraps this set into a common dictionary. Only non-empty properties will be included
 	var toDict: [String : Any]

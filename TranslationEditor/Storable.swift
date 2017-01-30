@@ -19,7 +19,7 @@ protocol Storable: JSONConvertible
 	// Each class has a certain way of parsing a unique identifier from certain properties. 
 	// This map is used for retrieving those properties from id data.
 	// Each property name should match a certain index / range of id parts, which must correspond with the idProperties values
-	static var idIndexMap : [String : IdIndex] {get}
+	static var idIndexMap : IdIndexMap {get}
 	
 	// The type of this storable instance. Should be stored as a property, always
 	// TODO: Modify the toPropertySet to include this

@@ -15,7 +15,7 @@ final class AgricolaAccount: Storable
 	static let PROPERTY_CB_USERNAME = "cbusername"
 	
 	static let type = "user"
-	static let idIndexMap = [PROPERTY_CB_USERNAME: IdIndex(1)]
+	static let idIndexMap: IdIndexMap = ["user_separator", PROPERTY_CB_USERNAME]
 	
 	let cbUserName: String
 	let isShared: Bool
@@ -29,7 +29,7 @@ final class AgricolaAccount: Storable
 	var idProperties: [Any] { return ["user", cbUserName] }
 	var properties: [String : PropertyValue]
 	{
-		return ["displayname": PropertyValue(displayName), "shared": PropertyValue(isShared), "project": PropertyValue(projectId)]
+		return ["displayname": displayName.value, "shared": isShared.value, "project": projectId.value]
 	}
 	
 	

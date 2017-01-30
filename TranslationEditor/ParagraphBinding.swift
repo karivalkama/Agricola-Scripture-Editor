@@ -14,7 +14,7 @@ final class ParagraphBinding: Storable
 	// ATTRIBUTES	----------
 	
 	static let type = "binding"
-	static let idIndexMap = ["binding_uid" : IdIndex(0)]
+	static let idIndexMap: IdIndexMap = ["binding_uid"]
 	
 	let uid: String
 	

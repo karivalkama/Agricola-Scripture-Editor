@@ -27,12 +27,9 @@ final class NotesPost: Storable
 	
 	// COMP. PROPERTIES	--------
 	
-	static var idIndexMap: [String : IdIndex]
+	static var idIndexMap: IdIndexMap
 	{
-		let threadMap = NotesThread.idIndexMap
-		let threadIndex = IdIndex.of(indexMap: threadMap)
-		
-		return threadMap + [PROPERTY_THREAD: threadIndex, PROPERTY_CREATED: threadIndex + 1]
+		return NotesThread.idIndexMap.makeChildPath(parentPathName: PROPERTY_THREAD, childPath: [PROPERTY_CREATED])
 	}
 	
 	var idProperties: [Any] { return [threadId, created] }

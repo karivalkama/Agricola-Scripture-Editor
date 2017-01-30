@@ -17,7 +17,7 @@ struct Id: CustomStringConvertible
 	let idString: String
 	
 	private let idParts: [String]
-	private let indexMap: [String : IdIndex]
+	private let indexMap: IdIndexMap
 	
 	
 	// COMP. PROPERTIES	-----
@@ -27,7 +27,7 @@ struct Id: CustomStringConvertible
 	
 	// INIT	-----------------
 	
-	init(id: String, indexMap: [String : IdIndex])
+	init(id: String, indexMap: IdIndexMap)
 	{
 		self.idString = id.lowercased()
 		self.indexMap = indexMap
@@ -117,115 +117,3 @@ struct Id: CustomStringConvertible
 	}
 }
 
-func max(_ left: IdIndex, _ right: IdIndex) -> IdIndex
-{
-	if left.end == right.end
-	{
-		if left.start >= right.start
-		{
-			return left
-		}
-		else
-		{
-			return right
-		}
-	}
-	else if left.end > right.end
-	{
-		return left
-	}
-	else
-	{
-		return right
-	}
-}
-
-func min(_ left: IdIndex, _ right: IdIndex) -> IdIndex
-{
-	if left.end == right.end
-	{
-		if left.start < right.start
-		{
-			return left
-		}
-		else
-		{
-			return right
-		}
-	}
-	else if left.end < right.end
-	{
-		return left
-	}
-	else
-	{
-		return right
-	}
-}
-
-struct IdIndex: Hashable
-{
-	let start: Int // Inclusive
-	let end: Int // Exclusive
-	
-	var hashValue: Int {return (31 &* start.hashValue) &+ end.hashValue}
-	
-	var length: Int {return end - start}
-	
-	init(_ start: Int, _ end: Int? = nil)
-	{
-		self.start = start
-		
-		if let end = end
-		{
-			self.end = end
-		}
-		else
-		{
-			self.end = start + 1
-		}
-	}
-	
-	static func of(indexMap: [String : IdIndex]) -> IdIndex
-	{
-		return IdIndex(minIndex(of: indexMap).start, maxIndex(of: indexMap).end)
-	}
-	
-	static func minIndex(of indexMap: [String : IdIndex]) -> IdIndex
-	{
-		if indexMap.isEmpty
-		{
-			return IdIndex(0)
-		}
-		
-		let values = indexMap.values
-		return values.dropFirst().reduce(values.first!, { return min($0, $1) })
-	}
-	
-	static func maxIndex(of indexMap: [String : IdIndex]) -> IdIndex
-	{
-		return indexMap.values.reduce(IdIndex(0), { return max($0, $1) })
-	}
-	
-	static func == (left: IdIndex, right: IdIndex) -> Bool
-	{
-		return left.start == right.start && left.end == right.end
-	}
-	
-	static func + (index: IdIndex, amount: Int) -> IdIndex
-	{
-		if amount == 0
-		{
-			return index
-		}
-		else if amount > 0
-		{
-			return IdIndex(index.end + amount - 1)
-		}
-		else
-		{
-			print("WARNING: Using a negative number on id index addition.")
-			return index
-		}
-	}
-}

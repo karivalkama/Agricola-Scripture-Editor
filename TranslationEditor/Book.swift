@@ -18,6 +18,8 @@ final class Book: Storable
 	static let type = "book"
 	static let PROPERTY_CODE = "code"
 	
+	static let idIndexMap: IdIndexMap = [PROPERTY_CODE, "book_uid"]
+	
 	let uid: String
 	let code: String
 	
@@ -33,8 +35,6 @@ final class Book: Storable
 	{
 		return ["identifier" : PropertyValue(identifier), "language" : PropertyValue(languageId)]
 	}
-	
-	static var idIndexMap: [String : IdIndex] {return [PROPERTY_CODE : IdIndex(0), "book_uid" : IdIndex(1)]}
 	
 	
 	// INIT	----------------

@@ -30,12 +30,9 @@ final class ParagraphEdit: Storable
 	
 	// COMP. PROPERTIES	-----
 	
-	static var idIndexMap: [String : IdIndex]
+	static var idIndexMap: IdIndexMap
 	{
-		let bookMap = Book.idIndexMap
-		let bookIdIndex = IdIndex.of(indexMap: bookMap)
-		
-		return bookMap + [PROPERTY_BOOK_ID : bookIdIndex, "edit" : IdIndex(bookIdIndex.end), PROPERTY_CHAPTER_INDEX : IdIndex(bookIdIndex.end + 1), PROPERTY_USER_ID : IdIndex(bookIdIndex.end + 2)]
+		return Book.idIndexMap.makeChildPath(parentPathName: PROPERTY_BOOK_ID, childPath: [PROPERTY_CHAPTER_INDEX, PROPERTY_USER_ID])
 	}
 	
 	var idProperties: [Any] {return [bookId, "edit", chapterIndex, userId]}

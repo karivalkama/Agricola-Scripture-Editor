@@ -28,12 +28,9 @@ final class Carousel: Storable
 	
 	// COMPUTED PROPERTIES	-----
 	
-	static var idIndexMap: [String : IdIndex]
+	static var idIndexMap: IdIndexMap
 	{
-		let projectIndexMap = Project.idIndexMap
-		let projectIndex = IdIndex.of(indexMap: projectIndexMap)
-		
-		return projectIndexMap + [PROPERTY_PROJECT: projectIndex, "carousel_uid": projectIndex + 2]
+		return Project.idIndexMap.makeChildPath(parentPathName: PROPERTY_PROJECT, childPath: ["carousel_separator", "carousel_uid"])
 	}
 	
 	var idProperties: [Any] { return [projectId, "carousel", uid] }

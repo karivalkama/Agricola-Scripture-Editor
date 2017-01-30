@@ -225,41 +225,34 @@ struct PropertyValue: CustomStringConvertible
 		value = object
 	}
 	
+	/*
 	init(_ object: JSONConvertible?)
 	{
 		self.init(object?.toPropertySet)
-	}
+	}*/
 	
 	init(_ array: [PropertyValue]?)
 	{
 		value = array
 	}
 	
-	init<T>(_ array: [T]?, _ mapper: (T) -> PropertyValue)
+	init(_ array: [PropertyValueWrapable]?)
 	{
-		self.init(array?.map(mapper))
+		self.init(array?.map { $0.value })
 	}
 	
+	/*
 	init(_ array: [JSONConvertible]?)
 	{
 		self.init(array, { PropertyValue($0) })
-	}
-	
-	init(_ array: [PropertySet]?)
-	{
-		self.init(array, { PropertyValue($0) })
-	}
-	
-	init(_ array: [String]?)
-	{
-		self.init(array, { PropertyValue($0) })
-	}
+	}*/
 	
 	private init(any: Any? = nil)
 	{
 		value = any
 	}
 	
+	// TODO: Use protocol instead
 	// Wraps an object into a property value, if possible
 	// Only strings, booleans, integers and double, property set (or [String : Any]) 
 	// and arrays ([PropertyValue] or [Any]) can be wrapped as property values
@@ -272,15 +265,15 @@ struct PropertyValue: CustomStringConvertible
 		{
 			return value
 		}
-		if any is String || any is Int || any is Double || any is Bool || any is PropertySet || any is [PropertyValue]
+		else if any is String || any is Int || any is Double || any is Bool || any is PropertySet || any is [PropertyValue]
 		{
 			return PropertyValue(any: any)
 		}
-		else if let object = any as? JSONConvertible
+		else if let wrapable = any as? PropertyValueWrapable
 		{
-			return PropertyValue(object)
+			return wrapable.value
 		}
-		else if let array = any as? [JSONConvertible]
+		else if let array = any as? [PropertyValueWrapable]
 		{
 			return PropertyValue(array)
 		}
@@ -384,6 +377,19 @@ struct PropertyValue: CustomStringConvertible
 		else
 		{
 			return defaultArray
+		}
+	}
+	
+	// Maps the value to a specific type of array. Non-mapable values are ignored
+	func array<T>(_ f: (PropertyValue) throws -> T?) rethrows -> [T]
+	{
+		if let array = array
+		{
+			return try array.flatMap(f)
+		}
+		else
+		{
+			return []
 		}
 	}
 }

@@ -14,6 +14,7 @@ final class ResourceCollection : Storable
 	// ATTRIBUTES	------------
 	
 	static let type = "resource"
+	static let idIndexMap: IdIndexMap = ["resource_uid"]
 	
 	let uid: String
 	let languageId: String
@@ -24,8 +25,6 @@ final class ResourceCollection : Storable
 	
 	
 	// COMP. PROPERTIES	--------
-	
-	static var idIndexMap: [String : IdIndex] { return ["resource_uid" : IdIndex(0)] }
 	
 	var idProperties: [Any] { return [uid] }
 	

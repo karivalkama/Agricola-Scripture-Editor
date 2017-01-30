@@ -15,7 +15,7 @@ final class Project: Storable
 	// ATTRIBUTES	----------------
 	
 	static let type = "project"
-	static let idIndexMap = ["project_uid": IdIndex(0)]
+	static let idIndexMap: IdIndexMap = ["project_uid": 0]
 	
 	let uid: String
 	let created: TimeInterval
@@ -31,7 +31,7 @@ final class Project: Storable
 	var idProperties: [Any] { return [uid] }
 	var properties: [String : PropertyValue]
 	{
-		return ["owner": PropertyValue(ownerId), "contributors": PropertyValue(contributorIds.map { PropertyValue($0) }), "name": PropertyValue(name), "language": PropertyValue(languageId), "created": PropertyValue(created)]
+		return ["owner": ownerId.value, "contributors": contributorIds.value, "name": name.value, "language": languageId.value, "created": created.value]
 	}
 	
 	
@@ -57,7 +57,7 @@ final class Project: Storable
 	
 	static func create(from properties: PropertySet, withId id: Id) -> Project
 	{
-		return Project(name: properties["name"].string(), languageId: properties["language"].string(), ownerId: properties["owner"].string(), contributorIds: properties["contributors"].array().flatMap { $0.string }, uid: id["project_uid"].string(), created: properties["created"].time())
+		return Project(name: properties["name"].string(), languageId: properties["language"].string(), ownerId: properties["owner"].string(), contributorIds: properties["contributors"].array({ $0.string }), uid: id["project_uid"].string(), created: properties["created"].time())
 	}
 	
 	

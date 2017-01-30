@@ -35,12 +35,9 @@ final class Phase: Storable
 	
 	// COMPUTED PROPERTIES	--------
 	
-	static var idIndexMap: [String : IdIndex]
+	static var idIndexMap: IdIndexMap
 	{
-		let projectIndexMap = Project.idIndexMap
-		let projectIndex = IdIndex.of(indexMap: projectIndexMap)
-		
-		return projectIndexMap + [PROPERTY_PROJECT: projectIndex, "phase_uid": projectIndex + 2]
+		return Project.idIndexMap.makeChildPath(parentPathName: PROPERTY_PROJECT, childPath: ["phase_separator", "phase_uid"])
 	}
 	
 	var idProperties: [Any] { return [projectId, "phase", uid] }
