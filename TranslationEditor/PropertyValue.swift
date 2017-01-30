@@ -227,7 +227,7 @@ struct PropertyValue: CustomStringConvertible
 	
 	init(_ object: JSONConvertible?)
 	{
-		value = object?.toPropertySet
+		self.init(object?.toPropertySet)
 	}
 	
 	init(_ array: [PropertyValue]?)
@@ -235,14 +235,24 @@ struct PropertyValue: CustomStringConvertible
 		value = array
 	}
 	
+	init<T>(_ array: [T]?, _ mapper: (T) -> PropertyValue)
+	{
+		self.init(array?.map(mapper))
+	}
+	
 	init(_ array: [JSONConvertible]?)
 	{
-		value = array?.map { PropertyValue($0) }
+		self.init(array, { PropertyValue($0) })
 	}
 	
 	init(_ array: [PropertySet]?)
 	{
-		value = array?.map { PropertyValue($0) }
+		self.init(array, { PropertyValue($0) })
+	}
+	
+	init(_ array: [String]?)
+	{
+		self.init(array, { PropertyValue($0) })
 	}
 	
 	private init(any: Any? = nil)

@@ -103,8 +103,37 @@ extension Dictionary
 		return self[key] != nil
 	}
 	
+	// Maps both the keys and values of a dictionary, preserving the dictionary format
+	func mapDict<K, V>(_ f: (Key, Value) -> (K, V)) -> [K: V]
+	{
+		var dict = [K: V]()
+		for (key, value) in self
+		{
+			let (key, value) = f(key, value)
+			dict[key] = value
+		}
+		
+		return dict
+	}
+	
+	// Maps both the keys and values of a dictionary, failed mappings are stripped from the final dictionary
+	func flatMapDict<K, V>(_ f: (Key, Value) -> (K?, V?)) -> [K: V]
+	{
+		var dict = [K: V]()
+		for (key, value) in self
+		{
+			let (castKey, castValue) = f(key, value)
+			if let key = castKey, let value = castValue
+			{
+				dict[key] = value
+			}
+		}
+		
+		return dict
+	}
+	
 	// Maps the dictionary values, but keeps the dictionary format
-	func mapValues<T>(f: (Value) throws -> T) rethrows -> [Key: T]
+	func mapValues<T>(_ f: (Value) throws -> T) rethrows -> [Key: T]
 	{
 		var dict = [Key: T]()
 		for (key, value) in self
@@ -116,7 +145,7 @@ extension Dictionary
 	}
 	
 	// Maps the dictionary values keeping the dictionary format. Values mapped to nil will not be included in the final dictionary.
-	func flatMapValues<T>(f: (Value) throws -> T?) rethrows -> [Key: T]
+	func flatMapValues<T>(_ f: (Value) throws -> T?) rethrows -> [Key: T]
 	{
 		var dict = [Key: T]()
 		for (key, value) in self

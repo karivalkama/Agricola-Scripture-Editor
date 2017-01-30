@@ -16,6 +16,10 @@
 		7C0130BD1E3F1DFB0053C5C2 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130BB1E3F1DFB0053C5C2 /* Carousel.swift */; };
 		7C0130BF1E3F25920053C5C2 /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130BE1E3F25920053C5C2 /* Phase.swift */; };
 		7C0130C01E3F25920053C5C2 /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130BE1E3F25920053C5C2 /* Phase.swift */; };
+		7C0130C21E3F2D520053C5C2 /* ProjectSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130C11E3F2D520053C5C2 /* ProjectSettings.swift */; };
+		7C0130C31E3F2D520053C5C2 /* ProjectSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130C11E3F2D520053C5C2 /* ProjectSettings.swift */; };
+		7C0130C51E3F3DFB0053C5C2 /* PropertyValueWrapable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130C41E3F3DFB0053C5C2 /* PropertyValueWrapable.swift */; };
+		7C0130C61E3F3DFB0053C5C2 /* PropertyValueWrapable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130C41E3F3DFB0053C5C2 /* PropertyValueWrapable.swift */; };
 		7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */; };
 		7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */; };
 		7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */; };
@@ -355,6 +359,8 @@
 		7C0130B71E3B6A1D0053C5C2 /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		7C0130BB1E3F1DFB0053C5C2 /* Carousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 		7C0130BE1E3F25920053C5C2 /* Phase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
+		7C0130C11E3F2D520053C5C2 /* ProjectSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSettings.swift; sourceTree = "<group>"; };
+		7C0130C41E3F3DFB0053C5C2 /* PropertyValueWrapable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyValueWrapable.swift; sourceTree = "<group>"; };
 		7C18A18B1D8BBEBD00DD1B03 /* TranslationEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslationEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationVC.swift; sourceTree = "<group>"; };
@@ -729,6 +735,7 @@
 				7C82CE891DE6E1EA00C054EB /* PropertySet.swift */,
 				7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */,
 				7C40DF6F1DEC6AB00035B92E /* Id.swift */,
+				7C0130C41E3F3DFB0053C5C2 /* PropertyValueWrapable.swift */,
 			);
 			name = Documents;
 			sourceTree = "<group>";
@@ -794,6 +801,7 @@
 				7C942A2D1E38DD80000C614A /* AgricolaAccount.swift */,
 				7C0130B71E3B6A1D0053C5C2 /* Avatar.swift */,
 				7C0130BE1E3F25920053C5C2 /* Phase.swift */,
+				7C0130C11E3F2D520053C5C2 /* ProjectSettings.swift */,
 			);
 			name = Project;
 			sourceTree = "<group>";
@@ -1135,6 +1143,7 @@
 				7C40DF801DEDB4C10035B92E /* BookView.swift in Sources */,
 				7C40DF6C1DEC59AB0035B92E /* Book.swift in Sources */,
 				7C40DF781DED6C530035B92E /* Paragraph.swift in Sources */,
+				7C0130C21E3F2D520053C5C2 /* ProjectSettings.swift in Sources */,
 				7CA1BAA01E2F9C2100611FED /* NotesThreadView.swift in Sources */,
 				7C4A4FAE1DF93B75009F890E /* AnyLiveQueryListener.swift in Sources */,
 				7CDBD6A81E238A0200912320 /* ResourceCategory.swift in Sources */,
@@ -1199,6 +1208,7 @@
 				7C4A4F8B1DEEC4BD009F890E /* View.swift in Sources */,
 				7CA1BAB81E31F33000611FED /* DateExtension.swift in Sources */,
 				7CCC01341DA7964000F0562E /* XmlParserUtil.swift in Sources */,
+				7C0130C51E3F3DFB0053C5C2 /* PropertyValueWrapable.swift in Sources */,
 				7CCC01481DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
 				7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */,
 				7CCC00F21D9D1B4E00F0562E /* AttributedStringConvertible.swift in Sources */,
@@ -1231,6 +1241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C0130C61E3F3DFB0053C5C2 /* PropertyValueWrapable.swift in Sources */,
 				7CCC010C1DA4DEC200F0562E /* ParagraphPrev.swift in Sources */,
 				7C4A4FB71DF96730009F890E /* ParagraphEditView.swift in Sources */,
 				7CDBD6B11E23900B00912320 /* SourceTranslationParagraph.swift in Sources */,
@@ -1309,6 +1320,7 @@
 				7CDBD6D21E28E53500912320 /* ScrollSyncManager.swift in Sources */,
 				7C20D7E41D8BF8D000E84BA5 /* TargetTranslationCell.swift in Sources */,
 				7C4A4FA71DF835E1009F890E /* LiveQueryManager.swift in Sources */,
+				7C0130C31E3F2D520053C5C2 /* ProjectSettings.swift in Sources */,
 				7C82CE8F1DE6E29500C054EB /* PropertyValue.swift in Sources */,
 				7CCC01211DA646FA00F0562E /* USXContentParser.swift in Sources */,
 				7C4A4FE51DFE7C87009F890E /* UIExtension.swift in Sources */,
