@@ -103,6 +103,33 @@ extension Dictionary
 		return self[key] != nil
 	}
 	
+	// Maps the dictionary values, but keeps the dictionary format
+	func mapValues<T>(f: (Value) throws -> T) rethrows -> [Key: T]
+	{
+		var dict = [Key: T]()
+		for (key, value) in self
+		{
+			dict[key] = try f(value)
+		}
+		
+		return dict
+	}
+	
+	// Maps the dictionary values keeping the dictionary format. Values mapped to nil will not be included in the final dictionary.
+	func flatMapValues<T>(f: (Value) throws -> T?) rethrows -> [Key: T]
+	{
+		var dict = [Key: T]()
+		for (key, value) in self
+		{
+			if let newValue = try f(value)
+			{
+				dict[key] = newValue
+			}
+		}
+		
+		return dict
+	}
+	
 	// Combines two dictionaries together to form a single, larger dictionary
 	// If both dictionaries contain equal keys, the values of the right dictionary will overwrite the values of the left dictionary for those keys in the returned dictionary
 	// For example: ["dog" : "woof", "cat" : "meow"] + ["dog" : "rawr!", "mouse" : "squeek"] => ["dog" : "rawr!", "cat" : "meow", "mouse" : "squeek"]
