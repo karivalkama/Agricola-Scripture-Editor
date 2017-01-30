@@ -33,7 +33,7 @@ final class Avatar: Storable
 	var idProperties: [Any] { return [projectId, "avatar", name.toKey] }
 	var properties: [String : PropertyValue]
 	{
-		return ["name": PropertyValue(name), "created": PropertyValue(created)]
+		return ["name": name.value, "created": created.value]
 	}
 	
 	
@@ -84,7 +84,7 @@ final class AvatarInfo: Storable
 	var openName: String?
 	
 	// Phase id -> Carousel id
-	var carousels: [String : String]
+	var carouselIds: [String : String]
 	
 	private var passwordHash: String?
 	
@@ -97,7 +97,10 @@ final class AvatarInfo: Storable
 	}
 	
 	var idProperties: [Any] { return [avatarId, "private"] }
-	var properties: [String : PropertyValue] { return ["open_name": PropertyValue(openName), "account": PropertyValue(accountId), "offline_password": PropertyValue(passwordHash), "carousels": PropertyValue(PropertySet(carousels))] }
+	var properties: [String : PropertyValue]
+	{
+		return ["open_name": openName.value, "account": accountId.value, "offline_password": passwordHash.value, "carousels": PropertySet(carouselIds).value]
+	}
 	
 	
 	// INIT	--------------------
@@ -107,7 +110,7 @@ final class AvatarInfo: Storable
 		self.avatarId = avatarId
 		self.accountId = accountId
 		self.openName = openName
-		self.carousels = carousels
+		self.carouselIds = carousels
 		
 		if let password = password
 		{
@@ -122,12 +125,12 @@ final class AvatarInfo: Storable
 		self.accountId = accountId
 		self.openName = openName
 		self.passwordHash = passwordHash
-		self.carousels = carousels
+		self.carouselIds = carousels
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> AvatarInfo
 	{
-		return AvatarInfo(avatarId: id[PROPERTY_AVATAR].string(), accountId: properties["account"].string(), openName: properties["open_name"].string, passwordHash: properties["offline_password"].string, carousels: properties["carousels"].object().properties.flatMapValues { $0.string })
+		return AvatarInfo(avatarId: id[PROPERTY_AVATAR].string(), accountId: properties["account"].string(), openName: properties["open_name"].string, passwordHash: properties["offline_password"].string, carousels: properties["carousels"].object { $0.string })
 	}
 	
 	
@@ -145,7 +148,7 @@ final class AvatarInfo: Storable
 		}
 		if let carouselData = properties["carousels"].object
 		{
-			self.carousels = carouselData.properties.flatMapValues { $0.string }
+			self.carouselIds = carouselData.properties.flatMapValues { $0.string }
 		}
 		if let passwordHash = properties["offline_password"].string
 		{

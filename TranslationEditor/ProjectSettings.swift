@@ -43,7 +43,7 @@ final class ProjectSettings: Storable
 	
 	var properties: [String : PropertyValue]
 	{
-		return ["project_path": PropertyValue(projectPath.map { PropertyValue($0) }), "avatars": PropertyValue(avatarIds.map { PropertyValue($0) }), "rigths": PropertyValue(PropertySet(rights.mapDict { key, value in return (key.rawValue, PropertyValue(value.map { PropertyValue($0) })) }))] // TODO: Create a slightly more simple way to do this
+		return ["project_path": projectPath.value, "avatars": avatarIds.value, "rigths": PropertyValue(PropertySet(rights.mapDict { key, value in return (key.rawValue, PropertyValue(value.map { PropertyValue($0) })) }))] // TODO: Create a slightly more simple way to do this
 	}
 	
 	

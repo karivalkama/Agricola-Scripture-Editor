@@ -110,7 +110,7 @@ struct PropertySet: CustomStringConvertible, PropertyValueWrapable
 		}
 	}
 	
-	private init(properties: [String : PropertyValue])
+	init(properties: [String : PropertyValue])
 	{
 		self.properties = properties
 	}

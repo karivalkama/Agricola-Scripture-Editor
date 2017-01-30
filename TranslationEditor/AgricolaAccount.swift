@@ -51,7 +51,7 @@ final class AgricolaAccount: Storable
 		self.projectId = projectId
 	}
 	
-	static func create(from properties: PropertySet, withId id: Id) throws -> AgricolaAccount
+	static func create(from properties: PropertySet, withId id: Id) -> AgricolaAccount
 	{
 		return AgricolaAccount(cbUserName: id[PROPERTY_CB_USERNAME].string(), displayName: properties["displayname"].string(), isShared: properties["shared"].bool(), projectId: properties["project"].string)
 	}

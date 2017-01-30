@@ -422,4 +422,18 @@ struct PropertyValue: CustomStringConvertible, ExpressibleByIntegerLiteral, Expr
 			return []
 		}
 	}
+	
+	
+	// Maps the value to a specific type of dictionary. Non-mapable values are ignored
+	func object<T>(_ f: (PropertyValue) throws -> T?) rethrows -> [String: T]
+	{
+		if let object = object
+		{
+			return try object.properties.flatMapValues(f)
+		}
+		else
+		{
+			return [:]
+		}
+	}
 }

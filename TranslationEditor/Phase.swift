@@ -44,7 +44,7 @@ final class Phase: Storable
 	
 	var properties: [String : PropertyValue]
 	{
-		return ["name": PropertyValue(name), "phase_type": PropertyValue(phaseType.rawValue), "template_carousel": PropertyValue(templateCarouselId)]
+		return ["name": name.value, "phase_type": phaseType.rawValue.value, "template_carousel": templateCarouselId.value]
 	}
 	
 	
