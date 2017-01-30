@@ -614,8 +614,8 @@
 			isa = PBXGroup;
 			children = (
 				7C40DF6A1DEC547F0035B92E /* OldVersion */,
-				7C942A2C1E38DD49000C614A /* Project */,
 				7C82CE881DE6E1C200C054EB /* Database */,
+				7C942A2C1E38DD49000C614A /* Project */,
 				7C4A4FFE1E01685C009F890E /* Translation */,
 				7CDBD6A61E23895000912320 /* Resource */,
 				7C4A4FCB1DFACC58009F890E /* Copyable.swift */,

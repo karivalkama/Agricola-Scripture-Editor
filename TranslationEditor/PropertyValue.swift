@@ -9,7 +9,7 @@
 import Foundation
 
 // Property values are used for wrapping JSON compatible values into an easy-to-access general value
-struct PropertyValue: CustomStringConvertible
+struct PropertyValue: CustomStringConvertible, ExpressibleByIntegerLiteral, ExpressibleByStringLiteral, ExpressibleByBooleanLiteral, ExpressibleByFloatLiteral
 {
 	// ATTRIBUTES	---------
 	
@@ -199,6 +199,36 @@ struct PropertyValue: CustomStringConvertible
 	
 	
 	// INIT	----------
+	
+	init(integerLiteral value: Int)
+	{
+		self.value = value
+	}
+	
+	init(stringLiteral value: String)
+	{
+		self.value = value
+	}
+	
+	init(unicodeScalarLiteral value: String)
+	{
+		self.value = value
+	}
+	
+	init(extendedGraphemeClusterLiteral value: String)
+	{
+		self.value = value
+	}
+	
+	init(booleanLiteral value: Bool)
+	{
+		self.value = value
+	}
+	
+	init(floatLiteral value: Double)
+	{
+		self.value = value
+	}
 	
 	init(_ str: String?)
 	{
