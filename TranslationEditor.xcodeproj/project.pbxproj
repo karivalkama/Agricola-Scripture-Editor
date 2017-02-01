@@ -22,6 +22,8 @@
 		7C0130C61E3F3DFB0053C5C2 /* PropertyValueWrapable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130C41E3F3DFB0053C5C2 /* PropertyValueWrapable.swift */; };
 		7C0130C81E3F64900053C5C2 /* IdIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130C71E3F64900053C5C2 /* IdIndex.swift */; };
 		7C0130C91E3F64900053C5C2 /* IdIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130C71E3F64900053C5C2 /* IdIndex.swift */; };
+		7C0130CB1E41F4D30053C5C2 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130CA1E41F4D30053C5C2 /* ProjectView.swift */; };
+		7C0130CC1E41F4D30053C5C2 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130CA1E41F4D30053C5C2 /* ProjectView.swift */; };
 		7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */; };
 		7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */; };
 		7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */; };
@@ -346,6 +348,7 @@
 		7C0130C11E3F2D520053C5C2 /* ProjectSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSettings.swift; sourceTree = "<group>"; };
 		7C0130C41E3F3DFB0053C5C2 /* PropertyValueWrapable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyValueWrapable.swift; sourceTree = "<group>"; };
 		7C0130C71E3F64900053C5C2 /* IdIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdIndex.swift; sourceTree = "<group>"; };
+		7C0130CA1E41F4D30053C5C2 /* ProjectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		7C18A18B1D8BBEBD00DD1B03 /* TranslationEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslationEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationVC.swift; sourceTree = "<group>"; };
@@ -658,6 +661,7 @@
 				7CDBD6FD1E2F7C1700912320 /* ParagraphNotesView.swift */,
 				7CA1BA9F1E2F9C2100611FED /* NotesThreadView.swift */,
 				7CA1BAA31E2FA5A500611FED /* NotesPostView.swift */,
+				7C0130CA1E41F4D30053C5C2 /* ProjectView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1196,6 +1200,7 @@
 				7C82CE8E1DE6E29500C054EB /* PropertyValue.swift in Sources */,
 				7CCC01201DA646F900F0562E /* USXContentParser.swift in Sources */,
 				7CA1BAA41E2FA5A500611FED /* NotesPostView.swift in Sources */,
+				7C0130CB1E41F4D30053C5C2 /* ProjectView.swift in Sources */,
 				7CCC013C1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
 				7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
 				7CA1BABC1E32037B00611FED /* NotesShowHideListener.swift in Sources */,
@@ -1291,6 +1296,7 @@
 				7CDBD6F31E2E3BEC00912320 /* NotesThread.swift in Sources */,
 				7C40DF5C1DE718DA0035B92E /* Storable.swift in Sources */,
 				7C4A4F8C1DEEC4BD009F890E /* View.swift in Sources */,
+				7C0130CC1E41F4D30053C5C2 /* ProjectView.swift in Sources */,
 				7CCC01351DA7964000F0562E /* XmlParserUtil.swift in Sources */,
 				7CCC01491DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
 				7C18A1A41D8BBEBD00DD1B03 /* TranslationEditorTests.swift in Sources */,

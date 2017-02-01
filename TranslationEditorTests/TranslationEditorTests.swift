@@ -111,11 +111,11 @@ class TranslationEditorTests: XCTestCase
 	func testParagraphProperties()
 	{
 		let language = Language(name: "English")
-		let book = Book(code: "GAL", identifier: "English: This and This Translation", languageId: language.idString)
+		let book = Book(projectId: "test-project", code: "gal", identifier: "English: This and This Translation", languageId: language.idString)
 		
 		let paragraph = Paragraph(bookId: book.idString, chapterIndex: 1, sectionIndex: 1, index: 1, content: [], creatorId: "testuserid")
 		
-		assert(paragraph.bookCode == "GAL")
+		assert(paragraph.bookCode == "gal")
 		
 		let copyParagraph = try! Paragraph.create(from: paragraph.toPropertySet, withId: paragraph.id)
 		
@@ -191,13 +191,7 @@ class TranslationEditorTests: XCTestCase
 	
 	func testClearDatabase()
 	{
-		let query = DATABASE.createAllDocumentsQuery()
-		let results = try! query.run()
-		
-		while let row = results.nextRow(), let doc = row.document
-		{
-			try! doc.delete()
-		}
+		try! DATABASE.delete()
 	}
 	
 	func testRemoveDataOfType()
@@ -221,7 +215,7 @@ class TranslationEditorTests: XCTestCase
 	
 	func testReadDataOfType()
 	{
-		let type = ParagraphBinding.type
+		let type = NotesThread.type
 		
 		let query = DATABASE.createAllDocumentsQuery()
 		let results = try! query.run()
@@ -305,14 +299,14 @@ class TranslationEditorTests: XCTestCase
 		let sourceLanguage = try! LanguageView.instance.language(withName: sourceLanguageName)
 		let targetLanguage = try! LanguageView.instance.language(withName: targetLanguageName)
 		
-		// Finds source books
+		// Finds source book
 		guard let sourceBook = try! BookView.instance.booksQuery(code: code, languageId: sourceLanguage.idString).firstResultObject() else
 		{
 			print("TEST: No source book material with code \(code) and language \(sourceLanguage.name)")
 			return
 		}
 		
-		// Makes an empty copy of each, if there isn't one already
+		// Makes an empty copy, if there isn't one already
 		guard try! BookView.instance.booksQuery(code: sourceBook.code, languageId: targetLanguage.idString).firstResultRow() == nil else
 		{
 			print("TEST: There already exists a \(targetLanguageName) copy of book \(code)")
@@ -320,7 +314,7 @@ class TranslationEditorTests: XCTestCase
 		}
 		
 		print("Creating a \(targetLanguageName) copy of \(sourceLanguageName) book \(sourceBook.code): \(sourceBook.identifier)")
-		_ = try! sourceBook.makeEmptyCopy(identifier: "Test Version", languageId: targetLanguage.idString, userId: userId)
+		_ = try! sourceBook.makeEmptyCopy(projectId: "test-project", identifier: "Test Version", languageId: targetLanguage.idString, userId: userId)
 		
 		print("Done")
 	}
@@ -487,7 +481,7 @@ class TranslationEditorTests: XCTestCase
 		let language = try! LanguageView.instance.language(withName: "English")
 		
 		// Book finding algorithm
-		func findBook(languageId: String, code: String, identifier: String) -> Book?
+		func findBook(projectId: String, languageId: String, code: String, identifier: String) -> Book?
 		{
 			// Performs a database query
 			return try! BookView.instance.booksQuery(code: code, languageId: languageId, identifier: identifier).firstResultObject()
@@ -501,7 +495,7 @@ class TranslationEditorTests: XCTestCase
 		
 		// Creates the parser first
 		let parser = XMLParser(contentsOf: url)!
-		let usxParserDelegate = USXParser(userId: "testuserid", languageId: language.idString, findReplacedBook: findBook, matchParagraphs: paragraphMatcher)
+		let usxParserDelegate = USXParser(projectId: "test-project", userId: "testuserid", languageId: language.idString, findReplacedBook: findBook, matchParagraphs: paragraphMatcher)
 		parser.delegate = usxParserDelegate
 		
 		// Parses the xml

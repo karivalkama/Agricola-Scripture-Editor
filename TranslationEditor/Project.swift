@@ -78,4 +78,15 @@ final class Project: Storable
 			self.contributorIds = contributorData.flatMap { $0.string }
 		}
 	}
+	
+	
+	// OTHER METHODS	----------
+	
+	/*
+	static func projectsAvailableForAccount(withId accountId: String) throws -> [Project]
+	{
+		let query =
+		
+		return []
+	}*/
 }

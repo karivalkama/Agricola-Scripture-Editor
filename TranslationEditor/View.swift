@@ -26,7 +26,7 @@ protocol View
 }
 
 extension View
-{
+{	
 	// Calling this function will set the map function of the view
 	// The map function can also be called through the view, but this version allows the 
 	// user to operate on a parsed instance instead of raw document data
@@ -36,21 +36,14 @@ extension View
 		{
 			do
 			{
-				// Only works on documents of the correct type
-				if let type = doc[PROPERTY_TYPE] as? String, type == Queried.type
+				if let object = try Queried.create(cblProperties: doc)
 				{
-					if let idString = doc["_id"] as? String
-					{
-						let id = Queried.createId(from: idString)
-						let object = try Queried.create(from: PropertySet(doc), withId: id)
-						
-						block(object, emit)
-					}
+					block(object, emit)
 				}
 			}
 			catch
 			{
-				print("DB: Error within map function: \(error)")
+				print("DB ERROR: Error within map function: \(error)")
 			}
 		}
 		

@@ -144,6 +144,22 @@ extension Storable
 		return try create(from: PropertySet(document.properties!), withId: createId(from: document.documentID))
 	}
 	
+	// Creates an instance of this storable from a set of couchbase lite properties
+	// The properties need to include the '_id' property and have a matching type
+	static func create(cblProperties doc: [String: Any]) throws -> Self?
+	{
+		// Only works on documents of the correct type
+		if let type = doc[PROPERTY_TYPE] as? String, type == type, let idString = doc["_id"] as? String
+		{
+			let id = createId(from: idString)
+			return try create(from: PropertySet(doc), withId: id)
+		}
+		else
+		{
+			return nil
+		}
+	}
+	
 	// Finds and creates an instance of this class for the provided id
 	// Returns nil if there wasn't a saved revision for the provided id
 	// Throws an error if instance generation failed

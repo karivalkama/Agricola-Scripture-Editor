@@ -15,9 +15,9 @@ typealias Chapter = [Section]
 
 
 // These functions are used for finding existing book data for
-// a certain language, code and identifier
+// a project, a certain language, code and identifier
 // Returns nil if no such book exists
-typealias FindBook = (String, String, String) -> Book?
+typealias FindBook = (String, String, String, String) -> Book?
 
 // This function / algorithm matches paragraphs with each other
 // Multiple matches can be formed from / to a single paragraph

@@ -44,6 +44,7 @@ class USXBookProcessor: USXContentProcessor
 	
 	// ATTRIBUTES	-------
 	
+	private let projectId: String
 	private let userId: String
 	private let code: String
 	private let languageId: String
@@ -59,8 +60,9 @@ class USXBookProcessor: USXContentProcessor
 	
 	// INIT	---------------
 	
-	init(userId: String, languageId: String, code: String, findReplacedBook: @escaping FindBook, matchParagraphs: @escaping MatchParagraphs)
+	init(projectId: String, userId: String, languageId: String, code: String, findReplacedBook: @escaping FindBook, matchParagraphs: @escaping MatchParagraphs)
 	{
+		self.projectId = projectId
 		self.userId = userId
 		self.languageId = languageId
 		self.code = code
@@ -71,10 +73,10 @@ class USXBookProcessor: USXContentProcessor
 	// Creates a new USX parser for book data
 	// The parser should be set to start after a book element start
 	// The parser will stop at the next book element start or at the end of usx
-	static func createBookParser(caller: XMLParserDelegate, userId: String, languageId: String, bookCode: String, findReplacedBook: @escaping FindBook, matchParagraphs: @escaping MatchParagraphs, targetPointer: UnsafeMutablePointer<[Book]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Book, Chapter>
+	static func createBookParser(caller: XMLParserDelegate, projectId: String, userId: String, languageId: String, bookCode: String, findReplacedBook: @escaping FindBook, matchParagraphs: @escaping MatchParagraphs, targetPointer: UnsafeMutablePointer<[Book]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Book, Chapter>
 	{
 		let parser = USXContentParser<Book, Chapter>(caller: caller, containingElement: .usx, lowestBreakMarker: .book, targetPointer: targetPointer, using: errorHandler)
-		parser.processor = AnyUSXContentProcessor(USXBookProcessor(userId: userId, languageId: languageId, code: bookCode, findReplacedBook: findReplacedBook, matchParagraphs: matchParagraphs))
+		parser.processor = AnyUSXContentProcessor(USXBookProcessor(projectId: projectId, userId: userId, languageId: languageId, code: bookCode, findReplacedBook: findReplacedBook, matchParagraphs: matchParagraphs))
 		
 		return parser
 	}
@@ -334,7 +336,7 @@ class USXBookProcessor: USXContentProcessor
 		{
 			if let identifier = identifier
 			{
-				if let existingBook = findReplacedBook(languageId, code, identifier)
+				if let existingBook = findReplacedBook(projectId, languageId, code, identifier)
 				{
 					existingBook.identifier = identifier
 					existingBook.languageId = languageId
@@ -342,7 +344,7 @@ class USXBookProcessor: USXContentProcessor
 				}
 				else
 				{
-					_book = Book(code: code, identifier: identifier, languageId: languageId)
+					_book = Book(projectId: projectId, code: code, identifier: identifier, languageId: languageId)
 				}
 			}
 			else
