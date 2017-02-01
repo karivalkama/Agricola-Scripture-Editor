@@ -34,10 +34,7 @@ final class ParagraphNotes: Storable
 	}
 	
 	var idProperties: [Any] { return [collectionId, chapterIndex, uid] }
-	var properties: [String : PropertyValue]
-	{
-		return ["path_id": PropertyValue(pathId)]
-	}
+	var properties: [String : PropertyValue] { return ["path_id": pathId.value] }
 	
 	
 	// INIT	-----------------

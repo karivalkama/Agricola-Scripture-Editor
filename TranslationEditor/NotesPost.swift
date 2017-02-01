@@ -35,7 +35,7 @@ final class NotesPost: Storable
 	var idProperties: [Any] { return [threadId, created] }
 	var properties: [String : PropertyValue]
 	{
-		return ["creator": PropertyValue(creatorId), "content": PropertyValue(content)]
+		return ["creator": creatorId.value, "content": content.value]
 	}
 	
 	var collectionId: String { return ParagraphNotes.collectionId(fromId: threadId) }

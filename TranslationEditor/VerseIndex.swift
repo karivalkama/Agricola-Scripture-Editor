@@ -36,7 +36,7 @@ func min(_ first: VerseIndex, _ second: VerseIndex) -> VerseIndex
 
 // A verseIndex is a way of indexing certain text ranges.
 // A single index may contain one, multiple, a half or multiple and a half verses
-struct VerseIndex: JSONConvertible, Equatable
+struct VerseIndex: JSONConvertible, Equatable, ExpressibleByIntegerLiteral
 {
 	// ATTRIBUTES	----------
 	
@@ -49,11 +49,17 @@ struct VerseIndex: JSONConvertible, Equatable
 	
 	var properties: [String : PropertyValue]
 	{
-		return ["index" : PropertyValue(index), "midVerse" : PropertyValue(midVerse)]
+		return ["index" : index.value, "midVerse" : midVerse.value]
 	}
 	
 	
 	// INIT	--------
+	
+	init(integerLiteral value: Int)
+	{
+		self.index = value
+		self.midVerse = false
+	}
 	
 	init(_ index: Int, midVerse: Bool = false)
 	{

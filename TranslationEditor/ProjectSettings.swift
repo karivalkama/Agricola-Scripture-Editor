@@ -43,7 +43,7 @@ final class ProjectSettings: Storable
 	
 	var properties: [String : PropertyValue]
 	{
-		return ["project_path": projectPath.value, "avatars": avatarIds.value, "rigths": PropertyValue(PropertySet(rights.mapDict { key, value in return (key.rawValue, PropertyValue(value.map { PropertyValue($0) })) }))] // TODO: Create a slightly more simple way to do this
+		return ["project_path": projectPath.value, "avatars": avatarIds.value, "rigths": PropertySet(rights.mapDict { ($0.rawValue, $1.value) }).value]
 	}
 	
 	
@@ -59,7 +59,7 @@ final class ProjectSettings: Storable
 	
 	static func create(from properties: PropertySet, withId id: Id) -> ProjectSettings
 	{
-		return ProjectSettings(projectId: id[PROPERTY_PROJECT].string(), projectPath: properties["project_path"].array().flatMap { $0.string }, avatarIds: properties["avatars"].array().flatMap { $0.string }, rights: properties["rights"].object().properties.flatMapDict { key, value in return (UserRight(rawValue: key), value.array().flatMap { $0.string }) })
+		return ProjectSettings(projectId: id[PROPERTY_PROJECT].string(), projectPath: properties["project_path"].array { $0.string }, avatarIds: properties["avatars"].array { $0.string }, rights: properties["rights"].object().properties.flatMapDict { key, value in return (UserRight(rawValue: key), value.array() { $0.string }) })
 	}
 	
 	
@@ -67,6 +67,17 @@ final class ProjectSettings: Storable
 	
 	func update(with properties: PropertySet)
 	{
-		
+		if let projectPath = properties["project_path"].array
+		{
+			self.projectPath = projectPath.flatMap { $0.string }
+		}
+		if let avatarIds = properties["avatars"].array
+		{
+			self.avatarIds = avatarIds.flatMap { $0.string }
+		}
+		if let rights = properties["rights"].object
+		{
+			self.rights = rights.properties.flatMapDict { key, value in return (UserRight(rawValue: key), value.array { $0.string }) }
+		}
 	}
 }

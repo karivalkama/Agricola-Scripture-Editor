@@ -25,7 +25,7 @@ final class Language: Storable
 	
 	var idProperties: [Any] { return [uid] }
 	
-	var properties: [String : PropertyValue] { return ["name" : PropertyValue(name)] }
+	var properties: [String : PropertyValue] { return ["name" : name.value] }
 	
 	
 	// INIT	---------------

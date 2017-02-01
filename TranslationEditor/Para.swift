@@ -40,16 +40,16 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 	
 	var properties: [String : PropertyValue]
 	{
-		var properties = ["style" : PropertyValue(style.code)]
+		var properties = ["style" : style.code.value]
 		
 		// Verses and ambiguous content are mutually exclusive
 		if verses.isEmpty
 		{
-			properties["ambiguous_content"] = PropertyValue(ambiguousContent)
+			properties["ambiguous_content"] = ambiguousContent.value
 		}
 		else
 		{
-			properties["verses"] = PropertyValue(verses)
+			properties["verses"] = verses.value
 		}
 		
 		return properties

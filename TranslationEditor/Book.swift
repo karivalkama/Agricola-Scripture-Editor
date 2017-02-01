@@ -33,7 +33,7 @@ final class Book: Storable
 	
 	var properties: [String : PropertyValue]
 	{
-		return ["identifier" : PropertyValue(identifier), "language" : PropertyValue(languageId)]
+		return ["identifier" : identifier.value, "language" : languageId.value]
 	}
 	
 	

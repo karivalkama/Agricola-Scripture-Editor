@@ -22,8 +22,8 @@ struct CharData: AttributedStringConvertible, JSONConvertible, Equatable
 	var properties: [String : PropertyValue]
 	{
 		return [
-			"style" : PropertyValue(style?.rawValue),
-			"text" : PropertyValue(text)]
+			"style" : (style?.rawValue).value,
+			"text" : text.value]
 	}
 	
 	

@@ -27,7 +27,7 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable
 	
 	var properties: [String : PropertyValue]
 	{
-		return ["range" : PropertyValue(range.toPropertySet), "content" : PropertyValue(content)]
+		return ["range" : range.toPropertySet.value, "content" : content.value]
 	}
 	
 	var text: String

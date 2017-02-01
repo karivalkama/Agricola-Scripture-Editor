@@ -45,13 +45,13 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	var idProperties: [Any] {return [bookId, chapterIndex, pathId, created]}
 	
 	var properties: [String : PropertyValue] {return [
-		"paras" : PropertyValue(content),
-		"section" : PropertyValue(sectionIndex),
-		"index" : PropertyValue(index),
-		"creator" : PropertyValue(creatorId),
-		"created_from" : PropertyValue(createdFrom),
-		"deprecated" : PropertyValue(isDeprecated),
-		"most_recent" : PropertyValue(isMostRecent)]}
+		"paras" : content.value,
+		"section" : sectionIndex.value,
+		"index" : index.value,
+		"creator" : creatorId.value,
+		"created_from" : createdFrom.value,
+		"deprecated" : isDeprecated.value,
+		"most_recent" : isMostRecent.value]}
 	
 	var range: VerseRange?
 	{
@@ -121,7 +121,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 			bookId: id[PROPERTY_BOOK_ID].string(), chapterIndex: id[PROPERTY_CHAPTER_INDEX].int(), sectionIndex: properties["section"].int(or: 1), index: properties["index"].int(),
 			content: Para.parseArray(from: properties["paras"].array(), using: Para.parse), creatorId: properties["creator"].string(),
 			createdFrom: properties["created_from"].string, pathId: id[PROPERTY_PATH_ID].string(),
-			created: id[PROPERTY_CREATED].time(), mostRecent: properties["most_recent"].bool(or: true),deprecated: properties["deprecated"].bool(or: false))
+			created: id[PROPERTY_CREATED].time(), mostRecent: properties["most_recent"].bool(or: true), deprecated: properties["deprecated"].bool(or: false))
 	}
 	
 	

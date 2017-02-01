@@ -45,7 +45,7 @@ final class ParagraphBinding: Storable
 	// COMPUTED PROPERTIES	--
 	
 	var idProperties: [Any] { return [uid] }
-	var properties: [String : PropertyValue] { return ["source_book": PropertyValue(sourceBookId), "target_book": PropertyValue(targetBookId), "created": PropertyValue(created), "creator": PropertyValue(creatorId), "deprecated": PropertyValue(isDeprecated), "bindings": PropertyValue(bindingDicts.map { PropertySet($0) })] }
+	var properties: [String : PropertyValue] { return ["source_book": sourceBookId.value, "target_book": targetBookId.value, "created": created.value, "creator": creatorId.value, "deprecated": isDeprecated.value, "bindings": bindingDicts.map { PropertySet($0) }.value] }
 	
 	private var bindingDicts: [[String : String]]
 	{
@@ -130,9 +130,7 @@ final class ParagraphBinding: Storable
 		
 		for bindingValue in bindingValues
 		{
-			let binding = bindingValue.object()
-			
-			if let sourceId = binding["source"].string, let targetId = binding["target"].string
+			if let binding = bindingValue.object, let sourceId = binding["source"].string, let targetId = binding["target"].string
 			{
 				bindings.append((sourceId, targetId))
 			}

@@ -39,7 +39,7 @@ final class ParagraphEdit: Storable
 	
 	var properties: [String : PropertyValue]
 	{
-		return ["created" : PropertyValue(created), "edits" : PropertyValue(PropertySet(edits))]
+		return ["created" : created.value, "edits" : PropertySet(edits).value]
 	}
 	
 	

@@ -38,7 +38,7 @@ final class NotesThread: Storable
 	var idProperties: [Any] { return [noteId, created] }
 	var properties: [String : PropertyValue]
 	{
-		return ["creator": PropertyValue(creatorId), "resolved": PropertyValue(isResolved), "name": PropertyValue(name), "verse": targetVerseIndex.value, "tags": PropertyValue(tags.map { PropertyValue($0) })]
+		return ["creator": creatorId.value, "resolved": isResolved.value, "name": name.value, "verse": targetVerseIndex.value, "tags": tags.value]
 	}
 	
 	var collectionId: String { return ParagraphNotes.collectionId(fromId: noteId) }
@@ -63,7 +63,7 @@ final class NotesThread: Storable
 		let verseIndexData = properties["verse"].object
 		let verseIndex = verseIndexData == nil ? nil : try VerseIndex.parse(from: verseIndexData!)
 		
-		return NotesThread(noteId: id[PROPERTY_NOTE].string(), creatorId: properties["creator"].string(), name: properties["name"].string(), targetVerseIndex: verseIndex, tags: properties["tags"].array().flatMap { $0.string }, resolved: properties["resolved"].bool(), created: id[PROPERTY_CREATED].time())
+		return NotesThread(noteId: id[PROPERTY_NOTE].string(), creatorId: properties["creator"].string(), name: properties["name"].string(), targetVerseIndex: verseIndex, tags: properties["tags"].array { $0.string }, resolved: properties["resolved"].bool(), created: id[PROPERTY_CREATED].time())
 	}
 	
 	

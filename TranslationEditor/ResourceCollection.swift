@@ -28,7 +28,7 @@ final class ResourceCollection : Storable
 	
 	var idProperties: [Any] { return [uid] }
 	
-	var properties: [String : PropertyValue] { return ["language" : PropertyValue(languageId), "book" : PropertyValue(bookId), "category" : PropertyValue(category.rawValue), "name" : PropertyValue(name)] }
+	var properties: [String : PropertyValue] { return ["language" : languageId.value, "book" : bookId.value, "category" : category.rawValue.value, "name" : name.value] }
 	
 	
 	// INIT	-------------------

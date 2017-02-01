@@ -99,20 +99,19 @@ struct PropertySet: CustomStringConvertible, PropertyValueWrapable
 		// Empty initialiser
 	}
 	
-	init(_ properties: [String : Any])
-	{
-		for (propertyName, value) in properties
-		{
-			if let parsedValue = PropertyValue.of(value)
-			{
-				self[propertyName] = parsedValue
-			}
-		}
-	}
-	
-	init(properties: [String : PropertyValue])
+	init(_ properties: [String : PropertyValue])
 	{
 		self.properties = properties
+	}
+	
+	init(_ properties: [String: PropertyValueWrapable])
+	{
+		self.properties = properties.mapValues { $0.value }
+	}
+	
+	init(_ properties: [String : Any])
+	{
+		self.properties = properties.flatMapValues { PropertyValue.of($0) }
 	}
 	
 	
@@ -131,7 +130,7 @@ struct PropertySet: CustomStringConvertible, PropertyValueWrapable
 	// The properties of the left set will be overwritten by right side properties where they have the same name
 	static func +(_ left: PropertySet, _ right: PropertySet) -> PropertySet
 	{
-		return PropertySet(properties: left.properties + right.properties)
+		return PropertySet(left.properties + right.properties)
 	}
 	
 	

@@ -36,7 +36,7 @@ final class Carousel: Storable
 	var idProperties: [Any] { return [projectId, "carousel", uid] }
 	var properties: [String : PropertyValue]
 	{
-		return ["template": PropertyValue(isTemplate), "owner": PropertyValue(ownerId), "source_books": PropertyValue(sourceBookIds.map { PropertyValue($0) }), "resources": PropertyValue(resourceIds.map { PropertyValue($0) })]
+		return ["template": isTemplate.value, "owner": ownerId.value, "source_books": sourceBookIds.value, "resources": resourceIds.value]
 	}
 	
 	
@@ -54,7 +54,7 @@ final class Carousel: Storable
 	
 	static func create(from properties: PropertySet, withId id: Id) -> Carousel
 	{
-		return Carousel(projectId: id[PROPERTY_PROJECT].string(), sourceBookIds: properties["source_books"].array().flatMap { $0.string }, resourceIds: properties["resources"].array().flatMap { $0.string }, ownerId: properties["owner"].string(), isTemplate: properties["template"].bool(), uid: id["carousel_uid"].string())
+		return Carousel(projectId: id[PROPERTY_PROJECT].string(), sourceBookIds: properties["source_books"].array { $0.string }, resourceIds: properties["resources"].array { $0.string }, ownerId: properties["owner"].string(), isTemplate: properties["template"].bool(), uid: id["carousel_uid"].string())
 	}
 	
 	
