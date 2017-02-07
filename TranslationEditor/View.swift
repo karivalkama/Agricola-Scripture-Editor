@@ -34,6 +34,8 @@ extension View
 	{
 		func mapBlock(doc: [String : Any], emit: CBLMapEmitBlock)
 		{
+			// The object must be of correct type
+			
 			do
 			{
 				if let object = try Queried.create(cblProperties: doc)

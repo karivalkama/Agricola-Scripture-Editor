@@ -149,7 +149,7 @@ extension Storable
 	static func create(cblProperties doc: [String: Any]) throws -> Self?
 	{
 		// Only works on documents of the correct type
-		if let type = doc[PROPERTY_TYPE] as? String, type == type, let idString = doc["_id"] as? String
+		if doc[PROPERTY_TYPE] as? String == type, let idString = doc["_id"] as? String
 		{
 			let id = createId(from: idString)
 			return try create(from: PropertySet(doc), withId: id)

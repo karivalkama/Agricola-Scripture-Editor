@@ -215,7 +215,7 @@ class TranslationEditorTests: XCTestCase
 	
 	func testReadDataOfType()
 	{
-		let type = NotesThread.type
+		let type = Book.type
 		
 		let query = DATABASE.createAllDocumentsQuery()
 		let results = try! query.run()
@@ -272,6 +272,8 @@ class TranslationEditorTests: XCTestCase
 			let paragraphs = try! ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
 			
 			print("- \(book.code) - \(book.identifier) (\(paragraphs.count) paragraphs)")
+			//print("Id: \(book.idString)")
+			//book.properties.forEach { print("\($0.key) = \($0.value.string())") }
 			
 			for paragraph in paragraphs
 			{
@@ -284,6 +286,34 @@ class TranslationEditorTests: XCTestCase
 			if editAmount != 0
 			{
 				print("There are also \(editAmount) edits")
+			}
+		}
+	}
+	
+	func testVerseConsistency()
+	{
+		let books = try! BookView.instance.createQuery().resultObjects()
+		
+		for book in books
+		{
+			print("Testing book \(book.identifier)")
+			
+			let paragraphs = try! ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
+			
+			for paragraph in paragraphs
+			{
+				if let range = paragraph.range
+				{
+					print("-> \(range)")
+				}
+				else if let para = paragraph.content.first
+				{
+					print("-> \(para.style)")
+				}
+				else
+				{
+					print("-> No content")
+				}
 			}
 		}
 	}
