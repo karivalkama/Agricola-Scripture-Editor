@@ -31,6 +31,20 @@ class TranslationEditorTests: XCTestCase
 		assert(stripped == "014-001222")
 	}
 	
+	func testPropertyRetrieval()
+	{
+		let rawProperties = ["a": 1.value, "B": 2.value, "c": 3.value, "C": 3.value]
+		let props = PropertySet(rawProperties)
+		
+		print(props)
+		
+		assert(props["a"].int == 1)
+		assert(props["A"].int == 1)
+		assert(props["b"].int == 2)
+		assert(props["B"].int == 2)
+		assert(props["c"].int == props["C"].int)
+	}
+	
 	func testVerseRanges()
 	{
 		let range1 = VerseRange(1, 2)

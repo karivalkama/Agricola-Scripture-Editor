@@ -101,17 +101,17 @@ struct PropertySet: CustomStringConvertible, PropertyValueWrapable
 	
 	init(_ properties: [String : PropertyValue])
 	{
-		self.properties = properties
+		self.properties = properties.mapKeys { $0.lowercased() }
 	}
 	
 	init(_ properties: [String: PropertyValueWrapable])
 	{
-		self.properties = properties.mapValues { $0.value }
+		self.properties = properties.mapDict { ($0.lowercased(), $1.value) }
 	}
 	
 	init(_ properties: [String : Any])
 	{
-		self.properties = properties.flatMapValues { PropertyValue.of($0) }
+		self.properties = properties.flatMapDict { ($0.lowercased(), PropertyValue.of($1)) }
 	}
 	
 	
