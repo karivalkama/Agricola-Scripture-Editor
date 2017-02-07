@@ -49,7 +49,7 @@ struct VerseIndex: JSONConvertible, Equatable, ExpressibleByIntegerLiteral
 	
 	var properties: [String : PropertyValue]
 	{
-		return ["index" : index.value, "midVerse" : midVerse.value]
+		return ["index" : index.value, "mid_verse" : midVerse.value]
 	}
 	
 	
@@ -73,7 +73,7 @@ struct VerseIndex: JSONConvertible, Equatable, ExpressibleByIntegerLiteral
 	{
 		if let index = propertyData["index"].int, index > 0
 		{
-			return VerseIndex(index, midVerse: propertyData["midVerse"].bool(or: false))
+			return VerseIndex(index, midVerse: propertyData["mid_verse"].bool(or: false))
 		}
 		else
 		{

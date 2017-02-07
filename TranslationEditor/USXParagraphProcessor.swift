@@ -95,6 +95,12 @@ class USXParagraphProcessor: USXContentProcessor
 	
 	func generate(from content: [Para], using errorHandler: @escaping ErrorHandler) -> Paragraph?
 	{
+		/*
+		for para in content
+		{
+			print("USX: \((para.range?.description).or("no range")) --- \(para.verses.map { $0.range }))")
+		}*/
+		
 		// Clears the status for reuse
 		contentParsed = false
 		paragraphStyleFound = false

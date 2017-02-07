@@ -24,7 +24,7 @@ struct VerseRange: JSONConvertible, Equatable, CustomStringConvertible
 	
 	var properties: [String : PropertyValue]
 	{
-		return ["start" : start.toPropertySet.value, "end" : end.toPropertySet.value]
+		return ["start" : start.value, "end" : end.value]
 	}
 	
 	var description: String {return name}

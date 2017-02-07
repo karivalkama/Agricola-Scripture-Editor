@@ -61,6 +61,17 @@ class TranslationEditorTests: XCTestCase
 		assert(range6.verses.count == 1)
 	}
 	
+	func testVerseRangeJSONParsing()
+	{
+		let ranges = [VerseRange(1, 2), VerseRange(2, 4), VerseRange(VerseIndex(4), VerseIndex(5, midVerse: true)), VerseRange(VerseIndex(5, midVerse: true), VerseIndex(8)), VerseRange(VerseIndex(8), VerseIndex(8, midVerse: true)), VerseRange(VerseIndex(8, midVerse: true), VerseIndex(9))]
+		
+		for range in ranges
+		{
+			let parsed = try! VerseRange.parse(from: range.toPropertySet)
+			assert(parsed == range, "Failed to parse: \(range) -> \(range.toPropertySet) -> \(parsed)")
+		}
+	}
+	
 	func testParaParsing()
 	{
 		let chData1 = CharData(text: "Chardata 1")
@@ -304,15 +315,28 @@ class TranslationEditorTests: XCTestCase
 			{
 				if let range = paragraph.range
 				{
-					print("-> \(range)")
-				}
-				else if let para = paragraph.content.first
-				{
-					print("-> \(para.style)")
+					print("Paragraph: \(range)")
 				}
 				else
 				{
-					print("-> No content")
+					print("Paragraph: no range")
+				}
+				
+				for para in paragraph.content
+				{
+					if let range = para.range
+					{
+						print("\tPara: \(range)")
+					}
+					else
+					{
+						print("\tPara: no range")
+					}
+					
+					for verse in para.verses
+					{
+						print("\t\tVerse: \(verse.range)")
+					}
 				}
 			}
 		}
