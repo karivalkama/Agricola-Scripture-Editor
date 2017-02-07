@@ -9,13 +9,21 @@
 import Foundation
 
 fileprivate var _database: CBLDatabase?
+fileprivate var _dbName = "default_database"
+
+// This method is used for setting up / customizing / changing the used database
+func useDatabase(named dbName: String)
+{
+	_database = nil
+	_dbName = dbName
+}
 
 // The database used in the project
 var DATABASE: CBLDatabase
 {
 	if _database == nil
 	{
-		_database = try! CBLManager.sharedInstance().databaseNamed("agricola")
+		_database = try! CBLManager.sharedInstance().databaseNamed(_dbName)
 	}
 	
 	return _database!

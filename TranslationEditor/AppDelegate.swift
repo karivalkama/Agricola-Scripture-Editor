@@ -15,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
 	{
+		// Chooses the database to use
+		useDatabase(named: "agricola")
+		
 		// Override point for customization after application launch.
 		// TODO: Setup database and start replication process
 		
