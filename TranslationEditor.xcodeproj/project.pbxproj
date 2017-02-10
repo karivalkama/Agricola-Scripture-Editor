@@ -24,6 +24,8 @@
 		7C0130C91E3F64900053C5C2 /* IdIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130C71E3F64900053C5C2 /* IdIndex.swift */; };
 		7C0130CB1E41F4D30053C5C2 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130CA1E41F4D30053C5C2 /* ProjectView.swift */; };
 		7C0130CC1E41F4D30053C5C2 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130CA1E41F4D30053C5C2 /* ProjectView.swift */; };
+		7C0130CE1E4AF8CC0053C5C2 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130CD1E4AF8CC0053C5C2 /* ConnectionManager.swift */; };
+		7C0130CF1E4AF8CC0053C5C2 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130CD1E4AF8CC0053C5C2 /* ConnectionManager.swift */; };
 		7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */; };
 		7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */; };
 		7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */; };
@@ -349,6 +351,7 @@
 		7C0130C41E3F3DFB0053C5C2 /* PropertyValueWrapable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyValueWrapable.swift; sourceTree = "<group>"; };
 		7C0130C71E3F64900053C5C2 /* IdIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdIndex.swift; sourceTree = "<group>"; };
 		7C0130CA1E41F4D30053C5C2 /* ProjectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		7C0130CD1E4AF8CC0053C5C2 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		7C18A18B1D8BBEBD00DD1B03 /* TranslationEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslationEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationVC.swift; sourceTree = "<group>"; };
@@ -694,6 +697,7 @@
 			children = (
 				7C4A4F9E1DF594FB009F890E /* Views */,
 				7C4A4FF81E012375009F890E /* ConflictResolver.swift */,
+				7C0130CD1E4AF8CC0053C5C2 /* ConnectionManager.swift */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -1183,6 +1187,7 @@
 				7CDBD6C41E28B35100912320 /* SourceTranslationCell.swift in Sources */,
 				7C0130C81E3F64900053C5C2 /* IdIndex.swift in Sources */,
 				7CDBD6B81E26200200912320 /* ParagraphBinding.swift in Sources */,
+				7C0130CE1E4AF8CC0053C5C2 /* ConnectionManager.swift in Sources */,
 				7C4A4FA21DF829C5009F890E /* CellInputListener.swift in Sources */,
 				7CA1BAAC1E30F7C800611FED /* NotesCell.swift in Sources */,
 				7CDBD6FE1E2F7C1700912320 /* ParagraphNotesView.swift in Sources */,
@@ -1227,6 +1232,7 @@
 				7C0130C61E3F3DFB0053C5C2 /* PropertyValueWrapable.swift in Sources */,
 				7CCC010C1DA4DEC200F0562E /* ParagraphPrev.swift in Sources */,
 				7C4A4FB71DF96730009F890E /* ParagraphEditView.swift in Sources */,
+				7C0130CF1E4AF8CC0053C5C2 /* ConnectionManager.swift in Sources */,
 				7CAF6D831DB4F47700E10597 /* USXChapterProcessor.swift in Sources */,
 				7CA1BAA51E2FA5A500611FED /* NotesPostView.swift in Sources */,
 				7CDBD6AD1E238ACB00912320 /* ResourceCollection.swift in Sources */,
