@@ -26,6 +26,10 @@
 		7C0130CC1E41F4D30053C5C2 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130CA1E41F4D30053C5C2 /* ProjectView.swift */; };
 		7C0130CE1E4AF8CC0053C5C2 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130CD1E4AF8CC0053C5C2 /* ConnectionManager.swift */; };
 		7C0130CF1E4AF8CC0053C5C2 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130CD1E4AF8CC0053C5C2 /* ConnectionManager.swift */; };
+		7C0130D11E4DB92C0053C5C2 /* ConnectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D01E4DB92C0053C5C2 /* ConnectionListener.swift */; };
+		7C0130D21E4DB92C0053C5C2 /* ConnectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D01E4DB92C0053C5C2 /* ConnectionListener.swift */; };
+		7C0130D41E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D31E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift */; };
+		7C0130D51E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D31E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift */; };
 		7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */; };
 		7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */; };
 		7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */; };
@@ -352,6 +356,8 @@
 		7C0130C71E3F64900053C5C2 /* IdIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdIndex.swift; sourceTree = "<group>"; };
 		7C0130CA1E41F4D30053C5C2 /* ProjectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		7C0130CD1E4AF8CC0053C5C2 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
+		7C0130D01E4DB92C0053C5C2 /* ConnectionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionListener.swift; sourceTree = "<group>"; };
+		7C0130D31E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionStatusLogger.swift; sourceTree = "<group>"; };
 		7C18A18B1D8BBEBD00DD1B03 /* TranslationEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslationEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationVC.swift; sourceTree = "<group>"; };
@@ -698,6 +704,8 @@
 				7C4A4F9E1DF594FB009F890E /* Views */,
 				7C4A4FF81E012375009F890E /* ConflictResolver.swift */,
 				7C0130CD1E4AF8CC0053C5C2 /* ConnectionManager.swift */,
+				7C0130D01E4DB92C0053C5C2 /* ConnectionListener.swift */,
+				7C0130D31E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -1139,6 +1147,7 @@
 				7C20D7FC1D9A87F500E84BA5 /* Verse.swift in Sources */,
 				7C4A50001E016A3B009F890E /* ParagraphHistoryView.swift in Sources */,
 				7C4A4FF01DFEDA59009F890E /* OptionalExtension.swift in Sources */,
+				7C0130D41E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift in Sources */,
 				7C4A4FF91E012375009F890E /* ConflictResolver.swift in Sources */,
 				7CAF6D861DB4F9AA00E10597 /* USXBookProcessor.swift in Sources */,
 				7CCC01441DAB7B0000F0562E /* USXParagraphProcessor.swift in Sources */,
@@ -1202,6 +1211,7 @@
 				7CCC00F21D9D1B4E00F0562E /* AttributedStringConvertible.swift in Sources */,
 				7C4A4FA61DF835E1009F890E /* LiveQueryManager.swift in Sources */,
 				7CA1BAC81E35E72E00611FED /* TranslationParagraphListener.swift in Sources */,
+				7C0130D11E4DB92C0053C5C2 /* ConnectionListener.swift in Sources */,
 				7C82CE8E1DE6E29500C054EB /* PropertyValue.swift in Sources */,
 				7CCC01201DA646F900F0562E /* USXContentParser.swift in Sources */,
 				7CA1BAA41E2FA5A500611FED /* NotesPostView.swift in Sources */,
@@ -1235,6 +1245,7 @@
 				7C0130CF1E4AF8CC0053C5C2 /* ConnectionManager.swift in Sources */,
 				7CAF6D831DB4F47700E10597 /* USXChapterProcessor.swift in Sources */,
 				7CA1BAA51E2FA5A500611FED /* NotesPostView.swift in Sources */,
+				7C0130D51E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift in Sources */,
 				7CDBD6AD1E238ACB00912320 /* ResourceCollection.swift in Sources */,
 				7C20D7E91D8BF9B100E84BA5 /* Para.swift in Sources */,
 				7C4A4FBD1DFA897F009F890E /* AppDelegate.swift in Sources */,
@@ -1262,6 +1273,7 @@
 				7C4A4FCD1DFACC58009F890E /* Copyable.swift in Sources */,
 				7C20D7ED1D8C1B7200E84BA5 /* CellContentListener.swift in Sources */,
 				7CAF6D871DB4F9AA00E10597 /* USXBookProcessor.swift in Sources */,
+				7C0130D21E4DB92C0053C5C2 /* ConnectionListener.swift in Sources */,
 				7C0130B91E3B6A1D0053C5C2 /* Avatar.swift in Sources */,
 				7C4A4FC51DFAB0AA009F890E /* ColorExtension.swift in Sources */,
 				7CCC01451DAB7B0000F0562E /* USXParagraphProcessor.swift in Sources */,

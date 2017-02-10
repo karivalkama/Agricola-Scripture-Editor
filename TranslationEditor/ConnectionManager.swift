@@ -16,18 +16,35 @@ class ConnectionManager
 	static let instance = ConnectionManager()
 	
 	private(set) var status = ConnectionStatus.disconnected
+	private(set) var targetTransferCount = 0
+	private(set) var completedTransferCount = 0
 	
 	private var replications = [CBLReplication]()
 	private var observers = [NSObjectProtocol]()
+	private var listeners = [ConnectionListener]()
+	
+	
+	// COMPUTED PROPERTIES	----
+	
+	// The relative progress of the sync process
+	// Between 0 and 1
+	var progress: Double
+	{
+		if targetTransferCount == 0
+		{
+			return status == .upToDate ? 1 : 0
+		}
+		else
+		{
+			return Double(completedTransferCount) / Double(targetTransferCount)
+		}
+	}
 	
 	
 	// INIT	--------------------
 	
 	// Initialisation hidden behind static interface
-	private init()
-	{
-		// Set up connection systems (?)
-	}
+	private init() { }
 	
 	
 	// OTHER METHODS	--------
@@ -78,23 +95,33 @@ class ConnectionManager
 		status = .disconnected
 	}
 	
+	// Adds a new listener to this connection manager. 
+	// The listener will be informed whenever the manager's status changes
+	func registerListener(_ listener: ConnectionListener)
+	{
+		if !listeners.contains(where: { $0 === listener })
+		{
+			listeners.append(listener)
+		}
+	}
+	
+	// Removes a listener from this connection manager so that it is no longer informed when connection status changes
+	func removeListener(_ listener: ConnectionListener)
+	{
+		listeners = listeners.filter { !($0 === listener) }
+	}
+	
 	private func updateStatus(n: Notification)
 	{
+		let oldStatus = status
+		
 		// If either replication is active, this process is considered to be active too
 		if replications.contains(where: { $0.status == .active })
 		{
-			let total = replications.reduce(0, { $0 + $1.changesCount })
+			targetTransferCount = Int(replications.reduce(0, { $0 + $1.changesCount }))
+			completedTransferCount = Int(replications.reduce(0, { $0 + $1.completedChangesCount }))
 			
-			if total > 0
-			{
-				let completed = replications.reduce(0, { $0 + $1.completedChangesCount })
-				status = .active(completion: Double(completed) / Double(total))
-			}
-			else
-			{
-				status = .active(completion: 0)
-			}
-			
+			status = .active
 		}
 		// Same goes with offline
 		else if replications.contains(where: { $0.status == .offline })
@@ -110,14 +137,26 @@ class ConnectionManager
 			}
 			else
 			{
+				completedTransferCount = targetTransferCount
 				status = .upToDate
 			}
+		}
+		
+		// Informs the listeners of the status change
+		if oldStatus != status
+		{
+			listeners.forEach { $0.onConnectionStatusChange(newStatus: status) }
 		}
 	}
 }
 
+// These are the different statuses a connection may have
 enum ConnectionStatus
 {
+	// Connection is disconnected when there is no attempt to connect, connecting before any connection results have been made, 
+	// offline when connection establishing fails, unauthorized when the provided credentials are not accepted 
+	// and upToDate when all data has been synced
 	case disconnected, connecting, upToDate, offline, unauthorized
-	case active(completion: Double)
+	// The connection is active while it is transferring data
+	case active
 }
