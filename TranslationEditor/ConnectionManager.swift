@@ -51,16 +51,20 @@ class ConnectionManager
 	
 	// Connects to a new server address
 	// Authorization is optional
+	// ServerURL may be 'http://localhost:4984', for example
 	func connect(serverURL: String, userName: String? = nil, password: String? = nil)
 	{
 		// First disconnects the previous connection
 		disconnect()
 		
-		guard let url = URL(string: DATABASE.name, relativeTo: URL(string: serverURL)) else
+		let completeURL = serverURL.endsWith("/") ? serverURL + DATABASE.name : serverURL + "/" + DATABASE.name
+		guard let url = URL(string: completeURL) else
 		{
-			print("ERROR: Failed to create url based on '\(serverURL)'")
+			print("ERROR: Failed to create url based on '\(completeURL)'")
 			return
 		}
+		
+		print("STATUS: Connecting to \(url.absoluteString)")
 		
 		// Creates new connections, uses authorization if available
 		replications = [DATABASE.createPullReplication(url), DATABASE.createPushReplication(url)]
@@ -75,9 +79,12 @@ class ConnectionManager
 		
 		// Starts the synchronization
 		status = .connecting
-		replications.forEach { $0.start() }
+		
+		// Informs the listeners too
+		listeners.forEach { $0.onConnectionStatusChange(newStatus: status) }
 		
 		observers = replications.map { NotificationCenter.default.addObserver(forName: NSNotification.Name.cblReplicationChange, object: $0, queue: nil, using: updateStatus) }
+		replications.forEach { $0.start() }
 	}
 	
 	// Disconnects the current connection
@@ -93,6 +100,8 @@ class ConnectionManager
 		observers = []
 		replications = []
 		status = .disconnected
+		
+		listeners.forEach { $0.onConnectionStatusChange(newStatus: status) }
 	}
 	
 	// Adds a new listener to this connection manager. 
@@ -114,6 +123,8 @@ class ConnectionManager
 	private func updateStatus(n: Notification)
 	{
 		let oldStatus = status
+		let oldTargetCount = targetTransferCount
+		let oldCompletedCount = completedTransferCount
 		
 		// If either replication is active, this process is considered to be active too
 		if replications.contains(where: { $0.status == .active })
@@ -146,6 +157,10 @@ class ConnectionManager
 		if oldStatus != status
 		{
 			listeners.forEach { $0.onConnectionStatusChange(newStatus: status) }
+		}
+		if oldTargetCount != targetTransferCount || oldCompletedCount != completedTransferCount
+		{
+			listeners.forEach { $0.onConnectionProgressUpdate(transferred: completedTransferCount, of: targetTransferCount, progress: progress) }
 		}
 	}
 }

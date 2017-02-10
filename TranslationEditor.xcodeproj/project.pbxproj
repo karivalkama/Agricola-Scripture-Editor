@@ -30,6 +30,8 @@
 		7C0130D21E4DB92C0053C5C2 /* ConnectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D01E4DB92C0053C5C2 /* ConnectionListener.swift */; };
 		7C0130D41E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D31E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift */; };
 		7C0130D51E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D31E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift */; };
+		7C0130D71E4DF97D0053C5C2 /* ScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */; };
+		7C0130D81E4DF97D0053C5C2 /* ScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */; };
 		7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */; };
 		7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */; };
 		7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */; };
@@ -303,7 +305,6 @@
 		7CDBD6CF1E28C1E700912320 /* TranslationCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6CC1E28C1E700912320 /* TranslationCellManager.swift */; };
 		7CDBD6D11E28E53500912320 /* ScrollSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6D01E28E53500912320 /* ScrollSyncManager.swift */; };
 		7CDBD6D21E28E53500912320 /* ScrollSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6D01E28E53500912320 /* ScrollSyncManager.swift */; };
-		7CDBD6D31E28E53500912320 /* ScrollSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6D01E28E53500912320 /* ScrollSyncManager.swift */; };
 		7CDBD6EA1E28FCD400912320 /* ParagraphAssociated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6E91E28FCD400912320 /* ParagraphAssociated.swift */; };
 		7CDBD6EB1E28FCD400912320 /* ParagraphAssociated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6E91E28FCD400912320 /* ParagraphAssociated.swift */; };
 		7CDBD6EC1E28FCD400912320 /* ParagraphAssociated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6E91E28FCD400912320 /* ParagraphAssociated.swift */; };
@@ -358,6 +359,7 @@
 		7C0130CD1E4AF8CC0053C5C2 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		7C0130D01E4DB92C0053C5C2 /* ConnectionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionListener.swift; sourceTree = "<group>"; };
 		7C0130D31E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionStatusLogger.swift; sourceTree = "<group>"; };
+		7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewExtension.swift; sourceTree = "<group>"; };
 		7C18A18B1D8BBEBD00DD1B03 /* TranslationEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslationEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationVC.swift; sourceTree = "<group>"; };
@@ -720,6 +722,7 @@
 				7C4A4FC31DFAB0AA009F890E /* ColorExtension.swift */,
 				7CD9ACF21E0914470032A7F8 /* DatabaseExtension.swift */,
 				7CA1BAB71E31F33000611FED /* DateExtension.swift */,
+				7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				TargetAttributes = {
 					7C18A18A1D8BBEBD00DD1B03 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 4QFE6EUS3B;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -1192,6 +1196,7 @@
 				7C4A4FC41DFAB0AA009F890E /* ColorExtension.swift in Sources */,
 				7C4CC1771DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7CCC00EE1D9D193F00F0562E /* CollectionExtension.swift in Sources */,
+				7C0130D71E4DF97D0053C5C2 /* ScrollViewExtension.swift in Sources */,
 				7C0130B51E3B5A100053C5C2 /* Project.swift in Sources */,
 				7CDBD6C41E28B35100912320 /* SourceTranslationCell.swift in Sources */,
 				7C0130C81E3F64900053C5C2 /* IdIndex.swift in Sources */,
@@ -1258,6 +1263,7 @@
 				7CCC00C71D9A98BE00F0562E /* StringExtension.swift in Sources */,
 				7CCC00EF1D9D194700F0562E /* CollectionExtension.swift in Sources */,
 				7CDBD6C51E28B35100912320 /* SourceTranslationCell.swift in Sources */,
+				7C0130D81E4DF97D0053C5C2 /* ScrollViewExtension.swift in Sources */,
 				7C4A4FD91DFAE0AA009F890E /* BasicButton.swift in Sources */,
 				7C40DF811DEDB4C10035B92E /* BookView.swift in Sources */,
 				7C40DF6D1DEC59AB0035B92E /* Book.swift in Sources */,
@@ -1413,7 +1419,6 @@
 				7CCC01361DA7964000F0562E /* XmlParserUtil.swift in Sources */,
 				7CCC014A1DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
 				7C18A1AF1D8BBEBD00DD1B03 /* TranslationEditorUITests.swift in Sources */,
-				7CDBD6D31E28E53500912320 /* ScrollSyncManager.swift in Sources */,
 				7C20D7E51D8BF8D000E84BA5 /* TargetTranslationCell.swift in Sources */,
 				7C4A4FA81DF835E1009F890E /* LiveQueryManager.swift in Sources */,
 				7C82CE901DE6E29500C054EB /* PropertyValue.swift in Sources */,
@@ -1575,6 +1580,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 4QFE6EUS3B;
 				INFOPLIST_FILE = TranslationEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditor;
@@ -1592,6 +1598,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 4QFE6EUS3B;
 				INFOPLIST_FILE = TranslationEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditor;

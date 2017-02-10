@@ -15,4 +15,9 @@ class ConnectionStatusLogger: ConnectionListener
 	{
 		print("STATUS: Connection status: \(status)")
 	}
+	
+	func onConnectionProgressUpdate(transferred: Int, of total: Int, progress: Double)
+	{
+		print("STATUS: Transferring \(transferred) / \(total) (\(Int(progress * 100)) %)")
+	}
 }

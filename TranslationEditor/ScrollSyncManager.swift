@@ -102,46 +102,59 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	{
 		let scrolledSide = sideOfTable(scrollView)
 		
-		// Records the scroll speed
-		let currentTime = Date().timeIntervalSince1970
-		let duration = currentTime - lastOffsetTime[scrolledSide]!
-		
-		// Doesn't record very short intervals
-		if duration >= 0.1
+		// When the table is scrolled to top or bottom, the other table will be too
+		if scrollView.isAtTop
 		{
-			let offsetY = scrollView.contentOffset.y
-			
-			// If the interval is very long, there hasn't been a scroll for a while and the program needs to recollect the material
-			if duration <= 1
-			{
-				// x = x0 + v*t
-				// -> v = (x - x0) / t
-				let velocity = (offsetY - lastOffsetY[scrolledSide]!) / CGFloat(duration)
-				
-				// Calculates the deceleration as well
-				// a = (v - v0) / t
-				let acceleration = (velocity - lastVelocity[scrolledSide]!) / CGFloat(duration)
-				
-				lastAcceleration[scrolledSide] = acceleration
-				lastVelocity[scrolledSide] = velocity
-			}
-			else
-			{
-				lastAcceleration[scrolledSide] = 0
-				lastVelocity[scrolledSide] = 0
-			}
-			
-			lastOffsetY[scrolledSide] = offsetY
-			lastOffsetTime[scrolledSide] = currentTime
+			tableOfSide(scrolledSide.opposite).scrollToTop()
 		}
-		
-		// Doesn't react to scrolls caused by sync scrolling
-		guard scrolledSide != syncScrolling else
+		else if scrollView.isAtBottom
 		{
-			return
+			tableOfSide(scrolledSide.opposite).scrollToBottom()
 		}
-		
-		syncScroll(toSide: scrolledSide, velocity: lastVelocity[scrolledSide]!, acceleration: lastAcceleration[scrolledSide]!, skipIfAnchorStill: true)
+		// Otherwise the tables are matched by their center cells
+		else
+		{
+			// Records the scroll speed
+			let currentTime = Date().timeIntervalSince1970
+			let duration = currentTime - lastOffsetTime[scrolledSide]!
+			
+			// Doesn't record very short intervals
+			if duration >= 0.1
+			{
+				let offsetY = scrollView.contentOffset.y
+				
+				// If the interval is very long, there hasn't been a scroll for a while and the program needs to recollect the material
+				if duration <= 1
+				{
+					// x = x0 + v*t
+					// -> v = (x - x0) / t
+					let velocity = (offsetY - lastOffsetY[scrolledSide]!) / CGFloat(duration)
+					
+					// Calculates the deceleration as well
+					// a = (v - v0) / t
+					let acceleration = (velocity - lastVelocity[scrolledSide]!) / CGFloat(duration)
+					
+					lastAcceleration[scrolledSide] = acceleration
+					lastVelocity[scrolledSide] = velocity
+				}
+				else
+				{
+					lastAcceleration[scrolledSide] = 0
+					lastVelocity[scrolledSide] = 0
+				}
+				
+				lastOffsetY[scrolledSide] = offsetY
+				lastOffsetTime[scrolledSide] = currentTime
+			}
+			
+			// Doesn't react to scrolls caused by sync scrolling
+			guard scrolledSide != syncScrolling else
+			{
+				return
+			}
+			
+			syncScroll(toSide: scrolledSide, velocity: lastVelocity[scrolledSide]!, acceleration: lastAcceleration[scrolledSide]!, skipIfAnchorStill: true)
+		}
 	}
 	
 	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)

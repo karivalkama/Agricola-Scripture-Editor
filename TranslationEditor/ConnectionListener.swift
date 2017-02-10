@@ -13,4 +13,7 @@ protocol ConnectionListener: class
 {
 	// This function will be called when the connection status changes
 	func onConnectionStatusChange(newStatus status: ConnectionStatus)
+	
+	// This function will be called when the transfer progres updates
+	func onConnectionProgressUpdate(transferred: Int, of total: Int, progress: Double)
 }

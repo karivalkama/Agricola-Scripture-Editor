@@ -13,8 +13,10 @@ fileprivate let keyRegex = try! NSRegularExpression(pattern: "[a-z0-9_@\\-\\+\\.
 // A global set of utility functions
 extension String
 {
+	var length: Int { return (self as NSString).length }
+	
 	// The range of this string instance
-	var nsRange: NSRange { return NSMakeRange(0, (self as NSString).length) }
+	var nsRange: NSRange { return NSMakeRange(0, length) }
 	
 	// A key-compatible version of this string
 	var toKey: String { return lowercased().replacingOccurrences(of: " ", with: "_").limited(toExpression: keyRegex) }
@@ -128,6 +130,27 @@ extension String
 	func limited(toCharacterSet characterSet: Set<Character>) -> String
 	{
 		return String(characters.filter { characterSet.contains($0) })
+	}
+	
+	// The last n characters of this string
+	func tail(withLength length: Int) -> String
+	{
+		let nsstr = self as NSString
+		
+		if nsstr.length <= length
+		{
+			return self
+		}
+		else
+		{
+			return nsstr.substring(from: nsstr.length - length)
+		}
+	}
+	
+	// Checks whether this string ends with the provided substring
+	func endsWith(_ substring: String) -> Bool
+	{
+		return tail(withLength: substring.length) == substring
 	}
 }
 

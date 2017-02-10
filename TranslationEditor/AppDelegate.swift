@@ -18,8 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		// Chooses the database to use
 		useDatabase(named: "agricola")
 		
-		// Override point for customization after application launch.
-		// TODO: Setup database and start replication process
+		// Starts synchronization process (test)
+		ConnectionManager.instance.registerListener(ConnectionStatusLogger())
+		ConnectionManager.instance.connect(serverURL: "http://192.168.1.107:4984")
 		
 		// Updates navigation bar visuals
 		let navigationBarAppearance = UINavigationBar.appearance()
