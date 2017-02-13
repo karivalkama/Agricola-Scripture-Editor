@@ -187,16 +187,12 @@
 		7CA1BAB81E31F33000611FED /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAB71E31F33000611FED /* DateExtension.swift */; };
 		7CA1BAB91E31F33000611FED /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAB71E31F33000611FED /* DateExtension.swift */; };
 		7CA1BABA1E31F33000611FED /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAB71E31F33000611FED /* DateExtension.swift */; };
-		7CA1BABC1E32037B00611FED /* NotesShowHideListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BABB1E32037B00611FED /* NotesShowHideListener.swift */; };
-		7CA1BABD1E32037B00611FED /* NotesShowHideListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BABB1E32037B00611FED /* NotesShowHideListener.swift */; };
-		7CA1BABE1E32037B00611FED /* NotesShowHideListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BABB1E32037B00611FED /* NotesShowHideListener.swift */; };
 		7CA1BAC01E323A7700611FED /* ResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BABF1E323A7700611FED /* ResourceManager.swift */; };
 		7CA1BAC41E323E6C00611FED /* LiveResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAC31E323E6C00611FED /* LiveResource.swift */; };
 		7CA1BAC51E323E6C00611FED /* LiveResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAC31E323E6C00611FED /* LiveResource.swift */; };
 		7CA1BAC61E323E6C00611FED /* LiveResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAC31E323E6C00611FED /* LiveResource.swift */; };
 		7CA1BAC81E35E72E00611FED /* TranslationParagraphListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAC71E35E72E00611FED /* TranslationParagraphListener.swift */; };
 		7CA1BAC91E35E72E00611FED /* TranslationParagraphListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAC71E35E72E00611FED /* TranslationParagraphListener.swift */; };
-		7CA1BACA1E35E72E00611FED /* TranslationParagraphListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAC71E35E72E00611FED /* TranslationParagraphListener.swift */; };
 		7CAF6D821DB4F47700E10597 /* USXChapterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */; };
 		7CAF6D831DB4F47700E10597 /* USXChapterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */; };
 		7CAF6D841DB4F47700E10597 /* USXChapterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */; };
@@ -434,7 +430,6 @@
 		7CA1BAAF1E31E8DD00611FED /* ThreadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadCell.swift; sourceTree = "<group>"; };
 		7CA1BAB31E31F09200611FED /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		7CA1BAB71E31F33000611FED /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
-		7CA1BABB1E32037B00611FED /* NotesShowHideListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesShowHideListener.swift; sourceTree = "<group>"; };
 		7CA1BABF1E323A7700611FED /* ResourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceManager.swift; sourceTree = "<group>"; };
 		7CA1BAC31E323E6C00611FED /* LiveResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveResource.swift; sourceTree = "<group>"; };
 		7CA1BAC71E35E72E00611FED /* TranslationParagraphListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationParagraphListener.swift; sourceTree = "<group>"; };
@@ -838,7 +833,6 @@
 				7CDBD6CC1E28C1E700912320 /* TranslationCellManager.swift */,
 				7CDBD6D01E28E53500912320 /* ScrollSyncManager.swift */,
 				7CA1BAA71E30C15B00611FED /* NotesTableDS.swift */,
-				7CA1BABB1E32037B00611FED /* NotesShowHideListener.swift */,
 				7CA1BABF1E323A7700611FED /* ResourceManager.swift */,
 				7CA1BAC31E323E6C00611FED /* LiveResource.swift */,
 				7CA1BAC71E35E72E00611FED /* TranslationParagraphListener.swift */,
@@ -1226,7 +1220,6 @@
 				7C0130CB1E41F4D30053C5C2 /* ProjectView.swift in Sources */,
 				7CCC013C1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
 				7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
-				7CA1BABC1E32037B00611FED /* NotesShowHideListener.swift in Sources */,
 				7C4A4F831DEEBAF2009F890E /* Row.swift in Sources */,
 				7CDBD6C81E28B69B00912320 /* TranslationTableViewDS.swift in Sources */,
 				7CA1BAC01E323A7700611FED /* ResourceManager.swift in Sources */,
@@ -1297,7 +1290,6 @@
 				7C4CC1741DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
 				7C942A2F1E38DD8E000C614A /* AgricolaAccount.swift in Sources */,
 				7C4A50051E016E31009F890E /* Reduce.swift in Sources */,
-				7CA1BABD1E32037B00611FED /* NotesShowHideListener.swift in Sources */,
 				7CD8EA631DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,
 				7CDBD6EF1E2E30DD00912320 /* ParagraphNotes.swift in Sources */,
 				7CA1BAB51E31F09200611FED /* PostCell.swift in Sources */,
@@ -1397,7 +1389,6 @@
 				7CCC00F41D9D223300F0562E /* AttributedStringConvertible.swift in Sources */,
 				7C4CC1751DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
 				7C4A50061E016E31009F890E /* Reduce.swift in Sources */,
-				7CA1BABE1E32037B00611FED /* NotesShowHideListener.swift in Sources */,
 				7CD8EA641DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,
 				7CDBD6AA1E238A0200912320 /* ResourceCategory.swift in Sources */,
 				7CCC01001D9D3A0800F0562E /* VerseError.swift in Sources */,
@@ -1410,7 +1401,6 @@
 				7CDBD6EC1E28FCD400912320 /* ParagraphAssociated.swift in Sources */,
 				7C4CC1791DB0EE1800BCF24B /* USXContainerElement.swift in Sources */,
 				7CA1BABA1E31F33000611FED /* DateExtension.swift in Sources */,
-				7CA1BACA1E35E72E00611FED /* TranslationParagraphListener.swift in Sources */,
 				7C4A4FF61E00105B009F890E /* Key.swift in Sources */,
 				7CCC00FA1D9D369100F0562E /* VerseRange.swift in Sources */,
 				7C4A4FFB1E012375009F890E /* ConflictResolver.swift in Sources */,

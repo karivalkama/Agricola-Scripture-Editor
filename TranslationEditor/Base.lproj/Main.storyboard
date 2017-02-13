@@ -189,7 +189,7 @@
                                                                     <rect key="frame" x="8" y="4" width="472" height="31.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1: 3 - 8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64G-83-vHx">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="424" height="31.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="472" height="31.5"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="32" id="jZ9-M9-Kqv"/>
                                                                             </constraints>
@@ -197,17 +197,6 @@
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBr-fY-SGn">
-                                                                            <rect key="frame" x="432" y="0.0" width="40" height="31.5"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="40" id="QCw-d8-7Xt"/>
-                                                                            </constraints>
-                                                                            <color key="tintColor" red="0.92156862745098034" green="0.33725490196078434" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <state key="normal" title="Post"/>
-                                                                            <connections>
-                                                                                <action selector="postButtonPressed:" destination="8ee-jT-DwW" eventType="touchUpInside" id="ahP-Zg-9R5"/>
-                                                                            </connections>
-                                                                        </button>
                                                                     </subviews>
                                                                 </stackView>
                                                             </subviews>
@@ -240,7 +229,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translation for Keruso?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEv-dU-6C3">
-                                                                            <rect key="frame" x="40" y="0.0" width="248" height="32"/>
+                                                                            <rect key="frame" x="40" y="0.0" width="352" height="32"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="32" id="ouQ-U5-Bo9"/>
                                                                             </constraints>
@@ -249,7 +238,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6CS-Kk-egI">
-                                                                            <rect key="frame" x="296" y="0.0" width="64" height="32"/>
+                                                                            <rect key="frame" x="400" y="0.0" width="64" height="32"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="64" id="bQF-iM-uQQ"/>
                                                                             </constraints>
@@ -257,30 +246,6 @@
                                                                             <state key="normal" title="Resolve"/>
                                                                             <connections>
                                                                                 <action selector="resolveButtonPressed:" destination="ut6-oO-hAA" eventType="touchUpInside" id="NKg-Ci-sXl"/>
-                                                                            </connections>
-                                                                        </button>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzF-Wu-GvK">
-                                                                            <rect key="frame" x="368" y="0.0" width="48" height="32"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="48" id="Meo-Yg-Vu7"/>
-                                                                            </constraints>
-                                                                            <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <state key="normal" title="Hide"/>
-                                                                            <connections>
-                                                                                <action selector="hideShowButtonPressed:" destination="ut6-oO-hAA" eventType="touchUpInside" id="OgG-3f-7pR"/>
-                                                                            </connections>
-                                                                        </button>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jsF-JY-Ibp">
-                                                                            <rect key="frame" x="424" y="0.0" width="40" height="32"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="40" id="yTG-uo-jeQ"/>
-                                                                            </constraints>
-                                                                            <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <state key="normal" title="Post">
-                                                                                <color key="titleColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            </state>
-                                                                            <connections>
-                                                                                <action selector="postButtonPressed:" destination="ut6-oO-hAA" eventType="touchUpInside" id="qZx-ek-Laf"/>
                                                                             </connections>
                                                                         </button>
                                                                     </subviews>
@@ -295,7 +260,6 @@
                                                         </tableViewCellContentView>
                                                         <connections>
                                                             <outlet property="flagImageView" destination="bcF-P5-kbW" id="zeh-tz-4zj"/>
-                                                            <outlet property="hideShowButton" destination="rzF-Wu-GvK" id="rwx-dF-HT0"/>
                                                             <outlet property="nameLabel" destination="EEv-dU-6C3" id="iB5-20-5Rr"/>
                                                             <outlet property="resolveButton" destination="6CS-Kk-egI" id="LRf-PW-BWh"/>
                                                         </connections>

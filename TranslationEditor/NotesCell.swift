@@ -19,10 +19,7 @@ class NotesCell: UITableViewCell, ParagraphAssociated
 	
 	static let identifier = "NoteCell"
 	
-	private weak var addThreadDelegate: AddNotesDelegate!
-	
 	private(set) var note: ParagraphNotes!
-	private var showStatus = false
 	
 	
 	// COMP. PROPERTIES	--------
@@ -30,22 +27,11 @@ class NotesCell: UITableViewCell, ParagraphAssociated
 	var pathId: String? { return note?.pathId }
 	
 	
-	// ACTIONS	----------------
-	
-	@IBAction func postButtonPressed(_ sender: Any)
-	{
-		addThreadDelegate?.insertThread(noteId: note.idString, pathId: pathId!)
-	}
-	
-	
 	// OTHER METHODS	-------
 	
-	func setContent(note: ParagraphNotes, name: String, displayHideShowButton: Bool, useShowOption: Bool, addDelegate: AddNotesDelegate)
+	func setContent(note: ParagraphNotes, name: String)
 	{
 		self.note = note
-		self.showStatus = !useShowOption
-		self.addThreadDelegate = addDelegate
-		
 		nameLabel.text = name
 	}
 }

@@ -16,7 +16,6 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	@IBOutlet weak var flagImageView: UIImageView!
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var resolveButton: UIButton!
-	@IBOutlet weak var hideShowButton: UIButton!
 	
 	
 	// ATTRIBUTES	----------
@@ -26,25 +25,8 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	private(set) var thread: NotesThread!
 	private(set) var pathId: String?
 	
-	private var visibleListener: ThreadShowHideListener!
-	private var showStatus = false
-	
-	private weak var addPostDelegate: AddNotesDelegate!
-	
 	
 	// ACTIONS	--------------
-	
-	@IBAction func postButtonPressed(_ sender: Any)
-	{
-		addPostDelegate.insertPost(threadId: thread.idString)
-	}
-	
-	@IBAction func hideShowButtonPressed(_ sender: Any)
-	{
-		// Informs the visibility listener
-		// TODO: Use selection listening instead
-		visibleListener?.showHideStatusRequested(forThreadId: thread!.idString, status: !showStatus)
-	}
 	
 	@IBAction func resolveButtonPressed(_ sender: Any)
 	{
@@ -65,20 +47,14 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	
 	// OTHER METHODS	-----
 	
-	func setContent(thread: NotesThread, pathId: String, displayHideShowButton: Bool, useShowOption: Bool, listener: ThreadShowHideListener, addDelegate: AddNotesDelegate)
+	func setContent(thread: NotesThread, pathId: String)
 	{
 		self.pathId = pathId
 		self.thread = thread
-		self.visibleListener = listener
-		self.showStatus = !useShowOption
-		self.addPostDelegate = addDelegate
 		
 		nameLabel.text = thread.name
 		
 		resolveButton.isEnabled = !thread.isResolved
 		flagImageView.isHidden = thread.isResolved
-		
-		hideShowButton.setTitle(useShowOption ? "Show" : "Hide", for: .normal)
-		hideShowButton.isHidden = !displayHideShowButton
 	}
 }

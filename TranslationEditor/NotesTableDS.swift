@@ -57,12 +57,11 @@ fileprivate class UpdateListener<QueryTarget: View>: LiveQueryListener
 }
 
 // TODO: Remove showlistener protocol
-class NotesTableDS: NSObject, UITableViewDataSource, ThreadShowHideListener, LiveResource, TranslationParagraphListener
+class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationParagraphListener
 {
 	// ATTRIBUTES	---------
 	
 	private weak var tableView: UITableView!
-	private weak var delegate: AddNotesDelegate!
 	
 	// Path id -> Note
 	private var notes = [String : ParagraphNotes]()
@@ -89,10 +88,9 @@ class NotesTableDS: NSObject, UITableViewDataSource, ThreadShowHideListener, Liv
 	// INIT	-----------------
 	
 	// TODO: Add chapter parameters after translation range is used
-	init(tableView: UITableView, resourceCollectionId: String, delegate: AddNotesDelegate)
+	init(tableView: UITableView, resourceCollectionId: String)
 	{
 		self.tableView = tableView
-		self.delegate = delegate
 		
 		notesQueryManager = ParagraphNotesView.instance.notesQuery(collectionId: resourceCollectionId).liveQueryManager
 		threadQueryManager = NotesThreadView.instance.threadQuery(collectionId: resourceCollectionId).liveQueryManager
@@ -165,8 +163,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, ThreadShowHideListener, Liv
 				cell = NotesCell()
 			}
 			
-			// TODO: This will be refactored
-			cell.setContent(note: note, name: paragraphNames[note.pathId].or(""), displayHideShowButton: threads[note.idString] != nil, useShowOption: false, addDelegate: delegate)
+			cell.setContent(note: note, name: paragraphNames[note.pathId].or(""))
 			
 			return cell
 		}
@@ -186,7 +183,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, ThreadShowHideListener, Liv
 						cell = ThreadCell()
 					}
 					
-					cell.setContent(thread: thread, pathId: note.pathId, displayHideShowButton: posts[thread.idString] != nil, useShowOption: !shouldDisplayPostsForThread(thread), listener: self, addDelegate: delegate)
+					cell.setContent(thread: thread, pathId: note.pathId)
 					
 					return cell
 				}
@@ -219,16 +216,6 @@ class NotesTableDS: NSObject, UITableViewDataSource, ThreadShowHideListener, Liv
 		}
 		
 		return UITableViewCell()
-	}
-	
-	// TODO: Remove
-	func showHideStatusRequested(forThreadId id: String, status: Bool)
-	{
-		if threadVisibleState[id] != status
-		{
-			threadVisibleState[id] = status
-			update()
-		}
 	}
 	
 	// This method should be called each time the displayed paragraphs change

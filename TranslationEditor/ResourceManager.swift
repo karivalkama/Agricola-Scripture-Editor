@@ -129,7 +129,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 			return BookData(book: book, binding: binding, datasource: TranslationTableViewDS(tableView: resourceTableView!, cellReuseId: "sourceCell", bookId: book.idString))
 		}
 		
-		self.notes = notes.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString, delegate: addNotesDelegate)) }
+		self.notes = notes.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString)) }
 		
 		selectResource(atIndex: 0)
 	}
