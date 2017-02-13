@@ -145,13 +145,13 @@
                                                     <action selector="resouceSegmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="o4y-Ko-hoR"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2EI-Mh-Uso">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2EI-Mh-Uso">
                                                 <rect key="frame" x="0.0" y="40" width="488" height="664"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="tintColor" red="1" green="0.66666666669999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="separatorColor" red="1" green="0.66666666669999997" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="sourceCell" rowHeight="86" id="fKr-Fz-xVH" customClass="SourceTranslationCell" customModule="TranslationEditor" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="sourceCell" rowHeight="86" id="fKr-Fz-xVH" customClass="SourceTranslationCell" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="488" height="86"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fKr-Fz-xVH" id="4ys-Pw-Kah">
@@ -234,7 +234,7 @@
                                                             <outlet property="nameLabel" destination="64G-83-vHx" id="JIv-YL-9vu"/>
                                                         </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ThreadCell" rowHeight="40" id="ut6-oO-hAA" customClass="ThreadCell" customModule="TranslationEditor" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ThreadCell" rowHeight="40" id="ut6-oO-hAA" customClass="ThreadCell" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="154" width="488" height="40"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ut6-oO-hAA" id="pde-an-CsQ">
@@ -312,14 +312,14 @@
                                                             <outlet property="resolveButton" destination="6CS-Kk-egI" id="LRf-PW-BWh"/>
                                                         </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="113" id="wmu-Nz-Dxx" customClass="PostCell" customModule="TranslationEditor" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="113" id="wmu-Nz-Dxx" customClass="PostCell" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="194" width="488" height="113"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wmu-Nz-Dxx" id="353-Ln-6RY">
                                                             <rect key="frame" x="0.0" y="0.0" width="488" height="112"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" editable="NO" text="I used this and this word, but it seems there might be a better alternative. Any thoughs?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wQC-qP-041">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" editable="NO" text="I used this and this word, but it seems there might be a better alternative. Any thoughs?" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQC-qP-041">
                                                                     <rect key="frame" x="24" y="44" width="456" height="56"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -430,7 +430,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="488" height="158"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3St-S3-RBA" id="EBA-h2-6EZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="488" height="157"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="488" height="158"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.84999999999999998" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fps-Dv-Nlj">
@@ -519,7 +519,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QC9-cB-tj5" userLabel="ContentView">
                                 <rect key="frame" x="44" y="32" width="420" height="696"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="LfH-0e-2SJ">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="LfH-0e-2SJ">
                                         <rect key="frame" x="24" y="24" width="372" height="648"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AJg-52-ZA8" userLabel="Subject Stack View">
@@ -549,7 +549,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hcb-wY-oXZ" userLabel="Verse Stack View">
-                                                <rect key="frame" x="0.0" y="88" width="372" height="128"/>
+                                                <rect key="frame" x="0.0" y="80" width="372" height="128"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verse" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2Z-BH-ajr">
                                                         <rect key="frame" x="0.0" y="48" width="64" height="32"/>
@@ -572,7 +572,7 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="uVH-Gx-WId" userLabel="Comment Stack View">
-                                                <rect key="frame" x="0.0" y="240" width="372" height="160"/>
+                                                <rect key="frame" x="0.0" y="224" width="372" height="192"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AX9-9x-VWK">
                                                         <rect key="frame" x="0.0" y="0.0" width="108.5" height="32"/>
@@ -584,7 +584,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.84999999999999998" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="chp-yY-mzi">
-                                                        <rect key="frame" x="0.0" y="32" width="372" height="128"/>
+                                                        <rect key="frame" x="0.0" y="32" width="372" height="160"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -597,7 +597,7 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Fef-VF-YOX" userLabel="Tag Stack View">
-                                                <rect key="frame" x="0.0" y="424" width="372" height="168"/>
+                                                <rect key="frame" x="0.0" y="432" width="372" height="168"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="iIp-Uj-Ec2" userLabel="Tag Header Stack View">
                                                         <rect key="frame" x="0.0" y="0.0" width="372" height="32"/>

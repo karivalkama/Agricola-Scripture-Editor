@@ -55,6 +55,8 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	// COMPUTED PROPERTIES	-----
 	
+	// The unigue resource identifier for the left hand side table.
+	// This should be modified when the type of the table contents changes.
 	var leftResourceId: String
 	{
 		get { return currentHeightIds[.left]! }
@@ -175,6 +177,11 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
 	{
 		isDragging = false
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+	{
+		print("User selected a table row")
 	}
 	
 	

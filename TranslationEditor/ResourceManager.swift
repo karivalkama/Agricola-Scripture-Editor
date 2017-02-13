@@ -43,6 +43,32 @@ class ResourceManager: TranslationParagraphListener
 		return sourceBooks.map { $0.book.identifier } + notes.map { $0.resource.name }
 	}
 	
+	// Currently selected book data, if one is selected
+	private var currentSourceBookData: BookData?
+	{
+		if let currentResourceIndex = currentResourceIndex, currentResourceIndex < sourceBooks.count
+		{
+			return sourceBooks[currentResourceIndex]
+		}
+		else
+		{
+			return nil
+		}
+	}
+	
+	// Currently selected notes data, if one is selected
+	private var currentNotesData: NotesData?
+	{
+		if let currentResourceIndex = currentResourceIndex, currentResourceIndex >= sourceBooks.count
+		{
+			return notes[currentResourceIndex - sourceBooks.count]
+		}
+		else
+		{
+			return nil
+		}
+	}
+	
 	
 	// INIT	-------------------
 	
@@ -86,38 +112,30 @@ class ResourceManager: TranslationParagraphListener
 	
 	func indexPathsForTargetPathId(_ targetPathId: String) -> [IndexPath]
 	{
-		// No selected resource -> No index paths
-		guard let currentResourceIndex = currentResourceIndex else
+		// Uses bindings to find source index paths from book data
+		if let currentSourceBookData = currentSourceBookData
 		{
-			return []
+			return currentSourceBookData.binding.sourcesForTarget(targetPathId).flatMap { currentSourceBookData.datasource.indexForPath($0) }
 		}
-		
-		if currentResourceIndex < sourceBooks.count
+		// Notes table data sources keep track of path indices
+		else if let currentNotesData = currentNotesData
 		{
-			let sourceBookData = sourceBooks[currentResourceIndex]
-			return sourceBookData.binding.sourcesForTarget(targetPathId).flatMap { sourceBookData.datasource.indexForPath($0) }
+			return currentNotesData.datasource.indexesForPath(targetPathId)
 		}
 		else
 		{
-			let notesData = notes[currentResourceIndex - sourceBooks.count]
-			return notesData.datasource.indexesForPath(targetPathId)
+			return []
 		}
 	}
 	
 	func targetPathsForSourcePath(_ sourcePathId: String) -> [String]
 	{
-		// No selected resource -> No path
-		guard let currentResourceIndex = currentResourceIndex else
+		// In source translation data, bindings are used for path to path connections
+		if let currentSourceBookData = currentSourceBookData
 		{
-			return []
+			return currentSourceBookData.binding.targetsForSource(sourcePathId)
 		}
-		
-		// In translation data, bindings are used
-		if currentResourceIndex < sourceBooks.count
-		{
-			return sourceBooks[currentResourceIndex].binding.targetsForSource(sourcePathId)
-		}
-		// Notes are already using the same path ids
+		// Other data is already using the same path ids
 		else
 		{
 			return [sourcePathId]
