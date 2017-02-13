@@ -178,11 +178,11 @@
                                                             <outlet property="sourceTextView" destination="HeG-UF-hqZ" id="79Z-Fc-2vB"/>
                                                         </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoteCell" rowHeight="40" id="8ee-jT-DwW" customClass="NotesCell" customModule="TranslationEditor" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NoteCell" rowHeight="40" id="8ee-jT-DwW" customClass="NotesCell" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="114" width="488" height="40"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8ee-jT-DwW" id="JnG-ji-Fah">
-                                                            <rect key="frame" x="0.0" y="0.0" width="488" height="40"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="488" height="39"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zFj-Ji-pr4">
@@ -221,7 +221,7 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4sB-RW-ygB">
                                                                     <rect key="frame" x="16" y="4" width="464" height="32"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowright" translatesAutoresizingMaskIntoConstraints="NO" id="Uc7-Nk-ypu">
+                                                                        <imageView userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowright" translatesAutoresizingMaskIntoConstraints="NO" id="Uc7-Nk-ypu">
                                                                             <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="32" id="GbE-wv-1dS"/>

@@ -65,7 +65,8 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		
 		// Creates a new thread (and post) instance, then dismisses the view
 		// TODO: Add support for tags
-		let thread = NotesThread(noteId: noteId, creatorId: userId, name: subjectTextField.text!, targetVerseIndex: verseIndex)
+		// TODO: Use the real target paragraph id here
+		let thread = NotesThread(noteId: noteId, creatorId: userId, name: subjectTextField.text!, targetParagraphId: "", targetVerseIndex: verseIndex)
 		let post = commentTextView.text.isEmpty ? nil : NotesPost(threadId: thread.idString, creatorId: userId, content: commentTextView.text)
 		
 		do

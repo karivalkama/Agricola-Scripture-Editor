@@ -21,6 +21,7 @@ final class NotesThread: Storable
 	let noteId: String
 	let creatorId: String
 	let created: TimeInterval
+	let originalTargetParagraphId: String
 	
 	var isResolved: Bool
 	var name: String
@@ -38,7 +39,7 @@ final class NotesThread: Storable
 	var idProperties: [Any] { return [noteId, created] }
 	var properties: [String : PropertyValue]
 	{
-		return ["creator": creatorId.value, "resolved": isResolved.value, "name": name.value, "verse": targetVerseIndex.value, "tags": tags.value]
+		return ["creator": creatorId.value, "resolved": isResolved.value, "name": name.value, "verse": targetVerseIndex.value, "tags": tags.value, "original_paragraph": originalTargetParagraphId.value]
 	}
 	
 	var collectionId: String { return ParagraphNotes.collectionId(fromId: noteId) }
@@ -47,7 +48,7 @@ final class NotesThread: Storable
 	
 	// INIT	-------------------
 	
-	init(noteId: String, creatorId: String, name: String, targetVerseIndex: VerseIndex? = nil, tags: [String] = [], resolved: Bool = false, created: TimeInterval = Date().timeIntervalSince1970)
+	init(noteId: String, creatorId: String, name: String, targetParagraphId: String, targetVerseIndex: VerseIndex? = nil, tags: [String] = [], resolved: Bool = false, created: TimeInterval = Date().timeIntervalSince1970)
 	{
 		self.noteId = noteId
 		self.creatorId = creatorId
@@ -56,6 +57,7 @@ final class NotesThread: Storable
 		self.name = name
 		self.targetVerseIndex = targetVerseIndex
 		self.tags = tags
+		self.originalTargetParagraphId = targetParagraphId
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> NotesThread
@@ -63,7 +65,7 @@ final class NotesThread: Storable
 		let verseIndexData = properties["verse"].object
 		let verseIndex = verseIndexData == nil ? nil : try VerseIndex.parse(from: verseIndexData!)
 		
-		return NotesThread(noteId: id[PROPERTY_NOTE].string(), creatorId: properties["creator"].string(), name: properties["name"].string(), targetVerseIndex: verseIndex, tags: properties["tags"].array { $0.string }, resolved: properties["resolved"].bool(), created: id[PROPERTY_CREATED].time())
+		return NotesThread(noteId: id[PROPERTY_NOTE].string(), creatorId: properties["creator"].string(), name: properties["name"].string(), targetParagraphId: properties["original_paragraph"].string(), targetVerseIndex: verseIndex, tags: properties["tags"].array { $0.string }, resolved: properties["resolved"].bool(), created: id[PROPERTY_CREATED].time())
 	}
 	
 	

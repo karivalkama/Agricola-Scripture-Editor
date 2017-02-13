@@ -161,11 +161,6 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		}
 	}
 	
-	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
-	{
-		syncScrolling = nil
-	}
-	
 	func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
 	{
 		isDragging = true
