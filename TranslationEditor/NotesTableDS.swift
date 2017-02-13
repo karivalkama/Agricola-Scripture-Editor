@@ -183,7 +183,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 						cell = ThreadCell()
 					}
 					
-					cell.setContent(thread: thread, pathId: note.pathId)
+					cell.setContent(thread: thread, pathId: note.pathId, showsPosts: shouldDisplayPostsForThread(thread))
 					
 					return cell
 				}

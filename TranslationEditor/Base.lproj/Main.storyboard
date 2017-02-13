@@ -221,15 +221,22 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4sB-RW-ygB">
                                                                     <rect key="frame" x="16" y="4" width="464" height="32"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag" translatesAutoresizingMaskIntoConstraints="NO" id="bcF-P5-kbW">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowright" translatesAutoresizingMaskIntoConstraints="NO" id="Uc7-Nk-ypu">
                                                                             <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="32" id="GbE-wv-1dS"/>
+                                                                                <constraint firstAttribute="width" constant="32" id="pN5-QA-J5s"/>
+                                                                            </constraints>
+                                                                        </imageView>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag" translatesAutoresizingMaskIntoConstraints="NO" id="bcF-P5-kbW">
+                                                                            <rect key="frame" x="40" y="0.0" width="32" height="32"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="32" id="9xy-MM-xXF"/>
                                                                                 <constraint firstAttribute="width" constant="32" id="YYg-Y9-Frv"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translation for Keruso?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEv-dU-6C3">
-                                                                            <rect key="frame" x="40" y="0.0" width="352" height="32"/>
+                                                                            <rect key="frame" x="80" y="0.0" width="312" height="32"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="32" id="ouQ-U5-Bo9"/>
                                                                             </constraints>
@@ -262,6 +269,7 @@
                                                             <outlet property="flagImageView" destination="bcF-P5-kbW" id="zeh-tz-4zj"/>
                                                             <outlet property="nameLabel" destination="EEv-dU-6C3" id="iB5-20-5Rr"/>
                                                             <outlet property="resolveButton" destination="6CS-Kk-egI" id="LRf-PW-BWh"/>
+                                                            <outlet property="showCollapseImageView" destination="Uc7-Nk-ypu" id="AYq-Vx-XpZ"/>
                                                         </connections>
                                                     </tableViewCell>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="142" id="wmu-Nz-Dxx" customClass="PostCell" customModule="TranslationEditor" customModuleProvider="target">
@@ -272,14 +280,14 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" editable="NO" text="I used this and this word, but it seems there might be a better alternative. Any thoughs?" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQC-qP-041">
-                                                                    <rect key="frame" x="24" y="44" width="456" height="85.5"/>
+                                                                    <rect key="frame" x="24" y="48" width="456" height="81.5"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 </textView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cYA-DS-lBG">
-                                                                    <rect key="frame" x="24" y="4" width="456" height="32"/>
+                                                                    <rect key="frame" x="24" y="8" width="456" height="32"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="uaa-ky-Dpd">
                                                                             <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -310,7 +318,7 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="wQC-qP-041" firstAttribute="trailing" secondItem="cYA-DS-lBG" secondAttribute="trailing" id="8Jq-xP-I47"/>
-                                                                <constraint firstItem="cYA-DS-lBG" firstAttribute="top" secondItem="353-Ln-6RY" secondAttribute="top" constant="4" id="ECk-8l-coH"/>
+                                                                <constraint firstItem="cYA-DS-lBG" firstAttribute="top" secondItem="353-Ln-6RY" secondAttribute="top" constant="8" id="ECk-8l-coH"/>
                                                                 <constraint firstItem="wQC-qP-041" firstAttribute="leading" secondItem="cYA-DS-lBG" secondAttribute="leading" id="N9C-GF-mHn"/>
                                                                 <constraint firstAttribute="trailing" secondItem="cYA-DS-lBG" secondAttribute="trailing" constant="8" id="UYn-w0-FCY"/>
                                                                 <constraint firstItem="cYA-DS-lBG" firstAttribute="leading" secondItem="353-Ln-6RY" secondAttribute="leading" constant="24" id="XQU-Ub-2Jl"/>
@@ -812,6 +820,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrowright" width="128" height="128"/>
         <image name="flag" width="200" height="311"/>
         <image name="leftButton" width="9" height="15"/>
         <image name="rightButton" width="9" height="15"/>

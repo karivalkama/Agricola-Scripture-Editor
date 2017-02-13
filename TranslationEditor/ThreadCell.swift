@@ -16,6 +16,7 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	@IBOutlet weak var flagImageView: UIImageView!
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var resolveButton: UIButton!
+	@IBOutlet weak var showCollapseImageView: UIImageView!
 	
 	
 	// ATTRIBUTES	----------
@@ -47,7 +48,7 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	
 	// OTHER METHODS	-----
 	
-	func setContent(thread: NotesThread, pathId: String)
+	func setContent(thread: NotesThread, pathId: String, showsPosts: Bool)
 	{
 		self.pathId = pathId
 		self.thread = thread
@@ -56,5 +57,6 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 		
 		resolveButton.isEnabled = !thread.isResolved
 		flagImageView.isHidden = thread.isResolved
+		showCollapseImageView.image = showsPosts ? #imageLiteral(resourceName: "arrowdown") : #imageLiteral(resourceName: "arrowright")
 	}
 }

@@ -95,9 +95,6 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 	
 	func onTableCellSelected(_ cell: UITableViewCell, identifier: String)
 	{
-		// TODO: React according to cell type
-		print("Selected cell with id: \(identifier)")
-		
 		// When a paragraph-notes -cell is selected, adds a new thread
 		if identifier == NotesCell.identifier, let cell = cell as? NotesCell
 		{
