@@ -16,6 +16,9 @@ class TranslationCell: UITableViewCell, ParagraphAssociated
 	weak var textView: UITextView?
 	var pathId: String?
 	
+	private static let chapterMarkerFont = UIFont(name: "Arial", size: 32.0)!
+	private static let defaultFont = UIFont(name: "Arial", size: 16.0)!
+	
 	
 	// IMPLEMENTED METHODS	---------
 	
@@ -57,7 +60,7 @@ class TranslationCell: UITableViewCell, ParagraphAssociated
 			{
 				switch attrName
 				{
-				case ChapterMarkerAttributeName: newText.addAttribute(NSFontAttributeName, value: UIFont(name: "Arial", size: 32.0)!, range: range)
+				case ChapterMarkerAttributeName: newText.addAttribute(NSFontAttributeName, value: TranslationCell.chapterMarkerFont, range: range)
 				case VerseIndexMarkerAttributeName, ParaMarkerAttributeName: newText.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: range)
 				case CharStyleAttributeName:
 					if let style = value as? CharStyle
@@ -72,7 +75,7 @@ class TranslationCell: UITableViewCell, ParagraphAssociated
 						}
 					}
 				// TODO: Add handling of paraStyle
-				default: break
+				default: newText.addAttribute(NSFontAttributeName, value: TranslationCell.defaultFont, range: range)
 				}
 			}
 		}
