@@ -56,6 +56,7 @@ fileprivate class UpdateListener<QueryTarget: View>: LiveQueryListener
 	}
 }
 
+// TODO: Remove showlistener protocol
 class NotesTableDS: NSObject, UITableViewDataSource, ThreadShowHideListener, LiveResource, TranslationParagraphListener
 {
 	// ATTRIBUTES	---------
@@ -204,7 +205,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, ThreadShowHideListener, Liv
 							cell = PostCell()
 						}
 						
-						cell.setContent(pathId: note.pathId, postText: post.content, postCreated: Date(timeIntervalSince1970: post.created))
+						cell.setContent(post: post, pathId: note.pathId)
 						
 						return cell
 					}
@@ -220,6 +221,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, ThreadShowHideListener, Liv
 		return UITableViewCell()
 	}
 	
+	// TODO: Remove
 	func showHideStatusRequested(forThreadId id: String, status: Bool)
 	{
 		if threadVisibleState[id] != status
@@ -266,6 +268,13 @@ class NotesTableDS: NSObject, UITableViewDataSource, ThreadShowHideListener, Liv
 	
 	
 	// OTHER METHDODS	-----
+	
+	// If thread contents were visible, hides them. If they were hidden, displays them
+	func changeThreadVisibility(thread: NotesThread)
+	{
+		threadVisibleState[thread.idString] = !shouldDisplayPostsForThread(thread)
+		update()
+	}
 	
 	func activate()
 	{

@@ -23,7 +23,7 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	
 	static let identifier = "ThreadCell"
 	
-	private var thread: NotesThread!
+	private(set) var thread: NotesThread!
 	private(set) var pathId: String?
 	
 	private var visibleListener: ThreadShowHideListener!

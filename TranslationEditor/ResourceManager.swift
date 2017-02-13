@@ -97,6 +97,22 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 	{
 		// TODO: React according to cell type
 		print("Selected cell with id: \(identifier)")
+		
+		// When a paragraph-notes -cell is selected, adds a new thread
+		if identifier == NotesCell.identifier, let cell = cell as? NotesCell
+		{
+			addNotesDelegate.insertThread(noteId: cell.note.idString, pathId: cell.note.pathId)
+		}
+		// When a thread cell is selected, hides / shows the thread contents
+		else if identifier == ThreadCell.identifier, let cell = cell as? ThreadCell
+		{
+			currentNotesData?.datasource.changeThreadVisibility(thread: cell.thread)
+		}
+		// When a post is tapped, creates a response to that post
+		else if identifier == PostCell.identifier, let cell = cell as? PostCell
+		{
+			addNotesDelegate.insertPost(threadId: cell.post.threadId)
+		}
 	}
 	
 	

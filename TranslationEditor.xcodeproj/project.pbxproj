@@ -184,7 +184,6 @@
 		7CA1BAB01E31E8DD00611FED /* ThreadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAAF1E31E8DD00611FED /* ThreadCell.swift */; };
 		7CA1BAB41E31F09200611FED /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAB31E31F09200611FED /* PostCell.swift */; };
 		7CA1BAB51E31F09200611FED /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAB31E31F09200611FED /* PostCell.swift */; };
-		7CA1BAB61E31F09200611FED /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAB31E31F09200611FED /* PostCell.swift */; };
 		7CA1BAB81E31F33000611FED /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAB71E31F33000611FED /* DateExtension.swift */; };
 		7CA1BAB91E31F33000611FED /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAB71E31F33000611FED /* DateExtension.swift */; };
 		7CA1BABA1E31F33000611FED /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAB71E31F33000611FED /* DateExtension.swift */; };
@@ -1400,7 +1399,6 @@
 				7C4A50061E016E31009F890E /* Reduce.swift in Sources */,
 				7CA1BABE1E32037B00611FED /* NotesShowHideListener.swift in Sources */,
 				7CD8EA641DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,
-				7CA1BAB61E31F09200611FED /* PostCell.swift in Sources */,
 				7CDBD6AA1E238A0200912320 /* ResourceCategory.swift in Sources */,
 				7CCC01001D9D3A0800F0562E /* VerseError.swift in Sources */,
 				7CCC01261DA64A1A00F0562E /* SectionPrev.swift in Sources */,

@@ -22,14 +22,18 @@ class PostCell: UITableViewCell, ParagraphAssociated
 	static let identifier = "PostCell"
 	
 	private(set) var pathId: String?
+	private(set) var post: NotesPost!
 	
 	
 	// OTHER METHODS	------
 	
-	func setContent(pathId: String, postText: String, postCreated: Date)
+	func setContent(post: NotesPost, pathId: String)
 	{
+		self.post = post
 		self.pathId = pathId
-		postTextView.text = postText
+		postTextView.text = post.content
+		
+		let postCreated = Date(timeIntervalSince1970: post.created)
 		
 		// If the post was made today, only displays time. Otherwise only displays date.
 		if postCreated.isWithinSameDay(with: Date())
