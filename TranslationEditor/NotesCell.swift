@@ -23,7 +23,6 @@ class NotesCell: UITableViewCell, ParagraphAssociated
 	private weak var addThreadDelegate: AddNotesDelegate!
 	
 	private var note: ParagraphNotes!
-	private var visibleListener: NotesShowHideListener!
 	private var showStatus = false
 	
 	
@@ -42,16 +41,16 @@ class NotesCell: UITableViewCell, ParagraphAssociated
 	@IBAction func hideShowButtonPressed(_ sender: Any)
 	{
 		// Informs the listener that a status change was requested
-		visibleListener?.showHideStatusRequested(forId: note!.idString, status: !showStatus)
+		// TODO: Remove
+		// visibleListener?.showHideStatusRequested(forId: note!.idString, status: !showStatus)
 	}
 	
 	
 	// OTHER METHODS	-------
 	
-	func setContent(note: ParagraphNotes, name: String, displayHideShowButton: Bool, useShowOption: Bool, listener: NotesShowHideListener, addDelegate: AddNotesDelegate)
+	func setContent(note: ParagraphNotes, name: String, displayHideShowButton: Bool, useShowOption: Bool, addDelegate: AddNotesDelegate)
 	{
 		self.note = note
-		self.visibleListener = listener
 		self.showStatus = !useShowOption
 		self.addThreadDelegate = addDelegate
 		

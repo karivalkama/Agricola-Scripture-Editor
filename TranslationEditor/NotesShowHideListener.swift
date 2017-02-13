@@ -8,9 +8,9 @@
 
 import Foundation
 
-// Classes implementing this protocol are informed about notes hide and show requests
-protocol NotesShowHideListener
+// Classes implementing this protocol are informed about notes thread hide and show requests
+protocol ThreadShowHideListener
 {
 	// This method will be called when either show or hide status is requested by a client
-	func showHideStatusRequested(forId id: String, status: Bool)
+	func showHideStatusRequested(forThreadId id: String, status: Bool)
 }

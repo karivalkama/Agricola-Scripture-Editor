@@ -56,7 +56,7 @@ fileprivate class UpdateListener<QueryTarget: View>: LiveQueryListener
 	}
 }
 
-class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, LiveResource, TranslationParagraphListener
+class NotesTableDS: NSObject, UITableViewDataSource, ThreadShowHideListener, LiveResource, TranslationParagraphListener
 {
 	// ATTRIBUTES	---------
 	
@@ -76,7 +76,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 	private var paragraphNames = [String : String]()
 	
 	// Instance id -> Custom visibility state
-	private var visibleState = [String : Bool]()
+	private var threadVisibleState = [String : Bool]()
 	
 	private var indexStatus = IndexStatus(rowCount: 0, pathIndex: [:], orderedNotes: [], noteStartIndices: [])
 	
@@ -164,7 +164,8 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 				cell = NotesCell()
 			}
 			
-			cell.setContent(note: note, name: paragraphNames[note.pathId].or(""), displayHideShowButton: threads[note.idString] != nil, useShowOption: !shouldDisplayThreadsForNote(withId: note.idString), listener: self, addDelegate: delegate)
+			// TODO: This will be refactored
+			cell.setContent(note: note, name: paragraphNames[note.pathId].or(""), displayHideShowButton: threads[note.idString] != nil, useShowOption: false, addDelegate: delegate)
 			
 			return cell
 		}
@@ -219,11 +220,11 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 		return UITableViewCell()
 	}
 	
-	func showHideStatusRequested(forId id: String, status: Bool)
+	func showHideStatusRequested(forThreadId id: String, status: Bool)
 	{
-		if visibleState[id] != status
+		if threadVisibleState[id] != status
 		{
-			visibleState[id] = status
+			threadVisibleState[id] = status
 			update()
 		}
 	}
@@ -328,14 +329,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 	{
 		// If there is a custom visibility state, uses that. 
 		// Otherwise only displays threads that are not resolved
-		return visibleState[thread.idString].or(!thread.isResolved)
-	}
-	
-	private func shouldDisplayThreadsForNote(withId noteId: String) -> Bool
-	{
-		// If threre is a custom visibility state, uses that.
-		// Otherwise only displays notes that contain unresolved threads
-		return visibleState[noteId].or(threads[noteId].or([]).contains { !$0.isResolved })
+		return threadVisibleState[thread.idString].or(!thread.isResolved)
 	}
 	
 	private func cellsForThread(_ thread: NotesThread) -> Int
@@ -354,15 +348,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 	
 	private func cellsForNote(withId noteId: String) -> Int
 	{
-		// If the note contents are displayed, counts the number of cells displayed for each thread
-		if shouldDisplayThreadsForNote(withId: noteId)
-		{
-			return threads[noteId].or([]).reduce(1, { $0 + cellsForThread($1) })
-		}
-		// Otherwise only displays the note itself
-		else
-		{
-			return 1
-		}
+		// Counts the number of cells displayed for each thread
+		return threads[noteId].or([]).reduce(1, { $0 + cellsForThread($1) })
 	}
 }

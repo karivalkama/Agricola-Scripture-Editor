@@ -26,7 +26,7 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	private var thread: NotesThread!
 	private(set) var pathId: String?
 	
-	private var visibleListener: NotesShowHideListener!
+	private var visibleListener: ThreadShowHideListener!
 	private var showStatus = false
 	
 	private weak var addPostDelegate: AddNotesDelegate!
@@ -42,7 +42,8 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	@IBAction func hideShowButtonPressed(_ sender: Any)
 	{
 		// Informs the visibility listener
-		visibleListener?.showHideStatusRequested(forId: thread!.idString, status: !showStatus)
+		// TODO: Use selection listening instead
+		visibleListener?.showHideStatusRequested(forThreadId: thread!.idString, status: !showStatus)
 	}
 	
 	@IBAction func resolveButtonPressed(_ sender: Any)
@@ -64,7 +65,7 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	
 	// OTHER METHODS	-----
 	
-	func setContent(thread: NotesThread, pathId: String, displayHideShowButton: Bool, useShowOption: Bool, listener: NotesShowHideListener, addDelegate: AddNotesDelegate)
+	func setContent(thread: NotesThread, pathId: String, displayHideShowButton: Bool, useShowOption: Bool, listener: ThreadShowHideListener, addDelegate: AddNotesDelegate)
 	{
 		self.pathId = pathId
 		self.thread = thread
