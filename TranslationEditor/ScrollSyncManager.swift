@@ -52,6 +52,8 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	private let defaultCellHeight: CGFloat = 640
 	private var currentHeightIds: [Side : String]
 	
+	private var cellSelectionListeners = [TableCellSelectionListener]()
+	
 	
 	// COMPUTED PROPERTIES	-----
 	
@@ -181,7 +183,20 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 	{
-		print("User selected a table row")
+		// Informs any interested selection listener
+		guard let cell = tableView.cellForRow(at: indexPath) else
+		{
+			print("ERROR: Could not find selected cell")
+			return
+		}
+		
+		guard let identifier = cell.reuseIdentifier else
+		{
+			print("ERROR: Selected cell did not have a reuse identifier")
+			return
+		}
+		
+		cellSelectionListeners.filter { $0.targetedCellIds.contains(identifier) }.forEach { $0.onTableCellSelected(cell, identifier: identifier) }
 	}
 	
 	
@@ -189,7 +204,36 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	func syncScrollToRight()
 	{
-		syncScroll(toSide: .right)
+		// Behaves slightly differently when anchor table is at top or bottom
+		let anchorTable = tableOfSide(.right)
+		
+		if anchorTable.isAtTop
+		{
+			tableOfSide(.left).scrollToTop()
+		}
+		else if anchorTable.isAtBottom
+		{
+			tableOfSide(.left).scrollToBottom()
+		}
+		else
+		{
+			syncScroll(toSide: .right)
+		}
+	}
+	
+	// Adds a new cell selection listener to the informed selection listeners
+	func registerSelectionListener(_ listener: TableCellSelectionListener)
+	{
+		if !cellSelectionListeners.contains(where: { $0 === listener })
+		{
+			cellSelectionListeners.append(listener)
+		}
+	}
+	
+	// Removes the listener from the informed selection listeners
+	func removeSelectionListener(_ listener: TableCellSelectionListener)
+	{
+		cellSelectionListeners = cellSelectionListeners.filter { !($0 === listener) }
 	}
 	
 	private func syncScroll(toSide anchorSide: Side, velocity: CGFloat = 0, acceleration: CGFloat = 0, skipIfAnchorStill: Bool = false)

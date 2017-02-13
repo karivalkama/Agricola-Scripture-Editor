@@ -18,6 +18,8 @@ class NotesCell: UITableViewCell, ParagraphAssociated
 	
 	// ATTRIBUTES	------------
 	
+	static let identifier = "NoteCell"
+	
 	private weak var addThreadDelegate: AddNotesDelegate!
 	
 	private var note: ParagraphNotes!

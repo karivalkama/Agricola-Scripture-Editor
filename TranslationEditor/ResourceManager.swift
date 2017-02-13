@@ -22,7 +22,7 @@ fileprivate struct NotesData
 }
 
 // This class handles the functions concerning the resource table
-class ResourceManager: TranslationParagraphListener
+class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 {
 	// ATTRIBUTES	-----------
 	
@@ -37,6 +37,8 @@ class ResourceManager: TranslationParagraphListener
 	
 	
 	// COMPUTED PROPERTIES	---
+	
+	let targetedCellIds = [NotesCell.identifier, ThreadCell.identifier, PostCell.identifier]
 	
 	var resourceTitles: [String]
 	{
@@ -89,6 +91,12 @@ class ResourceManager: TranslationParagraphListener
 		{
 			noteData.datasource.translationParagraphsUpdated(paragraphs)
 		}
+	}
+	
+	func onTableCellSelected(_ cell: UITableViewCell, identifier: String)
+	{
+		// TODO: React according to cell type
+		print("Selected cell with id: \(identifier)")
 	}
 	
 	

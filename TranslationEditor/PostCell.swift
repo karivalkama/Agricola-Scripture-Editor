@@ -19,6 +19,8 @@ class PostCell: UITableViewCell, ParagraphAssociated
 	
 	// ATTRIBUTES	----------
 	
+	static let identifier = "PostCell"
+	
 	private(set) var pathId: String?
 	
 	

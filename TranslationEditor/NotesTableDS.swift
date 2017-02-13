@@ -60,10 +60,6 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 {
 	// ATTRIBUTES	---------
 	
-	private static let NOTE_CELL_ID = "NoteCell"
-	private static let THREAD_CELL_ID = "ThreadCell"
-	private static let POST_CELL_ID = "PostCell"
-	
 	private weak var tableView: UITableView!
 	private weak var delegate: AddNotesDelegate!
 	
@@ -162,7 +158,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 		// In case the index is right on the note row, creates a row of that type
 		if remainingIndex == 0
 		{
-			var cell: NotesCell! = tableView.dequeueReusableCell(withIdentifier: NotesTableDS.NOTE_CELL_ID, for: indexPath) as? NotesCell
+			var cell: NotesCell! = tableView.dequeueReusableCell(withIdentifier: NotesCell.identifier, for: indexPath) as? NotesCell
 			if cell == nil
 			{
 				cell = NotesCell()
@@ -182,7 +178,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 				// In the index is on a specific thread, displays a thread cell
 				if remainingIndex == 0
 				{
-					var cell: ThreadCell! = tableView.dequeueReusableCell(withIdentifier: NotesTableDS.THREAD_CELL_ID, for: indexPath) as? ThreadCell
+					var cell: ThreadCell! = tableView.dequeueReusableCell(withIdentifier: ThreadCell.identifier, for: indexPath) as? ThreadCell
 					if cell == nil
 					{
 						cell = ThreadCell()
@@ -201,7 +197,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, NotesShowHideListener, Live
 					{
 						let post = posts[thread.idString]![remainingIndex - 1]
 						
-						var cell: PostCell! = tableView.dequeueReusableCell(withIdentifier: NotesTableDS.POST_CELL_ID, for: indexPath) as? PostCell
+						var cell: PostCell! = tableView.dequeueReusableCell(withIdentifier: PostCell.identifier, for: indexPath) as? PostCell
 						if cell == nil
 						{
 							cell = PostCell()

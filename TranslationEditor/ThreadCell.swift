@@ -21,6 +21,8 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	
 	// ATTRIBUTES	----------
 	
+	static let identifier = "ThreadCell"
+	
 	private var thread: NotesThread!
 	private(set) var pathId: String?
 	

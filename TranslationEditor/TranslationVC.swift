@@ -105,6 +105,9 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 				return self.resourceManager.targetPathsForSourcePath(oppositePathId).flatMap { self.targetTranslationDS?.indexForPath($0) }
 			}
 		}
+		
+		// Sets selection listening
+		scrollManager.registerSelectionListener(resourceManager)
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
