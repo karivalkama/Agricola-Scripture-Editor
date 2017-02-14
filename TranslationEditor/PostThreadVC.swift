@@ -85,9 +85,8 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		contextTableView.rowHeight = UITableViewAutomaticDimension
 		
 		contextDS = VerseTableDS(originalParagraph: originalParagraph, resourceData: contextData)
+		contextTableView.register(UINib(nibName: "VerseDataCell", bundle: nil), forCellReuseIdentifier: VerseCell.identifier)
 		contextTableView.dataSource = contextDS
-		
-		print("STATUS: Context table view area: \(contextTableView.frame)")
     }
 
 	
@@ -159,7 +158,22 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	
 	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
 	{
-		return 1 + (availableVerseRange?.verses.count).or(0)
+		// If there is only a single verse available, displays only a single option
+		if let verses = availableVerseRange?.verses
+		{
+			if verses.count <= 1
+			{
+				return 1
+			}
+			else
+			{
+				return verses.count + 1
+			}
+		}
+		else
+		{
+			return 1
+		}
 	}
 	
 	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
