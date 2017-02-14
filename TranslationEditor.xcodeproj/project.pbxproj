@@ -164,6 +164,7 @@
 		7C4CC1791DB0EE1800BCF24B /* USXContainerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */; };
 		7C6070471E51B113007718BC /* TableCellSelectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070461E51B113007718BC /* TableCellSelectionListener.swift */; };
 		7C6070491E52ECBA007718BC /* VerseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070481E52ECBA007718BC /* VerseCell.swift */; };
+		7C60704B1E52F770007718BC /* VerseTableDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60704A1E52F770007718BC /* VerseTableDS.swift */; };
 		7C6C3C1A1E373959001D56F4 /* PostThreadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C191E373959001D56F4 /* PostThreadVC.swift */; };
 		7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */; };
 		7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE891DE6E1EA00C054EB /* PropertySet.swift */; };
@@ -416,6 +417,7 @@
 		7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXContainerElement.swift; sourceTree = "<group>"; };
 		7C6070461E51B113007718BC /* TableCellSelectionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellSelectionListener.swift; sourceTree = "<group>"; };
 		7C6070481E52ECBA007718BC /* VerseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseCell.swift; sourceTree = "<group>"; };
+		7C60704A1E52F770007718BC /* VerseTableDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseTableDS.swift; sourceTree = "<group>"; };
 		7C6C3C191E373959001D56F4 /* PostThreadVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostThreadVC.swift; sourceTree = "<group>"; };
 		7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNotesDelegate.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -843,6 +845,7 @@
 				7C6C3C191E373959001D56F4 /* PostThreadVC.swift */,
 				7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */,
 				7C6070461E51B113007718BC /* TableCellSelectionListener.swift */,
+				7C60704A1E52F770007718BC /* VerseTableDS.swift */,
 			);
 			name = TranslationView;
 			sourceTree = "<group>";
@@ -1165,6 +1168,7 @@
 				7CDBD6FA1E2F65E900912320 /* ResourceCollectionView.swift in Sources */,
 				7CDBD6F61E2E3F5F00912320 /* NotesPost.swift in Sources */,
 				7C4A4F931DEEFC5F009F890E /* Types.swift in Sources */,
+				7C60704B1E52F770007718BC /* VerseTableDS.swift in Sources */,
 				7C4A4FD81DFAE0AA009F890E /* BasicButton.swift in Sources */,
 				7CAF6D8A1DB5F5FB00E10597 /* USXParser.swift in Sources */,
 				7CDBD6AC1E238ACB00912320 /* ResourceCollection.swift in Sources */,

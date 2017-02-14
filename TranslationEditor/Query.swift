@@ -283,9 +283,11 @@ struct Query<V: View>
 	}
 	
 	// Performs this query and returns the first result row, if available
+	// If the query is NOT of reduce type, limits the range to 1 for convenience. Reduce queries are still ran for the whole range though.
 	func firstResultRow() throws -> Row<V>?
 	{
-		let result = try limitedTo(1).toCBLQuery.run()
+		let query = type == .reduce ? self : limitedTo(1)
+		let result = try query.toCBLQuery.run()
 		
 		if let rawRow = result.nextRow()
 		{

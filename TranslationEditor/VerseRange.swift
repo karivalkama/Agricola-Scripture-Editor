@@ -234,7 +234,7 @@ struct VerseRange: JSONConvertible, Equatable, CustomStringConvertible
 	
 	// OTHER	--------
 	
-	func contains(index: VerseIndex, excludeEnd: Bool) -> Bool
+	func contains(index: VerseIndex, excludeEnd: Bool = true) -> Bool
 	{
 		// Checks whether the end is contained
 		if excludeEnd

@@ -158,6 +158,22 @@ final class ParagraphHistoryView: View
 		}
 	}
 	
+	// Finds the id of the most recent version of the paragraph
+	func mostRecentId(forParagraphWithId paragraphId: String) throws -> String?
+	{
+		// Creates the key first
+		let keys = [
+			ParagraphHistoryView.KEY_BOOK_ID: Key(Paragraph.bookId(fromId: paragraphId)),
+			ParagraphHistoryView.KEY_CHAPTER_INDEX: Key(Paragraph.chapterIndex(fromId: paragraphId)),
+			ParagraphHistoryView.KEY_PATH_ID: Key(Paragraph.pathId(fromId: paragraphId)),
+			ParagraphHistoryView.KEY_CREATED: Key.undefined]
+		
+		// The most recent id(s) are produced by a reduce query
+		let query = createQuery(ofType: .reduce, withKeys: keys)
+		
+		return try query.firstResultRow()?.value.array?.first?.string
+	}
+	
 	// Finds all conflicting paragraphs in certain chapter range
 	// Returns a map for each conflicting paragraph path that has all conflicting ids as values
 	func conflictsInRange(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) throws -> [String : [String]]

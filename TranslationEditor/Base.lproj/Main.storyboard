@@ -542,6 +542,11 @@
                                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                         </textView>
                                                                     </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="rI2-mW-3jn" firstAttribute="top" secondItem="y56-YW-pUY" secondAttribute="top" id="PzL-Jf-zB7"/>
+                                                                        <constraint firstItem="lRs-pV-rpX" firstAttribute="height" secondItem="rI2-mW-3jn" secondAttribute="height" id="dhp-0d-RXI"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="rI2-mW-3jn" secondAttribute="bottom" id="ugU-AE-Ebf"/>
+                                                                    </constraints>
                                                                 </stackView>
                                                             </subviews>
                                                             <constraints>
