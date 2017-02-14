@@ -62,6 +62,7 @@ class VerseTableDS: NSObject, UITableViewDataSource
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
+		print("STATUS: Displays \(data.count) different versions for paragraph")
 		return data.count
 	}
 	

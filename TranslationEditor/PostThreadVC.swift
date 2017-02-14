@@ -86,6 +86,8 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		
 		contextDS = VerseTableDS(originalParagraph: originalParagraph, resourceData: contextData)
 		contextTableView.dataSource = contextDS
+		
+		print("STATUS: Context table view area: \(contextTableView.frame)")
     }
 
 	
