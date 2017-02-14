@@ -98,7 +98,41 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 		// When a paragraph-notes -cell is selected, adds a new thread
 		if identifier == NotesCell.identifier, let cell = cell as? NotesCell
 		{
-			addNotesDelegate.insertThread(noteId: cell.note.idString, pathId: cell.note.pathId)
+			let chapterIndex = cell.note.chapterIndex
+			let pathId = cell.note.pathId
+			
+			// Finds the associated paragraphs from the resource data
+			var associatedParagraphData = [(String, Paragraph)]()
+			
+			do
+			{
+				for bookData in sourceBooks
+				{
+					let sourcePathIds = bookData.binding.sourcesForTarget(pathId)
+					
+					if !sourcePathIds.isEmpty, let languageName = try Language.get(bookData.book.languageId)?.name
+					{
+						for i in 0 ..< sourcePathIds.count
+						{
+							if let paragraphId = try ParagraphHistoryView.instance.mostRecentId(bookId: bookData.book.idString, chapterIndex: chapterIndex, pathId: sourcePathIds[i]), let paragraph = try Paragraph.get(paragraphId)
+							{
+								let title = languageName + (sourcePathIds.count == 1 ? "" : " (\(i + 1))")
+								associatedParagraphData.append((title, paragraph))
+							}
+							else
+							{
+								print("ERROR: Failed to find the latest version of associated paragraph in \(languageName) with path: \(sourcePathIds[i])")
+							}
+						}
+					}
+				}
+			}
+			catch
+			{
+				print("ERROR: Failed to prepare associated paragraph data. \(error)")
+			}
+			
+			addNotesDelegate.insertThread(noteId: cell.note.idString, pathId: cell.note.pathId, associatedParagraphData: associatedParagraphData)
 		}
 		// When a thread cell is selected, hides / shows the thread contents
 		else if identifier == ThreadCell.identifier, let cell = cell as? ThreadCell

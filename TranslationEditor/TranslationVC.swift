@@ -53,10 +53,10 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		
 		// (Epic hack which) Makes table view cells have automatic height
 		translationTableView.rowHeight = UITableViewAutomaticDimension
-		translationTableView.estimatedRowHeight = 640
+		translationTableView.estimatedRowHeight = 320
 		
 		resourceTableView.rowHeight = UITableViewAutomaticDimension
-		resourceTableView.estimatedRowHeight = 640
+		resourceTableView.estimatedRowHeight = 320
 		
 		// TODO: Use certain ranges, which should be changeable
 		// Reads necessary data (TEST)
@@ -144,11 +144,18 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		UIView.setAnimationsEnabled(true)
 	}
 	
-	func insertThread(noteId: String, pathId: String)
+	func insertThread(noteId: String, pathId: String, associatedParagraphData: [(String, Paragraph)])
 	{
 		displayAlert(withIdentifier: "PostThread")
 		{
-			($0 as! PostThreadVC).configure(userId: self.userId, noteId: noteId, paragraphRange: self.targetTranslationDS?.paragraphForPath(pathId)?.range)
+			// Finds the targeted paragraph
+			guard let targetParagraph = self.targetTranslationDS?.paragraphForPath(pathId) else
+			{
+				print("ERROR: No target paragraph for post thread")
+				return
+			}
+			
+			($0 as! PostThreadVC).configure(userId: self.userId, noteId: noteId, targetParagraph: targetParagraph, contextParagraphData: associatedParagraphData)
 		}
 	}
 	

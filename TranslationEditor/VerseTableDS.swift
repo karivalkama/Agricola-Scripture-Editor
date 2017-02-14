@@ -13,30 +13,18 @@ class VerseTableDS: NSObject, UITableViewDataSource
 {
 	// ATTRIBUTES	---------------------
 	
-	private weak var tableView: UITableView!
-	
 	// Language / section name -> Paragraph
 	private let data: [(String, Paragraph)]
 	
-	private var _targetVerseIndex: VerseIndex?
+	// The specific verse index the context is limited to
 	var targetVerseIndex: VerseIndex?
-	{
-		get { return _targetVerseIndex }
-		set
-		{
-			_targetVerseIndex = newValue
-			tableView.reloadData()
-		}
-	}
 	
 	
 	// INIT	-----------------------------
 	
 	// Resource data is combination of a language name and a matching paragraph version
-	init(tableView: UITableView, originalParagraph: Paragraph, resourceData: [(String, Paragraph)])
+	init(originalParagraph: Paragraph, resourceData: [(String, Paragraph)])
 	{
-		self.tableView = tableView
-		
 		var data = [(String, Paragraph)]()
 		
 		// Adds the current (and original) version of the targeted paragraph first

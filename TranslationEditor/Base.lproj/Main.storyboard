@@ -756,6 +756,7 @@
                     </view>
                     <connections>
                         <outlet property="commentTextView" destination="chp-yY-mzi" id="f0e-f1-crR"/>
+                        <outlet property="contextTableView" destination="ZkX-L0-3Ys" id="eiQ-da-hav"/>
                         <outlet property="postButton" destination="ehV-CF-i1b" id="dd5-dX-QNg"/>
                         <outlet property="subjectTextField" destination="90K-5f-J93" id="L4W-NU-wU6"/>
                         <outlet property="tagView" destination="lSl-Pb-zoG" id="8qD-h2-3vn"/>

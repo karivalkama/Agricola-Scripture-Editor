@@ -158,20 +158,25 @@ final class ParagraphHistoryView: View
 		}
 	}
 	
-	// Finds the id of the most recent version of the paragraph
-	func mostRecentId(forParagraphWithId paragraphId: String) throws -> String?
+	func mostRecentId(bookId: String, chapterIndex: Int, pathId: String) throws -> String?
 	{
 		// Creates the key first
 		let keys = [
-			ParagraphHistoryView.KEY_BOOK_ID: Key(Paragraph.bookId(fromId: paragraphId)),
-			ParagraphHistoryView.KEY_CHAPTER_INDEX: Key(Paragraph.chapterIndex(fromId: paragraphId)),
-			ParagraphHistoryView.KEY_PATH_ID: Key(Paragraph.pathId(fromId: paragraphId)),
+			ParagraphHistoryView.KEY_BOOK_ID: Key(bookId),
+			ParagraphHistoryView.KEY_CHAPTER_INDEX: Key(chapterIndex),
+			ParagraphHistoryView.KEY_PATH_ID: Key(pathId),
 			ParagraphHistoryView.KEY_CREATED: Key.undefined]
 		
 		// The most recent id(s) are produced by a reduce query
 		let query = createQuery(ofType: .reduce, withKeys: keys)
 		
 		return try query.firstResultRow()?.value.array?.first?.string
+	}
+	
+	// Finds the id of the most recent version of the paragraph
+	func mostRecentId(forParagraphWithId paragraphId: String) throws -> String?
+	{
+		return try mostRecentId(bookId: Paragraph.bookId(fromId: paragraphId), chapterIndex: Paragraph.chapterIndex(fromId: paragraphId), pathId: Paragraph.pathId(fromId: paragraphId))
 	}
 	
 	// Finds all conflicting paragraphs in certain chapter range

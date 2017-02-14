@@ -12,7 +12,8 @@ import Foundation
 protocol AddNotesDelegate: class
 {
 	// Should finalise thread creation for the provided note and paragraph
-	func insertThread(noteId: String, pathId: String)
+	// Associated paragraph data contains both paragraph language name and the paragraph itself
+	func insertThread(noteId: String, pathId: String, associatedParagraphData: [(String, Paragraph)])
 	
 	// Should create a new post for the provided thread
 	func insertPost(threadId: String)

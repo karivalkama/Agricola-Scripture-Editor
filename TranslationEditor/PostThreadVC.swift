@@ -18,16 +18,42 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	@IBOutlet weak var commentTextView: UITextView!
 	@IBOutlet weak var tagView: HTagView!
 	@IBOutlet weak var postButton: BasicButton!
+	@IBOutlet weak var contextTableView: UITableView!
 	
 	
 	// ATTRIBUTES	-----------
 	
 	private var configured = false
 	private var userId: String!
-	private var availableVerseRange: VerseRange?
 	private var noteId: String!
+	private var originalParagraph: Paragraph!
+	private var contextData: [(String, Paragraph)]!
+	
+	private var contextDS: VerseTableDS?
 	
 	private let tags = ["These", "Are", "Just", "Placeholder", "Tags"]
+	
+	
+	// COMPUTED PROPS	-------
+	
+	private var availableVerseRange: VerseRange? { return originalParagraph.range }
+	
+	private var selectedVerseIndex: VerseIndex?
+	{
+		guard let availableVerseRange = availableVerseRange else
+		{
+			return nil
+		}
+		
+		let selectedRow = versePickerView.selectedRow(inComponent: 0) - 1
+		
+		guard selectedRow >= 0 else
+		{
+			return nil
+		}
+		
+		return availableVerseRange.verses[selectedRow].start
+	}
 	
 	
 	// INIT	-------------------
@@ -54,6 +80,12 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		tagView.tagBorderColor = Colour.Text.Black.secondary.asColour.cgColor
 		
 		postButton.isEnabled = false
+		
+		contextTableView.estimatedRowHeight = 64
+		contextTableView.rowHeight = UITableViewAutomaticDimension
+		
+		contextDS = VerseTableDS(originalParagraph: originalParagraph, resourceData: contextData)
+		contextTableView.dataSource = contextDS
     }
 
 	
@@ -61,12 +93,11 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	
 	@IBAction func postButtonPressed(_ sender: Any)
 	{
-		let verseIndex = availableVerseRange?.verses[versePickerView.selectedRow(inComponent: 0) - 1].start
-		
 		// Creates a new thread (and post) instance, then dismisses the view
 		// TODO: Add support for tags
-		// TODO: Use the real target paragraph id here
-		let thread = NotesThread(noteId: noteId, creatorId: userId, name: subjectTextField.text!, targetParagraphId: "", targetVerseIndex: verseIndex)
+		let thread = NotesThread(noteId: noteId, creatorId: userId, name: subjectTextField.text!, targetParagraphId: originalParagraph.idString, targetVerseIndex: selectedVerseIndex)
+		
+		// TODO: Comment text should be required
 		let post = commentTextView.text.isEmpty ? nil : NotesPost(threadId: thread.idString, creatorId: userId, content: commentTextView.text)
 		
 		do
@@ -141,6 +172,13 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		}
 	}
 	
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+	{
+		// Updates the context table
+		contextDS?.targetVerseIndex = selectedVerseIndex
+		contextTableView.reloadData()
+	}
+	
 	func numberOfTags(_ tagView: HTagView) -> Int
 	{
 		return tags.count
@@ -159,11 +197,13 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	
 	// OTHER METHODS	------
 	
-	func configure(userId: String, noteId: String, paragraphRange: VerseRange?)
+	// Context paragraph data is language name (or other identifier) -> paragraph version
+	func configure(userId: String, noteId: String, targetParagraph: Paragraph, contextParagraphData: [(String, Paragraph)])
 	{
 		self.userId = userId
-		self.availableVerseRange = paragraphRange
 		self.noteId = noteId
+		self.originalParagraph = targetParagraph
+		self.contextData = contextParagraphData
 		
 		self.configured = true
 	}
