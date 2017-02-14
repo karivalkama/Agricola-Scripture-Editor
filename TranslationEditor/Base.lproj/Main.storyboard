@@ -148,7 +148,6 @@
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2EI-Mh-Uso">
                                                 <rect key="frame" x="0.0" y="40" width="488" height="664"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <color key="tintColor" red="1" green="0.66666666669999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="separatorColor" red="1" green="0.66666666669999997" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="sourceCell" rowHeight="86" id="fKr-Fz-xVH" customClass="SourceTranslationCell" customModule="TranslationEditor" customModuleProvider="target">
@@ -236,7 +235,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translation for Keruso?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEv-dU-6C3">
-                                                                            <rect key="frame" x="80" y="0.0" width="312" height="32"/>
+                                                                            <rect key="frame" x="80" y="0.0" width="271" height="32"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="32" id="ouQ-U5-Bo9"/>
                                                                             </constraints>
@@ -244,20 +243,22 @@
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6CS-Kk-egI" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                                            <rect key="frame" x="400" y="0.0" width="64" height="32"/>
-                                                                            <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gib-9y-P1o">
+                                                                            <rect key="frame" x="359" y="0.0" width="48" height="32"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" constant="64" id="bQF-iM-uQQ"/>
+                                                                                <constraint firstAttribute="width" constant="48" id="aGY-16-zNo"/>
                                                                             </constraints>
-                                                                            <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <state key="normal" title="Resolve">
-                                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            </state>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVC-vC-rFM">
+                                                                            <rect key="frame" x="415" y="0.0" width="51" height="32"/>
+                                                                            <color key="onTintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <connections>
-                                                                                <action selector="resolveButtonPressed:" destination="ut6-oO-hAA" eventType="touchUpInside" id="NKg-Ci-sXl"/>
+                                                                                <action selector="openStateChanged:" destination="ut6-oO-hAA" eventType="valueChanged" id="8mv-jG-XGC"/>
                                                                             </connections>
-                                                                        </button>
+                                                                        </switch>
                                                                     </subviews>
                                                                 </stackView>
                                                             </subviews>
@@ -271,7 +272,7 @@
                                                         <connections>
                                                             <outlet property="flagImageView" destination="bcF-P5-kbW" id="zeh-tz-4zj"/>
                                                             <outlet property="nameLabel" destination="EEv-dU-6C3" id="iB5-20-5Rr"/>
-                                                            <outlet property="resolveButton" destination="6CS-Kk-egI" id="LRf-PW-BWh"/>
+                                                            <outlet property="openSwitch" destination="iVC-vC-rFM" id="geS-SY-4vq"/>
                                                             <outlet property="showCollapseImageView" destination="Uc7-Nk-ypu" id="AYq-Vx-XpZ"/>
                                                         </connections>
                                                     </tableViewCell>

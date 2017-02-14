@@ -94,12 +94,12 @@ final class NotesThread: Storable
 
 	// OTHER METHODS	--------
 
-	// Marks the thread as resolved, if it isn't already. Saves the changes to the database
-	func resolve() throws
+	// Sets a new resolved status for the thread. Saves the changes to the database
+	func setResolved(_ resolved: Bool) throws
 	{
-		if !isResolved
+		if isResolved != resolved
 		{
-			isResolved = true
+			isResolved = resolved
 			try pushProperties(named: ["resolved"])
 		}
 	}

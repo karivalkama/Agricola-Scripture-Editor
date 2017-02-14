@@ -116,7 +116,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 						{
 							if let paragraphId = try ParagraphHistoryView.instance.mostRecentId(bookId: bookData.book.idString, chapterIndex: chapterIndex, pathId: sourcePathIds[i]), let paragraph = try Paragraph.get(paragraphId)
 							{
-								let title = languageName + (sourcePathIds.count == 1 ? "" : " (\(i + 1))")
+								let title = languageName + (sourcePathIds.count == 1 ? ":" : " (\(i + 1)):")
 								associatedParagraphData.append((title, paragraph))
 							}
 							else

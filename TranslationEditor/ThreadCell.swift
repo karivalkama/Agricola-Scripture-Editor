@@ -15,8 +15,8 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	
 	@IBOutlet weak var flagImageView: UIImageView!
 	@IBOutlet weak var nameLabel: UILabel!
-	@IBOutlet weak var resolveButton: UIButton!
 	@IBOutlet weak var showCollapseImageView: UIImageView!
+	@IBOutlet weak var openSwitch: UISwitch!
 	
 	
 	// ATTRIBUTES	----------
@@ -29,19 +29,16 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 	
 	// ACTIONS	--------------
 	
-	@IBAction func resolveButtonPressed(_ sender: Any)
+	@IBAction func openStateChanged(_ sender: Any)
 	{
-		// Marks the thread as resolved (this will cause all cells to get updated)
-		if let thread = thread
+		// Marks the thread either as resolved or as unresolved, based on the new state
+		do
 		{
-			do
-			{
-				try thread.resolve()
-			}
-			catch
-			{
-				print("ERROR: Couldn't resolve a thread \(error)")
-			}
+			try thread.setResolved(!openSwitch.isOn)
+		}
+		catch
+		{
+			print("ERROR: Failed to update thread's resolved status")
 		}
 	}
 	
@@ -55,7 +52,7 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 		
 		nameLabel.text = thread.name
 		
-		resolveButton.isEnabled = !thread.isResolved
+		openSwitch.setOn(!thread.isResolved, animated: false)
 		flagImageView.isHidden = thread.isResolved
 		showCollapseImageView.image = showsPosts ? #imageLiteral(resourceName: "arrowdown") : #imageLiteral(resourceName: "arrowright")
 	}

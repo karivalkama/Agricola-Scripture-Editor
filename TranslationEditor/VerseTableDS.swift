@@ -30,17 +30,17 @@ class VerseTableDS: NSObject, UITableViewDataSource
 		// Adds the current (and original) version of the targeted paragraph first
 		if originalParagraph.isMostRecent
 		{
-			data.append(("Current", originalParagraph))
+			data.append(("Current:", originalParagraph))
 		}
 		else
 		{
-			data.append(("Original", originalParagraph))
+			data.append(("Original:", originalParagraph))
 			
 			do
 			{
 				if let latestId = try ParagraphHistoryView.instance.mostRecentId(forParagraphWithId: originalParagraph.idString), let latestVersion = try Paragraph.get(latestId)
 				{
-					data.append(("Current", latestVersion))
+					data.append(("Current:", latestVersion))
 				}
 				else
 				{
