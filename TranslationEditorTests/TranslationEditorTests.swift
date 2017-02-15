@@ -10,9 +10,11 @@ import XCTest
 
 class TranslationEditorTests: XCTestCase
 {
-    override func setUp() {
+    override func setUp()
+	{
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+		useDatabase(named: "agricola")
     }
     
     override func tearDown() {
@@ -221,21 +223,32 @@ class TranslationEditorTests: XCTestCase
 	
 	func testRemoveDataOfType()
 	{
-		let type = NotesThread.type
+		let types = [NotesThread.type, NotesPost.type]
+		
+		print("STATUS: Database used: \(DATABASE.name)")
 		
 		let query = DATABASE.createAllDocumentsQuery()
 		let results = try! query.run()
 		
 		while let row = results.nextRow(), let document = row.document
 		{
-			if document[PROPERTY_TYPE] as? String == type
+			//print("STATUS: Row \(row.key)")
+			
+			if let type = document[PROPERTY_TYPE] as? String
 			{
-				print("deleting...")
-				try! document.delete()
+				if types.contains(type)
+				{
+					print("STATUS: deleting document of type \(type)")
+					try! document.delete()
+				}
+			}
+			else
+			{
+				print("STATUS: Typeless document found!")
 			}
 		}
 		
-		print("done!")
+		print("STATUS: done!")
 	}
 	
 	func testReadDataOfType()

@@ -62,8 +62,8 @@ enum Themes
 		{
 			switch self
 			{
-			case .normal: return Colour.Text.Black.asColour
-			case .secondary: return Colour.Text.Black.asColour
+			case .normal: return Colour.Text.White.asColour
+			case .secondary: return Colour.Text.White.asColour
 			case .disabled: return Colour.Text.Black.disabled.asColour
 			}
 		}

@@ -178,13 +178,18 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	
 	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
 	{
-		if row == 0
+		return verseTitle(forRow: row)
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString?
+	{
+		if let title = verseTitle(forRow: row)
 		{
-			return "All"
+			return NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: Colour.Primary.dark.asColour])
 		}
 		else
 		{
-			return availableVerseRange?.verses[row - 1].name
+			return nil
 		}
 	}
 	
@@ -222,5 +227,17 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		self.contextData = contextParagraphData
 		
 		self.configured = true
+	}
+	
+	private func verseTitle(forRow row: Int) -> String?
+	{
+		if row == 0
+		{
+			return "All"
+		}
+		else
+		{
+			return availableVerseRange?.verses[row - 1].name
+		}
 	}
 }

@@ -29,16 +29,16 @@ enum Colour
 	{
 		case normal = "#FF9800"
 		case dark = "#EF6C00"
-		case light = "#FFB74D"
+		case light = "#FFCC80"
 		
 		var asColour: UIColor {return UIColor(hexString: rawValue)}
 		static var asColour: UIColor {return normal.asColour}
 	}
 	enum Secondary: String, UIColorConvertible
 	{
-		case normal = "#C6FF00"
-		case dark = "#AEEA00"
-		case light = "#EEFF41"
+		case normal = "#FF1744"
+		case dark = "#D50000"
+		case light = "#FF8A80"
 		
 		var asColour: UIColor {return UIColor(hexString: rawValue)}
 		static var asColour: UIColor {return normal.asColour}

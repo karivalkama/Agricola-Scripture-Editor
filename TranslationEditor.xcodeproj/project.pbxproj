@@ -166,6 +166,7 @@
 		7C6070491E52ECBA007718BC /* VerseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070481E52ECBA007718BC /* VerseCell.swift */; };
 		7C60704B1E52F770007718BC /* VerseTableDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60704A1E52F770007718BC /* VerseTableDS.swift */; };
 		7C60704D1E533ED3007718BC /* VerseDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C60704C1E533ED3007718BC /* VerseDataCell.xib */; };
+		7C60704E1E54441D007718BC /* TableCellSelectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070461E51B113007718BC /* TableCellSelectionListener.swift */; };
 		7C6C3C1A1E373959001D56F4 /* PostThreadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C191E373959001D56F4 /* PostThreadVC.swift */; };
 		7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */; };
 		7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE891DE6E1EA00C054EB /* PropertySet.swift */; };
@@ -1338,6 +1339,7 @@
 				7C82CE8F1DE6E29500C054EB /* PropertyValue.swift in Sources */,
 				7CCC01211DA646FA00F0562E /* USXContentParser.swift in Sources */,
 				7C4A4FE51DFE7C87009F890E /* UIExtension.swift in Sources */,
+				7C60704E1E54441D007718BC /* TableCellSelectionListener.swift in Sources */,
 				7CCC013D1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
 				7C82CE8B1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
 				7C4A4F841DEEBAF2009F890E /* Row.swift in Sources */,
