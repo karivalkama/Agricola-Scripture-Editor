@@ -90,6 +90,10 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		{
 			resourceSegmentControl.insertSegment(withTitle: resourceTitles[i], at: i, animated: false)
 		}
+		if !resourceTitles.isEmpty
+		{
+			resourceSegmentControl.selectedSegmentIndex = 0
+		}
 		
 		// Sets scroll syncing
 		scrollManager = ScrollSyncManager(leftTable: resourceTableView, rightTable: translationTableView, leftResourceId: resourceTitles.isEmpty ? "none" : resourceTitles.first!, rightResourceId: "target")
@@ -159,11 +163,11 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		}
 	}
 	
-	func insertPost(threadId: String)
+	func insertPost(thread: NotesThread, originalComment: NotesPost, associatedParagraphData: [(String, Paragraph)])
 	{
 		displayAlert(withIdentifier: "AddPost")
 		{
-			($0 as! PostCommentVC).configure(userId: self.userId, threadId: threadId)
+			($0 as! PostCommentVC).configure(thread: thread, originalComment: originalComment, userId: self.userId, associatedParagraphData: associatedParagraphData)
 		}
 	}
 	

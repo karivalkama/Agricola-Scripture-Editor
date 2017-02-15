@@ -98,41 +98,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 		// When a paragraph-notes -cell is selected, adds a new thread
 		if identifier == NotesCell.identifier, let cell = cell as? NotesCell
 		{
-			let chapterIndex = cell.note.chapterIndex
-			let pathId = cell.note.pathId
-			
-			// Finds the associated paragraphs from the resource data
-			var associatedParagraphData = [(String, Paragraph)]()
-			
-			do
-			{
-				for bookData in sourceBooks
-				{
-					let sourcePathIds = bookData.binding.sourcesForTarget(pathId)
-					
-					if !sourcePathIds.isEmpty, let languageName = try Language.get(bookData.book.languageId)?.name
-					{
-						for i in 0 ..< sourcePathIds.count
-						{
-							if let paragraphId = try ParagraphHistoryView.instance.mostRecentId(bookId: bookData.book.idString, chapterIndex: chapterIndex, pathId: sourcePathIds[i]), let paragraph = try Paragraph.get(paragraphId)
-							{
-								let title = languageName + (sourcePathIds.count == 1 ? ":" : " (\(i + 1)):")
-								associatedParagraphData.append((title, paragraph))
-							}
-							else
-							{
-								print("ERROR: Failed to find the latest version of associated paragraph in \(languageName) with path: \(sourcePathIds[i])")
-							}
-						}
-					}
-				}
-			}
-			catch
-			{
-				print("ERROR: Failed to prepare associated paragraph data. \(error)")
-			}
-			
-			addNotesDelegate.insertThread(noteId: cell.note.idString, pathId: cell.note.pathId, associatedParagraphData: associatedParagraphData)
+			addNotesDelegate.insertThread(noteId: cell.note.idString, pathId: cell.note.pathId, associatedParagraphData: collectAssociatedParagraphData(pathId: cell.note.pathId, chapterIndex: cell.note.chapterIndex))
 		}
 		// When a thread cell is selected, hides / shows the thread contents
 		else if identifier == ThreadCell.identifier, let cell = cell as? ThreadCell
@@ -142,7 +108,20 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 		// When a post is tapped, creates a response to that post
 		else if identifier == PostCell.identifier, let cell = cell as? PostCell
 		{
-			addNotesDelegate.insertPost(threadId: cell.post.threadId)
+			do
+			{
+				guard let targetThread = try NotesThread.get(cell.post.threadId), let pathId = cell.pathId else
+				{
+					print("ERROR: Could not find requred associated data for new comment")
+					return
+				}
+				
+				addNotesDelegate.insertPost(thread: targetThread, originalComment: cell.post, associatedParagraphData: collectAssociatedParagraphData(pathId: pathId, chapterIndex: targetThread.chapterIndex))
+			}
+			catch
+			{
+				print("ERROR: Failed to read a target thread for the new comment. \(error)")
+			}
 		}
 	}
 	
@@ -241,5 +220,41 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 	func activate()
 	{
 		currentLiveResource?.activate()
+	}
+	
+	// Finds the associated paragraphs from the resource data
+	private func collectAssociatedParagraphData(pathId: String, chapterIndex: Int) -> [(String, Paragraph)]
+	{
+		var data = [(String, Paragraph)]()
+		
+		do
+		{
+			for bookData in sourceBooks
+			{
+				let sourcePathIds = bookData.binding.sourcesForTarget(pathId)
+				
+				if !sourcePathIds.isEmpty, let languageName = try Language.get(bookData.book.languageId)?.name
+				{
+					for i in 0 ..< sourcePathIds.count
+					{
+						if let paragraphId = try ParagraphHistoryView.instance.mostRecentId(bookId: bookData.book.idString, chapterIndex: chapterIndex, pathId: sourcePathIds[i]), let paragraph = try Paragraph.get(paragraphId)
+						{
+							let title = languageName + (sourcePathIds.count == 1 ? ":" : " (\(i + 1)):")
+							data.append((title, paragraph))
+						}
+						else
+						{
+							print("ERROR: Failed to find the latest version of associated paragraph in \(languageName) with path: \(sourcePathIds[i])")
+						}
+					}
+				}
+			}
+		}
+		catch
+		{
+			print("ERROR: Failed to prepare associated paragraph data. \(error)")
+		}
+		
+		return data
 	}
 }

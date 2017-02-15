@@ -14,13 +14,21 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 	
 	@IBOutlet weak var commentTextView: UITextView!
 	@IBOutlet weak var postButton: BasicButton!
+	@IBOutlet weak var originalCommentTextView: UITextView!
+	@IBOutlet weak var originalCommentLabel: UILabel!
+	@IBOutlet weak var verseTable: UITableView!
 	
 	
 	// ATTRIBUTES	--------
 	
 	private var configured = false
-	private var threadId: String!
+	private var originalComment: NotesPost!
 	private var userId: String!
+	private var targetThread: NotesThread!
+	// Title (eg. English:) + paragraph
+	private var associatedParagraphData: [(String, Paragraph)]!
+	
+	private var verseTableDS: VerseTableDS?
 	
 	
 	// INIT	----------------
@@ -32,6 +40,29 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 		// Sets up the components
 		postButton.isEnabled = false
 		commentTextView.delegate = self
+		
+		originalCommentTextView.text = originalComment.content
+		
+		verseTable.register(UINib(nibName: "VerseDataCell", bundle: nil), forCellReuseIdentifier: VerseCell.identifier)
+		verseTable.estimatedRowHeight = 240
+		verseTable.rowHeight = UITableViewAutomaticDimension
+		
+		do
+		{
+			guard let targetParagraph = try Paragraph.get(targetThread.originalTargetParagraphId) else
+			{
+				print("ERROR: Could not find the targeted paragraph for the comment")
+				return
+			}
+			
+			verseTableDS = VerseTableDS(originalParagraph: targetParagraph, resourceData: associatedParagraphData)
+			verseTableDS?.targetVerseIndex = targetThread.targetVerseIndex
+			verseTable.dataSource = verseTableDS
+		}
+		catch
+		{
+			print("ERROR: Failed to read paragraph data from the database. \(error)")
+		}
     }
 	
 	
@@ -42,7 +73,7 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 		// Creates a new post instance and saves it to the database
 		do
 		{
-			try NotesPost(threadId: threadId, creatorId: userId, content: commentTextView.text).push()
+			try NotesPost(threadId: targetThread.idString, creatorId: userId, content: commentTextView.text).push()
 			dismiss(animated: true, completion: nil)
 		}
 		catch
@@ -67,10 +98,12 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 	
 	// OTHER METHODS	---
 	
-	func configure(userId: String, threadId: String)
+	func configure(thread: NotesThread, originalComment: NotesPost, userId: String, associatedParagraphData: [(String, Paragraph)])
 	{
 		self.configured = true
 		self.userId = userId
-		self.threadId = threadId
+		self.targetThread = thread
+		self.originalComment = originalComment
+		self.associatedParagraphData = associatedParagraphData
 	}
 }
