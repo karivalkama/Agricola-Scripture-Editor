@@ -35,7 +35,6 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 		do
 		{
 			try thread.setResolved(!openSwitch.isOn)
-			// TODO: Change displayability of the thread
 		}
 		catch
 		{

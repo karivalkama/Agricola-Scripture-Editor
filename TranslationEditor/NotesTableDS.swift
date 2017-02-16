@@ -112,6 +112,19 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 			threads in
 			
 			print("STATUS: Received input of \(threads.count) threads")
+			
+			// Whenever a thread's resolved state changes, resets the custom visibility state for that thread
+			for thread in threads
+			{
+				if let previousVersion = self.threads[thread.noteId]?.first(where: { oldThread in oldThread.idString == thread.idString })
+				{
+					if previousVersion.isResolved != thread.isResolved
+					{
+						self.threadVisibleState[thread.idString] = nil
+					}
+				}
+			}
+			
 			self.threads = threads.toArrayDictionary { ($0.noteId, $0) }
 			self.update()
 		}))
