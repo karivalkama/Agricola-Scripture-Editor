@@ -51,7 +51,7 @@ class Keyboard: AppStatusListener
 	{
 		if observers.isEmpty
 		{
-			let didShowObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidShow, object: nil, queue: nil)
+			let didShowObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: nil)
 			{
 				notification in
 				

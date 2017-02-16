@@ -27,11 +27,15 @@ class PostCell: UITableViewCell, ParagraphAssociated
 	
 	// OTHER METHODS	------
 	
-	func setContent(post: NotesPost, pathId: String)
+	func setContent(post: NotesPost, pathId: String, isResolved: Bool)
 	{
 		self.post = post
 		self.pathId = pathId
 		postTextView.text = post.content
+		
+		let textColor = isResolved ? Colour.Text.Black.secondary.asColour : Colour.Text.Black.primary.asColour
+		postTextView.textColor = textColor
+		timeLabel.textColor = textColor
 		
 		let postCreated = Date(timeIntervalSince1970: post.created)
 		

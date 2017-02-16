@@ -35,6 +35,7 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 		do
 		{
 			try thread.setResolved(!openSwitch.isOn)
+			// TODO: Change displayability of the thread
 		}
 		catch
 		{
@@ -51,6 +52,7 @@ class ThreadCell: UITableViewCell, ParagraphAssociated
 		self.thread = thread
 		
 		nameLabel.text = thread.name
+		nameLabel.textColor = thread.isResolved ? Colour.Text.Black.secondary.asColour : Colour.Text.Black.primary.asColour
 		
 		openSwitch.setOn(!thread.isResolved, animated: false)
 		flagImageView.isHidden = thread.isResolved

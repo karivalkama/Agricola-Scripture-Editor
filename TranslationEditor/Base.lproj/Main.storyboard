@@ -536,7 +536,7 @@
                                                                         </constraints>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                         <connections>
                                                                             <action selector="subjectChanged:" destination="cTi-QG-SMh" eventType="editingChanged" id="ArC-Tg-Mp8"/>
                                                                         </connections>

@@ -202,7 +202,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 							cell = PostCell()
 						}
 						
-						cell.setContent(post: post, pathId: note.pathId)
+						cell.setContent(post: post, pathId: note.pathId, isResolved: thread.isResolved)
 						
 						return cell
 					}
@@ -255,6 +255,15 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 	
 	
 	// OTHER METHDODS	-----
+	
+	func setThreadVisibility(thread: NotesThread, visibility: Bool)
+	{
+		if threadVisibleState[thread.idString] != visibility
+		{
+			threadVisibleState[thread.idString] = visibility
+			update()
+		}
+	}
 	
 	// If thread contents were visible, hides them. If they were hidden, displays them
 	func changeThreadVisibility(thread: NotesThread)
