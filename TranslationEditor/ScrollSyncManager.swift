@@ -44,6 +44,12 @@ fileprivate enum MatchPosition
 		case .top: return height * 0.075
 		}
 	}
+	
+	// The used matching position depends on the keyboard state
+	static var current: MatchPosition
+	{
+		return Keyboard.instance.isVisible ? .top : .center
+	}
 }
 
 // This class handles the simultaneous scrolling of two scroll views
@@ -243,7 +249,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	}
 	
 	// TODO: Only works on the right table for now
-	func scrollToTop(cell: UITableViewCell)
+	func scrollToAnchor(cell: UITableViewCell)
 	{
 		let table = tableOfSide(.right)
 		
@@ -252,22 +258,28 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 			return
 		}
 		
-		// A small cell may be left in the top 'buffer' area so that sync scrolling connects the right cells
-		let topAreaHeight = MatchPosition.top.targetY(ofHeight: table.visibleContentHeight)
-		
-		var topIndex = index
-		var bufferHeight = cellHeight(side: .right, index: index)
-		
-		// Fills the 'buffer' area with small cells, if necessary
-		while topIndex.row > 0 && bufferHeight <= topAreaHeight
+		// Based on the keyboard usage, either scrolls the cell to the center or top
+		switch MatchPosition.current
 		{
-			topIndex = IndexPath(row: topIndex.row - 1, section: topIndex.section)
-			bufferHeight += cellHeight(side: .right, index: topIndex)
+		case .center: table.scrollToRow(at: index, at: MatchPosition.center.scrollPosition, animated: true)
+		case .top:
+			// A small cell may be left in the top 'buffer' area so that sync scrolling connects the right cells
+			let topAreaHeight = MatchPosition.top.targetY(ofHeight: table.visibleContentHeight)
+			
+			var topIndex = index
+			var bufferHeight = cellHeight(side: .right, index: index)
+			
+			// Fills the 'buffer' area with small cells, if necessary
+			while topIndex.row > 0 && bufferHeight <= topAreaHeight
+			{
+				topIndex = IndexPath(row: topIndex.row - 1, section: topIndex.section)
+				bufferHeight += cellHeight(side: .right, index: topIndex)
+			}
+			
+			// Scrolls to the top, leaving a possible buffer
+			syncScrolling = .left
+			table.scrollToRow(at: topIndex, at: .top, animated: true)
 		}
-		
-		// Scrolls to the top, leaving a possible buffer
-		syncScrolling = .left
-		table.scrollToRow(at: topIndex, at: .top, animated: true)
 	}
 	
 	// Adds a new cell selection listener to the informed selection listeners
@@ -289,7 +301,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	{
 		// Matches either the top or the middle of the two tables
 		// This is decided based on whether the virtual keyboard is displayed or not
-		let anchorPosition = Keyboard.instance.isVisible ? MatchPosition.top : MatchPosition.center
+		let anchorPosition = MatchPosition.current
 		
 		let scrolledTable = tableOfSide(anchorSide)
 		guard let newCell = anchorCell(atPosition: anchorPosition, inTable: scrolledTable/*, withVelocity: velocity, andAcceleration: acceleration*/) else
@@ -416,6 +428,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		// a = dv / dt
 		// s = vt + at^2 / 2
 		//let travelDistance = velocity * duration + acceleration * duration * duration / 2
+		//print(tableView.contentOffset.y - tableView.rectForRow(at: indexPaths.first!).minY)
 		
 		// Calculates the height of the visible area
 		let totalHeight = tableView.visibleContentHeight //cellHeights.reduce(0, { result, h in return result + h })
@@ -424,12 +437,12 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		let anchorY = position.targetY(ofHeight: totalHeight) //max(0, min(position.targetY(ofHeight: totalHeight) + travelDistance, totalHeight - 1))
 		
 		// Finds the anchor cell
-		var y:CGFloat = 0
+		var y = tableView.rectForRow(at: indexPaths.first!).minY - tableView.contentOffset.y
 		for i in 0 ..< cellHeights.count
 		{
 			let nextY = y + cellHeights[i]
 			
-			if nextY > anchorY
+			if nextY >= anchorY
 			{
 				return tableView.cellForRow(at: indexPaths[i])
 			}

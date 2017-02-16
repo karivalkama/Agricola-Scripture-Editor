@@ -56,7 +56,6 @@ class Keyboard: AppStatusListener
 				notification in
 				
 				self.isVisible = true
-				print("STATUS: Keyboard appeared")
 				
 				// Retrieves the keyboard's height too
 				if let keyboardSize = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect
@@ -68,7 +67,6 @@ class Keyboard: AppStatusListener
 			{
 				_ in
 				self.isVisible = false
-				print("STATUS: Keyboard disappeared")
 			}
 			
 			observers = [didShowObserver, didHideObserver]

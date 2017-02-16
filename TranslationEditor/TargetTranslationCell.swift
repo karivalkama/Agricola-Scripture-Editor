@@ -35,12 +35,8 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 	
 	func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
 	{
-		// TODO: Gained focus, modify accordingly
-		if Keyboard.instance.isVisible
-		{
-			scrollManger?.scrollToTop(cell: self)
-		}
-		
+		// Scrolls the cell into visible area
+		scrollManger?.scrollToAnchor(cell: self)
 		return true
 	}
 	
