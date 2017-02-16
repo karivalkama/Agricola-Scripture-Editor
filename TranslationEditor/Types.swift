@@ -28,4 +28,4 @@ typealias MatchParagraphs = ([Paragraph], [Paragraph]) -> [(Paragraph, Paragraph
 // This function merges the properties of multiple conflicting revisions into a single revision
 // Input: Document id string, Conflicting revision properties
 // Output: Merged revision properties
-typealias Merge = (String, [PropertySet]) throws -> PropertySet
+// typealias Merge = (String, [PropertySet]) throws -> PropertySet

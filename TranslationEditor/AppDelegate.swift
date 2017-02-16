@@ -31,12 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName : barTheme.textColour]
 		
 		// Sets up the conflict handler
-		ConflictResolver.instance.addMerger(
+		ConflictResolver.instance.addMerger
 		{
-			idString, conflicts in
-			
-			let id = Paragraph.createId(from: idString)
-			let paragraphs = try conflicts.map { try Paragraph.create(from: $0, withId: id) }
+			paragraphs -> Paragraph in
 			
 			// If any of the paragraphs is the most recent, the merged is too
 			let isMostRecent = paragraphs.contains(where: { $0.isMostRecent })
@@ -49,9 +46,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 			merged.isDeprecated = isDeprecated
 			merged.isMostRecent = isMostRecent
 			
-			return merged.toPropertySet
+			return merged
+		}
+		
+		/*
+		ConflictResolver.instance.addMerger(
+		{
+			idString, conflicts in
+			
+			
 		},
-		forType: Paragraph.type)
+		forType: NotesThread.type)*/
+		
+		print("Solved \(ConflictResolver.instance.run()) conflicts")
 		
 		return true
 	}

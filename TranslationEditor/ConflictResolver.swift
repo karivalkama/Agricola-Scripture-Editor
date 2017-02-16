@@ -15,7 +15,8 @@ class ConflictResolver
 	
 	static let instance = ConflictResolver()
 	
-	private var mergers = [String : Merge]()
+	// Type -> Id String + Conflicting property versions --> Merged properties
+	private var mergers = [String : (String, [PropertySet]) throws -> PropertySet]()
 	
 	
 	// INIT	-------------------
@@ -29,9 +30,14 @@ class ConflictResolver
 	// OTHER METHODS	-------
 	
 	// Adds a new tool to handle merge conflicts
-	func addMerger(_ merger: @escaping Merge, forType type: String)
+	func addMerger<T: Storable>(_ merger: @escaping ([T]) throws -> (T))
 	{
-		mergers[type] = merger
+		mergers[T.type] =
+		{
+			idString, conflictProperties in
+			
+			return try merger(conflictProperties.map { try T.create(from: $0, withId: T.createId(from: idString)) }).toPropertySet
+		}
 	}
 	
 	// Performs the conflict search algorithm
@@ -48,78 +54,64 @@ class ConflictResolver
 		do
 		{
 			let results = try query.run()
-			DATABASE.inTransaction
+			
+			try DATABASE.tryTransaction
 			{
-				do
+				// Goes through each conflict row
+				while let row = results.nextRow()
 				{
-					while let row = results.nextRow()
+					guard let document = row.document else
 					{
-						if let document = row.document
+						continue
+					}
+					
+					// Finds the conflicting revisions
+					let conflicts = try document.getConflictingRevisions()
+					guard conflicts.count > 1 else
+					{
+						continue
+					}
+					
+					guard let type = document[PROPERTY_TYPE] as? String else
+					{
+						print("ERROR: Conflict in typeless document \(document.documentID)")
+						continue
+					}
+					
+					// Finds the correct merge function
+					guard let merge = self.mergers[type] else
+					{
+						print("ERROR: No conflict merger for document of type \(type)")
+						continue
+					}
+					
+					let mergedProperties = try merge(document.documentID, conflicts.map { PropertySet($0.properties!) })
+					conflictsHandled += 1
+					
+					let current = document.currentRevision!
+					for revision in conflicts
+					{
+						let newRevision = revision.createRevision()
+						if revision == current
 						{
-							let conflicts = try document.getConflictingRevisions()
-							if conflicts.count > 1
-							{
-								// Checks if there is a merge available for the conflict
-								if let type = document[PROPERTY_TYPE] as? String
-								{
-									do
-									{
-										if let merge = self.mergers[type]
-										{
-											let mergeResult = try merge(document.documentID ,conflicts.map { PropertySet($0.properties!) })
-											conflictsHandled += 1
-											
-											let current = document.currentRevision!
-											for revision in conflicts
-											{
-												let newRevision = revision.createRevision()
-												if revision == current
-												{
-													// Adds the merge results to the current revision
-													let afterMergeProperties = newRevision.properties.map { PropertySet($0.toDict) }.or(PropertySet.empty) + mergeResult
-													newRevision.properties = NSMutableDictionary(dictionary: afterMergeProperties.toDict)
-												}
-												else
-												{
-													// Other, conflicting revisions, are deleted
-													newRevision.isDeletion = true
-												}
-												
-												// Saves the change to each revision
-												// Uses special save feature to update conflicting revisions
-												try newRevision.saveAllowingConflict()
-											}
-										}
-										else
-										{
-											print("CONFLICT: No merge function for type \(type)")
-										}
-									}
-									catch
-									{
-										print("CONFLICT: Merging failed for document \(document.documentID) \(error)")
-									}
-								}
-								else
-								{
-									print("CONFLICT: Conflict in a typeless document \(document.documentID)")
-								}
-							}
+							// Sets merge results to the version marked as current
+							let finalProperties = newRevision.properties.map { PropertySet($0.toDict) }.or(PropertySet.empty) + mergedProperties
+							newRevision.properties = NSMutableDictionary(dictionary: finalProperties.toDict)
 						}
+						else
+						{
+							// Deletes the other revisions
+							newRevision.isDeletion = true
+						}
+						
+						try newRevision.saveAllowingConflict()
 					}
 				}
-				catch
-				{
-					print("CONFLICT: Conflict handling failed with error \(error)")
-					return false
-				}
-				
-				return conflictsHandled > 0
 			}
 		}
 		catch
 		{
-			print("CONFLICT: Conflict handlign failed with error \(error)")
+			print("ERROR: Conflict handling failed with error: \(error)")
 		}
 		
 		return conflictsHandled

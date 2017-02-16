@@ -269,6 +269,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 	
 	// OTHER METHDODS	-----
 	
+	/*
 	func setThreadVisibility(thread: NotesThread, visibility: Bool)
 	{
 		if threadVisibleState[thread.idString] != visibility
@@ -276,7 +277,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 			threadVisibleState[thread.idString] = visibility
 			update()
 		}
-	}
+	}*/
 	
 	// If thread contents were visible, hides them. If they were hidden, displays them
 	func changeThreadVisibility(thread: NotesThread)
