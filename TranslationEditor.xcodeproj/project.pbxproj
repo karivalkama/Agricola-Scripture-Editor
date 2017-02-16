@@ -167,6 +167,7 @@
 		7C60704B1E52F770007718BC /* VerseTableDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60704A1E52F770007718BC /* VerseTableDS.swift */; };
 		7C60704D1E533ED3007718BC /* VerseDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C60704C1E533ED3007718BC /* VerseDataCell.xib */; };
 		7C60704E1E54441D007718BC /* TableCellSelectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070461E51B113007718BC /* TableCellSelectionListener.swift */; };
+		7C6070501E55860B007718BC /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60704F1E55860B007718BC /* Keyboard.swift */; };
 		7C6C3C1A1E373959001D56F4 /* PostThreadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C191E373959001D56F4 /* PostThreadVC.swift */; };
 		7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */; };
 		7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE891DE6E1EA00C054EB /* PropertySet.swift */; };
@@ -421,6 +422,7 @@
 		7C6070481E52ECBA007718BC /* VerseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseCell.swift; sourceTree = "<group>"; };
 		7C60704A1E52F770007718BC /* VerseTableDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseTableDS.swift; sourceTree = "<group>"; };
 		7C60704C1E533ED3007718BC /* VerseDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerseDataCell.xib; sourceTree = "<group>"; };
+		7C60704F1E55860B007718BC /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		7C6C3C191E373959001D56F4 /* PostThreadVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostThreadVC.swift; sourceTree = "<group>"; };
 		7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNotesDelegate.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -648,6 +650,7 @@
 				7C4A4FA01DF595B6009F890E /* Globals */,
 				7C4A4FFC1E01677E009F890E /* Extensions */,
 				7C4A4F9F1DF59594009F890E /* Errors */,
+				7C60704F1E55860B007718BC /* Keyboard.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -1217,6 +1220,7 @@
 				7CA1BAB41E31F09200611FED /* PostCell.swift in Sources */,
 				7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */,
 				7C4A4F8B1DEEC4BD009F890E /* View.swift in Sources */,
+				7C6070501E55860B007718BC /* Keyboard.swift in Sources */,
 				7CA1BAB81E31F33000611FED /* DateExtension.swift in Sources */,
 				7CCC01341DA7964000F0562E /* XmlParserUtil.swift in Sources */,
 				7C0130C51E3F3DFB0053C5C2 /* PropertyValueWrapable.swift in Sources */,
