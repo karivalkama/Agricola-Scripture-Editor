@@ -62,16 +62,17 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	private var pathFinder: IndexForPath
 	
-	private var lastOffsetY: [Side : CGFloat] = [.left: 0, .right: 0]
-	private var lastOffsetTime: [Side : TimeInterval] = [.left: 0, .right: 0]
-	private var lastVelocity: [Side : CGFloat] = [.left: 0, .right: 0]
-	private var lastAcceleration: [Side : CGFloat] = [.left: 0, .right: 0]
+	//private var lastOffsetY: [Side : CGFloat] = [.left: 0, .right: 0]
+	//private var lastOffsetTime: [Side : TimeInterval] = [.left: 0, .right: 0]
+	//private var lastVelocity: [Side : CGFloat] = [.left: 0, .right: 0]
+	//private var lastAcceleration: [Side : CGFloat] = [.left: 0, .right: 0]
 	private var isDragging = false
 	
 	private var lastAnchorCell: AnyObject?
 	
 	private var syncScrolling: Side?
 	
+	// ResourceId -> ( Index -> Height )
 	private var cellHeights: [String : [IndexPath : CGFloat]]
 	private let defaultCellHeight: CGFloat = 640
 	private var currentHeightIds: [Side : String]
@@ -130,6 +131,12 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	{
 		let scrolledSide = sideOfTable(scrollView)
 		
+		// Doesn't react to scrolls caused by sync scrolling
+		guard scrolledSide != syncScrolling else
+		{
+			return
+		}
+		
 		// When the table is scrolled to top or bottom, the other table will be too
 		if scrollView.isAtTop
 		{
@@ -142,6 +149,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		// Otherwise the tables are matched by their center cells
 		else
 		{
+			/*
 			// Records the scroll speed
 			let currentTime = Date().timeIntervalSince1970
 			let duration = currentTime - lastOffsetTime[scrolledSide]!
@@ -173,15 +181,9 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 				
 				lastOffsetY[scrolledSide] = offsetY
 				lastOffsetTime[scrolledSide] = currentTime
-			}
+			}*/
 			
-			// Doesn't react to scrolls caused by sync scrolling
-			guard scrolledSide != syncScrolling else
-			{
-				return
-			}
-			
-			syncScroll(toSide: scrolledSide, velocity: lastVelocity[scrolledSide]!, acceleration: lastAcceleration[scrolledSide]!, skipIfAnchorStill: true)
+			syncScroll(toSide: scrolledSide, /*velocity: lastVelocity[scrolledSide]!, acceleration: lastAcceleration[scrolledSide]!, */skipIfAnchorStill: true)
 		}
 	}
 	
@@ -240,6 +242,34 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		}
 	}
 	
+	// TODO: Only works on the right table for now
+	func scrollToTop(cell: UITableViewCell)
+	{
+		let table = tableOfSide(.right)
+		
+		guard let index = table.indexPath(for: cell) else
+		{
+			return
+		}
+		
+		// A small cell may be left in the top 'buffer' area so that sync scrolling connects the right cells
+		let topAreaHeight = MatchPosition.top.targetY(ofHeight: table.visibleContentHeight)
+		
+		var topIndex = index
+		var bufferHeight = cellHeight(side: .right, index: index)
+		
+		// Fills the 'buffer' area with small cells, if necessary
+		while topIndex.row > 0 && bufferHeight <= topAreaHeight
+		{
+			topIndex = IndexPath(row: topIndex.row - 1, section: topIndex.section)
+			bufferHeight += cellHeight(side: .right, index: topIndex)
+		}
+		
+		// Scrolls to the top, leaving a possible buffer
+		syncScrolling = .left
+		table.scrollToRow(at: topIndex, at: .top, animated: true)
+	}
+	
 	// Adds a new cell selection listener to the informed selection listeners
 	func registerSelectionListener(_ listener: TableCellSelectionListener)
 	{
@@ -255,14 +285,14 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		cellSelectionListeners = cellSelectionListeners.filter { !($0 === listener) }
 	}
 	
-	private func syncScroll(toSide anchorSide: Side, velocity: CGFloat = 0, acceleration: CGFloat = 0, skipIfAnchorStill: Bool = false)
+	private func syncScroll(toSide anchorSide: Side, /*velocity: CGFloat = 0, acceleration: CGFloat = 0, */skipIfAnchorStill: Bool = false)
 	{
 		// Matches either the top or the middle of the two tables
 		// This is decided based on whether the virtual keyboard is displayed or not
 		let anchorPosition = Keyboard.instance.isVisible ? MatchPosition.top : MatchPosition.center
 		
 		let scrolledTable = tableOfSide(anchorSide)
-		guard let newCell = anchorCell(atPosition: anchorPosition, inTable: scrolledTable, withVelocity: velocity, andAcceleration: acceleration) else
+		guard let newCell = anchorCell(atPosition: anchorPosition, inTable: scrolledTable/*, withVelocity: velocity, andAcceleration: acceleration*/) else
 		{
 			print("ERROR: No visible cells at \(anchorSide)")
 			return
@@ -367,7 +397,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	}
 	
 	// Velocity is in pixels per second
-	private func anchorCell(atPosition position: MatchPosition, inTable tableView: UITableView, withVelocity velocity: CGFloat, andAcceleration acceleration: CGFloat) -> UITableViewCell?
+	private func anchorCell(atPosition position: MatchPosition, inTable tableView: UITableView/*, withVelocity velocity: CGFloat, andAcceleration acceleration: CGFloat*/) -> UITableViewCell?
 	{
 		// Finds the index path of each cell
 		let indexPaths = tableView.indexPathsForVisibleRows.or([])
@@ -382,16 +412,16 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		let cellHeights = indexPaths.map { tableView.rectForRow(at: $0).height }
 		
 		// Calculates the velocity modifier, which depends from dragging state, velocity and deceleration values
-		let duration: CGFloat = isDragging ? 0 : 0.5
+		//let duration: CGFloat = isDragging ? 0 : 0.5
 		// a = dv / dt
 		// s = vt + at^2 / 2
-		let travelDistance = velocity * duration + acceleration * duration * duration / 2
+		//let travelDistance = velocity * duration + acceleration * duration * duration / 2
 		
 		// Calculates the height of the visible area
-		let totalHeight = cellHeights.reduce(0, { result, h in return result + h })
+		let totalHeight = tableView.visibleContentHeight //cellHeights.reduce(0, { result, h in return result + h })
 		
 		// Velocity is also taken into account when determining the anchor cell position (counts 0.5 second reaction time)
-		let anchorY = max(0, min(position.targetY(ofHeight: totalHeight) + travelDistance, totalHeight - 1))
+		let anchorY = position.targetY(ofHeight: totalHeight) //max(0, min(position.targetY(ofHeight: totalHeight) + travelDistance, totalHeight - 1))
 		
 		// Finds the anchor cell
 		var y:CGFloat = 0

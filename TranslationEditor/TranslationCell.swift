@@ -17,7 +17,7 @@ class TranslationCell: UITableViewCell, ParagraphAssociated
 	var pathId: String?
 	
 	private static let chapterMarkerFont = UIFont(name: "Arial", size: 32.0)!
-	private static let defaultFont = UIFont(name: "Arial", size: 16.0)!
+	static let defaultFont = UIFont(name: "Arial", size: 16.0)!
 	
 	
 	// IMPLEMENTED METHODS	---------

@@ -41,6 +41,13 @@ extension UIScrollView
 		return scrollViewBottomOffset
 	}
 	
+	// The height of the area in this table view that displays content
+	// (Insets do not count to this height)
+	var visibleContentHeight: CGFloat
+	{
+		return frame.height - contentInset.top - contentInset.bottom
+	}
+	
 	// Scrolls the view to the top
 	func scrollToTop(animated: Bool = true)
 	{

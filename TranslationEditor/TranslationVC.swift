@@ -184,6 +184,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		if let cell = cell as? TargetTranslationCell
 		{
 			cell.inputListener = self
+			cell.scrollManger = scrollManager
 		}
 	}
 	

@@ -10,17 +10,18 @@ import UIKit
 
 class TargetTranslationCell: TranslationCell, UITextViewDelegate
 {
-	// Outlets ----------
+	// OUTLETS	----------
 	
 	@IBOutlet weak var inputTextField: UITextView!
 	
 	
-	// Vars	-------------
+	// ATTRIBUTES	------
 	
 	var inputListener: CellInputListener?
+	var scrollManger: ScrollSyncManager?
 	
 	
-	// Overridden	-----
+	// IMPLEMENTED METHODS	----
 	
     override func awakeFromNib()
 	{
@@ -32,8 +33,16 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 		inputTextField.delegate = self
     }
 	
-	
-	// Text view delegate
+	func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
+	{
+		// TODO: Gained focus, modify accordingly
+		if Keyboard.instance.isVisible
+		{
+			scrollManger?.scrollToTop(cell: self)
+		}
+		
+		return true
+	}
 	
 	func textViewDidChange(_ textView: UITextView)
 	{
@@ -58,7 +67,7 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 		}
 		
 		// TODO: Determine the attributes for the inserted text
-		inputTextField.typingAttributes = [:]
+		inputTextField.typingAttributes = [NSFontAttributeName: TranslationCell.defaultFont]
 		return true
 		
 		// TODO: Implement uneditable verse markings here
