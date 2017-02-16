@@ -22,6 +22,30 @@ fileprivate enum Side
 	}
 }
 
+// The different vertical positions the cells can be matched at
+fileprivate enum MatchPosition
+{
+	case top, center
+	
+	var scrollPosition: UITableViewScrollPosition
+	{
+		switch self
+		{
+		case .center: return .middle
+		case .top: return .top
+		}
+	}
+	
+	func targetY(ofHeight height: CGFloat) -> CGFloat
+	{
+		switch self
+		{
+		case .center: return height / 2
+		case .top: return height * 0.075
+		}
+	}
+}
+
 // This class handles the simultaneous scrolling of two scroll views
 class ScrollSyncManager: NSObject, UITableViewDelegate
 {
@@ -44,7 +68,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	private var lastAcceleration: [Side : CGFloat] = [.left: 0, .right: 0]
 	private var isDragging = false
 	
-	private var lastCenterCell: AnyObject?
+	private var lastAnchorCell: AnyObject?
 	
 	private var syncScrolling: Side?
 	
@@ -233,18 +257,22 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	private func syncScroll(toSide anchorSide: Side, velocity: CGFloat = 0, acceleration: CGFloat = 0, skipIfAnchorStill: Bool = false)
 	{
+		// Matches either the top or the middle of the two tables
+		// This is decided based on whether the virtual keyboard is displayed or not
+		let anchorPosition = Keyboard.instance.isVisible ? MatchPosition.top : MatchPosition.center
+		
 		let scrolledTable = tableOfSide(anchorSide)
-		guard let newCell = centerCell(ofTable: scrolledTable, withVelocity: velocity, andAcceleration: acceleration) else
+		guard let newCell = anchorCell(atPosition: anchorPosition, inTable: scrolledTable, withVelocity: velocity, andAcceleration: acceleration) else
 		{
 			print("ERROR: No visible cells at \(anchorSide)")
 			return
 		}
 		
-		guard !(skipIfAnchorStill && newCell === lastCenterCell) else
+		guard !(skipIfAnchorStill && newCell === lastAnchorCell) else
 		{
 			return
 		}
-		lastCenterCell = newCell
+		lastAnchorCell = newCell
 		
 		// finds the matching cell in the other table
 		guard let pathId = (newCell as? ParagraphAssociated)?.pathId else
@@ -259,11 +287,11 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		updateVisibleRowHeights(forTable: scrolledTable)
 		updateVisibleRowHeights(forTable: syncTarget)
 		
-		if let targetIndex = centerIndex(of: pathFinder(syncTarget, pathId), onSide: syncScrollSide)
+		if let targetIndex = matchIndex(of: pathFinder(syncTarget, pathId), onSide: syncScrollSide, atPosition: anchorPosition)
 		{
 			// Scrolls the other table so that the matching cell is visible
 			syncScrolling = syncScrollSide
-			syncTarget.scrollToRow(at: targetIndex, at: .middle, animated: true)
+			syncTarget.scrollToRow(at: targetIndex, at: anchorPosition.scrollPosition, animated: true)
 		}
 	}
 	
@@ -309,7 +337,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		return cellHeights[currentHeightIds[side]!]![index].or(defaultCellHeight)
 	}
 	
-	private func centerIndex(of indexes: [IndexPath], onSide side: Side) -> IndexPath?
+	private func matchIndex(of indexes: [IndexPath], onSide side: Side, atPosition position: MatchPosition) -> IndexPath?
 	{
 		guard !indexes.isEmpty else
 		{
@@ -320,14 +348,14 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		let heights = indexes.map { cellHeights[heightId]![$0].or(defaultCellHeight) }
 		let totalHeight = heights.reduce(0, { $0 + $1 })
 		
-		let centerY = totalHeight / 2
+		let matchY = position.targetY(ofHeight: totalHeight)
 		
 		var y: CGFloat = 0
 		for i in 0 ..< indexes.count
 		{
 			let nextY = y + heights[i]
 			
-			if nextY > centerY
+			if nextY > matchY
 			{
 				return indexes[i]
 			}
@@ -339,7 +367,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	}
 	
 	// Velocity is in pixels per second
-	private func centerCell(ofTable tableView: UITableView, withVelocity velocity: CGFloat, andAcceleration acceleration: CGFloat) -> UITableViewCell?
+	private func anchorCell(atPosition position: MatchPosition, inTable tableView: UITableView, withVelocity velocity: CGFloat, andAcceleration acceleration: CGFloat) -> UITableViewCell?
 	{
 		// Finds the index path of each cell
 		let indexPaths = tableView.indexPathsForVisibleRows.or([])
@@ -361,16 +389,17 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		
 		// Calculates the height of the visible area
 		let totalHeight = cellHeights.reduce(0, { result, h in return result + h })
-		// The targeted center cell is at the center, but velocity is also taken into account (counts 0.5 second reaction time)
-		let centerY = max(0, min(totalHeight / 2 + travelDistance, totalHeight - 1))
 		
-		// Finds the centermost cell
+		// Velocity is also taken into account when determining the anchor cell position (counts 0.5 second reaction time)
+		let anchorY = max(0, min(position.targetY(ofHeight: totalHeight) + travelDistance, totalHeight - 1))
+		
+		// Finds the anchor cell
 		var y:CGFloat = 0
 		for i in 0 ..< cellHeights.count
 		{
 			let nextY = y + cellHeights[i]
 			
-			if nextY > centerY
+			if nextY > anchorY
 			{
 				return tableView.cellForRow(at: indexPaths[i])
 			}
@@ -378,7 +407,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 			y = nextY
 		}
 		
-		print("ERROR: Couldn't find a cell that would contain y of \(centerY)")
+		print("ERROR: Couldn't find a cell that would contain y of \(anchorY)")
 		return nil
 	}
 }
