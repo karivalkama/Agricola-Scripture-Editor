@@ -201,7 +201,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 				}
 			}
 			
-			cell.configure(inputListener: self, scrollManager: scrollManager, resourceSelector: resourceSegmentControl, withNotesAtIndex: noteResourceIndex)
+			cell.configure(inputListener: self, scrollManager: scrollManager, withNotesAtIndex: noteResourceIndex, openResource: switchToResource)
 		}
 	}
 	
@@ -264,17 +264,23 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	
 	@IBAction func resouceSegmentChanged(_ sender: Any)
 	{
-		resourceManager.selectResource(atIndex: resourceSegmentControl.selectedSegmentIndex)
-		if let newTitle = resourceSegmentControl.titleForSegment(at: resourceSegmentControl.selectedSegmentIndex)
+		switchToResource(atIndex: resourceSegmentControl.selectedSegmentIndex)
+	}
+	
+	
+	// OTHER	---------------------
+	
+	private func switchToResource(atIndex index: Int)
+	{
+		resourceSegmentControl.selectedSegmentIndex = index
+		resourceManager.selectResource(atIndex: index)
+		if let newTitle = resourceSegmentControl.titleForSegment(at: index)
 		{
 			print("STATUS: Switching to \(newTitle)")
 			scrollManager.leftResourceId = newTitle
 		}
 		scrollManager.syncScrollToRight()
 	}
-	
-	
-	// OTHER	---------------------
 	
 	private func displayAlert(withIdentifier alertId: String, using configurer: (UIViewController) -> ())
 	{

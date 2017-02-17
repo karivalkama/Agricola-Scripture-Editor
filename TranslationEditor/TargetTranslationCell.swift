@@ -21,7 +21,9 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 	private var notesIndex: Int?
 	private var inputListener: CellInputListener?
 	private weak var scrollManager: ScrollSyncManager?
-	private weak var resourceSelector: UISegmentedControl?
+	
+	// Opens a resource category at certain index
+	private var openResource: ((Int) -> ())?
 	
 	
 	// ACTIONS	-----------
@@ -34,7 +36,7 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 		}
 		
 		// Changes the selected resource to notes
-		resourceSelector?.selectedSegmentIndex = notesIndex
+		openResource?(notesIndex)
 		
 		// Then scrolls to highlight this cell
 		scrollManager?.scrollToAnchor(cell: self)
@@ -93,12 +95,12 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 	
 	// OTHER METHODS	-----
 	
-	func configure(inputListener: CellInputListener, scrollManager: ScrollSyncManager, resourceSelector: UISegmentedControl, withNotesAtIndex notesIndex: Int? = nil)
+	func configure(inputListener: CellInputListener, scrollManager: ScrollSyncManager, withNotesAtIndex notesIndex: Int?, openResource: @escaping (Int) -> ())
 	{
 		self.inputListener = inputListener
 		self.scrollManager = scrollManager
-		self.resourceSelector = resourceSelector
 		self.notesIndex = notesIndex
+		self.openResource = openResource
 		
 		// Notes flag is displayed only when there are pending notes
 		notesFlagButton.isHidden = notesIndex == nil
