@@ -179,7 +179,7 @@ extension NSAttributedString
 	func attribute(_ attrName: String, surrounding range: NSRange) -> Any?
 	{
 		// There are no surrounding attributes at the start and end of the string
-		if range.location <= 0 || range.location + range.length >= length - 1
+		if range.location <= 0 || range.location + range.length >= length
 		{
 			return nil
 		}

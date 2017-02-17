@@ -89,6 +89,8 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 	private let threadQueryManager: LiveQueryManager<NotesThreadView>
 	private let postQueryManager: LiveQueryManager<NotesPostView>
 	
+	private var isActive = false
+	
 	private weak var openThreadListener: OpenThreadListener?
 	
 	
@@ -147,7 +149,10 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 			self.update()
 		}))
 		
-		// TODO: Thread listening should probably be started right away
+		// Starts the thread queries right away in order to update the paragraph flags
+		// TODO: Should probably pause thread listening while the app is not active (may be implemented as a common feature for all listeners)
+		notesQueryManager.start()
+		threadQueryManager.start()
 	}
 	
 	
@@ -297,17 +302,15 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 	
 	func activate()
 	{
-		notesQueryManager.start()
-		threadQueryManager.start()
+		isActive = true
 		postQueryManager.start()
 	}
 	
 	func pause()
 	{
-		// TODO: Don't stop the thread queries (for the flags)
-		notesQueryManager.pause()
-		threadQueryManager.pause()
+		isActive = false
 		postQueryManager.pause()
+		// Thread listening contiues while other resources may be paused
 	}
 	
 	// Finds the IndexPaths that match the provided path id
@@ -356,8 +359,11 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 		// Informs the thread listener about the new status
 		openThreadListener?.onThreadStatusUpdated(forResouceId: self.resourceCollectionId, status: pathStatus)
 		
-		// Also updates the table contents
-		tableView.reloadData()
+		// Also updates the table contents (if currently in charge of that)
+		if isActive
+		{
+			tableView.reloadData()
+		}
 	}
 	
 	private func shouldDisplayPostsForThread(_ thread: NotesThread) -> Bool
