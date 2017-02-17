@@ -9,7 +9,7 @@
 import UIKit
 
 // TranslationVC is the view controller used in the translation / review / work view
-class TranslationVC: UIViewController, CellInputListener, AppStatusListener, TranslationCellManager, AddNotesDelegate
+class TranslationVC: UIViewController, CellInputListener, AppStatusListener, TranslationCellManager, AddNotesDelegate, OpenThreadListener
 {
 	// TYPES	----------
 	
@@ -42,6 +42,10 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	// Key = paragraph path id, value = edited text
 	private var inputData = [String : NSAttributedString]()
 	
+	// Open thread status
+	// path id -> [ resource ids for each resource containing open threads for the path ]
+	private var openThreadStatus = [String: [String]]()
+	
 	private var active = false
 	
 	
@@ -70,7 +74,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			translationTableView.dataSource = targetTranslationDS
 		}
 		
-		resourceManager = ResourceManager(resourceTableView: resourceTableView, addNotesDelegate: self)
+		resourceManager = ResourceManager(resourceTableView: resourceTableView, addNotesDelegate: self, threadStatusListener: self)
 		
 		// Sets initial resources (TEST)
 		let sourceLanguage = try! LanguageView.instance.language(withName: "English")
@@ -183,8 +187,21 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	{
 		if let cell = cell as? TargetTranslationCell
 		{
-			cell.inputListener = self
-			cell.scrollManger = scrollManager
+			// Finds the first viable index of a resource that contains an open thread for this paragraph cell
+			var noteResourceIndex: Int? = nil
+			if let openResourceIds = cell.pathId.flatMap({ self.openThreadStatus[$0] })
+			{
+				for resourceId in openResourceIds
+				{
+					if let resourceIndex = resourceManager.indexForResource(withId: resourceId)
+					{
+						noteResourceIndex = resourceIndex
+						break
+					}
+				}
+			}
+			
+			cell.configure(inputListener: self, scrollManager: scrollManager, resourceSelector: resourceSegmentControl, withNotesAtIndex: noteResourceIndex)
 		}
 	}
 	
@@ -199,6 +216,41 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	func appWillContinue()
 	{
 		activate()
+	}
+	
+	
+	// OTHER IMPLEMENTED	---------
+	
+	func onThreadStatusUpdated(forResouceId resourceId: String, status: [String : Bool])
+	{
+		// Updates the open thread status for each path
+		for (pathId, isOpen) in status
+		{
+			if let currentStatus = openThreadStatus[pathId]
+			{
+				if isOpen
+				{
+					if !currentStatus.contains(resourceId)
+					{
+						openThreadStatus[pathId] = currentStatus + resourceId
+					}
+				}
+				else
+				{
+					if currentStatus.contains(resourceId)
+					{
+						openThreadStatus[pathId] = currentStatus - resourceId
+					}
+				}
+			}
+			else
+			{
+				// Adds new elements where necessary
+				openThreadStatus[pathId] = isOpen ? [resourceId] : []
+			}
+		}
+		
+		translationTableView.reloadData()
 	}
 	
 	

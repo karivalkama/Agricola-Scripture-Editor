@@ -71,6 +71,15 @@ extension Array
 	}
 }
 
+extension Array where Element: Equatable
+{
+	// Returns an array without the specified element
+	static func - (array: Array<Element>, element: Element) -> Array<Element>
+	{
+		return array.filter { $0 != element }
+	}
+}
+
 extension Array where Element: AnyObject
 {
 	// Checks if the array contains a reference to the provided object instance
@@ -83,6 +92,12 @@ extension Array where Element: AnyObject
 	func containsReferences(to elements: [Element]) -> Bool
 	{
 		return elements.forAll(containsReference)
+	}
+	
+	// Returns the array without any reference to the specified element
+	static func - (array: Array<Element>, element: Element) -> Array<Element>
+	{
+		return array.filter { !($0 === element) }
 	}
 }
 

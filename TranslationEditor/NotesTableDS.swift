@@ -63,6 +63,8 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 	
 	private weak var tableView: UITableView!
 	
+	private let resourceCollectionId: String
+	
 	// Path id -> Note
 	private var notes = [String : ParagraphNotes]()
 	// Note id -> Threads
@@ -80,17 +82,24 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 	
 	private var indexStatus = IndexStatus(rowCount: 0, pathIndex: [:], orderedNotes: [], noteStartIndices: [])
 	
+	// Path id -> path contains unresolved threads
+	private var pathStatus = [String: Bool]()
+	
 	private let notesQueryManager: LiveQueryManager<ParagraphNotesView>
 	private let threadQueryManager: LiveQueryManager<NotesThreadView>
 	private let postQueryManager: LiveQueryManager<NotesPostView>
+	
+	private weak var openThreadListener: OpenThreadListener?
 	
 	
 	// INIT	-----------------
 	
 	// TODO: Add chapter parameters after translation range is used
-	init(tableView: UITableView, resourceCollectionId: String)
+	init(tableView: UITableView, resourceCollectionId: String, threadListener: OpenThreadListener?)
 	{
+		self.resourceCollectionId = resourceCollectionId
 		self.tableView = tableView
+		self.openThreadListener = threadListener
 		
 		notesQueryManager = ParagraphNotesView.instance.notesQuery(collectionId: resourceCollectionId).liveQueryManager
 		threadQueryManager = NotesThreadView.instance.threadQuery(collectionId: resourceCollectionId).liveQueryManager
@@ -335,11 +344,18 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 				
 				pathIndex[pathId] = (index, nextIndex)
 				index = nextIndex
+				
+				// Updates the path status as well
+				// (checks which path ids contain open threads)
+				pathStatus[pathId] = (threads[note.idString]?.contains(where: { !$0.isResolved })).or(false)
 			}
 		}
 		
 		indexStatus = IndexStatus(rowCount: index, pathIndex: pathIndex, orderedNotes: orderedNotes, noteStartIndices: noteStartIndices)
-		//print("STATUS: Notes updated: \(indexStatus)")
+		
+		// Informs the thread listener about the new status
+		openThreadListener?.onThreadStatusUpdated(forResouceId: self.resourceCollectionId, status: pathStatus)
+		
 		// Also updates the table contents
 		tableView.reloadData()
 	}

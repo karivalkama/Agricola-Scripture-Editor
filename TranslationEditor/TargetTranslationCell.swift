@@ -13,13 +13,32 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 	// OUTLETS	----------
 	
 	@IBOutlet weak var inputTextField: UITextView!
+	@IBOutlet weak var notesFlagButton: UIButton!
 	
 	
 	// ATTRIBUTES	------
 	
-	var inputListener: CellInputListener?
-	var scrollManger: ScrollSyncManager?
+	private var notesIndex: Int?
+	private var inputListener: CellInputListener?
+	private weak var scrollManager: ScrollSyncManager?
+	private weak var resourceSelector: UISegmentedControl?
 	
+	
+	// ACTIONS	-----------
+	
+	@IBAction func noteFlagButtonPressed(_ sender: Any)
+	{
+		guard let notesIndex = notesIndex else
+		{
+			return
+		}
+		
+		// Changes the selected resource to notes
+		resourceSelector?.selectedSegmentIndex = notesIndex
+		
+		// Then scrolls to highlight this cell
+		scrollManager?.scrollToAnchor(cell: self)
+	}
 	
 	// IMPLEMENTED METHODS	----
 	
@@ -36,7 +55,7 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 	func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
 	{
 		// Scrolls the cell into visible area
-		scrollManger?.scrollToAnchor(cell: self)
+		scrollManager?.scrollToAnchor(cell: self)
 		return true
 	}
 	
@@ -69,5 +88,19 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 		// TODO: Implement uneditable verse markings here
 		//return textView.text.occurences(of: TranslationCell.verseRegex, within: range) == text.occurences(of: TranslationCell.verseRegex)
 		//return textView.text.occurrences(of: "#", within: range) == text.occurrences(of: "#")
+	}
+	
+	
+	// OTHER METHODS	-----
+	
+	func configure(inputListener: CellInputListener, scrollManager: ScrollSyncManager, resourceSelector: UISegmentedControl, withNotesAtIndex notesIndex: Int? = nil)
+	{
+		self.inputListener = inputListener
+		self.scrollManager = scrollManager
+		self.resourceSelector = resourceSelector
+		self.notesIndex = notesIndex
+		
+		// Notes flag is displayed only when there are pending notes
+		notesFlagButton.isHidden = notesIndex == nil
 	}
 }

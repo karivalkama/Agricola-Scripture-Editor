@@ -28,6 +28,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 	
 	private weak var resourceTableView: UITableView!
 	private weak var addNotesDelegate: AddNotesDelegate!
+	private weak var threadStatusListener: OpenThreadListener?
 	
 	private var sourceBooks = [BookData]()
 	private var notes = [NotesData]()
@@ -74,10 +75,11 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 	
 	// INIT	-------------------
 	
-	init(resourceTableView: UITableView, addNotesDelegate: AddNotesDelegate)
+	init(resourceTableView: UITableView, addNotesDelegate: AddNotesDelegate, threadStatusListener: OpenThreadListener?)
 	{
 		self.resourceTableView = resourceTableView
 		self.addNotesDelegate = addNotesDelegate
+		self.threadStatusListener = threadStatusListener
 	}
 	
 	
@@ -139,7 +141,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 			return BookData(book: book, binding: binding, datasource: TranslationTableViewDS(tableView: resourceTableView!, cellReuseId: "sourceCell", bookId: book.idString))
 		}
 		
-		self.notes = notes.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString)) }
+		self.notes = notes.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString, threadListener: self.threadStatusListener)) }
 		
 		selectResource(atIndex: 0)
 	}
@@ -210,6 +212,22 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 		currentLiveResource?.activate()
 		
 		resourceTableView.reloadData()
+	}
+	
+	// Retrieves the index of a resource (collection) with the specified id
+	// Only works with resources that are tied to a certain resource collection instance 
+	// (Eg. not books)
+	func indexForResource(withId resourceId: String) -> Int?
+	{
+		for i in 0 ..< notes.count
+		{
+			if notes[i].resource.idString == resourceId
+			{
+				return sourceBooks.count + i
+			}
+		}
+		
+		return nil
 	}
 	
 	func pause()

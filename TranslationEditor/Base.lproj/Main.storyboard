@@ -391,7 +391,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="488" height="158"/>
                                                                     <subviews>
                                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.84999999999999998" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fps-Dv-Nlj">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="488" height="158"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="460" height="158"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <color key="tintColor" red="0.92156862745098034" green="0.33725490196078434" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
@@ -407,23 +407,37 @@
                                                                                         <constraint firstAttribute="height" constant="24" id="s1H-tJ-86g"/>
                                                                                     </constraints>
                                                                                 </imageView>
-                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag" translatesAutoresizingMaskIntoConstraints="NO" id="VF2-L8-Q9h">
+                                                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knn-0b-PZw">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="24" height="32"/>
                                                                                     <constraints>
-                                                                                        <constraint firstAttribute="height" constant="32" id="Kqh-8a-427"/>
+                                                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="32" id="ZlR-CQ-r1E"/>
                                                                                     </constraints>
-                                                                                </imageView>
+                                                                                    <state key="normal" image="flag"/>
+                                                                                    <connections>
+                                                                                        <action selector="noteFlagButtonPressed:" destination="3St-S3-RBA" eventType="touchUpInside" id="uLA-Nv-jQ7"/>
+                                                                                    </connections>
+                                                                                </button>
                                                                             </subviews>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="24" id="Ag2-eb-Kd1"/>
+                                                                                <constraint firstItem="knn-0b-PZw" firstAttribute="top" secondItem="2Oa-s8-i7D" secondAttribute="top" id="BAP-mg-lta"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="knn-0b-PZw" secondAttribute="trailing" id="S68-rj-3nu"/>
                                                                                 <constraint firstItem="tWx-2M-Rcc" firstAttribute="leading" secondItem="2Oa-s8-i7D" secondAttribute="leading" id="Uwz-f9-khL"/>
-                                                                                <constraint firstAttribute="trailing" secondItem="VF2-L8-Q9h" secondAttribute="trailing" id="l0z-Y3-beg"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="tWx-2M-Rcc" secondAttribute="trailing" id="mSd-DI-2tj"/>
-                                                                                <constraint firstItem="VF2-L8-Q9h" firstAttribute="top" secondItem="2Oa-s8-i7D" secondAttribute="top" id="rnr-9V-Kxw"/>
-                                                                                <constraint firstItem="VF2-L8-Q9h" firstAttribute="leading" secondItem="2Oa-s8-i7D" secondAttribute="leading" id="sYU-9Z-6f5"/>
+                                                                                <constraint firstItem="knn-0b-PZw" firstAttribute="leading" secondItem="2Oa-s8-i7D" secondAttribute="leading" id="rBH-yD-eD0"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="tWx-2M-Rcc" secondAttribute="bottom" id="v1l-A0-cWO"/>
                                                                             </constraints>
+                                                                            <variation key="default">
+                                                                                <mask key="subviews">
+                                                                                    <exclude reference="tWx-2M-Rcc"/>
+                                                                                </mask>
+                                                                                <mask key="constraints">
+                                                                                    <exclude reference="Uwz-f9-khL"/>
+                                                                                    <exclude reference="mSd-DI-2tj"/>
+                                                                                    <exclude reference="v1l-A0-cWO"/>
+                                                                                </mask>
+                                                                            </variation>
                                                                         </view>
                                                                     </subviews>
                                                                     <constraints>
@@ -432,15 +446,6 @@
                                                                         <constraint firstItem="Fps-Dv-Nlj" firstAttribute="top" secondItem="rgb-Qd-yiL" secondAttribute="top" id="OzA-Xi-n4A"/>
                                                                         <constraint firstAttribute="bottom" secondItem="2Oa-s8-i7D" secondAttribute="bottom" constant="8" id="RVx-it-ccv"/>
                                                                     </constraints>
-                                                                    <variation key="default">
-                                                                        <mask key="subviews">
-                                                                            <exclude reference="2Oa-s8-i7D"/>
-                                                                        </mask>
-                                                                        <mask key="constraints">
-                                                                            <exclude reference="Gll-66-maA"/>
-                                                                            <exclude reference="RVx-it-ccv"/>
-                                                                        </mask>
-                                                                    </variation>
                                                                 </stackView>
                                                             </subviews>
                                                             <constraints>
@@ -452,6 +457,7 @@
                                                         </tableViewCellContentView>
                                                         <connections>
                                                             <outlet property="inputTextField" destination="Fps-Dv-Nlj" id="ajQ-X4-pZg"/>
+                                                            <outlet property="notesFlagButton" destination="knn-0b-PZw" id="cZa-w0-YMK"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
