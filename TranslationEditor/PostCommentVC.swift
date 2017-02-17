@@ -17,6 +17,7 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 	@IBOutlet weak var originalCommentTextView: UITextView!
 	@IBOutlet weak var originalCommentLabel: UILabel!
 	@IBOutlet weak var verseTable: UITableView!
+	@IBOutlet weak var titleLabel: UILabel!
 	
 	
 	// ATTRIBUTES	--------
@@ -41,6 +42,7 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 		postButton.isEnabled = false
 		commentTextView.delegate = self
 		
+		titleLabel.text = targetThread.name
 		originalCommentTextView.text = originalComment.content
 		
 		verseTable.register(UINib(nibName: "VerseDataCell", bundle: nil), forCellReuseIdentifier: VerseCell.identifier)
@@ -74,6 +76,13 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 		do
 		{
 			try NotesPost(threadId: targetThread.idString, creatorId: userId, content: commentTextView.text).push()
+			
+			// If the thread was already marked as resolved, it is reopened
+			if targetThread.isResolved
+			{
+				try targetThread.setResolved(false)
+			}
+			
 			dismiss(animated: true, completion: nil)
 		}
 		catch

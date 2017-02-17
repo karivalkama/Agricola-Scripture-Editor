@@ -168,6 +168,7 @@
 		7C60704D1E533ED3007718BC /* VerseDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C60704C1E533ED3007718BC /* VerseDataCell.xib */; };
 		7C60704E1E54441D007718BC /* TableCellSelectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070461E51B113007718BC /* TableCellSelectionListener.swift */; };
 		7C6070501E55860B007718BC /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60704F1E55860B007718BC /* Keyboard.swift */; };
+		7C6070511E56D703007718BC /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60704F1E55860B007718BC /* Keyboard.swift */; };
 		7C6C3C1A1E373959001D56F4 /* PostThreadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C191E373959001D56F4 /* PostThreadVC.swift */; };
 		7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */; };
 		7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE891DE6E1EA00C054EB /* PropertySet.swift */; };
@@ -1329,6 +1330,7 @@
 				7C4A4FFA1E012375009F890E /* ConflictResolver.swift in Sources */,
 				7CDBD6C11E28AE0300912320 /* TranslationCell.swift in Sources */,
 				7C4A4FA31DF829C5009F890E /* CellInputListener.swift in Sources */,
+				7C6070511E56D703007718BC /* Keyboard.swift in Sources */,
 				7CDBD6F31E2E3BEC00912320 /* NotesThread.swift in Sources */,
 				7C40DF5C1DE718DA0035B92E /* Storable.swift in Sources */,
 				7C4A4F8C1DEEC4BD009F890E /* View.swift in Sources */,

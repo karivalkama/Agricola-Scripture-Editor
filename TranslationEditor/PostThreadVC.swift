@@ -9,7 +9,7 @@
 import UIKit
 import HTagView
 
-class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, HTagViewDataSource
+class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, HTagViewDataSource, UITextViewDelegate
 {
 	// IB OUTLETS	-----------
 	
@@ -69,6 +69,8 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		}
 		
 		// Configures UI elements
+		commentTextView.delegate = self
+		
 		versePickerView.dataSource = self
 		versePickerView.delegate = self
 		
@@ -138,18 +140,16 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	
 	@IBAction func subjectChanged(_ sender: Any)
 	{
-		if subjectTextField.text == nil || subjectTextField.text!.isEmpty
-		{
-			postButton.isEnabled = false
-		}
-		else
-		{
-			postButton.isEnabled = true
-		}
+		updatePostButtonStatus()
 	}
 	
 	
 	// IMPLEMENTED METHODS	---
+	
+	func textViewDidChange(_ textView: UITextView)
+	{
+		updatePostButtonStatus()
+	}
 	
 	func numberOfComponents(in pickerView: UIPickerView) -> Int
 	{
@@ -238,6 +238,18 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		else
 		{
 			return availableVerseRange?.verses[row - 1].name
+		}
+	}
+	
+	private func updatePostButtonStatus()
+	{
+		if subjectTextField.text == nil || subjectTextField.text!.isEmpty || commentTextView.text.isEmpty
+		{
+			postButton.isEnabled = false
+		}
+		else
+		{
+			postButton.isEnabled = true
 		}
 	}
 }

@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		},
 		forType: NotesThread.type)*/
 		
-		print("Solved \(ConflictResolver.instance.run()) conflicts")
+		print("STATUS: Solved \(ConflictResolver.instance.run()) conflicts")
 		
 		return true
 	}
