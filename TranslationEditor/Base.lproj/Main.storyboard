@@ -126,10 +126,10 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="yBB-ki-v5F">
-                                <rect key="frame" x="16" y="56" width="992" height="704"/>
+                                <rect key="frame" x="16" y="64" width="992" height="696"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="apn-1P-Iz2" userLabel="Resource Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="488" height="704"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="488" height="696"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ree-vj-F6F">
                                                 <rect key="frame" x="0.0" y="0.0" width="488" height="33"/>
@@ -146,7 +146,7 @@
                                                 </connections>
                                             </segmentedControl>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2EI-Mh-Uso">
-                                                <rect key="frame" x="0.0" y="48" width="488" height="656"/>
+                                                <rect key="frame" x="0.0" y="48" width="488" height="648"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="separatorColor" red="1" green="0.66666666669999997" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                 <prototypes>
@@ -177,7 +177,7 @@
                                                             <outlet property="sourceTextView" destination="HeG-UF-hqZ" id="79Z-Fc-2vB"/>
                                                         </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NoteCell" rowHeight="44" id="8ee-jT-DwW" customClass="NotesCell" customModule="TranslationEditor" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="NoteCell" rowHeight="44" id="8ee-jT-DwW" customClass="NotesCell" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="114" width="488" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8ee-jT-DwW" id="JnG-ji-Fah">
@@ -254,6 +254,9 @@
                                                                         </label>
                                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVC-vC-rFM">
                                                                             <rect key="frame" x="415" y="0.0" width="51" height="32"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="49" id="N3C-JC-VmC"/>
+                                                                            </constraints>
                                                                             <color key="onTintColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <connections>
                                                                                 <action selector="openStateChanged:" destination="ut6-oO-hAA" eventType="valueChanged" id="8mv-jG-XGC"/>
@@ -340,7 +343,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="akX-uh-vvq" userLabel="Translation Stack View">
-                                        <rect key="frame" x="504" y="0.0" width="488" height="704"/>
+                                        <rect key="frame" x="504" y="0.0" width="488" height="696"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sq2-EQ-rYb">
                                                 <rect key="frame" x="0.0" y="0.0" width="488" height="32"/>
@@ -375,7 +378,7 @@
                                                 </subviews>
                                             </stackView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="158" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7zH-vr-M2m">
-                                                <rect key="frame" x="0.0" y="48" width="488" height="656"/>
+                                                <rect key="frame" x="0.0" y="48" width="488" height="648"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="tintColor" red="1" green="0.66666666669999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="separatorColor" red="1" green="0.66666666666666663" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -390,16 +393,8 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="rgb-Qd-yiL" userLabel="Translation Content Stack View">
                                                                     <rect key="frame" x="0.0" y="0.0" width="488" height="158"/>
                                                                     <subviews>
-                                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.84999999999999998" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fps-Dv-Nlj">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="460" height="158"/>
-                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                            <color key="tintColor" red="0.92156862745098034" green="0.33725490196078434" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
-                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" keyboardType="alphabet"/>
-                                                                        </textView>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Oa-s8-i7D" userLabel="Status View">
-                                                                            <rect key="frame" x="464" y="8" width="24" height="142"/>
+                                                                            <rect key="frame" x="0.0" y="8" width="24" height="142"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" image="starfilled" translatesAutoresizingMaskIntoConstraints="NO" id="tWx-2M-Rcc">
                                                                                     <rect key="frame" x="0.0" y="118" width="24" height="24"/>
@@ -439,6 +434,14 @@
                                                                                 </mask>
                                                                             </variation>
                                                                         </view>
+                                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.84999999999999998" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fps-Dv-Nlj">
+                                                                            <rect key="frame" x="28" y="0.0" width="460" height="158"/>
+                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            <color key="tintColor" red="0.92156862745098034" green="0.33725490196078434" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
+                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" keyboardType="alphabet"/>
+                                                                        </textView>
                                                                     </subviews>
                                                                     <constraints>
                                                                         <constraint firstItem="2Oa-s8-i7D" firstAttribute="top" secondItem="rgb-Qd-yiL" secondAttribute="top" constant="8" id="Gll-66-maA"/>
@@ -473,13 +476,14 @@
                             <constraint firstItem="Tth-WK-l9P" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="FwA-ou-fcx"/>
                             <constraint firstAttribute="trailing" secondItem="Tth-WK-l9P" secondAttribute="trailing" id="Ibp-0r-LH2"/>
                             <constraint firstAttribute="trailing" secondItem="Tth-WK-l9P" secondAttribute="trailing" id="TQb-YJ-Vo2"/>
-                            <constraint firstItem="yBB-ki-v5F" firstAttribute="top" secondItem="Tth-WK-l9P" secondAttribute="bottom" constant="8" id="bob-wo-gdQ"/>
+                            <constraint firstItem="yBB-ki-v5F" firstAttribute="top" secondItem="Tth-WK-l9P" secondAttribute="bottom" constant="16" id="bob-wo-gdQ"/>
                             <constraint firstAttribute="bottom" secondItem="yBB-ki-v5F" secondAttribute="bottom" constant="8" id="dUQ-nU-LoX"/>
                             <constraint firstItem="Tth-WK-l9P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fdA-13-NNl"/>
                             <constraint firstItem="yBB-ki-v5F" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="fj0-Od-Amv"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="commitButton" destination="yfA-HO-Uct" id="xVx-nA-SsB"/>
                         <outlet property="resourceSegmentControl" destination="ree-vj-F6F" id="v1v-I9-yL9"/>
                         <outlet property="resourceTableView" destination="2EI-Mh-Uso" id="hhv-Px-gYO"/>
                         <outlet property="translationTableView" destination="7zH-vr-M2m" id="37F-w5-az9"/>
@@ -503,7 +507,7 @@
                         <subviews>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="heb-qA-gZy" userLabel="BackgroundView">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QC9-cB-tj5" userLabel="ContentView">
                                 <rect key="frame" x="148" y="32" width="832" height="608"/>
@@ -772,7 +776,7 @@
                         <subviews>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OBd-63-Ny2" userLabel="BackgroundView">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSI-mH-uZ4" userLabel="ContentView">
                                 <rect key="frame" x="148" y="32" width="832" height="608"/>

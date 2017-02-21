@@ -97,7 +97,7 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 		}
 		
 		// TODO: Determine the attributes for the inserted text
-		inputTextField.typingAttributes = [NSFontAttributeName: TranslationCell.defaultFont]
+		inputTextField.typingAttributes = [NSFontAttributeName: TranslationCell.defaultFont, NSForegroundColorAttributeName: Colour.Primary.dark.asColour]
 		return true
 		
 		// TODO: Implement uneditable verse markings here
@@ -117,5 +117,15 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 		
 		// Notes flag is displayed only when there are pending notes
 		notesFlagButton.isHidden = notesIndex == nil
+		
+		let menuItem = UIMenuItem(title: "Print To Console", action: #selector(printToConsole))
+		UIMenuController.shared.menuItems = [menuItem]
+		UIMenuController.shared.update()
+	}
+	
+	func printToConsole() {
+		if let range = inputTextField.selectedTextRange, let selectedText = inputTextField.text(in: range) {
+			print(selectedText)
+		}
 	}
 }

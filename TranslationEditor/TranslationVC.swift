@@ -18,6 +18,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	
 	// OUTLETS	----------
 	
+	@IBOutlet weak var commitButton: BasicButton!
 	@IBOutlet weak var translationTableView: UITableView!
 	@IBOutlet weak var resourceTableView: UITableView!
 	@IBOutlet weak var resourceSegmentControl: UISegmentedControl!
@@ -54,6 +55,8 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
+		
+		commitButton.isEnabled = false
 		
 		// (Epic hack which) Makes table view cells have automatic height
 		translationTableView.rowHeight = UITableViewAutomaticDimension
@@ -144,6 +147,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	func cellContentChanged(id: String, newContent: NSAttributedString)
 	{
 		inputData[id] = newContent
+		commitButton.isEnabled = true
 		
 		// Resets cell height
 		UIView.setAnimationsEnabled(false)
@@ -303,6 +307,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		}
 		
 		print("STATUS: STARTING COMMIT")
+		commitButton.isEnabled = false
 		
 		DATABASE.inTransaction
 		{
@@ -360,6 +365,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 				}
 				
 				print("There are now \(inputData.count) inputs")
+				commitButton.isEnabled = !inputData.isEmpty
 			}
 			
 			// Starts the database listening process, if not yet started
