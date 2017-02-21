@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Select AvatarVC-->
         <scene sceneID="qAS-cU-ihd">
             <objects>
-                <viewController storyboardIdentifier="SelectAvatar" id="dMv-eu-RFU" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectAvatar" id="dMv-eu-RFU" customClass="SelectAvatarVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3cW-jL-GWh"/>
                         <viewControllerLayoutGuide type="bottom" id="Vbd-3v-8fx"/>
@@ -80,7 +80,7 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oz8-mI-VI2">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oz8-mI-VI2" userLabel="Password View">
                                 <rect key="frame" x="318" y="312" width="388" height="144"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BRS-qN-0CT">
@@ -106,6 +106,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                                        <connections>
+                                                            <action selector="passwordFieldChanged:" destination="dMv-eu-RFU" eventType="valueChanged" id="Yfx-JS-5UI"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -126,6 +129,9 @@
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="cancelPressed:" destination="dMv-eu-RFU" eventType="touchUpInside" id="lS8-JV-uKt"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uC0-5u-oCf" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="186" y="0.0" width="170" height="40"/>
@@ -137,6 +143,9 @@
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="loginPressed:" destination="dMv-eu-RFU" eventType="touchUpInside" id="eJ3-kN-t4K"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -174,6 +183,12 @@
                             <constraint firstItem="oz8-mI-VI2" firstAttribute="centerX" secondItem="WPR-I3-vDQ" secondAttribute="centerX" id="tvH-3M-ifY"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="avatarCollectionView" destination="UrZ-ky-uDt" id="MnX-4p-KZE"/>
+                        <outlet property="loginButton" destination="uC0-5u-oCf" id="MBb-5p-DAI"/>
+                        <outlet property="passwordField" destination="tKq-yi-0bd" id="31R-Es-lbc"/>
+                        <outlet property="passwordView" destination="oz8-mI-VI2" id="2Ig-Od-7fS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SI4-Qj-Joy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
