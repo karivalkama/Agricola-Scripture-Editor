@@ -58,6 +58,13 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 	{
 		// Scrolls the cell into visible area
 		scrollManager?.scrollToAnchor(cell: self)
+		
+		// Adds a timed scroll too since the keyboard may pop up
+		DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.33)
+		{
+			self.scrollManager?.scrollToAnchor(cell: self)
+		}
+		
 		return true
 	}
 	
@@ -72,6 +79,12 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 	
 	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
 	{
+		// The very start (before paragraph marker) of the string cannot be replaced
+		if range.location == 0
+		{
+			return false
+		}
+		
 		// The new string can't remove verse markings
 		if textView.attributedText.containsAttribute(VerseIndexMarkerAttributeName, in: range) || textView.attributedText.containsAttribute(ParaMarkerAttributeName, in: range)
 		{
