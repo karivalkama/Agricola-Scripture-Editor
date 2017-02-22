@@ -67,6 +67,16 @@ final class Avatar: Storable
 	{
 		return try AvatarInfo.get(avatarId: idString)
 	}
+	
+	static func project(fromId avatarId: String) -> String
+	{
+		return property(withName: PROPERTY_PROJECT, fromId: avatarId).string()
+	}
+	
+	fileprivate static func nameKey(ofId avatarId: String) -> String
+	{
+		return property(withName: "avatar_name_key", fromId: avatarId).string()
+	}
 }
 
 // This class contains avatar info that is only visible in the project scope
@@ -101,6 +111,11 @@ final class AvatarInfo: Storable
 	{
 		return ["open_name": openName.value, "account": accountId.value, "offline_password": passwordHash.value, "carousels": PropertySet(carouselIds).value]
 	}
+	
+	var projectId: String { return Avatar.project(fromId: avatarId) }
+	
+	// The key version of the avatar's name
+	var nameKey: String { return Avatar.nameKey(ofId: avatarId) }
 	
 	
 	// INIT	--------------------
@@ -169,6 +184,23 @@ final class AvatarInfo: Storable
 		else
 		{
 			return (avatarId + password).SHA256() == passwordHash
+		}
+	}
+	
+	// The name that should be displayed for this avatar in-project
+	func displayName() throws -> String
+	{
+		if let openName = openName
+		{
+			return openName
+		}
+		else if let avatar = try Avatar.get(avatarId)
+		{
+			return avatar.name
+		}
+		else
+		{
+			return nameKey
 		}
 	}
 	

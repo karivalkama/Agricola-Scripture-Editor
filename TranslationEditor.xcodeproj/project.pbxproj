@@ -172,6 +172,9 @@
 		7C6070531E570C0B007718BC /* OpenThreadStatusListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070521E570C0B007718BC /* OpenThreadStatusListener.swift */; };
 		7C6070561E5C601D007718BC /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6070551E5C601D007718BC /* Login.storyboard */; };
 		7C6070591E5C7BE0007718BC /* SelectAvatarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070581E5C7BE0007718BC /* SelectAvatarVC.swift */; };
+		7C60705B1E5D705B007718BC /* AvatarInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60705A1E5D705B007718BC /* AvatarInfoView.swift */; };
+		7C60705D1E5D79D8007718BC /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60705C1E5D79D8007718BC /* AvatarCell.swift */; };
+		7C6070601E5D89E0007718BC /* Alpine.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C60705F1E5D89E0007718BC /* Alpine.ttf */; };
 		7C6C3C1A1E373959001D56F4 /* PostThreadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C191E373959001D56F4 /* PostThreadVC.swift */; };
 		7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */; };
 		7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE891DE6E1EA00C054EB /* PropertySet.swift */; };
@@ -430,6 +433,9 @@
 		7C6070521E570C0B007718BC /* OpenThreadStatusListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenThreadStatusListener.swift; sourceTree = "<group>"; };
 		7C6070551E5C601D007718BC /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		7C6070581E5C7BE0007718BC /* SelectAvatarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAvatarVC.swift; sourceTree = "<group>"; };
+		7C60705A1E5D705B007718BC /* AvatarInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarInfoView.swift; sourceTree = "<group>"; };
+		7C60705C1E5D79D8007718BC /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
+		7C60705F1E5D89E0007718BC /* Alpine.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Alpine.ttf; sourceTree = "<group>"; };
 		7C6C3C191E373959001D56F4 /* PostThreadVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostThreadVC.swift; sourceTree = "<group>"; };
 		7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNotesDelegate.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -571,6 +577,7 @@
 		7C18A18D1D8BBEBD00DD1B03 /* TranslationEditor */ = {
 			isa = PBXGroup;
 			children = (
+				7C60705E1E5D89BD007718BC /* Resources */,
 				7C6070541E5C5FE5007718BC /* UI */,
 				7C20D7FD1D9A939400E84BA5 /* Util */,
 				7C20D7E61D8BF99D00E84BA5 /* Model */,
@@ -621,6 +628,7 @@
 				7C4A4FDB1DFAE273009F890E /* Theme.swift */,
 				7CDBD6E91E28FCD400912320 /* ParagraphAssociated.swift */,
 				7C6070481E52ECBA007718BC /* VerseCell.swift */,
+				7C60705C1E5D79D8007718BC /* AvatarCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -687,6 +695,7 @@
 				7CA1BA9F1E2F9C2100611FED /* NotesThreadView.swift */,
 				7CA1BAA31E2FA5A500611FED /* NotesPostView.swift */,
 				7C0130CA1E41F4D30053C5C2 /* ProjectView.swift */,
+				7C60705A1E5D705B007718BC /* AvatarInfoView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -799,8 +808,8 @@
 			children = (
 				7C18A1971D8BBEBD00DD1B03 /* LaunchScreen.storyboard */,
 				7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */,
-				7C60704C1E533ED3007718BC /* VerseDataCell.xib */,
 				7C6070551E5C601D007718BC /* Login.storyboard */,
+				7C60704C1E533ED3007718BC /* VerseDataCell.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -811,6 +820,14 @@
 				7C6070581E5C7BE0007718BC /* SelectAvatarVC.swift */,
 			);
 			name = LoginView;
+			sourceTree = "<group>";
+		};
+		7C60705E1E5D89BD007718BC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7C60705F1E5D89E0007718BC /* Alpine.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		7C82CE881DE6E1C200C054EB /* Database */ = {
@@ -1009,6 +1026,7 @@
 				7CD8EA5F1DB61A3C00364B70 /* MAT.usx in Resources */,
 				7CD8EA661DB644E300364B70 /* GAL.usx in Resources */,
 				7C60704D1E533ED3007718BC /* VerseDataCell.xib in Resources */,
+				7C6070601E5D89E0007718BC /* Alpine.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1195,6 +1213,7 @@
 				7CAF6D861DB4F9AA00E10597 /* USXBookProcessor.swift in Sources */,
 				7CCC01441DAB7B0000F0562E /* USXParagraphProcessor.swift in Sources */,
 				7C2390C51E027B200074BBA7 /* Query.swift in Sources */,
+				7C60705D1E5D79D8007718BC /* AvatarCell.swift in Sources */,
 				7C942A2B1E38C7E2000C614A /* PostCommentVC.swift in Sources */,
 				7CCC01281DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */,
 				7CCC01401DA7D12800F0562E /* USXParaProcessor.swift in Sources */,
@@ -1271,6 +1290,7 @@
 				7CA1BAC01E323A7700611FED /* ResourceManager.swift in Sources */,
 				7CCC00F61D9D235800F0562E /* USXAttributes.swift in Sources */,
 				7C20D7FF1D9A93AA00E84BA5 /* StringExtension.swift in Sources */,
+				7C60705B1E5D705B007718BC /* AvatarInfoView.swift in Sources */,
 				7C4A4F971DEF0CDE009F890E /* LanguageView.swift in Sources */,
 				7CCC01071DA3C1C800F0562E /* USXStyle.swift in Sources */,
 				7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */,

@@ -21,6 +21,9 @@ class SelectAvatarVC: UIViewController
 	
 	// ATTRIBUTES	---------------
 	
+	private var avatarData = [(Avatar, AvatarInfo)]()
+	private var projectId = "test-project" // TODO: This will be provided by the previous view
+	private var loggedAccountId = "user/testuser" // TODO: This will be provided by the previous view
 	
 	
 	// LOAD	-----------------------
@@ -28,6 +31,8 @@ class SelectAvatarVC: UIViewController
     override func viewDidLoad()
 	{
         super.viewDidLoad()
+		
+		// Reads the avatar data from the database
     }
 	
 	
