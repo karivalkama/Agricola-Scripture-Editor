@@ -175,6 +175,13 @@
 		7C60705B1E5D705B007718BC /* AvatarInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60705A1E5D705B007718BC /* AvatarInfoView.swift */; };
 		7C60705D1E5D79D8007718BC /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60705C1E5D79D8007718BC /* AvatarCell.swift */; };
 		7C6070601E5D89E0007718BC /* Alpine.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C60705F1E5D89E0007718BC /* Alpine.ttf */; };
+		7C6B7B181E645EC00005AD43 /* FilteredMultiSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B7B171E645EC00005AD43 /* FilteredMultiSelection.xib */; };
+		7C6B7B1C1E6554920005AD43 /* LabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B7B1B1E6554920005AD43 /* LabelCell.xib */; };
+		7C6B7B1E1E6555140005AD43 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B7B1D1E6555140005AD43 /* LabelCell.swift */; };
+		7C6B7B201E6557270005AD43 /* FilteredMultiSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B7B1F1E6557270005AD43 /* FilteredMultiSelection.swift */; };
+		7C6B7B231E6565CC0005AD43 /* CustomXibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B7B221E6565CC0005AD43 /* CustomXibView.swift */; };
+		7C6B7B251E659CA00005AD43 /* OnlineStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B7B241E659CA00005AD43 /* OnlineStatusView.xib */; };
+		7C6B7B271E659E220005AD43 /* OnlineStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B7B261E659E220005AD43 /* OnlineStatusView.swift */; };
 		7C6C3C1A1E373959001D56F4 /* PostThreadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C191E373959001D56F4 /* PostThreadVC.swift */; };
 		7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */; };
 		7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE891DE6E1EA00C054EB /* PropertySet.swift */; };
@@ -436,6 +443,13 @@
 		7C60705A1E5D705B007718BC /* AvatarInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarInfoView.swift; sourceTree = "<group>"; };
 		7C60705C1E5D79D8007718BC /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
 		7C60705F1E5D89E0007718BC /* Alpine.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Alpine.ttf; sourceTree = "<group>"; };
+		7C6B7B171E645EC00005AD43 /* FilteredMultiSelection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilteredMultiSelection.xib; sourceTree = "<group>"; };
+		7C6B7B1B1E6554920005AD43 /* LabelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelCell.xib; sourceTree = "<group>"; };
+		7C6B7B1D1E6555140005AD43 /* LabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
+		7C6B7B1F1E6557270005AD43 /* FilteredMultiSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilteredMultiSelection.swift; sourceTree = "<group>"; };
+		7C6B7B221E6565CC0005AD43 /* CustomXibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomXibView.swift; sourceTree = "<group>"; };
+		7C6B7B241E659CA00005AD43 /* OnlineStatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnlineStatusView.xib; sourceTree = "<group>"; };
+		7C6B7B261E659E220005AD43 /* OnlineStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineStatusView.swift; sourceTree = "<group>"; };
 		7C6C3C191E373959001D56F4 /* PostThreadVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostThreadVC.swift; sourceTree = "<group>"; };
 		7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNotesDelegate.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -629,6 +643,10 @@
 				7CDBD6E91E28FCD400912320 /* ParagraphAssociated.swift */,
 				7C6070481E52ECBA007718BC /* VerseCell.swift */,
 				7C60705C1E5D79D8007718BC /* AvatarCell.swift */,
+				7C6B7B1D1E6555140005AD43 /* LabelCell.swift */,
+				7C6B7B1F1E6557270005AD43 /* FilteredMultiSelection.swift */,
+				7C6B7B221E6565CC0005AD43 /* CustomXibView.swift */,
+				7C6B7B261E659E220005AD43 /* OnlineStatusView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -810,6 +828,9 @@
 				7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */,
 				7C6070551E5C601D007718BC /* Login.storyboard */,
 				7C60704C1E533ED3007718BC /* VerseDataCell.xib */,
+				7C6B7B171E645EC00005AD43 /* FilteredMultiSelection.xib */,
+				7C6B7B1B1E6554920005AD43 /* LabelCell.xib */,
+				7C6B7B241E659CA00005AD43 /* OnlineStatusView.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1026,6 +1047,9 @@
 				7CD8EA5F1DB61A3C00364B70 /* MAT.usx in Resources */,
 				7CD8EA661DB644E300364B70 /* GAL.usx in Resources */,
 				7C60704D1E533ED3007718BC /* VerseDataCell.xib in Resources */,
+				7C6B7B181E645EC00005AD43 /* FilteredMultiSelection.xib in Resources */,
+				7C6B7B251E659CA00005AD43 /* OnlineStatusView.xib in Resources */,
+				7C6B7B1C1E6554920005AD43 /* LabelCell.xib in Resources */,
 				7C6070601E5D89E0007718BC /* Alpine.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1242,6 +1266,7 @@
 				7C942A2E1E38DD80000C614A /* AgricolaAccount.swift in Sources */,
 				7CDBD6EE1E2E30DD00912320 /* ParagraphNotes.swift in Sources */,
 				7C0130B81E3B6A1D0053C5C2 /* Avatar.swift in Sources */,
+				7C6B7B201E6557270005AD43 /* FilteredMultiSelection.swift in Sources */,
 				7CD8EA621DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,
 				7C40DF7C1DED9FB90035B92E /* Language.swift in Sources */,
 				7C20D7FA1D9A768700E84BA5 /* VerseRange.swift in Sources */,
@@ -1263,6 +1288,7 @@
 				7CDBD6B81E26200200912320 /* ParagraphBinding.swift in Sources */,
 				7C0130CE1E4AF8CC0053C5C2 /* ConnectionManager.swift in Sources */,
 				7C4A4FA21DF829C5009F890E /* CellInputListener.swift in Sources */,
+				7C6B7B271E659E220005AD43 /* OnlineStatusView.swift in Sources */,
 				7CA1BAAC1E30F7C800611FED /* NotesCell.swift in Sources */,
 				7CDBD6FE1E2F7C1700912320 /* ParagraphNotesView.swift in Sources */,
 				7CA1BAB41E31F09200611FED /* PostCell.swift in Sources */,
@@ -1294,10 +1320,12 @@
 				7C4A4F971DEF0CDE009F890E /* LanguageView.swift in Sources */,
 				7CCC01071DA3C1C800F0562E /* USXStyle.swift in Sources */,
 				7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */,
+				7C6B7B1E1E6555140005AD43 /* LabelCell.swift in Sources */,
 				7C4A4F871DEEC0A6009F890E /* RowParseError.swift in Sources */,
 				7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */,
 				7C4A4FB21DF95FE3009F890E /* ParagraphEdit.swift in Sources */,
 				7C40DF701DEC6AB00035B92E /* Id.swift in Sources */,
+				7C6B7B231E6565CC0005AD43 /* CustomXibView.swift in Sources */,
 				7C4A4F8F1DEEF891009F890E /* ParagraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
