@@ -9,12 +9,13 @@
 import UIKit
 
 // This view is used to display the current online status and transfer progress
-class OnlineStatusView: CustomXibView
+@IBDesignable class OnlineStatusView: CustomXibView
 {
 	// OUTLETS	----------
 	
 	@IBOutlet weak var statusLabel: UILabel!
 	@IBOutlet weak var progressBar: UIProgressView!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 	
 	// ATTRIBUTES	------
@@ -33,6 +34,14 @@ class OnlineStatusView: CustomXibView
 		{
 			_status = newValue
 			updateText()
+			if newValue.isFinal
+			{
+				activityIndicator.stopAnimating()
+			}
+			else
+			{
+				activityIndicator.startAnimating()
+			}
 		}
 	}
 	
@@ -64,20 +73,17 @@ class OnlineStatusView: CustomXibView
 	private func updateText()
 	{
 		var text = ""
-		var ok = true
 		
 		switch _status
 		{
 		case .active: text = "Transferring Data"
 		case .connecting: text = "Establishing Connection"
 		case .disconnected: text = "Not Connected"
-		case .offline:
-			text = "No Internet Connection"
-			ok = false
-		case .unauthorized:
-			text = "Access Denied"
-			ok = false
+		case .offline: text = "No Internet Connection"
+		case .unauthorized: text = "Access Denied"
 		case .upToDate: text = "Done"
+		case .done: text = "Done!"
+		case .failed: text = "Failed"
 		}
 		
 		if progressTotal != progressComplete
@@ -86,6 +92,6 @@ class OnlineStatusView: CustomXibView
 		}
 		
 		statusLabel.text = text
-		statusLabel.textColor = ok ? Colour.Text.Black.secondary.asColour : Colour.Secondary.asColour
+		statusLabel.textColor = _status.isError ? Colour.Secondary.asColour : Colour.Text.Black.secondary.asColour
 	}
 }

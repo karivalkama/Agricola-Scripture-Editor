@@ -20,22 +20,6 @@ class TranslationCell: UITableViewCell, ParagraphAssociated
 	static let defaultFont = UIFont(name: "Arial", size: 16.0)!
 	
 	
-	// IMPLEMENTED METHODS	---------
-	
-	// TODO: Test override to implement simultaneous scrolling
-	/*
-	override func setSelected(_ selected: Bool, animated: Bool)
-	{
-		super.setSelected(selected, animated: animated)
-		
-		if let contentPathId = contentPathId
-		{
-			print("STATUS: CELL \(contentPathId) SELECTED")
-		}
-		// Configure the view for the selected state
-	}*/
-	
-	
 	// OTHER METHODS	-------------
 	
 	func setContent(_ text: NSAttributedString, withId pathId: String)
@@ -47,6 +31,8 @@ class TranslationCell: UITableViewCell, ParagraphAssociated
 			print("ERROR: Text view hasn't been defined for new content")
 			return
 		}
+		
+		textView.scrollsToTop = false
 		
 		let newText = NSMutableAttributedString()
 		newText.append(text)

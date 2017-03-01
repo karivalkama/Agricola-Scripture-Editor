@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OnlineStatusView" customModule="TranslationEditor" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="zDl-1S-mND" id="pNN-AU-iaf"/>
                 <outlet property="progressBar" destination="x7I-8l-G7R" id="xxV-dr-bSp"/>
                 <outlet property="statusLabel" destination="sDP-cm-UQy" id="hD5-BO-iZJ"/>
             </connections>
@@ -49,7 +50,6 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="pHZ-1D-Z2l" secondAttribute="trailing" id="25D-9T-dC9"/>
                 <constraint firstItem="pHZ-1D-Z2l" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="8nI-hb-S4a"/>

@@ -52,7 +52,8 @@ class ConnectionManager
 	// Connects to a new server address
 	// Authorization is optional
 	// ServerURL may be 'http://localhost:4984', for example
-	func connect(serverURL: String, userName: String? = nil, password: String? = nil)
+	// The connection is continuous by default
+	func connect(serverURL: String, userName: String? = nil, password: String? = nil, continuous: Bool = true)
 	{
 		// First disconnects the previous connection
 		disconnect()
@@ -69,7 +70,7 @@ class ConnectionManager
 		// Creates new connections, uses authorization if available
 		replications = [DATABASE.createPullReplication(url), DATABASE.createPushReplication(url)]
 		
-		replications.forEach { $0.continuous = true }
+		replications.forEach { $0.continuous = continuous }
 		
 		if let userName = userName, let password = password
 		{
@@ -91,17 +92,20 @@ class ConnectionManager
 	// Has no effect if there is no connection
 	func disconnect()
 	{
-		// Removes the observers first
-		observers.forEach { NotificationCenter.default.removeObserver($0) }
-		
-		// Then stops the replications
-		replications.forEach { $0.stop() }
-		
-		observers = []
-		replications = []
-		status = .disconnected
-		
-		listeners.forEach { $0.onConnectionStatusChange(newStatus: status) }
+		if status != .disconnected
+		{
+			// Removes the observers first
+			observers.forEach { NotificationCenter.default.removeObserver($0) }
+			
+			// Then stops the replications
+			replications.forEach { $0.stop() }
+			
+			observers = []
+			replications = []
+			status = .disconnected
+			
+			listeners.forEach { $0.onConnectionStatusChange(newStatus: status) }
+		}
 	}
 	
 	// Adds a new listener to this connection manager. 
@@ -146,6 +150,18 @@ class ConnectionManager
 			{
 				status = .unauthorized
 			}
+			else if replications.contains(where: { $0.status == .stopped })
+			{
+				if let error = replications.flatMap({ $0.lastError }).first
+				{
+					print("ERROR: Database transfer failed with error: \(error)")
+					status = .failed
+				}
+				else
+				{
+					status = .done
+				}
+			}
 			else
 			{
 				completedTransferCount = targetTransferCount
@@ -174,4 +190,25 @@ enum ConnectionStatus
 	case disconnected, connecting, upToDate, offline, unauthorized
 	// The connection is active while it is transferring data
 	case active
+	// These two states are only used for one time connections.
+	// Done implicates a successful transfer while failed means that an error prevented success
+	case done, failed
+	
+	
+	// COMPUTED PROPERTIES	----------
+	
+	// Whether this status represents an error situation of some sort
+	var isError: Bool
+	{
+		switch self
+		{
+		case .offline: return true
+		case .unauthorized: return true
+		case .failed: return true
+		default: return false
+		}
+	}
+	
+	// Whether this status is not likely to change without some user action
+	var isFinal: Bool { return self != .connecting && self != .active }
 }
