@@ -63,8 +63,10 @@ import UIKit
 	
 	// OTHER METHODS	--
 	
-	func updateProgress(completed: Int, of total: Int)
+	func updateProgress(completed: Int, of total: Int, progress: Double)
 	{
+		progressBar.progress = Float(progress)
+		
 		progressComplete = completed
 		progressTotal = total
 		updateText()

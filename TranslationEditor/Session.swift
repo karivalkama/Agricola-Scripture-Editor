@@ -44,13 +44,13 @@ class Session
 		set { self[Session.KEY_ACCOUNT] = newValue }
 	}
 	
-	private var userName: String?
+	private(set) var userName: String?
 	{
 		get { return self[Session.KEY_USERNAME] }
 		set { self[Session.KEY_USERNAME] = newValue }
 	}
 	
-	private var password: String?
+	private(set) var password: String?
 	{
 		get { return self[Session.KEY_PASSWORD] }
 		set { self[Session.KEY_PASSWORD] = newValue }
@@ -89,8 +89,18 @@ class Session
 	
 	// OTHER METHODS	-----------
 	
-	func logIn(userName: String, password: String) throws
+	// Notice that this is the couchbase username, not the one typed by the user
+	func logIn(accountId: String, userName: String, password: String) throws
 	{
-		
+		self.accountId = accountId
+		self.userName = userName
+		self.password = password
+	}
+	
+	func logout()
+	{
+		self.password = nil
+		self.userName = nil
+		self.accountId = nil
 	}
 }

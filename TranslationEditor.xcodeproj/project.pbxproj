@@ -165,6 +165,8 @@
 		7C57EBFE1E66BC2D000718E9 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EBFD1E66BC2D000718E9 /* LoginVC.swift */; };
 		7C57EC001E66BFFC000718E9 /* KeychainSwiftDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EBFF1E66BFFC000718E9 /* KeychainSwiftDistrib.swift */; };
 		7C57EC031E66E293000718E9 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC021E66E293000718E9 /* Session.swift */; };
+		7C57EC051E66F824000718E9 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC041E66F824000718E9 /* AccountView.swift */; };
+		7C57EC071E6709A2000718E9 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC061E6709A2000718E9 /* Server.swift */; };
 		7C6070471E51B113007718BC /* TableCellSelectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070461E51B113007718BC /* TableCellSelectionListener.swift */; };
 		7C6070491E52ECBA007718BC /* VerseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070481E52ECBA007718BC /* VerseCell.swift */; };
 		7C60704B1E52F770007718BC /* VerseTableDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60704A1E52F770007718BC /* VerseTableDS.swift */; };
@@ -439,6 +441,8 @@
 		7C57EBFF1E66BFFC000718E9 /* KeychainSwiftDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainSwiftDistrib.swift; sourceTree = "<group>"; };
 		7C57EC011E66C043000718E9 /* TranslationEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TranslationEditor.entitlements; sourceTree = "<group>"; };
 		7C57EC021E66E293000718E9 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		7C57EC041E66F824000718E9 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		7C57EC061E6709A2000718E9 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		7C6070461E51B113007718BC /* TableCellSelectionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellSelectionListener.swift; sourceTree = "<group>"; };
 		7C6070481E52ECBA007718BC /* VerseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseCell.swift; sourceTree = "<group>"; };
 		7C60704A1E52F770007718BC /* VerseTableDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseTableDS.swift; sourceTree = "<group>"; };
@@ -724,6 +728,7 @@
 				7CA1BAA31E2FA5A500611FED /* NotesPostView.swift */,
 				7C0130CA1E41F4D30053C5C2 /* ProjectView.swift */,
 				7C60705A1E5D705B007718BC /* AvatarInfoView.swift */,
+				7C57EC041E66F824000718E9 /* AccountView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -747,6 +752,7 @@
 				7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */,
 				7C4A4FBF1DFAA60E009F890E /* Colours.swift */,
 				7C4A50031E016E31009F890E /* Reduce.swift */,
+				7C57EC061E6709A2000718E9 /* Server.swift */,
 			);
 			name = Globals;
 			sourceTree = "<group>";
@@ -1303,6 +1309,7 @@
 				7C0130D71E4DF97D0053C5C2 /* ScrollViewExtension.swift in Sources */,
 				7C0130B51E3B5A100053C5C2 /* Project.swift in Sources */,
 				7CDBD6C41E28B35100912320 /* SourceTranslationCell.swift in Sources */,
+				7C57EC051E66F824000718E9 /* AccountView.swift in Sources */,
 				7C0130C81E3F64900053C5C2 /* IdIndex.swift in Sources */,
 				7CDBD6B81E26200200912320 /* ParagraphBinding.swift in Sources */,
 				7C0130CE1E4AF8CC0053C5C2 /* ConnectionManager.swift in Sources */,
@@ -1312,6 +1319,7 @@
 				7CDBD6FE1E2F7C1700912320 /* ParagraphNotesView.swift in Sources */,
 				7CA1BAB41E31F09200611FED /* PostCell.swift in Sources */,
 				7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */,
+				7C57EC071E6709A2000718E9 /* Server.swift in Sources */,
 				7C4A4F8B1DEEC4BD009F890E /* View.swift in Sources */,
 				7C6070501E55860B007718BC /* Keyboard.swift in Sources */,
 				7CA1BAB81E31F33000611FED /* DateExtension.swift in Sources */,

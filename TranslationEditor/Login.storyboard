@@ -28,7 +28,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="6iV-fs-Bhb" userLabel="Content Stack View">
-                                <rect key="frame" x="209.5" y="131" width="605" height="506.5"/>
+                                <rect key="frame" x="209.5" y="139.5" width="605" height="490.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tTQ-ez-qc3" userLabel="Title Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="605" height="217.5"/>
@@ -51,8 +51,8 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="7X2-Hd-R1C" userLabel="Auth Stack View">
-                                        <rect key="frame" x="82.5" y="281.5" width="440" height="124"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7X2-Hd-R1C" userLabel="Auth Stack View">
+                                        <rect key="frame" x="82.5" y="281.5" width="440" height="108"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="9JH-5a-4v1" userLabel="Login Stack View">
                                                 <rect key="frame" x="0.0" y="0.0" width="440" height="68"/>
@@ -128,8 +128,14 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username doesn't match any known user!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZr-uV-CHp">
+                                                <rect key="frame" x="0.0" y="72" width="440" height="0.0"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                <color key="textColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xbx-HW-Hak" userLabel="Register Stack View">
-                                                <rect key="frame" x="121" y="92" width="319" height="32"/>
+                                                <rect key="frame" x="121" y="76" width="319" height="32"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account yet?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDg-Gw-FuI">
                                                         <rect key="frame" x="0.0" y="0.0" width="207" height="32"/>
@@ -155,9 +161,13 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="jZr-uV-CHp" firstAttribute="leading" secondItem="7X2-Hd-R1C" secondAttribute="leading" id="1nS-Kx-jMP"/>
+                                            <constraint firstAttribute="trailing" secondItem="jZr-uV-CHp" secondAttribute="trailing" id="EWU-me-C9E"/>
+                                        </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpl-Mu-LaE" customClass="OnlineStatusView" customModule="TranslationEditor" customModuleProvider="target">
-                                        <rect key="frame" x="142.5" y="469.5" width="320" height="37"/>
+                                        <rect key="frame" x="142.5" y="453.5" width="320" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="5ps-pS-Ejf"/>
                                             <constraint firstAttribute="height" constant="37" id="aJW-eb-oV6"/>
@@ -174,7 +184,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="errorLabel" destination="jZr-uV-CHp" id="7RG-Eu-HAt"/>
+                        <outlet property="loginButton" destination="8EW-FA-pFd" id="3Kv-dk-yoj"/>
                         <outlet property="onlineStatusView" destination="Mpl-Mu-LaE" id="WR3-3f-wK6"/>
+                        <outlet property="passwordField" destination="CnF-lF-3AM" id="79x-tJ-ON1"/>
                         <outlet property="userNameField" destination="lIj-GE-Qvn" id="DTx-Jj-iSz"/>
                         <segue destination="kXv-Dx-fTW" kind="presentation" identifier="SelectProject" id="HNA-AV-7xQ"/>
                     </connections>
