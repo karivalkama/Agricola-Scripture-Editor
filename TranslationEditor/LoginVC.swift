@@ -13,14 +13,31 @@ import UIKit
 // (user data is stored in the keychain)
 class LoginVC: UIViewController
 {
+	// OUTLETS	--------------------
+	
+	@IBOutlet weak var userNameField: UITextField!
+	@IBOutlet weak var onlineStatusView: OnlineStatusView!
+	
+	
+	// ATTRIBUTES	----------------
 
+	// INIT	------------------------
+	
     override func viewDidLoad()
 	{
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
+	
+	
+	// ACTIONS	-------------------
+	
+	@IBAction func loginButtonPressed(_ sender: Any) {
+	}
+	
+	
+	// IMPLEMENTED METHODS	-------
 
     /*
     // MARK: - Navigation

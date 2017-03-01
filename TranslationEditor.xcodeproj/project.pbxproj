@@ -164,6 +164,7 @@
 		7C4CC1791DB0EE1800BCF24B /* USXContainerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */; };
 		7C57EBFE1E66BC2D000718E9 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EBFD1E66BC2D000718E9 /* LoginVC.swift */; };
 		7C57EC001E66BFFC000718E9 /* KeychainSwiftDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EBFF1E66BFFC000718E9 /* KeychainSwiftDistrib.swift */; };
+		7C57EC031E66E293000718E9 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC021E66E293000718E9 /* Session.swift */; };
 		7C6070471E51B113007718BC /* TableCellSelectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070461E51B113007718BC /* TableCellSelectionListener.swift */; };
 		7C6070491E52ECBA007718BC /* VerseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070481E52ECBA007718BC /* VerseCell.swift */; };
 		7C60704B1E52F770007718BC /* VerseTableDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60704A1E52F770007718BC /* VerseTableDS.swift */; };
@@ -437,6 +438,7 @@
 		7C57EBFD1E66BC2D000718E9 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		7C57EBFF1E66BFFC000718E9 /* KeychainSwiftDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainSwiftDistrib.swift; sourceTree = "<group>"; };
 		7C57EC011E66C043000718E9 /* TranslationEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TranslationEditor.entitlements; sourceTree = "<group>"; };
+		7C57EC021E66E293000718E9 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		7C6070461E51B113007718BC /* TableCellSelectionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellSelectionListener.swift; sourceTree = "<group>"; };
 		7C6070481E52ECBA007718BC /* VerseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseCell.swift; sourceTree = "<group>"; };
 		7C60704A1E52F770007718BC /* VerseTableDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseTableDS.swift; sourceTree = "<group>"; };
@@ -665,6 +667,7 @@
 				7C4A4FF71E012328009F890E /* Database */,
 				7C4CC1711DB0ED6200BCF24B /* USXParsing */,
 				7C4A4FB91DF99490009F890E /* ProgramStatusListener.swift */,
+				7C57EC021E66E293000718E9 /* Session.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1272,6 +1275,7 @@
 				7CDBD6D11E28E53500912320 /* ScrollSyncManager.swift in Sources */,
 				7C4A4FCC1DFACC58009F890E /* Copyable.swift in Sources */,
 				7C4A4FDC1DFAE273009F890E /* Theme.swift in Sources */,
+				7C57EC031E66E293000718E9 /* Session.swift in Sources */,
 				7C4A4FAA1DF836F1009F890E /* LiveQueryListener.swift in Sources */,
 				7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */,
 				7C2390C91E0280CC0074BBA7 /* QueryType.swift in Sources */,

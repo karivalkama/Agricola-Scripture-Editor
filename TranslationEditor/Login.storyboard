@@ -15,10 +15,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--LoginVC-->
         <scene sceneID="6Nn-CK-z0g">
             <objects>
-                <viewController storyboardIdentifier="Welcome" id="7HQ-at-0Yn" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Welcome" id="7HQ-at-0Yn" customClass="LoginVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MsI-kg-kWV"/>
                         <viewControllerLayoutGuide type="bottom" id="hO1-jk-60D"/>
@@ -122,6 +122,9 @@
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="loginButtonPressed:" destination="7HQ-at-0Yn" eventType="touchUpInside" id="cst-ht-Nll"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -170,6 +173,11 @@
                             <constraint firstItem="6iV-fs-Bhb" firstAttribute="centerY" secondItem="hMo-7h-QZX" secondAttribute="centerY" id="oer-DT-Vyc"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="onlineStatusView" destination="Mpl-Mu-LaE" id="WR3-3f-wK6"/>
+                        <outlet property="userNameField" destination="lIj-GE-Qvn" id="DTx-Jj-iSz"/>
+                        <segue destination="kXv-Dx-fTW" kind="presentation" identifier="SelectProject" id="HNA-AV-7xQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DhV-Wp-diV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -433,7 +441,7 @@
                                 <rect key="frame" x="52" y="76" width="888" height="596"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="Qn1-aN-GAg">
-                                        <rect key="frame" x="0.0" y="7" width="355" height="582.5"/>
+                                        <rect key="frame" x="0.0" y="2.5" width="355" height="591.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="355" id="f53-5n-HuG"/>
                                         </constraints>
@@ -678,7 +686,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I99-Xe-Pjq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-183.3984375" y="12.5"/>
+            <point key="canvasLocation" x="-164" y="13"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="xfu-dv-ict">
@@ -836,7 +844,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RBb-bf-4Mw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-184.5703125" y="662.5"/>
+            <point key="canvasLocation" x="-164" y="706"/>
         </scene>
         <!--Select AvatarVC-->
         <scene sceneID="qAS-cU-ihd">

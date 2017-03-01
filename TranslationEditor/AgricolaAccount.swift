@@ -19,9 +19,10 @@ final class AgricolaAccount: Storable
 	
 	let cbUserName: String
 	let isShared: Bool
-	let projectId: String? // The tied project id. Only for shared project accounts
 	
+	var projectId: String? // The tied project id. Only for shared project accounts
 	var displayName: String
+	var languageIds: [String]
 	
 	
 	// COMPUTED PROPERTIES	---
@@ -29,22 +30,20 @@ final class AgricolaAccount: Storable
 	var idProperties: [Any] { return ["user", cbUserName] }
 	var properties: [String : PropertyValue]
 	{
-		return ["displayname": displayName.value, "shared": isShared.value, "project": projectId.value]
+		return ["displayname": displayName.value, "shared": isShared.value, "project": projectId.value, "languages": languageIds.value]
 	}
 	
 	
 	// INIT	-------------------
 	
-	init(name: String, projectId: String? = nil)
+	convenience init(name: String, languageIds: [String], isShared: Bool)
 	{
-		self.displayName = name
-		self.cbUserName = name.toKey
-		self.isShared = projectId != nil
-		self.projectId = projectId
+		self.init(cbUserName: name.toKey, displayName: name, languageIds: languageIds, isShared: isShared, projectId: nil)
 	}
 	
-	private init(cbUserName: String, displayName: String, isShared: Bool, projectId: String?)
+	private init(cbUserName: String, displayName: String, languageIds: [String], isShared: Bool, projectId: String?)
 	{
+		self.languageIds = languageIds
 		self.displayName = displayName
 		self.cbUserName = cbUserName
 		self.isShared = isShared
@@ -53,7 +52,7 @@ final class AgricolaAccount: Storable
 	
 	static func create(from properties: PropertySet, withId id: Id) -> AgricolaAccount
 	{
-		return AgricolaAccount(cbUserName: id[PROPERTY_CB_USERNAME].string(), displayName: properties["displayname"].string(), isShared: properties["shared"].bool(), projectId: properties["project"].string)
+		return AgricolaAccount(cbUserName: id[PROPERTY_CB_USERNAME].string(), displayName: properties["displayname"].string(), languageIds: properties["languages"].array { $0.string }, isShared: properties["shared"].bool(), projectId: properties["project"].string)
 	}
 	
 	
@@ -64,6 +63,10 @@ final class AgricolaAccount: Storable
 		if let displayName = properties["displayname"].string
 		{
 			self.displayName = displayName
+		}
+		if let languageData = properties["language"].array
+		{
+			languageIds = languageData.flatMap { $0.string }
 		}
 	}
 }
