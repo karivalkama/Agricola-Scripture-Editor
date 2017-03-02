@@ -32,6 +32,9 @@
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    <connections>
+                                        <action selector="filterChanged:" destination="-1" eventType="valueChanged" id="HjD-Zh-I6H"/>
+                                    </connections>
                                 </textField>
                                 <imageView userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="m9O-t4-rN7">
                                     <rect key="frame" x="339" y="4" width="40" height="24"/>

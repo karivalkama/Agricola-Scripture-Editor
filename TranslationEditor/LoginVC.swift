@@ -23,6 +23,10 @@ class LoginVC: UIViewController, ConnectionListener
 	
 	
 	// ATTRIBUTES	----------------
+	
+	private var loginUsername: String?
+	private var loginPassword: String?
+	
 
 	// INIT	------------------------
 	
@@ -56,6 +60,12 @@ class LoginVC: UIViewController, ConnectionListener
 			return
 		}
 		
+		loginButton.isEnabled = false
+		onlineStatusView.isHidden = false
+		
+		loginUsername = userName
+		loginPassword = password
+		
 		// Tries logging in
 		ConnectionManager.instance.registerListener(self)
 		// TODO: Use real authorization when it is only available
@@ -87,7 +97,24 @@ class LoginVC: UIViewController, ConnectionListener
 				
 				if !status.isError
 				{
-					proceed()
+					// Saves the login status to the session
+					do
+					{
+						guard let result = try AccountView.instance.accountQuery(displayName: loginUsername!).firstResultRow() else
+						{
+							print("ERROR: No account for username: \(loginUsername!)")
+							errorLabel.text = "Internal Error: No user data available"
+							return
+						}
+						
+						try Session.instance.logIn(accountId: result.id!, userName: loginUsername!.toKey, password: loginPassword!)
+						proceed()
+					}
+					catch
+					{
+						print("ERROR: Login failed. \(error)")
+						errorLabel.text = "Internal Error: Database operation failed"
+					}
 				}
 			}
 		}
