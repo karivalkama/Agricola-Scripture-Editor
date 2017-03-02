@@ -28,7 +28,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="6iV-fs-Bhb" userLabel="Content Stack View">
-                                <rect key="frame" x="209.5" y="139" width="605" height="490.5"/>
+                                <rect key="frame" x="209.5" y="117" width="605" height="534"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tTQ-ez-qc3" userLabel="Title Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="605" height="217.5"/>
@@ -51,11 +51,20 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7X2-Hd-R1C" userLabel="Auth Stack View">
-                                        <rect key="frame" x="82.5" y="281.5" width="440" height="108"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="7X2-Hd-R1C" userLabel="Auth Stack View">
+                                        <rect key="frame" x="82.5" y="281.5" width="440" height="151.5"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid username and/or password!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZr-uV-CHp">
+                                                <rect key="frame" x="0.0" y="0.0" width="440" height="19.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="19.5" id="d1z-9g-3p2"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                <color key="textColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="9JH-5a-4v1" userLabel="Login Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="440" height="68"/>
+                                                <rect key="frame" x="0.0" y="35.5" width="440" height="68"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="l6N-Rj-qkp" userLabel="Input Stack View">
                                                         <rect key="frame" x="0.0" y="0.0" width="328" height="68"/>
@@ -128,14 +137,8 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username doesn't match any known user!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZr-uV-CHp">
-                                                <rect key="frame" x="0.0" y="72" width="440" height="0.0"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                <color key="textColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xbx-HW-Hak" userLabel="Register Stack View">
-                                                <rect key="frame" x="121" y="76" width="319" height="32"/>
+                                                <rect key="frame" x="121" y="119.5" width="319" height="32"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account yet?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDg-Gw-FuI">
                                                         <rect key="frame" x="0.0" y="0.0" width="207" height="32"/>
@@ -167,7 +170,7 @@
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpl-Mu-LaE" customClass="OnlineStatusView" customModule="TranslationEditor" customModuleProvider="target">
-                                        <rect key="frame" x="142.5" y="453.5" width="320" height="37"/>
+                                        <rect key="frame" x="142.5" y="497" width="320" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="5ps-pS-Ejf"/>
                                             <constraint firstAttribute="height" constant="37" id="aJW-eb-oV6"/>
@@ -196,10 +199,10 @@
             </objects>
             <point key="canvasLocation" x="-817.3828125" y="13.28125"/>
         </scene>
-        <!--View Controller-->
+        <!--Create AccountVC-->
         <scene sceneID="8Bn-nr-S1h">
             <objects>
-                <viewController storyboardIdentifier="CreateAccount" id="B6k-06-m6j" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateAccount" id="B6k-06-m6j" customClass="CreateAccountVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bJg-iz-VIa"/>
                         <viewControllerLayoutGuide type="bottom" id="3eb-IZ-cbp"/>
@@ -218,6 +221,9 @@
                                     <navigationItem title="Create Account" id="k2l-MB-5DA">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="wbc-tg-BY6">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="backButtonPressed:" destination="B6k-06-m6j" id="SCm-7q-gg2"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -225,8 +231,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="uNc-Md-fRa" userLabel="Content Stack View">
                                 <rect key="frame" x="257" y="108" width="683" height="564"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="UK4-xb-TSv" userLabel="Base Info Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="371" height="252"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="UK4-xb-TSv" userLabel="Base Info Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="371" height="271.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5rS-26-qlC" userLabel="Auth Stack View">
                                                 <rect key="frame" x="0.0" y="0.0" width="371" height="167.5"/>
@@ -294,8 +300,17 @@
                                                     <constraint firstItem="nHf-YG-wHI" firstAttribute="height" secondItem="fVt-Y7-sUV" secondAttribute="height" id="KZd-wb-g0X"/>
                                                 </constraints>
                                             </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error messages are displayed here!" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxa-3z-msG">
+                                                <rect key="frame" x="0.0" y="183.5" width="371" height="19.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="19.5" id="FF1-tr-VDo"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                <color key="textColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6TA-QV-xT9" userLabel="Share Stack View">
-                                                <rect key="frame" x="0.0" y="199.5" width="371" height="52.5"/>
+                                                <rect key="frame" x="0.0" y="219" width="371" height="52.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="WbK-35-aqE" userLabel="Text Stack View">
                                                         <rect key="frame" x="0.0" y="0.0" width="314" height="52.5"/>
@@ -393,6 +408,9 @@
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="createButtonPressed:" destination="B6k-06-m6j" eventType="touchUpInside" id="MXL-75-u1c"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Requires internet access" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EuV-hm-8w3">
                                                         <rect key="frame" x="20.5" y="52" width="139.5" height="14.5"/>
@@ -419,6 +437,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="uNc-Md-fRa" secondAttribute="trailing" constant="64" id="kuk-bu-ELq"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="createAccountButton" destination="pNj-8M-QpE" id="7IS-My-BRj"/>
+                        <outlet property="errorMessageLabel" destination="gxa-3z-msG" id="QvX-lE-apv"/>
+                        <outlet property="isSharedSwitch" destination="QbT-3D-Zaf" id="XA6-ls-Fvo"/>
+                        <outlet property="languageSelectionView" destination="8tT-RQ-fdQ" id="TE8-yG-Mpg"/>
+                        <outlet property="onlineStatusView" destination="BKH-H1-uGz" id="Htp-eA-q5j"/>
+                        <outlet property="passwordField" destination="nHf-YG-wHI" id="mJx-5R-Z27"/>
+                        <outlet property="repeatPasswordField" destination="9x7-V7-hDP" id="7Me-qb-JrW"/>
+                        <outlet property="usernameField" destination="fVt-Y7-sUV" id="Mwd-xh-f5e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rCk-Ac-fiG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

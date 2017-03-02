@@ -167,6 +167,7 @@
 		7C57EC031E66E293000718E9 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC021E66E293000718E9 /* Session.swift */; };
 		7C57EC051E66F824000718E9 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC041E66F824000718E9 /* AccountView.swift */; };
 		7C57EC071E6709A2000718E9 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC061E6709A2000718E9 /* Server.swift */; };
+		7C57EC0B1E680AC6000718E9 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC0A1E680AC6000718E9 /* CreateAccountVC.swift */; };
 		7C6070471E51B113007718BC /* TableCellSelectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070461E51B113007718BC /* TableCellSelectionListener.swift */; };
 		7C6070491E52ECBA007718BC /* VerseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070481E52ECBA007718BC /* VerseCell.swift */; };
 		7C60704B1E52F770007718BC /* VerseTableDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60704A1E52F770007718BC /* VerseTableDS.swift */; };
@@ -443,6 +444,7 @@
 		7C57EC021E66E293000718E9 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		7C57EC041E66F824000718E9 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		7C57EC061E6709A2000718E9 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		7C57EC0A1E680AC6000718E9 /* CreateAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
 		7C6070461E51B113007718BC /* TableCellSelectionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellSelectionListener.swift; sourceTree = "<group>"; };
 		7C6070481E52ECBA007718BC /* VerseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseCell.swift; sourceTree = "<group>"; };
 		7C60704A1E52F770007718BC /* VerseTableDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseTableDS.swift; sourceTree = "<group>"; };
@@ -856,6 +858,7 @@
 			children = (
 				7C6070581E5C7BE0007718BC /* SelectAvatarVC.swift */,
 				7C57EBFD1E66BC2D000718E9 /* LoginVC.swift */,
+				7C57EC0A1E680AC6000718E9 /* CreateAccountVC.swift */,
 			);
 			name = LoginView;
 			sourceTree = "<group>";
@@ -1343,6 +1346,7 @@
 				7CA1BAC01E323A7700611FED /* ResourceManager.swift in Sources */,
 				7CCC00F61D9D235800F0562E /* USXAttributes.swift in Sources */,
 				7C20D7FF1D9A93AA00E84BA5 /* StringExtension.swift in Sources */,
+				7C57EC0B1E680AC6000718E9 /* CreateAccountVC.swift in Sources */,
 				7C60705B1E5D705B007718BC /* AvatarInfoView.swift in Sources */,
 				7C4A4F971DEF0CDE009F890E /* LanguageView.swift in Sources */,
 				7CCC01071DA3C1C800F0562E /* USXStyle.swift in Sources */,

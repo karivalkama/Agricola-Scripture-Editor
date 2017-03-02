@@ -16,7 +16,7 @@ protocol MultiSelectionDataSource
 	var numberOfOptions: Int { get }
 	
 	// The displayed label for an option
-	func labelForOption(atIndex: Int) -> String
+	func labelForOption(atIndex index: Int) -> String
 	
 	// Checks whether the item at the specified index should be included in the target group of the provided filter
 	func indexIsIncludedInFilter(index: Int, filter: String) -> Bool
@@ -34,7 +34,7 @@ protocol MultiSelectionDataSource
 	
 	// ATTRIBUTES	-------------
 	
-	var dataSouce: MultiSelectionDataSource?
+	var dataSource: MultiSelectionDataSource?
 	
 	private(set) var selectedIndices = [Int]()
 	private var displayedIndices = [Int]()
@@ -57,6 +57,10 @@ protocol MultiSelectionDataSource
 	override func awakeFromNib()
 	{
 		optionTable.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
+		optionTable.dataSource = self
+		optionTable.delegate = self
+		selectedTagView.dataSource = self
+		selectedTagView.delegate = self
 	}
 	
 	
@@ -80,7 +84,7 @@ protocol MultiSelectionDataSource
 		// Finds and configures the cell
 		let cell = tableView.dequeueReusableCell(withIdentifier: LabelCell.identifier, for: indexPath) as! LabelCell
 		
-		if let dataSouce = dataSouce
+		if let dataSouce = dataSource
 		{
 			cell.configure(text: dataSouce.labelForOption(atIndex: displayedIndices[indexPath.row]))
 		}
@@ -102,7 +106,7 @@ protocol MultiSelectionDataSource
 	
 	func tagView(_ tagView: HTagView, titleOfTagAtIndex index: Int) -> String
 	{
-		guard let dataSouce = dataSouce else
+		guard let dataSouce = dataSource else
 		{
 			print("ERROR: No data source available for multi selection view")
 			return "???"
@@ -134,7 +138,7 @@ protocol MultiSelectionDataSource
 	
 	private func reloadData()
 	{
-		guard let dataSouce = dataSouce else
+		guard let dataSouce = dataSource else
 		{
 			return
 		}
