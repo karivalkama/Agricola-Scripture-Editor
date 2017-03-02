@@ -80,14 +80,14 @@ import UIKit
 		
 		switch _status
 		{
-		case .active: text = "Transferring Data"
+		case .active: text = "Transferring"
 		case .connecting: text = "Establishing Connection"
 		case .disconnected: text = "Not Connected"
 		case .offline: text = "No Internet Connection"
 		case .unauthorized: text = "Access Denied"
-		case .upToDate: text = "Done"
-		case .done: text = "Done!"
-		case .failed: text = "Failed"
+		case .upToDate: text = "Waiting for Updates"
+		case .done: text = "Transfer Complete"
+		case .failed: text = "Transfer Failed"
 		}
 		
 		if progressTotal != progressComplete

@@ -148,7 +148,6 @@ protocol MultiSelectionDataSource
 		
 		if let filter = searchField.text, !filter.isEmpty
 		{
-			print("Using filter: \(filter)")
 			displayedIndices = (0 ..< dataSouce.numberOfOptions).flatMap { dataSouce.indexIsIncludedInFilter(index: $0, filter: filter) ? $0 : nil }
 		}
 		else
