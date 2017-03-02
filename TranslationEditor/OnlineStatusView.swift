@@ -33,15 +33,17 @@ import UIKit
 		set
 		{
 			_status = newValue
-			updateText()
 			if newValue.isFinal
 			{
 				activityIndicator.stopAnimating()
+				progressComplete = progressTotal
+				progressBar.progress = 1
 			}
 			else
 			{
 				activityIndicator.startAnimating()
 			}
+			updateText()
 		}
 	}
 	

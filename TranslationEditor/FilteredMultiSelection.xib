@@ -33,7 +33,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     <connections>
-                                        <action selector="filterChanged:" destination="-1" eventType="valueChanged" id="HjD-Zh-I6H"/>
+                                        <action selector="filterChanged:" destination="-1" eventType="editingChanged" id="WFM-Gc-8wi"/>
                                     </connections>
                                 </textField>
                                 <imageView userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="m9O-t4-rN7">
@@ -51,6 +51,7 @@
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wLG-4W-ByU">
                             <rect key="frame" x="0.0" y="48" width="381" height="352"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gLm-Tm-mGh" customClass="HTagView" customModule="HTagView">
                             <rect key="frame" x="0.0" y="416" width="381" height="96"/>

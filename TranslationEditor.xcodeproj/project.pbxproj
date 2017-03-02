@@ -168,6 +168,7 @@
 		7C57EC051E66F824000718E9 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC041E66F824000718E9 /* AccountView.swift */; };
 		7C57EC071E6709A2000718E9 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC061E6709A2000718E9 /* Server.swift */; };
 		7C57EC0B1E680AC6000718E9 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC0A1E680AC6000718E9 /* CreateAccountVC.swift */; };
+		7C57EC0D1E683753000718E9 /* TIT_DURI.usx in Resources */ = {isa = PBXBuildFile; fileRef = 7C57EC0C1E683753000718E9 /* TIT_DURI.usx */; };
 		7C6070471E51B113007718BC /* TableCellSelectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070461E51B113007718BC /* TableCellSelectionListener.swift */; };
 		7C6070491E52ECBA007718BC /* VerseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070481E52ECBA007718BC /* VerseCell.swift */; };
 		7C60704B1E52F770007718BC /* VerseTableDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60704A1E52F770007718BC /* VerseTableDS.swift */; };
@@ -445,6 +446,7 @@
 		7C57EC041E66F824000718E9 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		7C57EC061E6709A2000718E9 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		7C57EC0A1E680AC6000718E9 /* CreateAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
+		7C57EC0C1E683753000718E9 /* TIT_DURI.usx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TIT_DURI.usx; sourceTree = "<group>"; };
 		7C6070461E51B113007718BC /* TableCellSelectionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellSelectionListener.swift; sourceTree = "<group>"; };
 		7C6070481E52ECBA007718BC /* VerseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseCell.swift; sourceTree = "<group>"; };
 		7C60704A1E52F770007718BC /* VerseTableDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseTableDS.swift; sourceTree = "<group>"; };
@@ -627,6 +629,7 @@
 				7C18A1A31D8BBEBD00DD1B03 /* TranslationEditorTests.swift */,
 				7CD8EA5A1DB60C5C00364B70 /* MAT.usx */,
 				7CD8EA651DB644E300364B70 /* GAL.usx */,
+				7C57EC0C1E683753000718E9 /* TIT_DURI.usx */,
 				7CD8EA591DB60C5C00364B70 /* 019PSA.usx */,
 				7C18A1A51D8BBEBD00DD1B03 /* Info.plist */,
 				7CD8EA581DB60C4800364B70 /* TestResources */,
@@ -1083,6 +1086,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C57EC0D1E683753000718E9 /* TIT_DURI.usx in Resources */,
 				7CD8EA671DB644E300364B70 /* GAL.usx in Resources */,
 				7CD8EA5C1DB60C5C00364B70 /* MAT.usx in Resources */,
 				7CD8EA5B1DB60C5C00364B70 /* 019PSA.usx in Resources */,

@@ -35,6 +35,7 @@ class LoginVC: UIViewController, ConnectionListener
         super.viewDidLoad()
 		
 		errorLabel.text = nil
+		onlineStatusView.isHidden = true
 
 		// If the user is already logged in, just starts the background updates and moves on
 		if Session.instance.isAuthorized

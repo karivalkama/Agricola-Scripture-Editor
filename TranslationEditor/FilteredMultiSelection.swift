@@ -23,7 +23,7 @@ protocol MultiSelectionDataSource
 }
 
 // This UI element allows the user to pick multiple elements from a table that also supports filtering
-@IBDesignable class FilteredMultiSelection: CustomXibView, UITableViewDataSource, UITableViewDelegate, HTagViewDataSource, HTagViewDelegate
+@IBDesignable class FilteredMultiSelection: CustomXibView, UITableViewDataSource, UITableViewDelegate, HTagViewDataSource, HTagViewDelegate, UITextFieldDelegate
 {
 	// OUTLETS	-----------------
 	
@@ -57,6 +57,7 @@ protocol MultiSelectionDataSource
 	override func awakeFromNib()
 	{
 		optionTable.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
+		
 		optionTable.dataSource = self
 		optionTable.delegate = self
 		selectedTagView.dataSource = self
@@ -81,6 +82,8 @@ protocol MultiSelectionDataSource
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
+		//return UITableViewCell()
+		
 		// Finds and configures the cell
 		let cell = tableView.dequeueReusableCell(withIdentifier: LabelCell.identifier, for: indexPath) as! LabelCell
 		
@@ -145,6 +148,7 @@ protocol MultiSelectionDataSource
 		
 		if let filter = searchField.text, !filter.isEmpty
 		{
+			print("Using filter: \(filter)")
 			displayedIndices = (0 ..< dataSouce.numberOfOptions).flatMap { dataSouce.indexIsIncludedInFilter(index: $0, filter: filter) ? $0 : nil }
 		}
 		else

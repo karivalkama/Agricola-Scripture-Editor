@@ -24,11 +24,11 @@
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pHZ-1D-Z2l">
                     <rect key="frame" x="0.0" y="12" width="322" height="37"/>
                     <subviews>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="zDl-1S-mND">
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="zDl-1S-mND">
                             <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="37" id="Zb2-hk-ylH"/>
-                                <constraint firstAttribute="height" constant="37" id="zzI-NY-Ahv"/>
+                                <constraint firstAttribute="width" priority="750" constant="37" id="Zb2-hk-ylH"/>
+                                <constraint firstAttribute="height" priority="750" constant="37" id="zzI-NY-Ahv"/>
                             </constraints>
                             <color key="color" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </activityIndicatorView>

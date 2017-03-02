@@ -28,7 +28,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="6iV-fs-Bhb" userLabel="Content Stack View">
-                                <rect key="frame" x="209.5" y="117" width="605" height="534"/>
+                                <rect key="frame" x="209.5" y="110.5" width="605" height="547"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tTQ-ez-qc3" userLabel="Title Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="605" height="217.5"/>
@@ -170,10 +170,10 @@
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpl-Mu-LaE" customClass="OnlineStatusView" customModule="TranslationEditor" customModuleProvider="target">
-                                        <rect key="frame" x="142.5" y="497" width="320" height="37"/>
+                                        <rect key="frame" x="142.5" y="497" width="320" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="5ps-pS-Ejf"/>
-                                            <constraint firstAttribute="height" constant="37" id="aJW-eb-oV6"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" priority="750" constant="320" id="5ps-pS-Ejf"/>
+                                            <constraint firstAttribute="height" priority="750" constant="37" id="aJW-eb-oV6"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -351,10 +351,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="zj5-vV-dfg" userLabel="Additional Info Stack View">
-                                        <rect key="frame" x="419" y="0.0" width="264" height="499.5"/>
+                                        <rect key="frame" x="419" y="0.0" width="264" height="564"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TtO-sl-E8O" userLabel="Select Language Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="264" height="332"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="264" height="396.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="kG6-UL-DWQ">
                                                         <rect key="frame" x="0.0" y="0.0" width="234.5" height="35.5"/>
@@ -377,7 +377,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tT-RQ-fdQ" customClass="FilteredMultiSelection" customModule="TranslationEditor" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="43.5" width="264" height="288.5"/>
+                                                        <rect key="frame" x="0.0" y="43.5" width="264" height="353"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="264" id="OD8-O4-SEC"/>
                                                         </constraints>
@@ -385,14 +385,13 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BKH-H1-uGz" userLabel="Online Status View" customClass="OnlineStatusView" customModule="TranslationEditor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="364" width="264" height="37"/>
+                                                <rect key="frame" x="0.0" y="428.5" width="264" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="7qB-IK-jzC"/>
-                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="geh-7h-8sr"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="tcl-s0-Vj6" userLabel="Create Stack View">
-                                                <rect key="frame" x="104" y="433" width="160" height="66.5"/>
+                                                <rect key="frame" x="104" y="497.5" width="160" height="66.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pNj-8M-QpE" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="160" height="48"/>
@@ -421,8 +420,15 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="BKH-H1-uGz" firstAttribute="leading" secondItem="zj5-vV-dfg" secondAttribute="leading" id="1EY-ax-cq5"/>
+                                            <constraint firstAttribute="trailing" secondItem="BKH-H1-uGz" secondAttribute="trailing" id="BGa-Cg-x0g"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="zj5-vV-dfg" secondAttribute="bottom" id="fVg-6d-oR3"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>

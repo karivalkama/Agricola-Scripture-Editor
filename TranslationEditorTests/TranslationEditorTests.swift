@@ -253,7 +253,7 @@ class TranslationEditorTests: XCTestCase
 	
 	func testReadDataOfType()
 	{
-		let type = Book.type
+		let type = Language.type
 		
 		let query = DATABASE.createAllDocumentsQuery()
 		let results = try! query.run()
