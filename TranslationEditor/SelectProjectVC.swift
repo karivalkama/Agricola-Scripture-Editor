@@ -9,7 +9,7 @@
 import UIKit
 
 // This VC handles project selection (including accepting invitations to other people's projects)
-class SelectProjectVC: UIViewController, LiveQueryListener
+class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSource
 {
 	// TYPES	------------------
 	
@@ -75,6 +75,35 @@ class SelectProjectVC: UIViewController, LiveQueryListener
 	
 	
 	// IMPLEMENTED METHODS	------
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+	{
+		return projects.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+	{
+		let cell = tableView.dequeueReusableCell(withIdentifier: ProjectCell.identifier, for: indexPath) as! ProjectCell
+		
+		do
+		{
+			let project = projects[indexPath.row]
+			let languageName = try Language.get(project.languageId)?.name
+			
+			if languageName == nil
+			{
+				print("ERROR: No language data for project \(project.toPropertySet)")
+			}
+			
+			cell.configure(name: project.name, languageName: languageName.or(""), created: Date(timeIntervalSince1970: project.created))
+		}
+		catch
+		{
+			print("ERROR: Failed to set up a project cell. \(error)")
+		}
+			
+		return cell
+	}
 	
 	func rowsUpdated(rows: [Row<ProjectView>])
 	{

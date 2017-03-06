@@ -724,9 +724,6 @@
                                                         <state key="normal" title="Start New Project">
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
-                                                        <connections>
-                                                            <segue destination="pD5-zL-wXv" kind="presentation" id="k3M-Sm-eRm"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -760,6 +757,7 @@
                     <connections>
                         <outlet property="projectTableView" destination="7bl-Kc-0Yq" id="dia-bn-OrJ"/>
                         <segue destination="dMv-eu-RFU" kind="presentation" identifier="SelectAvatar" id="OS0-uP-3up"/>
+                        <segue destination="pD5-zL-wXv" kind="presentation" identifier="CreateProject" id="OCN-KF-Fet"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I99-Xe-Pjq" userLabel="First Responder" sceneMemberID="firstResponder"/>

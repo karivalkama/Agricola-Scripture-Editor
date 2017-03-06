@@ -178,6 +178,7 @@
 		7C57ECA61E6D4726000718E9 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B7B1D1E6555140005AD43 /* LabelCell.swift */; };
 		7C57ECAA1E6D5EDA000718E9 /* SelectProjectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57ECA91E6D5EDA000718E9 /* SelectProjectVC.swift */; };
 		7C57ECAC1E6D6651000718E9 /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57ECAB1E6D6651000718E9 /* ProjectCell.swift */; };
+		7C57ECAE1E6D970C000718E9 /* CreateAvatar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C57ECAD1E6D970C000718E9 /* CreateAvatar.xib */; };
 		7C6070471E51B113007718BC /* TableCellSelectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070461E51B113007718BC /* TableCellSelectionListener.swift */; };
 		7C6070491E52ECBA007718BC /* VerseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070481E52ECBA007718BC /* VerseCell.swift */; };
 		7C60704B1E52F770007718BC /* VerseTableDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60704A1E52F770007718BC /* VerseTableDS.swift */; };
@@ -394,6 +395,7 @@
 		7C57EC141E694975000718E9 /* TIT_ENG.usx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TIT_ENG.usx; sourceTree = "<group>"; };
 		7C57ECA91E6D5EDA000718E9 /* SelectProjectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectProjectVC.swift; sourceTree = "<group>"; };
 		7C57ECAB1E6D6651000718E9 /* ProjectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
+		7C57ECAD1E6D970C000718E9 /* CreateAvatar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateAvatar.xib; sourceTree = "<group>"; };
 		7C6070461E51B113007718BC /* TableCellSelectionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellSelectionListener.swift; sourceTree = "<group>"; };
 		7C6070481E52ECBA007718BC /* VerseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseCell.swift; sourceTree = "<group>"; };
 		7C60704A1E52F770007718BC /* VerseTableDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseTableDS.swift; sourceTree = "<group>"; };
@@ -787,6 +789,7 @@
 				7C6B7B171E645EC00005AD43 /* FilteredMultiSelection.xib */,
 				7C6B7B1B1E6554920005AD43 /* LabelCell.xib */,
 				7C6B7B241E659CA00005AD43 /* OnlineStatusView.xib */,
+				7C57ECAD1E6D970C000718E9 /* CreateAvatar.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1013,6 +1016,7 @@
 				7CD8EA5F1DB61A3C00364B70 /* MAT.usx in Resources */,
 				7CD8EA661DB644E300364B70 /* GAL.usx in Resources */,
 				7C60704D1E533ED3007718BC /* VerseDataCell.xib in Resources */,
+				7C57ECAE1E6D970C000718E9 /* CreateAvatar.xib in Resources */,
 				7C6B7B181E645EC00005AD43 /* FilteredMultiSelection.xib in Resources */,
 				7C6B7B251E659CA00005AD43 /* OnlineStatusView.xib in Resources */,
 				7C6B7B1C1E6554920005AD43 /* LabelCell.xib in Resources */,

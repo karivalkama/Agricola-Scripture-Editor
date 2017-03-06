@@ -18,6 +18,11 @@ class ProjectCell: UITableViewCell
 	@IBOutlet weak var createdLabel: UILabel!
 	
 	
+	// ATTRIBUTES	--------------
+	
+	static let identifier = "ProjectCell"
+	
+	
 	// OTHER METHODS	-----------
 	
 	func configure(name: String, languageName: String, created: Date)
