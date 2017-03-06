@@ -27,10 +27,7 @@ extension Array
 		combined.append(contentsOf: right)
 		return combined
 	}
-}
-
-extension Array
-{
+	
 	// Converts the array into a dictionary
 	// If there are duplicate keys, only the latter will remain in effect
 	// The provided function returns key value pair for each element
@@ -60,6 +57,26 @@ extension Array
 		}
 		
 		return dict
+	}
+	
+	// Takes a sub array from this array by starting from the provided index and including elements as long as the condition holds
+	func take(from startIndex: Int, while condition: (Element) -> Bool) -> [Element]
+	{
+		var result = [Element]()
+		for i in startIndex ..< count
+		{
+			let element = self[i]
+			if condition(element)
+			{
+				result.append(element)
+			}
+			else
+			{
+				break
+			}
+		}
+		
+		return result
 	}
 	
 	// Adds an element to this array and returns the new array

@@ -142,6 +142,7 @@ class CreateAccountVC: UIViewController, ConnectionListener, LiveQueryListener, 
 		if status.isFinal && !status.isError
 		{
 			createAccountButton.isEnabled = true
+			onlineStatusView.isHidden = true
 		}
 	}
 	

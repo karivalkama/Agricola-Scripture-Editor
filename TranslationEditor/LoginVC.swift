@@ -40,7 +40,13 @@ class LoginVC: UIViewController, ConnectionListener
 		// If the user is already logged in, just starts the background updates and moves on
 		if Session.instance.isAuthorized
 		{
+			print("STATUS: Already authorized")
 			proceed()
+		}
+		else
+		{
+			print("STATUS: No login information present")
+			ConnectionManager.instance.registerListener(self)
 		}
     }
 	
@@ -68,7 +74,6 @@ class LoginVC: UIViewController, ConnectionListener
 		loginPassword = password
 		
 		// Tries logging in
-		ConnectionManager.instance.registerListener(self)
 		// TODO: Use real authorization when it is only available
 		ConnectionManager.instance.connect(serverURL: SERVER_ADDRESS, continuous: false)
 	}
@@ -95,6 +100,7 @@ class LoginVC: UIViewController, ConnectionListener
 			else
 			{
 				errorLabel.text = nil
+				onlineStatusView.isHidden = true
 				
 				if !status.isError
 				{
@@ -134,7 +140,6 @@ class LoginVC: UIViewController, ConnectionListener
 		ConnectionManager.instance.removeListener(self)
 		
 		passwordField.text = nil
-		errorLabel.isHidden = true
 		onlineStatusView.isHidden = true
 		
 		// Starts the updates in the background

@@ -144,6 +144,22 @@ struct VerseRange: JSONConvertible, Equatable, CustomStringConvertible
 		}
 	}
 	
+	// The length of the range in verses (mid verses are counted as 1/2 verse)
+	var length: Double
+	{
+		var length = Double(end.index) - Double(start.index)
+		if end.midVerse
+		{
+			length += 0.5
+		}
+		if start.midVerse
+		{
+			length -= 0.5
+		}
+		
+		return length
+	}
+	
 	
 	// INIT	--------
 	

@@ -8,6 +8,7 @@
 import XCTest
 @testable import TranslationEditor
 
+
 class TranslationEditorTests: XCTestCase
 {
     override func setUp()
@@ -253,7 +254,7 @@ class TranslationEditorTests: XCTestCase
 	
 	func testReadDataOfType()
 	{
-		let type = Language.type
+		let type = AgricolaAccount.type
 		
 		let query = DATABASE.createAllDocumentsQuery()
 		let results = try! query.run()
@@ -271,6 +272,15 @@ class TranslationEditorTests: XCTestCase
 		print("TEST: DONE")
 	}
 	
+	func testQuery()
+	{
+		print("TEST: Starting")
+		let query = AccountView.instance.accountQuery(nameKey: "test")
+		
+		try! query.resultRows().forEach { print("\($0.keys)") }
+		print("TEST: Done")
+	}
+
 	func testRemoveEdits()
 	{
 		let editRows = try! ParagraphEditView.instance.createQuery().resultRows()
@@ -468,6 +478,21 @@ class TranslationEditorTests: XCTestCase
 			return
 		}
 		
+		/*
+		// Finds the paragraphs
+		let sourceParagraphs = try! ParagraphView.instance.latestParagraphQuery(bookId: sourceBookId).resultObjects()
+		let targetParagraphs = try! ParagraphView.instance.latestParagraphQuery(bookId: targetBookId).resultObjects()
+		
+		guard !sourceParagraphs.isEmpty && !targetParagraphs.isEmpty else
+		{
+			assertionFailure("Didn't find any paragraphs")
+			return
+		}
+		
+		// Makes the binding based on the matched paragraphs
+		let bindings = match(sourceParagraphs, and: targetParagraphs).map { (source, target) in return (source.idString, target.idString) }
+		*/
+		
 		// Finds the paragraphs
 		let sourceParagraphIds = try! ParagraphView.instance.latestParagraphQuery(bookId: sourceBookId).resultRows().map { $0.id! }
 		let targetParagraphIds = try! ParagraphView.instance.latestParagraphQuery(bookId: targetBookId).resultRows().map { $0.id! }
@@ -551,7 +576,7 @@ class TranslationEditorTests: XCTestCase
 	
 	func testUSXParsing()
 	{
-		guard let url = Bundle.main.url(forResource: "GAL", withExtension: "usx")
+		guard let url = Bundle.main.url(forResource: "TIT_DURI", withExtension: "usx")
 		else
 		{
 			XCTFail("Couldn't find url")
@@ -559,7 +584,7 @@ class TranslationEditorTests: XCTestCase
 		}
 		
 		// Finds the target language
-		let language = try! LanguageView.instance.language(withName: "English")
+		let language = try! LanguageView.instance.language(withName: "Duri")
 		
 		// Book finding algorithm
 		func findBook(projectId: String, languageId: String, code: String, identifier: String) -> Book?
@@ -602,6 +627,122 @@ class TranslationEditorTests: XCTestCase
 			}
 		}
 	}
+	/*
+	// TODO: WET WET
+	func match(_ sources: [Paragraph], and targets: [Paragraph]) -> [(Paragraph, Paragraph)]
+	{
+		guard !sources.isEmpty && !targets.isEmpty else
+		{
+			print("ERROR: Nothing to match!")
+			return []
+		}
+		
+		var matches = [(Paragraph, Paragraph)]()
+		var nextSourceIndex = 0
+		var nextTargetIndex = 0
+		
+		// Matches paragraphs. A single paragraph may be matched with multiple consecutive paragraphs
+		while nextSourceIndex < sources.count || nextTargetIndex < targets.count
+		{
+			// Finds out how many paragraphs without range there are on either side consecutively
+			let noRangeSources = sources.take(from: nextSourceIndex, while: { $0.range == nil })
+			let noRangeTargets = targets.take(from: nextTargetIndex, while: { $0.range == nil })
+			
+			// Matches them together, or if there are no matching paragraphs on either side, matches them to the latest paragraph instead
+			if noRangeSources.isEmpty
+			{
+				// If both sides have ranges, matches the paragraphs based on range overlapping
+				if noRangeTargets.isEmpty
+				{
+					// Goes through sources until one is found that doesn't have a range
+					var lastConnectedTargetRange: VerseRange?
+					var lastConnectedTargetIndex: Int?
+					var targetWithoutRangeFound = false
+					while nextSourceIndex < sources.count, let sourceRange = sources[nextSourceIndex].range
+					{
+						// The latest connected target may be connected to multiple sources
+						if let lastConnectedTargetIndex = lastConnectedTargetIndex, let lastConnectedTargetRange = lastConnectedTargetRange, sourceRange.overlaps(with: lastConnectedTargetRange)
+						{
+							matches.append((sources[nextSourceIndex], targets[lastConnectedTargetIndex]))
+						}
+						else if targetWithoutRangeFound
+						{
+							break
+						}
+						
+						// Goes through the targets (matching overlaps) until
+						// a) No match can be made -> moves to next source
+						// b) No target range available -> moves to next source but activates a different state too
+						while nextTargetIndex < targets.count
+						{
+							if let targetRange = targets[nextTargetIndex].range
+							{
+								if sourceRange.overlaps(with: targetRange)
+								{
+									matches.append((sources[nextSourceIndex], targets[nextTargetIndex]))
+									lastConnectedTargetIndex = nextTargetIndex
+									lastConnectedTargetRange = targetRange
+									nextTargetIndex += 1
+								}
+								else
+								{
+									break
+								}
+							}
+							else
+							{
+								targetWithoutRangeFound = true
+								break
+							}
+						}
+						
+						nextSourceIndex += 1
+					}
+				}
+				else
+				{
+					let matchingSource = nextSourceIndex == 0 ? sources.first! : sources[nextSourceIndex - 1]
+					noRangeTargets.forEach { matches.append((matchingSource, $0)) }
+					nextTargetIndex += noRangeTargets.count
+				}
+			}
+			else if noRangeTargets.isEmpty
+			{
+				let matchingTarget = nextTargetIndex == 0 ? targets.first! : targets[nextTargetIndex - 1]
+				noRangeSources.forEach { matches.append(($0, matchingTarget)) }
+				nextSourceIndex += noRangeSources.count
+			}
+			else
+			{
+				// TODO: Should probably let the user match paragraphs when the case is ambiguous (different number of non-verse paragraphs)
+				// Now simply binds the first last to many
+				let commonIndices = min(noRangeSources.count, noRangeTargets.count)
+				for i in 0 ..< commonIndices
+				{
+					matches.append((noRangeSources[i], noRangeTargets[i]))
+				}
+				for i in commonIndices ..< noRangeSources.count
+				{
+					matches.append((noRangeSources[i], noRangeTargets[commonIndices - 1]))
+				}
+				for i in commonIndices ..< noRangeTargets.count
+				{
+					matches.append((noRangeSources[commonIndices - 1], noRangeTargets[i]))
+				}
+				
+				nextSourceIndex += noRangeSources.count
+				nextTargetIndex += noRangeTargets.count
+			}
+		}
+		
+		// And if there happen to be any unmatched elements at the end, connects them to the last available match
+		for i in nextTargetIndex ..< targets.count
+		{
+			matches.append((sources.last!, targets[i]))
+		}
+		
+		return matches
+	}
 	
 	/*
     func testExample() {
@@ -615,4 +756,5 @@ class TranslationEditorTests: XCTestCase
             // Put the code you want to measure the time of here.
         }
     }*/
+*/
 }
