@@ -36,7 +36,12 @@ class LoginVC: UIViewController, ConnectionListener
 		
 		errorLabel.text = nil
 		onlineStatusView.isHidden = true
-
+    }
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		super.viewDidAppear(animated)
+		
 		// If the user is already logged in, just starts the background updates and moves on
 		if Session.instance.isAuthorized
 		{
@@ -48,7 +53,7 @@ class LoginVC: UIViewController, ConnectionListener
 			print("STATUS: No login information present")
 			ConnectionManager.instance.registerListener(self)
 		}
-    }
+	}
 	
 	
 	// ACTIONS	-------------------
@@ -146,6 +151,7 @@ class LoginVC: UIViewController, ConnectionListener
 		// TODO: Add authorization when backed supports it
 		ConnectionManager.instance.connect(serverURL: SERVER_ADDRESS)
 		
+		print("STATUS: Moving to select project view")
 		performSegue(withIdentifier: "SelectProject", sender: nil)
 	}
 }

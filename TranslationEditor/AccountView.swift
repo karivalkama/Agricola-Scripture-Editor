@@ -38,9 +38,9 @@ final class AccountView: View
 			account, emit in
 		
 			// Key = key name version
-			emit([account.cbUserName], nil)
+			emit(account.cbUserName, nil)
 			
-		}, version: "1")
+		}, version: "2")
 	}
 	
 	
