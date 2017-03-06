@@ -176,6 +176,8 @@
 		7C57ECA41E6D4726000718E9 /* VerseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070481E52ECBA007718BC /* VerseCell.swift */; };
 		7C57ECA51E6D4726000718E9 /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60705C1E5D79D8007718BC /* AvatarCell.swift */; };
 		7C57ECA61E6D4726000718E9 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B7B1D1E6555140005AD43 /* LabelCell.swift */; };
+		7C57ECAA1E6D5EDA000718E9 /* SelectProjectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57ECA91E6D5EDA000718E9 /* SelectProjectVC.swift */; };
+		7C57ECAC1E6D6651000718E9 /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57ECAB1E6D6651000718E9 /* ProjectCell.swift */; };
 		7C6070471E51B113007718BC /* TableCellSelectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070461E51B113007718BC /* TableCellSelectionListener.swift */; };
 		7C6070491E52ECBA007718BC /* VerseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070481E52ECBA007718BC /* VerseCell.swift */; };
 		7C60704B1E52F770007718BC /* VerseTableDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60704A1E52F770007718BC /* VerseTableDS.swift */; };
@@ -390,6 +392,8 @@
 		7C57EC0E1E6948FC000718E9 /* TI2_ENG.usx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TI2_ENG.usx; sourceTree = "<group>"; };
 		7C57EC111E694939000718E9 /* TI1_ENG.usx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TI1_ENG.usx; sourceTree = "<group>"; };
 		7C57EC141E694975000718E9 /* TIT_ENG.usx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TIT_ENG.usx; sourceTree = "<group>"; };
+		7C57ECA91E6D5EDA000718E9 /* SelectProjectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectProjectVC.swift; sourceTree = "<group>"; };
+		7C57ECAB1E6D6651000718E9 /* ProjectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
 		7C6070461E51B113007718BC /* TableCellSelectionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellSelectionListener.swift; sourceTree = "<group>"; };
 		7C6070481E52ECBA007718BC /* VerseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseCell.swift; sourceTree = "<group>"; };
 		7C60704A1E52F770007718BC /* VerseTableDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseTableDS.swift; sourceTree = "<group>"; };
@@ -606,6 +610,7 @@
 				7C6B7B1F1E6557270005AD43 /* FilteredMultiSelection.swift */,
 				7C6B7B221E6565CC0005AD43 /* CustomXibView.swift */,
 				7C6B7B261E659E220005AD43 /* OnlineStatusView.swift */,
+				7C57ECAB1E6D6651000718E9 /* ProjectCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -789,9 +794,10 @@
 		7C6070571E5C7BA4007718BC /* LoginView */ = {
 			isa = PBXGroup;
 			children = (
-				7C6070581E5C7BE0007718BC /* SelectAvatarVC.swift */,
 				7C57EBFD1E66BC2D000718E9 /* LoginVC.swift */,
 				7C57EC0A1E680AC6000718E9 /* CreateAccountVC.swift */,
+				7C57ECA91E6D5EDA000718E9 /* SelectProjectVC.swift */,
+				7C6070581E5C7BE0007718BC /* SelectAvatarVC.swift */,
 			);
 			name = LoginView;
 			sourceTree = "<group>";
@@ -1235,6 +1241,7 @@
 				7CD8EA621DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,
 				7C40DF7C1DED9FB90035B92E /* Language.swift in Sources */,
 				7C20D7FA1D9A768700E84BA5 /* VerseRange.swift in Sources */,
+				7C57ECAC1E6D6651000718E9 /* ProjectCell.swift in Sources */,
 				7CA1BAB01E31E8DD00611FED /* ThreadCell.swift in Sources */,
 				7CDBD6BC1E2657F900912320 /* ParagraphBindingView.swift in Sources */,
 				7C40DF5F1DE71E490035B92E /* DatabaseUtilities.swift in Sources */,
@@ -1258,6 +1265,7 @@
 				7CDBD6FE1E2F7C1700912320 /* ParagraphNotesView.swift in Sources */,
 				7CA1BAB41E31F09200611FED /* PostCell.swift in Sources */,
 				7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */,
+				7C57ECAA1E6D5EDA000718E9 /* SelectProjectVC.swift in Sources */,
 				7C57EC071E6709A2000718E9 /* Server.swift in Sources */,
 				7C4A4F8B1DEEC4BD009F890E /* View.swift in Sources */,
 				7C6070501E55860B007718BC /* Keyboard.swift in Sources */,

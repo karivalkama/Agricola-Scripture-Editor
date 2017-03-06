@@ -49,10 +49,16 @@ final class ProjectView: View
 	
 	// OTHER METHODS	-------
 	
+	// Query for all projects the account contributes to
+	func projectQuery(forContributorId accountId: String) -> MyQuery
+	{
+		return MyQuery(range: [ProjectView.KEY_CONTRIBUTOR: Key(accountId)], descending: true)
+	}
+	
 	// Finds all projects the provided account has access to
 	func projectsForContributor(withId accountId: String) throws -> [Project]
 	{
-		return try MyQuery(range: [ProjectView.KEY_CONTRIBUTOR: Key(accountId), ProjectView.KEY_CREATED: Key.undefined], descending: true).resultObjects()
+		return try projectQuery(forContributorId: accountId).resultObjects()
 	}
 	
 	

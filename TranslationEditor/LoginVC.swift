@@ -83,6 +83,13 @@ class LoginVC: UIViewController, ConnectionListener
 		ConnectionManager.instance.connect(serverURL: SERVER_ADDRESS, continuous: false)
 	}
 	
+	@IBAction func continueButtonPressed(_ sender: Any)
+	{
+		// Moves to the create account view
+		ConnectionManager.instance.removeListener(self)
+		performSegue(withIdentifier: "CreateUser", sender: nil)
+	}
+	
 	
 	// IMPLEMENTED METHODS	-------
 	

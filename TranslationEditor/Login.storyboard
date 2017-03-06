@@ -89,7 +89,7 @@
                                                                         </constraints>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                                     </textField>
                                                                 </subviews>
                                                             </stackView>
@@ -158,7 +158,7 @@
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
                                                         <connections>
-                                                            <segue destination="B6k-06-m6j" kind="presentation" identifier="CreateUser" id="EP1-fF-Rpz"/>
+                                                            <action selector="continueButtonPressed:" destination="7HQ-at-0Yn" eventType="touchUpInside" id="Amr-Ah-s56"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -193,6 +193,7 @@
                         <outlet property="passwordField" destination="CnF-lF-3AM" id="79x-tJ-ON1"/>
                         <outlet property="userNameField" destination="lIj-GE-Qvn" id="DTx-Jj-iSz"/>
                         <segue destination="kXv-Dx-fTW" kind="presentation" identifier="SelectProject" id="HNA-AV-7xQ"/>
+                        <segue destination="B6k-06-m6j" kind="presentation" identifier="CreateUser" id="0sd-W1-GYG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DhV-Wp-diV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -254,7 +255,7 @@
                                                                 </constraints>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -461,10 +462,10 @@
             </objects>
             <point key="canvasLocation" x="-817" y="707"/>
         </scene>
-        <!--View Controller-->
+        <!--Select ProjectVC-->
         <scene sceneID="tK9-7u-bGZ">
             <objects>
-                <viewController storyboardIdentifier="SelectProject" id="kXv-Dx-fTW" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectProject" id="kXv-Dx-fTW" customClass="SelectProjectVC" customModule="TranslationEditor" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lMy-Gw-QMW"/>
                         <viewControllerLayoutGuide type="bottom" id="ao5-jR-Ga8"/>
@@ -483,6 +484,9 @@
                                     <navigationItem title="Select Project" id="fEl-Mi-qaS">
                                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="YWp-8U-OOF">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="logoutButtonPressed:" destination="kXv-Dx-fTW" id="BL5-w4-6aa"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -518,7 +522,7 @@
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="352" id="QfX-T5-ECe"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectCell" rowHeight="87" id="sG3-be-bJb">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectCell" rowHeight="87" id="sG3-be-bJb" customClass="ProjectCell" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="485" height="87"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sG3-be-bJb" id="EcI-Gu-8tF">
@@ -567,6 +571,11 @@
                                                                 <constraint firstItem="wh2-3I-Lsf" firstAttribute="leading" secondItem="EcI-Gu-8tF" secondAttribute="leadingMargin" constant="8" id="u7Q-l5-dnP"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="createdLabel" destination="oap-hn-qB3" id="R5i-qJ-gRA"/>
+                                                            <outlet property="languageLabel" destination="ACo-ny-lib" id="8Zh-Mk-Cl0"/>
+                                                            <outlet property="projectNameLabel" destination="XPg-eE-ds2" id="fCm-6O-AlZ"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InvitationCell" rowHeight="176" id="Vde-PQ-RQ0">
                                                         <rect key="frame" x="0.0" y="115" width="485" height="176"/>
@@ -715,6 +724,9 @@
                                                         <state key="normal" title="Start New Project">
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <segue destination="pD5-zL-wXv" kind="presentation" id="k3M-Sm-eRm"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -745,6 +757,10 @@
                             <constraint firstAttribute="trailing" secondItem="exh-JZ-L1D" secondAttribute="trailing" id="kAe-cf-WL7"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="projectTableView" destination="7bl-Kc-0Yq" id="dia-bn-OrJ"/>
+                        <segue destination="dMv-eu-RFU" kind="presentation" identifier="SelectAvatar" id="OS0-uP-3up"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I99-Xe-Pjq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -795,7 +811,7 @@
                                                         <rect key="frame" x="0.0" y="22.5" width="256" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -812,7 +828,7 @@
                                                         <rect key="frame" x="0.0" y="22.5" width="256" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
