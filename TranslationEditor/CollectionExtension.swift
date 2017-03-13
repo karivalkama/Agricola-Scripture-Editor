@@ -228,16 +228,51 @@ protocol Appending
 	associatedtype Addable
 	
 	mutating func add(_ e: Addable)
+	mutating func dropFirst() -> Addable?
+	mutating func dropLast() -> Addable?
 }
 
 extension Dictionary where Value: Appending
 {
+	// Adds a new item to the collection at a certain key
 	mutating func append(key: Key, value: Value.Addable, empty: Value)
 	{
 		var array = self[key].or(empty)
 		array.add(value)
 		
 		self[key] = array
+	}
+	
+	// Finds and removes an element from the collection at the specified key
+	mutating func dropFirst(at key: Key) -> Value.Addable?
+	{
+		if var array = self[key]
+		{
+			let item = array.dropFirst()
+			self[key] = array
+			
+			return item
+		}
+		else
+		{
+			return nil
+		}
+	}
+	
+	// TODO: WET WET
+	mutating func dropLast(at key: Key) -> Value.Addable?
+	{
+		if var array = self[key]
+		{
+			let item = array.dropLast()
+			self[key] = array
+			
+			return item
+		}
+		else
+		{
+			return nil
+		}
 	}
 }
 
@@ -248,6 +283,16 @@ extension Array: Appending
 	mutating func add(_ e: Addable)
 	{
 		self.append(e)
+	}
+	
+	mutating func dropFirst() -> Addable?
+	{
+		return self.dropFirst()
+	}
+	
+	mutating func dropLast() -> Addable?
+	{
+		return self.dropLast()
 	}
 }
 

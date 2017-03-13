@@ -129,6 +129,7 @@ final class ParagraphHistoryView: View
 	{
 		var query = historyQuery(paragraphId: paragraphId)
 		query.limit = limit
+		query.descending = !goForward
 		
 		if goForward
 		{
@@ -140,6 +141,12 @@ final class ParagraphHistoryView: View
 		}
 		
 		return query
+	}
+	
+	// A convenience method for running a history query in search of the next paragraph in the history
+	func previousParagraphVersion(paragraphId: String) throws -> Paragraph?
+	{
+		return try historyOfParagraphQuery(paragraphId: paragraphId, limit: 1, goForward: false).firstResultObject()
 	}
 	
 	// Deprecates the whole path of a paragraph

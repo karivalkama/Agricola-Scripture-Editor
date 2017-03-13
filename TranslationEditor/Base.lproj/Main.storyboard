@@ -29,6 +29,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="TKx-6u-taf"/>
                                 </constraints>
+                                <color key="barTintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Intial Translation" id="jFy-f6-kP1">
                                         <barButtonItem key="backBarButtonItem" title="Back" id="vNs-s3-cee"/>
@@ -427,7 +428,6 @@
                                                                                     </connections>
                                                                                 </button>
                                                                             </subviews>
-                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="24" id="Ag2-eb-Kd1"/>
                                                                                 <constraint firstItem="knn-0b-PZw" firstAttribute="top" secondItem="2Oa-s8-i7D" secondAttribute="top" id="BAP-mg-lta"/>
