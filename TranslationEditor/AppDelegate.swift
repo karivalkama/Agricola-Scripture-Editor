@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		
 		// Starts synchronization process (test)
 		ConnectionManager.instance.registerListener(ConnectionStatusLogger())
-		//ConnectionManager.instance.connect(serverURL: "http://192.168.1.107:4984")
+		ConnectionManager.instance.connect(serverURL: "http://192.168.1.107:4984")
 		
 		// Updates navigation bar visuals
 		let navigationBarAppearance = UINavigationBar.appearance()
