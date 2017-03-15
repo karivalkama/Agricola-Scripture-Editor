@@ -18,8 +18,9 @@ struct Query<V: View>
 	private var min: Any?
 	private var max: Any?
 	
-	var minId: (String, Bool)?
-	var maxId: (String, Bool)?
+	var minId: String? // Minimum id, only works when all keys have been specified
+	var maxId: String? // Maximum id, only works when all keys have been specified
+	var exclusive: Bool = false
 	
 	var descending = false
 	
@@ -43,32 +44,16 @@ struct Query<V: View>
 			query.startKey = max
 			query.endKey = min
 			
-			if let (minId, inclusive) = minId
-			{
-				query.endKeyDocID = minId
-				query.inclusiveEnd = inclusive
-			}
-			if let (maxId, inclusive) = maxId
-			{
-				query.startKeyDocID = maxId
-				query.inclusiveStart = inclusive
-			}
+			query.endKeyDocID = minId
+			query.startKeyDocID = maxId
 		}
 		else
 		{
 			query.startKey = min
 			query.endKey = max
 			
-			if let (minId, inclusive) = minId
-			{
-				query.startKeyDocID = minId
-				query.inclusiveStart = inclusive
-			}
-			if let (maxId, inclusive) = maxId
-			{
-				query.endKeyDocID = maxId
-				query.inclusiveEnd = inclusive
-			}
+			query.startKeyDocID = minId
+			query.endKeyDocID = maxId
 		}
 		
 		if let limit = limit
@@ -79,6 +64,9 @@ struct Query<V: View>
 		{
 			query.skip = UInt(skip)
 		}
+		
+		query.inclusiveEnd = !exclusive
+		query.inclusiveStart = !exclusive
 		
 		query.prefetch = type == .object
 		query.mapOnly = type != .reduce
@@ -131,11 +119,11 @@ struct Query<V: View>
 			
 			if let startKey = query.startKeyDocID
 			{
-				maxId = (startKey, query.inclusiveStart)
+				maxId = startKey
 			}
 			if let endKey = query.endKeyDocID
 			{
-				minId = (endKey, query.inclusiveEnd)
+				minId = endKey
 			}
 		}
 		else
@@ -143,15 +131,11 @@ struct Query<V: View>
 			self.min = query.startKey
 			self.max = query.endKey
 			
-			if let startKey = query.startKeyDocID
-			{
-				minId = (startKey, query.inclusiveStart)
-			}
-			if let endKey = query.endKeyDocID
-			{
-				maxId = (endKey, query.inclusiveEnd)
-			}
+			minId = query.startKeyDocID
+			maxId = query.endKeyDocID
 		}
+		
+		exclusive = !query.inclusiveStart || !query.inclusiveEnd
 		
 		if query.mapOnly
 		{

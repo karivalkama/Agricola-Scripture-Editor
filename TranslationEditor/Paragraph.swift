@@ -357,7 +357,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	}
 	
 	// Finds the paragraph creation time from a paragraph id string
-	static func created(from paragraphIdString: String) -> TimeInterval
+	static func created(fromId paragraphIdString: String) -> TimeInterval
 	{
 		return createId(from: paragraphIdString)[PROPERTY_CREATED].time()
 	}

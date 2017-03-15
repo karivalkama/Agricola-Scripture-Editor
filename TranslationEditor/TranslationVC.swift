@@ -9,7 +9,7 @@
 import UIKit
 
 // TranslationVC is the view controller used in the translation / review / work view
-class TranslationVC: UIViewController, CellInputListener, AppStatusListener, TranslationCellManager, AddNotesDelegate, OpenThreadListener
+class TranslationVC: UIViewController, CellInputListener, AppStatusListener, TranslationCellManager, AddNotesDelegate, OpenThreadListener, UIGestureRecognizerDelegate
 {
 	// TYPES	----------
 	
@@ -31,7 +31,11 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	private let userId = "testuserid"
 	
 	// Target translation managing
+	private let targetHistoryManager = TranslationHistoryManager()
+	
 	private var targetTranslationDS: TranslationTableViewDS?
+	private var targetSwipeRecognizerLeft: UISwipeGestureRecognizer?
+	private var targetSwipeRecognizerRight: UISwipeGestureRecognizer?
 	
 	// resource table managing
 	private var resourceManager: ResourceManager!
@@ -119,6 +123,24 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		
 		// Sets selection listening
 		scrollManager.registerSelectionListener(resourceManager)
+		
+		// Adds swipe listening
+		if targetSwipeRecognizerLeft == nil
+		{
+			
+			targetSwipeRecognizerLeft = UISwipeGestureRecognizer(target: self, action: #selector(targetTableSwiped(recognizer:)))
+			targetSwipeRecognizerLeft?.direction = .left
+			translationTableView.addGestureRecognizer(targetSwipeRecognizerLeft!)
+			targetSwipeRecognizerLeft?.delegate = self
+		}
+		if targetSwipeRecognizerRight == nil
+		{
+			
+			targetSwipeRecognizerRight = UISwipeGestureRecognizer(target: self, action: #selector(targetTableSwiped(recognizer:)))
+			targetSwipeRecognizerRight?.direction = .right
+			translationTableView.addGestureRecognizer(targetSwipeRecognizerRight!)
+			targetSwipeRecognizerRight?.delegate = self
+		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -182,12 +204,20 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	
 	// CELL MANAGEMENT	-------------
 	
-	func overrideContentForPath(_ pathId: String) -> NSAttributedString?
+	func overrideContentForParagraph(_ paragraph: Paragraph) -> NSAttributedString?
 	{
-		return inputData[pathId]
+		// Checks if history is used
+		if let history = targetHistoryManager.currentHistoryForParagraph(withId: paragraph.idString)
+		{
+			return history.toAttributedString(options: [Paragraph.optionDisplayParagraphRange: false])
+		}
+		else
+		{
+			return inputData[paragraph.pathId]
+		}
 	}
 	
-	func cellUpdated(_ cell: TranslationCell)
+	func cellUpdated(_ cell: TranslationCell, paragraph: Paragraph)
 	{
 		if let cell = cell as? TargetTranslationCell
 		{
@@ -205,7 +235,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 				}
 			}
 			
-			cell.configure(inputListener: self, scrollManager: scrollManager, withNotesAtIndex: noteResourceIndex, openResource: switchToResource)
+			cell.configure(showsHistory: targetHistoryManager.currentDepthForParagraph(withId: paragraph.idString) != 0, inputListener: self, scrollManager: scrollManager, withNotesAtIndex: noteResourceIndex, openResource: switchToResource)
 		}
 	}
 	
@@ -269,6 +299,45 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	@IBAction func resouceSegmentChanged(_ sender: Any)
 	{
 		switchToResource(atIndex: resourceSegmentControl.selectedSegmentIndex)
+	}
+	
+	func targetTableSwiped(recognizer: UISwipeGestureRecognizer)
+	{
+		// First finds the targeted cell
+		guard let index = translationTableView.indexPathForRow(at: recognizer.location(in: translationTableView)) else
+		{
+			print("ERROR: Could not find swipe target cell")
+			return
+		}
+		
+		guard let paragraph = targetTranslationDS?.paragraphAtIndex(index) else
+		{
+			print("ERROR: Could not find swipe target paragraph")
+			return
+		}
+		
+		var changed = false
+		do
+		{
+			// Depending on the swipe direction, the history either goes forward or backward
+			if recognizer.direction == .right
+			{
+				changed = try targetHistoryManager.goToPreviousVersionOfParagraph(withId: paragraph.idString)
+			}
+			else if recognizer.direction == .left
+			{
+				changed = targetHistoryManager.goToNextVersionOfParagraph(withId: paragraph.idString)
+			}
+		}
+		catch
+		{
+			print("ERROR: Failed to modify history. \(error)")
+		}
+		
+		if changed
+		{
+			translationTableView.reloadRows(at: [index], with: recognizer.direction == .left ? .left : .right)
+		}
 	}
 	
 	

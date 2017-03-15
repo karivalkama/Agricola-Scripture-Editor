@@ -12,8 +12,8 @@ import Foundation
 protocol TranslationCellManager
 {
 	// Provides custom content for a certain cell. Nil if original content should be used.
-	func overrideContentForPath(_ pathId: String) -> NSAttributedString?
+	func overrideContentForParagraph(_ paragraph: Paragraph) -> NSAttributedString?
 	
 	// This is called after creation and updating of a cell, before it is updated to the table view
-	func cellUpdated(_ cell: TranslationCell)
+	func cellUpdated(_ cell: TranslationCell, paragraph: Paragraph)
 }

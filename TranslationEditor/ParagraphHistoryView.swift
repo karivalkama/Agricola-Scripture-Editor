@@ -109,36 +109,32 @@ final class ParagraphHistoryView: View
 	// A query for the whole history of a paragraph, from oldest to the most recent
 	func historyQuery(bookId: String, chapterIndex: Int, pathId: String) -> Query<ParagraphHistoryView>
 	{
-		return createQuery().withRange(createKey(bookId: bookId, firstChapter: chapterIndex, lastChapter: chapterIndex, pathId: pathId))
+		return createQuery(withKeys: createKey(bookId: bookId, firstChapter: chapterIndex, lastChapter: chapterIndex, pathId: pathId))
 	}
 	
 	// A query for the whole history of a specific paragraph instance, from the oldest to the most recent
 	func historyQuery(paragraphId: String) -> Query<ParagraphHistoryView>
 	{
-		// Parses the search data from the id first
-		let id = Paragraph.createId(from: paragraphId)
-		let bookId = id[Paragraph.PROPERTY_BOOK_ID].string()
-		let chapterIndex = id[Paragraph.PROPERTY_CHAPTER_INDEX].int()
-		let pathId = id[Paragraph.PROPERTY_PATH_ID].string()
-		
-		return historyQuery(bookId: bookId, chapterIndex: chapterIndex, pathId: pathId)
+		return createQuery(withKeys: createKey(paragraphId: paragraphId))
 	}
 	
 	// The backwards or forwards history of a certain paragraph instance
-	func historyOfParagraphQuery(paragraphId: String, limit: Int, goForward: Bool = false) -> Query<ParagraphHistoryView>
+	func historyOfParagraphQuery(paragraphId: String, limit: Int? = nil, goForward: Bool = false) -> Query<ParagraphHistoryView>
 	{
-		var query = historyQuery(paragraphId: paragraphId)
-		query.limit = limit
-		query.descending = !goForward
-		
+		var keys = createKey(paragraphId: paragraphId)
 		if goForward
 		{
-			query.minId = (paragraphId, false)
+			keys[ParagraphHistoryView.KEY_CREATED] = Key([Paragraph.created(fromId: paragraphId), nil])
 		}
 		else
 		{
-			query.maxId = (paragraphId, false)
+			keys[ParagraphHistoryView.KEY_CREATED] = Key([nil, Paragraph.created(fromId: paragraphId)])
 		}
+		
+		var query = createQuery(withKeys: keys)
+		query.exclusive = true
+		query.limit = limit
+		query.descending = !goForward
 		
 		return query
 	}
@@ -146,7 +142,12 @@ final class ParagraphHistoryView: View
 	// A convenience method for running a history query in search of the next paragraph in the history
 	func previousParagraphVersion(paragraphId: String) throws -> Paragraph?
 	{
-		return try historyOfParagraphQuery(paragraphId: paragraphId, limit: 1, goForward: false).firstResultObject()
+		return try historyOfParagraphQuery(paragraphId: paragraphId, limit: 1).firstResultObject()
+	}
+	
+	func nextParagraphVersion(paragraphId: String) throws -> Paragraph?
+	{
+		return try historyOfParagraphQuery(paragraphId: paragraphId, limit: 1, goForward: true).firstResultObject()
 	}
 	
 	// Deprecates the whole path of a paragraph
@@ -303,6 +304,16 @@ final class ParagraphHistoryView: View
 		}
 		
 		return commonAncestor
+	}
+	
+	private func createKey(paragraphId: String) -> [String: Key]
+	{
+		let id = Paragraph.createId(from: paragraphId)
+		let bookId = id[Paragraph.PROPERTY_BOOK_ID].string()
+		let chapterIndex = id[Paragraph.PROPERTY_CHAPTER_INDEX].int()
+		let pathId = id[Paragraph.PROPERTY_PATH_ID].string()
+		
+		return createKey(bookId: bookId, firstChapter: chapterIndex, lastChapter: chapterIndex, pathId: pathId)
 	}
 	
 	private func createKey(bookId: String?, firstChapter: Int?, lastChapter: Int?, pathId: String?) -> [String : Key]

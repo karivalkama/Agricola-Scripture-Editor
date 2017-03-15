@@ -108,19 +108,22 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 	
 	// OTHER METHODS	-----
 	
-	func configure(inputListener: CellInputListener, scrollManager: ScrollSyncManager, withNotesAtIndex notesIndex: Int?, openResource: @escaping (Int) -> ())
+	func configure(showsHistory: Bool, inputListener: CellInputListener, scrollManager: ScrollSyncManager, withNotesAtIndex notesIndex: Int?, openResource: @escaping (Int) -> ())
 	{
 		self.inputListener = inputListener
 		self.scrollManager = scrollManager
 		self.notesIndex = notesIndex
 		self.openResource = openResource
 		
-		// Notes flag is displayed only when there are pending notes
-		notesFlagButton.isHidden = notesIndex == nil
+		// Notes flag is displayed only when there are pending notes (and not in history mode)
+		notesFlagButton.isHidden = notesIndex == nil || showsHistory
 		
 		let menuItem = UIMenuItem(title: "Print To Console", action: #selector(printToConsole))
 		UIMenuController.shared.menuItems = [menuItem]
 		UIMenuController.shared.update()
+		
+		// When displays history, the background color is set to gray
+		contentView.backgroundColor = showsHistory ? UIColor.lightGray : UIColor.white
 	}
 	
 	func printToConsole() {

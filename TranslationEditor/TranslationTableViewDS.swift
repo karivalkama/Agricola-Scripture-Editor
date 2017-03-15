@@ -86,7 +86,7 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		let paragraph = currentData[indexPath.row]
 		
 		var stringContents: NSAttributedString!
-		if let input = cellManager?.overrideContentForPath(paragraph.pathId)
+		if let input = cellManager?.overrideContentForParagraph(paragraph)
 		{
 			stringContents = input
 			print("STATUS: Presenting input data")
@@ -97,7 +97,7 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		}
 		
 		cell.setContent(stringContents, withId: paragraph.pathId)
-		cellManager?.cellUpdated(cell)
+		cellManager?.cellUpdated(cell, paragraph: paragraph)
 		return cell
 	}
 	
@@ -140,6 +140,19 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		else
 		{
 			return nil
+		}
+	}
+	
+	// Finds the paragraph displayed at certain index path (row)
+	func paragraphAtIndex(_ index: IndexPath) -> Paragraph?
+	{
+		if index.row < 0 || index.row >= currentData.count
+		{
+			return nil
+		}
+		else
+		{
+			return currentData[index.row]
 		}
 	}
 }

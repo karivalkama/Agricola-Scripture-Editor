@@ -227,9 +227,12 @@ protocol Appending
 {
 	associatedtype Addable
 	
+	// Appends a single element
 	mutating func add(_ e: Addable)
-	mutating func dropFirst() -> Addable?
-	mutating func dropLast() -> Addable?
+	// Removes and returns the first element
+	mutating func popFirst() -> Addable?
+	// Removes and returns the last element
+	mutating func popLast() -> Addable?
 }
 
 extension Dictionary where Value: Appending
@@ -244,11 +247,11 @@ extension Dictionary where Value: Appending
 	}
 	
 	// Finds and removes an element from the collection at the specified key
-	mutating func dropFirst(at key: Key) -> Value.Addable?
+	mutating func popFirst(at key: Key) -> Value.Addable?
 	{
 		if var array = self[key]
 		{
-			let item = array.dropFirst()
+			let item = array.popFirst()
 			self[key] = array
 			
 			return item
@@ -260,11 +263,11 @@ extension Dictionary where Value: Appending
 	}
 	
 	// TODO: WET WET
-	mutating func dropLast(at key: Key) -> Value.Addable?
+	mutating func popLast(at key: Key) -> Value.Addable?
 	{
 		if var array = self[key]
 		{
-			let item = array.dropLast()
+			let item = array.popLast()
 			self[key] = array
 			
 			return item
@@ -285,14 +288,9 @@ extension Array: Appending
 		self.append(e)
 	}
 	
-	mutating func dropFirst() -> Addable?
+	mutating func popFirst() -> Element?
 	{
-		return self.dropFirst()
-	}
-	
-	mutating func dropLast() -> Addable?
-	{
-		return self.dropLast()
+		return removeFirst()
 	}
 }
 

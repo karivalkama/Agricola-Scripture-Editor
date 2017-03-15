@@ -7,6 +7,7 @@
 //
 import XCTest
 @testable import TranslationEditor
+// import Pods_TranslationEditor
 
 
 class TranslationEditorTests: XCTestCase
@@ -299,6 +300,53 @@ class TranslationEditorTests: XCTestCase
 		let languages = try! query.resultObjects()
 		print("Found \(languages.count) languages named 'english'")
 		languages.forEach { print("- \($0.name): \($0.idString)") }
+	}
+	
+	func testReadParagraphHistory()
+	{
+		let format = DateFormatter()
+		format.dateStyle = .short
+		format.timeStyle = .short
+		
+		var paragraphsWithHistory = [[Paragraph]]()
+		
+		print("TEST: Reading paragraph history")
+		for book in try! BookView.instance.createQuery().resultObjects()
+		{
+			print("Book: \(book.identifier) ------------")
+			
+			for paragraph in try! ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
+			{
+				let versions = try! ParagraphHistoryView.instance.historyQuery(paragraphId: paragraph.idString).resultObjects()
+				let versionTimes = versions.map { Date(timeIntervalSince1970: $0.created) }
+				
+				var timeStr = format.string(from: versionTimes.first!)
+				for time in versionTimes.dropFirst()
+				{
+					timeStr += " -> \(format.string(from: time))"
+				}
+				
+				print("\(paragraph.chapterIndex).\(paragraph.sectionIndex).\(paragraph.index): \(timeStr)")
+				
+				if versions.count > 2
+				{
+					paragraphsWithHistory.append(versions)
+				}
+			}
+		}
+		
+		print("")
+		
+		// Tests that versions can be iterated over
+		for history in paragraphsWithHistory
+		{
+			var lastId = history.first!.idString
+			for version in history.dropFirst()
+			{
+				assert(try! ParagraphHistoryView.instance.nextParagraphVersion(paragraphId: lastId)?.idString == version.idString)
+				lastId = version.idString
+			}
+		}
 	}
 	
 	func testReadDatabaseData()
