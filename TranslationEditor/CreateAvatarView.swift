@@ -10,7 +10,7 @@ import UIKit
 
 // This view is used for requesting basic avatar information from the user
 // This view is not used for defining avatar rights
-@IBDesignable class CreateAvatarView: CustomXibView
+@IBDesignable class CreateAvatarView: CustomXibView, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
 	// OUTLETS	----------------
 	
@@ -26,6 +26,13 @@ import UIKit
 	
 	
 	// ATTRIBUTES	------------
+	
+	// The hosting view controller needs to be specified by the VC using this view
+	weak var viewController: UIViewController?
+	
+	private let imagePicker = UIImagePickerController()
+	
+	private(set) var avatarImage: UIImage?
 	
 	private var _mustBeShared = false
 	var mustBeShared: Bool
@@ -87,6 +94,12 @@ import UIKit
 	
 	// INIT	--------------------
 	
+	override func awakeFromNib()
+	{
+		imagePicker.delegate = self
+		imagePicker.allowsEditing = true
+	}
+	
 	override init(frame: CGRect)
 	{
 		super.init(frame: frame)
@@ -109,7 +122,27 @@ import UIKit
 	
 	@IBAction func avatarImageTapped(_ sender: Any)
 	{
-		// TODO: Request the user to change image
+		if let viewController = viewController
+		{
+			viewController.present(imagePicker, animated: true, completion: nil)
+		}
+		else
+		{
+			print("ERROR: No hosting view controller specified for CreateAvatarView. Cannot display image picker.")
+		}
+	}
+	
+	
+	// IMPLEMENTED METHODS	----
+	
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+	{
+		if let image = info[UIImagePickerControllerEditedImage] as? UIImage
+		{
+			avatarImageView.image = image
+			avatarImage = image
+		}
+		picker.dismiss(animated: true, completion: nil)
 	}
 	
 	
