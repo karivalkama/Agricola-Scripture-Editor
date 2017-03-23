@@ -10,7 +10,7 @@ import UIKit
 
 // This view is used for requesting basic avatar information from the user
 // This view is not used for defining avatar rights
-class CreateAvatarView: UIView
+@IBDesignable class CreateAvatarView: CustomXibView
 {
 	// OUTLETS	----------------
 	
@@ -23,6 +23,23 @@ class CreateAvatarView: UIView
 	
 	@IBOutlet weak var sharingView: UIView!
 	@IBOutlet weak var passwordsView: UIView!
+	
+	
+	// ATTRIBUTES	------------
+	
+	private var _mustBeShared = false
+	var mustBeShared: Bool
+	{
+		get { return _mustBeShared }
+		set
+		{
+			_mustBeShared = newValue
+			
+			// Sharing is not asked when it is determined beforehand
+			sharingView.isHidden = newValue
+			updatePasswordVisibility()
+		}
+	}
 	
 	
 	// COMPUTED PROPERTIES	----
@@ -65,19 +82,29 @@ class CreateAvatarView: UIView
 		return !isShared || offlinePasswordField.text == repeatPasswordField.text
 	}
 	
-	var isShared: Bool { return isSharedSwitch.isOn }
+	var isShared: Bool { return mustBeShared || isSharedSwitch.isOn }
 	
 	
 	// INIT	--------------------
 	
+	override init(frame: CGRect)
+	{
+		super.init(frame: frame)
+		setupXib(nibName: "CreateAvatar")
+	}
+	
+	required init?(coder: NSCoder)
+	{
+		super.init(coder: coder)
+		setupXib(nibName: "CreateAvatar")
+	}
 	
 	
 	// ACTIONS	----------------
 	
 	@IBAction func sharingChanged(_ sender: Any)
 	{
-		// Offline password fields are only displayed while the sharing is on
-		passwordsView.isHidden = !isShared
+		updatePasswordVisibility()
 	}
 	
 	@IBAction func avatarImageTapped(_ sender: Any)
@@ -91,5 +118,11 @@ class CreateAvatarView: UIView
 	private func fieldIsFilled(_ field: UITextField) -> Bool
 	{
 		return field.text != nil && !field.text!.isEmpty
+	}
+	
+	private func updatePasswordVisibility()
+	{
+		// Offline password fields are only displayed while the sharing is on
+		passwordsView.isHidden = !isShared
 	}
 }
