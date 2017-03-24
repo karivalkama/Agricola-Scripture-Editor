@@ -16,6 +16,10 @@ protocol Storable: JSONConvertible
 	// Id properties don't need to (/ shouldn't) be part of the reqular object properties 
 	var idProperties: [Any] {get}
 	
+	// The attachments added to this model.
+	// These are stored in the database along with other model data.
+	//var attachments: [String: Attachment] {get}
+	
 	// Each class has a certain way of parsing a unique identifier from certain properties. 
 	// This map is used for retrieving those properties from id data.
 	// Each property name should match a certain index / range of id parts, which must correspond with the idProperties values
@@ -47,6 +51,47 @@ extension Storable
 	
 	// The database document corresponding to this instance
 	var document: CBLDocument {return DATABASE.document(withID: idString)!}
+	
+	// The names of the attachments associated with this storable instance
+	// It is not quaranteed that an attachment actually exists for each of these names since the actual files may have been removed
+	var attachmentNames: [String]
+	{
+		if let revision = document.currentRevision
+		{
+			return revision.attachmentNames.or([])
+		}
+		else
+		{
+			return []
+		}
+	}
+	
+	// Reads all attachments for this document
+	// This value should be cached if used repreatedly
+	var attachments: [String: Attachment]
+	{
+		guard let revision = document.currentRevision else
+		{
+			return [:]
+		}
+		
+		guard let attachments = revision.attachments else
+		{
+			return [:]
+		}
+		
+		var parsed = [String: Attachment]()
+		for attachment in attachments
+		{
+			// Naturally only includes attachments that actaully contain something
+			if let data = attachment.content, let contentType = attachment.contentType
+			{
+				parsed[attachment.name] = Attachment(data: data, contentType: contentType)
+			}
+		}
+		
+		return parsed
+	}
 	
 	// Pushes the instance data into the database
 	// If 'overwrite' is set to true, removes any values from the database 
@@ -124,6 +169,50 @@ extension Storable
 	func delete() throws
 	{
 		try document.delete()
+	}
+	
+	// Reads an attachment for this storable document
+	// Returns nil if the document didn't contain the provided attachment
+	func attachment(named attachmentName: String) -> Attachment?
+	{
+		if let revision = document.currentRevision, let attachment = revision.attachmentNamed(attachmentName)
+		{
+			if let data = attachment.content, let contentType = attachment.contentType
+			{
+				return Attachment(data: data, contentType: contentType)
+			}
+		}
+		
+		return nil
+	}
+	
+	// Saves a new attachment to this document
+	// The document must first have been pushed to the database at least once
+	func saveAttachment(_ attachment: Attachment, withName name: String) throws
+	{
+		guard let currentRevision = document.currentRevision else
+		{
+			return
+		}
+		
+		let newRevision = currentRevision.createRevision()
+		newRevision.setAttachmentNamed(name, withContentType: attachment.contentType, content: attachment.data)
+		
+		try newRevision.save()
+	}
+	
+	// Deletes an attachment from this document
+	func deleteAttachment(named name: String) throws
+	{
+		guard let currentRevision = document.currentRevision else
+		{
+			return
+		}
+		
+		let newRevision = currentRevision.createRevision()
+		newRevision.removeAttachmentNamed(name)
+		
+		try newRevision.save()
 	}
 	
 	// Parses an id compatible with this class from a unique id string

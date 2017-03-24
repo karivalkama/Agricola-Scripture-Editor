@@ -98,6 +98,28 @@ final class AvatarInfo: Storable
 	
 	private var passwordHash: String?
 	
+	private var _image: UIImage?
+	var image: UIImage?
+	{
+		// Reads the image from CB if necessary
+		if let image = _image
+		{
+			return image
+		}
+		else
+		{
+			if let image = attachment(named: "image")?.toImage
+			{
+				_image = image
+				return image
+			}
+			else
+			{
+				return nil
+			}
+		}
+	}
+	
 	
 	// COMPUTED PROPERTIES	----
 	
@@ -173,6 +195,19 @@ final class AvatarInfo: Storable
 	
 	
 	// OTHER METHODS	-------
+	
+	// Changes the image associated with this avatar
+	func setImage(_ image: UIImage) throws
+	{
+		if (_image != image)
+		{
+			_image = image
+			if let attachment = Attachment.parse(fromImage: image)
+			{
+				try saveAttachment(attachment, withName: "image")
+			}
+		}
+	}
 	
 	func authenticate(loggedAccountId: String, password: String) -> Bool
 	{

@@ -230,16 +230,16 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="uNc-Md-fRa" userLabel="Content Stack View">
-                                <rect key="frame" x="32" y="108" width="908" height="564"/>
+                                <rect key="frame" x="257" y="108" width="683" height="564"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="UK4-xb-TSv" userLabel="Base Info Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="596" height="272"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="371" height="272"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5rS-26-qlC" userLabel="Auth Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="596" height="167.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="371" height="167.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="w78-nA-O7V" userLabel="Username Stack View">
-                                                        <rect key="frame" x="368" y="0.0" width="228" height="50.5"/>
+                                                        <rect key="frame" x="143" y="0.0" width="228" height="50.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcZ-Hj-etx">
                                                                 <rect key="frame" x="0.0" y="0.0" width="228" height="20.5"/>
@@ -260,7 +260,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="3dW-U3-OCL" userLabel="Password Stack View">
-                                                        <rect key="frame" x="368" y="58.5" width="228" height="50.5"/>
+                                                        <rect key="frame" x="143" y="58.5" width="228" height="50.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCE-OX-t5t">
                                                                 <rect key="frame" x="0.0" y="0.0" width="228" height="20.5"/>
@@ -277,7 +277,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="eqn-kZ-KND" userLabel="Repeat Password Stack View">
-                                                        <rect key="frame" x="368" y="117" width="228" height="50.5"/>
+                                                        <rect key="frame" x="143" y="117" width="228" height="50.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeat Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKu-O8-IxW">
                                                                 <rect key="frame" x="0.0" y="0.0" width="228" height="20.5"/>
@@ -302,7 +302,7 @@
                                                 </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error messages are displayed here!" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxa-3z-msG">
-                                                <rect key="frame" x="0.0" y="183.5" width="596" height="20"/>
+                                                <rect key="frame" x="0.0" y="183.5" width="371" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="19.5" id="FF1-tr-VDo"/>
                                                 </constraints>
@@ -311,19 +311,19 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6TA-QV-xT9" userLabel="Share Stack View">
-                                                <rect key="frame" x="0.0" y="219.5" width="596" height="52.5"/>
+                                                <rect key="frame" x="0.0" y="219.5" width="371" height="52.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="WbK-35-aqE" userLabel="Text Stack View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="539" height="52.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="314" height="52.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a shared project account" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Nz-jq-dqh">
-                                                                <rect key="frame" x="0.0" y="0.0" width="539" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="314" height="20.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use this if this tablet is used  by many project members" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tdm-DB-bii">
-                                                                <rect key="frame" x="0.0" y="20.5" width="539" height="32"/>
+                                                                <rect key="frame" x="0.0" y="20.5" width="314" height="32"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="32" id="S8Z-b6-sGw"/>
                                                                 </constraints>
@@ -337,7 +337,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QbT-3D-Zaf">
-                                                        <rect key="frame" x="547" y="11" width="51" height="31"/>
+                                                        <rect key="frame" x="322" y="11" width="51" height="31"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="31" id="p3O-ft-83L"/>
                                                         </constraints>
@@ -352,7 +352,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="zj5-vV-dfg" userLabel="Additional Info Stack View">
-                                        <rect key="frame" x="644" y="0.0" width="264" height="564"/>
+                                        <rect key="frame" x="419" y="0.0" width="264" height="564"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TtO-sl-E8O" userLabel="Select Language Stack View">
                                                 <rect key="frame" x="0.0" y="0.0" width="264" height="411"/>
@@ -764,10 +764,10 @@
             </objects>
             <point key="canvasLocation" x="-164" y="13"/>
         </scene>
-        <!--View Controller-->
+        <!--Create ProjectVC-->
         <scene sceneID="xfu-dv-ict">
             <objects>
-                <viewController storyboardIdentifier="CreateProject" id="pD5-zL-wXv" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateProject" id="pD5-zL-wXv" customClass="CreateProjectVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nif-9Z-XwR"/>
                         <viewControllerLayoutGuide type="bottom" id="Ybl-zg-GkX"/>
@@ -876,6 +876,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="continueButtonPressed:" destination="pD5-zL-wXv" eventType="touchUpInside" id="cCh-e7-rlp"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -892,6 +895,12 @@
                             <constraint firstAttribute="trailing" secondItem="ZHV-wf-uO3" secondAttribute="trailing" id="zeh-Ab-t0P"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="createAvatarView" destination="GwQ-wJ-TU4" id="a2J-Tk-b11"/>
+                        <outlet property="projectNameField" destination="Rob-4Y-3f8" id="L75-vL-1zE"/>
+                        <outlet property="targetLanguageField" destination="HJO-6z-Sky" id="FnF-Au-pgt"/>
+                        <outlet property="targetLanguageTable" destination="GES-hn-dhr" id="QBw-RH-O24"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RBb-bf-4Mw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
