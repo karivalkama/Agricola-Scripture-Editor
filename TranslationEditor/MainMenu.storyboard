@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main MenuVC-->
         <scene sceneID="jA9-80-sOV">
             <objects>
-                <viewController id="itN-2l-wFE" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainMenu" id="itN-2l-wFE" customClass="MainMenuVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bg7-jG-e5b"/>
                         <viewControllerLayoutGuide type="bottom" id="bFc-B8-LPk"/>
@@ -119,6 +119,9 @@
                                                                 <state key="normal" title="Join">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="joinButtonPressed:" destination="itN-2l-wFE" eventType="touchUpInside" id="vho-Ie-Gfl"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BqK-yK-8fy">
                                                                 <rect key="frame" x="128" y="0.0" width="112" height="40"/>
@@ -127,6 +130,9 @@
                                                                 <state key="normal" title="Disconnect">
                                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="disconnectButtonPressed:" destination="itN-2l-wFE" eventType="touchUpInside" id="hHH-o3-Sqk"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -145,6 +151,9 @@
                                                                     <constraint firstAttribute="width" constant="49" id="Iiv-pS-sMw"/>
                                                                 </constraints>
                                                                 <color key="onTintColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <connections>
+                                                                    <action selector="hostingStatusChanged:" destination="itN-2l-wFE" eventType="valueChanged" id="qcS-dO-UFy"/>
+                                                                </connections>
                                                             </switch>
                                                         </subviews>
                                                     </stackView>
@@ -199,6 +208,16 @@
                             <constraint firstItem="kZp-yK-yQq" firstAttribute="leading" secondItem="f7L-bV-Kv3" secondAttribute="leading" id="paT-Xi-ssc"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bookTableView" destination="Nmh-Sf-zta" id="q3N-LD-4sf"/>
+                        <outlet property="disconnectButton" destination="BqK-yK-8fy" id="q5k-sj-de1"/>
+                        <outlet property="hostingSwitch" destination="gdS-AM-Rx2" id="VSI-eB-Wi6"/>
+                        <outlet property="joinButton" destination="4cB-je-1Nd" id="f5Q-2N-QnP"/>
+                        <outlet property="onlineStatusView" destination="d4F-eg-xbM" id="2uB-4M-nmk"/>
+                        <outlet property="qrImageView" destination="2sN-Rw-Dvv" id="nYI-S4-0D7"/>
+                        <outlet property="qrView" destination="Dsu-CT-hOv" id="aIh-5X-WJ4"/>
+                        <outlet property="userView" destination="fhK-Xg-VZG" id="bXq-Ma-yzJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TbU-FM-9Z2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -71,6 +71,8 @@
 		7C4A50041E016E31009F890E /* Reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4A50031E016E31009F890E /* Reduce.swift */; };
 		7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */; };
 		7C4CC1771DB0EE1800BCF24B /* USXContainerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */; };
+		7C506B7F1E892FA400ACB5AC /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C506B7E1E892FA400ACB5AC /* MainMenuVC.swift */; };
+		7C506B811E8939A100ACB5AC /* P2PClientSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C506B801E8939A100ACB5AC /* P2PClientSession.swift */; };
 		7C55A1F71E76C0580038C122 /* TranslationHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55A1F61E76C0580038C122 /* TranslationHistoryManager.swift */; };
 		7C55A1FF1E7970A70038C122 /* CreateAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55A1FE1E7970A70038C122 /* CreateAvatarView.swift */; };
 		7C57EBFE1E66BC2D000718E9 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EBFD1E66BC2D000718E9 /* LoginVC.swift */; };
@@ -266,6 +268,8 @@
 		7C4A50031E016E31009F890E /* Reduce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reduce.swift; sourceTree = "<group>"; };
 		7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXMarkerElement.swift; sourceTree = "<group>"; };
 		7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXContainerElement.swift; sourceTree = "<group>"; };
+		7C506B7E1E892FA400ACB5AC /* MainMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuVC.swift; sourceTree = "<group>"; };
+		7C506B801E8939A100ACB5AC /* P2PClientSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P2PClientSession.swift; sourceTree = "<group>"; };
 		7C55A1F61E76C0580038C122 /* TranslationHistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationHistoryManager.swift; sourceTree = "<group>"; };
 		7C55A1FE1E7970A70038C122 /* CreateAvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAvatarView.swift; sourceTree = "<group>"; };
 		7C57EBFD1E66BC2D000718E9 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -498,12 +502,14 @@
 		7C20D7E11D8BF89200E84BA5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7C506B7D1E892F8400ACB5AC /* Main Menu */,
 				7C6070571E5C7BA4007718BC /* LoginView */,
 				7CDBD6CB1E28C17E00912320 /* TranslationView */,
 				7C4A4FF71E012328009F890E /* Database */,
 				7C4CC1711DB0ED6200BCF24B /* USXParsing */,
 				7C4A4FB91DF99490009F890E /* ProgramStatusListener.swift */,
 				7C57EC021E66E293000718E9 /* Session.swift */,
+				7C506B801E8939A100ACB5AC /* P2PClientSession.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -703,6 +709,14 @@
 				7C9BB7E61E853A250010DE5C /* TopUserView.swift */,
 			);
 			name = XibViews;
+			sourceTree = "<group>";
+		};
+		7C506B7D1E892F8400ACB5AC /* Main Menu */ = {
+			isa = PBXGroup;
+			children = (
+				7C506B7E1E892FA400ACB5AC /* MainMenuVC.swift */,
+			);
+			name = "Main Menu";
 			sourceTree = "<group>";
 		};
 		7C6070541E5C5FE5007718BC /* UI */ = {
@@ -1197,6 +1211,7 @@
 				7C57EC051E66F824000718E9 /* AccountView.swift in Sources */,
 				7C0130C81E3F64900053C5C2 /* IdIndex.swift in Sources */,
 				7CDBD6B81E26200200912320 /* ParagraphBinding.swift in Sources */,
+				7C506B811E8939A100ACB5AC /* P2PClientSession.swift in Sources */,
 				7C0130CE1E4AF8CC0053C5C2 /* ConnectionManager.swift in Sources */,
 				7C4A4FA21DF829C5009F890E /* CellInputListener.swift in Sources */,
 				7C6B7B271E659E220005AD43 /* OnlineStatusView.swift in Sources */,
@@ -1220,6 +1235,7 @@
 				7C0130D11E4DB92C0053C5C2 /* ConnectionListener.swift in Sources */,
 				7C55A1FF1E7970A70038C122 /* CreateAvatarView.swift in Sources */,
 				7C82CE8E1DE6E29500C054EB /* PropertyValue.swift in Sources */,
+				7C506B7F1E892FA400ACB5AC /* MainMenuVC.swift in Sources */,
 				7CCC01201DA646F900F0562E /* USXContentParser.swift in Sources */,
 				7CA1BAA41E2FA5A500611FED /* NotesPostView.swift in Sources */,
 				7C6070491E52ECBA007718BC /* VerseCell.swift in Sources */,
