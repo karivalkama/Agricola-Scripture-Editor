@@ -19,9 +19,7 @@ class P2PClientSession
 	
 	private init()
 	{
-		let app = UIApplication.shared.delegate as! AppDelegate
 		
-		//let camera = AV
 	}
 	
 	

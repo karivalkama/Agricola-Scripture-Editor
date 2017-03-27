@@ -3,18 +3,21 @@ PODS:
     - couchbase-lite-ios/SQLite (= 1.3.1)
   - couchbase-lite-ios/SQLite (1.3.1)
   - HTagView (2.1.1)
+  - QRCodeReader.swift (7.2.0)
   - SCrypto (2.0.0)
 
 DEPENDENCIES:
   - couchbase-lite-ios (~> 1.3)
   - HTagView
+  - QRCodeReader.swift
   - SCrypto
 
 SPEC CHECKSUMS:
   couchbase-lite-ios: e4672e9c623e31584602c0300c299c363acebb05
   HTagView: 1fd0b80e7a9326fbe22e2a6a7c8b3230baaff8b8
+  QRCodeReader.swift: 2ddf74993243106dd2be5cf9f6e13c7a3e9a2d00
   SCrypto: 8287dcf6151df38f9bc0efad2ed982c54a96d1b8
 
-PODFILE CHECKSUM: 5c127f60f523be530e0ea5921cac9fb3b822d6f0
+PODFILE CHECKSUM: 5f16e33d87c9ea35a5c68f1f2dce5cfa65d68227
 
 COCOAPODS: 1.0.1
