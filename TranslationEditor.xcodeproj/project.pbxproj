@@ -488,24 +488,9 @@
 		7C20D7E01D8BF88B00E84BA5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7CDBD6BF1E28AE0300912320 /* TranslationCell.swift */,
-				7C20D7E21D8BF8D000E84BA5 /* TargetTranslationCell.swift */,
-				7CDBD6C31E28B35100912320 /* SourceTranslationCell.swift */,
-				7CA1BAAB1E30F7C800611FED /* NotesCell.swift */,
-				7CA1BAAF1E31E8DD00611FED /* ThreadCell.swift */,
-				7CA1BAB31E31F09200611FED /* PostCell.swift */,
-				7C4A4FD71DFAE0AA009F890E /* BasicButton.swift */,
-				7C4A4FDB1DFAE273009F890E /* Theme.swift */,
-				7CDBD6E91E28FCD400912320 /* ParagraphAssociated.swift */,
-				7C6070481E52ECBA007718BC /* VerseCell.swift */,
-				7C60705C1E5D79D8007718BC /* AvatarCell.swift */,
-				7C6B7B1D1E6555140005AD43 /* LabelCell.swift */,
-				7C6B7B1F1E6557270005AD43 /* FilteredMultiSelection.swift */,
-				7C6B7B221E6565CC0005AD43 /* CustomXibView.swift */,
-				7C6B7B261E659E220005AD43 /* OnlineStatusView.swift */,
-				7C57ECAB1E6D6651000718E9 /* ProjectCell.swift */,
-				7C55A1FE1E7970A70038C122 /* CreateAvatarView.swift */,
-				7C9BB7E61E853A250010DE5C /* TopUserView.swift */,
+				7C506B7A1E88F55C00ACB5AC /* Common */,
+				7C506B791E88F53E00ACB5AC /* Translation */,
+				7C506B7B1E88F57A00ACB5AC /* Login */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -671,6 +656,53 @@
 				7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */,
 			);
 			name = USXParsing;
+			sourceTree = "<group>";
+		};
+		7C506B791E88F53E00ACB5AC /* Translation */ = {
+			isa = PBXGroup;
+			children = (
+				7CDBD6E91E28FCD400912320 /* ParagraphAssociated.swift */,
+				7CDBD6BF1E28AE0300912320 /* TranslationCell.swift */,
+				7C20D7E21D8BF8D000E84BA5 /* TargetTranslationCell.swift */,
+				7CDBD6C31E28B35100912320 /* SourceTranslationCell.swift */,
+				7CA1BAAB1E30F7C800611FED /* NotesCell.swift */,
+				7CA1BAAF1E31E8DD00611FED /* ThreadCell.swift */,
+				7CA1BAB31E31F09200611FED /* PostCell.swift */,
+				7C6070481E52ECBA007718BC /* VerseCell.swift */,
+			);
+			name = Translation;
+			sourceTree = "<group>";
+		};
+		7C506B7A1E88F55C00ACB5AC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7C506B7C1E88F59800ACB5AC /* XibViews */,
+				7C4A4FDB1DFAE273009F890E /* Theme.swift */,
+				7C4A4FD71DFAE0AA009F890E /* BasicButton.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		7C506B7B1E88F57A00ACB5AC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7C60705C1E5D79D8007718BC /* AvatarCell.swift */,
+				7C57ECAB1E6D6651000718E9 /* ProjectCell.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		7C506B7C1E88F59800ACB5AC /* XibViews */ = {
+			isa = PBXGroup;
+			children = (
+				7C6B7B221E6565CC0005AD43 /* CustomXibView.swift */,
+				7C6B7B1D1E6555140005AD43 /* LabelCell.swift */,
+				7C6B7B1F1E6557270005AD43 /* FilteredMultiSelection.swift */,
+				7C6B7B261E659E220005AD43 /* OnlineStatusView.swift */,
+				7C55A1FE1E7970A70038C122 /* CreateAvatarView.swift */,
+				7C9BB7E61E853A250010DE5C /* TopUserView.swift */,
+			);
+			name = XibViews;
 			sourceTree = "<group>";
 		};
 		7C6070541E5C5FE5007718BC /* UI */ = {

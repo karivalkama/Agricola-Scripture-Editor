@@ -9,7 +9,7 @@
 import UIKit
 
 // This VC handles project selection (including accepting invitations to other people's projects)
-class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSource
+class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSource, UITableViewDelegate
 {
 	// TYPES	------------------
 	
@@ -33,11 +33,21 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
     override func viewDidLoad()
 	{
         super.viewDidLoad()
+		
+		projectTableView.delegate = self
+		projectTableView.dataSource = self
     }
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
 		super.viewDidAppear(animated)
+		
+		// If the user hasn't authenticated / was logged out, goes to the previous view instead
+		guard Session.instance.isAuthorized else
+		{
+			dismiss(animated: true, completion: nil)
+			return
+		}
 		
 		// If project is already selected, moves to the next view
 		// Otherwise listens to project data changes
@@ -103,6 +113,14 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		}
 			
 		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+	{
+		// Remembers the selected project and moves to the next view
+		let project = projects[indexPath.row]
+		Session.instance.projectId = project.idString
+		performSegue(withIdentifier: "SelectAvatar", sender: nil)
 	}
 	
 	func rowsUpdated(rows: [Row<ProjectView>])

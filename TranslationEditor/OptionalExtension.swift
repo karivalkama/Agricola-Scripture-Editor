@@ -19,4 +19,15 @@ extension Optional
 		case .some(let value): return value
 		}
 	}
+	
+	// Checks whether a condition holds true for the optional's possible value
+	// Always returns false when the optional is empty
+	func exists(_ condition: (Wrapped) throws -> Bool) rethrows -> Bool
+	{
+		switch (self)
+		{
+		case .none: return false
+		case .some(let value): return try condition(value)
+		}
+	}
 }

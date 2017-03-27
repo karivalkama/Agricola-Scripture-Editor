@@ -922,11 +922,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                 <color key="barTintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <navigationItem title="Select Avatar" id="u3U-kN-nj5"/>
+                                    <navigationItem title="Select Avatar" id="u3U-kN-nj5">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="D2B-E3-E4J">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="backButtonPressed:" destination="dMv-eu-RFU" id="mJQ-09-OTD"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UrZ-ky-uDt">
                                 <rect key="frame" x="52" y="76" width="920" height="660"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rMz-gR-dIP">
                                     <size key="itemSize" width="272" height="305"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -975,16 +983,17 @@
                                             <constraint firstItem="A90-4V-FHe" firstAttribute="leading" secondItem="g7g-Lr-XWg" secondAttribute="leading" constant="8" id="y38-DM-Xbr"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="avatarImageView" destination="EUL-Rd-u9X" id="wtE-Fz-5lO"/>
                                             <outlet property="nameLabel" destination="I3k-Bi-vbz" id="7H5-MR-cOb"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oz8-mI-VI2" userLabel="Password View">
-                                <rect key="frame" x="318" y="312" width="388" height="144"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oz8-mI-VI2" userLabel="Password View">
+                                <rect key="frame" x="318" y="297.5" width="388" height="173.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BRS-qN-0CT">
-                                        <rect key="frame" x="16" y="16" width="356" height="112"/>
+                                        <rect key="frame" x="16" y="16" width="356" height="141.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Iso-tx-Yzq">
                                                 <rect key="frame" x="0.0" y="0.0" width="356" height="56"/>
@@ -1016,11 +1025,17 @@
                                                     <constraint firstItem="tKq-yi-0bd" firstAttribute="leading" secondItem="Iso-tx-Yzq" secondAttribute="leading" id="Z7Z-3O-6ZQ"/>
                                                 </constraints>
                                             </stackView>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The password was incorrect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjy-Eb-Ez7">
+                                                <rect key="frame" x="0.0" y="72" width="215" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VHK-wj-yaw">
-                                                <rect key="frame" x="0.0" y="72" width="356" height="40"/>
+                                                <rect key="frame" x="0.0" y="108.5" width="356" height="33"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L73-tV-GnT" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="170" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="170" height="33"/>
                                                         <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <state key="normal" title="Cancel">
@@ -1031,7 +1046,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uC0-5u-oCf" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                        <rect key="frame" x="186" y="0.0" width="170" height="40"/>
+                                                        <rect key="frame" x="186" y="0.0" width="170" height="33"/>
                                                         <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <state key="normal" title="Login">
@@ -1060,7 +1075,6 @@
                                     <constraint firstItem="BRS-qN-0CT" firstAttribute="leading" secondItem="oz8-mI-VI2" secondAttribute="leading" constant="16" id="0GJ-va-wNO"/>
                                     <constraint firstItem="BRS-qN-0CT" firstAttribute="top" secondItem="oz8-mI-VI2" secondAttribute="top" constant="16" id="Hfc-eH-ySP"/>
                                     <constraint firstAttribute="trailing" secondItem="BRS-qN-0CT" secondAttribute="trailing" constant="16" id="SCz-XR-WBN"/>
-                                    <constraint firstAttribute="height" constant="144" id="SDY-e3-vGt"/>
                                     <constraint firstAttribute="width" constant="388" id="URm-zx-Llm"/>
                                     <constraint firstAttribute="bottom" secondItem="BRS-qN-0CT" secondAttribute="bottom" constant="16" id="Xh8-ed-vhn"/>
                                 </constraints>
@@ -1082,6 +1096,7 @@
                     </view>
                     <connections>
                         <outlet property="avatarCollectionView" destination="UrZ-ky-uDt" id="MnX-4p-KZE"/>
+                        <outlet property="errorLabel" destination="zjy-Eb-Ez7" id="UEH-uC-H7U"/>
                         <outlet property="loginButton" destination="uC0-5u-oCf" id="MBb-5p-DAI"/>
                         <outlet property="passwordField" destination="tKq-yi-0bd" id="31R-Es-lbc"/>
                         <outlet property="passwordView" destination="oz8-mI-VI2" id="2Ig-Od-7fS"/>

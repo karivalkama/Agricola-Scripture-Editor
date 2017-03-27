@@ -154,6 +154,19 @@ class LoginVC: UIViewController, ConnectionListener
 		passwordField.text = nil
 		onlineStatusView.isHidden = true
 		
+		do
+		{
+			// If the selected account already specifies a project, selects that
+			if let projectId = try AgricolaAccount.get(Session.instance.accountId!)?.projectId
+			{
+				Session.instance.projectId = projectId
+			}
+		}
+		catch
+		{
+			print("ERROR: Could not read account data. \(error)")
+		}
+		
 		// Starts the updates in the background
 		// TODO: Add authorization when backed supports it
 		ConnectionManager.instance.connect(serverURL: SERVER_ADDRESS)
