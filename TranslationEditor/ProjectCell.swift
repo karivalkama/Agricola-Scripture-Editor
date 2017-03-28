@@ -31,7 +31,7 @@ class ProjectCell: UITableViewCell
 		languageLabel.text = languageName
 		
 		let formatter = DateFormatter()
-		formatter.dateStyle = .medium
+		formatter.dateStyle = .long
 		
 		createdLabel.text = formatter.string(from: created)
 	}

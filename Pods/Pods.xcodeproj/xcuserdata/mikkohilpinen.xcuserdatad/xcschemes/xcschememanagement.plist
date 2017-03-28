@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>QRCodeReader.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SCrypto.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,27 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0057FDF91F928A182FC6A39465E5E7B9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>06BD38701ACE8B3EE3B20F864EAA8307</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>28295D02E79D07F49ABFB45CC6D4594F</key>
+		<key>1E7EA9201A882A49D3B2C4709F83BB43</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>489EDEC1EB3F5F663A44892EC02CDD54</key>
+		<key>4067C9FAE16EBB8ED80A4DD4675AFE82</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AC6C1A149239200877BECF12B0E7BBEA</key>
+		<key>4F2991BD5B6D10D5FECC833E1BE5433A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE6BC57068BC04A4C85D2E0F92B8FEF1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC3AA3AADF4CA86C7274BD78D7944EEE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

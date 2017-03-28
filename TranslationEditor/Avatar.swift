@@ -92,11 +92,34 @@ final class AvatarInfo: Storable
 	
 	var accountId: String
 	var openName: String?
+	var isShared: Bool
 	
 	// Phase id -> Carousel id
 	var carouselIds: [String : String]
 	
 	private var passwordHash: String?
+	
+	private var _image: UIImage?
+	var image: UIImage?
+	{
+		// Reads the image from CB if necessary
+		if let image = _image
+		{
+			return image
+		}
+		else
+		{
+			if let image = attachment(named: "image")?.toImage
+			{
+				_image = image
+				return image
+			}
+			else
+			{
+				return nil
+			}
+		}
+	}
 	
 	
 	// COMPUTED PROPERTIES	----
@@ -109,7 +132,7 @@ final class AvatarInfo: Storable
 	var idProperties: [Any] { return [avatarId, "private"] }
 	var properties: [String : PropertyValue]
 	{
-		return ["open_name": openName.value, "account": accountId.value, "offline_password": passwordHash.value, "carousels": PropertySet(carouselIds).value]
+		return ["open_name": openName.value, "account": accountId.value, "offline_password": passwordHash.value, "shared": isShared.value, "carousels": PropertySet(carouselIds).value]
 	}
 	
 	var projectId: String { return Avatar.project(fromId: avatarId) }
@@ -117,15 +140,19 @@ final class AvatarInfo: Storable
 	// The key version of the avatar's name
 	var nameKey: String { return Avatar.nameKey(ofId: avatarId) }
 	
+	// Whether the info requires a password for authentication
+	var requiresPassword: Bool { return passwordHash != nil }
+	
 	
 	// INIT	--------------------
 	
-	init(avatarId: String, accountId: String, openName: String? = nil, password: String? = nil, carousels: [String : String] = [:])
+	init(avatarId: String, accountId: String, openName: String? = nil, password: String? = nil, isShared: Bool = false, carousels: [String : String] = [:])
 	{
 		self.avatarId = avatarId
 		self.accountId = accountId
 		self.openName = openName
 		self.carouselIds = carousels
+		self.isShared = isShared
 		
 		if let password = password
 		{
@@ -134,18 +161,19 @@ final class AvatarInfo: Storable
 		}
 	}
 	
-	private init(avatarId: String, accountId: String, openName: String?, passwordHash: String?, carousels: [String : String])
+	private init(avatarId: String, accountId: String, openName: String?, passwordHash: String?, isShared: Bool, carousels: [String : String])
 	{
 		self.avatarId = avatarId
 		self.accountId = accountId
 		self.openName = openName
 		self.passwordHash = passwordHash
+		self.isShared = isShared
 		self.carouselIds = carousels
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> AvatarInfo
 	{
-		return AvatarInfo(avatarId: id[PROPERTY_AVATAR].string(), accountId: properties["account"].string(), openName: properties["open_name"].string, passwordHash: properties["offline_password"].string, carousels: properties["carousels"].object { $0.string })
+		return AvatarInfo(avatarId: id[PROPERTY_AVATAR].string(), accountId: properties["account"].string(), openName: properties["open_name"].string, passwordHash: properties["offline_password"].string, isShared: properties["shared"].bool(), carousels: properties["carousels"].object { $0.string })
 	}
 	
 	
@@ -161,6 +189,10 @@ final class AvatarInfo: Storable
 		{
 			self.openName = openName
 		}
+		if let isShared = properties["shared"].bool
+		{
+			self.isShared = isShared
+		}
 		if let carouselData = properties["carousels"].object
 		{
 			self.carouselIds = carouselData.properties.flatMapValues { $0.string }
@@ -174,7 +206,20 @@ final class AvatarInfo: Storable
 	
 	// OTHER METHODS	-------
 	
-	func authenticate(loggedAccountId: String, password: String) -> Bool
+	// Changes the image associated with this avatar
+	func setImage(_ image: UIImage) throws
+	{
+		if (_image != image)
+		{
+			_image = image
+			if let attachment = Attachment.parse(fromImage: image)
+			{
+				try saveAttachment(attachment, withName: "image")
+			}
+		}
+	}
+	
+	func authenticate(loggedAccountId: String?, password: String) -> Bool
 	{
 		// If the avatar doesn't have a specified password, correct account login is enough
 		if passwordHash == nil

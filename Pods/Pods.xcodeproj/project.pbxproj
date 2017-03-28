@@ -7,175 +7,212 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04895F1E17E13BCA044409F1AF0652EF /* SCrypto-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5E6595BDAA52C16D979418F18FAEA /* SCrypto-dummy.m */; };
-		0EC840B0418B517FD900DFC70048C721 /* Pods-TranslationEditorUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A06F07BAEDCB03D53A8320181A363B66 /* Pods-TranslationEditorUITests-dummy.m */; };
-		18C594C436765DDBBCB65B1BCEEA02FE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C896B947F53876CA0F20B210F0BC733 /* Images.xcassets */; };
-		1A5E27C9A274FF9500959F0386AFFF23 /* HTagView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B8FA94F50AE7F28C39EDF9AF423160F /* HTagView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2DC1D622CFE8DEDEEE19548BAC68C112 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A6FF208CEC4C2861F1E9D42D651453 /* Foundation.framework */; };
-		32A486224989A2EA2E796A04F1603FCA /* Pods-TranslationEditor-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 597F621C38545123BBD9FB8E53011F11 /* Pods-TranslationEditor-dummy.m */; };
-		3D3E051B6CAD3C423126194FADC9606B /* SCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECB802B683DD4793B3ACA5A14661FCB /* SCrypto.swift */; };
-		3FCBDF9858710096B8494E225C423B61 /* SCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4CF1CADAA3DB2BF2AC548BAF6861D8 /* SCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		63290257B17910AEB7DC9F2B2300935A /* Pods-TranslationEditorTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A3BF23981914D097AA012B2C7A20B526 /* Pods-TranslationEditorTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6680F6492E417A7F81E84B2D96578AD6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E86668F20F252C440D1015B816BE59C5 /* UIKit.framework */; };
-		6AD4D93507C8816031DA9A212CD7B122 /* SCrypto-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C163B5249C99775B16A9E74DC14BADB /* SCrypto-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E67F3E91B915FD8961BBFE0C78ED156 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A6FF208CEC4C2861F1E9D42D651453 /* Foundation.framework */; };
-		8EF5DB45445E33233F8C53B219A8FC13 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A6FF208CEC4C2861F1E9D42D651453 /* Foundation.framework */; };
-		8FE3A4FAAB6C2FFD0C272F03DA02AC1D /* HTagView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E07B1E3A64C7CB07F49A5745DC43EFBF /* HTagView-dummy.m */; };
-		96303C593912B6D6578E9F7ED45FA4B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A6FF208CEC4C2861F1E9D42D651453 /* Foundation.framework */; };
-		9915A79B097A69B8A3C53D1B693EC2C9 /* HTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A011D103E1387A8FEACE295FD40795F /* HTag.swift */; };
-		AEDD5514D9FD16347B3E316FDBE561E2 /* HTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00243B926BE135FF6ECC7466AE378710 /* HTagView.swift */; };
-		BA1EF8DB0D935B495354213BBDD5F206 /* Pods-TranslationEditor-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BBD4B3EC003849E7422999C61128529 /* Pods-TranslationEditor-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C504CD72E25810760CBAE6E5D154FF92 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A6FF208CEC4C2861F1E9D42D651453 /* Foundation.framework */; };
-		D9ADB94CED9946D6641D4CB1ECDFBD1E /* Pods-TranslationEditorTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEADFDC25263533A67D7968516AA73F /* Pods-TranslationEditorTests-dummy.m */; };
-		FF6C09EAE56571C2A1360385034EE31D /* Pods-TranslationEditorUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FA184E63B48FB88128FB9A1415C5C6 /* Pods-TranslationEditorUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03C8CF3937B1E44B5A0AAD3926D4FDE7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ADFC5A4B2BBCFD9A27B7A059658E773 /* AVFoundation.framework */; };
+		08155170C86CFD01FF2F498A66E31B09 /* Pods-TranslationEditorUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 69FA184E63B48FB88128FB9A1415C5C6 /* Pods-TranslationEditorUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		18C594C436765DDBBCB65B1BCEEA02FE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE13DAFA79F8E52A84F9BC53170FFF6E /* Images.xcassets */; };
+		1A5E27C9A274FF9500959F0386AFFF23 /* HTagView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E1FA0EAE2F6E4F52C2023DC10BB5E3E /* HTagView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FDDC252B649814AA2C084B8A9C1B983 /* SCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72E833CA0B23FC8E6539C56B8854F87 /* SCrypto.swift */; };
+		3CE93FAF96DCA694FC5A04A27790A05F /* QRCodeReaderViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12C7155C29B489D877F41BBDCD642F0 /* QRCodeReaderViewControllerBuilder.swift */; };
+		4FD9A63CD7E65558F4333BA9B4E69A3A /* SCrypto-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 568AAAC02ADA5238169CE17D1969AC2B /* SCrypto-dummy.m */; };
+		51E9DA198F15F092C6E97E8EB76506AF /* SCrypto-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EA71580E5EF2E30BA0A16979EE7E7CF /* SCrypto-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53A210C9BFF7F978D7A839D82F0DF9F3 /* QRCodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73E07D2B04487E7AAA44B5C976613EC /* QRCodeReaderViewController.swift */; };
+		5E97C47FEBD07D628C1A3C5874D753A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5422916563B77A748D40B022EAE1747C /* Foundation.framework */; };
+		5FCB04AB83C7FC81B9175148CAFE40EE /* SCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = F2519D612EEFB995ED55DC0ED8D1D84C /* SCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		606E70CBA36502F2DFF38517D441EAA4 /* QRCodeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862D8C43AAE4BE503CA597228EF76857 /* QRCodeReader.swift */; };
+		63D25EA48D9F4AD04B2D96856F382781 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5422916563B77A748D40B022EAE1747C /* Foundation.framework */; };
+		6680F6492E417A7F81E84B2D96578AD6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A41C04F9FB06B54E2A413E29A588B49 /* UIKit.framework */; };
+		706037E600B72A521E15BA1E79B03866 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5422916563B77A748D40B022EAE1747C /* Foundation.framework */; };
+		768169C0B93DA22616F8CE7016C421C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5422916563B77A748D40B022EAE1747C /* Foundation.framework */; };
+		7834DACD947EAA7590CB602819BC6B12 /* QRCodeReaderResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43F5638A3E592EC0984FCD9F90E0C69 /* QRCodeReaderResult.swift */; };
+		7AF1269D903AB0A0E260BE519E73EBA2 /* ReaderOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2767522C1A983C5A1F514DE03EADF282 /* ReaderOverlayView.swift */; };
+		7B8DD5107B54A1F62308CDA10E1FAD6A /* Pods-TranslationEditor-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BBD4B3EC003849E7422999C61128529 /* Pods-TranslationEditor-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7CE9958BF6BAC2488877F97CB6C5E3DA /* Pods-TranslationEditorTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A3BF23981914D097AA012B2C7A20B526 /* Pods-TranslationEditorTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		838957E285B5477379A4AB3AE0D650B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5422916563B77A748D40B022EAE1747C /* Foundation.framework */; };
+		84A9B45699BA9BE608FF96D50841C673 /* QRCodeReader.swift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 57663BCCB4543FE3F39565EA3A63EEF5 /* QRCodeReader.swift-dummy.m */; };
+		890387AB322919B63623F890437C8EB9 /* QRCodeReader.swift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B432E80F0A618042CD26EC2EF1FC239 /* QRCodeReader.swift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8FE3A4FAAB6C2FFD0C272F03DA02AC1D /* HTagView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A8F9D836405EE502F9E7465FF3680A /* HTagView-dummy.m */; };
+		9323E4CDCE6A095494A194A02C5D462B /* Pods-TranslationEditorTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEADFDC25263533A67D7968516AA73F /* Pods-TranslationEditorTests-dummy.m */; };
+		9915A79B097A69B8A3C53D1B693EC2C9 /* HTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEA9B5F118F688F2DD42AA90043F995 /* HTag.swift */; };
+		9D0F37E6F197988F3D8D223A7DFDB6DB /* Pods-TranslationEditorUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A06F07BAEDCB03D53A8320181A363B66 /* Pods-TranslationEditorUITests-dummy.m */; };
+		9E6A7DA9B3A9D27C0714250DED7E17A9 /* QRCodeReaderViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E3B6EAC4D2DF739C23C1A82C12FB20 /* QRCodeReaderViewContainer.swift */; };
+		AE7661D1A55B1E9A016C049022E7A96A /* QRCodeReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C4ACE2B2C40A0148B1520079A5737 /* QRCodeReaderView.swift */; };
+		AEDD5514D9FD16347B3E316FDBE561E2 /* HTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4088C6651FB2A3840372891E52F6F /* HTagView.swift */; };
+		B9F4F120EBC82ACF008D2F3790776395 /* QRCodeReaderViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D259E4D3D1271484400297C837C7C6 /* QRCodeReaderViewControllerDelegate.swift */; };
+		C504CD72E25810760CBAE6E5D154FF92 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5422916563B77A748D40B022EAE1747C /* Foundation.framework */; };
+		E308FFE018AEC42835E5EB1B0AFA921B /* Pods-TranslationEditor-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 597F621C38545123BBD9FB8E53011F11 /* Pods-TranslationEditor-dummy.m */; };
+		E540B7096542AAAC51CC1ADD614A9BCE /* ToggleTorchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3468EBAF59C5EE75A6A6C3167840DEA /* ToggleTorchButton.swift */; };
+		EF2A530E2FD2E9AF28F7746C6E7B6377 /* SwitchCameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3288FE38D98F26664970EFBE6CAADD /* SwitchCameraButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		27D28C8F6ADE7A797848C9F73652FE99 /* PBXContainerItemProxy */ = {
+		093B4203D522102F5224779E449FA69D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 06BD38701ACE8B3EE3B20F864EAA8307;
 			remoteInfo = HTagView;
 		};
-		44A14466CC310545F0757A26EE348B74 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AC6C1A149239200877BECF12B0E7BBEA;
-			remoteInfo = SCrypto;
-		};
-		76953EFD18CBD7033A913BD0AE1D659E /* PBXContainerItemProxy */ = {
+		23F35C917AE1266D459CB55E0976A29B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 06BD38701ACE8B3EE3B20F864EAA8307;
 			remoteInfo = HTagView;
 		};
-		97BCF8D6D085D742AD264449000CBD0E /* PBXContainerItemProxy */ = {
+		559002D7DE97A4FD657D3537F74A9D56 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = AC6C1A149239200877BECF12B0E7BBEA;
+			remoteGlobalIDString = 1E7EA9201A882A49D3B2C4709F83BB43;
+			remoteInfo = QRCodeReader.swift;
+		};
+		7C08090144FE19E920AC7B51DE042B04 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC3AA3AADF4CA86C7274BD78D7944EEE;
 			remoteInfo = SCrypto;
 		};
-		A7A88760D89C19003170E01F4EFDB149 /* PBXContainerItemProxy */ = {
+		7E50DE7652D94E2D7A6F67D47434A948 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 06BD38701ACE8B3EE3B20F864EAA8307;
 			remoteInfo = HTagView;
 		};
-		ACE7736E0DD4A17C82A83E58FD1D8267 /* PBXContainerItemProxy */ = {
+		97D9C8609EFA2FF297C2721FE4BC1461 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = AC6C1A149239200877BECF12B0E7BBEA;
+			remoteGlobalIDString = EC3AA3AADF4CA86C7274BD78D7944EEE;
 			remoteInfo = SCrypto;
+		};
+		9C0494373927B88A94C61CB3E5AB6537 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC3AA3AADF4CA86C7274BD78D7944EEE;
+			remoteInfo = SCrypto;
+		};
+		CCF079D51C7B22365EEF2E0FE85B410B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E7EA9201A882A49D3B2C4709F83BB43;
+			remoteInfo = QRCodeReader.swift;
+		};
+		DC6FDFE1C6A336D154DEBB9364B632DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E7EA9201A882A49D3B2C4709F83BB43;
+			remoteInfo = QRCodeReader.swift;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00243B926BE135FF6ECC7466AE378710 /* HTagView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTagView.swift; path = HTagView/Classes/HTagView.swift; sourceTree = "<group>"; };
-		01DFA97FF34C22200E474F79C0DF8B21 /* CBLModelFactory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLModelFactory.h; path = CouchbaseLite.framework/Headers/CBLModelFactory.h; sourceTree = "<group>"; };
-		0B222B68FDAF3D603A47478B9BEE3DAD /* CBLQuery+FullTextSearch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CBLQuery+FullTextSearch.h"; path = "CouchbaseLite.framework/Headers/CBLQuery+FullTextSearch.h"; sourceTree = "<group>"; };
-		0D1189B45DDAE26A52A30E7ACC9977FC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		19B709CD5D037B4D137821389334E41F /* CBLReplication.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLReplication.h; path = CouchbaseLite.framework/Headers/CBLReplication.h; sourceTree = "<group>"; };
-		1B8FA94F50AE7F28C39EDF9AF423160F /* HTagView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HTagView-umbrella.h"; sourceTree = "<group>"; };
+		02D2DC8E73216898CEE0ABE870A6FE81 /* CouchbaseLiteListener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CouchbaseLiteListener.h; path = CouchbaseLiteListener.framework/Headers/CouchbaseLiteListener.h; sourceTree = "<group>"; };
+		06DD7F4E73D350A18340DB3FB4B516F0 /* CBLQuery.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLQuery.h; path = CouchbaseLite.framework/Headers/CBLQuery.h; sourceTree = "<group>"; };
+		0724FD640255D9297F4DC01BBB1CDF60 /* CBLQuery+FullTextSearch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CBLQuery+FullTextSearch.h"; path = "CouchbaseLite.framework/Headers/CBLQuery+FullTextSearch.h"; sourceTree = "<group>"; };
+		1234C6BF05F133EF13FECAE824102849 /* CBLGeometry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLGeometry.h; path = CouchbaseLite.framework/Headers/CBLGeometry.h; sourceTree = "<group>"; };
 		1BBD4B3EC003849E7422999C61128529 /* Pods-TranslationEditor-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TranslationEditor-umbrella.h"; sourceTree = "<group>"; };
-		1CB80CB358790BBFDA175B105ACCE915 /* SCrypto.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SCrypto.modulemap; sourceTree = "<group>"; };
-		1CF26EBA1F0E6A53F2DAB6E61974CDB1 /* CBLModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLModel.h; path = CouchbaseLite.framework/Headers/CBLModel.h; sourceTree = "<group>"; };
+		1D244EFBDC5E72D7EDC01433A53CF916 /* HTagView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HTagView.xcconfig; sourceTree = "<group>"; };
+		213A1725394E4058B18A67F79AE16263 /* CBLAttachment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLAttachment.h; path = CouchbaseLite.framework/Headers/CBLAttachment.h; sourceTree = "<group>"; };
+		23F13F4DC8E50D54CDA85BB580362C0A /* SCrypto.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SCrypto.xcconfig; sourceTree = "<group>"; };
+		2461923A7480FBBE0B6DD5E26011F59F /* CBLDynamicObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLDynamicObject.h; path = CouchbaseLite.framework/Headers/CBLDynamicObject.h; sourceTree = "<group>"; };
 		27211C871B4EAB3F940D319A17BD66CD /* Pods-TranslationEditorUITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TranslationEditorUITests-resources.sh"; sourceTree = "<group>"; };
-		2DC5E6595BDAA52C16D979418F18FAEA /* SCrypto-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SCrypto-dummy.m"; sourceTree = "<group>"; };
+		2767522C1A983C5A1F514DE03EADF282 /* ReaderOverlayView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReaderOverlayView.swift; path = Sources/ReaderOverlayView.swift; sourceTree = "<group>"; };
+		2BDD776A473966BA3E060F3C03192F8A /* CBLQueryBuilder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLQueryBuilder.h; path = CouchbaseLite.framework/Headers/CBLQueryBuilder.h; sourceTree = "<group>"; };
+		2E1FA0EAE2F6E4F52C2023DC10BB5E3E /* HTagView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HTagView-umbrella.h"; sourceTree = "<group>"; };
 		30EF8BE5D715F0CF81FAB2D0CD4CF4A2 /* Pods-TranslationEditorTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TranslationEditorTests-frameworks.sh"; sourceTree = "<group>"; };
-		31B6B9ABC786A85F3089ABD81E2AB553 /* HTagView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HTagView-prefix.pch"; sourceTree = "<group>"; };
-		342F2C7AB92FC0E4A1AE2F681FD10B06 /* Pods_TranslationEditorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		357CC4266D10889BD75365D9904F00F1 /* CBLRevision.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLRevision.h; path = CouchbaseLite.framework/Headers/CBLRevision.h; sourceTree = "<group>"; };
-		37ECBE89256E26F98D539660269F8149 /* CBLQueryBuilder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLQueryBuilder.h; path = CouchbaseLite.framework/Headers/CBLQueryBuilder.h; sourceTree = "<group>"; };
-		3E4CF1CADAA3DB2BF2AC548BAF6861D8 /* SCrypto.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SCrypto.h; path = Source/SCrypto.h; sourceTree = "<group>"; };
-		3F55B2C0B679336FE4F75F296AEAFE39 /* SCrypto.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SCrypto.xcconfig; sourceTree = "<group>"; };
-		427D0EF71EE579D8CB593423136EB71F /* CBLBase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLBase.h; path = CouchbaseLite.framework/Headers/CBLBase.h; sourceTree = "<group>"; };
-		474DE1A061CD3346029C7D251A28DB93 /* CouchbaseLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CouchbaseLite.framework; sourceTree = "<group>"; };
+		32DBE3CD2C56D0531658A60709AC1DFE /* QRCodeReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QRCodeReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		357B7617C614A0F715A1FE38F6F68A42 /* CouchbaseLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CouchbaseLite.framework; sourceTree = "<group>"; };
+		3A41C04F9FB06B54E2A413E29A588B49 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		44CFF44AF63455C9E7C558D91CB1650B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		487329AC9D054CB24ADEEC9BC75957AB /* CBLReplication.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLReplication.h; path = CouchbaseLite.framework/Headers/CBLReplication.h; sourceTree = "<group>"; };
 		49780ADD05290F6E53991F4201F5CE32 /* Pods-TranslationEditor-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TranslationEditor-resources.sh"; sourceTree = "<group>"; };
 		4B179632F213F19B0EAADECAE31A292B /* Pods-TranslationEditor-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TranslationEditor-frameworks.sh"; sourceTree = "<group>"; };
+		4C4A752ED3E40F0FA255E3965F81625B /* QRCodeReader.swift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QRCodeReader.swift.xcconfig; sourceTree = "<group>"; };
 		4D6D4ECAEE6D45DE03902BE051EE1AD8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EA71580E5EF2E30BA0A16979EE7E7CF /* SCrypto-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SCrypto-umbrella.h"; sourceTree = "<group>"; };
 		4FDCBAADD1536B929D8A5A50D637F892 /* Pods-TranslationEditorTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TranslationEditorTests-resources.sh"; sourceTree = "<group>"; };
-		52CE38ECD39C60B0DCB5994DE0391154 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5603B682AE3D6EFF664A9439CE71E714 /* CBLGeometry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLGeometry.h; path = CouchbaseLite.framework/Headers/CBLGeometry.h; sourceTree = "<group>"; };
-		580BAA903B5BD8587DB29A0D20317D41 /* CBLAuthenticator+OpenID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CBLAuthenticator+OpenID.h"; path = "CouchbaseLite.framework/Headers/CBLAuthenticator+OpenID.h"; sourceTree = "<group>"; };
-		58F9155B97A9D128D05D5DA5D6095E87 /* SCrypto-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SCrypto-prefix.pch"; sourceTree = "<group>"; };
+		5422916563B77A748D40B022EAE1747C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		54904905562235095BDDBEEC807FFCCD /* CBLRevision.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLRevision.h; path = CouchbaseLite.framework/Headers/CBLRevision.h; sourceTree = "<group>"; };
+		555909F51B0C85E9622859371C53A5ED /* CBLQuery+Geo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CBLQuery+Geo.h"; path = "CouchbaseLite.framework/Headers/CBLQuery+Geo.h"; sourceTree = "<group>"; };
+		568AAAC02ADA5238169CE17D1969AC2B /* SCrypto-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SCrypto-dummy.m"; sourceTree = "<group>"; };
+		57663BCCB4543FE3F39565EA3A63EEF5 /* QRCodeReader.swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QRCodeReader.swift-dummy.m"; sourceTree = "<group>"; };
+		57E3B6EAC4D2DF739C23C1A82C12FB20 /* QRCodeReaderViewContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QRCodeReaderViewContainer.swift; path = Sources/QRCodeReaderViewContainer.swift; sourceTree = "<group>"; };
 		597F621C38545123BBD9FB8E53011F11 /* Pods-TranslationEditor-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TranslationEditor-dummy.m"; sourceTree = "<group>"; };
-		5C163B5249C99775B16A9E74DC14BADB /* SCrypto-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SCrypto-umbrella.h"; sourceTree = "<group>"; };
 		5C89B4976E6769692955CB0EF54C450D /* Pods-TranslationEditor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TranslationEditor.debug.xcconfig"; sourceTree = "<group>"; };
 		5EC9AE8D179718B311D20AE1876A3788 /* Pods-TranslationEditorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TranslationEditorTests.debug.xcconfig"; sourceTree = "<group>"; };
-		607097F910974B17E1E3E7DD60BB859C /* SCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D901AA52A78D154608FB57D0F12A9D /* Pods-TranslationEditorUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TranslationEditorUITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		61E6DDA5B91B89ED36A85A4315F5EFAE /* CBLQuery.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLQuery.h; path = CouchbaseLite.framework/Headers/CBLQuery.h; sourceTree = "<group>"; };
-		678FDF09541BAB655A7941C8FB471993 /* CBLQuery+Geo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CBLQuery+Geo.h"; path = "CouchbaseLite.framework/Headers/CBLQuery+Geo.h"; sourceTree = "<group>"; };
-		679F570F0342B4D2D394820CD045EECE /* Pods_TranslationEditorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67BC2B4F1108BC9745DCA248CFCEEE15 /* Pods-TranslationEditorUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TranslationEditorUITests-frameworks.sh"; sourceTree = "<group>"; };
+		69F7BBAE2F95BFB6A40A430567D8FFD6 /* CBLListener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLListener.h; path = CouchbaseLiteListener.framework/Headers/CBLListener.h; sourceTree = "<group>"; };
 		69FA184E63B48FB88128FB9A1415C5C6 /* Pods-TranslationEditorUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TranslationEditorUITests-umbrella.h"; sourceTree = "<group>"; };
-		6A011D103E1387A8FEACE295FD40795F /* HTag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTag.swift; path = HTagView/Classes/HTag.swift; sourceTree = "<group>"; };
-		6C896B947F53876CA0F20B210F0BC733 /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = HTagView/Assets/Images.xcassets; sourceTree = "<group>"; };
-		723A587CFDB91F438E4F3552F1DE9FE1 /* CBLDatabase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLDatabase.h; path = CouchbaseLite.framework/Headers/CBLDatabase.h; sourceTree = "<group>"; };
+		6A3288FE38D98F26664970EFBE6CAADD /* SwitchCameraButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwitchCameraButton.swift; path = Sources/SwitchCameraButton.swift; sourceTree = "<group>"; };
+		6B4FD7BF7C90098FFC985B79A4310775 /* CBLJSON.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLJSON.h; path = CouchbaseLite.framework/Headers/CBLJSON.h; sourceTree = "<group>"; };
+		7170ED1406E227429C1F3C782D9D4D6A /* SCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		725113B5C6A9912011C3A9A941AB61B1 /* Pods-TranslationEditor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TranslationEditor.release.xcconfig"; sourceTree = "<group>"; };
 		72888B8421DEE96F05818EB54AB6DD72 /* Pods-TranslationEditor.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-TranslationEditor.modulemap"; sourceTree = "<group>"; };
-		7B9F6BDC4DE47C843FF1493B502A804B /* CBLUITableSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLUITableSource.h; path = CouchbaseLite.framework/Headers/CBLUITableSource.h; sourceTree = "<group>"; };
-		7FC572DC5CE9AF7497601CCC86458BDB /* CBLJSON.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLJSON.h; path = CouchbaseLite.framework/Headers/CBLJSON.h; sourceTree = "<group>"; };
-		82D72792FEE5CDA34932560C821D6774 /* CBLAuthenticator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLAuthenticator.h; path = CouchbaseLite.framework/Headers/CBLAuthenticator.h; sourceTree = "<group>"; };
+		75B27A2D07B5BCFE3945E92F864616AA /* QRCodeReader.swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = QRCodeReader.swift.modulemap; sourceTree = "<group>"; };
+		7A3781B2C21940B2D936AFFEC6EB1ED8 /* CouchbaseLite.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CouchbaseLite.h; path = CouchbaseLite.framework/Headers/CouchbaseLite.h; sourceTree = "<group>"; };
+		7B432E80F0A618042CD26EC2EF1FC239 /* QRCodeReader.swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QRCodeReader.swift-umbrella.h"; sourceTree = "<group>"; };
+		7FEA9B5F118F688F2DD42AA90043F995 /* HTag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTag.swift; path = HTagView/Classes/HTag.swift; sourceTree = "<group>"; };
+		80D259E4D3D1271484400297C837C7C6 /* QRCodeReaderViewControllerDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QRCodeReaderViewControllerDelegate.swift; path = Sources/QRCodeReaderViewControllerDelegate.swift; sourceTree = "<group>"; };
+		828004F95B8354C8753A10AA6F3FF542 /* CBLAuthenticator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLAuthenticator.h; path = CouchbaseLite.framework/Headers/CBLAuthenticator.h; sourceTree = "<group>"; };
 		83F577601EA929B91B29DE3B59FB69E0 /* Pods-TranslationEditorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TranslationEditorTests.release.xcconfig"; sourceTree = "<group>"; };
+		862D8C43AAE4BE503CA597228EF76857 /* QRCodeReader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QRCodeReader.swift; path = Sources/QRCodeReader.swift; sourceTree = "<group>"; };
+		86D5A956D5DCE3E628C2E24C5F78B0E2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87F9BBDBC5AF3C656B5E148774D5240C /* CBLView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLView.h; path = CouchbaseLite.framework/Headers/CBLView.h; sourceTree = "<group>"; };
+		8AC42E0651781944CD43EA1F53719EED /* CBLModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLModel.h; path = CouchbaseLite.framework/Headers/CBLModel.h; sourceTree = "<group>"; };
 		8B26EDE8B72066FEABB752B13D7EC9B3 /* Pods-TranslationEditor-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TranslationEditor-acknowledgements.markdown"; sourceTree = "<group>"; };
-		90CB721D2BB6597A74CB76C11BB241E2 /* CouchbaseLite.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CouchbaseLite.h; path = CouchbaseLite.framework/Headers/CouchbaseLite.h; sourceTree = "<group>"; };
 		922AACBAF66E4BB11BA89056837D6B18 /* Pods-TranslationEditorUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-TranslationEditorUITests.modulemap"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9ECB6F603C27B304F925D1A945FA5636 /* CouchbaseLiteListener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CouchbaseLiteListener.h; path = CouchbaseLiteListener.framework/Headers/CouchbaseLiteListener.h; sourceTree = "<group>"; };
+		9ADFC5A4B2BBCFD9A27B7A059658E773 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		A06F07BAEDCB03D53A8320181A363B66 /* Pods-TranslationEditorUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TranslationEditorUITests-dummy.m"; sourceTree = "<group>"; };
-		A2A6FF208CEC4C2861F1E9D42D651453 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A30EC4885DA9B8F3A93E6E00163F0755 /* Pods-TranslationEditorTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-TranslationEditorTests.modulemap"; sourceTree = "<group>"; };
 		A3BF23981914D097AA012B2C7A20B526 /* Pods-TranslationEditorTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TranslationEditorTests-umbrella.h"; sourceTree = "<group>"; };
+		A6A253F6BD3C8F1BF6E3374C0B33CEA1 /* SCrypto.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SCrypto.modulemap; sourceTree = "<group>"; };
+		A73E07D2B04487E7AAA44B5C976613EC /* QRCodeReaderViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QRCodeReaderViewController.swift; path = Sources/QRCodeReaderViewController.swift; sourceTree = "<group>"; };
 		AC879285AE23D01A9CA9ECE9F9D79FB4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AFB2619178DC6E4FEE084CA4475EA350 /* Pods_TranslationEditor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B31E35A8E01243081D6DF101F1D0F7D2 /* CBLDocument.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLDocument.h; path = CouchbaseLite.framework/Headers/CBLDocument.h; sourceTree = "<group>"; };
+		ACE17FF0147A59E188EC3E7F589DF57A /* Pods_TranslationEditor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFEC70DE17AD8586C61A123E940DDB0D /* QRCodeReader.swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QRCodeReader.swift-prefix.pch"; sourceTree = "<group>"; };
+		B0EE28CD26AAB177F5B8BFDCF6A6E165 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0F3F200BA1530334C97DE8DD74A04B0 /* CBLBase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLBase.h; path = CouchbaseLite.framework/Headers/CBLBase.h; sourceTree = "<group>"; };
+		B44245634934FE74B7BFB54021559010 /* HTagView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HTagView-prefix.pch"; sourceTree = "<group>"; };
 		B69C65866BD8BEFB9884F6311BBEA527 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D27A733190819F50FF8FF8FE9F210776 /* HTagView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTagView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D617A14F66B85399A974E2921DC6BE3D /* CBLAttachment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLAttachment.h; path = CouchbaseLite.framework/Headers/CBLAttachment.h; sourceTree = "<group>"; };
-		DAFC74E636E69E61E1FB595A66FF6017 /* CBLDatabaseChange.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLDatabaseChange.h; path = CouchbaseLite.framework/Headers/CBLDatabaseChange.h; sourceTree = "<group>"; };
+		B9D2D55739F9B844699869E2CC5BDF27 /* SCrypto-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SCrypto-prefix.pch"; sourceTree = "<group>"; };
+		BBFD5F32667F51222840B9A68883EB35 /* CBLUITableSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLUITableSource.h; path = CouchbaseLite.framework/Headers/CBLUITableSource.h; sourceTree = "<group>"; };
+		BEDFD1B6D8CFC02FF3ED6BAB78D59CD0 /* CBLDatabaseChange.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLDatabaseChange.h; path = CouchbaseLite.framework/Headers/CBLDatabaseChange.h; sourceTree = "<group>"; };
+		C8ACCEC09AF8E802C0142E6E47C86ABF /* CBLManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLManager.h; path = CouchbaseLite.framework/Headers/CBLManager.h; sourceTree = "<group>"; };
+		D12C7155C29B489D877F41BBDCD642F0 /* QRCodeReaderViewControllerBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QRCodeReaderViewControllerBuilder.swift; path = Sources/QRCodeReaderViewControllerBuilder.swift; sourceTree = "<group>"; };
+		D3468EBAF59C5EE75A6A6C3167840DEA /* ToggleTorchButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToggleTorchButton.swift; path = Sources/ToggleTorchButton.swift; sourceTree = "<group>"; };
+		D43F5638A3E592EC0984FCD9F90E0C69 /* QRCodeReaderResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QRCodeReaderResult.swift; path = Sources/QRCodeReaderResult.swift; sourceTree = "<group>"; };
+		D5201BD0C1610468CC79085836DEF026 /* CBLAuthenticator+OpenID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CBLAuthenticator+OpenID.h"; path = "CouchbaseLite.framework/Headers/CBLAuthenticator+OpenID.h"; sourceTree = "<group>"; };
+		D6851B50B1D1B8B35A824383EA147D41 /* Pods_TranslationEditorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9DF3665C7874470D99D18C2FDD05709 /* HTagView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = HTagView.modulemap; sourceTree = "<group>"; };
 		DB2B839E9F1C82F5D1DF9432F7252BF1 /* Pods-TranslationEditorTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TranslationEditorTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		DE6F17655B780FFC6E5532429CDB79A2 /* CBLView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLView.h; path = CouchbaseLite.framework/Headers/CBLView.h; sourceTree = "<group>"; };
-		E07B1E3A64C7CB07F49A5745DC43EFBF /* HTagView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HTagView-dummy.m"; sourceTree = "<group>"; };
+		DE13DAFA79F8E52A84F9BC53170FFF6E /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = HTagView/Assets/Images.xcassets; sourceTree = "<group>"; };
 		E0C68059912F0019F7C29CAEB0906E26 /* Pods-TranslationEditorTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TranslationEditorTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		E27C4ACE2B2C40A0148B1520079A5737 /* QRCodeReaderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QRCodeReaderView.swift; path = Sources/QRCodeReaderView.swift; sourceTree = "<group>"; };
 		E3D511C81C2E683617B4E8C5998A8C9A /* Pods-TranslationEditorUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TranslationEditorUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E42D98130593E43D38E0E95A4FC2E4BA /* CouchbaseLiteListener.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CouchbaseLiteListener.framework; sourceTree = "<group>"; };
+		E72E833CA0B23FC8E6539C56B8854F87 /* SCrypto.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SCrypto.swift; path = Source/SCrypto.swift; sourceTree = "<group>"; };
 		E85CEAE72A3EA4B8D3E62B7BD9E8DAD0 /* Pods-TranslationEditorUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TranslationEditorUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		E86668F20F252C440D1015B816BE59C5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		EBB9FD96F4E24D3473864592F93A0503 /* CBLDynamicObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLDynamicObject.h; path = CouchbaseLite.framework/Headers/CBLDynamicObject.h; sourceTree = "<group>"; };
-		EC509FA089D79C95B247CA8A258C6DCB /* CBLManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLManager.h; path = CouchbaseLite.framework/Headers/CBLManager.h; sourceTree = "<group>"; };
-		EE6FF79551ECB2094F9EC32A1206AD93 /* CBLListener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLListener.h; path = CouchbaseLiteListener.framework/Headers/CBLListener.h; sourceTree = "<group>"; };
-		EECB802B683DD4793B3ACA5A14661FCB /* SCrypto.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SCrypto.swift; path = Source/SCrypto.swift; sourceTree = "<group>"; };
-		EF68793DF7FF44268F2867FCBA3D41F2 /* HTagView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = HTagView.modulemap; sourceTree = "<group>"; };
+		ED9C6262CE46813EA203D458FC3526C9 /* Pods_TranslationEditorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFF0F103F21B27A384774F5DA7320926 /* Pods-TranslationEditorUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TranslationEditorUITests.release.xcconfig"; sourceTree = "<group>"; };
-		F4802BAF0005DD45CE7C22CCF2FC010D /* HTagView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HTagView.xcconfig; sourceTree = "<group>"; };
-		F762CBC3DDC368062F7AF072AF43144E /* CouchbaseLiteListener.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CouchbaseLiteListener.framework; sourceTree = "<group>"; };
+		F0280B2A39ACFC73DD297C602FD6944F /* HTagView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HTagView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F17BDF6DB13D495E282BDFB479C50358 /* CBLModelFactory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLModelFactory.h; path = CouchbaseLite.framework/Headers/CBLModelFactory.h; sourceTree = "<group>"; };
+		F2519D612EEFB995ED55DC0ED8D1D84C /* SCrypto.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SCrypto.h; path = Source/SCrypto.h; sourceTree = "<group>"; };
+		F9A8F9D836405EE502F9E7465FF3680A /* HTagView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HTagView-dummy.m"; sourceTree = "<group>"; };
+		FAC232EB8A82F1416AC3A7CEA6E4B636 /* CBLDatabase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLDatabase.h; path = CouchbaseLite.framework/Headers/CBLDatabase.h; sourceTree = "<group>"; };
 		FB0F85E20A9159F883FFF68E05E50038 /* Pods-TranslationEditor-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TranslationEditor-acknowledgements.plist"; sourceTree = "<group>"; };
 		FCEADFDC25263533A67D7968516AA73F /* Pods-TranslationEditorTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TranslationEditorTests-dummy.m"; sourceTree = "<group>"; };
+		FDA4088C6651FB2A3840372891E52F6F /* HTagView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTagView.swift; path = HTagView/Classes/HTagView.swift; sourceTree = "<group>"; };
+		FE7883B4A361CBBCDD5E60E0161099D9 /* CBLDocument.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CBLDocument.h; path = CouchbaseLite.framework/Headers/CBLDocument.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		11E5AA8D0AFD314413D070722F49DA4C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				96303C593912B6D6578E9F7ED45FA4B3 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1340B845559362BBB8463ED0E7279B1B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2DC1D622CFE8DEDEEE19548BAC68C112 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1EBF3FED636AAFBB693406FA4C7E2AE3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -185,55 +222,115 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		42030406E5C667995C2D3920C46F1CA2 /* Frameworks */ = {
+		2797D976C02D17625812DB11200D83F6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E67F3E91B915FD8961BBFE0C78ED156 /* Foundation.framework in Frameworks */,
+				838957E285B5477379A4AB3AE0D650B5 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7CE689B282FC5C4D124FFF644AC3B02D /* Frameworks */ = {
+		3FD6731CFE338395D72D2550C01FC3CA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EF5DB45445E33233F8C53B219A8FC13 /* Foundation.framework in Frameworks */,
+				768169C0B93DA22616F8CE7016C421C9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E0776003E32372FB536CCFBE8198588 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63D25EA48D9F4AD04B2D96856F382781 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F834B417325B0EB9547591BD4DEA881 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03C8CF3937B1E44B5A0AAD3926D4FDE7 /* AVFoundation.framework in Frameworks */,
+				706037E600B72A521E15BA1E79B03866 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B567004B44CEEDFC67731192E219BD05 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E97C47FEBD07D628C1A3C5874D753A3 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		05A592D32F3CB830A3783A25A0C5DABB /* Pods */ = {
+		072C81A8575496787C8DA3B8E164E4EC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6646D1C690774EA352AF6377D34BB1F6 /* couchbase-lite-ios */,
-				E2AFF967B2EFF8BD5E154AC068E150BC /* HTagView */,
-				49952CB63C4F0A60AF49C15F686AFE20 /* SCrypto */,
+				F0280B2A39ACFC73DD297C602FD6944F /* HTagView.framework */,
+				ACE17FF0147A59E188EC3E7F589DF57A /* Pods_TranslationEditor.framework */,
+				D6851B50B1D1B8B35A824383EA147D41 /* Pods_TranslationEditorTests.framework */,
+				ED9C6262CE46813EA203D458FC3526C9 /* Pods_TranslationEditorUITests.framework */,
+				32DBE3CD2C56D0531658A60709AC1DFE /* QRCodeReader.framework */,
+				7170ED1406E227429C1F3C782D9D4D6A /* SCrypto.framework */,
 			);
-			name = Pods;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		0B65379BD1B7A8C0FC9E776D6174C17E /* Support Files */ = {
+		0B969C334BC281E54A1F293662296EF3 /* SQLite */ = {
 			isa = PBXGroup;
 			children = (
-				EF68793DF7FF44268F2867FCBA3D41F2 /* HTagView.modulemap */,
-				F4802BAF0005DD45CE7C22CCF2FC010D /* HTagView.xcconfig */,
-				E07B1E3A64C7CB07F49A5745DC43EFBF /* HTagView-dummy.m */,
-				31B6B9ABC786A85F3089ABD81E2AB553 /* HTagView-prefix.pch */,
-				1B8FA94F50AE7F28C39EDF9AF423160F /* HTagView-umbrella.h */,
-				52CE38ECD39C60B0DCB5994DE0391154 /* Info.plist */,
+				213A1725394E4058B18A67F79AE16263 /* CBLAttachment.h */,
+				828004F95B8354C8753A10AA6F3FF542 /* CBLAuthenticator.h */,
+				D5201BD0C1610468CC79085836DEF026 /* CBLAuthenticator+OpenID.h */,
+				B0F3F200BA1530334C97DE8DD74A04B0 /* CBLBase.h */,
+				FAC232EB8A82F1416AC3A7CEA6E4B636 /* CBLDatabase.h */,
+				BEDFD1B6D8CFC02FF3ED6BAB78D59CD0 /* CBLDatabaseChange.h */,
+				FE7883B4A361CBBCDD5E60E0161099D9 /* CBLDocument.h */,
+				2461923A7480FBBE0B6DD5E26011F59F /* CBLDynamicObject.h */,
+				1234C6BF05F133EF13FECAE824102849 /* CBLGeometry.h */,
+				6B4FD7BF7C90098FFC985B79A4310775 /* CBLJSON.h */,
+				69F7BBAE2F95BFB6A40A430567D8FFD6 /* CBLListener.h */,
+				C8ACCEC09AF8E802C0142E6E47C86ABF /* CBLManager.h */,
+				8AC42E0651781944CD43EA1F53719EED /* CBLModel.h */,
+				F17BDF6DB13D495E282BDFB479C50358 /* CBLModelFactory.h */,
+				06DD7F4E73D350A18340DB3FB4B516F0 /* CBLQuery.h */,
+				0724FD640255D9297F4DC01BBB1CDF60 /* CBLQuery+FullTextSearch.h */,
+				555909F51B0C85E9622859371C53A5ED /* CBLQuery+Geo.h */,
+				2BDD776A473966BA3E060F3C03192F8A /* CBLQueryBuilder.h */,
+				487329AC9D054CB24ADEEC9BC75957AB /* CBLReplication.h */,
+				54904905562235095BDDBEEC807FFCCD /* CBLRevision.h */,
+				BBFD5F32667F51222840B9A68883EB35 /* CBLUITableSource.h */,
+				87F9BBDBC5AF3C656B5E148774D5240C /* CBLView.h */,
+				7A3781B2C21940B2D936AFFEC6EB1ED8 /* CouchbaseLite.h */,
+				02D2DC8E73216898CEE0ABE870A6FE81 /* CouchbaseLiteListener.h */,
+				8E2B7C3B6DA8186EBF0A5883ABB6D596 /* Frameworks */,
+			);
+			name = SQLite;
+			sourceTree = "<group>";
+		};
+		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA648648317C71E5A4DA455C8D2DBA8E /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1458224CFEAA9543F46686B5D5390AB9 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				44CFF44AF63455C9E7C558D91CB1650B /* Info.plist */,
+				A6A253F6BD3C8F1BF6E3374C0B33CEA1 /* SCrypto.modulemap */,
+				23F13F4DC8E50D54CDA85BB580362C0A /* SCrypto.xcconfig */,
+				568AAAC02ADA5238169CE17D1969AC2B /* SCrypto-dummy.m */,
+				B9D2D55739F9B844699869E2CC5BDF27 /* SCrypto-prefix.pch */,
+				4EA71580E5EF2E30BA0A16979EE7E7CF /* SCrypto-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/HTagView";
-			sourceTree = "<group>";
-		};
-		235EBDC942260A56D1371921C4A19304 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				6C896B947F53876CA0F20B210F0BC733 /* Images.xcassets */,
-			);
-			name = Resources;
+			path = "../Target Support Files/SCrypto";
 			sourceTree = "<group>";
 		};
 		357C377317D1A9AC7F4E14D1E0AE71E5 /* Targets Support Files */ = {
@@ -246,97 +343,27 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		3DD56CD4F93D3C07D82C4B1A36D1A360 /* Support Files */ = {
+		51EACA76E71302F907171A2D3D7F8B56 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				0D1189B45DDAE26A52A30E7ACC9977FC /* Info.plist */,
-				1CB80CB358790BBFDA175B105ACCE915 /* SCrypto.modulemap */,
-				3F55B2C0B679336FE4F75F296AEAFE39 /* SCrypto.xcconfig */,
-				2DC5E6595BDAA52C16D979418F18FAEA /* SCrypto-dummy.m */,
-				58F9155B97A9D128D05D5DA5D6095E87 /* SCrypto-prefix.pch */,
-				5C163B5249C99775B16A9E74DC14BADB /* SCrypto-umbrella.h */,
+				B0EE28CD26AAB177F5B8BFDCF6A6E165 /* Info.plist */,
+				75B27A2D07B5BCFE3945E92F864616AA /* QRCodeReader.swift.modulemap */,
+				4C4A752ED3E40F0FA255E3965F81625B /* QRCodeReader.swift.xcconfig */,
+				57663BCCB4543FE3F39565EA3A63EEF5 /* QRCodeReader.swift-dummy.m */,
+				AFEC70DE17AD8586C61A123E940DDB0D /* QRCodeReader.swift-prefix.pch */,
+				7B432E80F0A618042CD26EC2EF1FC239 /* QRCodeReader.swift-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/SCrypto";
-			sourceTree = "<group>";
-		};
-		406A0D2E4A7171EA2F6EB05C19AC38BE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D27A733190819F50FF8FF8FE9F210776 /* HTagView.framework */,
-				AFB2619178DC6E4FEE084CA4475EA350 /* Pods_TranslationEditor.framework */,
-				679F570F0342B4D2D394820CD045EECE /* Pods_TranslationEditorTests.framework */,
-				342F2C7AB92FC0E4A1AE2F681FD10B06 /* Pods_TranslationEditorUITests.framework */,
-				607097F910974B17E1E3E7DD60BB859C /* SCrypto.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F302CD3B306AF1ED96B9AF31FCDBC26C /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		49952CB63C4F0A60AF49C15F686AFE20 /* SCrypto */ = {
-			isa = PBXGroup;
-			children = (
-				3E4CF1CADAA3DB2BF2AC548BAF6861D8 /* SCrypto.h */,
-				EECB802B683DD4793B3ACA5A14661FCB /* SCrypto.swift */,
-				3DD56CD4F93D3C07D82C4B1A36D1A360 /* Support Files */,
-			);
-			path = SCrypto;
-			sourceTree = "<group>";
-		};
-		6646D1C690774EA352AF6377D34BB1F6 /* couchbase-lite-ios */ = {
-			isa = PBXGroup;
-			children = (
-				7C25254926DFF9F82C3897C042704320 /* SQLite */,
-			);
-			path = "couchbase-lite-ios";
-			sourceTree = "<group>";
-		};
-		7C25254926DFF9F82C3897C042704320 /* SQLite */ = {
-			isa = PBXGroup;
-			children = (
-				D617A14F66B85399A974E2921DC6BE3D /* CBLAttachment.h */,
-				82D72792FEE5CDA34932560C821D6774 /* CBLAuthenticator.h */,
-				580BAA903B5BD8587DB29A0D20317D41 /* CBLAuthenticator+OpenID.h */,
-				427D0EF71EE579D8CB593423136EB71F /* CBLBase.h */,
-				723A587CFDB91F438E4F3552F1DE9FE1 /* CBLDatabase.h */,
-				DAFC74E636E69E61E1FB595A66FF6017 /* CBLDatabaseChange.h */,
-				B31E35A8E01243081D6DF101F1D0F7D2 /* CBLDocument.h */,
-				EBB9FD96F4E24D3473864592F93A0503 /* CBLDynamicObject.h */,
-				5603B682AE3D6EFF664A9439CE71E714 /* CBLGeometry.h */,
-				7FC572DC5CE9AF7497601CCC86458BDB /* CBLJSON.h */,
-				EE6FF79551ECB2094F9EC32A1206AD93 /* CBLListener.h */,
-				EC509FA089D79C95B247CA8A258C6DCB /* CBLManager.h */,
-				1CF26EBA1F0E6A53F2DAB6E61974CDB1 /* CBLModel.h */,
-				01DFA97FF34C22200E474F79C0DF8B21 /* CBLModelFactory.h */,
-				61E6DDA5B91B89ED36A85A4315F5EFAE /* CBLQuery.h */,
-				0B222B68FDAF3D603A47478B9BEE3DAD /* CBLQuery+FullTextSearch.h */,
-				678FDF09541BAB655A7941C8FB471993 /* CBLQuery+Geo.h */,
-				37ECBE89256E26F98D539660269F8149 /* CBLQueryBuilder.h */,
-				19B709CD5D037B4D137821389334E41F /* CBLReplication.h */,
-				357CC4266D10889BD75365D9904F00F1 /* CBLRevision.h */,
-				7B9F6BDC4DE47C843FF1493B502A804B /* CBLUITableSource.h */,
-				DE6F17655B780FFC6E5532429CDB79A2 /* CBLView.h */,
-				90CB721D2BB6597A74CB76C11BB241E2 /* CouchbaseLite.h */,
-				9ECB6F603C27B304F925D1A945FA5636 /* CouchbaseLiteListener.h */,
-				AEC7BA9A841C0988132D2B9A0D99C56C /* Frameworks */,
-			);
-			name = SQLite;
+			path = "../Target Support Files/QRCodeReader.swift";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				05A592D32F3CB830A3783A25A0C5DABB /* Pods */,
-				406A0D2E4A7171EA2F6EB05C19AC38BE /* Products */,
+				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
+				CC1C4104BDD69E3CC0094F60A419581E /* Pods */,
+				072C81A8575496787C8DA3B8E164E4EC /* Products */,
 				357C377317D1A9AC7F4E14D1E0AE71E5 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -359,6 +386,54 @@
 			path = "Target Support Files/Pods-TranslationEditorTests";
 			sourceTree = "<group>";
 		};
+		8D0A8931A4CAD35C391D4A24A19AC0E0 /* HTagView */ = {
+			isa = PBXGroup;
+			children = (
+				7FEA9B5F118F688F2DD42AA90043F995 /* HTag.swift */,
+				FDA4088C6651FB2A3840372891E52F6F /* HTagView.swift */,
+				E5B19C4CA7017DB3A782FD56CFE9202A /* Resources */,
+				C31508F245DAFC7B7700BE7BF0DAE6F0 /* Support Files */,
+			);
+			path = HTagView;
+			sourceTree = "<group>";
+		};
+		8E2B7C3B6DA8186EBF0A5883ABB6D596 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				357B7617C614A0F715A1FE38F6F68A42 /* CouchbaseLite.framework */,
+				E42D98130593E43D38E0E95A4FC2E4BA /* CouchbaseLiteListener.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		909ACA0EBD3000E0B5EEF31B608331FB /* QRCodeReader.swift */ = {
+			isa = PBXGroup;
+			children = (
+				862D8C43AAE4BE503CA597228EF76857 /* QRCodeReader.swift */,
+				D43F5638A3E592EC0984FCD9F90E0C69 /* QRCodeReaderResult.swift */,
+				E27C4ACE2B2C40A0148B1520079A5737 /* QRCodeReaderView.swift */,
+				57E3B6EAC4D2DF739C23C1A82C12FB20 /* QRCodeReaderViewContainer.swift */,
+				A73E07D2B04487E7AAA44B5C976613EC /* QRCodeReaderViewController.swift */,
+				D12C7155C29B489D877F41BBDCD642F0 /* QRCodeReaderViewControllerBuilder.swift */,
+				80D259E4D3D1271484400297C837C7C6 /* QRCodeReaderViewControllerDelegate.swift */,
+				2767522C1A983C5A1F514DE03EADF282 /* ReaderOverlayView.swift */,
+				6A3288FE38D98F26664970EFBE6CAADD /* SwitchCameraButton.swift */,
+				D3468EBAF59C5EE75A6A6C3167840DEA /* ToggleTorchButton.swift */,
+				51EACA76E71302F907171A2D3D7F8B56 /* Support Files */,
+			);
+			path = QRCodeReader.swift;
+			sourceTree = "<group>";
+		};
+		9D008BC3EE7D741D559CF0651EB2F04F /* SCrypto */ = {
+			isa = PBXGroup;
+			children = (
+				F2519D612EEFB995ED55DC0ED8D1D84C /* SCrypto.h */,
+				E72E833CA0B23FC8E6539C56B8854F87 /* SCrypto.swift */,
+				1458224CFEAA9543F46686B5D5390AB9 /* Support Files */,
+			);
+			path = SCrypto;
+			sourceTree = "<group>";
+		};
 		ADE49FDD25F0CFB94D1DAA2FB9CDE30B /* Pods-TranslationEditorUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,24 +452,55 @@
 			path = "Target Support Files/Pods-TranslationEditorUITests";
 			sourceTree = "<group>";
 		};
-		AEC7BA9A841C0988132D2B9A0D99C56C /* Frameworks */ = {
+		B1834633C434B2F6233D2AA105A7A60F /* couchbase-lite-ios */ = {
 			isa = PBXGroup;
 			children = (
-				474DE1A061CD3346029C7D251A28DB93 /* CouchbaseLite.framework */,
-				F762CBC3DDC368062F7AF072AF43144E /* CouchbaseLiteListener.framework */,
+				0B969C334BC281E54A1F293662296EF3 /* SQLite */,
 			);
-			name = Frameworks;
+			path = "couchbase-lite-ios";
 			sourceTree = "<group>";
 		};
-		E2AFF967B2EFF8BD5E154AC068E150BC /* HTagView */ = {
+		C31508F245DAFC7B7700BE7BF0DAE6F0 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				6A011D103E1387A8FEACE295FD40795F /* HTag.swift */,
-				00243B926BE135FF6ECC7466AE378710 /* HTagView.swift */,
-				235EBDC942260A56D1371921C4A19304 /* Resources */,
-				0B65379BD1B7A8C0FC9E776D6174C17E /* Support Files */,
+				D9DF3665C7874470D99D18C2FDD05709 /* HTagView.modulemap */,
+				1D244EFBDC5E72D7EDC01433A53CF916 /* HTagView.xcconfig */,
+				F9A8F9D836405EE502F9E7465FF3680A /* HTagView-dummy.m */,
+				B44245634934FE74B7BFB54021559010 /* HTagView-prefix.pch */,
+				2E1FA0EAE2F6E4F52C2023DC10BB5E3E /* HTagView-umbrella.h */,
+				86D5A956D5DCE3E628C2E24C5F78B0E2 /* Info.plist */,
 			);
-			path = HTagView;
+			name = "Support Files";
+			path = "../Target Support Files/HTagView";
+			sourceTree = "<group>";
+		};
+		CA648648317C71E5A4DA455C8D2DBA8E /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				9ADFC5A4B2BBCFD9A27B7A059658E773 /* AVFoundation.framework */,
+				5422916563B77A748D40B022EAE1747C /* Foundation.framework */,
+				3A41C04F9FB06B54E2A413E29A588B49 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		CC1C4104BDD69E3CC0094F60A419581E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B1834633C434B2F6233D2AA105A7A60F /* couchbase-lite-ios */,
+				8D0A8931A4CAD35C391D4A24A19AC0E0 /* HTagView */,
+				909ACA0EBD3000E0B5EEF31B608331FB /* QRCodeReader.swift */,
+				9D008BC3EE7D741D559CF0651EB2F04F /* SCrypto */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E5B19C4CA7017DB3A782FD56CFE9202A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DE13DAFA79F8E52A84F9BC53170FFF6E /* Images.xcassets */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		E76167BFF5D3D31104216113449D74D8 /* Pods-TranslationEditor */ = {
@@ -415,15 +521,6 @@
 			path = "Target Support Files/Pods-TranslationEditor";
 			sourceTree = "<group>";
 		};
-		F302CD3B306AF1ED96B9AF31FCDBC26C /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				A2A6FF208CEC4C2861F1E9D42D651453 /* Foundation.framework */,
-				E86668F20F252C440D1015B816BE59C5 /* UIKit.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -435,61 +532,50 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3E2A8537CE263603786BBB1EE9320413 /* Headers */ = {
+		3CD8C92B8103FA282D932DAA65E21F35 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63290257B17910AEB7DC9F2B2300935A /* Pods-TranslationEditorTests-umbrella.h in Headers */,
+				7CE9958BF6BAC2488877F97CB6C5E3DA /* Pods-TranslationEditorTests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9273D2FFE905200045A85A8D90511EF8 /* Headers */ = {
+		78A8F5F9EF834C05F4B262EEEEDDBCEF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AD4D93507C8816031DA9A212CD7B122 /* SCrypto-umbrella.h in Headers */,
-				3FCBDF9858710096B8494E225C423B61 /* SCrypto.h in Headers */,
+				51E9DA198F15F092C6E97E8EB76506AF /* SCrypto-umbrella.h in Headers */,
+				5FCB04AB83C7FC81B9175148CAFE40EE /* SCrypto.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E17C45282C3C2C3BAE9922F93E92622F /* Headers */ = {
+		96E41B04485C6D2AADE8271F921730DA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF6C09EAE56571C2A1360385034EE31D /* Pods-TranslationEditorUITests-umbrella.h in Headers */,
+				7B8DD5107B54A1F62308CDA10E1FAD6A /* Pods-TranslationEditor-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ED7A7EB8A487B1114D4AF0FD0904784F /* Headers */ = {
+		ED3A2877C87091C6FC603C91EDF7C5D1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA1EF8DB0D935B495354213BBDD5F206 /* Pods-TranslationEditor-umbrella.h in Headers */,
+				08155170C86CFD01FF2F498A66E31B09 /* Pods-TranslationEditorUITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7215DFEBFF356F6F9488DFC20BBD637 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				890387AB322919B63623F890437C8EB9 /* QRCodeReader.swift-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0057FDF91F928A182FC6A39465E5E7B9 /* Pods-TranslationEditorTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D32755E2DD880465686C30A38A554722 /* Build configuration list for PBXNativeTarget "Pods-TranslationEditorTests" */;
-			buildPhases = (
-				9F935108EC212EB6DF7A2EBB2BB3A49B /* Sources */,
-				7CE689B282FC5C4D124FFF644AC3B02D /* Frameworks */,
-				3E2A8537CE263603786BBB1EE9320413 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7D6B43C1FD4397159AAFD018A3E9AB7E /* PBXTargetDependency */,
-				72FDCF27BD7FD5958136E18ADB9D9567 /* PBXTargetDependency */,
-			);
-			name = "Pods-TranslationEditorTests";
-			productName = "Pods-TranslationEditorTests";
-			productReference = 679F570F0342B4D2D394820CD045EECE /* Pods_TranslationEditorTests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		06BD38701ACE8B3EE3B20F864EAA8307 /* HTagView */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B783F91B024B10EFD6DA7C22F04AABD /* Build configuration list for PBXNativeTarget "HTagView" */;
@@ -505,54 +591,93 @@
 			);
 			name = HTagView;
 			productName = HTagView;
-			productReference = D27A733190819F50FF8FF8FE9F210776 /* HTagView.framework */;
+			productReference = F0280B2A39ACFC73DD297C602FD6944F /* HTagView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		28295D02E79D07F49ABFB45CC6D4594F /* Pods-TranslationEditorUITests */ = {
+		1E7EA9201A882A49D3B2C4709F83BB43 /* QRCodeReader.swift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 35E59739F800BC30DA76D17E0DE521E9 /* Build configuration list for PBXNativeTarget "Pods-TranslationEditorUITests" */;
+			buildConfigurationList = BFB08D2AD63A8B1E0F8BC8D35E534183 /* Build configuration list for PBXNativeTarget "QRCodeReader.swift" */;
 			buildPhases = (
-				A5271195A8584273225172DB1210616D /* Sources */,
-				42030406E5C667995C2D3920C46F1CA2 /* Frameworks */,
-				E17C45282C3C2C3BAE9922F93E92622F /* Headers */,
+				A38C6BA9FF7C963C0B04BB552C5945C5 /* Sources */,
+				9F834B417325B0EB9547591BD4DEA881 /* Frameworks */,
+				F7215DFEBFF356F6F9488DFC20BBD637 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7FEF958B3CB15DD111307A49DC163E92 /* PBXTargetDependency */,
-				52FE688F0ECB87D938945C4C31684CD0 /* PBXTargetDependency */,
+			);
+			name = QRCodeReader.swift;
+			productName = QRCodeReader.swift;
+			productReference = 32DBE3CD2C56D0531658A60709AC1DFE /* QRCodeReader.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4067C9FAE16EBB8ED80A4DD4675AFE82 /* Pods-TranslationEditorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96CE2888EEA9BA5257851D778BA2A2B2 /* Build configuration list for PBXNativeTarget "Pods-TranslationEditorUITests" */;
+			buildPhases = (
+				432C647588289BA91A570FD188020843 /* Sources */,
+				3FD6731CFE338395D72D2550C01FC3CA /* Frameworks */,
+				ED3A2877C87091C6FC603C91EDF7C5D1 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C1B6BFD8E3FAE18BE24FE686929B596C /* PBXTargetDependency */,
+				60D49563BC5EE7F2D46652964E40C9F2 /* PBXTargetDependency */,
+				1E4BA6C1F15DF3CB8329DB1EA71F3FFD /* PBXTargetDependency */,
 			);
 			name = "Pods-TranslationEditorUITests";
 			productName = "Pods-TranslationEditorUITests";
-			productReference = 342F2C7AB92FC0E4A1AE2F681FD10B06 /* Pods_TranslationEditorUITests.framework */;
+			productReference = ED9C6262CE46813EA203D458FC3526C9 /* Pods_TranslationEditorUITests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		489EDEC1EB3F5F663A44892EC02CDD54 /* Pods-TranslationEditor */ = {
+		4F2991BD5B6D10D5FECC833E1BE5433A /* Pods-TranslationEditor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E35E94DD0D89FF284BF68746CDE191E7 /* Build configuration list for PBXNativeTarget "Pods-TranslationEditor" */;
+			buildConfigurationList = 70BB5BF7C876B33614629293C18C1332 /* Build configuration list for PBXNativeTarget "Pods-TranslationEditor" */;
 			buildPhases = (
-				DDD248BC23C6B424BCD5F76465D6085F /* Sources */,
-				1340B845559362BBB8463ED0E7279B1B /* Frameworks */,
-				ED7A7EB8A487B1114D4AF0FD0904784F /* Headers */,
+				DADDB472BBDF695FB877281DF49B9B45 /* Sources */,
+				2797D976C02D17625812DB11200D83F6 /* Frameworks */,
+				96E41B04485C6D2AADE8271F921730DA /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				2D53BC3D57EA1F7407B9C1D88ECF3099 /* PBXTargetDependency */,
-				C912C7C3DA5CD775110EDAED398BFBB8 /* PBXTargetDependency */,
+				AD13DF61A5599E1B121542EFBC9A1492 /* PBXTargetDependency */,
+				6016D962719E89404F906119217361ED /* PBXTargetDependency */,
+				DBB743C4645E283203D42E198D4DAA0E /* PBXTargetDependency */,
 			);
 			name = "Pods-TranslationEditor";
 			productName = "Pods-TranslationEditor";
-			productReference = AFB2619178DC6E4FEE084CA4475EA350 /* Pods_TranslationEditor.framework */;
+			productReference = ACE17FF0147A59E188EC3E7F589DF57A /* Pods_TranslationEditor.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		AC6C1A149239200877BECF12B0E7BBEA /* SCrypto */ = {
+		CE6BC57068BC04A4C85D2E0F92B8FEF1 /* Pods-TranslationEditorTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F0518269A0F0775FAEE6833EF1C14984 /* Build configuration list for PBXNativeTarget "SCrypto" */;
+			buildConfigurationList = 06C0B2EE115EA8881AF6892C7DE1E029 /* Build configuration list for PBXNativeTarget "Pods-TranslationEditorTests" */;
 			buildPhases = (
-				1B4568B26C077B1CCC322EAB4425F023 /* Sources */,
-				11E5AA8D0AFD314413D070722F49DA4C /* Frameworks */,
-				9273D2FFE905200045A85A8D90511EF8 /* Headers */,
+				73D448DA2C582A8B49F65DC81C64A9B5 /* Sources */,
+				B567004B44CEEDFC67731192E219BD05 /* Frameworks */,
+				3CD8C92B8103FA282D932DAA65E21F35 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7B4E9E5239D4ABBEF274042D0ABF69D1 /* PBXTargetDependency */,
+				B742181B4DA0AF9C5480D847B3F39BB9 /* PBXTargetDependency */,
+				377E5B375BB81995B9310A93F946E891 /* PBXTargetDependency */,
+			);
+			name = "Pods-TranslationEditorTests";
+			productName = "Pods-TranslationEditorTests";
+			productReference = D6851B50B1D1B8B35A824383EA147D41 /* Pods_TranslationEditorTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		EC3AA3AADF4CA86C7274BD78D7944EEE /* SCrypto */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C93D4D709C8D58BFC12A983446194610 /* Build configuration list for PBXNativeTarget "SCrypto" */;
+			buildPhases = (
+				7049FD66E73C4EDDF8D47A31C3E0B139 /* Sources */,
+				8E0776003E32372FB536CCFBE8198588 /* Frameworks */,
+				78A8F5F9EF834C05F4B262EEEEDDBCEF /* Headers */,
 			);
 			buildRules = (
 			);
@@ -560,7 +685,7 @@
 			);
 			name = SCrypto;
 			productName = SCrypto;
-			productReference = 607097F910974B17E1E3E7DD60BB859C /* SCrypto.framework */;
+			productReference = 7170ED1406E227429C1F3C782D9D4D6A /* SCrypto.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -572,19 +697,22 @@
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				TargetAttributes = {
-					0057FDF91F928A182FC6A39465E5E7B9 = {
-						LastSwiftMigration = 0820;
-					};
 					06BD38701ACE8B3EE3B20F864EAA8307 = {
 						LastSwiftMigration = 0820;
 					};
-					28295D02E79D07F49ABFB45CC6D4594F = {
+					1E7EA9201A882A49D3B2C4709F83BB43 = {
 						LastSwiftMigration = 0820;
 					};
-					489EDEC1EB3F5F663A44892EC02CDD54 = {
+					4067C9FAE16EBB8ED80A4DD4675AFE82 = {
 						LastSwiftMigration = 0820;
 					};
-					AC6C1A149239200877BECF12B0E7BBEA = {
+					4F2991BD5B6D10D5FECC833E1BE5433A = {
+						LastSwiftMigration = 0820;
+					};
+					CE6BC57068BC04A4C85D2E0F92B8FEF1 = {
+						LastSwiftMigration = 0820;
+					};
+					EC3AA3AADF4CA86C7274BD78D7944EEE = {
 						LastSwiftMigration = 0820;
 					};
 				};
@@ -597,15 +725,16 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 406A0D2E4A7171EA2F6EB05C19AC38BE /* Products */;
+			productRefGroup = 072C81A8575496787C8DA3B8E164E4EC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				06BD38701ACE8B3EE3B20F864EAA8307 /* HTagView */,
-				489EDEC1EB3F5F663A44892EC02CDD54 /* Pods-TranslationEditor */,
-				0057FDF91F928A182FC6A39465E5E7B9 /* Pods-TranslationEditorTests */,
-				28295D02E79D07F49ABFB45CC6D4594F /* Pods-TranslationEditorUITests */,
-				AC6C1A149239200877BECF12B0E7BBEA /* SCrypto */,
+				4F2991BD5B6D10D5FECC833E1BE5433A /* Pods-TranslationEditor */,
+				CE6BC57068BC04A4C85D2E0F92B8FEF1 /* Pods-TranslationEditorTests */,
+				4067C9FAE16EBB8ED80A4DD4675AFE82 /* Pods-TranslationEditorUITests */,
+				1E7EA9201A882A49D3B2C4709F83BB43 /* QRCodeReader.swift */,
+				EC3AA3AADF4CA86C7274BD78D7944EEE /* SCrypto */,
 			);
 		};
 /* End PBXProject section */
@@ -632,82 +761,118 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1B4568B26C077B1CCC322EAB4425F023 /* Sources */ = {
+		432C647588289BA91A570FD188020843 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04895F1E17E13BCA044409F1AF0652EF /* SCrypto-dummy.m in Sources */,
-				3D3E051B6CAD3C423126194FADC9606B /* SCrypto.swift in Sources */,
+				9D0F37E6F197988F3D8D223A7DFDB6DB /* Pods-TranslationEditorUITests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9F935108EC212EB6DF7A2EBB2BB3A49B /* Sources */ = {
+		7049FD66E73C4EDDF8D47A31C3E0B139 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9ADB94CED9946D6641D4CB1ECDFBD1E /* Pods-TranslationEditorTests-dummy.m in Sources */,
+				4FD9A63CD7E65558F4333BA9B4E69A3A /* SCrypto-dummy.m in Sources */,
+				1FDDC252B649814AA2C084B8A9C1B983 /* SCrypto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5271195A8584273225172DB1210616D /* Sources */ = {
+		73D448DA2C582A8B49F65DC81C64A9B5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EC840B0418B517FD900DFC70048C721 /* Pods-TranslationEditorUITests-dummy.m in Sources */,
+				9323E4CDCE6A095494A194A02C5D462B /* Pods-TranslationEditorTests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DDD248BC23C6B424BCD5F76465D6085F /* Sources */ = {
+		A38C6BA9FF7C963C0B04BB552C5945C5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32A486224989A2EA2E796A04F1603FCA /* Pods-TranslationEditor-dummy.m in Sources */,
+				606E70CBA36502F2DFF38517D441EAA4 /* QRCodeReader.swift in Sources */,
+				84A9B45699BA9BE608FF96D50841C673 /* QRCodeReader.swift-dummy.m in Sources */,
+				7834DACD947EAA7590CB602819BC6B12 /* QRCodeReaderResult.swift in Sources */,
+				AE7661D1A55B1E9A016C049022E7A96A /* QRCodeReaderView.swift in Sources */,
+				9E6A7DA9B3A9D27C0714250DED7E17A9 /* QRCodeReaderViewContainer.swift in Sources */,
+				53A210C9BFF7F978D7A839D82F0DF9F3 /* QRCodeReaderViewController.swift in Sources */,
+				3CE93FAF96DCA694FC5A04A27790A05F /* QRCodeReaderViewControllerBuilder.swift in Sources */,
+				B9F4F120EBC82ACF008D2F3790776395 /* QRCodeReaderViewControllerDelegate.swift in Sources */,
+				7AF1269D903AB0A0E260BE519E73EBA2 /* ReaderOverlayView.swift in Sources */,
+				EF2A530E2FD2E9AF28F7746C6E7B6377 /* SwitchCameraButton.swift in Sources */,
+				E540B7096542AAAC51CC1ADD614A9BCE /* ToggleTorchButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DADDB472BBDF695FB877281DF49B9B45 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E308FFE018AEC42835E5EB1B0AFA921B /* Pods-TranslationEditor-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2D53BC3D57EA1F7407B9C1D88ECF3099 /* PBXTargetDependency */ = {
+		1E4BA6C1F15DF3CB8329DB1EA71F3FFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SCrypto;
+			target = EC3AA3AADF4CA86C7274BD78D7944EEE /* SCrypto */;
+			targetProxy = 9C0494373927B88A94C61CB3E5AB6537 /* PBXContainerItemProxy */;
+		};
+		377E5B375BB81995B9310A93F946E891 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SCrypto;
+			target = EC3AA3AADF4CA86C7274BD78D7944EEE /* SCrypto */;
+			targetProxy = 7C08090144FE19E920AC7B51DE042B04 /* PBXContainerItemProxy */;
+		};
+		6016D962719E89404F906119217361ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QRCodeReader.swift;
+			target = 1E7EA9201A882A49D3B2C4709F83BB43 /* QRCodeReader.swift */;
+			targetProxy = CCF079D51C7B22365EEF2E0FE85B410B /* PBXContainerItemProxy */;
+		};
+		60D49563BC5EE7F2D46652964E40C9F2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QRCodeReader.swift;
+			target = 1E7EA9201A882A49D3B2C4709F83BB43 /* QRCodeReader.swift */;
+			targetProxy = DC6FDFE1C6A336D154DEBB9364B632DA /* PBXContainerItemProxy */;
+		};
+		7B4E9E5239D4ABBEF274042D0ABF69D1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = HTagView;
 			target = 06BD38701ACE8B3EE3B20F864EAA8307 /* HTagView */;
-			targetProxy = 76953EFD18CBD7033A913BD0AE1D659E /* PBXContainerItemProxy */;
+			targetProxy = 093B4203D522102F5224779E449FA69D /* PBXContainerItemProxy */;
 		};
-		52FE688F0ECB87D938945C4C31684CD0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SCrypto;
-			target = AC6C1A149239200877BECF12B0E7BBEA /* SCrypto */;
-			targetProxy = ACE7736E0DD4A17C82A83E58FD1D8267 /* PBXContainerItemProxy */;
-		};
-		72FDCF27BD7FD5958136E18ADB9D9567 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SCrypto;
-			target = AC6C1A149239200877BECF12B0E7BBEA /* SCrypto */;
-			targetProxy = 44A14466CC310545F0757A26EE348B74 /* PBXContainerItemProxy */;
-		};
-		7D6B43C1FD4397159AAFD018A3E9AB7E /* PBXTargetDependency */ = {
+		AD13DF61A5599E1B121542EFBC9A1492 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = HTagView;
 			target = 06BD38701ACE8B3EE3B20F864EAA8307 /* HTagView */;
-			targetProxy = 27D28C8F6ADE7A797848C9F73652FE99 /* PBXContainerItemProxy */;
+			targetProxy = 7E50DE7652D94E2D7A6F67D47434A948 /* PBXContainerItemProxy */;
 		};
-		7FEF958B3CB15DD111307A49DC163E92 /* PBXTargetDependency */ = {
+		B742181B4DA0AF9C5480D847B3F39BB9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QRCodeReader.swift;
+			target = 1E7EA9201A882A49D3B2C4709F83BB43 /* QRCodeReader.swift */;
+			targetProxy = 559002D7DE97A4FD657D3537F74A9D56 /* PBXContainerItemProxy */;
+		};
+		C1B6BFD8E3FAE18BE24FE686929B596C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = HTagView;
 			target = 06BD38701ACE8B3EE3B20F864EAA8307 /* HTagView */;
-			targetProxy = A7A88760D89C19003170E01F4EFDB149 /* PBXContainerItemProxy */;
+			targetProxy = 23F35C917AE1266D459CB55E0976A29B /* PBXContainerItemProxy */;
 		};
-		C912C7C3DA5CD775110EDAED398BFBB8 /* PBXTargetDependency */ = {
+		DBB743C4645E283203D42E198D4DAA0E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SCrypto;
-			target = AC6C1A149239200877BECF12B0E7BBEA /* SCrypto */;
-			targetProxy = 97BCF8D6D085D742AD264449000CBD0E /* PBXContainerItemProxy */;
+			target = EC3AA3AADF4CA86C7274BD78D7944EEE /* SCrypto */;
+			targetProxy = 97D9C8609EFA2FF297C2721FE4BC1461 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1A183A10A6E0022A1FD06AD04E287CB1 /* Release */ = {
+		03CE595C609DA6DF1F09BF65DC4A89AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 725113B5C6A9912011C3A9A941AB61B1 /* Pods-TranslationEditor.release.xcconfig */;
 			buildSettings = {
@@ -741,77 +906,7 @@
 			};
 			name = Release;
 		};
-		1D45F4C85BA0D17EFC6DE6C013AD556B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C89B4976E6769692955CB0EF54C450D /* Pods-TranslationEditor.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-TranslationEditor/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-TranslationEditor/Pods-TranslationEditor.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_TranslationEditor;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		2F013BF0101F1B7421E7956D34C636A4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EC9AE8D179718B311D20AE1876A3788 /* Pods-TranslationEditorTests.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-TranslationEditorTests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_TranslationEditorTests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		39B3DF8B23784CBD4C3800C81E53DD05 /* Release */ = {
+		09CE8A7905F7AA7141CAFFE74554F9EC /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EFF0F103F21B27A384774F5DA7320926 /* Pods-TranslationEditorUITests.release.xcconfig */;
 			buildSettings = {
@@ -836,6 +931,132 @@
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Pods_TranslationEditorUITests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		20E774436D05C7F14486A2D5FB0C8221 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23F13F4DC8E50D54CDA85BB580362C0A /* SCrypto.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SCrypto/SCrypto-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SCrypto/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SCrypto/SCrypto.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SCrypto;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		350E42B62DA95BE3D3A26FEBF9A4AAF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3D511C81C2E683617B4E8C5998A8C9A /* Pods-TranslationEditorUITests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TranslationEditorUITests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TranslationEditorUITests/Pods-TranslationEditorUITests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_TranslationEditorUITests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		35986C9B71D5CC4A133DD1BC2E3D10EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23F13F4DC8E50D54CDA85BB580362C0A /* SCrypto.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SCrypto/SCrypto-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SCrypto/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SCrypto/SCrypto.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SCrypto;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		414C207AB32A27C9620D41E0EE65DB07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C4A752ED3E40F0FA255E3965F81625B /* QRCodeReader.swift.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/QRCodeReader.swift/QRCodeReader.swift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/QRCodeReader.swift/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/QRCodeReader.swift/QRCodeReader.swift.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = QRCodeReader;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -883,9 +1104,9 @@
 			};
 			name = Release;
 		};
-		794CBF34C5186FBD0AE4BFC68828BCB6 /* Debug */ = {
+		71D3C5A8333B1153A373E35870571133 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F55B2C0B679336FE4F75F296AEAFE39 /* SCrypto.xcconfig */;
+			baseConfigurationReference = 4C4A752ED3E40F0FA255E3965F81625B /* QRCodeReader.swift.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -896,14 +1117,14 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SCrypto/SCrypto-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SCrypto/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/QRCodeReader.swift/QRCodeReader.swift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/QRCodeReader.swift/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SCrypto/SCrypto.modulemap";
+				MODULEMAP_FILE = "Target Support Files/QRCodeReader.swift/QRCodeReader.swift.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = SCrypto;
+				PRODUCT_NAME = QRCodeReader;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -914,43 +1135,44 @@
 			};
 			name = Debug;
 		};
-		890ECE9AB9DB1D4C609D6391C1369614 /* Release */ = {
+		81349476049B8382D45C42B2C7C65A3F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83F577601EA929B91B29DE3B59FB69E0 /* Pods-TranslationEditorTests.release.xcconfig */;
+			baseConfigurationReference = 5C89B4976E6769692955CB0EF54C450D /* Pods-TranslationEditor.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-TranslationEditorTests/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-TranslationEditor/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MODULEMAP_FILE = "Target Support Files/Pods-TranslationEditor/Pods-TranslationEditor.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_TranslationEditorTests;
+				PRODUCT_NAME = Pods_TranslationEditor;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		9AF1764BEB98A16EC08CEF84592F9A77 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4802BAF0005DD45CE7C22CCF2FC010D /* HTagView.xcconfig */;
+			baseConfigurationReference = 1D244EFBDC5E72D7EDC01433A53CF916 /* HTagView.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1020,44 +1242,9 @@
 			};
 			name = Debug;
 		};
-		B13C8CE66EFEF92CD55F1D0587CE3014 /* Debug */ = {
+		D32A75ABAF4E2DCAC806E475303D0A0E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E3D511C81C2E683617B4E8C5998A8C9A /* Pods-TranslationEditorUITests.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-TranslationEditorUITests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-TranslationEditorUITests/Pods-TranslationEditorUITests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_TranslationEditorUITests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		E094283B2F6E0BE798C23661F2D7107E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F55B2C0B679336FE4F75F296AEAFE39 /* SCrypto.xcconfig */;
+			baseConfigurationReference = 83F577601EA929B91B29DE3B59FB69E0 /* Pods-TranslationEditorTests.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1068,14 +1255,18 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SCrypto/SCrypto-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SCrypto/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-TranslationEditorTests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SCrypto/SCrypto.modulemap";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SCrypto;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_TranslationEditorTests;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -1085,9 +1276,44 @@
 			};
 			name = Release;
 		};
+		D6D962019E2970C51E747F509A9ADE74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EC9AE8D179718B311D20AE1876A3788 /* Pods-TranslationEditorTests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TranslationEditorTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_TranslationEditorTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		EEC81163C4F1CDCA5B45658158E2A2D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4802BAF0005DD45CE7C22CCF2FC010D /* HTagView.xcconfig */;
+			baseConfigurationReference = 1D244EFBDC5E72D7EDC01433A53CF916 /* HTagView.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1119,6 +1345,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		06C0B2EE115EA8881AF6892C7DE1E029 /* Build configuration list for PBXNativeTarget "Pods-TranslationEditorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6D962019E2970C51E747F509A9ADE74 /* Debug */,
+				D32A75ABAF4E2DCAC806E475303D0A0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1B783F91B024B10EFD6DA7C22F04AABD /* Build configuration list for PBXNativeTarget "HTagView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1137,38 +1372,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		35E59739F800BC30DA76D17E0DE521E9 /* Build configuration list for PBXNativeTarget "Pods-TranslationEditorUITests" */ = {
+		70BB5BF7C876B33614629293C18C1332 /* Build configuration list for PBXNativeTarget "Pods-TranslationEditor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B13C8CE66EFEF92CD55F1D0587CE3014 /* Debug */,
-				39B3DF8B23784CBD4C3800C81E53DD05 /* Release */,
+				81349476049B8382D45C42B2C7C65A3F /* Debug */,
+				03CE595C609DA6DF1F09BF65DC4A89AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D32755E2DD880465686C30A38A554722 /* Build configuration list for PBXNativeTarget "Pods-TranslationEditorTests" */ = {
+		96CE2888EEA9BA5257851D778BA2A2B2 /* Build configuration list for PBXNativeTarget "Pods-TranslationEditorUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2F013BF0101F1B7421E7956D34C636A4 /* Debug */,
-				890ECE9AB9DB1D4C609D6391C1369614 /* Release */,
+				350E42B62DA95BE3D3A26FEBF9A4AAF0 /* Debug */,
+				09CE8A7905F7AA7141CAFFE74554F9EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E35E94DD0D89FF284BF68746CDE191E7 /* Build configuration list for PBXNativeTarget "Pods-TranslationEditor" */ = {
+		BFB08D2AD63A8B1E0F8BC8D35E534183 /* Build configuration list for PBXNativeTarget "QRCodeReader.swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1D45F4C85BA0D17EFC6DE6C013AD556B /* Debug */,
-				1A183A10A6E0022A1FD06AD04E287CB1 /* Release */,
+				71D3C5A8333B1153A373E35870571133 /* Debug */,
+				414C207AB32A27C9620D41E0EE65DB07 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F0518269A0F0775FAEE6833EF1C14984 /* Build configuration list for PBXNativeTarget "SCrypto" */ = {
+		C93D4D709C8D58BFC12A983446194610 /* Build configuration list for PBXNativeTarget "SCrypto" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				794CBF34C5186FBD0AE4BFC68828BCB6 /* Debug */,
-				E094283B2F6E0BE798C23661F2D7107E /* Release */,
+				20E774436D05C7F14486A2D5FB0C8221 /* Debug */,
+				35986C9B71D5CC4A133DD1BC2E3D10EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

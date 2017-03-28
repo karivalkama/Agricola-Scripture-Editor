@@ -622,6 +622,50 @@ class TranslationEditorTests: XCTestCase
 		print("TEST: DONE")
 	}
 	
+	func testAddProject()
+	{
+		let userName = "Test"
+		let languageNames = ["English", "Finnish"]
+		
+		let projectName = "Test-Project"
+		let projectLanguageName = "Finnish"
+		
+		
+		// Creates a new non-shared account first
+		let languageIds = languageNames.map { try! LanguageView.instance.language(withName: $0).idString }
+		
+		let account = AgricolaAccount(name: userName, languageIds: languageIds, isShared: false)
+		try! account.push()
+		
+		// Next creates a new project for that account
+		let project = Project(name: projectName, languageId: try! LanguageView.instance.language(withName: projectLanguageName).idString, ownerId: account.idString, contributorIds: [account.idString])
+		try! project.push()
+		
+		// Creates a new avatar for the primary account
+		let avatar = Avatar(name: "Test-Avatar", projectId: project.idString)
+		try! avatar.push()
+		
+		let avatarInfo = AvatarInfo(avatarId: avatar.idString, accountId: account.idString)
+		try! avatarInfo.push()
+		
+		// Creates a new, shared account for the project
+		let sharedAccount = AgricolaAccount(name: "Test-Shared", languageIds: languageIds, isShared: true)
+		sharedAccount.projectId = project.idString
+		try! sharedAccount.push()
+		
+		let sharedAvatar = Avatar(name: "Shared-Avatar", projectId: project.idString)
+		try! sharedAvatar.push()
+		
+		let sharedInfo = AvatarInfo(avatarId: sharedAvatar.idString, accountId: sharedAccount.idString, openName: "Shared", password: "Shared", isShared: true)
+		try! sharedInfo.push()
+		
+		// Adds the shared account to the project
+		project.contributorIds.add(sharedAccount.idString)
+		try! project.push()
+		
+		print("Project id is: \(project.idString)")
+	}
+	
 	func testUSXParsing()
 	{
 		guard let url = Bundle.main.url(forResource: "TIT_DURI", withExtension: "usx")
