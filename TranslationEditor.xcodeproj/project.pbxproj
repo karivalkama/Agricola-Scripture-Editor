@@ -36,6 +36,7 @@
 		7C20D7FF1D9A93AA00E84BA5 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C20D7FE1D9A93AA00E84BA5 /* StringExtension.swift */; };
 		7C2390C51E027B200074BBA7 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2390C41E027B200074BBA7 /* Query.swift */; };
 		7C2390C91E0280CC0074BBA7 /* QueryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2390C81E0280CC0074BBA7 /* QueryType.swift */; };
+		7C2518071E8A6CB60089E1FD /* P2PHostSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518061E8A6CB60089E1FD /* P2PHostSession.swift */; };
 		7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF5A1DE718DA0035B92E /* Storable.swift */; };
 		7C40DF5F1DE71E490035B92E /* DatabaseUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */; };
 		7C40DF631DEC14C80035B92E /* JSONConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF621DEC14C80035B92E /* JSONConvertible.swift */; };
@@ -233,6 +234,7 @@
 		7C20D7FE1D9A93AA00E84BA5 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		7C2390C41E027B200074BBA7 /* Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		7C2390C81E0280CC0074BBA7 /* QueryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryType.swift; sourceTree = "<group>"; };
+		7C2518061E8A6CB60089E1FD /* P2PHostSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P2PHostSession.swift; sourceTree = "<group>"; };
 		7C40DF5A1DE718DA0035B92E /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseUtilities.swift; sourceTree = "<group>"; };
 		7C40DF621DEC14C80035B92E /* JSONConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONConvertible.swift; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 				7C4A4FB91DF99490009F890E /* ProgramStatusListener.swift */,
 				7C57EC021E66E293000718E9 /* Session.swift */,
 				7C506B801E8939A100ACB5AC /* P2PClientSession.swift */,
+				7C2518061E8A6CB60089E1FD /* P2PHostSession.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1184,6 +1187,7 @@
 				7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */,
 				7C2390C91E0280CC0074BBA7 /* QueryType.swift in Sources */,
 				7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
+				7C2518071E8A6CB60089E1FD /* P2PHostSession.swift in Sources */,
 				7C4A4FE41DFE7C87009F890E /* UIExtension.swift in Sources */,
 				7C942A2E1E38DD80000C614A /* AgricolaAccount.swift in Sources */,
 				7CDBD6EE1E2E30DD00912320 /* ParagraphNotes.swift in Sources */,
