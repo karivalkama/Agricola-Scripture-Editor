@@ -42,11 +42,10 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate
 
 		// Some views are hidden initially
 		// TODO: Curent hosting status should affect these, naturally
-		disconnectButton.isEnabled = false
 		qrView.isHidden = true
 		
 		// The QR Code scanning feature could be unavailable, which will prevent the use of P2P joining
-		joinButton.isEnabled = QRCodeReader.isAvailable()
+		updateConnectionButtonAvailability()
 		
 		do
 		{
@@ -76,12 +75,50 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate
 	@IBAction func disconnectButtonPressed(_ sender: Any)
 	{
 		// TODO: Disconnects from the current P2P session
+		P2PClientSession.stop()
+		updateConnectionButtonAvailability()
 	}
 	
 	@IBAction func hostingStatusChanged(_ sender: Any)
 	{
 		// TODO: When hosting, generates the appropriate QR code / hosting session
 		qrView.isHidden = !hostingSwitch.isOn
+		
+		guard let projectId = Session.instance.projectId else
+		{
+			print("ERROR: No project selected for sharing")
+			return
+		}
+		
+		if hostingSwitch.isOn
+		{
+			do
+			{
+				let session = try P2PHostSession.start(projectId: projectId)
+				
+				// Sets the new QR Image based on session information
+				if var qrCode = session.connectionInformation?.qrCode
+				{
+					qrCode.size = CGSize(width: 240, height: 240)
+					// qrCode.color = Colour.Text.Black.asColour.ciColor
+					qrImageView.image = qrCode.image
+				}
+				else
+				{
+					print("ERROR: Failed to generate a QR Code for the session")
+				}
+			}
+			catch
+			{
+				print("ERROR: Failed to start P2P hosting session")
+			}
+		}
+		else
+		{
+			P2PHostSession.stop()
+		}
+		
+		updateConnectionButtonAvailability()
 	}
 	
 	
@@ -103,5 +140,18 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate
 	{
 		reader.stopScanning()
 		print("STATUS: QR Capture session cancelled")
+	}
+	
+	
+	// OTHER METHODS	--------
+	
+	private func updateConnectionButtonAvailability()
+	{
+		let isClient = P2PClientSession.isConnected
+		let isHosting = P2PHostSession.instance != nil
+		
+		joinButton.isEnabled = !isHosting && !isClient && QRCodeReader.isAvailable()
+		disconnectButton.isEnabled = isClient
+		hostingSwitch.isEnabled = !isClient
 	}
 }

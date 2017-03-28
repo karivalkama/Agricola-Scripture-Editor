@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>QRCode.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>QRCodeReader.swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,27 +47,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1E7EA9201A882A49D3B2C4709F83BB43</key>
+		<key>15685605D3BC43A326FF01BCA122E14B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4067C9FAE16EBB8ED80A4DD4675AFE82</key>
+		<key>6A3EA4406C6E0C60E916470A42F9851B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4F2991BD5B6D10D5FECC833E1BE5433A</key>
+		<key>8B75DCD80272A5272F2120E405576D35</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CE6BC57068BC04A4C85D2E0F92B8FEF1</key>
+		<key>B381F39C22B3998F4CEE26A38EB574FC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EC3AA3AADF4CA86C7274BD78D7944EEE</key>
+		<key>C581AB4E1267B8E9D1CEED8FB0289ACF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C7055B32761C829C8C2705B2E53EEF92</key>
 		<dict>
 			<key>primary</key>
 			<true/>

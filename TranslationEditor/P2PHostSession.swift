@@ -42,6 +42,18 @@ class P2PHostSession
 	
 	// COMPUTED PROPERTIES	----------
 	
+	// A QR Code instance that represents basic hosting data
+	var connectionInformation: P2PConnectionInformation?
+	{
+		guard let url = listener.url?.absoluteString else
+		{
+			print("ERROR: Failed to parse URL for P2P hosting")
+			return nil
+		}
+		
+		return P2PConnectionInformation(serverURL: url, userName: userName, password: password, projectId: projectId)
+	}
+	
 	
 	// INIT	--------------------------
 	
@@ -60,7 +72,35 @@ class P2PHostSession
 	}
 	
 	
-	// OTHER METHODS	-------------
+	// OTHER METHODS	---------------
 	
+	// Starts a new hosting session
+	// If there is already a session, may just continue that or replace it with a new one (depending on target project)
+	static func start(projectId: String) throws -> P2PHostSession
+	{
+		if let instance = instance
+		{
+			if instance.projectId == projectId
+			{
+				return instance
+			}
+			else
+			{
+				instance.listener.stop()
+			}
+		}
+		
+		instance = try P2PHostSession(projectId: projectId)
+		return instance!
+	}
 	
+	// Stops the current P2P hosting session
+	static func stop()
+	{
+		if let instance = instance
+		{
+			instance.listener.stop()
+		}
+		instance = nil
+	}
 }
