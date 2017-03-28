@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import AVFoundation
+import QRCodeReader
 
 // This view controller handles the main menu features like connection hosting, and book selection
-class MainMenuVC: UIViewController
+class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate
 {
 	// OUTLETS	------------------
 	
@@ -23,6 +25,15 @@ class MainMenuVC: UIViewController
 	@IBOutlet weak var qrView: UIView!
 	
 	
+	// ATTRIBUTES	--------------
+	
+	// The reader used for capturing QR codes, initialized only when used
+	private lazy var readerVC = QRCodeReaderViewController(builder: QRCodeReaderViewControllerBuilder
+	{
+		$0.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObjectTypeQRCode], captureDevicePosition: .back)
+	})
+	
+	
 	// INIT	----------------------
 	
     override func viewDidLoad()
@@ -33,6 +44,9 @@ class MainMenuVC: UIViewController
 		// TODO: Curent hosting status should affect these, naturally
 		disconnectButton.isEnabled = false
 		qrView.isHidden = true
+		
+		// The QR Code scanning feature could be unavailable, which will prevent the use of P2P joining
+		joinButton.isEnabled = QRCodeReader.isAvailable()
 		
 		do
 		{
@@ -54,6 +68,9 @@ class MainMenuVC: UIViewController
 	@IBAction func joinButtonPressed(_ sender: Any)
 	{
 		// TODO: Presents a join P2P VC
+		readerVC.delegate = self
+		readerVC.modalPresentationStyle = .formSheet
+		present(readerVC, animated: true, completion: nil)
 	}
 	
 	@IBAction func disconnectButtonPressed(_ sender: Any)
@@ -65,5 +82,26 @@ class MainMenuVC: UIViewController
 	{
 		// TODO: When hosting, generates the appropriate QR code / hosting session
 		qrView.isHidden = !hostingSwitch.isOn
+	}
+	
+	
+	// IMPLEMENTED METHODS	-----
+	
+	func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult)
+	{
+		// TODO: Parse result and start P2P session
+		reader.stopScanning()
+		print("STATUS: Scanned QR code result: \(result.value) (of type \(result.metadataType))")
+	}
+	
+	func reader(_ reader: QRCodeReaderViewController, didSwitchCamera newCaptureDevice: AVCaptureDeviceInput)
+	{
+		print("STATUS: Switched camera")
+	}
+	
+	func readerDidCancel(_ reader: QRCodeReaderViewController)
+	{
+		reader.stopScanning()
+		print("STATUS: QR Capture session cancelled")
 	}
 }

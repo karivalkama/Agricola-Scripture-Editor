@@ -78,6 +78,9 @@ public final class QRCodeReader: NSObject, AVCaptureMetadataOutputObjectsDelegat
   /// Block is executed when a metadata object is found.
   public var didFindCode: ((QRCodeReaderResult) -> Void)?
 
+  /// Block is executed when a found metadata object string could not be decoded.
+  public var didFailDecoding: ((Void) -> Void)?
+
   // MARK: - Creating the Code Reade
 
   /**
@@ -303,10 +306,10 @@ public final class QRCodeReader: NSObject, AVCaptureMetadataOutputObjectsDelegat
 
    - returns: A boolean value that indicates whether the device supports the given metadata object types.
    */
-  public class func supportsMetadataObjectTypes(_ metadataTypes: [String]? = nil) -> Bool {
+  public class func supportsMetadataObjectTypes(_ metadataTypes: [String]? = nil) throws -> Bool {
     let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
 
-    guard let deviceInput = try? AVCaptureDeviceInput(device: captureDevice) else { return false }
+    let deviceInput = try AVCaptureDeviceInput(device: captureDevice)
 
     let output  = AVCaptureMetadataOutput()
     let session = AVCaptureSession()
@@ -332,20 +335,26 @@ public final class QRCodeReader: NSObject, AVCaptureMetadataOutputObjectsDelegat
 
   // MARK: - AVCaptureMetadataOutputObjects Delegate Methods
 
-
   public func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
     for current in metadataObjects {
       if let _readableCodeObject = current as? AVMetadataMachineReadableCodeObject {
-        if metadataObjectTypes.contains(_readableCodeObject.type) {
-          if stopScanningWhenCodeIsFound {
-            stopScanning()
-          }
+        if _readableCodeObject.stringValue != nil {
+          if metadataObjectTypes.contains(_readableCodeObject.type) {
+            if let sVal = _readableCodeObject.stringValue {
+              if stopScanningWhenCodeIsFound {
+                stopScanning()
+              }
 
-          let scannedResult = QRCodeReaderResult(value: _readableCodeObject.stringValue, metadataType:_readableCodeObject.type)
-          
-          DispatchQueue.main.async(execute: { [weak self] in
-            self?.didFindCode?(scannedResult)
-            })
+              let scannedResult = QRCodeReaderResult(value: sVal, metadataType:_readableCodeObject.type)
+
+              DispatchQueue.main.async(execute: { [weak self] in
+                self?.didFindCode?(scannedResult)
+              })
+            }
+          }
+        }
+        else {
+          didFailDecoding?()
         }
       }
     }

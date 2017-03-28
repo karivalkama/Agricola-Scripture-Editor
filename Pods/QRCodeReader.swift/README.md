@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="http://yannickloriot.com/resources/qrcodereader.swift-logo.png" alt="QRCodeReader.swift">
+  <img src="https://cloud.githubusercontent.com/assets/798235/19688388/c61a6ab8-9ac9-11e6-9757-e087c268f3a6.png" alt="QRCodeReader.swift">
 </p>
 
 <p align="center">
@@ -7,7 +7,7 @@
   <a href="http://cocoadocs.org/docsets/QRCodeReader.swift/"><img alt="Version" src="https://cocoapod-badges.herokuapp.com/v/QRCodeReader.swift/badge.svg"/></a>
 </p>
 
-**QRCodeReader.swift** was a simple code reader (initially only QRCode) for iOS in Swift. It is based on the `AVFoundation` framework from Apple in order to replace ZXing or ZBar for iOS 8.0 and over. It can decodes these [format types](https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVMetadataMachineReadableCodeObject_Class/index.html#//apple_ref/doc/constant_group/Machine_Readable_Object_Types).
+**QRCodeReader.swift** is a simple code reader (initially only QRCode) for iOS in Swift. It is based on the `AVFoundation` framework from Apple in order to replace ZXing or ZBar for iOS 8.0 and over. It can decodes these [format types](https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVMetadataMachineReadableCodeObject_Class/index.html#//apple_ref/doc/constant_group/Machine_Readable_Object_Types).
 
 It provides a default view controller to display the camera view with the scan area overlay and it also provides a button to switch between the front and the back cameras.
 
@@ -63,7 +63,7 @@ lazy var readerVC = QRCodeReaderViewController(builder: QRCodeReaderViewControll
 
 // MARK: - QRCodeReaderViewController Delegate Methods
 
-func reader(_ reader: QRCodeReader, didScanResult result: QRCodeReaderResult) {
+func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
   reader.stopScanning()
 
   dismiss(animated: true, completion: nil)
@@ -77,7 +77,7 @@ func reader(_ reader: QRCodeReaderViewController, didSwitchCamera newCaptureDevi
     }
 }
 
-func readerDidCancel(_ reader: QRCodeReader) {
+func readerDidCancel(_ reader: QRCodeReaderViewController) {
   reader.stopScanning()
 
   dismiss(animated: true, completion: nil)
@@ -105,7 +105,7 @@ class YourCustomView: UIView, QRCodeReaderDisplayable {
 }
 
 lazy var reader = QRCodeReaderViewController(builder: QRCodeReaderViewControllerBuilder {
-  let readerView = QRCodeReaderContainer(displayable: QRCodeReaderView())
+  let readerView = QRCodeReaderContainer(displayable: YourCustomView())
 
   $0.readerView = readerView
 })
@@ -134,7 +134,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'TargetName' do
-    pod 'QRCodeReader.swift', '~> 7.2.0'
+    pod 'QRCodeReader.swift', '~> 7.3.0'
 end
 ```
 
@@ -166,7 +166,7 @@ $ brew install carthage
 To integrate `QRCodeReader` into your Xcode project using Carthage, specify it in your `Cartfile` file:
 
 ```ogdl
-github "yannickl/QRCodeReader.swift" >= 7.2.0
+github "yannickl/QRCodeReader.swift" >= 7.3.0
 ```
 
 #### Swift Package Manager
@@ -180,7 +180,7 @@ let package = Package(
     name: "YOUR_PROJECT_NAME",
     targets: [],
     dependencies: [
-        .Package(url: "https://github.com/yannickl/QRCodeReader.swift.git", versions: "7.2.0" ..< Version.max)
+        .Package(url: "https://github.com/yannickl/QRCodeReader.swift.git", versions: "7.3.0" ..< Version.max)
     ]
 )
 ```
