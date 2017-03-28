@@ -28,7 +28,7 @@ enum Themes
 			{
 			case .normal: return Colour.Primary.asColour
 			case .secondary: return Colour.Primary.dark.asColour
-			case .disabled: return Colour.Primary.light.asColour
+			case .disabled: return Colour.Primary.semiLight.asColour
 			}
 		}
 		

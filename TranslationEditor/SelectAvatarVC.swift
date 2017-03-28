@@ -31,6 +31,16 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
     override func viewDidLoad()
 	{
         super.viewDidLoad()
+    }
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		// If the avatar has already been chosen, skips this phase
+		if let avatarId = Session.instance.avatarId
+		{
+			proceed(avatarId: avatarId, animated: false)
+			return
+		}
 		
 		guard let projectId = Session.instance.projectId else
 		{
@@ -48,17 +58,17 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			let avatarInfo = try AvatarInfoView.instance.avatarQuery(projectId: projectId).resultObjects()
 			
 			avatarData = try avatarInfo.flatMap
-			{
-				info in
-				
-				if let avatar = try Avatar.get(info.avatarId)
 				{
-					return (avatar, info)
-				}
-				else
-				{
-					return nil
-				}
+					info in
+					
+					if let avatar = try Avatar.get(info.avatarId)
+					{
+						return (avatar, info)
+					}
+					else
+					{
+						return nil
+					}
 			}
 		}
 		catch
@@ -68,7 +78,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		
 		avatarCollectionView.delegate = self
 		avatarCollectionView.dataSource = self
-    }
+	}
 	
 	
 	// ACTIONS	-------------------
@@ -173,9 +183,18 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	
 	// OTHER METHODS	--------
 	
-	func proceed(avatarId: String)
+	func proceed(avatarId: String, animated: Bool = true)
 	{
 		Session.instance.avatarId = avatarId
-		// TODO: Mode to the next view
+		
+		// Presents the main menu
+		let storyboard = UIStoryboard(name: "MainMenu", bundle: nil)
+		guard let controller = storyboard.instantiateInitialViewController() else
+		{
+			print("ERROR: Failed to instantiate VC for the main menu")
+			return
+		}
+
+		present(controller, animated: animated, completion: nil)
 	}
 }

@@ -46,7 +46,7 @@ class LoginVC: UIViewController, ConnectionListener
 		if Session.instance.isAuthorized
 		{
 			print("STATUS: Already authorized")
-			proceed()
+			proceed(animated: false)
 		}
 		else
 		{
@@ -147,7 +147,7 @@ class LoginVC: UIViewController, ConnectionListener
 	
 	// OTHER METHODS	-----------
 	
-	private func proceed()
+	private func proceed(animated: Bool = true)
 	{
 		ConnectionManager.instance.removeListener(self)
 		

@@ -29,6 +29,7 @@ enum Colour
 	{
 		case normal = "#FF9800"
 		case dark = "#EF6C00"
+		case semiLight = "#FFB74D"
 		case light = "#FFCC80"
 		
 		var asColour: UIColor {return UIColor(hexString: rawValue)}
