@@ -77,6 +77,10 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 	// Path id -> Paragraph name
 	private var paragraphNames = [String : String]()
 	
+	// Avatar info (based on posts) data is cached before use as well
+	// Avatar Id -> Avatar Info Instance
+	private var avatarInfo = [String: AvatarInfo]()
+	
 	// Instance id -> Custom visibility state
 	private var threadVisibleState = [String : Bool]()
 	
@@ -146,6 +150,30 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 			
 			print("STATUS: Received input of \(posts.count) posts")
 			self.posts = posts.toArrayDictionary { ($0.threadId, $0) }
+			
+			// Updates avatar info data
+			for post in posts
+			{
+				if !self.avatarInfo.containsKey(post.creatorId)
+				{
+					do
+					{
+						if let avatarInfo = try AvatarInfo.get(avatarId: post.creatorId)
+						{
+							self.avatarInfo[post.creatorId] = avatarInfo
+						}
+						else
+						{
+							print("ERROR: No avatar data available for id: \(post.creatorId)")
+						}
+					}
+					catch
+					{
+						print("ERROR: Failed to read avatar data from the database. \(error)")
+					}
+				}
+			}
+			
 			self.update()
 		}))
 		
@@ -229,7 +257,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 							cell = PostCell()
 						}
 						
-						cell.setContent(post: post, pathId: note.pathId, isResolved: thread.isResolved)
+						cell.setContent(post: post, pathId: note.pathId, isResolved: thread.isResolved, creatorInfo: avatarInfo[post.creatorId])
 						
 						return cell
 					}

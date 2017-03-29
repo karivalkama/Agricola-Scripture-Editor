@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -34,12 +34,15 @@
                                     <navigationItem title="Intial Translation" id="jFy-f6-kP1">
                                         <barButtonItem key="backBarButtonItem" title="Back" id="vNs-s3-cee"/>
                                         <leftBarButtonItems>
-                                            <barButtonItem title="Settings" id="ZxH-Fa-FTz">
+                                            <barButtonItem title="Back" id="ghq-0y-9uU">
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <connections>
+                                                    <action selector="backButtonPressed:" destination="BYZ-38-t0r" id="K8m-tM-sSl"/>
+                                                </connections>
                                             </barButtonItem>
                                             <barButtonItem id="UjS-Ln-yWm">
                                                 <view key="customView" contentMode="scaleToFill" id="OJ9-1R-Dq8">
-                                                    <rect key="frame" x="92" y="2" width="128" height="48"/>
+                                                    <rect key="frame" x="66" y="2" width="128" height="48"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="VoD-Wq-8PC">
@@ -79,48 +82,9 @@
                                             </barButtonItem>
                                         </leftBarButtonItems>
                                         <barButtonItem key="rightBarButtonItem" id="Y5E-mq-OgS">
-                                            <view key="customView" contentMode="scaleToFill" id="XCj-1P-hIs">
+                                            <view key="customView" contentMode="scaleToFill" id="XCj-1P-hIs" customClass="TopUserView" customModule="TranslationEditor" customModuleProvider="target">
                                                 <rect key="frame" x="844" y="2" width="160" height="48"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ssw-n8-eHt">
-                                                        <rect key="frame" x="0.0" y="2" width="144" height="42"/>
-                                                        <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="jUU-JK-lCd">
-                                                                <rect key="frame" x="0.0" y="1.5" width="92" height="39.5"/>
-                                                                <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Syalom" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiy-4J-Hkf">
-                                                                        <rect key="frame" x="36" y="0.0" width="56" height="20"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="20" id="WpH-Lk-M8k"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 ★  " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwG-4f-WWn">
-                                                                        <rect key="frame" x="46.5" y="20" width="45.5" height="19.5"/>
-                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                </subviews>
-                                                            </stackView>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="fcu-lS-7iS">
-                                                                <rect key="frame" x="100" y="0.0" width="44" height="42"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="44" id="cxP-QL-eJ8"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                        </subviews>
-                                                    </stackView>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="ssw-n8-eHt" secondAttribute="bottom" constant="4" id="29I-Mi-ehy"/>
-                                                    <constraint firstItem="ssw-n8-eHt" firstAttribute="top" secondItem="XCj-1P-hIs" secondAttribute="top" constant="2" id="e1F-hT-RbY"/>
-                                                    <constraint firstAttribute="trailing" secondItem="ssw-n8-eHt" secondAttribute="trailing" constant="16" id="lvt-Mo-CFl"/>
-                                                    <constraint firstItem="ssw-n8-eHt" firstAttribute="leading" secondItem="XCj-1P-hIs" secondAttribute="leading" id="z32-hV-dcf"/>
-                                                </constraints>
                                             </view>
                                         </barButtonItem>
                                     </navigationItem>
@@ -343,6 +307,8 @@
                                                         <connections>
                                                             <outlet property="postTextView" destination="wQC-qP-041" id="Scp-dX-YvC"/>
                                                             <outlet property="timeLabel" destination="nt7-kO-jlq" id="Agu-FJ-J18"/>
+                                                            <outlet property="userImageView" destination="uaa-ky-Dpd" id="Kpd-rF-aXj"/>
+                                                            <outlet property="userNameLabel" destination="cWh-s1-66p" id="3eA-Y6-orw"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
@@ -491,6 +457,7 @@
                         <outlet property="commitButton" destination="yfA-HO-Uct" id="xVx-nA-SsB"/>
                         <outlet property="resourceSegmentControl" destination="ree-vj-F6F" id="v1v-I9-yL9"/>
                         <outlet property="resourceTableView" destination="2EI-Mh-Uso" id="hhv-Px-gYO"/>
+                        <outlet property="topUserView" destination="XCj-1P-hIs" id="UQf-4I-8u3"/>
                         <outlet property="translationTableView" destination="7zH-vr-M2m" id="37F-w5-az9"/>
                     </connections>
                 </viewController>

@@ -22,6 +22,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	@IBOutlet weak var translationTableView: UITableView!
 	@IBOutlet weak var resourceTableView: UITableView!
 	@IBOutlet weak var resourceSegmentControl: UISegmentedControl!
+	@IBOutlet weak var topUserView: TopUserView!
 	
 	
 	// PROPERTIES	---------
@@ -136,6 +137,26 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			targetSwipeRecognizerRight?.direction = .right
 			translationTableView.addGestureRecognizer(targetSwipeRecognizerRight!)
 			targetSwipeRecognizerRight?.delegate = self
+		}
+		
+		// Sets up top user view
+		if let avatarId = Session.instance.avatarId
+		{
+			do
+			{
+				if let avatarInfo = try AvatarInfo.get(avatarId: avatarId)
+				{
+					topUserView.configure(userName: try avatarInfo.displayName(), userIcon: avatarInfo.image.or(#imageLiteral(resourceName: "userIcon")))
+				}
+				else
+				{
+					print("ERROR: Couldn't find avatar information for id: \(avatarId)")
+				}
+			}
+			catch
+			{
+				print("ERROR: Couldn't read avatar information. \(error)")
+			}
 		}
 	}
 	
@@ -303,6 +324,11 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	
 	
 	// IB ACTIONS	-----------------
+	
+	@IBAction func backButtonPressed(_ sender: Any)
+	{
+		dismiss(animated: true, completion: nil)
+	}
 	
 	@IBAction func commitPressed(_ sender: Any)
 	{

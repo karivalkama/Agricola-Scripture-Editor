@@ -15,6 +15,8 @@ class PostCell: UITableViewCell, ParagraphAssociated
 	
 	@IBOutlet weak var postTextView: UITextView!
 	@IBOutlet weak var timeLabel: UILabel!
+	@IBOutlet weak var userImageView: UIImageView!
+	@IBOutlet weak var userNameLabel: UILabel!
 	
 	
 	// ATTRIBUTES	----------
@@ -23,14 +25,16 @@ class PostCell: UITableViewCell, ParagraphAssociated
 	
 	private(set) var pathId: String?
 	private(set) var post: NotesPost!
+	private(set) var avatar: AvatarInfo?
 	
 	
 	// OTHER METHODS	------
 	
-	func setContent(post: NotesPost, pathId: String, isResolved: Bool)
+	func setContent(post: NotesPost, pathId: String, isResolved: Bool, creatorInfo: AvatarInfo?)
 	{
 		self.post = post
 		self.pathId = pathId
+		self.avatar = creatorInfo
 		postTextView.text = post.content
 		
 		let textColor = isResolved ? Colour.Text.Black.secondary.asColour : Colour.Text.Black.primary.asColour
@@ -53,6 +57,17 @@ class PostCell: UITableViewCell, ParagraphAssociated
 			formatter.dateStyle = .medium
 			
 			timeLabel.text = formatter.string(from: postCreated)
+		}
+		
+		// Sets the user information
+		do
+		{
+			userImageView.image = (creatorInfo?.image).or(#imageLiteral(resourceName: "userIcon"))
+			userNameLabel.text = try creatorInfo?.displayName()
+		}
+		catch
+		{
+			print("ERROR: Failed to get user name. \(error)")
 		}
 	}
 }
