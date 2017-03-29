@@ -11,11 +11,11 @@ import AVFoundation
 import QRCodeReader
 
 // This view controller handles the main menu features like connection hosting, and book selection
-class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQueryListener
+class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQueryListener, UITableViewDataSource, UITableViewDelegate
 {
 	// TYPES	------------------
 	
-	typealias QueryTarget = BookView
+	typealias QueryTarget = ProjectBooksView
 	
 	
 	// OUTLETS	------------------
@@ -32,7 +32,7 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 	
 	// ATTRIBUTES	--------------
 	
-	// private let queryManager: LiveQueryManager<BookView>
+	private var queryManager: LiveQueryManager<ProjectBooksView>?
 	private var books = [Book]()
 	
 	// The reader used for capturing QR codes, initialized only when used
@@ -55,6 +55,11 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 		// The QR Code scanning feature could be unavailable, which will prevent the use of P2P joining
 		updateConnectionButtonAvailability()
 		
+		// Sets up the table
+		bookTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
+		bookTableView.dataSource = self
+		bookTableView.delegate = self
+		
 		do
 		{
 			// Sets up user status
@@ -62,13 +67,28 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 			{
 				userView.configure(userName: try avatarInfo.displayName(), userIcon: avatarInfo.image.or(#imageLiteral(resourceName: "userIcon")))
 			}
+			
+			guard let projectId = Session.instance.projectId else
+			{
+				print("ERROR: No project selected when in main menu")
+				return
+			}
+			
+			guard let project = try Project.get(projectId) else
+			{
+				print("ERROR: Couldn't find correct project data")
+				return
+			}
+			
+			// Loads the available book data
+			queryManager = ProjectBooksView.instance.booksQuery(languageId: project.languageId, projectId: projectId).liveQueryManager
+			queryManager?.addListener(AnyLiveQueryListener(self))
+			queryManager?.start()
 		}
 		catch
 		{
-			print("Failed to load avatar data. \(error)")
+			print("ERROR: Failed to setup data for the main menu. \(error)")
 		}
-		
-		// Loads the available book data
     }
 	
 	
@@ -152,7 +172,7 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 		print("STATUS: QR Capture session cancelled")
 	}
 	
-	func rowsUpdated(rows: [Row<BookView>])
+	func rowsUpdated(rows: [Row<ProjectBooksView>])
 	{
 		do
 		{
@@ -163,6 +183,34 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 		{
 			print("ERROR: Failed to read through book data")
 		}
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+	{
+		return books.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+	{
+		let cell = tableView.dequeueReusableCell(withIdentifier: LabelCell.identifier, for: indexPath) as! LabelCell
+		
+		cell.configure(text: "\(books[indexPath.row].code.uppercased()) - \(books[indexPath.row].identifier)")
+		
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+	{
+		// Moves to the main translation view
+		let storyboard = UIStoryboard(name: "MainMenu", bundle: nil)
+		guard let controller = storyboard.instantiateInitialViewController() else
+		{
+			print("ERROR: Failed to instantiate the translation view")
+			return
+		}
+		
+		// TODO: Sets the book ready for the translation VC
+		present(controller, animated: true, completion: nil)
 	}
 	
 	
@@ -176,5 +224,11 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 		joinButton.isEnabled = !isHosting && !isClient && QRCodeReader.isAvailable()
 		disconnectButton.isEnabled = isClient
 		hostingSwitch.isEnabled = !isClient
+	}
+	
+	private func stopListening()
+	{
+		queryManager?.stop()
+		queryManager?.removeListeners()
 	}
 }
