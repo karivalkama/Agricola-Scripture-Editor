@@ -11,8 +11,13 @@ import AVFoundation
 import QRCodeReader
 
 // This view controller handles the main menu features like connection hosting, and book selection
-class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate
+class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQueryListener
 {
+	// TYPES	------------------
+	
+	typealias QueryTarget = BookView
+	
+	
 	// OUTLETS	------------------
 	
 	@IBOutlet weak var bookTableView: UITableView!
@@ -26,6 +31,9 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate
 	
 	
 	// ATTRIBUTES	--------------
+	
+	// private let queryManager: LiveQueryManager<BookView>
+	private var books = [Book]()
 	
 	// The reader used for capturing QR codes, initialized only when used
 	private lazy var readerVC = QRCodeReaderViewController(builder: QRCodeReaderViewControllerBuilder
@@ -59,6 +67,8 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate
 		{
 			print("Failed to load avatar data. \(error)")
 		}
+		
+		// Loads the available book data
     }
 	
 	
@@ -140,6 +150,19 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate
 	{
 		reader.stopScanning()
 		print("STATUS: QR Capture session cancelled")
+	}
+	
+	func rowsUpdated(rows: [Row<BookView>])
+	{
+		do
+		{
+			books = try rows.map { try $0.object() }
+			bookTableView.reloadData()
+		}
+		catch
+		{
+			print("ERROR: Failed to read through book data")
+		}
 	}
 	
 	

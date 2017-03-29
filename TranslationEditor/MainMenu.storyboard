@@ -172,13 +172,13 @@
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2sN-Rw-Dvv">
                                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" secondItem="2sN-Rw-Dvv" secondAttribute="height" id="njx-gi-Rjz"/>
+                                                                            <constraint firstAttribute="width" secondItem="2sN-Rw-Dvv" secondAttribute="height" priority="750" id="njx-gi-Rjz"/>
                                                                         </constraints>
                                                                     </imageView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show this to users who want to join" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXx-Kr-Hcz">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show this to users who want to join" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXx-Kr-Hcz">
                                                                         <rect key="frame" x="0.0" y="240" width="240" height="15"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="15" id="UMG-fI-iND"/>
+                                                                            <constraint firstAttribute="height" priority="750" constant="15" id="UMG-fI-iND"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                                         <nil key="textColor"/>

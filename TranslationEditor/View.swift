@@ -98,6 +98,21 @@ extension View
 		return Query<Self>(type: type, range: keys)
 	}
 	
+	// Creates a key set / range from the specified values
+	// The values must be presented in the same order as in keyNames array
+	// You may omit from 0 to n last values
+	static func makeKeys(from keyValues: [Any?]) -> [String: Key]
+	{
+		var keys = [String: Key]()
+		
+		for i in 0 ..< keyValues.count
+		{
+			keys[keyNames[i]] = Key(keyValues[i])
+		}
+		
+		return keys
+	}
+	
 	/*
 	// Creates a query that returns each row of this view
 	func createAllQuery(descending: Bool = false) -> CBLQuery

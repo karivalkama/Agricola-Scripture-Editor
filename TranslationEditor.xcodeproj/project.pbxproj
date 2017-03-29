@@ -39,6 +39,7 @@
 		7C2518071E8A6CB60089E1FD /* P2PHostSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518061E8A6CB60089E1FD /* P2PHostSession.swift */; };
 		7C2518091E8A71CC0089E1FD /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C2518081E8A71CC0089E1FD /* JavaScriptCore.framework */; };
 		7C25180B1E8A71F10089E1FD /* CouchbaseLiteListener.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C25180A1E8A71F10089E1FD /* CouchbaseLiteListener.framework */; };
+		7C25180D1E8B8A930089E1FD /* ProjectBooksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C25180C1E8B8A930089E1FD /* ProjectBooksView.swift */; };
 		7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF5A1DE718DA0035B92E /* Storable.swift */; };
 		7C40DF5F1DE71E490035B92E /* DatabaseUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */; };
 		7C40DF631DEC14C80035B92E /* JSONConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF621DEC14C80035B92E /* JSONConvertible.swift */; };
@@ -239,6 +240,7 @@
 		7C2518061E8A6CB60089E1FD /* P2PHostSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P2PHostSession.swift; sourceTree = "<group>"; };
 		7C2518081E8A71CC0089E1FD /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		7C25180A1E8A71F10089E1FD /* CouchbaseLiteListener.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CouchbaseLiteListener.framework; sourceTree = "<group>"; };
+		7C25180C1E8B8A930089E1FD /* ProjectBooksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectBooksView.swift; sourceTree = "<group>"; };
 		7C40DF5A1DE718DA0035B92E /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseUtilities.swift; sourceTree = "<group>"; };
 		7C40DF621DEC14C80035B92E /* JSONConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONConvertible.swift; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 				7C0130CA1E41F4D30053C5C2 /* ProjectView.swift */,
 				7C60705A1E5D705B007718BC /* AvatarInfoView.swift */,
 				7C57EC041E66F824000718E9 /* AccountView.swift */,
+				7C25180C1E8B8A930089E1FD /* ProjectBooksView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1207,6 +1210,7 @@
 				7C57ECAC1E6D6651000718E9 /* ProjectCell.swift in Sources */,
 				7CA1BAB01E31E8DD00611FED /* ThreadCell.swift in Sources */,
 				7CDBD6BC1E2657F900912320 /* ParagraphBindingView.swift in Sources */,
+				7C25180D1E8B8A930089E1FD /* ProjectBooksView.swift in Sources */,
 				7C40DF5F1DE71E490035B92E /* DatabaseUtilities.swift in Sources */,
 				7C40DF671DEC26340035B92E /* JSONParseError.swift in Sources */,
 				7C4A4FBA1DF99490009F890E /* ProgramStatusListener.swift in Sources */,

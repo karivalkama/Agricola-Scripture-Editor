@@ -62,13 +62,7 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		}
 		else
 		{
-			if listening
-			{
-				queryManager.removeListeners()
-				queryManager.stop()
-				listening = false
-			}
-			
+			stopListening()
 			performSegue(withIdentifier: "SelectAvatar", sender: nil)
 		}
 	}
@@ -79,6 +73,7 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	@IBAction func logoutButtonPressed(_ sender: Any)
 	{
 		// Ends the session and returns to login
+		stopListening()
 		Session.instance.logout()
 		dismiss(animated: true, completion: nil)
 	}
@@ -120,6 +115,8 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		// Remembers the selected project and moves to the next view
 		let project = projects[indexPath.row]
 		Session.instance.projectId = project.idString
+		
+		stopListening()
 		performSegue(withIdentifier: "SelectAvatar", sender: nil)
 	}
 	
@@ -133,6 +130,19 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		catch
 		{
 			print("ERROR: Failed to read project data from DB. \(error)")
+		}
+	}
+	
+	
+	// OTHER METHODS	---------
+	
+	private func stopListening()
+	{
+		if listening
+		{
+			queryManager.removeListeners()
+			queryManager.stop()
+			listening = false
 		}
 	}
 }
