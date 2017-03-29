@@ -52,10 +52,10 @@
                                 <rect key="frame" x="84" y="108" width="856" height="564"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="4ZA-dA-3pH" userLabel="Left Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="552" height="520"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="552" height="564"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="V2R-Th-wSe" userLabel="Book Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="552" height="411.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="552" height="455.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work on a Book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjb-YB-WnE">
                                                         <rect key="frame" x="0.0" y="0.0" width="552" height="20.5"/>
@@ -64,16 +64,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nmh-Sf-zta">
-                                                        <rect key="frame" x="0.0" y="36.5" width="552" height="375"/>
+                                                        <rect key="frame" x="0.0" y="36.5" width="552" height="419"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="MU9-b8-QF7"/>
-                                                        </constraints>
                                                     </tableView>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qym-SG-wct" userLabel="Settings Stack View">
-                                                <rect key="frame" x="0.0" y="443.5" width="552" height="76.5"/>
+                                                <rect key="frame" x="0.0" y="487.5" width="552" height="76.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage Project" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EgS-5U-bC2">
                                                         <rect key="frame" x="0.0" y="0.0" width="120" height="20.5"/>
@@ -220,6 +217,10 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="4ZA-dA-3pH" firstAttribute="top" secondItem="B9T-KG-u5k" secondAttribute="top" id="llh-TC-Xw0"/>
+                                    <constraint firstAttribute="bottom" secondItem="4ZA-dA-3pH" secondAttribute="bottom" id="yne-6s-6yq"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>

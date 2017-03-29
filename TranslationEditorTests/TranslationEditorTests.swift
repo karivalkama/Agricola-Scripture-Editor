@@ -311,7 +311,7 @@ class TranslationEditorTests: XCTestCase
 		var paragraphsWithHistory = [[Paragraph]]()
 		
 		print("TEST: Reading paragraph history")
-		for book in try! BookView.instance.createQuery().resultObjects()
+		for book in try! ProjectBooksView.instance.createQuery().resultObjects()
 		{
 			print("Book: \(book.identifier) ------------")
 			
@@ -463,9 +463,10 @@ class TranslationEditorTests: XCTestCase
 		let code = "gal"
 		let languageName = "Finnish"
 		let resourceName = "Notes"
+		let projectId = "20744647-9c04-4982-bb63-02de5d60eca0"
 		
 		let language = try! LanguageView.instance.language(withName: languageName)
-		guard let book = try! BookView.instance.booksQuery(code: code, languageId: language.idString).firstResultObject() else
+		guard let book = try! ProjectBooksView.instance.booksQuery(languageId: language.idString, projectId: projectId, code: code).firstResultObject() else
 		{
 			print("TEST: No book \(code) for language \(languageName)")
 			return
@@ -498,22 +499,31 @@ class TranslationEditorTests: XCTestCase
 	func testMakeBind()
 	{
 		let bookCode = "gal"
+		
+		let sourceProjectId = "20744647-9c04-4982-bb63-02de5d60eca0"
 		let sourceLanguageName = "English"
+		
+		let targetProjectId = "20744647-9c04-4982-bb63-02de5d60eca0"
 		let targetLanguageName = "Finnish"
-		let userId = "testuserid"
+		
+		guard let avatarId = try! avatarIdForProject(withId: targetProjectId) else
+		{
+			print("ERROR: No suitable avatar data for the target project")
+			return
+		}
 		
 		// Reads language data
 		let sourceLanguage = try! LanguageView.instance.language(withName: sourceLanguageName)
 		let targetLanguage = try! LanguageView.instance.language(withName: targetLanguageName)
 		
 		// Finds book data
-		guard let sourceBookId = try! BookView.instance.booksQuery(code: bookCode, languageId: sourceLanguage.idString).firstResultRow()?.id else
+		guard let sourceBookId = try! ProjectBooksView.instance.booksQuery(languageId: sourceLanguage.idString, projectId: sourceProjectId, code: bookCode).firstResultRow()?.id else
 		{
 			assertionFailure("TEST: No book \(bookCode) for language \(sourceLanguageName)")
 			return
 		}
 		
-		guard let targetBookId = try! BookView.instance.booksQuery(code: bookCode, languageId: targetLanguage.idString).firstResultRow()?.id else
+		guard let targetBookId = try! ProjectBooksView.instance.booksQuery(languageId: targetLanguage.idString, projectId: targetProjectId, code: bookCode).firstResultRow()?.id else
 		{
 			assertionFailure("TEST: No book \(bookCode) for language \(targetLanguageName)")
 			return
@@ -526,7 +536,6 @@ class TranslationEditorTests: XCTestCase
 			return
 		}
 		
-		/*
 		// Finds the paragraphs
 		let sourceParagraphs = try! ParagraphView.instance.latestParagraphQuery(bookId: sourceBookId).resultObjects()
 		let targetParagraphs = try! ParagraphView.instance.latestParagraphQuery(bookId: targetBookId).resultObjects()
@@ -539,8 +548,8 @@ class TranslationEditorTests: XCTestCase
 		
 		// Makes the binding based on the matched paragraphs
 		let bindings = match(sourceParagraphs, and: targetParagraphs).map { (source, target) in return (source.idString, target.idString) }
-		*/
 		
+		/*
 		// Finds the paragraphs
 		let sourceParagraphIds = try! ParagraphView.instance.latestParagraphQuery(bookId: sourceBookId).resultRows().map { $0.id! }
 		let targetParagraphIds = try! ParagraphView.instance.latestParagraphQuery(bookId: targetBookId).resultRows().map { $0.id! }
@@ -565,9 +574,9 @@ class TranslationEditorTests: XCTestCase
 		for i in 0 ..< sourceParagraphIds.count
 		{
 			bindings.append((sourceParagraphIds[i], targetParagraphIds[i]))
-		}
+		}*/
 		
-		let binding = ParagraphBinding(sourceBookId: sourceBookId, targetBookId: targetBookId, bindings: bindings, creatorId: userId)
+		let binding = ParagraphBinding(sourceBookId: sourceBookId, targetBookId: targetBookId, bindings: bindings, creatorId: avatarId)
 		try! binding.push()
 		
 		print("TEST: DONE")
@@ -666,9 +675,67 @@ class TranslationEditorTests: XCTestCase
 		print("Project id is: \(project.idString)")
 	}
 	
+	func testCopyBooks()
+	{
+		let languageName = "Finnish"
+		let fromProjectId = "test-project"
+		let toProjectId = "20744647-9c04-4982-bb63-02de5d60eca0"
+		
+		// Finds the main avatar for the target project
+		guard let avatarId = try! avatarIdForProject(withId: toProjectId) else
+		{
+			print("ERROR: No suitable avatar for the new books")
+			return
+		}
+		
+		// Reads the book data
+		let language = try! LanguageView.instance.language(withName: languageName)
+		
+		let books = try! ProjectBooksView.instance.booksQuery(languageId: language.idString, projectId: fromProjectId).resultObjects()
+		
+		var newBooks = [Book]()
+		var newParagraphs = [Paragraph]()
+		
+		// Generates new copies of the book(s) and paragraphs
+		for book in books
+		{
+			let newBook = Book(projectId: toProjectId, code: book.code, identifier: book.identifier, languageId: language.idString)
+			newBooks.add(newBook)
+			
+			let paragraphs = try! ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
+			
+			for paragraph in paragraphs
+			{
+				newParagraphs.append(Paragraph(bookId: newBook.idString, chapterIndex: paragraph.chapterIndex, sectionIndex: paragraph.sectionIndex, index: paragraph.index, content: paragraph.content.copy(), creatorId: avatarId))
+			}
+		}
+		
+		// Saves the new data to the database
+		DATABASE.inTransaction
+		{
+			newBooks.forEach { try! $0.push() }
+			newParagraphs.forEach { try! $0.push() }
+			
+			return true
+		}
+		
+		print("STATUS: Copied \(newBooks.count) books and \(newParagraphs.count) paragraphs")
+	}
+	
 	func testUSXParsing()
 	{
-		guard let url = Bundle.main.url(forResource: "TIT_DURI", withExtension: "usx")
+		let sourceResource = "GAL"
+		let sourceLanguageName = "English"
+		let projectId = "20744647-9c04-4982-bb63-02de5d60eca0"
+		
+		// Finds the main avatar for the target project
+		guard let avatarId = try! avatarIdForProject(withId: projectId) else
+		{
+			print("ERROR: No suitable avatar for the project")
+			return
+		}
+		
+		guard let url = Bundle.main.url(forResource: sourceResource, withExtension: "usx")
 		else
 		{
 			XCTFail("Couldn't find url")
@@ -676,24 +743,24 @@ class TranslationEditorTests: XCTestCase
 		}
 		
 		// Finds the target language
-		let language = try! LanguageView.instance.language(withName: "Duri")
+		let language = try! LanguageView.instance.language(withName: sourceLanguageName)
 		
 		// Book finding algorithm
 		func findBook(projectId: String, languageId: String, code: String, identifier: String) -> Book?
 		{
 			// Performs a database query
-			return try! BookView.instance.booksQuery(code: code, languageId: languageId, identifier: identifier).firstResultObject()
+			return try! ProjectBooksView.instance.booksQuery(languageId: languageId, projectId: projectId, code: code, identifier: identifier).firstResultObject()
 		}
 		
 		// Paragraph matching algorithm (incomplete)
 		func paragraphMatcher(existingParagraphs: [Paragraph], newParagraphs: [Paragraph]) -> [(Paragraph, Paragraph)]?
 		{
-			fatalError("Paragraph matcher not implemented")
+			return match(existingParagraphs, and: newParagraphs)
 		}
 		
 		// Creates the parser first
 		let parser = XMLParser(contentsOf: url)!
-		let usxParserDelegate = USXParser(projectId: "test-project", userId: "testuserid", languageId: language.idString, findReplacedBook: findBook, matchParagraphs: paragraphMatcher)
+		let usxParserDelegate = USXParser(projectId: projectId, userId: avatarId, languageId: language.idString, findReplacedBook: findBook, matchParagraphs: paragraphMatcher)
 		parser.delegate = usxParserDelegate
 		
 		// Parses the xml
@@ -719,7 +786,25 @@ class TranslationEditorTests: XCTestCase
 			}
 		}
 	}
-	/*
+	
+	func avatarIdForProject(withId projectId: String) throws -> String?
+	{
+		// Finds the main avatar for the target project
+		guard let project = try Project.get(projectId) else
+		{
+			print("ERROR: Target project doesn't exist")
+			return nil
+		}
+		
+		guard let avatarInfo = try AvatarInfoView.instance.avatarQuery(projectId: projectId, accountId: project.ownerId).firstResultObject() else
+		{
+			print("ERROR: Couldn't find the project owner's avatar data")
+			return nil
+		}
+		
+		return avatarInfo.avatarId
+	}
+	
 	// TODO: WET WET
 	func match(_ sources: [Paragraph], and targets: [Paragraph]) -> [(Paragraph, Paragraph)]
 	{
@@ -807,7 +892,7 @@ class TranslationEditorTests: XCTestCase
 			else
 			{
 				// TODO: Should probably let the user match paragraphs when the case is ambiguous (different number of non-verse paragraphs)
-				// Now simply binds the first last to many
+				// Now simply binds the last to many
 				let commonIndices = min(noRangeSources.count, noRangeTargets.count)
 				for i in 0 ..< commonIndices
 				{
@@ -848,5 +933,5 @@ class TranslationEditorTests: XCTestCase
             // Put the code you want to measure the time of here.
         }
     }*/
-*/
+
 }

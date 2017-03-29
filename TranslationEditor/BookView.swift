@@ -9,6 +9,7 @@
 import Foundation
 
 // A book view can be used for querying book data from the database
+@available(*, deprecated)
 final class BookView: View
 {
 	// TYPES	------------

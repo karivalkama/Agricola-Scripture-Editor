@@ -82,7 +82,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		
 		// Sets initial resources (TEST)
 		let sourceLanguage = try! LanguageView.instance.language(withName: "English")
-		if let sourceBook = try! BookView.instance.booksQuery(code: book.code, languageId: sourceLanguage.idString).firstResultObject(), let binding = try! ParagraphBindingView.instance.latestBinding(from: sourceBook.idString, to: book.idString)
+		if let sourceBook = try! ProjectBooksView.instance.booksQuery(languageId: sourceLanguage.idString, projectId: book.projectId, code: book.code).firstResultObject(), let binding = try! ParagraphBindingView.instance.latestBinding(from: sourceBook.idString, to: book.idString)
 		{
 			// TODO: Use a better query (more languages, etc.) (catch errors too)
 			let notesResources = try! ResourceCollectionView.instance.collectionQuery(bookId: book.idString, languageId: book.languageId, category: .notes).resultObjects()

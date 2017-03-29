@@ -202,7 +202,7 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 	{
 		// Moves to the main translation view
-		let storyboard = UIStoryboard(name: "MainMenu", bundle: nil)
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		guard let controller = storyboard.instantiateInitialViewController() as? TranslationVC else
 		{
 			print("ERROR: Failed to instantiate the translation view")
