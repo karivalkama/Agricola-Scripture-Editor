@@ -26,14 +26,14 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	
 	// PROPERTIES	---------
 	
-	// Testing data
-	private var book: Book?
-	private let userId = "testuserid"
+	// Configurable data
+	private var configured = false
+	private var book: Book!
 	
 	// Target translation managing
 	private let targetHistoryManager = TranslationHistoryManager()
 	
-	private var targetTranslationDS: TranslationTableViewDS?
+	private var targetTranslationDS: TranslationTableViewDS!
 	private var targetSwipeRecognizerLeft: UISwipeGestureRecognizer?
 	private var targetSwipeRecognizerRight: UISwipeGestureRecognizer?
 	
@@ -60,6 +60,11 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	{
 		super.viewDidLoad()
 		
+		guard configured else
+		{
+			fatalError("Translation VC must be configured before use")
+		}
+		
 		commitButton.isEnabled = false
 		
 		// (Epic hack which) Makes table view cells have automatic height
@@ -69,31 +74,23 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		resourceTableView.rowHeight = UITableViewAutomaticDimension
 		resourceTableView.estimatedRowHeight = 320
 		
-		// TODO: Use certain ranges, which should be changeable
-		// Reads necessary data (TEST)
-		let language = try! LanguageView.instance.language(withName: "Finnish")
-		if let book = try! BookView.instance.booksQuery(code: "gal", languageId: language.idString).firstResultObject()
-		{
-			self.book = book
-			
-			targetTranslationDS = TranslationTableViewDS(tableView: translationTableView, cellReuseId: "TranslationCell", bookId: book.idString)
-			targetTranslationDS?.cellManager = self
-			translationTableView.dataSource = targetTranslationDS
-		}
+		targetTranslationDS = TranslationTableViewDS(tableView: translationTableView, cellReuseId: "TranslationCell", bookId: book.idString)
+		targetTranslationDS.cellManager = self
+		translationTableView.dataSource = targetTranslationDS
 		
 		resourceManager = ResourceManager(resourceTableView: resourceTableView, addNotesDelegate: self, threadStatusListener: self)
 		
 		// Sets initial resources (TEST)
 		let sourceLanguage = try! LanguageView.instance.language(withName: "English")
-		if let sourceBook = try! BookView.instance.booksQuery(code: "gal", languageId: sourceLanguage.idString).firstResultObject(), let targetBook = book, let binding = try! ParagraphBindingView.instance.latestBinding(from: sourceBook.idString, to: targetBook.idString)
+		if let sourceBook = try! BookView.instance.booksQuery(code: book.code, languageId: sourceLanguage.idString).firstResultObject(), let binding = try! ParagraphBindingView.instance.latestBinding(from: sourceBook.idString, to: book.idString)
 		{
 			// TODO: Use a better query (more languages, etc.) (catch errors too)
-			let notesResources = try! ResourceCollectionView.instance.collectionQuery(bookId: targetBook.idString, languageId: language.idString, category: .notes).resultObjects()
+			let notesResources = try! ResourceCollectionView.instance.collectionQuery(bookId: book.idString, languageId: book.languageId, category: .notes).resultObjects()
 			resourceManager.setResources(sourceBooks: [(sourceBook, binding)], notes: notesResources)
 		}
 		
 		// Makes resource manager listen to paragraph content changes
-		targetTranslationDS?.contentListener = resourceManager
+		targetTranslationDS.contentListener = resourceManager
 		
 		resourceSegmentControl.removeAllSegments()
 		let resourceTitles = resourceManager.resourceTitles
@@ -117,7 +114,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			}
 			else
 			{
-				return self.resourceManager.targetPathsForSourcePath(oppositePathId).flatMap { self.targetTranslationDS?.indexForPath($0) }
+				return self.resourceManager.targetPathsForSourcePath(oppositePathId).flatMap { self.targetTranslationDS.indexForPath($0) }
 			}
 		}
 		
@@ -127,7 +124,6 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		// Adds swipe listening
 		if targetSwipeRecognizerLeft == nil
 		{
-			
 			targetSwipeRecognizerLeft = UISwipeGestureRecognizer(target: self, action: #selector(targetTableSwiped(recognizer:)))
 			targetSwipeRecognizerLeft?.direction = .left
 			translationTableView.addGestureRecognizer(targetSwipeRecognizerLeft!)
@@ -180,24 +176,36 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	
 	func insertThread(noteId: String, pathId: String, associatedParagraphData: [(String, Paragraph)])
 	{
+		guard let avatarId = Session.instance.avatarId else
+		{
+			print("ERROR: Cannot insert a thread without avatar selected")
+			return
+		}
+		
 		displayAlert(withIdentifier: "PostThread")
 		{
 			// Finds the targeted paragraph
-			guard let targetParagraph = self.targetTranslationDS?.paragraphForPath(pathId) else
+			guard let targetParagraph = self.targetTranslationDS.paragraphForPath(pathId) else
 			{
 				print("ERROR: No target paragraph for post thread")
 				return
 			}
 			
-			($0 as! PostThreadVC).configure(userId: self.userId, noteId: noteId, targetParagraph: targetParagraph, contextParagraphData: associatedParagraphData)
+			($0 as! PostThreadVC).configure(userId: avatarId, noteId: noteId, targetParagraph: targetParagraph, contextParagraphData: associatedParagraphData)
 		}
 	}
 	
 	func insertPost(thread: NotesThread, originalComment: NotesPost, associatedParagraphData: [(String, Paragraph)])
 	{
+		guard let avatarId = Session.instance.avatarId else
+		{
+			print("ERROR: Cannot insert a post without avatar selected")
+			return
+		}
+		
 		displayAlert(withIdentifier: "AddPost")
 		{
-			($0 as! PostCommentVC).configure(thread: thread, originalComment: originalComment, userId: self.userId, associatedParagraphData: associatedParagraphData)
+			($0 as! PostCommentVC).configure(thread: thread, originalComment: originalComment, userId: avatarId, associatedParagraphData: associatedParagraphData)
 		}
 	}
 	
@@ -254,6 +262,12 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	
 	
 	// OTHER IMPLEMENTED	---------
+	
+	func configure(book: Book)
+	{
+		self.book = book
+		configured = true
+	}
 	
 	func onThreadStatusUpdated(forResouceId resourceId: String, status: [String : Bool])
 	{
@@ -375,6 +389,12 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			return
 		}
 		
+		guard let avatarId = Session.instance.avatarId else
+		{
+			print("ERROR: Cannot commit without avatar selected")
+			return
+		}
+		
 		print("STATUS: STARTING COMMIT")
 		commitButton.isEnabled = false
 		
@@ -387,7 +407,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 				{
 					if let paragraph = self.targetTranslationDS?.paragraphForPath(pathId)
 					{
-						_ = try paragraph.commit(userId: self.userId, text: text)
+						_ = try paragraph.commit(userId: avatarId, text: text)
 					}
 				}
 				
@@ -409,7 +429,12 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	
 	private func activate()
 	{
-		if !active
+		guard !active else
+		{
+			return
+		}
+		
+		do
 		{
 			print("STATUS: ACTIVATING")
 			active = true
@@ -418,22 +443,24 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			// TODO: rework after user data and book data are in place
 			if inputData.isEmpty
 			{
-				let paragraphEdits = try! getParagraphEdits()
+				guard let avatarId = Session.instance.avatarId else
+				{
+					print("ERROR: Cannot save edits without avatar selected")
+					return
+				}
+				
+				let paragraphEdits = try ParagraphEditView.instance.editsForRangeQuery(bookId: book.idString, userId: avatarId).resultObjects()
 				
 				print("STATUS: FOUND \(paragraphEdits.count) edits")
 				
 				for edit in paragraphEdits
 				{
-					print("STATUS: Edit status: \(edit.idString), \(edit.toPropertySet)")
-					
 					for paragraph in edit.edits.values
 					{
-						print("Updating input for paragraph \(paragraph.pathId)")
 						inputData[paragraph.pathId] = paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
 					}
 				}
 				
-				print("There are now \(inputData.count) inputs")
 				commitButton.isEnabled = !inputData.isEmpty
 			}
 			
@@ -441,80 +468,80 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			targetTranslationDS?.activate()
 			resourceManager.activate()
 		}
+		catch
+		{
+			print("ERROR: Failed to read edit data. \(error)")
+		}
 	}
 	
 	private func deactivate()
 	{
-		if active
+		guard active else
 		{
-			print("STATUS: DEACTIVATING")
-			active = false
-			
-			// Ends the database listening process, if present
-			targetTranslationDS?.pause()
-			resourceManager.pause()
-			
-			// TODO: Test. modify later
-			guard let book = book else
+			return
+		}
+		
+		print("STATUS: DEACTIVATING")
+		active = false
+		
+		// Ends the database listening process, if present
+		targetTranslationDS?.pause()
+		resourceManager.pause()
+		
+		guard let avatarId = Session.instance.avatarId else
+		{
+			print("ERROR: Cannot save edits without avatar selected")
+			return
+		}
+		
+		// Parses the input data into paragraphs, grouped by chapter index
+		var chapterData = [Int : [Paragraph]]()
+		for (pathId, inputText) in self.inputData
+		{
+			if let paragraphCopy = targetTranslationDS?.paragraphForPath(pathId)?.copy()
 			{
-				return
-			}
-			
-			// Parses the input data into paragraphs, grouped by chapter index
-			var chapterData = [Int : [Paragraph]]()
-			for (pathId, inputText) in self.inputData
-			{
-				if let paragraphCopy = targetTranslationDS?.paragraphForPath(pathId)?.copy()
-				{
-					paragraphCopy.replaceContents(with: inputText)
-					
-					let chapterIndex = paragraphCopy.chapterIndex
-					chapterData[chapterIndex] = chapterData[chapterIndex].or([]) + paragraphCopy
-				}
-			}
-			
-			// Saves paragraph edit status to the database
-			DATABASE.inTransaction
-			{
-				do
-				{
-					// Finds existing edit data
-					let previousEdits = try ParagraphEditView.instance.editsForRangeQuery(bookId: book.idString).resultObjects()
-					
-					// Inserts new data to the database
-					var insertedIds = [String]()
-					for (chapterIndex, paragraphs) in chapterData
-					{
-						var edits = [String : Paragraph]()
-						for paragraph in paragraphs
-						{
-							edits[paragraph.idString] = paragraph
-						}
-						
-						let edit = ParagraphEdit(bookId: book.idString, chapterIndex: chapterIndex, userId: self.userId, edits: edits)
-						try edit.push(overwrite: true)
-						insertedIds.append(edit.idString)
-						
-						print("STATUS: SAVING EDIT \(edit.idString)")
-					}
-					
-					// Removes the old data that wasn't overwritten
-					try previousEdits.filter { !insertedIds.contains($0.idString) }.forEach { try $0.delete() }
-					
-					return true
-				}
-				catch
-				{
-					print("DB: Failed to save edit status \(error)")
-					return false
-				}
+				paragraphCopy.replaceContents(with: inputText)
+				
+				let chapterIndex = paragraphCopy.chapterIndex
+				chapterData[chapterIndex] = chapterData[chapterIndex].or([]) + paragraphCopy
 			}
 		}
-	}
-	
-	private func getParagraphEdits() throws -> [ParagraphEdit]
-	{
-		guard let book = book else { return [] }
-		return try ParagraphEditView.instance.editsForRangeQuery(bookId: book.idString, userId: userId).resultObjects()
+		
+		// Saves paragraph edit status to the database
+		DATABASE.inTransaction
+		{
+			do
+			{
+				// Finds existing edit data
+				let previousEdits = try ParagraphEditView.instance.editsForRangeQuery(bookId: self.book.idString).resultObjects()
+				
+				// Inserts new data to the database
+				var insertedIds = [String]()
+				for (chapterIndex, paragraphs) in chapterData
+				{
+					var edits = [String : Paragraph]()
+					for paragraph in paragraphs
+					{
+						edits[paragraph.idString] = paragraph
+					}
+					
+					let edit = ParagraphEdit(bookId: self.book.idString, chapterIndex: chapterIndex, userId: avatarId, edits: edits)
+					try edit.push(overwrite: true)
+					insertedIds.append(edit.idString)
+					
+					print("STATUS: SAVING EDIT \(edit.idString)")
+				}
+				
+				// Removes the old data that wasn't overwritten
+				try previousEdits.filter { !insertedIds.contains($0.idString) }.forEach { try $0.delete() }
+				
+				return true
+			}
+			catch
+			{
+				print("DB: Failed to save edit status \(error)")
+				return false
+			}
+		}
 	}
 }

@@ -203,13 +203,14 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 	{
 		// Moves to the main translation view
 		let storyboard = UIStoryboard(name: "MainMenu", bundle: nil)
-		guard let controller = storyboard.instantiateInitialViewController() else
+		guard let controller = storyboard.instantiateInitialViewController() as? TranslationVC else
 		{
 			print("ERROR: Failed to instantiate the translation view")
 			return
 		}
 		
-		// TODO: Sets the book ready for the translation VC
+		// Sets the book ready for the translation VC
+		controller.configure(book: books[indexPath.row])
 		present(controller, animated: true, completion: nil)
 	}
 	
