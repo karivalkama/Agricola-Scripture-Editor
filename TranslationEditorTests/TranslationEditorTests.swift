@@ -427,6 +427,7 @@ class TranslationEditorTests: XCTestCase
 		}
 	}
 	
+	/*
 	func testMakeFinnishCopy()
 	{
 		let code = "gal"
@@ -456,7 +457,7 @@ class TranslationEditorTests: XCTestCase
 		_ = try! sourceBook.makeEmptyCopy(projectId: "test-project", identifier: "Test Version", languageId: targetLanguage.idString, userId: userId)
 		
 		print("Done")
-	}
+	}*/
 	
 	func testMakeNotes()
 	{
@@ -582,6 +583,7 @@ class TranslationEditorTests: XCTestCase
 		print("TEST: DONE")
 	}
 	
+	/*
 	func testReadBind()
 	{
 		let bookCode = "gal"
@@ -615,7 +617,7 @@ class TranslationEditorTests: XCTestCase
 		{
 			print("TEST: No binding exists")
 		}
-	}
+	}*/
 	
 	// 0456c66d-fd56-43f1-986c-8b8eb538b093
 	func testReadBinds()
@@ -646,8 +648,12 @@ class TranslationEditorTests: XCTestCase
 		let account = AgricolaAccount(name: userName, languageIds: languageIds, isShared: false)
 		try! account.push()
 		
+		// Creates a new, shared account for the project
+		let sharedAccount = AgricolaAccount(name: "Test-Shared", languageIds: languageIds, isShared: true)
+		try! sharedAccount.push()
+		
 		// Next creates a new project for that account
-		let project = Project(name: projectName, languageId: try! LanguageView.instance.language(withName: projectLanguageName).idString, ownerId: account.idString, contributorIds: [account.idString])
+		let project = Project(name: projectName, languageId: try! LanguageView.instance.language(withName: projectLanguageName).idString, ownerId: account.idString, contributorIds: [account.idString], sharedAccountId: sharedAccount.idString)
 		try! project.push()
 		
 		// Creates a new avatar for the primary account
@@ -657,11 +663,7 @@ class TranslationEditorTests: XCTestCase
 		let avatarInfo = AvatarInfo(avatarId: avatar.idString, accountId: account.idString)
 		try! avatarInfo.push()
 		
-		// Creates a new, shared account for the project
-		let sharedAccount = AgricolaAccount(name: "Test-Shared", languageIds: languageIds, isShared: true)
-		sharedAccount.projectId = project.idString
-		try! sharedAccount.push()
-		
+		// And for the shared account
 		let sharedAvatar = Avatar(name: "Shared-Avatar", projectId: project.idString)
 		try! sharedAvatar.push()
 		
@@ -674,6 +676,34 @@ class TranslationEditorTests: XCTestCase
 		
 		print("Project id is: \(project.idString)")
 	}
+	
+	/*
+	func testAccountRefactoring()
+	{
+		let projectId = "20744647-9c04-4982-bb63-02de5d60eca0"
+		
+		// Reads project data first
+		guard let project = try! Project.get(projectId) else
+		{
+			print("ERROR: No such project")
+			return
+		}
+		
+		// Finds the shared account for the project
+		let accounts = project.contributorIds.flatMap { try! AgricolaAccount.get($0) }
+		for account in accounts
+		{
+			if account.isShared
+			{
+				print("STATUS: Found shared account '\(account.displayName)' with id: \(account.idString)")
+				
+				// Saves the changes
+				let copyProject = Project(name: project.name, languageId: project.languageId, ownerId: project.ownerId, contributorIds: project.contributorIds, sharedAccountId: account.idString, uid: project.uid, created: project.created)
+				try! copyProject.push()
+				break
+			}
+		}
+	}*/
 	
 	func testCopyBooks()
 	{

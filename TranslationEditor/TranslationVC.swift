@@ -61,6 +61,8 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	{
 		super.viewDidLoad()
 		
+		print("STATUS: Translation VC loaded")
+		
 		guard configured else
 		{
 			fatalError("Translation VC must be configured before use")

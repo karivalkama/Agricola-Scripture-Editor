@@ -48,6 +48,8 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 	{
         super.viewDidLoad()
 
+		print("STATUS: Main menu loaded")
+		
 		// Only displays qr view while hosting. Only displays connection status while joined
 		qrView.isHidden = P2PHostSession.instance == nil
 		onlineStatusView.isHidden = !P2PClientSession.isConnected
@@ -150,6 +152,14 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 		}
 		
 		updateConnectionButtonAvailability()
+	}
+	
+	@IBAction func backButtonPressed(_ sender: Any)
+	{
+		// Stops the listening process and goes back to avatar selection
+		queryManager?.stop()
+		queryManager?.removeListeners()
+		dismiss(animated: true, completion: nil)
 	}
 	
 	

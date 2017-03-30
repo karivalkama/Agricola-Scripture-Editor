@@ -33,6 +33,9 @@
                                     <navigationItem title="Main Menu" id="Flh-yN-wcl">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="hnH-lu-0Ir">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="backButtonPressed:" destination="itN-2l-wFE" id="iXF-S4-fpq"/>
+                                            </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" id="VlJ-kz-4l0">
                                             <view key="customView" contentMode="scaleToFill" id="fhK-Xg-VZG" customClass="TopUserView" customModule="TranslationEditor" customModuleProvider="target">
