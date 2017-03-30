@@ -821,22 +821,22 @@
 			isa = PBXGroup;
 			children = (
 				7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */,
+				7C6C3C191E373959001D56F4 /* PostThreadVC.swift */,
+				7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */,
 				7CDBD6C71E28B69B00912320 /* TranslationTableViewDS.swift */,
+				7CA1BAA71E30C15B00611FED /* NotesTableDS.swift */,
+				7C60704A1E52F770007718BC /* VerseTableDS.swift */,
+				7CDBD6D01E28E53500912320 /* ScrollSyncManager.swift */,
+				7CA1BABF1E323A7700611FED /* ResourceManager.swift */,
+				7C55A1F61E76C0580038C122 /* TranslationHistoryManager.swift */,
 				7C20D7EB1D8C1B7200E84BA5 /* CellContentListener.swift */,
 				7C4A4FA11DF829C5009F890E /* CellInputListener.swift */,
 				7CDBD6CC1E28C1E700912320 /* TranslationCellManager.swift */,
-				7CDBD6D01E28E53500912320 /* ScrollSyncManager.swift */,
-				7CA1BAA71E30C15B00611FED /* NotesTableDS.swift */,
-				7CA1BABF1E323A7700611FED /* ResourceManager.swift */,
-				7CA1BAC31E323E6C00611FED /* LiveResource.swift */,
 				7CA1BAC71E35E72E00611FED /* TranslationParagraphListener.swift */,
 				7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */,
-				7C6C3C191E373959001D56F4 /* PostThreadVC.swift */,
-				7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */,
 				7C6070461E51B113007718BC /* TableCellSelectionListener.swift */,
-				7C60704A1E52F770007718BC /* VerseTableDS.swift */,
 				7C6070521E570C0B007718BC /* OpenThreadStatusListener.swift */,
-				7C55A1F61E76C0580038C122 /* TranslationHistoryManager.swift */,
+				7CA1BAC31E323E6C00611FED /* LiveResource.swift */,
 			);
 			name = TranslationView;
 			sourceTree = "<group>";

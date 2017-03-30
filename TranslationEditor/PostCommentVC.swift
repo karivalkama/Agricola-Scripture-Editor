@@ -18,13 +18,13 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 	@IBOutlet weak var originalCommentLabel: UILabel!
 	@IBOutlet weak var verseTable: UITableView!
 	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var originalCommentTitleLabel: UILabel!
 	
 	
 	// ATTRIBUTES	--------
 	
 	private var configured = false
-	private var originalComment: NotesPost!
-	private var userId: String!
+	private var selectedComment: NotesPost!
 	private var targetThread: NotesThread!
 	// Title (eg. English:) + paragraph
 	private var associatedParagraphData: [(String, Paragraph)]!
@@ -43,8 +43,8 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 		commentTextView.delegate = self
 		
 		titleLabel.text = targetThread.name
-		originalCommentTextView.text = originalComment.content
 		
+		// Sets up the verse table
 		verseTable.register(UINib(nibName: "VerseDataCell", bundle: nil), forCellReuseIdentifier: VerseCell.identifier)
 		verseTable.estimatedRowHeight = 240
 		verseTable.rowHeight = UITableViewAutomaticDimension
@@ -65,17 +65,71 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 		{
 			print("ERROR: Failed to read paragraph data from the database. \(error)")
 		}
+		
+		// The contents are slightly different when editing an existing comment
+		let isEditing = selectedComment.creatorId == Session.instance.avatarId
+		
+		do
+		{
+			var originalComment: NotesPost?
+			
+			if isEditing
+			{
+				if let originalCommentId = selectedComment.originalCommentId
+				{
+					originalComment = try NotesPost.get(originalCommentId)
+				}
+				
+				commentTextView.text = selectedComment.content
+			}
+			else
+			{
+				originalComment = selectedComment
+			}
+			
+			var originalCommentWriter = "Someone"
+			
+			if let originalCommentCreatorId = originalComment?.creatorId, let originalCreatorInfo = try AvatarInfo.get(avatarId: originalCommentCreatorId)
+			{
+				originalCommentWriter = try originalCreatorInfo.displayName()
+			}
+			
+			originalCommentTitleLabel.text = "\(originalCommentWriter) wrote:"
+			originalCommentTextView.text = originalComment?.content
+		}
+		catch
+		{
+			print("ERROR: Failed to read database data. \(error)")
+		}
     }
 	
 	
-	// IB ACTIONS	-------
+	// IB ACTIONS	---------
 
 	@IBAction func postButtonPressed(_ sender: Any)
 	{
 		// Creates a new post instance and saves it to the database
 		do
 		{
-			try NotesPost(threadId: targetThread.idString, creatorId: userId, content: commentTextView.text).push()
+			// Again, the functionality is slightly different when editing
+			let avatarId = Session.instance.avatarId!
+			let isEditing = avatarId == selectedComment.creatorId
+			
+			let newText: String = commentTextView.text
+			
+			if isEditing
+			{
+				// Modifies the existing comment
+				if newText != selectedComment.content
+				{
+					selectedComment.content = newText
+					try selectedComment.push()
+				}
+			}
+			else
+			{
+				try NotesPost(threadId: targetThread.idString, creatorId: avatarId, content: newText, originalCommentId: selectedComment.idString).push()
+			}
 			
 			// If the thread was already marked as resolved, it is reopened
 			if targetThread.isResolved
@@ -105,14 +159,13 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 	}
 	
 	
-	// OTHER METHODS	---
+	// OTHER METHODS	---------
 	
-	func configure(thread: NotesThread, originalComment: NotesPost, userId: String, associatedParagraphData: [(String, Paragraph)])
+	func configure(thread: NotesThread, selectedComment: NotesPost, associatedParagraphData: [(String, Paragraph)])
 	{
 		self.configured = true
-		self.userId = userId
 		self.targetThread = thread
-		self.originalComment = originalComment
+		self.selectedComment = selectedComment
 		self.associatedParagraphData = associatedParagraphData
 	}
 }

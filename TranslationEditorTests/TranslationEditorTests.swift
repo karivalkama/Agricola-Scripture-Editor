@@ -361,7 +361,7 @@ class TranslationEditorTests: XCTestCase
 		}
 		
 		// Next finds all books
-		let books = try! BookView.instance.createQuery().resultObjects()
+		let books = try! ProjectBooksView.instance.createQuery().resultObjects()
 		
 		for book in books
 		{
@@ -388,7 +388,7 @@ class TranslationEditorTests: XCTestCase
 	
 	func testVerseConsistency()
 	{
-		let books = try! BookView.instance.createQuery().resultObjects()
+		let books = try! ProjectBooksView.instance.createQuery().resultObjects()
 		
 		for book in books
 		{

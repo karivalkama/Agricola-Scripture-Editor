@@ -16,5 +16,5 @@ protocol AddNotesDelegate: class
 	func insertThread(noteId: String, pathId: String, associatedParagraphData: [(String, Paragraph)])
 	
 	// Should create a new post for the provided thread
-	func insertPost(thread: NotesThread, originalComment: NotesPost, associatedParagraphData: [(String, Paragraph)])
+	func insertPost(thread: NotesThread, selectedComment: NotesPost, associatedParagraphData: [(String, Paragraph)])
 }

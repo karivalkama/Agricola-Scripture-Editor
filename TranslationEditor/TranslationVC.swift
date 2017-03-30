@@ -216,17 +216,11 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		}
 	}
 	
-	func insertPost(thread: NotesThread, originalComment: NotesPost, associatedParagraphData: [(String, Paragraph)])
+	func insertPost(thread: NotesThread, selectedComment originalComment: NotesPost, associatedParagraphData: [(String, Paragraph)])
 	{
-		guard let avatarId = Session.instance.avatarId else
-		{
-			print("ERROR: Cannot insert a post without avatar selected")
-			return
-		}
-		
 		displayAlert(withIdentifier: "AddPost")
 		{
-			($0 as! PostCommentVC).configure(thread: thread, originalComment: originalComment, userId: avatarId, associatedParagraphData: associatedParagraphData)
+			($0 as! PostCommentVC).configure(thread: thread, selectedComment: originalComment, associatedParagraphData: associatedParagraphData)
 		}
 	}
 	

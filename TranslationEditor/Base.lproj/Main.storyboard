@@ -909,6 +909,7 @@
                         <outlet property="commentTextView" destination="YNg-Zm-nWP" id="NaU-MK-TfC"/>
                         <outlet property="originalCommentLabel" destination="D8U-Gs-CEk" id="xvw-jh-EF0"/>
                         <outlet property="originalCommentTextView" destination="sMQ-kq-8ka" id="7FY-jz-Wj3"/>
+                        <outlet property="originalCommentTitleLabel" destination="D8U-Gs-CEk" id="6nR-Vi-gUy"/>
                         <outlet property="postButton" destination="UQD-g1-7N1" id="I2Z-f5-yNb"/>
                         <outlet property="titleLabel" destination="fwx-Qq-EA7" id="qRI-qw-mV8"/>
                         <outlet property="verseTable" destination="Kh9-cV-fW1" id="cSb-ut-xmI"/>
@@ -916,7 +917,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YC9-qK-NkO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1439.6484375" y="125"/>
+            <point key="canvasLocation" x="1365" y="125"/>
         </scene>
     </scenes>
     <resources>

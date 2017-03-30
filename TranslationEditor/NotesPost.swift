@@ -21,6 +21,7 @@ final class NotesPost: Storable
 	let threadId: String
 	let creatorId: String
 	let created: TimeInterval
+	let originalCommentId: String?
 	
 	var content: String
 	
@@ -35,7 +36,7 @@ final class NotesPost: Storable
 	var idProperties: [Any] { return [threadId, created] }
 	var properties: [String : PropertyValue]
 	{
-		return ["creator": creatorId.value, "content": content.value]
+		return ["creator": creatorId.value, "content": content.value, "original_comment": originalCommentId.value]
 	}
 	
 	var collectionId: String { return ParagraphNotes.collectionId(fromId: threadId) }
@@ -46,17 +47,18 @@ final class NotesPost: Storable
 	
 	// INIT	--------------------
 	
-	init(threadId: String, creatorId: String, content: String, created: TimeInterval = Date().timeIntervalSince1970)
+	init(threadId: String, creatorId: String, content: String, created: TimeInterval = Date().timeIntervalSince1970, originalCommentId: String? = nil)
 	{
 		self.threadId = threadId
 		self.creatorId = creatorId
 		self.content = content
 		self.created = created
+		self.originalCommentId = originalCommentId
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) -> NotesPost
 	{
-		return NotesPost(threadId: id[PROPERTY_THREAD].string(), creatorId: properties["creator"].string(), content: properties["content"].string(), created: id[PROPERTY_CREATED].time())
+		return NotesPost(threadId: id[PROPERTY_THREAD].string(), creatorId: properties["creator"].string(), content: properties["content"].string(), created: id[PROPERTY_CREATED].time(), originalCommentId: properties["original_comment"].string())
 	}
 	
 	

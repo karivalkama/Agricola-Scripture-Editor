@@ -118,7 +118,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 					return
 				}
 				
-				addNotesDelegate.insertPost(thread: targetThread, originalComment: cell.post, associatedParagraphData: collectAssociatedParagraphData(pathId: pathId, chapterIndex: targetThread.chapterIndex))
+				addNotesDelegate.insertPost(thread: targetThread, selectedComment: cell.post, associatedParagraphData: collectAssociatedParagraphData(pathId: pathId, chapterIndex: targetThread.chapterIndex))
 			}
 			catch
 			{
