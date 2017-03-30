@@ -48,27 +48,48 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			return
 		}
 		
+		guard let accountId = Session.instance.accountId else
+		{
+			print("ERROR: No account information available.")
+			return
+		}
+		
+		// If logged in with a non-shared account, uses the only avatar for the project
 		do
 		{
-			// TODO: Add handling for cases where logged in with a non-shared account
-			// (Extra parameter into query)
-			// And when logged in with a shared account (filter results based on shared attribute)
-			
+			if let project = try Project.get(projectId)
+			{
+				if project.sharedAccountId == accountId
+				{
+					if let avatarInfoId = try AvatarInfoView.instance.avatarQuery(projectId: projectId, accountId: accountId).firstResultRow()?.id
+					{
+						proceed(avatarId: AvatarInfo.avatarId(fromAvatarInfoId: avatarInfoId), animated: false)
+					}
+				}
+			}
+		}
+		catch
+		{
+			print("ERROR: Failed to read associated database data. \(error)")
+		}
+		
+		do
+		{
 			// Reads the avatar data from the database
 			let avatarInfo = try AvatarInfoView.instance.avatarQuery(projectId: projectId).resultObjects()
 			
 			avatarData = try avatarInfo.flatMap
+			{
+				info in
+				
+				if info.isShared, let avatar = try Avatar.get(info.avatarId)
 				{
-					info in
-					
-					if let avatar = try Avatar.get(info.avatarId)
-					{
-						return (avatar, info)
-					}
-					else
-					{
-						return nil
-					}
+					return (avatar, info)
+				}
+				else
+				{
+					return nil
+				}
 			}
 		}
 		catch
@@ -124,9 +145,9 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		// Also, if this was a project account, logs out
 		do
 		{
-			if let accountId = Session.instance.accountId, let account = try AgricolaAccount.get(accountId)
+			if let accountId = Session.instance.accountId, let projectId = Session.instance.projectId, let project = try Project.get(projectId)
 			{
-				if account.projectId != nil
+				if project.sharedAccountId == accountId
 				{
 					Session.instance.logout()
 				}

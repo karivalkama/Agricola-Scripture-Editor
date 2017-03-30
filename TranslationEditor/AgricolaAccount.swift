@@ -20,7 +20,6 @@ final class AgricolaAccount: Storable
 	let cbUserName: String
 	let isShared: Bool
 	
-	var projectId: String? // The tied project id. Only for shared project accounts
 	var displayName: String
 	var languageIds: [String]
 	
@@ -30,7 +29,7 @@ final class AgricolaAccount: Storable
 	var idProperties: [Any] { return ["user", cbUserName] }
 	var properties: [String : PropertyValue]
 	{
-		return ["displayname": displayName.value, "shared": isShared.value, "project": projectId.value, "languages": languageIds.value]
+		return ["displayname": displayName.value, "shared": isShared.value, "languages": languageIds.value]
 	}
 	
 	
@@ -38,21 +37,20 @@ final class AgricolaAccount: Storable
 	
 	convenience init(name: String, languageIds: [String], isShared: Bool)
 	{
-		self.init(cbUserName: name.toKey, displayName: name, languageIds: languageIds, isShared: isShared, projectId: nil)
+		self.init(cbUserName: name.toKey, displayName: name, languageIds: languageIds, isShared: isShared)
 	}
 	
-	private init(cbUserName: String, displayName: String, languageIds: [String], isShared: Bool, projectId: String?)
+	private init(cbUserName: String, displayName: String, languageIds: [String], isShared: Bool)
 	{
 		self.languageIds = languageIds
 		self.displayName = displayName
 		self.cbUserName = cbUserName
 		self.isShared = isShared
-		self.projectId = projectId
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) -> AgricolaAccount
 	{
-		return AgricolaAccount(cbUserName: id[PROPERTY_CB_USERNAME].string(), displayName: properties["displayname"].string(), languageIds: properties["languages"].array { $0.string }, isShared: properties["shared"].bool(), projectId: properties["project"].string)
+		return AgricolaAccount(cbUserName: id[PROPERTY_CB_USERNAME].string(), displayName: properties["displayname"].string(), languageIds: properties["languages"].array { $0.string }, isShared: properties["shared"].bool())
 	}
 	
 	

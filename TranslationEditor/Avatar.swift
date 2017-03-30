@@ -253,4 +253,10 @@ final class AvatarInfo: Storable
 	{
 		return try get(parseId(from: [avatarId, "private"]))
 	}
+	
+	// The avatar id portion of the avatar info id string
+	static func avatarId(fromAvatarInfoId infoId: String) -> String
+	{
+		return property(withName: PROPERTY_AVATAR, fromId: infoId).string()
+	}
 }

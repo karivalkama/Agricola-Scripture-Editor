@@ -20,6 +20,7 @@ final class Project: Storable
 	let uid: String
 	let created: TimeInterval
 	let languageId: String
+	let sharedAccountId: String
 	
 	var name: String
 	var ownerId: String // Id of the owner CB user
@@ -31,33 +32,37 @@ final class Project: Storable
 	var idProperties: [Any] { return [uid] }
 	var properties: [String : PropertyValue]
 	{
-		return ["owner": ownerId.value, "contributors": contributorIds.value, "name": name.value, "language": languageId.value, "created": created.value]
+		return ["owner": ownerId.value, "contributors": contributorIds.value, "name": name.value, "language": languageId.value, "shared_account": sharedAccountId.value, "created": created.value]
 	}
 	
 	
 	// INIT	------------------------
 	
-	init(name: String, languageId: String, ownerId: String, contributorIds: [String], uid: String = UUID().uuidString.lowercased(), created: TimeInterval = Date().timeIntervalSince1970)
+	init(name: String, languageId: String, ownerId: String, contributorIds: [String], sharedAccountId: String, uid: String = UUID().uuidString.lowercased(), created: TimeInterval = Date().timeIntervalSince1970)
 	{
 		self.uid = uid
 		self.created = created
 		self.languageId = languageId
 		self.name = name
 		self.ownerId = ownerId
+		self.sharedAccountId = sharedAccountId
 		
-		if contributorIds.contains(ownerId)
-		{
-			self.contributorIds = contributorIds
-		}
-		else
+		self.contributorIds = contributorIds
+		
+		if !contributorIds.contains(ownerId)
 		{
 			self.contributorIds = contributorIds + ownerId
+		}
+		
+		if !contributorIds.contains(sharedAccountId)
+		{
+			self.contributorIds.append(sharedAccountId)
 		}
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) -> Project
 	{
-		return Project(name: properties["name"].string(), languageId: properties["language"].string(), ownerId: properties["owner"].string(), contributorIds: properties["contributors"].array({ $0.string }), uid: id["project_uid"].string(), created: properties["created"].time())
+		return Project(name: properties["name"].string(), languageId: properties["language"].string(), ownerId: properties["owner"].string(), contributorIds: properties["contributors"].array({ $0.string }), sharedAccountId: properties["shared_account"].string(), uid: id["project_uid"].string(), created: properties["created"].time())
 	}
 	
 	

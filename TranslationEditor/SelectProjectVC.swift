@@ -49,6 +49,26 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 			return
 		}
 		
+		// If using a shared account, selects the project too
+		if let accountId = Session.instance.accountId
+		{
+			do
+			{
+				for project in try ProjectView.instance.projectsForContributor(withId: accountId)
+				{
+					if project.sharedAccountId == accountId
+					{
+						Session.instance.projectId = project.idString
+						break
+					}
+				}
+			}
+			catch
+			{
+				print("ERROR: Could not read database data. \(error)")
+			}
+		}
+		
 		// If project is already selected, moves to the next view
 		// Otherwise listens to project data changes
 		if Session.instance.projectId == nil
