@@ -11,7 +11,7 @@ import AVFoundation
 import QRCodeReader
 
 // This view controller handles the main menu features like connection hosting, and book selection
-class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQueryListener, UITableViewDataSource, UITableViewDelegate
+class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQueryListener, UITableViewDataSource, UITableViewDelegate, ConnectionListener
 {
 	// TYPES	------------------
 	
@@ -48,9 +48,9 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 	{
         super.viewDidLoad()
 
-		// Some views are hidden initially
-		// TODO: Curent hosting status should affect these, naturally
-		qrView.isHidden = true
+		// Only displays qr view while hosting. Only displays connection status while joined
+		qrView.isHidden = P2PHostSession.instance == nil
+		onlineStatusView.isHidden = !P2PClientSession.isConnected
 		
 		// The QR Code scanning feature could be unavailable, which will prevent the use of P2P joining
 		updateConnectionButtonAvailability()
@@ -107,6 +107,7 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 		// TODO: Disconnects from the current P2P session
 		P2PClientSession.stop()
 		updateConnectionButtonAvailability()
+		onlineStatusView.isHidden = true
 	}
 	
 	@IBAction func hostingStatusChanged(_ sender: Any)
@@ -212,6 +213,16 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 		// Sets the book ready for the translation VC
 		controller.configure(book: books[indexPath.row])
 		present(controller, animated: true, completion: nil)
+	}
+	
+	func onConnectionStatusChange(newStatus status: ConnectionStatus)
+	{
+		onlineStatusView.status = status
+	}
+	
+	func onConnectionProgressUpdate(transferred: Int, of total: Int, progress: Double)
+	{
+		onlineStatusView.updateProgress(completed: transferred, of: total, progress: progress)
 	}
 	
 	

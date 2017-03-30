@@ -81,7 +81,7 @@ import UIKit
 	
 	var allFieldsFilled: Bool
 	{
-		return !avatarName.isEmpty && (!isShared || (fieldIsFilled(offlinePasswordField) && fieldIsFilled(repeatPasswordField)))
+		return !avatarName.isEmpty // && (!isShared || (fieldIsFilled(offlinePasswordField) && fieldIsFilled(repeatPasswordField)))
 	}
 	
 	var passwordsMatch: Bool
