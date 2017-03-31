@@ -93,6 +93,14 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 		}
     }
 	
+	/*
+	override func viewDidAppear(_ animated: Bool)
+	{
+		super.viewDidAppear(animated)
+		
+		print("STATUS: Main menu VC appeared")
+	}*/
+	
 	
 	// ACTIONS	------------------
 	

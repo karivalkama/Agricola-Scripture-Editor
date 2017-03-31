@@ -9,8 +9,13 @@
 import UIKit
 
 // This view controller handles avatar selection and authorization
-class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate
+class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, LiveQueryListener
 {
+	// TYPES	-------------------
+	
+	typealias QueryTarget = AvatarInfoView
+	
+	
 	// OUTLETS	-------------------
 	
 	@IBOutlet weak var avatarCollectionView: UICollectionView!
@@ -22,8 +27,11 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	
 	// ATTRIBUTES	---------------
 	
+	private var queryManager: LiveQueryManager<QueryTarget>?
 	private var avatarData = [(Avatar, AvatarInfo)]()
 	private var selectedData: (Avatar, AvatarInfo)?
+	
+	private var usesSharedAccount = true
 	
 	
 	// LOAD	-----------------------
@@ -31,16 +39,6 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
     override func viewDidLoad()
 	{
         super.viewDidLoad()
-    }
-	
-	override func viewDidAppear(_ animated: Bool)
-	{
-		// If the avatar has already been chosen, skips this phase
-		if let avatarId = Session.instance.avatarId
-		{
-			proceed(avatarId: avatarId, animated: false)
-			return
-		}
 		
 		guard let projectId = Session.instance.projectId else
 		{
@@ -55,16 +53,19 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		}
 		
 		// If logged in with a non-shared account, uses the only avatar for the project
+		// Otherwises reads all avatar data and filters out the non-shared later
 		do
 		{
 			if let project = try Project.get(projectId)
 			{
-				if project.sharedAccountId == accountId
+				usesSharedAccount = project.sharedAccountId == accountId
+				if usesSharedAccount
 				{
-					if let avatarInfoId = try AvatarInfoView.instance.avatarQuery(projectId: projectId, accountId: accountId).firstResultRow()?.id
-					{
-						proceed(avatarId: AvatarInfo.avatarId(fromAvatarInfoId: avatarInfoId), animated: false)
-					}
+					queryManager = AvatarInfoView.instance.avatarQuery(projectId: projectId).liveQueryManager
+				}
+				else
+				{
+					queryManager = AvatarInfoView.instance.avatarQuery(projectId: projectId, accountId: accountId).liveQueryManager
 				}
 			}
 		}
@@ -73,32 +74,29 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			print("ERROR: Failed to read associated database data. \(error)")
 		}
 		
-		do
-		{
-			// Reads the avatar data from the database
-			let avatarInfo = try AvatarInfoView.instance.avatarQuery(projectId: projectId).resultObjects()
-			
-			avatarData = try avatarInfo.flatMap
-			{
-				info in
-				
-				if info.isShared, let avatar = try Avatar.get(info.avatarId)
-				{
-					return (avatar, info)
-				}
-				else
-				{
-					return nil
-				}
-			}
-		}
-		catch
-		{
-			print("ERROR: Failed to load avatar data. \(error)")
-		}
-		
 		avatarCollectionView.delegate = self
 		avatarCollectionView.dataSource = self
+		
+		queryManager?.addListener(AnyLiveQueryListener(self))
+    }
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		// If the avatar has already been chosen, skips this phase
+		if Session.instance.avatarId != nil
+		{
+			proceed(animated: false)
+			return
+		}
+		
+		// Otherwise starts the queries
+		queryManager?.start()
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		// Doen't need to continue with live queries while the view is not visible
+		queryManager?.stop()
 	}
 	
 	
@@ -134,7 +132,8 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			return
 		}
 		
-		proceed(avatarId: selectedAvatar.idString)
+		Session.instance.avatarId = selectedAvatar.idString
+		proceed()
 	}
 	
 	@IBAction func backButtonPressed(_ sender: Any)
@@ -164,6 +163,45 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	
 	
 	// IMPLEMENTED METHODS	-------
+	
+	func rowsUpdated(rows: [Row<AvatarInfoView>])
+	{
+		do
+		{
+			// If using a shared account, presents all viable options in the collection view
+			if usesSharedAccount
+			{
+				avatarData = try rows.map { try $0.object() }.flatMap
+				{
+					info in
+					
+					if info.isShared, let avatar = try Avatar.get(info.avatarId)
+					{
+						return (avatar, info)
+					}
+					else
+					{
+						return nil
+					}
+				}
+				
+				avatarCollectionView.reloadData()
+			}
+			// Otherwise just finds the first applicable avatar and uses that
+			else
+			{
+				if let infoId = rows.first?.id
+				{
+					Session.instance.avatarId = AvatarInfo.avatarId(fromAvatarInfoId: infoId)
+					proceed()
+				}
+			}
+		}
+		catch
+		{
+			print("ERROR: Failed to process avatar data. \(error)")
+		}
+	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
 	{
@@ -196,7 +234,8 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			}
 			else
 			{
-				proceed(avatarId: selectedData!.0.idString)
+				Session.instance.avatarId = selectedData!.0.idString
+				proceed()
 			}
 		}
 	}
@@ -204,10 +243,8 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	
 	// OTHER METHODS	--------
 	
-	func proceed(avatarId: String, animated: Bool = true)
+	func proceed(animated: Bool = true)
 	{
-		Session.instance.avatarId = avatarId
-		
 		// Presents the main menu
 		let storyboard = UIStoryboard(name: "MainMenu", bundle: nil)
 		guard let controller = storyboard.instantiateInitialViewController() else

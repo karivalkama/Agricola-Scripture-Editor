@@ -41,6 +41,7 @@
 		7C25180B1E8A71F10089E1FD /* CouchbaseLiteListener.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C25180A1E8A71F10089E1FD /* CouchbaseLiteListener.framework */; };
 		7C25180D1E8B8A930089E1FD /* ProjectBooksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C25180C1E8B8A930089E1FD /* ProjectBooksView.swift */; };
 		7C25180F1E8D0F8A0089E1FD /* EditAvatarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C25180E1E8D0F8A0089E1FD /* EditAvatarVC.swift */; };
+		7C2518111E8E39F50089E1FD /* StackDismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518101E8E39F50089E1FD /* StackDismissable.swift */; };
 		7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF5A1DE718DA0035B92E /* Storable.swift */; };
 		7C40DF5F1DE71E490035B92E /* DatabaseUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */; };
 		7C40DF631DEC14C80035B92E /* JSONConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF621DEC14C80035B92E /* JSONConvertible.swift */; };
@@ -243,6 +244,7 @@
 		7C25180A1E8A71F10089E1FD /* CouchbaseLiteListener.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CouchbaseLiteListener.framework; sourceTree = "<group>"; };
 		7C25180C1E8B8A930089E1FD /* ProjectBooksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectBooksView.swift; sourceTree = "<group>"; };
 		7C25180E1E8D0F8A0089E1FD /* EditAvatarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAvatarVC.swift; sourceTree = "<group>"; };
+		7C2518101E8E39F50089E1FD /* StackDismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackDismissable.swift; sourceTree = "<group>"; };
 		7C40DF5A1DE718DA0035B92E /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseUtilities.swift; sourceTree = "<group>"; };
 		7C40DF621DEC14C80035B92E /* JSONConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONConvertible.swift; sourceTree = "<group>"; };
@@ -525,6 +527,7 @@
 				7C57EC021E66E293000718E9 /* Session.swift */,
 				7C506B801E8939A100ACB5AC /* P2PClientSession.swift */,
 				7C2518061E8A6CB60089E1FD /* P2PHostSession.swift */,
+				7C2518101E8E39F50089E1FD /* StackDismissable.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1196,6 +1199,7 @@
 				7CD9ACF31E0914470032A7F8 /* DatabaseExtension.swift in Sources */,
 				7CDBD6D11E28E53500912320 /* ScrollSyncManager.swift in Sources */,
 				7C4A4FCC1DFACC58009F890E /* Copyable.swift in Sources */,
+				7C2518111E8E39F50089E1FD /* StackDismissable.swift in Sources */,
 				7C4A4FDC1DFAE273009F890E /* Theme.swift in Sources */,
 				7C57EC031E66E293000718E9 /* Session.swift in Sources */,
 				7C4A4FAA1DF836F1009F890E /* LiveQueryListener.swift in Sources */,

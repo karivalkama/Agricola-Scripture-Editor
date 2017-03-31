@@ -9,7 +9,7 @@
 import UIKit
 
 // This VC handles project selection (including accepting invitations to other people's projects)
-class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSource, UITableViewDelegate
+class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSource, UITableViewDelegate, StackDismissable
 {
 	// TYPES	------------------
 	
@@ -23,9 +23,17 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	
 	// ATTRIBUTES	--------------
 	
-	private let queryManager = ProjectView.instance.projectQuery(forContributorId: Session.instance.accountId!).liveQueryManager
+	private var queryManager: LiveQueryManager<QueryTarget>?
 	private var projects = [Project]()
-	private var listening = false
+	// Language id -> language name
+	private var languageNames = [String: String]()
+	
+	private var selectedWithSharedAccount = false
+	
+	
+	// COMPUTED PROPERTIES	------
+	
+	var shouldDismissBelow: Bool { return selectedWithSharedAccount }
 	
 	
 	// INIT	----------------------
@@ -36,55 +44,37 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		
 		projectTableView.delegate = self
 		projectTableView.dataSource = self
+		
+		// If using a shared account, selects the project automatically
+		guard let accountId = Session.instance.accountId else
+		{
+			print("ERROR: No logged account -> Cannot find any projects.")
+			return
+		}
+		
+		queryManager = ProjectView.instance.projectQuery(forContributorId: accountId).liveQueryManager
+		queryManager?.addListener(AnyLiveQueryListener(self))
     }
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
 		super.viewDidAppear(animated)
 		
-		// If the user hasn't authenticated / was logged out, goes to the previous view instead
-		guard Session.instance.isAuthorized else
-		{
-			dismiss(animated: true, completion: nil)
-			return
-		}
-		
-		// If using a shared account, selects the project too
-		if let accountId = Session.instance.accountId
-		{
-			do
-			{
-				for project in try ProjectView.instance.projectsForContributor(withId: accountId)
-				{
-					if project.sharedAccountId == accountId
-					{
-						Session.instance.projectId = project.idString
-						break
-					}
-				}
-			}
-			catch
-			{
-				print("ERROR: Could not read database data. \(error)")
-			}
-		}
-		
 		// If project is already selected, moves to the next view
 		// Otherwise listens to project data changes
 		if Session.instance.projectId == nil
 		{
-			if !listening
-			{
-				queryManager.addListener(AnyLiveQueryListener(self))
-				queryManager.start()
-				listening = true
-			}
+			queryManager?.start()
 		}
 		else
 		{
-			stopListening()
 			performSegue(withIdentifier: "SelectAvatar", sender: nil)
 		}
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		queryManager?.stop()
 	}
     
 
@@ -93,7 +83,6 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	@IBAction func logoutButtonPressed(_ sender: Any)
 	{
 		// Ends the session and returns to login
-		stopListening()
 		Session.instance.logout()
 		dismiss(animated: true, completion: nil)
 	}
@@ -110,23 +99,11 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	{
 		let cell = tableView.dequeueReusableCell(withIdentifier: ProjectCell.identifier, for: indexPath) as! ProjectCell
 		
-		do
-		{
-			let project = projects[indexPath.row]
-			let languageName = try Language.get(project.languageId)?.name
-			
-			if languageName == nil
-			{
-				print("ERROR: No language data for project \(project.toPropertySet)")
-			}
-			
-			cell.configure(name: project.name, languageName: languageName.or(""), created: Date(timeIntervalSince1970: project.created))
-		}
-		catch
-		{
-			print("ERROR: Failed to set up a project cell. \(error)")
-		}
-			
+		let project = projects[indexPath.row]
+		let languageName = languageNames[project.languageId].or("")
+		
+		cell.configure(name: project.name, languageName: languageName, created: Date(timeIntervalSince1970: project.created))
+		
 		return cell
 	}
 	
@@ -135,34 +112,58 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		// Remembers the selected project and moves to the next view
 		let project = projects[indexPath.row]
 		Session.instance.projectId = project.idString
-		
-		stopListening()
 		performSegue(withIdentifier: "SelectAvatar", sender: nil)
 	}
 	
 	func rowsUpdated(rows: [Row<ProjectView>])
 	{
+		// Updates the project data in the table
 		do
 		{
 			projects = try rows.map { try $0.object() }
+			
+			for project in projects
+			{
+				if !languageNames.containsKey(project.languageId)
+				{
+					if let language = try Language.get(project.languageId)
+					{
+						languageNames[project.languageId] = language.name
+					}
+				}
+			}
+			
 			projectTableView.reloadData()
 		}
 		catch
 		{
 			print("ERROR: Failed to read project data from DB. \(error)")
 		}
+		
+		if let accountId = Session.instance.accountId
+		{
+			var selectedWithSharedAccount = false
+			
+			// Also checks if the user has logged in with a shared account for any of the projects
+			// If so, proceeds with that project automatically
+			for project in projects
+			{
+				if project.sharedAccountId == accountId
+				{
+					selectedWithSharedAccount = true
+					Session.instance.projectId = project.idString
+					performSegue(withIdentifier: "SelectAvatar", sender: nil)
+					break
+				}
+			}
+			
+			self.selectedWithSharedAccount = selectedWithSharedAccount
+		}
 	}
 	
-	
-	// OTHER METHODS	---------
-	
-	private func stopListening()
+	func willDissmissBelow()
 	{
-		if listening
-		{
-			queryManager.removeListeners()
-			queryManager.stop()
-			listening = false
-		}
+		// Logs the user out before dimissing into login
+		Session.instance.logout()
 	}
 }
