@@ -40,6 +40,7 @@ fileprivate func miss(viewController: UIViewController)
 		// Dismisses the presenting view controller, or if this is the bottom, this controller
 		if let presentingController = viewController.presentingViewController
 		{
+			viewController.dismiss(animated: true, completion: nil)
 			miss(viewController: presentingController)
 		}
 		else

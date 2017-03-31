@@ -109,7 +109,7 @@ class LoginVC: UIViewController, ConnectionListener
 				errorLabel.text = "Invalid username and/or password"
 				passwordField.text = nil
 			}
-			else
+			else if status != .offline
 			{
 				errorLabel.text = nil
 				onlineStatusView.isHidden = true
