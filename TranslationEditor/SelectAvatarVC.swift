@@ -9,7 +9,7 @@
 import UIKit
 
 // This view controller handles avatar selection and authorization
-class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, LiveQueryListener
+class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, LiveQueryListener, StackDismissable
 {
 	// TYPES	-------------------
 	
@@ -32,6 +32,11 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	private var selectedData: (Avatar, AvatarInfo)?
 	
 	private var usesSharedAccount = true
+	
+	
+	// COMPUTED PROPERTIES	-------
+	
+	var shouldDismissBelow: Bool { return !usesSharedAccount }
 	
 	
 	// LOAD	-----------------------
@@ -85,6 +90,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		// If the avatar has already been chosen, skips this phase
 		if Session.instance.avatarId != nil
 		{
+			print("STATUS: Avatar already selected")
 			proceed(animated: false)
 			return
 		}
@@ -141,23 +147,16 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		// Deselects the current project
 		Session.instance.projectId = nil
 		
-		// Also, if this was a project account, logs out
-		do
+		// Dimisses the view controller below
+		if let projectVC = presentingViewController as? SelectProjectVC
 		{
-			if let accountId = Session.instance.accountId, let projectId = Session.instance.projectId, let project = try Project.get(projectId)
-			{
-				if project.sharedAccountId == accountId
-				{
-					Session.instance.logout()
-				}
-			}
+			projectVC.dismissFromAbove()
 		}
-		catch
+		else
 		{
-			print("ERROR: Couldn't read account data. \(error)")
+			print("ERROR: Avatar selection not presented from project selection")
+			dismiss(animated: true, completion: nil)
 		}
-		
-		dismiss(animated: true, completion: nil)
 	}
 	
 	
@@ -192,6 +191,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			{
 				if let infoId = rows.first?.id
 				{
+					print("STATUS: Proceeding with non-shared account avatar")
 					Session.instance.avatarId = AvatarInfo.avatarId(fromAvatarInfoId: infoId)
 					proceed()
 				}
@@ -238,6 +238,12 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 				proceed()
 			}
 		}
+	}
+	
+	func willDissmissBelow()
+	{
+		// Deselects the project
+		Session.instance.projectId = nil
 	}
 	
 	

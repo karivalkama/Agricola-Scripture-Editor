@@ -48,8 +48,6 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 	{
         super.viewDidLoad()
 
-		print("STATUS: Main menu loaded")
-		
 		// Only displays qr view while hosting. Only displays connection status while joined
 		qrView.isHidden = P2PHostSession.instance == nil
 		onlineStatusView.isHidden = !P2PClientSession.isConnected
@@ -85,7 +83,6 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 			// Loads the available book data
 			queryManager = ProjectBooksView.instance.booksQuery(languageId: project.languageId, projectId: projectId).liveQueryManager
 			queryManager?.addListener(AnyLiveQueryListener(self))
-			queryManager?.start()
 		}
 		catch
 		{
@@ -93,13 +90,17 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 		}
     }
 	
-	/*
 	override func viewDidAppear(_ animated: Bool)
 	{
 		super.viewDidAppear(animated)
 		
-		print("STATUS: Main menu VC appeared")
-	}*/
+		queryManager?.start()
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		queryManager?.stop()
+	}
 	
 	
 	// ACTIONS	------------------
@@ -164,10 +165,17 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 	
 	@IBAction func backButtonPressed(_ sender: Any)
 	{
-		// Stops the listening process and goes back to avatar selection
-		queryManager?.stop()
-		queryManager?.removeListeners()
-		dismiss(animated: true, completion: nil)
+		// goes back to avatar selection
+		Session.instance.avatarId = nil
+		
+		if let selectAvatarVC = presentingViewController as? SelectAvatarVC
+		{
+			selectAvatarVC.dismissFromAbove()
+		}
+		else
+		{
+			dismiss(animated: true, completion: nil)
+		}
 	}
 	
 	
@@ -254,11 +262,5 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 		joinButton.isEnabled = !isHosting && !isClient && QRCodeReader.isAvailable()
 		disconnectButton.isEnabled = isClient
 		hostingSwitch.isEnabled = !isClient
-	}
-	
-	private func stopListening()
-	{
-		queryManager?.stop()
-		queryManager?.removeListeners()
 	}
 }
