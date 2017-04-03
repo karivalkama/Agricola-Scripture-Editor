@@ -145,7 +145,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d4F-eg-xbM" customClass="OnlineStatusView" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="64" width="240" height="64"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="64" id="n80-Wd-9an"/>
+                                                            <constraint firstAttribute="height" priority="750" constant="64" id="n80-Wd-9an"/>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="wtb-Qc-uor" userLabel="Host Stack View">

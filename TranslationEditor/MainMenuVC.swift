@@ -38,7 +38,8 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 	// The reader used for capturing QR codes, initialized only when used
 	private lazy var readerVC = QRCodeReaderViewController(builder: QRCodeReaderViewControllerBuilder
 	{
-		$0.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObjectTypeQRCode], captureDevicePosition: .back)
+		builder in
+		// builder.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObjectTypeQRCode], captureDevicePosition: .back)
 	})
 	
 	

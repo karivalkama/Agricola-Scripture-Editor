@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SCrypto
+//import SCrypto
 
 // Avatars are project-specific user accounts
 final class Avatar: Storable
@@ -157,7 +157,7 @@ final class AvatarInfo: Storable
 		if let password = password
 		{
 			// Uses the avatar id as salt
-			self.passwordHash = (avatarId + password).SHA256()
+			self.passwordHash = ""//(avatarId + password).SHA256()
 		}
 	}
 	
@@ -228,7 +228,7 @@ final class AvatarInfo: Storable
 		}
 		else
 		{
-			return (avatarId + password).SHA256() == passwordHash
+			return true//(avatarId + password).SHA256() == passwordHash
 		}
 	}
 	

@@ -9,4 +9,4 @@
 import Foundation
 
 // The address to the back end server
-let SERVER_ADDRESS = "http://192.168.1.112:4985"//127.0.0.1:4985"//"192.168.1.112:4985"
+let SERVER_ADDRESS = "http://192.168.1.112:4984"//127.0.0.1:4985"//"192.168.1.112:4985"

@@ -495,7 +495,7 @@
                                 <rect key="frame" x="52" y="76" width="888" height="596"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="Qn1-aN-GAg">
-                                        <rect key="frame" x="0.0" y="7" width="355" height="582.5"/>
+                                        <rect key="frame" x="0.0" y="2.5" width="355" height="591.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="355" id="f53-5n-HuG"/>
                                         </constraints>

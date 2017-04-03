@@ -677,6 +677,24 @@ class TranslationEditorTests: XCTestCase
 		print("Project id is: \(project.idString)")
 	}
 	
+	func testAddAvatar()
+	{
+		guard let accountId = try! AccountView.instance.accountQuery(displayName: "Test-Shared").firstResultRow()?.id else
+		{
+			print("ERROR: No hosting account")
+			return
+		}
+		
+		let avatar = Avatar(name: "Another Avatar", projectId: "20744647-9c04-4982-bb63-02de5d60eca0")
+		let avatarInfo = AvatarInfo(avatarId: avatar.idString, accountId: accountId, openName: "Another", isShared: true)
+		
+		try! DATABASE.tryTransaction
+		{
+			try avatar.push()
+			try avatarInfo.push()
+		}
+	}
+	
 	/*
 	func testAccountRefactoring()
 	{
