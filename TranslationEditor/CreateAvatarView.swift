@@ -32,7 +32,16 @@ import UIKit
 	
 	private let imagePicker = UIImagePickerController()
 	
-	private(set) var avatarImage: UIImage?
+	private var _avatarImage: UIImage?
+	var avatarImage: UIImage?
+	{
+		get { return _avatarImage }
+		set
+		{
+			_avatarImage = newValue
+			avatarImageView.image = newValue.or(#imageLiteral(resourceName: "userIcon"))
+		}
+	}
 	
 	private var _mustBeShared = false
 	var mustBeShared: Bool
@@ -51,27 +60,36 @@ import UIKit
 	
 	// COMPUTED PROPERTIES	----
 	
-	var avatarName: String { return (avatarNameField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)).or("") }
+	var avatarName: String
+	{
+		get { return (avatarNameField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)).or("") }
+		set { avatarNameField.text = newValue }
+	}
 	
 	var inProjectName: String?
 	{
-		if let rawName = inProjectNameField.text
+		get
 		{
-			let trimmed = rawName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-			
-			if trimmed.isEmpty
+			if let rawName = inProjectNameField.text
 			{
-				return nil
+				let trimmed = rawName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+				
+				if trimmed.isEmpty
+				{
+					return nil
+				}
+				else
+				{
+					return trimmed
+				}
 			}
 			else
 			{
-				return trimmed
+				return nil
 			}
 		}
-		else
-		{
-			return nil
-		}
+		
+		set { inProjectNameField.text = newValue }
 	}
 	
 	var offlinePassword: String?
@@ -139,7 +157,6 @@ import UIKit
 	{
 		if let image = info[UIImagePickerControllerEditedImage] as? UIImage
 		{
-			avatarImageView.image = image
 			avatarImage = image
 		}
 		picker.dismiss(animated: true, completion: nil)

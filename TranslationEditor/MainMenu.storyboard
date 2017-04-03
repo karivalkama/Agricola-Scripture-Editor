@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="itN-2l-wFE">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="itN-2l-wFE">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,11 +41,15 @@
                                             <view key="customView" contentMode="scaleToFill" id="fhK-Xg-VZG" customClass="TopUserView" customModule="TranslationEditor" customModuleProvider="target">
                                                 <rect key="frame" x="777" y="5" width="227" height="33"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="KSz-uD-tcs" appends="YES" id="m1K-1i-Aq7"/>
+                                                </connections>
                                             </view>
                                         </barButtonItem>
                                     </navigationItem>
@@ -92,6 +96,9 @@
                                                         <state key="normal" title="Add User">
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="addUserButtonPressed:" destination="itN-2l-wFE" eventType="touchUpInside" id="zfJ-cZ-9A7"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -239,13 +246,18 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TbU-FM-9Z2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="KSz-uD-tcs" userLabel="User View Tapped Recognizer">
+                    <connections>
+                        <action selector="userViewPressed:" destination="itN-2l-wFE" id="ozd-nm-O5y"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="29.882812499999996" y="51.5625"/>
         </scene>
         <!--EditAvatar-->
         <scene sceneID="9xo-pC-Eb0">
             <objects>
-                <viewController storyboardIdentifier="EditAvatar" title="EditAvatar" id="XhR-5a-cmL" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditAvatar" title="EditAvatar" id="XhR-5a-cmL" customClass="EditAvatarVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vFt-Fp-5oD"/>
                         <viewControllerLayoutGuide type="bottom" id="85E-9l-LWE"/>
@@ -284,6 +296,9 @@
                                                         <state key="normal" title="Cancel">
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="cancelButtonPressed:" destination="XhR-5a-cmL" eventType="touchUpInside" id="DBW-hh-UGR"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lyw-Ql-b3R" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="200" y="0.0" width="184" height="40"/>
@@ -298,6 +313,9 @@
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="saveButtonPressed:" destination="XhR-5a-cmL" eventType="touchUpInside" id="hh7-yL-a0T"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -327,6 +345,10 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="createAvatarView" destination="Yi2-g3-zAs" id="TAC-4F-utp"/>
+                        <outlet property="errorLabel" destination="3S4-fY-xGT" id="eEv-Za-gBD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6tX-dL-cHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -205,7 +205,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			return
 		}
 		
-		displayAlert(withIdentifier: "PostThread")
+		displayAlert(withIdentifier: "PostThread", storyBoardId: "Main")
 		{
 			// Finds the targeted paragraph
 			guard let targetParagraph = self.targetTranslationDS.paragraphForPath(pathId) else
@@ -220,7 +220,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	
 	func insertPost(thread: NotesThread, selectedComment originalComment: NotesPost, associatedParagraphData: [(String, Paragraph)])
 	{
-		displayAlert(withIdentifier: "AddPost")
+		displayAlert(withIdentifier: "AddPost", storyBoardId: "Main")
 		{
 			($0 as! PostCommentVC).configure(thread: thread, selectedComment: originalComment, associatedParagraphData: associatedParagraphData)
 		}
@@ -389,19 +389,6 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			scrollManager.leftResourceId = newTitle
 		}
 		scrollManager.syncScrollToRight()
-	}
-	
-	private func displayAlert(withIdentifier alertId: String, using configurer: (UIViewController) -> ())
-	{
-		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let myAlert = storyboard.instantiateViewController(withIdentifier: alertId)
-		myAlert.modalPresentationStyle = .overCurrentContext
-		myAlert.modalTransitionStyle = .crossDissolve
-		
-		configurer(myAlert)
-		
-		print("STATUS: Presenting view with id \(alertId)")
-		present(myAlert, animated: true, completion: nil)
 	}
 	
 	private func commit()

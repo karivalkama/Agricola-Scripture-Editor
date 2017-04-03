@@ -21,3 +21,20 @@ extension UIButton
 		setTitleColor(theme.textColour, for: .disabled)
 	}
 }
+
+extension UIViewController
+{
+	// Displays another view controller modally over this one
+	// The configurer function is called before the new view controller is presented
+	func displayAlert(withIdentifier alertId: String, storyBoardId: String, using configurer: ((UIViewController) -> ())? = nil)
+	{
+		let storyboard = UIStoryboard(name: storyBoardId, bundle: nil)
+		let myAlert = storyboard.instantiateViewController(withIdentifier: alertId)
+		myAlert.modalPresentationStyle = .overCurrentContext
+		myAlert.modalTransitionStyle = .crossDissolve
+		
+		configurer?(myAlert)
+		
+		present(myAlert, animated: true, completion: nil)
+	}
+}

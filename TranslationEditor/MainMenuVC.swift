@@ -183,6 +183,43 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 		}
 	}
 	
+	@IBAction func userViewPressed(_ sender: Any)
+	{
+		do
+		{
+			// Loads avatar data from the database first
+			guard let avatarId = Session.instance.avatarId else
+			{
+				print("ERROR: No avatar selected for editing.")
+				return
+			}
+			
+			guard let avatar = try Avatar.get(avatarId), let info = try AvatarInfo.get(avatarId: avatarId) else
+			{
+				print("ERROR: Couldn't find avatar data")
+				return
+			}
+			
+			displayAlert(withIdentifier: "EditAvatar", storyBoardId: "MainMenu")
+			{
+				newVC in
+				
+				if let editAvatarVC = newVC as? EditAvatarVC
+				{
+					editAvatarVC.configureForEdit(avatar: avatar, avatarInfo: info)
+				}
+			}
+		}
+		catch
+		{
+			print("ERROR: Database operation failed. \(error)")
+		}
+	}
+	
+	@IBAction func addUserButtonPressed(_ sender: Any)
+	{
+		displayAlert(withIdentifier: "EditAvatar", storyBoardId: "MainMenu")
+	}
 	
 	// IMPLEMENTED METHODS	-----
 	

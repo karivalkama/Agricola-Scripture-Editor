@@ -73,6 +73,18 @@ final class Avatar: Storable
 		return property(withName: PROPERTY_PROJECT, fromId: avatarId).string()
 	}
 	
+	// Creates a new avatar id based on the provided properties
+	static func createId(projectId: String, avatarName: String) -> String
+	{
+		return parseId(from: [projectId, "avatar", avatarName.toKey])
+	}
+	
+	// Retrieves avatar data from the database
+	static func get(projectId: String, avatarName: String) throws -> Avatar?
+	{
+		return try get(createId(projectId: projectId, avatarName: avatarName))
+	}
+	
 	fileprivate static func nameKey(ofId avatarId: String) -> String
 	{
 		return property(withName: "avatar_name_key", fromId: avatarId).string()
@@ -157,7 +169,7 @@ final class AvatarInfo: Storable
 		if let password = password
 		{
 			// Uses the avatar id as salt
-			self.passwordHash = (avatarId + password).SHA256()
+			self.passwordHash = createPasswordHash(password: password)
 		}
 	}
 	
@@ -219,6 +231,12 @@ final class AvatarInfo: Storable
 		}
 	}
 	
+	// Updates the avatar's password
+	func setPassword(_ password: String)
+	{
+		passwordHash = createPasswordHash(password: password)
+	}
+	
 	func authenticate(loggedAccountId: String?, password: String) -> Bool
 	{
 		// If the avatar doesn't have a specified password, correct account login is enough
@@ -247,6 +265,11 @@ final class AvatarInfo: Storable
 		{
 			return nameKey
 		}
+	}
+	
+	private func createPasswordHash(password: String) -> String
+	{
+		return (avatarId + password).SHA256()
 	}
 	
 	static func get(avatarId: String) throws -> AvatarInfo?
