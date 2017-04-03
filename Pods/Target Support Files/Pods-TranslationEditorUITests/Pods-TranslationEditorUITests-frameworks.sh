@@ -87,9 +87,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/HTagView/HTagView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/QRCode/QRCode.framework"
   install_framework "$BUILT_PRODUCTS_DIR/QRCodeReader.swift/QRCodeReader.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SCrypto/SCrypto.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/HTagView/HTagView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/QRCode/QRCode.framework"
   install_framework "$BUILT_PRODUCTS_DIR/QRCodeReader.swift/QRCodeReader.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SCrypto/SCrypto.framework"
 fi

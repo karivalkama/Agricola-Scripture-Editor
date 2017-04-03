@@ -146,7 +146,7 @@ class ConnectionManager
 		else
 		{
 			// Checks for authentication errors
-			if replications.contains(where: { ($0.lastError as? NSError)?.code == 401 })
+			if replications.contains(where: { ($0.lastError as NSError?)?.code == 401 })
 			{
 				status = .unauthorized
 			}

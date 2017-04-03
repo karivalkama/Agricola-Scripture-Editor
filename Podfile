@@ -8,7 +8,7 @@ target 'TranslationEditor' do
   # Pods for TranslationEditor
   pod 'couchbase-lite-ios', '~> 1.3'
   pod 'HTagView'
-  # pod 'SCrypto'
+  pod 'SCrypto'
   pod 'QRCodeReader.swift'
   pod 'QRCode'
 
@@ -16,7 +16,7 @@ target 'TranslationEditor' do
     inherit! :search_paths
     pod 'couchbase-lite-ios', '~> 1.3'
     pod 'HTagView'
-    # pod 'SCrypto'
+    pod 'SCrypto'
     pod 'QRCodeReader.swift'
     pod 'QRCode'
   end
@@ -25,7 +25,7 @@ target 'TranslationEditor' do
     inherit! :search_paths
     pod 'couchbase-lite-ios', '~> 1.3'
     pod 'HTagView'
-    # pod 'SCrypto'
+    pod 'SCrypto'
     pod 'QRCodeReader.swift'
     pod 'QRCode'
   end
