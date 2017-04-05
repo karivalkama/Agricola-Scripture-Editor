@@ -11,7 +11,6 @@ target 'TranslationEditor' do
   pod 'SCrypto'
   pod 'QRCodeReader.swift'
   pod 'QRCode'
-  pod 'AEXML'
 
   target 'TranslationEditorTests' do
     inherit! :search_paths
@@ -20,7 +19,6 @@ target 'TranslationEditor' do
     pod 'SCrypto'
     pod 'QRCodeReader.swift'
     pod 'QRCode'
-    pod 'AEXML'
   end
 
   target 'TranslationEditorUITests' do
@@ -30,7 +28,6 @@ target 'TranslationEditor' do
     pod 'SCrypto'
     pod 'QRCodeReader.swift'
     pod 'QRCode'
-    pod 'AEXML'
   end
 
 end

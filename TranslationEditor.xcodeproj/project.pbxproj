@@ -21,6 +21,7 @@
 		7C0130D41E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D31E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift */; };
 		7C0130D71E4DF97D0053C5C2 /* ScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */; };
 		7C1515151E94BEDC00419DEA /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1515141E94BEDC00419DEA /* CircleImage.swift */; };
+		7C1515181E94D58000419DEA /* USXWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1515171E94D58000419DEA /* USXWriter.swift */; };
 		7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */; };
 		7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */; };
 		7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */; };
@@ -219,6 +220,7 @@
 		7C0130D31E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionStatusLogger.swift; sourceTree = "<group>"; };
 		7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewExtension.swift; sourceTree = "<group>"; };
 		7C1515141E94BEDC00419DEA /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		7C1515171E94D58000419DEA /* USXWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXWriter.swift; sourceTree = "<group>"; };
 		7C18A18B1D8BBEBD00DD1B03 /* TranslationEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslationEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationVC.swift; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 				7C506B801E8939A100ACB5AC /* P2PClientSession.swift */,
 				7C2518061E8A6CB60089E1FD /* P2PHostSession.swift */,
 				7C2518101E8E39F50089E1FD /* StackDismissable.swift */,
+				7C1515171E94D58000419DEA /* USXWriter.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1161,6 +1164,7 @@
 				7C20D7E31D8BF8D000E84BA5 /* TargetTranslationCell.swift in Sources */,
 				7CDBD6EA1E28FCD400912320 /* ParagraphAssociated.swift in Sources */,
 				7CA1BAC41E323E6C00611FED /* LiveResource.swift in Sources */,
+				7C1515181E94D58000419DEA /* USXWriter.swift in Sources */,
 				7CCC00EA1D9BD3FC00F0562E /* VerseError.swift in Sources */,
 				7C40DF801DEDB4C10035B92E /* BookView.swift in Sources */,
 				7C40DF6C1DEC59AB0035B92E /* Book.swift in Sources */,
