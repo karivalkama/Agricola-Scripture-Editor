@@ -816,7 +816,7 @@ class TranslationEditorTests: XCTestCase
 		self.measure{ parser.parse() }
 		
 		// Checks the results
-		XCTAssertTrue(usxParserDelegate.success, "\(usxParserDelegate.error)")
+		XCTAssertTrue(usxParserDelegate.success, "\(usxParserDelegate.error!)")
 		
 		// Prints the results
 		for book in usxParserDelegate.parsedBooks
@@ -833,6 +833,23 @@ class TranslationEditorTests: XCTestCase
 				print(paragraph.text)
 			}
 		}
+	}
+	
+	func testUSXWriting()
+	{
+		let books = try! ProjectBooksView.instance.booksQuery().resultObjects()
+		
+		for book in books
+		{
+			print("---------------------------------")
+			print("USX For Book \(book.identifier):")
+			
+			let paragraphs = try! ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
+			
+			print(USXWriter().writeUSXDocument(book: book, paragraphs: paragraphs))
+		}
+		
+		print("DONE")
 	}
 	
 	func avatarIdForProject(withId projectId: String) throws -> String?

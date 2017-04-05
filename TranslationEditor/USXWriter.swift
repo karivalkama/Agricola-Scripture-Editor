@@ -54,7 +54,7 @@ class USXWriter
 	// Creates a string representing a USX chapter marker
 	func chapterMarker(withIndex index: Int) -> String
 	{
-		return "<chapter number=\"\(index)\" style=\"c\">"
+		return "<chapter number=\"\(index)\" style=\"c\"/>"
 	}
 	
 	// Creates a string representing paragraph contents in USX format
