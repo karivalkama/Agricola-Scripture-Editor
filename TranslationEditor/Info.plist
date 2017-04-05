@@ -52,5 +52,7 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>The camera is needed for scanning QR codes</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your photo library is needed for setting new profile image</string>
 </dict>
 </plist>

@@ -20,6 +20,7 @@
 		7C0130D11E4DB92C0053C5C2 /* ConnectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D01E4DB92C0053C5C2 /* ConnectionListener.swift */; };
 		7C0130D41E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D31E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift */; };
 		7C0130D71E4DF97D0053C5C2 /* ScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */; };
+		7C1515151E94BEDC00419DEA /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1515141E94BEDC00419DEA /* CircleImage.swift */; };
 		7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */; };
 		7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */; };
 		7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */; };
@@ -217,6 +218,7 @@
 		7C0130D01E4DB92C0053C5C2 /* ConnectionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionListener.swift; sourceTree = "<group>"; };
 		7C0130D31E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionStatusLogger.swift; sourceTree = "<group>"; };
 		7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewExtension.swift; sourceTree = "<group>"; };
+		7C1515141E94BEDC00419DEA /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		7C18A18B1D8BBEBD00DD1B03 /* TranslationEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslationEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationVC.swift; sourceTree = "<group>"; };
@@ -704,6 +706,7 @@
 				7C506B7C1E88F59800ACB5AC /* XibViews */,
 				7C4A4FDB1DFAE273009F890E /* Theme.swift */,
 				7C4A4FD71DFAE0AA009F890E /* BasicButton.swift */,
+				7C1515141E94BEDC00419DEA /* CircleImage.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1273,6 +1276,7 @@
 				7C20D7FF1D9A93AA00E84BA5 /* StringExtension.swift in Sources */,
 				7C57EC0B1E680AC6000718E9 /* CreateAccountVC.swift in Sources */,
 				7C60705B1E5D705B007718BC /* AvatarInfoView.swift in Sources */,
+				7C1515151E94BEDC00419DEA /* CircleImage.swift in Sources */,
 				7C4A4F971DEF0CDE009F890E /* LanguageView.swift in Sources */,
 				7CCC01071DA3C1C800F0562E /* USXStyle.swift in Sources */,
 				7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */,
