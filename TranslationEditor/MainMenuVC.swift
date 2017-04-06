@@ -7,11 +7,9 @@
 //
 
 import UIKit
-import AVFoundation
-import QRCodeReader
 
 // This view controller handles the main menu features like connection hosting, and book selection
-class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQueryListener, UITableViewDataSource, UITableViewDelegate, ConnectionListener
+class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UITableViewDelegate
 {
 	// TYPES	------------------
 	
@@ -22,29 +20,17 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 	
 	@IBOutlet weak var bookTableView: UITableView!
 	@IBOutlet weak var userView: TopUserView!
-	@IBOutlet weak var joinButton: UIButton!
-	@IBOutlet weak var disconnectButton: UIButton!
 	@IBOutlet weak var hostingSwitch: UISwitch!
 	@IBOutlet weak var qrImageView: UIImageView!
 	@IBOutlet weak var onlineStatusView: OnlineStatusView!
 	@IBOutlet weak var qrView: UIView!
+	@IBOutlet weak var joinView: P2PJoinView!
 	
 	
 	// ATTRIBUTES	--------------
 	
 	private var queryManager: LiveQueryManager<ProjectBooksView>?
 	private var books = [Book]()
-	
-	// The reader used for capturing QR codes, initialized only when used
-	private lazy var readerVC: QRCodeReaderViewController =
-	{
-		let builder = QRCodeReaderViewControllerBuilder
-		{
-			$0.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObjectTypeQRCode], captureDevicePosition: .back)
-		}
-		
-		return QRCodeReaderViewController(builder: builder)
-	}()
 	
 	
 	// INIT	----------------------
@@ -53,12 +39,12 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 	{
         super.viewDidLoad()
 
+		joinView.viewController = self
+		joinView.onlineStatusView = onlineStatusView
+		joinView.connectionUpdated = { self.hostingSwitch.isEnabled = !P2PClientSession.isConnected }
+		
 		// Only displays qr view while hosting. Only displays connection status while joined
 		qrView.isHidden = P2PHostSession.instance == nil
-		onlineStatusView.isHidden = !P2PClientSession.isConnected
-		
-		// The QR Code scanning feature could be unavailable, which will prevent the use of P2P joining
-		updateConnectionButtonAvailability()
 		
 		// Sets up the table
 		bookTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
@@ -99,6 +85,11 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 	{
 		super.viewDidAppear(animated)
 		
+		// The QR Code scanning feature could be unavailable, which will prevent the use of P2P joining
+		joinView.updateAppearance()
+		hostingSwitch.isOn = P2PHostSession.instance != nil
+		hostingSwitch.isEnabled = !P2PClientSession.isConnected
+		
 		queryManager?.start()
 	}
 	
@@ -109,22 +100,6 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 	
 	
 	// ACTIONS	------------------
-	
-	@IBAction func joinButtonPressed(_ sender: Any)
-	{
-		// TODO: Presents a join P2P VC
-		readerVC.delegate = self
-		readerVC.modalPresentationStyle = .formSheet
-		present(readerVC, animated: true, completion: nil)
-	}
-	
-	@IBAction func disconnectButtonPressed(_ sender: Any)
-	{
-		// TODO: Disconnects from the current P2P session
-		P2PClientSession.stop()
-		updateConnectionButtonAvailability()
-		onlineStatusView.isHidden = true
-	}
 	
 	@IBAction func hostingStatusChanged(_ sender: Any)
 	{
@@ -165,7 +140,7 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 			P2PHostSession.stop()
 		}
 		
-		updateConnectionButtonAvailability()
+		joinView.updateAppearance()
 	}
 	
 	@IBAction func backButtonPressed(_ sender: Any)
@@ -223,24 +198,6 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 	
 	// IMPLEMENTED METHODS	-----
 	
-	func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult)
-	{
-		// TODO: Parse result and start P2P session
-		reader.stopScanning()
-		print("STATUS: Scanned QR code result: \(result.value) (of type \(result.metadataType))")
-	}
-	
-	func reader(_ reader: QRCodeReaderViewController, didSwitchCamera newCaptureDevice: AVCaptureDeviceInput)
-	{
-		print("STATUS: Switched camera")
-	}
-	
-	func readerDidCancel(_ reader: QRCodeReaderViewController)
-	{
-		reader.stopScanning()
-		print("STATUS: QR Capture session cancelled")
-	}
-	
 	func rowsUpdated(rows: [Row<ProjectBooksView>])
 	{
 		do
@@ -281,28 +238,5 @@ class MainMenuVC: UIViewController, QRCodeReaderViewControllerDelegate, LiveQuer
 		// Sets the book ready for the translation VC
 		controller.configure(book: books[indexPath.row])
 		present(controller, animated: true, completion: nil)
-	}
-	
-	func onConnectionStatusChange(newStatus status: ConnectionStatus)
-	{
-		onlineStatusView.status = status
-	}
-	
-	func onConnectionProgressUpdate(transferred: Int, of total: Int, progress: Double)
-	{
-		onlineStatusView.updateProgress(completed: transferred, of: total, progress: progress)
-	}
-	
-	
-	// OTHER METHODS	--------
-	
-	private func updateConnectionButtonAvailability()
-	{
-		let isClient = P2PClientSession.isConnected
-		let isHosting = P2PHostSession.instance != nil
-		
-		joinButton.isEnabled = !isHosting && !isClient && QRCodeReader.isAvailable()
-		disconnectButton.isEnabled = isClient
-		hostingSwitch.isEnabled = !isClient
 	}
 }

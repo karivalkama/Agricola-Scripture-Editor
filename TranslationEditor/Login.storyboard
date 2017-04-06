@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7HQ-at-0Yn">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7HQ-at-0Yn">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -526,7 +527,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="485" height="87"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sG3-be-bJb" id="EcI-Gu-8tF">
-                                                            <rect key="frame" x="0.0" y="0.0" width="485" height="86"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="485" height="86.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wh2-3I-Lsf" userLabel="Content Stack View">
@@ -581,7 +582,7 @@
                                                         <rect key="frame" x="0.0" y="115" width="485" height="176"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vde-PQ-RQ0" id="TeY-rK-FQx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="485" height="175"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="485" height="175.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="A6x-z7-cDy" userLabel="Content Stack View">
@@ -933,7 +934,7 @@
                                 </items>
                             </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UrZ-ky-uDt">
-                                <rect key="frame" x="52" y="76" width="920" height="660"/>
+                                <rect key="frame" x="36" y="76" width="952" height="660"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rMz-gR-dIP">
                                     <size key="itemSize" width="272" height="305"/>
@@ -952,15 +953,15 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="A90-4V-FHe">
                                                     <rect key="frame" x="8" y="8" width="296" height="330"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="EUL-Rd-u9X">
-                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="249"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="EUL-Rd-u9X" customClass="CircleImage" customModule="TranslationEditor" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="EUL-Rd-u9X" secondAttribute="height" id="YGD-FT-gb9"/>
+                                                            </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Syalom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3k-Bi-vbz">
-                                                            <rect key="frame" x="0.0" y="257" width="256" height="32"/>
+                                                            <rect key="frame" x="0.0" y="264" width="256" height="25"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="32" id="vH5-H5-JgS"/>
-                                                            </constraints>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1087,9 +1088,9 @@
                             <constraint firstAttribute="trailing" secondItem="tJb-C9-MzN" secondAttribute="trailing" id="DgB-kA-fpt"/>
                             <constraint firstItem="oz8-mI-VI2" firstAttribute="centerY" secondItem="WPR-I3-vDQ" secondAttribute="centerY" id="IEO-Iy-qcS"/>
                             <constraint firstItem="tJb-C9-MzN" firstAttribute="leading" secondItem="WPR-I3-vDQ" secondAttribute="leading" id="Rzv-cz-USv"/>
-                            <constraint firstItem="UrZ-ky-uDt" firstAttribute="leading" secondItem="WPR-I3-vDQ" secondAttribute="leadingMargin" constant="32" id="Uju-iN-UgP"/>
+                            <constraint firstItem="UrZ-ky-uDt" firstAttribute="leading" secondItem="WPR-I3-vDQ" secondAttribute="leadingMargin" constant="16" id="Uju-iN-UgP"/>
                             <constraint firstItem="Vbd-3v-8fx" firstAttribute="top" secondItem="UrZ-ky-uDt" secondAttribute="bottom" constant="32" id="anx-nL-SNl"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="UrZ-ky-uDt" secondAttribute="trailing" constant="32" id="gOg-6j-50E"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UrZ-ky-uDt" secondAttribute="trailing" constant="16" id="gOg-6j-50E"/>
                             <constraint firstItem="UrZ-ky-uDt" firstAttribute="top" secondItem="tJb-C9-MzN" secondAttribute="bottom" constant="32" id="naF-Qn-qDN"/>
                             <constraint firstItem="oz8-mI-VI2" firstAttribute="centerX" secondItem="WPR-I3-vDQ" secondAttribute="centerX" id="tvH-3M-ifY"/>
                         </constraints>

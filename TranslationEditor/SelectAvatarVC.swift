@@ -205,17 +205,25 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
 	{
-		return avatarData.count
+		return avatarData.count + 1
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
 	{
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AvatarCell.identifier, for: indexPath) as! AvatarCell
 		
-		let (avatar, info) = avatarData[indexPath.row]
-		let avatarName = info.openName.or(avatar.name)
+		// The last row is used for the avatar addition
+		if indexPath.row == avatarData.count
+		{
+			cell.configure(avatarName: "New Avatar", avatarImage: #imageLiteral(resourceName: "addIcon"))
+		}
+		else
+		{
+			let (avatar, info) = avatarData[indexPath.row]
+			let avatarName = info.openName.or(avatar.name)
 		
-		cell.configure(avatarName: avatarName, avatarImage: info.image)
+			cell.configure(avatarName: avatarName, avatarImage: info.image)
+		}
 		
 		return cell
 	}
@@ -225,17 +233,25 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		// Selects an avatar and displays the password view
 		if selectedData == nil
 		{
-			selectedData = avatarData[indexPath.row]
-			
-			if selectedData!.1.requiresPassword
+			// If the last cell was selected, displays a view for adding a new avatar
+			if indexPath.row == avatarData.count
 			{
-				errorLabel.isHidden = true
-				passwordView.isHidden = false
+				displayAlert(withIdentifier: "EditAvatar", storyBoardId: "MainMenu")
 			}
 			else
 			{
-				Session.instance.avatarId = selectedData!.0.idString
-				proceed()
+				selectedData = avatarData[indexPath.row]
+				
+				if selectedData!.1.requiresPassword
+				{
+					errorLabel.isHidden = true
+					passwordView.isHidden = false
+				}
+				else
+				{
+					Session.instance.avatarId = selectedData!.0.idString
+					proceed()
+				}
 			}
 		}
 	}

@@ -22,6 +22,8 @@
 		7C0130D71E4DF97D0053C5C2 /* ScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */; };
 		7C1515151E94BEDC00419DEA /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1515141E94BEDC00419DEA /* CircleImage.swift */; };
 		7C1515181E94D58000419DEA /* USXWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1515171E94D58000419DEA /* USXWriter.swift */; };
+		7C15151A1E961B6300419DEA /* P2PJoinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1515191E961B6300419DEA /* P2PJoinView.xib */; };
+		7C15151C1E961FD000419DEA /* P2PJoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C15151B1E961FD000419DEA /* P2PJoinView.swift */; };
 		7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */; };
 		7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */; };
 		7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */; };
@@ -221,6 +223,8 @@
 		7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewExtension.swift; sourceTree = "<group>"; };
 		7C1515141E94BEDC00419DEA /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		7C1515171E94D58000419DEA /* USXWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXWriter.swift; sourceTree = "<group>"; };
+		7C1515191E961B6300419DEA /* P2PJoinView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = P2PJoinView.xib; sourceTree = "<group>"; };
+		7C15151B1E961FD000419DEA /* P2PJoinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P2PJoinView.swift; sourceTree = "<group>"; };
 		7C18A18B1D8BBEBD00DD1B03 /* TranslationEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslationEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C18A18E1D8BBEBD00DD1B03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationVC.swift; sourceTree = "<group>"; };
@@ -732,6 +736,7 @@
 				7C6B7B261E659E220005AD43 /* OnlineStatusView.swift */,
 				7C55A1FE1E7970A70038C122 /* CreateAvatarView.swift */,
 				7C9BB7E61E853A250010DE5C /* TopUserView.swift */,
+				7C15151B1E961FD000419DEA /* P2PJoinView.swift */,
 			);
 			name = XibViews;
 			sourceTree = "<group>";
@@ -758,6 +763,7 @@
 				7C6B7B241E659CA00005AD43 /* OnlineStatusView.xib */,
 				7C57ECAD1E6D970C000718E9 /* CreateAvatar.xib */,
 				7C9BB7E41E8538730010DE5C /* TopUserDisplay.xib */,
+				7C1515191E961B6300419DEA /* P2PJoinView.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -988,6 +994,7 @@
 				7C9BB7E51E8538730010DE5C /* TopUserDisplay.xib in Resources */,
 				7CD8EA661DB644E300364B70 /* GAL.usx in Resources */,
 				7C60704D1E533ED3007718BC /* VerseDataCell.xib in Resources */,
+				7C15151A1E961B6300419DEA /* P2PJoinView.xib in Resources */,
 				7C57ECAE1E6D970C000718E9 /* CreateAvatar.xib in Resources */,
 				7C6B7B181E645EC00005AD43 /* FilteredMultiSelection.xib in Resources */,
 				7C6B7B251E659CA00005AD43 /* OnlineStatusView.xib in Resources */,
@@ -1217,6 +1224,7 @@
 				7C4A4FE41DFE7C87009F890E /* UIExtension.swift in Sources */,
 				7C942A2E1E38DD80000C614A /* AgricolaAccount.swift in Sources */,
 				7CDBD6EE1E2E30DD00912320 /* ParagraphNotes.swift in Sources */,
+				7C15151C1E961FD000419DEA /* P2PJoinView.swift in Sources */,
 				7C0130B81E3B6A1D0053C5C2 /* Avatar.swift in Sources */,
 				7C6B7B201E6557270005AD43 /* FilteredMultiSelection.swift in Sources */,
 				7CD8EA621DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,
