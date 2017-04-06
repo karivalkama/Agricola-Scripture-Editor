@@ -246,7 +246,7 @@ final class AvatarInfo: Storable
 		}
 		else
 		{
-			return (avatarId + password).SHA256() == passwordHash
+			return createPasswordHash(password: password) == passwordHash
 		}
 	}
 	

@@ -104,7 +104,7 @@ class CreateAccountVC: UIViewController, ConnectionListener, LiveQueryListener, 
 				return
 			}
 			
-			let account = AgricolaAccount(name: userName, languageIds: languageSelectionView.selectedIndices.map { languages[$0].idString }, isShared: isSharedSwitch.isOn)
+			let account = AgricolaAccount(name: userName, languageIds: languageSelectionView.selectedIndices.map { languages[$0].idString }, isShared: isSharedSwitch.isOn, password: password)
 			try account.push()
 			
 			try Session.instance.logIn(accountId: account.idString, userName: account.cbUserName, password: password)

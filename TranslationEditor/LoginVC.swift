@@ -20,6 +20,7 @@ class LoginVC: UIViewController, ConnectionListener
 	@IBOutlet weak var passwordField: UITextField!
 	@IBOutlet weak var errorLabel: UILabel!
 	@IBOutlet weak var loginButton: BasicButton!
+	@IBOutlet weak var joinView: P2PJoinView!
 	
 	
 	// ATTRIBUTES	----------------
