@@ -81,6 +81,12 @@ final class AgricolaAccount: Storable
 		return AgricolaAccount.createPasswordHash(name: cbUserName, password: password) == passwordHash
 	}
 	
+	// Changes the password of the account
+	func setPassword(password: String)
+	{
+		passwordHash = AgricolaAccount.createPasswordHash(name: cbUserName, password: password)
+	}
+	
 	private static func createPasswordHash(name: String, password: String) -> String
 	{
 		return (name + password).SHA256()

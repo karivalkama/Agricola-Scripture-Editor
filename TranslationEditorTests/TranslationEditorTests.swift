@@ -636,6 +636,7 @@ class TranslationEditorTests: XCTestCase
 	func testAddProject()
 	{
 		let userName = "Test"
+		let password = "test"
 		let languageNames = ["English", "Finnish"]
 		
 		let projectName = "Test-Project"
@@ -645,11 +646,11 @@ class TranslationEditorTests: XCTestCase
 		// Creates a new non-shared account first
 		let languageIds = languageNames.map { try! LanguageView.instance.language(withName: $0).idString }
 		
-		let account = AgricolaAccount(name: userName, languageIds: languageIds, isShared: false)
+		let account = AgricolaAccount(name: userName, languageIds: languageIds, isShared: false, password: password)
 		try! account.push()
 		
 		// Creates a new, shared account for the project
-		let sharedAccount = AgricolaAccount(name: "Test-Shared", languageIds: languageIds, isShared: true)
+		let sharedAccount = AgricolaAccount(name: "Test-Shared", languageIds: languageIds, isShared: true, password: password)
 		try! sharedAccount.push()
 		
 		// Next creates a new project for that account
@@ -768,6 +769,23 @@ class TranslationEditorTests: XCTestCase
 		}
 		
 		print("STATUS: Copied \(newBooks.count) books and \(newParagraphs.count) paragraphs")
+	}
+	
+	func testAddPasswords()
+	{
+		let accounts = try! AccountView.instance.createQuery().resultObjects()
+		print("STATUS: Updates the password of \(accounts.count) accounts")
+		
+		try! DATABASE.tryTransaction
+		{
+			for account in accounts
+			{
+				account.setPassword(password: "asd")
+				try account.push()
+			}
+		}
+		
+		print("DONE!")
 	}
 	
 	func testUSXParsing()

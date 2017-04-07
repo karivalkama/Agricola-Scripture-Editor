@@ -92,7 +92,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 		AppStatusHandler.instance.appWillClose()
 	}
-
+	
+	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool
+	{
+		/*
+		if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "someController") as? SomeController {
+		if let window = self.window, let rootViewController = window.rootViewController {
+		var currentController = rootViewController
+		while let presentedController = currentController.presentedViewController {
+		currentController = presentedController
+		}
+		currentController.present(controller, animated: true, completion: nil)
+		}
+		}
+		*/
+		
+		// TODO: Implement open url
+		print("STATUS: Received file with url: \(url)")
+		return false // TODO: Return true
+	}
 }
 
 class AppStatusHandler

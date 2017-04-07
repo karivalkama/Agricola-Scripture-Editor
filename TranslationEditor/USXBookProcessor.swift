@@ -13,6 +13,7 @@ import Foundation
 // Saves paragraph information by overwriting an old version
 fileprivate func handleSingleMatch(existing: Paragraph, newVersion: Paragraph) throws
 {
+	// TODO: Only commit if the paragraphs contain changes
 	// Creates a new commit over the existing paragraph version
 	_ = try existing.commit(userId: newVersion.creatorId, sectionIndex: newVersion.sectionIndex, paragraphIndex: newVersion.index, content: newVersion.content)
 }
@@ -160,10 +161,9 @@ class USXBookProcessor: USXContentProcessor
 			for chapter in content
 			{
 				chapterIndex += 1
-				// TODO: The chapter indices are all wrong
 				
 				// Collects the new paragraphs into a single array
-				let chapterParagraphs = chapter.flatMap {(section) in section.flatMap { $0 } }
+				let chapterParagraphs = chapter.flatMap { section in section.flatMap { $0 } }
 				
 				// Finds all paragraphs already existing in this chapter
 				let existingParagraphs = try ParagraphView.instance.latestParagraphQuery(bookId: book.idString, chapterIndex: chapterIndex).resultObjects()
@@ -177,6 +177,8 @@ class USXBookProcessor: USXContentProcessor
 				// Matches existing paragraphs to new paragraphs and operates on those
 				else
 				{
+					// TODO: Use the provided match algorithm instead
+					
 					var singleMatches = [(Paragraph, Paragraph)]()
 					var unmatchedExisting = [Paragraph]()
 					var unmatchedNew = [Paragraph]()
