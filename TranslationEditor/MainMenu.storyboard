@@ -74,39 +74,56 @@
                                                         <rect key="frame" x="0.0" y="36.5" width="552" height="419"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" id="X1P-0t-QRE">
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" id="X1P-0t-QRE" customClass="BookCell" customModule="TranslationEditor" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="28" width="552" height="44"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X1P-0t-QRE" id="mvV-WX-iNg">
                                                                     <rect key="frame" x="0.0" y="0.0" width="552" height="43.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xqp-Uw-r9I">
-                                                                            <rect key="frame" x="16" y="4" width="520" height="35.5"/>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Xqp-Uw-r9I">
+                                                                            <rect key="frame" x="0.0" y="4" width="536" height="35.5"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAL - Test Translation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ow-aM-d4X">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="467" height="35.5"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAL" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6m-fe-4P3">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="64" height="35.5"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="64" id="bDY-P2-gis"/>
+                                                                                    </constraints>
+                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Translation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ow-aM-d4X">
+                                                                                    <rect key="frame" x="72" y="0.0" width="403" height="35.5"/>
                                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKg-9x-Zmz">
-                                                                                    <rect key="frame" x="467" y="0.0" width="53" height="35.5"/>
+                                                                                    <rect key="frame" x="483" y="0.0" width="53" height="35.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" secondItem="yKg-9x-Zmz" secondAttribute="height" multiplier="3:2" id="40n-xG-QBA"/>
                                                                                     </constraints>
                                                                                     <state key="normal" image="email"/>
+                                                                                    <connections>
+                                                                                        <action selector="sendButtonPressed:" destination="X1P-0t-QRE" eventType="touchUpInside" id="4Rb-KV-l5e"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                             </subviews>
                                                                         </stackView>
                                                                     </subviews>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="Xqp-Uw-r9I" secondAttribute="trailing" constant="16" id="Aga-4D-sah"/>
-                                                                        <constraint firstItem="Xqp-Uw-r9I" firstAttribute="leading" secondItem="mvV-WX-iNg" secondAttribute="leading" constant="16" id="TjP-Qr-i9N"/>
+                                                                        <constraint firstItem="Xqp-Uw-r9I" firstAttribute="leading" secondItem="mvV-WX-iNg" secondAttribute="leading" id="TjP-Qr-i9N"/>
                                                                         <constraint firstItem="Xqp-Uw-r9I" firstAttribute="top" secondItem="mvV-WX-iNg" secondAttribute="top" constant="4" id="i2h-6T-0xV"/>
                                                                         <constraint firstAttribute="bottom" secondItem="Xqp-Uw-r9I" secondAttribute="bottom" constant="4" id="u0e-kj-R7k"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
+                                                                <connections>
+                                                                    <outlet property="bookNameLabel" destination="4Ow-aM-d4X" id="nKm-yi-8xd"/>
+                                                                    <outlet property="codeLabel" destination="R6m-fe-4P3" id="dkC-3T-OJZ"/>
+                                                                    <outlet property="sendButton" destination="yKg-9x-Zmz" id="APo-Vg-vKJ"/>
+                                                                </connections>
                                                             </tableViewCell>
                                                         </prototypes>
                                                     </tableView>

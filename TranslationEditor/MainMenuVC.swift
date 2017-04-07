@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MessageUI
 
 // This view controller handles the main menu features like connection hosting, and book selection
-class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UITableViewDelegate
+class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate
 {
 	// TYPES	------------------
 	
@@ -47,7 +48,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		qrView.isHidden = P2PHostSession.instance == nil
 		
 		// Sets up the table
-		bookTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
+		// bookTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
 		bookTableView.dataSource = self
 		bookTableView.delegate = self
 		
@@ -218,9 +219,10 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		let cell = tableView.dequeueReusableCell(withIdentifier: LabelCell.identifier, for: indexPath) as! LabelCell
+		let cell = tableView.dequeueReusableCell(withIdentifier: BookCell.identifier, for: indexPath) as! BookCell
 		
-		cell.configure(text: "\(books[indexPath.row].code.uppercased()) - \(books[indexPath.row].identifier)")
+		let book = books[indexPath.row]
+		cell.configure(bookCode: book.code, identifier: book.identifier, sendActionAvailable: MFMailComposeViewController.canSendMail(), sendAction: sendAction)
 		
 		return cell
 	}
@@ -238,5 +240,48 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		// Sets the book ready for the translation VC
 		controller.configure(book: books[indexPath.row])
 		present(controller, animated: true, completion: nil)
+	}
+	
+	func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)
+	{
+		print("STATUS: Mail send finished with result \(result)")
+	}
+	
+	
+	// OTHER METHODS	--------
+	
+	private func sendAction(cell: BookCell)
+	{
+		// Sends book USX data via email
+		guard let index = bookTableView.indexPath(for: cell)?.row else
+		{
+			print("ERROR: No index path for the active cell.")
+			return
+		}
+		
+		do
+		{
+			let book = books[index]
+			let paragraphs = try ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
+			
+			let usx = USXWriter().writeUSXDocument(book: book, paragraphs: paragraphs)
+			
+			guard let data = usx.data(using: .utf8) else
+			{
+				print("ERROR: Failed to generate USX data")
+				return
+			}
+			
+			let mailVC = MFMailComposeViewController()
+			mailVC.mailComposeDelegate = self
+			mailVC.addAttachmentData(data, mimeType: "application/xml", fileName: "\(book.code.uppercased()).usx")
+			mailVC.setSubject("\(book.code.uppercased()) - \(book.identifier) USX Export")
+			
+			present(mailVC, animated: true, completion: nil)
+		}
+		catch
+		{
+			print("ERROR: Failed to read translation data. \(error)")
+		}
 	}
 }
