@@ -33,7 +33,7 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	
 	// COMPUTED PROPERTIES	------
 	
-	var shouldDismissBelow: Bool { return selectedWithSharedAccount }
+	var shouldDismissBelow: Bool { return selectedWithSharedAccount || P2PClientSession.isConnected }
 	
 	
 	// INIT	----------------------

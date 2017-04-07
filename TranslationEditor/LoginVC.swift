@@ -11,7 +11,7 @@ import UIKit
 // Login VC handles user authorization and login (duh)
 // The process may be skipped / sped up after the first success
 // (user data is stored in the keychain)
-class LoginVC: UIViewController, ConnectionListener
+class LoginVC: UIViewController//, ConnectionListener
 {
 	// OUTLETS	--------------------
 	
@@ -25,8 +25,8 @@ class LoginVC: UIViewController, ConnectionListener
 	
 	// ATTRIBUTES	----------------
 	
-	private var loginUsername: String?
-	private var loginPassword: String?
+	// private var loginUsername: String?
+	// private var loginPassword: String?
 	
 
 	// INIT	------------------------
@@ -35,8 +35,10 @@ class LoginVC: UIViewController, ConnectionListener
 	{
         super.viewDidLoad()
 		
+		joinView.viewController = self
+		joinView.onlineStatusView = onlineStatusView
+		
 		errorLabel.text = nil
-		onlineStatusView.isHidden = true
     }
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -52,7 +54,7 @@ class LoginVC: UIViewController, ConnectionListener
 		else
 		{
 			print("STATUS: No login information present")
-			ConnectionManager.instance.registerListener(self)
+			// ConnectionManager.instance.registerListener(self)
 		}
 	}
 	
@@ -73,6 +75,48 @@ class LoginVC: UIViewController, ConnectionListener
 			return
 		}
 		
+		do
+		{
+			// Finds the correct target account
+			guard let account = try AccountView.instance.accountQuery(displayName: userName).firstResultObject() else
+			{
+				errorLabel.text = "Invalid username"
+				return
+			}
+			
+			// Checks that the passwords match
+			guard account.authorize(password: password) else
+			{
+				errorLabel.text = "Invalid password"
+				return
+			}
+			
+			try Session.instance.logIn(accountId: account.idString, userName: userName, password: password)
+			
+			// If there is a P2P session active, provides access to the host project
+			if P2PClientSession.isConnected
+			{
+				if let project = try Project.get(P2PClientSession.instance!.projectId)
+				{
+					if !project.contributorIds.contains(account.idString)
+					{
+						project.contributorIds.add(account.idString)
+						try project.push()
+					}
+					
+					Session.instance.projectId = project.idString
+				}
+			}
+			
+			proceed()
+		}
+		catch
+		{
+			print("ERROR: Login failed. \(error)")
+			errorLabel.text = "Internal error occurred!"
+		}
+		
+		/*
 		loginButton.isEnabled = false
 		onlineStatusView.isHidden = false
 		
@@ -82,18 +126,20 @@ class LoginVC: UIViewController, ConnectionListener
 		// Tries logging in
 		// TODO: Use real authorization when it is only available
 		ConnectionManager.instance.connect(serverURL: SERVER_ADDRESS, continuous: false)
+		*/
 	}
 	
 	@IBAction func continueButtonPressed(_ sender: Any)
 	{
 		// Moves to the create account view
-		ConnectionManager.instance.removeListener(self)
+		// ConnectionManager.instance.removeListener(self)
 		performSegue(withIdentifier: "CreateUser", sender: nil)
 	}
 	
 	
 	// IMPLEMENTED METHODS	-------
 	
+	/*
 	func onConnectionStatusChange(newStatus status: ConnectionStatus)
 	{
 		// Updates online status
@@ -144,16 +190,17 @@ class LoginVC: UIViewController, ConnectionListener
 	{
 		onlineStatusView.updateProgress(completed: transferred, of: total, progress: progress)
 	}
+*/
 
 	
 	// OTHER METHODS	-----------
 	
 	private func proceed(animated: Bool = true)
 	{
-		ConnectionManager.instance.removeListener(self)
+		//ConnectionManager.instance.removeListener(self)
 		
 		passwordField.text = nil
-		onlineStatusView.isHidden = true
+		errorLabel.text = nil
 		
 		// Starts the updates in the background
 		// TODO: Add authorization when backed supports it

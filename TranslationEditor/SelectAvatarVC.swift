@@ -87,6 +87,8 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
+		hidePasswordView()
+		
 		// If the avatar has already been chosen, skips this phase
 		if Session.instance.avatarId != nil
 		{
@@ -117,10 +119,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	@IBAction func cancelPressed(_ sender: Any)
 	{
 		// Hide password area. Resets selection
-		passwordField.text = nil
-		selectedData = nil
-		passwordView.isHidden = true
-		avatarCollectionView.selectItem(at: nil, animated: true, scrollPosition: .left)
+		hidePasswordView()
 	}
 	
 	@IBAction func loginPressed(_ sender: Any)
@@ -276,5 +275,14 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		}
 
 		present(controller, animated: animated, completion: nil)
+	}
+	
+	private func hidePasswordView()
+	{
+		// Hide password area. Resets selection
+		passwordField.text = nil
+		selectedData = nil
+		passwordView.isHidden = true
+		avatarCollectionView.selectItem(at: nil, animated: true, scrollPosition: .left)
 	}
 }

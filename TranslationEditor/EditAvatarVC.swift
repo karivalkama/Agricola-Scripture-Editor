@@ -19,6 +19,7 @@ class EditAvatarVC: UIViewController
 	
 	// ATTRIBUTES	--------------
 	
+	private var targetAccountId: String?
 	private var editedInfo: (Avatar, AvatarInfo)?
 	
 	
@@ -54,10 +55,18 @@ class EditAvatarVC: UIViewController
 				print("ERROR: Failed to read account data. \(error)")
 			}
 		}
-		// If creating a new avatar, it will always be associated with a shared account so sharing is required
+		// If creating a new avatar, those created for shared accounts must be shared
 		else
 		{
-			createAvatarView.mustBeShared = true
+			do
+			{
+				let isSharedAccount = try targetAccountId.exists { try (AgricolaAccount.get($0)?.isShared).or(true) }
+				createAvatarView.mustBeShared = isSharedAccount
+			}
+			catch
+			{
+				print("ERROR: Failed to check whether account is shared. \(error)")
+			}
 		}
 		
 		createAvatarView.viewController = self
@@ -131,7 +140,7 @@ class EditAvatarVC: UIViewController
 				
 				// Creates the new information
 				let avatar = Avatar(name: avatarName, projectId: projectId)
-				let info = AvatarInfo(avatarId: avatar.idString, accountId: project.sharedAccountId, openName: createAvatarView.inProjectName, password: createAvatarView.offlinePassword, isShared: createAvatarView.isShared)
+				let info = AvatarInfo(avatarId: avatar.idString, accountId: targetAccountId.or(project.sharedAccountId), openName: createAvatarView.inProjectName, password: createAvatarView.offlinePassword, isShared: createAvatarView.isShared)
 				
 				// Saves the changes to the database (inlcuding image attachment)
 				try DATABASE.tryTransaction
