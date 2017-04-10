@@ -124,6 +124,8 @@
 		7C7834CB1E977D1C000556B0 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7834CA1E977D1C000556B0 /* BookCell.swift */; };
 		7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE891DE6E1EA00C054EB /* PropertySet.swift */; };
 		7C82CE8E1DE6E29500C054EB /* PropertyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */; };
+		7C936C0D1E9B751300AC06BF /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C0C1E9B751300AC06BF /* VersionCell.swift */; };
+		7C936C0F1E9B7F6700AC06BF /* ResolveConflictVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C0E1E9B7F6700AC06BF /* ResolveConflictVC.swift */; };
 		7C942A2B1E38C7E2000C614A /* PostCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */; };
 		7C942A2E1E38DD80000C614A /* AgricolaAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C942A2D1E38DD80000C614A /* AgricolaAccount.swift */; };
 		7C9BB7E31E8536AA0010DE5C /* MainMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */; };
@@ -333,6 +335,8 @@
 		7C82CE821DE6D91100C054EB /* TranslationEditorUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditorUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		7C82CE891DE6E1EA00C054EB /* PropertySet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertySet.swift; sourceTree = "<group>"; };
 		7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyValue.swift; sourceTree = "<group>"; };
+		7C936C0C1E9B751300AC06BF /* VersionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCell.swift; sourceTree = "<group>"; };
+		7C936C0E1E9B7F6700AC06BF /* ResolveConflictVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResolveConflictVC.swift; sourceTree = "<group>"; };
 		7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCommentVC.swift; sourceTree = "<group>"; };
 		7C942A2D1E38DD80000C614A /* AgricolaAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgricolaAccount.swift; sourceTree = "<group>"; };
 		7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainMenu.storyboard; sourceTree = "<group>"; };
@@ -706,6 +710,7 @@
 				7CA1BAAF1E31E8DD00611FED /* ThreadCell.swift */,
 				7CA1BAB31E31F09200611FED /* PostCell.swift */,
 				7C6070481E52ECBA007718BC /* VerseCell.swift */,
+				7C936C0C1E9B751300AC06BF /* VersionCell.swift */,
 			);
 			name = Translation;
 			sourceTree = "<group>";
@@ -852,6 +857,7 @@
 				7C18A1901D8BBEBD00DD1B03 /* TranslationVC.swift */,
 				7C6C3C191E373959001D56F4 /* PostThreadVC.swift */,
 				7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */,
+				7C936C0E1E9B7F6700AC06BF /* ResolveConflictVC.swift */,
 				7CDBD6C71E28B69B00912320 /* TranslationTableViewDS.swift */,
 				7CA1BAA71E30C15B00611FED /* NotesTableDS.swift */,
 				7C60704A1E52F770007718BC /* VerseTableDS.swift */,
@@ -1218,6 +1224,7 @@
 				7C60704B1E52F770007718BC /* VerseTableDS.swift in Sources */,
 				7C4A4FD81DFAE0AA009F890E /* BasicButton.swift in Sources */,
 				7CAF6D8A1DB5F5FB00E10597 /* USXParser.swift in Sources */,
+				7C936C0D1E9B751300AC06BF /* VersionCell.swift in Sources */,
 				7CDBD6AC1E238ACB00912320 /* ResourceCollection.swift in Sources */,
 				7C20D7F81D9A672800E84BA5 /* VerseIndex.swift in Sources */,
 				7C4A4FF41E00105B009F890E /* Key.swift in Sources */,
@@ -1276,6 +1283,7 @@
 				7C6070501E55860B007718BC /* Keyboard.swift in Sources */,
 				7CA1BAB81E31F33000611FED /* DateExtension.swift in Sources */,
 				7CCC01341DA7964000F0562E /* XmlParserUtil.swift in Sources */,
+				7C936C0F1E9B7F6700AC06BF /* ResolveConflictVC.swift in Sources */,
 				7C0130C51E3F3DFB0053C5C2 /* PropertyValueWrapable.swift in Sources */,
 				7CCC01481DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
 				7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */,

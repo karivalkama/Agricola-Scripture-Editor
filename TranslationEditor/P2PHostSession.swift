@@ -65,8 +65,8 @@ class P2PHostSession
 		password = randomAlphaNumericString(length: 16)
 		
 		listener = CBLListener(manager: CBLManager.sharedInstance(), port: 7623)
-		listener.requiresAuth = true
-		listener.setPasswords([userName: password])
+		listener.requiresAuth = false
+		// listener.setPasswords([userName: password])
 		
 		try listener.start()
 	}
@@ -91,6 +91,13 @@ class P2PHostSession
 		}
 		
 		instance = try P2PHostSession(projectId: projectId)
+		print("STATUS: Started hosting a P2P session")
+		
+		if let info = instance?.connectionInformation
+		{
+			print("STATUS: \(info)")
+		}
+		
 		return instance!
 	}
 	

@@ -211,6 +211,31 @@ final class ParagraphHistoryView: View
 		return conflictPaths
 	}
 	
+	// Finds the ids of the conflicting paragraph versions for the specified paragraph path
+	// Returns nil if there are no conglicts for the paragraph
+	func conflictsForParagraph(withId paragraphId: String) throws -> [String]?
+	{
+		var query = createQuery(ofType: .reduce, withKeys: createKey(paragraphId: paragraphId))
+		query.groupByKey = ParagraphHistoryView.KEY_PATH_ID
+		
+		if let row = try query.firstResultRow()
+		{
+			let ids = row.value.array { $0.string }
+			if ids.count > 1
+			{
+				return ids
+			}
+			else
+			{
+				return nil
+			}
+		}
+		else
+		{
+			return nil
+		}
+	}
+	
 	// Finds the latest common ancestor of all the provided paragraph ids
 	// This method should be called only for paragraphs that share a path / history together. Usually for paragraphs returned by the conflictsInRange -method
 	func commonAncestorOf(paragraphIds: [String]) throws -> Paragraph?

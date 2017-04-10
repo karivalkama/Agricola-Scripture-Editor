@@ -10,7 +10,7 @@ import Foundation
 import QRCode
 
 // This information can be used for connecting with peer hosts
-struct P2PConnectionInformation
+struct P2PConnectionInformation: CustomStringConvertible
 {
 	// ATTRIBUTES	--------------
 	
@@ -33,6 +33,8 @@ struct P2PConnectionInformation
 	{
 		return QRCode(stringRepresentation)
 	}
+	
+	var description: String { return "Server URL: \(serverURL)\nUsername: \(userName)\nPassword: \(password)\nProject: \(projectId)" }
 	
 	
 	// INIT	---------------------
@@ -81,7 +83,8 @@ class P2PClientSession: ConnectionListener
 		self.status = .connecting
 		
 		// Starts online connection and listens for the new status
-		ConnectionManager.instance.connect(serverURL: info.serverURL, userName: info.userName, password: info.password, continuous: true)
+		ConnectionManager.instance.connect(serverURL: info.serverURL, continuous: true)
+		// ConnectionManager.instance.connect(serverURL: info.serverURL, userName: info.userName, password: info.password, continuous: true)
 		ConnectionManager.instance.registerListener(self)
 	}
 	

@@ -245,6 +245,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 	func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)
 	{
 		print("STATUS: Mail send finished with result \(result)")
+		dismiss(animated: true, completion: nil)
 	}
 	
 	

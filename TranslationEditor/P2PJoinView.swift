@@ -96,9 +96,13 @@ import QRCodeReader
 		// TODO: Parse result and start P2P session
 		reader.stopScanning()
 		print("STATUS: Scanned QR code result: \(result.value) (of type \(result.metadataType))")
+		viewController.or(reader).dismiss(animated: true, completion: nil)
 		
 		if let info = P2PConnectionInformation.parse(from: result.value)
 		{
+			print("STATUS: Starting P2P client session")
+			print("STATUS: \(info)")
+			
 			P2PClientSession.start(info)
 			updateAppearance()
 			connectionUpdated?()
@@ -118,6 +122,7 @@ import QRCodeReader
 	{
 		reader.stopScanning()
 		print("STATUS: QR Capture session cancelled")
+		viewController.or(reader).dismiss(animated: true, completion: nil)
 	}
 	
 	func onConnectionStatusChange(newStatus status: ConnectionStatus)

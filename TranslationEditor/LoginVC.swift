@@ -204,7 +204,7 @@ class LoginVC: UIViewController//, ConnectionListener
 		
 		// Starts the updates in the background
 		// TODO: Add authorization when backed supports it
-		ConnectionManager.instance.connect(serverURL: SERVER_ADDRESS)
+		// ConnectionManager.instance.connect(serverURL: SERVER_ADDRESS)
 		
 		print("STATUS: Moving to select project view")
 		performSegue(withIdentifier: "SelectProject", sender: nil)
