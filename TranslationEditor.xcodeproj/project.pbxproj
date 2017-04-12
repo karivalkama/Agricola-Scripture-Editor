@@ -126,6 +126,8 @@
 		7C82CE8E1DE6E29500C054EB /* PropertyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */; };
 		7C936C0D1E9B751300AC06BF /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C0C1E9B751300AC06BF /* VersionCell.swift */; };
 		7C936C0F1E9B7F6700AC06BF /* ResolveConflictVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C0E1E9B7F6700AC06BF /* ResolveConflictVC.swift */; };
+		7C936C111E9DF6AF00AC06BF /* TranslationCellAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C101E9DF6AF00AC06BF /* TranslationCellAction.swift */; };
+		7C936C131E9DF87700AC06BF /* TranslationCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C121E9DF87700AC06BF /* TranslationCellDelegate.swift */; };
 		7C942A2B1E38C7E2000C614A /* PostCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */; };
 		7C942A2E1E38DD80000C614A /* AgricolaAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C942A2D1E38DD80000C614A /* AgricolaAccount.swift */; };
 		7C9BB7E31E8536AA0010DE5C /* MainMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */; };
@@ -337,6 +339,8 @@
 		7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyValue.swift; sourceTree = "<group>"; };
 		7C936C0C1E9B751300AC06BF /* VersionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCell.swift; sourceTree = "<group>"; };
 		7C936C0E1E9B7F6700AC06BF /* ResolveConflictVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResolveConflictVC.swift; sourceTree = "<group>"; };
+		7C936C101E9DF6AF00AC06BF /* TranslationCellAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationCellAction.swift; sourceTree = "<group>"; };
+		7C936C121E9DF87700AC06BF /* TranslationCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationCellDelegate.swift; sourceTree = "<group>"; };
 		7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCommentVC.swift; sourceTree = "<group>"; };
 		7C942A2D1E38DD80000C614A /* AgricolaAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgricolaAccount.swift; sourceTree = "<group>"; };
 		7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainMenu.storyboard; sourceTree = "<group>"; };
@@ -872,6 +876,8 @@
 				7C6070461E51B113007718BC /* TableCellSelectionListener.swift */,
 				7C6070521E570C0B007718BC /* OpenThreadStatusListener.swift */,
 				7CA1BAC31E323E6C00611FED /* LiveResource.swift */,
+				7C936C101E9DF6AF00AC06BF /* TranslationCellAction.swift */,
+				7C936C121E9DF87700AC06BF /* TranslationCellDelegate.swift */,
 			);
 			name = TranslationView;
 			sourceTree = "<group>";
@@ -1196,6 +1202,7 @@
 				7C0130C21E3F2D520053C5C2 /* ProjectSettings.swift in Sources */,
 				7CA1BAA01E2F9C2100611FED /* NotesThreadView.swift in Sources */,
 				7C4A4FAE1DF93B75009F890E /* AnyLiveQueryListener.swift in Sources */,
+				7C936C131E9DF87700AC06BF /* TranslationCellDelegate.swift in Sources */,
 				7CDBD6A81E238A0200912320 /* ResourceCategory.swift in Sources */,
 				7C20D7EC1D8C1B7200E84BA5 /* CellContentListener.swift in Sources */,
 				7C25180F1E8D0F8A0089E1FD /* EditAvatarVC.swift in Sources */,
@@ -1279,6 +1286,7 @@
 				7CA3B9BD1E840976002A6C48 /* CreateProjectVC.swift in Sources */,
 				7C57ECAA1E6D5EDA000718E9 /* SelectProjectVC.swift in Sources */,
 				7C57EC071E6709A2000718E9 /* Server.swift in Sources */,
+				7C936C111E9DF6AF00AC06BF /* TranslationCellAction.swift in Sources */,
 				7C4A4F8B1DEEC4BD009F890E /* View.swift in Sources */,
 				7C6070501E55860B007718BC /* Keyboard.swift in Sources */,
 				7CA1BAB81E31F33000611FED /* DateExtension.swift in Sources */,

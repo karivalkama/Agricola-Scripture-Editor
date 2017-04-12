@@ -16,3 +16,7 @@ let ParaMarkerAttributeName = "paraMarker"
 let ParaStyleAttributeName = "paraStyle"
 // The value of this attribute should be the chapter index
 let ChapterMarkerAttributeName = "chapterMarker"
+
+
+let chapterMarkerFont = UIFont(name: "Arial", size: 32.0)!
+let defaultParagraphFont = UIFont(name: "Arial", size: 16.0)!

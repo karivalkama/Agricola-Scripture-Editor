@@ -9,7 +9,7 @@
 import UIKit
 
 // TranslationVC is the view controller used in the translation / review / work view
-class TranslationVC: UIViewController, CellInputListener, AppStatusListener, TranslationCellManager, AddNotesDelegate, OpenThreadListener, UIGestureRecognizerDelegate
+class TranslationVC: UIViewController, CellInputListener, AppStatusListener, TranslationCellManager, AddNotesDelegate, OpenThreadListener, UIGestureRecognizerDelegate, TranslationCellDelegate
 {
 	// TYPES	----------
 	
@@ -173,14 +173,6 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		AppStatusHandler.instance.removeListener(self)
 		deactivate()
 	}
-
-	/*
-	override func didReceiveMemoryWarning()
-	{
-		super.didReceiveMemoryWarning()
-		
-		// Dispose of any resources that can be recreated.
-	}*/
 	
 	
 	// CELL LISTENING	-------------
@@ -261,6 +253,21 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 			}
 			
 			cell.configure(showsHistory: targetHistoryManager.currentDepthForParagraph(withId: paragraph.idString) != 0, inputListener: self, scrollManager: scrollManager, withNotesAtIndex: noteResourceIndex, openResource: switchToResource)
+		}
+	}
+	
+	func perform(action: TranslationCellAction, for cell: TranslationCell)
+	{
+		switch action
+		{
+		// For a open notes action, opens a new resource and performs the sync scrolling
+		case .openNotes(let index):
+			switchToResource(atIndex: index)
+			scrollManager.scrollToAnchor(cell: cell)
+		// For conflicts, displays the conflict resolve VC
+		case .resolveConflict:
+			// TODO: Find conflicts and handle them
+			break
 		}
 	}
 	

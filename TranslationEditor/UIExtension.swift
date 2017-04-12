@@ -38,3 +38,51 @@ extension UIViewController
 		present(myAlert, animated: true, completion: nil)
 	}
 }
+
+extension UITextView
+{
+	// Displays a usx string with the correct format
+	func display(usxString: NSAttributedString)
+	{
+		let newText = NSMutableAttributedString()
+		newText.append(usxString)
+		
+		// Adds visual attributes based on the existing attribute data
+		usxString.enumerateAttributes(in: NSMakeRange(0, text.length), options: [])
+		{
+			attributes, range, _ in
+			
+			for (attrName, value) in attributes
+			{
+				switch attrName
+				{
+				case ChapterMarkerAttributeName: newText.addAttribute(NSFontAttributeName, value: chapterMarkerFont, range: range)
+				case VerseIndexMarkerAttributeName, ParaMarkerAttributeName: newText.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: range)
+				case CharStyleAttributeName:
+					if let style = value as? CharStyle
+					{
+						switch style
+						{
+						// TODO: This font is just for testing purposes
+						case .quotation:
+							newText.addAttribute(NSFontAttributeName, value: UIFont(name: "Chalkduster", size: 18.0)!, range: range)
+						// TODO: Add exhaustive cases
+						default: break
+						}
+					}
+				// TODO: Add handling of paraStyle
+				default: newText.addAttribute(NSFontAttributeName, value: defaultParagraphFont, range: range)
+				}
+			}
+		}
+		
+		// Sets text content
+		attributedText = newText
+	}
+	
+	// Displays a paragraph as a formatted usx string
+	func display(paragraph: Paragraph)
+	{
+		display(usxString: paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange: false]))
+	}
+}
