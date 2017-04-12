@@ -22,25 +22,26 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	
 	// Path id -> Current Data index
 	private var pathIndex = [String : Int]()
-	private var queryManager: LiveQueryManager<ParagraphView>
+	private var queryManager: LiveQueryManager<QueryTarget>
 	
 	private(set) var currentData = [Paragraph]()
 	
-	let cellReuseId: String
-	
-	// The instance that manages content change listening and overwrites content when necessary
-	var cellManager: TranslationCellManager?
+	// Content listener is informed whenever the table contents have been updated
 	var contentListener: TranslationParagraphListener?
+	
+	private let configureCell: (UITableView, IndexPath, Paragraph) -> UITableViewCell
+	private let prepareUpdate: (() -> ())?
 	
 	
 	// INIT	-------------------------
 	
 	// TODO: Change book id to translation range
 	// Activation must be called separately
-	init(tableView: UITableView, cellReuseId: String, bookId: String)
+	init(tableView: UITableView, bookId: String, configureCell: @escaping (UITableView, IndexPath, Paragraph) -> UITableViewCell, prepareUpdate: (() -> ())? = nil)
 	{
 		self.tableView = tableView
-		self.cellReuseId = cellReuseId
+		self.configureCell = configureCell
+		self.prepareUpdate = prepareUpdate
 		
 		let query = ParagraphView.instance.latestParagraphQuery(bookId: bookId)
 		self.queryManager = query.liveQueryManager
@@ -56,8 +57,8 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	func rowsUpdated(rows: [Row<ParagraphView>])
 	{
 		// Updates paragraph data
-		// TODO: Check for conflicts. Make safer
-		currentData = rows.map { try! $0.object() }
+		currentData = rows.flatMap { try? $0.object() }
+		
 		// Updates the path index too
 		pathIndex = [:]
 		for i in 0 ..< currentData.count
@@ -65,8 +66,7 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 			pathIndex[currentData[i].pathId] = i
 		}
 		
-		print("STATUS: Paragraph data updated (\(rows.count) rows)")
-		
+		prepareUpdate?()
 		tableView.reloadData()
 		
 		contentListener?.translationParagraphsUpdated(currentData)
@@ -79,12 +79,11 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		// Finds a reusable cell
-		let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId, for: indexPath) as! TranslationCell
-		
 		// Updates cell content (either from current data or from current input status)
 		let paragraph = currentData[indexPath.row]
+		return configureCell(tableView, indexPath, paragraph)
 		
+		/*
 		var stringContents: NSAttributedString!
 		if let input = cellManager?.overrideContentForParagraph(paragraph)
 		{
@@ -99,6 +98,7 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		cell.setContent(stringContents, withId: paragraph.pathId)
 		cellManager?.cellUpdated(cell, paragraph: paragraph)
 		return cell
+		*/
 	}
 	
 	

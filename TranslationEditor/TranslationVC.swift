@@ -9,7 +9,7 @@
 import UIKit
 
 // TranslationVC is the view controller used in the translation / review / work view
-class TranslationVC: UIViewController, CellInputListener, AppStatusListener, TranslationCellManager, AddNotesDelegate, OpenThreadListener, UIGestureRecognizerDelegate, TranslationCellDelegate
+class TranslationVC: UIViewController, CellInputListener, AppStatusListener, AddNotesDelegate, OpenThreadListener, UIGestureRecognizerDelegate, TranslationCellDelegate
 {
 	// TYPES	----------
 	
@@ -51,6 +51,9 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	// Open thread status
 	// path id -> [ resource ids for each resource containing open threads for the path ]
 	private var openThreadStatus = [String: [String]]()
+	// The conflicting paragraphs for each path id
+	// path id -> paragraph ids
+	private var conflictStatus = [String: [String]]()
 	
 	private var active = false
 	
@@ -77,8 +80,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		resourceTableView.rowHeight = UITableViewAutomaticDimension
 		resourceTableView.estimatedRowHeight = 320
 		
-		targetTranslationDS = TranslationTableViewDS(tableView: translationTableView, cellReuseId: "TranslationCell", bookId: book.idString)
-		targetTranslationDS.cellManager = self
+		targetTranslationDS = TranslationTableViewDS(tableView: translationTableView, bookId: book.idString, configureCell: configureTargetTranslationCell, prepareUpdate: updateConflictData)
 		translationTableView.dataSource = targetTranslationDS
 		
 		resourceManager = ResourceManager(resourceTableView: resourceTableView, addNotesDelegate: self, threadStatusListener: self)
@@ -234,29 +236,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 		}
 	}
 	
-	func cellUpdated(_ cell: TranslationCell, paragraph: Paragraph)
-	{
-		if let cell = cell as? TargetTranslationCell
-		{
-			// Finds the first viable index of a resource that contains an open thread for this paragraph cell
-			var noteResourceIndex: Int? = nil
-			if let openResourceIds = cell.pathId.flatMap({ self.openThreadStatus[$0] })
-			{
-				for resourceId in openResourceIds
-				{
-					if let resourceIndex = resourceManager.indexForResource(withId: resourceId)
-					{
-						noteResourceIndex = resourceIndex
-						break
-					}
-				}
-			}
-			
-			cell.configure(showsHistory: targetHistoryManager.currentDepthForParagraph(withId: paragraph.idString) != 0, inputListener: self, scrollManager: scrollManager, withNotesAtIndex: noteResourceIndex, openResource: switchToResource)
-		}
-	}
-	
-	func perform(action: TranslationCellAction, for cell: TranslationCell)
+	func perform(action: TranslationCellAction, for cell: TargetTranslationCell)
 	{
 		switch action
 		{
@@ -385,6 +365,58 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Tra
 	
 	
 	// OTHER	---------------------
+	
+	private func configureTargetTranslationCell(tableView: UITableView, indexPath: IndexPath, paragraph: Paragraph) -> UITableViewCell
+	{
+		let cell = tableView.dequeueReusableCell(withIdentifier: TargetTranslationCell.identifier, for: indexPath) as! TargetTranslationCell
+		
+		// Sets the cell contents either based on collected user input or paragraph data
+		if let input = inputData[paragraph.pathId]
+		{
+			cell.setContent(usxString: input, pathId: paragraph.pathId)
+		}
+		else
+		{
+			cell.setContent(paragraph: paragraph)
+		}
+		
+		var action: TranslationCellAction?
+		
+		// Checks if there are any conflicts for the cell
+		if conflictStatus[paragraph.pathId] != nil
+		{
+			action = .resolveConflict
+		}
+		// If there are no conflicts, checks for notes
+		else if let openResourceIds = cell.pathId.flatMap({ self.openThreadStatus[$0] })
+		{
+			for resourceId in openResourceIds
+			{
+				if let resourceIndex = resourceManager.indexForResource(withId: resourceId)
+				{
+					action = TranslationCellAction.openNotes(atIndex: resourceIndex)
+					break
+				}
+			}
+		}
+			
+		cell.configure(showsHistory: targetHistoryManager.currentDepthForParagraph(withId: paragraph.idString) != 0, inputListener: self, scrollManager: scrollManager, action: action)
+		cell.delegate = self
+		
+		return cell
+	}
+	
+	private func updateConflictData()
+	{
+		do
+		{
+			conflictStatus = try ParagraphHistoryView.instance.conflictsInRange(bookId: book.idString)
+		}
+		catch
+		{
+			print("ERROR: Failed to update paragraph conflict status. \(error)")
+		}
+	}
 	
 	private func switchToResource(atIndex index: Int)
 	{

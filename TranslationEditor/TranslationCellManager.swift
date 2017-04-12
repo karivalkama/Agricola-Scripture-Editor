@@ -9,6 +9,7 @@
 import Foundation
 
 // This protocol can be used along with some table view controllers in order to provide custom cell content and management
+@available(*, deprecated)
 protocol TranslationCellManager
 {
 	// Provides custom content for a certain cell. Nil if original content should be used.

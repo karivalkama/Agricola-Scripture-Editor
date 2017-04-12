@@ -48,7 +48,7 @@ extension UITextView
 		newText.append(usxString)
 		
 		// Adds visual attributes based on the existing attribute data
-		usxString.enumerateAttributes(in: NSMakeRange(0, text.length), options: [])
+		usxString.enumerateAttributes(in: NSMakeRange(0, newText.length), options: [])
 		{
 			attributes, range, _ in
 			

@@ -9,7 +9,7 @@
 import Foundation
 
 // Classes implementing this protocol are informed when the user makes some changes to cell contents
-protocol CellInputListener
+protocol CellInputListener: class
 {
 	// This method is called each time the contents of a cell change
 	// Only user initiated changes are sent

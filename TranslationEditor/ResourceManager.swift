@@ -132,13 +132,20 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 	
 	func setResources(sourceBooks: [(Book, ParagraphBinding)], notes: [ResourceCollection])
 	{
-		// TODO: Deactivate old resources if they are not present anymore
+		func configureSourceCell(tableView: UITableView, indexPath: IndexPath, paragraph: Paragraph) -> UITableViewCell
+		{
+			let cell = tableView.dequeueReusableCell(withIdentifier: SourceTranslationCell.identifier, for: indexPath) as! SourceTranslationCell
+			cell.configure(paragraph: paragraph)
+			
+			return cell
+		}
 		
+		// TODO: Deactivate old resources if they are not present anymore
 		self.sourceBooks = sourceBooks.map
 		{
 			book, binding in
 			
-			return BookData(book: book, binding: binding, datasource: TranslationTableViewDS(tableView: resourceTableView!, cellReuseId: "sourceCell", bookId: book.idString))
+			return BookData(book: book, binding: binding, datasource: TranslationTableViewDS(tableView: resourceTableView!, bookId: book.idString, configureCell: configureSourceCell))
 		}
 		
 		self.notes = notes.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString, threadListener: self.threadStatusListener)) }

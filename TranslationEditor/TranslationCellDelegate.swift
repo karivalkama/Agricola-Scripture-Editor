@@ -9,8 +9,8 @@
 import Foundation
 
 // Translation cell delegates implement / handle actions fired from translation cells
-protocol TranslationCellDelegate
+protocol TranslationCellDelegate: class
 {
 	// Performs an action fired from a translation cell
-	func perform(action: TranslationCellAction, for cell: TranslationCell)
+	func perform(action: TranslationCellAction, for cell: TargetTranslationCell)
 }

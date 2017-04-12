@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TargetTranslationCell: TranslationCell, UITextViewDelegate
+class TargetTranslationCell: UITableViewCell, ParagraphAssociated, UITextViewDelegate
 {
 	// OUTLETS	----------
 	
@@ -18,37 +18,34 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 	
 	// ATTRIBUTES	------
 	
-	private var notesIndex: Int?
-	private var inputListener: CellInputListener?
+	static let identifier = "TranslationCell"
+	
+	private(set) var pathId: String?
+	
+	private var action: TranslationCellAction?
+	
+	private weak var inputListener: CellInputListener?
 	private weak var scrollManager: ScrollSyncManager?
 	
-	// Opens a resource category at certain index
-	private var openResource: ((Int) -> ())?
+	weak var delegate: TranslationCellDelegate?
 	
 	
 	// ACTIONS	-----------
 	
 	@IBAction func noteFlagButtonPressed(_ sender: Any)
 	{
-		guard let notesIndex = notesIndex else
+		if let action = action
 		{
-			return
+			delegate?.perform(action: action, for: self)
 		}
-		
-		// Changes the selected resource to notes
-		openResource?(notesIndex)
-		
-		// Then scrolls to highlight this cell
-		scrollManager?.scrollToAnchor(cell: self)
 	}
+	
 	
 	// IMPLEMENTED METHODS	----
 	
     override func awakeFromNib()
 	{
         super.awakeFromNib()
-		
-		textView = inputTextField
 		
 		// Listens to changes in text view
 		inputTextField.delegate = self
@@ -97,7 +94,7 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 		}
 		
 		// TODO: Determine the attributes for the inserted text
-		inputTextField.typingAttributes = [NSFontAttributeName: TranslationCell.defaultFont, NSForegroundColorAttributeName: Colour.Primary.dark.asColour]
+		inputTextField.typingAttributes = [NSFontAttributeName: defaultParagraphFont, NSForegroundColorAttributeName: Colour.Primary.dark.asColour]
 		return true
 		
 		// TODO: Implement uneditable verse markings here
@@ -108,20 +105,34 @@ class TargetTranslationCell: TranslationCell, UITextViewDelegate
 	
 	// OTHER METHODS	-----
 	
-	func configure(showsHistory: Bool, inputListener: CellInputListener, scrollManager: ScrollSyncManager, withNotesAtIndex notesIndex: Int?, openResource: @escaping (Int) -> ())
+	func setContent(paragraph: Paragraph)
+	{
+		pathId = paragraph.pathId
+		inputTextField.display(paragraph: paragraph)
+	}
+	
+	func setContent(usxString: NSAttributedString, pathId: String)
+	{
+		self.pathId = pathId
+		inputTextField.display(usxString: usxString)
+	}
+	
+	func configure(showsHistory: Bool, inputListener: CellInputListener, scrollManager: ScrollSyncManager, action: TranslationCellAction? = nil)
 	{
 		self.inputListener = inputListener
 		self.scrollManager = scrollManager
-		self.notesIndex = notesIndex
-		self.openResource = openResource
+		self.action = action
 		
 		// Notes flag is displayed only when there are pending notes (and not in history mode)
-		notesFlagButton.isHidden = notesIndex == nil || showsHistory
+		notesFlagButton.isHidden = action == nil || showsHistory
+		notesFlagButton.setImage(action?.icon, for: .normal)
 		
+		/*
 		let menuItem = UIMenuItem(title: "Print To Console", action: #selector(printToConsole))
 		UIMenuController.shared.menuItems = [menuItem]
 		UIMenuController.shared.update()
-		
+		*/
+
 		// When displays history, the background color is set to gray
 		contentView.backgroundColor = showsHistory ? UIColor.lightGray : UIColor.white
 	}

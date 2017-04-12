@@ -9,6 +9,7 @@
 import Foundation
 
 // This is the superclass for different translation cells (source and target)
+@available(*, deprecated)
 class TranslationCell: UITableViewCell, ParagraphAssociated
 {
 	// ATTRIBUTES	-----------------
