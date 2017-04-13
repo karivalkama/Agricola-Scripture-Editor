@@ -11,6 +11,7 @@ import Foundation
 // Some utility functions
 
 // Saves paragraph information by overwriting an old version
+@available(*, deprecated)
 fileprivate func handleSingleMatch(existing: Paragraph, newVersion: Paragraph) throws
 {
 	// TODO: Only commit if the paragraphs contain changes
@@ -19,11 +20,13 @@ fileprivate func handleSingleMatch(existing: Paragraph, newVersion: Paragraph) t
 }
 
 // Saves a bunch of single paragraph matches to the database
+@available(*, deprecated)
 fileprivate func handleSingleMatches(_ matches: [(Paragraph, Paragraph)]) throws
 {
 	try matches.forEach{ existing, newVersion in try handleSingleMatch(existing: existing, newVersion: newVersion) }
 }
 
+@available(*, deprecated)
 fileprivate func paragraphsHaveEqualRange(_ first: Paragraph, _ second: Paragraph) -> Bool
 {
 	if let range1 = first.range, let range2 = second.range
@@ -39,45 +42,34 @@ fileprivate func paragraphsHaveEqualRange(_ first: Paragraph, _ second: Paragrap
 // This USX processor is able to parse contents of a single book based on USX data
 class USXBookProcessor: USXContentProcessor
 {
-	typealias Generated = Book
+	typealias Generated = BookData
 	typealias Processed = Chapter
 	
 	
 	// ATTRIBUTES	-------
 	
-	private let projectId: String
 	private let userId: String
-	private let code: String
-	private let languageId: String
-	
-	// Language + code + identifier -> Book to overwrite
-	private let findReplacedBook: FindBook
-	private let matchParagraphs: MatchParagraphs
 	
 	private var introductionParas = [Para]()
-	private var identifier: String?
-	private var _book: Book?
+	private var identifier = ""
+	private var book: Book
 	
 	
 	// INIT	---------------
 	
-	init(projectId: String, userId: String, languageId: String, code: String, findReplacedBook: @escaping FindBook, matchParagraphs: @escaping MatchParagraphs)
+	init(projectId: String, userId: String, languageId: String, code: String)
 	{
-		self.projectId = projectId
 		self.userId = userId
-		self.languageId = languageId
-		self.code = code
-		self.findReplacedBook = findReplacedBook
-		self.matchParagraphs = matchParagraphs
+		self.book = Book(projectId: projectId, code: code, identifier: "", languageId: languageId)
 	}
 	
 	// Creates a new USX parser for book data
 	// The parser should be set to start after a book element start
 	// The parser will stop at the next book element start or at the end of usx
-	static func createBookParser(caller: XMLParserDelegate, projectId: String, userId: String, languageId: String, bookCode: String, findReplacedBook: @escaping FindBook, matchParagraphs: @escaping MatchParagraphs, targetPointer: UnsafeMutablePointer<[Book]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Book, Chapter>
+	static func createBookParser(caller: XMLParserDelegate, projectId: String, userId: String, languageId: String, bookCode: String, targetPointer: UnsafeMutablePointer<[Generated]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Generated, Processed>
 	{
-		let parser = USXContentParser<Book, Chapter>(caller: caller, containingElement: .usx, lowestBreakMarker: .book, targetPointer: targetPointer, using: errorHandler)
-		parser.processor = AnyUSXContentProcessor(USXBookProcessor(projectId: projectId, userId: userId, languageId: languageId, code: bookCode, findReplacedBook: findReplacedBook, matchParagraphs: matchParagraphs))
+		let parser = USXContentParser<Generated, Processed>(caller: caller, containingElement: .usx, lowestBreakMarker: .book, targetPointer: targetPointer, using: errorHandler)
+		parser.processor = AnyUSXContentProcessor(USXBookProcessor(projectId: projectId, userId: userId, languageId: languageId, code: bookCode))
 		
 		return parser
 	}
@@ -85,7 +77,7 @@ class USXBookProcessor: USXContentProcessor
 	
 	// USX PARSING	-------
 	
-	func getParser(_ caller: USXContentParser<Book, Chapter>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Chapter]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
+	func getParser(_ caller: USXContentParser<Generated, Processed>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
 	{
 		// On chapter elements, parses using a chapter parser
 		if elementName == USXMarkerElement.chapter.rawValue
@@ -93,16 +85,7 @@ class USXBookProcessor: USXContentProcessor
 			// Parses the chapter index from an attribute
 			if let numberAttribute = attributes["number"], let index = Int(numberAttribute)
 			{
-				do
-				{
-					let book = try getBook()
-					return (USXChapterProcessor.createChapterParser(caller: caller, userId: userId, bookId: book.idString, index: index, targetPointer: targetPointer, using: errorHandler), false)
-				}
-				catch
-				{
-					errorHandler(error)
-					return nil
-				}
+				return (USXChapterProcessor.createChapterParser(caller: caller, userId: userId, bookId: book.idString, index: index, targetPointer: targetPointer, using: errorHandler), false)
 			}
 			else
 			{
@@ -128,19 +111,34 @@ class USXBookProcessor: USXContentProcessor
 		}
 	}
 	
-	func getCharacterParser(_ caller: USXContentParser<Book, Chapter>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[Chapter]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
+	func getCharacterParser(_ caller: USXContentParser<Generated, Processed>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
 	{
 		// Only character data found by this parser is the book name inside the book element
 		// this information is parsed here and not delegated
-		identifier = string
+		identifier += string
 		return nil
 	}
 	
-	func generate(from content: [Chapter], using errorHandler: @escaping ErrorHandler) -> Book?
+	func generate(from content: [Processed], using errorHandler: @escaping ErrorHandler) -> Generated?
 	{
+		// Finalises book data
+		book.identifier = identifier
+		// TODO: Add introductory paras at some point
+		
+		// Wraps the collected data into a book data
+		let paragraphs = content.flatMap { chapter in return chapter.flatMap { $0 } }
+		let bookData = BookData(book: book, paragraphs: paragraphs)
+		
+		// Resets status for reuse
+		introductionParas = []
+		identifier = ""
+		
+		return bookData
+		
 		// Creates the introduction paragraphs (TODO: Removed in the current version)
 		//let introduction = ParagraphPrev(content: introductionParas)
 		
+		/*
 		do
 		{
 			// Creates the book
@@ -326,12 +324,14 @@ class USXBookProcessor: USXContentProcessor
 			errorHandler(error)
 			return nil
 		}
+		*/
 	}
 	
 	
 	// OTHER METHODS	---------
 	
 	// Function used because computed properties can't throw at this time
+	/*
 	private func getBook() throws -> Book
 	{
 		if _book == nil
@@ -357,4 +357,5 @@ class USXBookProcessor: USXContentProcessor
 		
 		return _book!
 	}
+*/
 }

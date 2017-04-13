@@ -8,7 +8,7 @@
 
 import Foundation
 
-fileprivate struct BookData
+fileprivate struct BookResourceData
 {
 	let book: Book
 	let binding: ParagraphBinding
@@ -30,7 +30,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 	private weak var addNotesDelegate: AddNotesDelegate!
 	private weak var threadStatusListener: OpenThreadListener?
 	
-	private var sourceBooks = [BookData]()
+	private var sourceBooks = [BookResourceData]()
 	private var notes = [NotesData]()
 	
 	private var currentLiveResource: LiveResource?
@@ -47,7 +47,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 	}
 	
 	// Currently selected book data, if one is selected
-	private var currentSourceBookData: BookData?
+	private var currentSourceBookData: BookResourceData?
 	{
 		if let currentResourceIndex = currentResourceIndex, currentResourceIndex < sourceBooks.count
 		{
@@ -145,7 +145,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 		{
 			book, binding in
 			
-			return BookData(book: book, binding: binding, datasource: TranslationTableViewDS(tableView: resourceTableView!, bookId: book.idString, configureCell: configureSourceCell))
+			return BookResourceData(book: book, binding: binding, datasource: TranslationTableViewDS(tableView: resourceTableView!, bookId: book.idString, configureCell: configureSourceCell))
 		}
 		
 		self.notes = notes.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString, threadListener: self.threadStatusListener)) }
