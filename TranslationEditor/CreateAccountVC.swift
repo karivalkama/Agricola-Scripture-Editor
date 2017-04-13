@@ -9,7 +9,7 @@
 import UIKit
 
 // This view is used for creating new agricola accounts
-class CreateAccountVC: UIViewController, ConnectionListener, LiveQueryListener, MultiSelectionDataSource
+class CreateAccountVC: UIViewController, ConnectionListener, LiveQueryListener, FilteredSelectionDataSource
 {
 	// TYPES	----------------------
 	

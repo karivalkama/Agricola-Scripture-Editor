@@ -246,8 +246,12 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 			scrollManager.scrollToAnchor(cell: cell)
 		// For conflicts, displays the conflict resolve VC
 		case .resolveConflict:
-			// TODO: Find conflicts and handle them
-			break
+			displayAlert(withIdentifier: "ResolveConflictVC", storyBoardId: "Main")
+			{
+				let viewController = $0 as! ResolveConflictVC
+				// TODO: Make more secure
+				viewController.configure(versionIds: self.conflictStatus[cell.pathId!]!)
+			}
 		}
 	}
 	

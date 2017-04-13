@@ -128,6 +128,9 @@
 		7C936C0F1E9B7F6700AC06BF /* ResolveConflictVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C0E1E9B7F6700AC06BF /* ResolveConflictVC.swift */; };
 		7C936C111E9DF6AF00AC06BF /* TranslationCellAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C101E9DF6AF00AC06BF /* TranslationCellAction.swift */; };
 		7C936C131E9DF87700AC06BF /* TranslationCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C121E9DF87700AC06BF /* TranslationCellDelegate.swift */; };
+		7C936C151E9E582C00AC06BF /* FilteredSingleSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C936C141E9E582C00AC06BF /* FilteredSingleSelection.xib */; };
+		7C936C171E9F48C900AC06BF /* FilteredSingleSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C161E9F48C900AC06BF /* FilteredSingleSelection.swift */; };
+		7C936C191E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C181E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift */; };
 		7C942A2B1E38C7E2000C614A /* PostCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */; };
 		7C942A2E1E38DD80000C614A /* AgricolaAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C942A2D1E38DD80000C614A /* AgricolaAccount.swift */; };
 		7C9BB7E31E8536AA0010DE5C /* MainMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */; };
@@ -341,6 +344,9 @@
 		7C936C0E1E9B7F6700AC06BF /* ResolveConflictVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResolveConflictVC.swift; sourceTree = "<group>"; };
 		7C936C101E9DF6AF00AC06BF /* TranslationCellAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationCellAction.swift; sourceTree = "<group>"; };
 		7C936C121E9DF87700AC06BF /* TranslationCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationCellDelegate.swift; sourceTree = "<group>"; };
+		7C936C141E9E582C00AC06BF /* FilteredSingleSelection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilteredSingleSelection.xib; sourceTree = "<group>"; };
+		7C936C161E9F48C900AC06BF /* FilteredSingleSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilteredSingleSelection.swift; sourceTree = "<group>"; };
+		7C936C181E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilteredSelectionDataSource.swift; sourceTree = "<group>"; };
 		7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCommentVC.swift; sourceTree = "<group>"; };
 		7C942A2D1E38DD80000C614A /* AgricolaAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgricolaAccount.swift; sourceTree = "<group>"; };
 		7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainMenu.storyboard; sourceTree = "<group>"; };
@@ -749,6 +755,8 @@
 				7C55A1FE1E7970A70038C122 /* CreateAvatarView.swift */,
 				7C9BB7E61E853A250010DE5C /* TopUserView.swift */,
 				7C15151B1E961FD000419DEA /* P2PJoinView.swift */,
+				7C936C161E9F48C900AC06BF /* FilteredSingleSelection.swift */,
+				7C936C181E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift */,
 			);
 			name = XibViews;
 			sourceTree = "<group>";
@@ -776,6 +784,7 @@
 				7C57ECAD1E6D970C000718E9 /* CreateAvatar.xib */,
 				7C9BB7E41E8538730010DE5C /* TopUserDisplay.xib */,
 				7C1515191E961B6300419DEA /* P2PJoinView.xib */,
+				7C936C141E9E582C00AC06BF /* FilteredSingleSelection.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1009,6 +1018,7 @@
 				7C57EC151E694975000718E9 /* TIT_ENG.usx in Resources */,
 				7C18A1991D8BBEBD00DD1B03 /* LaunchScreen.storyboard in Resources */,
 				7C57EC0F1E6948FC000718E9 /* TI2_ENG.usx in Resources */,
+				7C936C151E9E582C00AC06BF /* FilteredSingleSelection.xib in Resources */,
 				7C18A1961D8BBEBD00DD1B03 /* Assets.xcassets in Resources */,
 				7C9BB7E31E8536AA0010DE5C /* MainMenu.storyboard in Resources */,
 				7C6070561E5C601D007718BC /* Login.storyboard in Resources */,
@@ -1182,6 +1192,7 @@
 			files = (
 				7C4A4FB61DF96730009F890E /* ParagraphEditView.swift in Sources */,
 				7CAF6D821DB4F47700E10597 /* USXChapterProcessor.swift in Sources */,
+				7C936C191E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift in Sources */,
 				7C20D7E81D8BF9B100E84BA5 /* Para.swift in Sources */,
 				7CDBD6CD1E28C1E700912320 /* TranslationCellManager.swift in Sources */,
 				7CA3B9BF1E8512F4002A6C48 /* Attachment.swift in Sources */,
@@ -1299,6 +1310,7 @@
 				7C4A4FA61DF835E1009F890E /* LiveQueryManager.swift in Sources */,
 				7CA1BAC81E35E72E00611FED /* TranslationParagraphListener.swift in Sources */,
 				7C0130D11E4DB92C0053C5C2 /* ConnectionListener.swift in Sources */,
+				7C936C171E9F48C900AC06BF /* FilteredSingleSelection.swift in Sources */,
 				7C55A1FF1E7970A70038C122 /* CreateAvatarView.swift in Sources */,
 				7C82CE8E1DE6E29500C054EB /* PropertyValue.swift in Sources */,
 				7C506B7F1E892FA400ACB5AC /* MainMenuVC.swift in Sources */,

@@ -268,6 +268,101 @@
             </objects>
             <point key="canvasLocation" x="29.882812499999996" y="51.5625"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="27H-eW-0N4">
+            <objects>
+                <viewController storyboardIdentifier="ImportUSX" id="6ZB-aJ-eNh" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QYC-2p-l01"/>
+                        <viewControllerLayoutGuide type="bottom" id="PXC-TV-3E9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nab-Ma-NbE">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4H-y5-Uuf">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="75U-4B-VKh"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Import USX File" id="uU0-7a-qRc">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Phh-Y6-gSM">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" id="Lby-S3-qr5">
+                                            <view key="customView" contentMode="scaleToFill" id="k1W-5T-QvW" customClass="TopUserView" customModule="TranslationEditor" customModuleProvider="target">
+                                                <rect key="frame" x="777" y="5" width="227" height="33"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </view>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="d4k-qD-tnZ" userLabel="Content Stack View">
+                                <rect key="frame" x="84" y="76" width="856" height="628"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="GAL: King James Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYb-eo-8RK">
+                                        <rect key="frame" x="0.0" y="0.0" width="856" height="33.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" distribution="fillEqually" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="yhN-i4-gii" userLabel="Selection Stack View">
+                                        <rect key="frame" x="0.0" y="65.5" width="856" height="562.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="kr3-tq-0Ns" userLabel="Select Language Stack View">
+                                                <rect key="frame" x="0.0" y="0.0" width="396" height="562.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OaF-XV-X24">
+                                                        <rect key="frame" x="0.0" y="0.0" width="396" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="fUH-YQ-xZW" customClass="FilteredSingleSelection" customModule="TranslationEditor" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="36.5" width="396" height="526"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hPn-uk-Mgg" userLabel="Select Book Stack View">
+                                                <rect key="frame" x="460" y="0.0" width="396" height="562.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Select Book to Update" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CT7-Xc-Iak">
+                                                        <rect key="frame" x="0.0" y="0.0" width="396" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="40j-tK-L8p">
+                                                        <rect key="frame" x="0.0" y="36.5" width="396" height="526"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </tableView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="d4k-qD-tnZ" firstAttribute="top" secondItem="S4H-y5-Uuf" secondAttribute="bottom" constant="32" id="elK-rC-rek"/>
+                            <constraint firstItem="S4H-y5-Uuf" firstAttribute="leading" secondItem="nab-Ma-NbE" secondAttribute="leading" id="fp1-ed-yyQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="d4k-qD-tnZ" secondAttribute="trailing" constant="64" id="m8K-s2-P44"/>
+                            <constraint firstItem="d4k-qD-tnZ" firstAttribute="leading" secondItem="nab-Ma-NbE" secondAttribute="leadingMargin" constant="64" id="s0S-36-qx7"/>
+                            <constraint firstItem="S4H-y5-Uuf" firstAttribute="top" secondItem="nab-Ma-NbE" secondAttribute="top" id="u89-vF-qWx"/>
+                            <constraint firstAttribute="trailing" secondItem="S4H-y5-Uuf" secondAttribute="trailing" id="ue4-j2-oi6"/>
+                            <constraint firstItem="PXC-TV-3E9" firstAttribute="top" secondItem="d4k-qD-tnZ" secondAttribute="bottom" constant="64" id="xTq-ar-fdx"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ipI-hx-yDm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="29.882812499999996" y="725.78125"/>
+        </scene>
         <!--EditAvatar-->
         <scene sceneID="9xo-pC-Eb0">
             <objects>
@@ -372,6 +467,116 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6tX-dL-cHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="642.7734375" y="52.34375"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="rzN-yh-Vvc">
+            <objects>
+                <viewController storyboardIdentifier="ImportPreview" id="5Q3-b0-bhS" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="06g-mb-BTg"/>
+                        <viewControllerLayoutGuide type="bottom" id="7Nt-7t-rCc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e1g-76-J1G">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eep-a7-Je6">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="RjS-1x-OgG"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Preview Import" id="KIR-gC-jOu">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="2mb-qs-nHB">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" id="hoq-07-cZu">
+                                            <view key="customView" contentMode="scaleToFill" id="hfe-20-SwZ" customClass="TopUserView" customModule="TranslationEditor" customModuleProvider="target">
+                                                <rect key="frame" x="777" y="5" width="227" height="33"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </view>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="7oy-1t-aRQ" userLabel="Content Stack View">
+                                <rect key="frame" x="20" y="60" width="984" height="692"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="SnG-2Z-yrR" userLabel="Previous Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="484" height="692"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Previous Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXo-zG-QkS">
+                                                <rect key="frame" x="0.0" y="0.0" width="484" height="26.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="61H-Kl-wXT">
+                                                <rect key="frame" x="0.0" y="42.5" width="484" height="593.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </tableView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJE-Tt-HfA" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="652" width="484" height="40"/>
+                                                <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="owF-zy-7LC"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <state key="normal" title="Abort">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ToJ-Ad-Ide" userLabel="New Stack View">
+                                        <rect key="frame" x="500" y="0.0" width="484" height="692"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="New Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OD-u7-rre">
+                                                <rect key="frame" x="0.0" y="0.0" width="484" height="26.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TH7-MB-hlA">
+                                                <rect key="frame" x="0.0" y="42.5" width="484" height="593.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </tableView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCx-AJ-uv9" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="652" width="484" height="40"/>
+                                                <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="tZa-L8-fSP"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <state key="normal" title="Accept">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="7oy-1t-aRQ" secondAttribute="trailing" id="96E-Uu-7Kk"/>
+                            <constraint firstItem="Eep-a7-Je6" firstAttribute="top" secondItem="e1g-76-J1G" secondAttribute="top" id="Zj1-Ts-w9F"/>
+                            <constraint firstItem="7oy-1t-aRQ" firstAttribute="leading" secondItem="e1g-76-J1G" secondAttribute="leadingMargin" id="i3Z-QU-DgZ"/>
+                            <constraint firstItem="7Nt-7t-rCc" firstAttribute="top" secondItem="7oy-1t-aRQ" secondAttribute="bottom" constant="16" id="jcc-VJ-TVc"/>
+                            <constraint firstItem="Eep-a7-Je6" firstAttribute="leading" secondItem="e1g-76-J1G" secondAttribute="leading" id="kw2-mW-CTp"/>
+                            <constraint firstItem="7oy-1t-aRQ" firstAttribute="top" secondItem="Eep-a7-Je6" secondAttribute="bottom" constant="16" id="nwS-3b-bul"/>
+                            <constraint firstAttribute="trailing" secondItem="Eep-a7-Je6" secondAttribute="trailing" id="qt8-mi-rhq"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="amO-7Z-aJO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="642.7734375" y="725.78125"/>
         </scene>
     </scenes>
     <resources>

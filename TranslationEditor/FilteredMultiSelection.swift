@@ -9,19 +9,6 @@
 import UIKit
 import HTagView
 
-// The multi selection data source provides the content for the user to select
-protocol MultiSelectionDataSource
-{
-	// The number of options in total (not all of these are always displayed)
-	var numberOfOptions: Int { get }
-	
-	// The displayed label for an option
-	func labelForOption(atIndex index: Int) -> String
-	
-	// Checks whether the item at the specified index should be included in the target group of the provided filter
-	func indexIsIncludedInFilter(index: Int, filter: String) -> Bool
-}
-
 // This UI element allows the user to pick multiple elements from a table that also supports filtering
 @IBDesignable class FilteredMultiSelection: CustomXibView, UITableViewDataSource, UITableViewDelegate, HTagViewDataSource, HTagViewDelegate, UITextFieldDelegate
 {
@@ -34,7 +21,7 @@ protocol MultiSelectionDataSource
 	
 	// ATTRIBUTES	-------------
 	
-	var dataSource: MultiSelectionDataSource?
+	weak var dataSource: FilteredSelectionDataSource?
 	
 	private(set) var selectedIndices = [Int]()
 	private var displayedIndices = [Int]()
