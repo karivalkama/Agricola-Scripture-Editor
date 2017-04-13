@@ -131,6 +131,8 @@
 		7C936C151E9E582C00AC06BF /* FilteredSingleSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C936C141E9E582C00AC06BF /* FilteredSingleSelection.xib */; };
 		7C936C171E9F48C900AC06BF /* FilteredSingleSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C161E9F48C900AC06BF /* FilteredSingleSelection.swift */; };
 		7C936C191E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C181E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift */; };
+		7C936C1B1E9F7F1E00AC06BF /* USXBookFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C1A1E9F7F1E00AC06BF /* USXBookFinder.swift */; };
+		7C936C1D1E9F921200AC06BF /* BookData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C1C1E9F921200AC06BF /* BookData.swift */; };
 		7C942A2B1E38C7E2000C614A /* PostCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */; };
 		7C942A2E1E38DD80000C614A /* AgricolaAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C942A2D1E38DD80000C614A /* AgricolaAccount.swift */; };
 		7C9BB7E31E8536AA0010DE5C /* MainMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */; };
@@ -347,6 +349,8 @@
 		7C936C141E9E582C00AC06BF /* FilteredSingleSelection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilteredSingleSelection.xib; sourceTree = "<group>"; };
 		7C936C161E9F48C900AC06BF /* FilteredSingleSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilteredSingleSelection.swift; sourceTree = "<group>"; };
 		7C936C181E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilteredSelectionDataSource.swift; sourceTree = "<group>"; };
+		7C936C1A1E9F7F1E00AC06BF /* USXBookFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXBookFinder.swift; sourceTree = "<group>"; };
+		7C936C1C1E9F921200AC06BF /* BookData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookData.swift; sourceTree = "<group>"; };
 		7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCommentVC.swift; sourceTree = "<group>"; };
 		7C942A2D1E38DD80000C614A /* AgricolaAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgricolaAccount.swift; sourceTree = "<group>"; };
 		7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainMenu.storyboard; sourceTree = "<group>"; };
@@ -705,6 +709,8 @@
 				7CCC01371DA7B45A00F0562E /* USXCharParser.swift */,
 				7C4CC1721DB0EDA200BCF24B /* USXMarkerElement.swift */,
 				7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */,
+				7C936C1A1E9F7F1E00AC06BF /* USXBookFinder.swift */,
+				7C936C1C1E9F921200AC06BF /* BookData.swift */,
 			);
 			name = USXParsing;
 			sourceTree = "<group>";
@@ -1269,6 +1275,7 @@
 				7C57ECAC1E6D6651000718E9 /* ProjectCell.swift in Sources */,
 				7CA1BAB01E31E8DD00611FED /* ThreadCell.swift in Sources */,
 				7CDBD6BC1E2657F900912320 /* ParagraphBindingView.swift in Sources */,
+				7C936C1B1E9F7F1E00AC06BF /* USXBookFinder.swift in Sources */,
 				7C25180D1E8B8A930089E1FD /* ProjectBooksView.swift in Sources */,
 				7C40DF5F1DE71E490035B92E /* DatabaseUtilities.swift in Sources */,
 				7C40DF671DEC26340035B92E /* JSONParseError.swift in Sources */,
@@ -1302,6 +1309,7 @@
 				7C6070501E55860B007718BC /* Keyboard.swift in Sources */,
 				7CA1BAB81E31F33000611FED /* DateExtension.swift in Sources */,
 				7CCC01341DA7964000F0562E /* XmlParserUtil.swift in Sources */,
+				7C936C1D1E9F921200AC06BF /* BookData.swift in Sources */,
 				7C936C0F1E9B7F6700AC06BF /* ResolveConflictVC.swift in Sources */,
 				7C0130C51E3F3DFB0053C5C2 /* PropertyValueWrapable.swift in Sources */,
 				7CCC01481DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
