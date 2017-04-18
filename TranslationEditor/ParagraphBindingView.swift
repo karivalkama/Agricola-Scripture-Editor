@@ -78,6 +78,13 @@ final class ParagraphBindingView: View
 		return try createQuery(deprecated: false, targetBookId: targetBookId, sourceBookId: sourceBookId).firstResultObject()
 	}
 	
+	// Finds all bindings that have the provided book id as either source or target
+	// NB: This is not the most efficient implementation of this feature
+	func bindings(concerning bookId: String) throws -> [ParagraphBinding]
+	{
+		return try createQuery().resultRows().filter { $0.keys[ParagraphBindingView.KEY_TARGET_BOOK]?.string == bookId || $0.keys[ParagraphBindingView.KEY_SOURCE_BOOK]?.string == bookId }.map { try $0.object() }
+	}
+	
 	// TODO: Add other methods as necessary
 	// TODO: Add function for deprecating bindings between two books (called when structure changes)
 	

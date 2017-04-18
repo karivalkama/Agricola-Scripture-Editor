@@ -221,6 +221,12 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			return
 		}
 		
+		guard let newBook = self.book else
+		{
+			print("ERROR: No new book data available")
+			return
+		}
+		
 		do
 		{
 			let existingParagraphs = try ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
@@ -277,16 +283,20 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				
 				// Old paragraphs that were left without any matches are deprecated
 				try existingParagraphs.filter { !matchedExisting.containsReference(to: $0) }.forEach { try ParagraphHistoryView.instance.deprecatePath(ofId: $0.idString) }
+				
+				// Updates book identifier too, if necessary
+				if book.identifier != newBook.identifier
+				{
+					book.identifier = newBook.identifier
+					try book.push()
+				}
 			}
 			
 			// Updates the paragraph bindings if necessary
-			// TODO: Implement
-			/*
 			if !newInserts.isEmpty || !merges.isEmpty
 			{
 				
 			}
-			*/
 		}
 		catch
 		{
