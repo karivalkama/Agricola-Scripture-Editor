@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParagraphCell" customModule="TranslationEditor" customModuleProvider="target">
+            <connections>
+                <outlet property="contentTextView" destination="I3V-zo-ygG" id="QfI-Fz-keN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="109" id="J9m-a9-iab">
+            <rect key="frame" x="0.0" y="0.0" width="355" height="109"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J9m-a9-iab" id="jBN-aP-2um">
+                <rect key="frame" x="0.0" y="0.0" width="355" height="108.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.84999999999999998" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="I3V-zo-ygG">
+                        <rect key="frame" x="4" y="0.0" width="347" height="108.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="I3V-zo-ygG" secondAttribute="trailing" constant="4" id="50u-je-szd"/>
+                    <constraint firstAttribute="bottom" secondItem="I3V-zo-ygG" secondAttribute="bottom" id="8UN-OI-E7H"/>
+                    <constraint firstItem="I3V-zo-ygG" firstAttribute="top" secondItem="jBN-aP-2um" secondAttribute="top" id="IEs-rL-8Vb"/>
+                    <constraint firstItem="I3V-zo-ygG" firstAttribute="leading" secondItem="jBN-aP-2um" secondAttribute="leading" constant="4" id="tNp-OP-mOY"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="20.5" y="65.5"/>
+        </tableViewCell>
+    </objects>
+</document>

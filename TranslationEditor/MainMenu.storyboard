@@ -268,10 +268,10 @@
             </objects>
             <point key="canvasLocation" x="29.882812499999996" y="51.5625"/>
         </scene>
-        <!--View Controller-->
+        <!--ImportUSXVC-->
         <scene sceneID="27H-eW-0N4">
             <objects>
-                <viewController storyboardIdentifier="ImportUSX" id="6ZB-aJ-eNh" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImportUSX" id="6ZB-aJ-eNh" customClass="ImportUSXVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QYC-2p-l01"/>
                         <viewControllerLayoutGuide type="bottom" id="PXC-TV-3E9"/>
@@ -290,6 +290,9 @@
                                     <navigationItem title="Import USX File" id="uU0-7a-qRc">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="Phh-Y6-gSM">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="cancelButtonPressed:" destination="6ZB-aJ-eNh" id="GGQ-Qd-N7g"/>
+                                            </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" id="Lby-S3-qr5">
                                             <view key="customView" contentMode="scaleToFill" id="k1W-5T-QvW" customClass="TopUserView" customModule="TranslationEditor" customModuleProvider="target">
@@ -370,6 +373,13 @@
                             <constraint firstAttribute="trailing" secondItem="S4H-y5-Uuf" secondAttribute="trailing" id="ue4-j2-oi6"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bookLabel" destination="qYb-eo-8RK" id="3eO-QK-EaY"/>
+                        <outlet property="paragraphTableView" destination="ksg-fs-xvJ" id="PCs-7u-fiZ"/>
+                        <outlet property="selectBookTableView" destination="40j-tK-L8p" id="qXn-gR-t0l"/>
+                        <outlet property="selectLanguageView" destination="fUH-YQ-xZW" id="Svg-nk-mWC"/>
+                        <outlet property="topUserView" destination="k1W-5T-QvW" id="uvL-I6-xSB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ipI-hx-yDm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

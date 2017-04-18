@@ -45,4 +45,14 @@ import UIKit
 		userNameField.text = userName
 		userImage.image = userIcon
 	}
+	
+	// Alternative way to configure the view
+	func configure(avatarId: String) throws
+	{
+		if let avatarInfo = try AvatarInfo.get(avatarId: avatarId)
+		{
+			userNameField.text = try avatarInfo.displayName()
+			userImage.image = avatarInfo.image
+		}
+	}
 }

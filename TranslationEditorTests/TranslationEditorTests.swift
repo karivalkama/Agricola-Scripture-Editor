@@ -788,6 +788,7 @@ class TranslationEditorTests: XCTestCase
 		print("DONE!")
 	}
 	
+	/*
 	func testUSXParsing()
 	{
 		let sourceResource = "GAL"
@@ -886,7 +887,7 @@ class TranslationEditorTests: XCTestCase
 		}
 		
 		return avatarInfo.avatarId
-	}
+	}*/
 	
 	// TODO: WET WET
 	func match(_ sources: [Paragraph], and targets: [Paragraph]) -> [(Paragraph, Paragraph)]

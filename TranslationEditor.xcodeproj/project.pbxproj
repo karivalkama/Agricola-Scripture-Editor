@@ -122,6 +122,8 @@
 		7C6C3C1A1E373959001D56F4 /* PostThreadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C191E373959001D56F4 /* PostThreadVC.swift */; };
 		7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */; };
 		7C7834CB1E977D1C000556B0 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7834CA1E977D1C000556B0 /* BookCell.swift */; };
+		7C7FD65A1EA5E18600ED2364 /* ParagraphCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7FD6591EA5E18600ED2364 /* ParagraphCell.xib */; };
+		7C7FD65C1EA5E5D400ED2364 /* ParagraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7FD65B1EA5E5D400ED2364 /* ParagraphCell.swift */; };
 		7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE891DE6E1EA00C054EB /* PropertySet.swift */; };
 		7C82CE8E1DE6E29500C054EB /* PropertyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */; };
 		7C936C0D1E9B751300AC06BF /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C0C1E9B751300AC06BF /* VersionCell.swift */; };
@@ -133,6 +135,7 @@
 		7C936C191E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C181E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift */; };
 		7C936C1B1E9F7F1E00AC06BF /* USXBookFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C1A1E9F7F1E00AC06BF /* USXBookFinder.swift */; };
 		7C936C1D1E9F921200AC06BF /* BookData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C1C1E9F921200AC06BF /* BookData.swift */; };
+		7C936C1F1E9FA81800AC06BF /* ImportUSXVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C1E1E9FA81800AC06BF /* ImportUSXVC.swift */; };
 		7C942A2B1E38C7E2000C614A /* PostCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */; };
 		7C942A2E1E38DD80000C614A /* AgricolaAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C942A2D1E38DD80000C614A /* AgricolaAccount.swift */; };
 		7C9BB7E31E8536AA0010DE5C /* MainMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */; };
@@ -337,6 +340,8 @@
 		7C6C3C191E373959001D56F4 /* PostThreadVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostThreadVC.swift; sourceTree = "<group>"; };
 		7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNotesDelegate.swift; sourceTree = "<group>"; };
 		7C7834CA1E977D1C000556B0 /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
+		7C7FD6591EA5E18600ED2364 /* ParagraphCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParagraphCell.xib; sourceTree = "<group>"; };
+		7C7FD65B1EA5E5D400ED2364 /* ParagraphCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphCell.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
 		7C82CE811DE6D91100C054EB /* TranslationEditorTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditorTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		7C82CE821DE6D91100C054EB /* TranslationEditorUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditorUITests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -351,6 +356,7 @@
 		7C936C181E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilteredSelectionDataSource.swift; sourceTree = "<group>"; };
 		7C936C1A1E9F7F1E00AC06BF /* USXBookFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXBookFinder.swift; sourceTree = "<group>"; };
 		7C936C1C1E9F921200AC06BF /* BookData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookData.swift; sourceTree = "<group>"; };
+		7C936C1E1E9FA81800AC06BF /* ImportUSXVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportUSXVC.swift; sourceTree = "<group>"; };
 		7C942A2A1E38C7E2000C614A /* PostCommentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCommentVC.swift; sourceTree = "<group>"; };
 		7C942A2D1E38DD80000C614A /* AgricolaAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgricolaAccount.swift; sourceTree = "<group>"; };
 		7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainMenu.storyboard; sourceTree = "<group>"; };
@@ -763,6 +769,7 @@
 				7C15151B1E961FD000419DEA /* P2PJoinView.swift */,
 				7C936C161E9F48C900AC06BF /* FilteredSingleSelection.swift */,
 				7C936C181E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift */,
+				7C7FD65B1EA5E5D400ED2364 /* ParagraphCell.swift */,
 			);
 			name = XibViews;
 			sourceTree = "<group>";
@@ -772,6 +779,7 @@
 			children = (
 				7C506B7E1E892FA400ACB5AC /* MainMenuVC.swift */,
 				7C25180E1E8D0F8A0089E1FD /* EditAvatarVC.swift */,
+				7C936C1E1E9FA81800AC06BF /* ImportUSXVC.swift */,
 			);
 			name = "Main Menu";
 			sourceTree = "<group>";
@@ -791,6 +799,7 @@
 				7C9BB7E41E8538730010DE5C /* TopUserDisplay.xib */,
 				7C1515191E961B6300419DEA /* P2PJoinView.xib */,
 				7C936C141E9E582C00AC06BF /* FilteredSingleSelection.xib */,
+				7C7FD6591EA5E18600ED2364 /* ParagraphCell.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1033,6 +1042,7 @@
 				7C9BB7E51E8538730010DE5C /* TopUserDisplay.xib in Resources */,
 				7CD8EA661DB644E300364B70 /* GAL.usx in Resources */,
 				7C60704D1E533ED3007718BC /* VerseDataCell.xib in Resources */,
+				7C7FD65A1EA5E18600ED2364 /* ParagraphCell.xib in Resources */,
 				7C15151A1E961B6300419DEA /* P2PJoinView.xib in Resources */,
 				7C57ECAE1E6D970C000718E9 /* CreateAvatar.xib in Resources */,
 				7C6B7B181E645EC00005AD43 /* FilteredMultiSelection.xib in Resources */,
@@ -1252,6 +1262,7 @@
 				7CDBD6AC1E238ACB00912320 /* ResourceCollection.swift in Sources */,
 				7C20D7F81D9A672800E84BA5 /* VerseIndex.swift in Sources */,
 				7C4A4FF41E00105B009F890E /* Key.swift in Sources */,
+				7C936C1F1E9FA81800AC06BF /* ImportUSXVC.swift in Sources */,
 				7CD9ACF31E0914470032A7F8 /* DatabaseExtension.swift in Sources */,
 				7CDBD6D11E28E53500912320 /* ScrollSyncManager.swift in Sources */,
 				7C4A4FCC1DFACC58009F890E /* Copyable.swift in Sources */,
@@ -1289,6 +1300,7 @@
 				7C0130D71E4DF97D0053C5C2 /* ScrollViewExtension.swift in Sources */,
 				7C0130B51E3B5A100053C5C2 /* Project.swift in Sources */,
 				7C9BB7E71E853A250010DE5C /* TopUserView.swift in Sources */,
+				7C7FD65C1EA5E5D400ED2364 /* ParagraphCell.swift in Sources */,
 				7CDBD6C41E28B35100912320 /* SourceTranslationCell.swift in Sources */,
 				7C57EC051E66F824000718E9 /* AccountView.swift in Sources */,
 				7C0130C81E3F64900053C5C2 /* IdIndex.swift in Sources */,
