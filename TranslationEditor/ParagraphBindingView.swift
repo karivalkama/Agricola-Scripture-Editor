@@ -19,13 +19,12 @@ final class ParagraphBindingView: View
 	
 	// ATTRIBUTES	----------------
 	
-	static let KEY_DEPRECATED = "deprecated"
 	static let KEY_TARGET_BOOK = "target"
 	static let KEY_SOURCE_BOOK = "souce"
 	static let KEY_CREATED = "created"
 	
 	static let instance = ParagraphBindingView()
-	static let keyNames = [KEY_DEPRECATED, KEY_TARGET_BOOK, KEY_SOURCE_BOOK, KEY_CREATED]
+	static let keyNames = [KEY_TARGET_BOOK, KEY_SOURCE_BOOK, KEY_CREATED]
 	
 	let view: CBLView
 	
@@ -39,12 +38,12 @@ final class ParagraphBindingView: View
 		{
 			binding, emit in
 			
-			let key = [binding.isDeprecated, binding.targetBookId, binding.sourceBookId, binding.created] as [Any]
+			let key = [binding.targetBookId, binding.sourceBookId, binding.created] as [Any]
 			let value = [binding.idString, binding.created] as [Any]
 			
 			emit(key, value)
 			
-		}, reduce:
+		}/*, reduce:
 		{
 			// Finds the most recent id
 			keys, values, rereduce in
@@ -67,7 +66,7 @@ final class ParagraphBindingView: View
 			
 			return [mostRecentId, mostRecentTime]
 			
-		}, version: "3")
+		}*/, version: "4")
 	}
 	
 	
@@ -84,10 +83,9 @@ final class ParagraphBindingView: View
 	
 	private func createQuery(deprecated: Bool, targetBookId: String?, sourceBookId: String?) -> MyQuery
 	{
-		let keys = [ParagraphBindingView.KEY_DEPRECATED: Key(deprecated),
-		            ParagraphBindingView.KEY_TARGET_BOOK: Key(targetBookId),
-		            ParagraphBindingView.KEY_SOURCE_BOOK: Key(sourceBookId),
-		            ParagraphBindingView.KEY_CREATED: Key.undefined]
+		let keys = [ParagraphBindingView.KEY_TARGET_BOOK: Key(targetBookId),
+		            ParagraphBindingView.KEY_SOURCE_BOOK: Key(sourceBookId)
+		]
 		
 		var query = createQuery(withKeys: keys)
 		query.descending = true

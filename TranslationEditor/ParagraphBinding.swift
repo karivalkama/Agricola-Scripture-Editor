@@ -24,7 +24,6 @@ final class ParagraphBinding: Storable
 	let created: TimeInterval
 	let creatorId: String
 	
-	var isDeprecated: Bool
 	// Source paragraph id <-> Target paragraph id. Ordered by source
 	private var _bindings: [(String, String)]
 	var bindings: [(String, String)]
@@ -45,7 +44,7 @@ final class ParagraphBinding: Storable
 	// COMPUTED PROPERTIES	--
 	
 	var idProperties: [Any] { return [uid] }
-	var properties: [String : PropertyValue] { return ["source_book": sourceBookId.value, "target_book": targetBookId.value, "created": created.value, "creator": creatorId.value, "deprecated": isDeprecated.value, "bindings": bindingDicts.map { PropertySet($0) }.value] }
+	var properties: [String : PropertyValue] { return ["source_book": sourceBookId.value, "target_book": targetBookId.value, "created": created.value, "creator": creatorId.value, "bindings": bindingDicts.map { PropertySet($0) }.value] }
 	
 	private var bindingDicts: [[String : String]]
 	{
@@ -62,14 +61,13 @@ final class ParagraphBinding: Storable
 	// INIT	------------------
 	
 	// The bindings are as follows: (source parameter id, target parameter id)
-	init(sourceBookId: String, targetBookId: String, bindings: [(String, String)], creatorId: String, created: TimeInterval = Date().timeIntervalSince1970, uid: String = UUID().uuidString.lowercased(), deprecated: Bool = false)
+	init(sourceBookId: String, targetBookId: String, bindings: [(String, String)], creatorId: String, created: TimeInterval = Date().timeIntervalSince1970, uid: String = UUID().uuidString.lowercased())
 	{
 		self.uid = uid
 		self.sourceBookId = sourceBookId
 		self.targetBookId = targetBookId
 		self.created = created
 		self.creatorId = creatorId
-		self.isDeprecated = deprecated
 		self._bindings = bindings
 		
 		updateIdMaps()
@@ -78,7 +76,7 @@ final class ParagraphBinding: Storable
 	static func create(from properties: PropertySet, withId id: Id) throws -> ParagraphBinding
 	{
 		// Parses the bindings separately
-		return ParagraphBinding(sourceBookId: properties["source_book"].string(), targetBookId: properties["target_book"].string(), bindings: ParagraphBinding.parseBindings(from: properties["bindings"].array()), creatorId: properties["creator"].string(), created: properties["created"].time(), uid: id["binding_uid"].string(), deprecated: properties["deprecated"].bool())
+		return ParagraphBinding(sourceBookId: properties["source_book"].string(), targetBookId: properties["target_book"].string(), bindings: ParagraphBinding.parseBindings(from: properties["bindings"].array()), creatorId: properties["creator"].string(), created: properties["created"].time(), uid: id["binding_uid"].string())
 	}
 	
 	
@@ -86,10 +84,6 @@ final class ParagraphBinding: Storable
 	
 	func update(with properties: PropertySet) throws
 	{
-		if let deprecated = properties["deprecated"].bool
-		{
-			self.isDeprecated = deprecated
-		}
 		if let bindings = properties["bindings"].array
 		{
 			self.bindings = ParagraphBinding.parseBindings(from: bindings)

@@ -214,6 +214,84 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	{
 		// Runs a matching algorithm on between the new and previous data, then updates each paragraph and the book
 		// TODO: Update book data (commit). Also update bindings
+		
+		guard let avatarId = Session.instance.avatarId else
+		{
+			print("ERROR: Cannot save new data without a selected avatar")
+			return
+		}
+		
+		do
+		{
+			let existingParagraphs = try ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
+			let matches = match(existingParagraphs, and: paragraphs)
+			
+			// New paragraphs can be resolved in 3 ways
+			var newInserts = [Paragraph]() // Completely new versions
+			var commits = [(Paragraph, Paragraph)]() // Old version -> New version
+			var merges = [([Paragraph], Paragraph)]() // Old versions -> New independent version
+			
+			// Existing paragraphs that have already been associated with a new paragraph / paragraphs
+			var matchedExisting = [Paragraph]()
+			
+			for newParagraph in paragraphs
+			{
+				// Finds out how many connections (existing -> new) were made to each new paragraph
+				// Only counts paragraphs that have not been matched already
+				let matchingExisting = matches.filter { $0.1 === newParagraph }.map { $0.0 }.filter { !matchedExisting.containsReference(to: $0) }
+				
+				// If there are 0 previous versions, or if all of those were already matched to different paragraphs, inserts the new paragraph as a completely new entry
+				if matchingExisting.isEmpty
+				{
+					newInserts.add(newParagraph)
+				}
+				// If there is only a single match, handles it as a new commit
+				else if matchingExisting.count == 1
+				{
+					commits.add((matchingExisting.first!, newParagraph))
+					matchedExisting.add(matchingExisting.first!)
+				}
+				else
+				{
+					merges.add((matchingExisting, newParagraph))
+					matchedExisting.append(contentsOf: matchingExisting)
+				}
+			}
+			
+			// Saves new data to the database all at once
+			try DATABASE.tryTransaction
+			{
+				try newInserts.forEach { try $0.push() }
+				
+				for (oldVersion, newVersion) in commits
+				{
+					_ = try oldVersion.commit(userId: avatarId, chapterIndex: newVersion.chapterIndex, sectionIndex: newVersion.sectionIndex, paragraphIndex: newVersion.index, content: newVersion.content)
+				}
+				
+				for (oldVersions, newVersion) in merges
+				{
+					// On merge, all old versions are deprecated while the new version is inserted separately
+					try oldVersions.forEach { try ParagraphHistoryView.instance.deprecatePath(ofId: $0.idString) }
+					try newVersion.push()
+				}
+				
+				// Old paragraphs that were left without any matches are deprecated
+				try existingParagraphs.filter { !matchedExisting.containsReference(to: $0) }.forEach { try ParagraphHistoryView.instance.deprecatePath(ofId: $0.idString) }
+			}
+			
+			// Updates the paragraph bindings if necessary
+			// TODO: Implement
+			/*
+			if !newInserts.isEmpty || !merges.isEmpty
+			{
+				
+			}
+			*/
+		}
+		catch
+		{
+			
+		}
 	}
 	
 	func insertSelected()
