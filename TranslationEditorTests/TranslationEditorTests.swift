@@ -869,7 +869,7 @@ class TranslationEditorTests: XCTestCase
 		}
 		
 		print("DONE")
-	}
+	}*/
 	
 	func avatarIdForProject(withId projectId: String) throws -> String?
 	{
@@ -887,7 +887,7 @@ class TranslationEditorTests: XCTestCase
 		}
 		
 		return avatarInfo.avatarId
-	}*/
+	}
 	
 	// TODO: WET WET
 	func match(_ sources: [Paragraph], and targets: [Paragraph]) -> [(Paragraph, Paragraph)]

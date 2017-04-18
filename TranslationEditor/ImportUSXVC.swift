@@ -9,8 +9,13 @@
 import UIKit
 
 // This VC is used for importing new books / updating existing data from USX files
-class ImportUSXVC: UIViewController
+class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDataSource, FilteredSingleSelectionDelegate, SelectBookTableControllerDelegate
 {
+	// TYPES	--------------
+	
+	typealias QueryTarget = LanguageView
+	
+	
 	// OUTLETS	--------------
 	
 	@IBOutlet weak var topUserView: TopUserView!
@@ -24,7 +29,17 @@ class ImportUSXVC: UIViewController
 	
 	private var usxURL: URL?
 	private var book: Book?
+	
+	private var languages = [Language]()
+	private var selectedLanguage: Language?
+	
 	private var paragraphs = [Paragraph]()
+	private var bookTableController: SelectBookTableController?
+	
+	
+	// COMPUTED PROPERTIES	--
+	
+	var numberOfOptions: Int { return languages.count }
 	
 	
 	// LOAD	-----------------
@@ -32,7 +47,7 @@ class ImportUSXVC: UIViewController
     override func viewDidLoad()
 	{
         super.viewDidLoad()
-
+		
 		// Reads paragraph data first
 		guard let usxURL = usxURL else
 		{
@@ -88,9 +103,23 @@ class ImportUSXVC: UIViewController
 		paragraphTableView.register(UINib(nibName: "ParagraphCell", bundle: nil), forCellReuseIdentifier: ParagraphCell.identifier)
 		paragraphTableView.rowHeight = UITableViewAutomaticDimension
 		paragraphTableView.estimatedRowHeight = 160
+		paragraphTableView.dataSource = self
 		
 		// Sets up other views
 		bookLabel.text = "\(book!.code): \(book!.identifier)"
+		
+		bookTableController = SelectBookTableController(table: selectBookTableView, newIdentifier: book!.identifier)
+		
+		do
+		{
+			languages = try LanguageView.instance.createQuery().resultObjects()
+			selectLanguageView.datasource = self
+			selectLanguageView.delegate = self
+		}
+		catch
+		{
+			print("ERROR: Couldn't read language data from the database")
+		}
 		
 		do
 		{
@@ -107,7 +136,139 @@ class ImportUSXVC: UIViewController
 	
 	@IBAction func cancelButtonPressed(_ sender: Any)
 	{
+		dismiss(animated: true, completion: nil)
+	}
+	
+	
+	// IMPLEMENTED METHODS	---
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+	{
+		return paragraphs.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+	{
+		let cell = tableView.dequeueReusableCell(withIdentifier: ParagraphCell.identifier, for: indexPath) as! ParagraphCell
+		cell.configure(paragraph: paragraphs[indexPath.row])
+		return cell
+	}
+	
+	func labelForOption(atIndex index: Int) -> String
+	{
+		return languages[index].name
+	}
+	
+	func indexIsIncludedInFilter(index: Int, filter: String) -> Bool
+	{
+		return labelForOption(atIndex: index).contains(filter)
+	}
+	
+	func onItemSelected(index: Int)
+	{
+		guard let projectId = Session.instance.projectId else
+		{
+			print("ERROR: Cannot find project books when project is not selected")
+			return
+		}
 		
+		selectedLanguage = languages[index]
+		
+		// Reloads the available target books
+		do
+		{
+			let books = try ProjectBooksView.instance.booksQuery(languageId: languages[index].idString, projectId: projectId).resultObjects()
+			bookTableController?.update(books: books)
+		}
+		catch
+		{
+			print("ERROR: Failed to update book selection. \(error)")
+		}
+	}
+	
+	func insertItem(named: String) -> Int?
+	{
+		// Checks if there already exists a language with the provided name
+		if let existingIndex = languages.index(where: { $0.name.lowercased() == named.lowercased() })
+		{
+			return existingIndex
+		}
+		else
+		{
+			do
+			{
+				let newLanguage = try LanguageView.instance.language(withName: named)
+				languages.add(newLanguage)
+				// TODO: Sorting is not done correctly here. Consider other options
+				return languages.count - 1
+			}
+			catch
+			{
+				print("ERROR: Failed to insert a new language")
+				return nil
+			}
+		}
+	}
+	
+	func bookSelected(_ book: Book)
+	{
+		// Runs a matching algorithm on between the new and previous data, then updates each paragraph and the book
+		// TODO: Update book data (commit). Also update bindings
+	}
+	
+	func insertSelected()
+	{
+		guard let avatarId = Session.instance.avatarId else
+		{
+			print("ERROR: Cannot save new data without user being selected")
+			return
+		}
+		
+		guard let selectedLanguage = selectedLanguage else
+		{
+			print("ERROR: Cannot insert a book before language has been selected")
+			return
+		}
+		
+		guard book != nil else
+		{
+			print("ERROR: No book data available")
+			return
+		}
+		
+		// Inserts the collected data as a totally new entry
+		book?.languageId = selectedLanguage.idString
+		
+		do
+		{
+			guard let projectId = Session.instance.projectId, let project = try Project.get(projectId) else
+			{
+				print("ERROR: Associated project data couldn't be found")
+				return
+			}
+			
+			// Creates new bindings for the books
+			var newBindings = [ParagraphBinding]()
+			for book in try project.targetTranslationQuery(bookCode: book!.code).resultObjects()
+			{
+				let bindings = match(paragraphs, and: try ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()).map { ($0.0.idString, $0.1.idString) }
+				newBindings.add(ParagraphBinding(sourceBookId: self.book!.idString, targetBookId: book.idString, bindings: bindings, creatorId: avatarId))
+			}
+			
+			// Saves the new data to the database
+			try DATABASE.tryTransaction
+			{
+				try self.book?.push()
+				try self.paragraphs.forEach { try $0.push() }
+				try newBindings.forEach { try $0.push() }
+			}
+			
+			dismiss(animated: true, completion: nil)
+		}
+		catch
+		{
+			print("ERROR: Couldn't save book data to the database. \(error)")
+		}
 	}
 	
 	
@@ -119,7 +280,7 @@ class ImportUSXVC: UIViewController
 	}
 }
 
-fileprivate class SelectBookTableController: NSObject, UITableViewDataSource
+fileprivate class SelectBookTableController: NSObject, UITableViewDataSource, UITableViewDelegate
 {
 	// ATTRIBUTES	--------
 	
@@ -142,6 +303,7 @@ fileprivate class SelectBookTableController: NSObject, UITableViewDataSource
 		super.init()
 		
 		table.dataSource = self
+		table.delegate = self
 	}
 	
 	
@@ -199,6 +361,18 @@ fileprivate class SelectBookTableController: NSObject, UITableViewDataSource
 		}
 		
 		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+	{
+		if indexPath.section == 0
+		{
+			delegate?.bookSelected(books[indexPath.row])
+		}
+		else
+		{
+			delegate?.insertSelected()
+		}
 	}
 }
 

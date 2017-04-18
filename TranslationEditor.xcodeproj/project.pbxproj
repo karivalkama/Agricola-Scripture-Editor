@@ -124,6 +124,7 @@
 		7C7834CB1E977D1C000556B0 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7834CA1E977D1C000556B0 /* BookCell.swift */; };
 		7C7FD65A1EA5E18600ED2364 /* ParagraphCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7FD6591EA5E18600ED2364 /* ParagraphCell.xib */; };
 		7C7FD65C1EA5E5D400ED2364 /* ParagraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7FD65B1EA5E5D400ED2364 /* ParagraphCell.swift */; };
+		7C7FD65E1EA620BA00ED2364 /* ParagraphUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7FD65D1EA620BA00ED2364 /* ParagraphUtils.swift */; };
 		7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE891DE6E1EA00C054EB /* PropertySet.swift */; };
 		7C82CE8E1DE6E29500C054EB /* PropertyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */; };
 		7C936C0D1E9B751300AC06BF /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C0C1E9B751300AC06BF /* VersionCell.swift */; };
@@ -342,6 +343,7 @@
 		7C7834CA1E977D1C000556B0 /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		7C7FD6591EA5E18600ED2364 /* ParagraphCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParagraphCell.xib; sourceTree = "<group>"; };
 		7C7FD65B1EA5E5D400ED2364 /* ParagraphCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphCell.swift; sourceTree = "<group>"; };
+		7C7FD65D1EA620BA00ED2364 /* ParagraphUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphUtils.swift; sourceTree = "<group>"; };
 		7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditor-Bridging-Header.h"; sourceTree = "<group>"; };
 		7C82CE811DE6D91100C054EB /* TranslationEditorTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditorTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		7C82CE821DE6D91100C054EB /* TranslationEditorUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditorUITests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -634,6 +636,7 @@
 				7C4A4FBF1DFAA60E009F890E /* Colours.swift */,
 				7C4A50031E016E31009F890E /* Reduce.swift */,
 				7C57EC061E6709A2000718E9 /* Server.swift */,
+				7C7FD65D1EA620BA00ED2364 /* ParagraphUtils.swift */,
 			);
 			name = Globals;
 			sourceTree = "<group>";
@@ -1262,6 +1265,7 @@
 				7CDBD6AC1E238ACB00912320 /* ResourceCollection.swift in Sources */,
 				7C20D7F81D9A672800E84BA5 /* VerseIndex.swift in Sources */,
 				7C4A4FF41E00105B009F890E /* Key.swift in Sources */,
+				7C7FD65E1EA620BA00ED2364 /* ParagraphUtils.swift in Sources */,
 				7C936C1F1E9FA81800AC06BF /* ImportUSXVC.swift in Sources */,
 				7CD9ACF31E0914470032A7F8 /* DatabaseExtension.swift in Sources */,
 				7CDBD6D11E28E53500912320 /* ScrollSyncManager.swift in Sources */,

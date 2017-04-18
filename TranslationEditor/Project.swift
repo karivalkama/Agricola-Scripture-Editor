@@ -87,6 +87,13 @@ final class Project: Storable
 	
 	// OTHER METHODS	----------
 	
+	// Creates a query for the target translations of this project
+	// By providing the bookCode parameter, you can limit the translations to certain book
+	func targetTranslationQuery(bookCode: String? = nil) -> Query<ProjectBooksView>
+	{
+		return ProjectBooksView.instance.booksQuery(languageId: languageId, projectId: idString, code: bookCode)
+	}
+	
 	/*
 	static func projectsAvailableForAccount(withId accountId: String) throws -> [Project]
 	{
