@@ -50,7 +50,7 @@ class USXParser: NSObject, XMLParserDelegate
 			if let code = attributeDict["code"]
 			{
 				// Delegates parsing to book parser
-				contentParser = USXBookProcessor.createBookParser(caller: self, projectId: projectId, userId: userId, languageId: languageId, bookCode: code, targetPointer: &parsedBooks, using: parsingFailed)
+				contentParser = USXBookProcessor.createBookParser(caller: self, projectId: projectId, userId: userId, languageId: languageId, bookCode: BookCode.of(code: code), targetPointer: &parsedBooks, using: parsingFailed)
 				parser.delegate = contentParser
 			}
 			else

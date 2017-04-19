@@ -206,10 +206,6 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		}
 	}
 	
-	@IBAction func addUserButtonPressed(_ sender: Any)
-	{
-		displayAlert(withIdentifier: "EditAvatar", storyBoardId: "MainMenu")
-	}
 	
 	// IMPLEMENTED METHODS	-----
 	
@@ -289,8 +285,8 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 			
 			let mailVC = MFMailComposeViewController()
 			mailVC.mailComposeDelegate = self
-			mailVC.addAttachmentData(data, mimeType: "application/xml", fileName: "\(book.code.uppercased()).usx")
-			mailVC.setSubject("\(book.code.uppercased()) - \(book.identifier) USX Export")
+			mailVC.addAttachmentData(data, mimeType: "application/xml", fileName: "\(book.code.code).usx")
+			mailVC.setSubject("\(book.code.name) - \(book.identifier) USX Export")
 			
 			present(mailVC, animated: true, completion: nil)
 		}

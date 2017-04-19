@@ -25,6 +25,7 @@ final class Project: Storable
 	var name: String
 	var ownerId: String // Id of the owner CB user
 	var contributorIds: [String] // Ids of the contributing CB users
+	var defaultBookIdentifier: String
 	
 	
 	// COMPUTED PROPERTIES	--------
@@ -32,13 +33,13 @@ final class Project: Storable
 	var idProperties: [Any] { return [uid] }
 	var properties: [String : PropertyValue]
 	{
-		return ["owner": ownerId.value, "contributors": contributorIds.value, "name": name.value, "language": languageId.value, "shared_account": sharedAccountId.value, "created": created.value]
+		return ["owner": ownerId.value, "contributors": contributorIds.value, "name": name.value, "language": languageId.value, "shared_account": sharedAccountId.value, "default_book_identifier": defaultBookIdentifier.value, "created": created.value]
 	}
 	
 	
 	// INIT	------------------------
 	
-	init(name: String, languageId: String, ownerId: String, contributorIds: [String], sharedAccountId: String, uid: String = UUID().uuidString.lowercased(), created: TimeInterval = Date().timeIntervalSince1970)
+	init(name: String, languageId: String, ownerId: String, contributorIds: [String], sharedAccountId: String, defaultBookIdentifier: String, uid: String = UUID().uuidString.lowercased(), created: TimeInterval = Date().timeIntervalSince1970)
 	{
 		self.uid = uid
 		self.created = created
@@ -46,6 +47,7 @@ final class Project: Storable
 		self.name = name
 		self.ownerId = ownerId
 		self.sharedAccountId = sharedAccountId
+		self.defaultBookIdentifier = defaultBookIdentifier
 		
 		self.contributorIds = contributorIds
 		
@@ -62,7 +64,7 @@ final class Project: Storable
 	
 	static func create(from properties: PropertySet, withId id: Id) -> Project
 	{
-		return Project(name: properties["name"].string(), languageId: properties["language"].string(), ownerId: properties["owner"].string(), contributorIds: properties["contributors"].array({ $0.string }), sharedAccountId: properties["shared_account"].string(), uid: id["project_uid"].string(), created: properties["created"].time())
+		return Project(name: properties["name"].string(), languageId: properties["language"].string(), ownerId: properties["owner"].string(), contributorIds: properties["contributors"].array({ $0.string }), sharedAccountId: properties["shared_account"].string(), defaultBookIdentifier: properties["default_book_identifier"].string(), uid: id["project_uid"].string(), created: properties["created"].time())
 	}
 	
 	
@@ -78,6 +80,10 @@ final class Project: Storable
 		{
 			self.ownerId = ownerId
 		}
+		if let defaultBookIdentifier = properties["default_book_identifier"].string
+		{
+			self.defaultBookIdentifier = defaultBookIdentifier
+		}
 		if let contributorData = properties["contributors"].array
 		{
 			self.contributorIds = contributorData.flatMap { $0.string }
@@ -89,7 +95,7 @@ final class Project: Storable
 	
 	// Creates a query for the target translations of this project
 	// By providing the bookCode parameter, you can limit the translations to certain book
-	func targetTranslationQuery(bookCode: String? = nil) -> Query<ProjectBooksView>
+	func targetTranslationQuery(bookCode: BookCode? = nil) -> Query<ProjectBooksView>
 	{
 		return ProjectBooksView.instance.booksQuery(languageId: languageId, projectId: idString, code: bookCode)
 	}

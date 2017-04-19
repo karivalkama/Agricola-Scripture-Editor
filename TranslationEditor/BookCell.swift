@@ -37,9 +37,9 @@ class BookCell: UITableViewCell
 	// OTHER METHODS	---------
 	
 	// Configures the cell to display correct data
-	func configure(bookCode: String, identifier: String, sendActionAvailable: Bool, sendAction: @escaping (BookCell) -> ())
+	func configure(bookCode: BookCode, identifier: String, sendActionAvailable: Bool, sendAction: @escaping (BookCell) -> ())
 	{
-		codeLabel.text = bookCode.uppercased()
+		codeLabel.text = bookCode.name
 		bookNameLabel.text = identifier
 		sendButton.isEnabled = sendActionAvailable
 		self.sendAction = sendAction

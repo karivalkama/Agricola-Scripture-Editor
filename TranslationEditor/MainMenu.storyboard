@@ -62,16 +62,16 @@
                                         <rect key="frame" x="0.0" y="0.0" width="552" height="564"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="V2R-Th-wSe" userLabel="Book Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="552" height="455.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="552" height="476"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work on a Book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjb-YB-WnE">
-                                                        <rect key="frame" x="0.0" y="0.0" width="552" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="552" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nmh-Sf-zta">
-                                                        <rect key="frame" x="0.0" y="36.5" width="552" height="419"/>
+                                                        <rect key="frame" x="0.0" y="16" width="552" height="460"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" id="X1P-0t-QRE" customClass="BookCell" customModule="TranslationEditor" customModuleProvider="target">
@@ -81,26 +81,23 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="552" height="43.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Xqp-Uw-r9I">
-                                                                            <rect key="frame" x="0.0" y="4" width="536" height="35.5"/>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Xqp-Uw-r9I">
+                                                                            <rect key="frame" x="16" y="4" width="520" height="35.5"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAL" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6m-fe-4P3">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="64" height="35.5"/>
-                                                                                    <constraints>
-                                                                                        <constraint firstAttribute="width" constant="64" id="bDY-P2-gis"/>
-                                                                                    </constraints>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Galatians" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6m-fe-4P3">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="74.5" height="35.5"/>
                                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Translation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ow-aM-d4X">
-                                                                                    <rect key="frame" x="72" y="0.0" width="403" height="35.5"/>
-                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Test Translation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ow-aM-d4X">
+                                                                                    <rect key="frame" x="226" y="0.0" width="90" height="35.5"/>
+                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKg-9x-Zmz">
-                                                                                    <rect key="frame" x="483" y="0.0" width="53" height="35.5"/>
+                                                                                    <rect key="frame" x="467" y="0.0" width="53" height="35.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" secondItem="yKg-9x-Zmz" secondAttribute="height" multiplier="3:2" id="40n-xG-QBA"/>
                                                                                     </constraints>
@@ -114,7 +111,7 @@
                                                                     </subviews>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="Xqp-Uw-r9I" secondAttribute="trailing" constant="16" id="Aga-4D-sah"/>
-                                                                        <constraint firstItem="Xqp-Uw-r9I" firstAttribute="leading" secondItem="mvV-WX-iNg" secondAttribute="leading" id="TjP-Qr-i9N"/>
+                                                                        <constraint firstItem="Xqp-Uw-r9I" firstAttribute="leading" secondItem="mvV-WX-iNg" secondAttribute="leading" constant="16" id="TjP-Qr-i9N"/>
                                                                         <constraint firstItem="Xqp-Uw-r9I" firstAttribute="top" secondItem="mvV-WX-iNg" secondAttribute="top" constant="4" id="i2h-6T-0xV"/>
                                                                         <constraint firstAttribute="bottom" secondItem="Xqp-Uw-r9I" secondAttribute="bottom" constant="4" id="u0e-kj-R7k"/>
                                                                     </constraints>
@@ -130,28 +127,25 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qym-SG-wct" userLabel="Settings Stack View">
-                                                <rect key="frame" x="0.0" y="487.5" width="552" height="76.5"/>
+                                                <rect key="frame" x="0.0" y="508" width="552" height="56"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage Project" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EgS-5U-bC2">
-                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fyh-vL-sZl" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="36.5" width="96" height="40"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fyh-vL-sZl" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="16" width="128" height="40"/>
                                                         <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="5PJ-7w-nAx"/>
-                                                            <constraint firstAttribute="width" constant="96" id="xES-xU-DWV"/>
+                                                            <constraint firstAttribute="width" constant="128" id="xES-xU-DWV"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <state key="normal" title="Add User">
+                                                        <state key="normal" title="Book Identifier">
                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="addUserButtonPressed:" destination="itN-2l-wFE" eventType="touchUpInside" id="zfJ-cZ-9A7"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -309,7 +303,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="MIJ-bi-7Qz" userLabel="Read Data Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="660"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="GAL: King James Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYb-eo-8RK">
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Galatians: King James Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYb-eo-8RK">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="33.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <nil key="textColor"/>

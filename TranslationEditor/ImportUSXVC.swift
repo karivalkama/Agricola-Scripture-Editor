@@ -211,6 +211,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		}
 	}
 	
+	// TODO: Handle situations where some of the translations contain conflicts
 	func bookSelected(_ book: Book)
 	{
 		// Runs a matching algorithm on between the new and previous data, then updates each paragraph and the book
@@ -350,14 +351,14 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			return
 		}
 		
-		guard book != nil else
+		guard let book = book else
 		{
 			print("ERROR: No book data available")
 			return
 		}
 		
 		// Inserts the collected data as a totally new entry
-		book?.languageId = selectedLanguage.idString
+		book.languageId = selectedLanguage.idString
 		
 		do
 		{
@@ -369,21 +370,26 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			
 			// Creates new bindings for the books
 			var newBindings = [ParagraphBinding]()
-			for book in try project.targetTranslationQuery(bookCode: book!.code).resultObjects()
+			let targetTranslations = try project.targetTranslationQuery(bookCode: book.code).resultObjects()
+			for targetBook in targetTranslations
 			{
-				let bindings = match(paragraphs, and: try ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()).map { ($0.0.idString, $0.1.idString) }
-				newBindings.add(ParagraphBinding(sourceBookId: self.book!.idString, targetBookId: book.idString, bindings: bindings, creatorId: avatarId))
+				let bindings = match(paragraphs, and: try ParagraphView.instance.latestParagraphQuery(bookId: targetBook.idString).resultObjects()).map { ($0.0.idString, $0.1.idString) }
+				newBindings.add(ParagraphBinding(sourceBookId: book.idString, targetBookId: targetBook.idString, bindings: bindings, creatorId: avatarId))
 			}
 			
 			// Saves the new data to the database
 			try DATABASE.tryTransaction
 			{
-				try self.book?.push()
+				try book.push()
 				try self.paragraphs.forEach { try $0.push() }
 				try newBindings.forEach { try $0.push() }
 			}
 			
-			// TODO: Create an empty book for the new code
+			// If there is no target translation for the book yet, creates an empty copy of the just created book
+			if book.languageId != project.languageId && targetTranslations.isEmpty
+			{
+				_ = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId)
+			}
 			
 			dismiss(animated: true, completion: nil)
 		}

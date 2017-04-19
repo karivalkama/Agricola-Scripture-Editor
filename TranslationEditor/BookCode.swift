@@ -9,7 +9,7 @@
 import Foundation
 
 // These are the different book codes available in the editor
-enum BookCode: Comparable
+enum BookCode: Comparable, CustomStringConvertible
 {
 	// OPTIONS	------------------
 	
@@ -26,6 +26,8 @@ enum BookCode: Comparable
 	
 	
 	// COMPUTED PROPERTIES	------
+	
+	var description: String { return name }
 	
 	var code: String
 	{
@@ -231,14 +233,14 @@ enum BookCode: Comparable
 	
 	static func of(code: String) -> BookCode
 	{
-		return codeMap[code].or(.other(code: code))
+		return codeMap[code.lowercased()].or(.other(code: code.uppercased()))
 	}
 	
 	private static func makeCodeMap() -> [String: BookCode]
 	{
 		var codes = [String: BookCode]()
-		oldTestamentBooks.forEach { codes[$0.code] = $0 }
-		newTestamentBooks.forEach { codes[$0.code] = $0 }
+		oldTestamentBooks.forEach { codes[$0.code.lowercased()] = $0 }
+		newTestamentBooks.forEach { codes[$0.code.lowercased()] = $0 }
 		
 		return codes
 	}

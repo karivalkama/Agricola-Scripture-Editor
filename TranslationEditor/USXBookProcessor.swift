@@ -57,7 +57,7 @@ class USXBookProcessor: USXContentProcessor
 	
 	// INIT	---------------
 	
-	init(projectId: String, userId: String, languageId: String, code: String)
+	init(projectId: String, userId: String, languageId: String, code: BookCode)
 	{
 		self.userId = userId
 		self.book = Book(projectId: projectId, code: code, identifier: "", languageId: languageId)
@@ -66,7 +66,7 @@ class USXBookProcessor: USXContentProcessor
 	// Creates a new USX parser for book data
 	// The parser should be set to start after a book element start
 	// The parser will stop at the next book element start or at the end of usx
-	static func createBookParser(caller: XMLParserDelegate, projectId: String, userId: String, languageId: String, bookCode: String, targetPointer: UnsafeMutablePointer<[Generated]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Generated, Processed>
+	static func createBookParser(caller: XMLParserDelegate, projectId: String, userId: String, languageId: String, bookCode: BookCode, targetPointer: UnsafeMutablePointer<[Generated]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Generated, Processed>
 	{
 		let parser = USXContentParser<Generated, Processed>(caller: caller, containingElement: .usx, lowestBreakMarker: .book, targetPointer: targetPointer, using: errorHandler)
 		parser.processor = AnyUSXContentProcessor(USXBookProcessor(projectId: projectId, userId: userId, languageId: languageId, code: bookCode))

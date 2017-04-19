@@ -654,7 +654,7 @@ class TranslationEditorTests: XCTestCase
 		try! sharedAccount.push()
 		
 		// Next creates a new project for that account
-		let project = Project(name: projectName, languageId: try! LanguageView.instance.language(withName: projectLanguageName).idString, ownerId: account.idString, contributorIds: [account.idString], sharedAccountId: sharedAccount.idString)
+		let project = Project(name: projectName, languageId: try! LanguageView.instance.language(withName: projectLanguageName).idString, ownerId: account.idString, contributorIds: [account.idString], sharedAccountId: sharedAccount.idString, defaultBookIdentifier: projectName)
 		try! project.push()
 		
 		// Creates a new avatar for the primary account
@@ -695,6 +695,24 @@ class TranslationEditorTests: XCTestCase
 			try avatarInfo.push()
 		}
 	}
+	
+	/*
+	func testAddDefaultBookIdentifiersToProjects()
+	{
+		let projects = try! ProjectView.instance.createQuery().resultObjects()
+		
+		for project in projects
+		{
+			project.defaultBookIdentifier = project.name
+		}
+		
+		try! DATABASE.tryTransaction
+		{
+			try projects.forEach { try $0.push() }
+		}
+		
+		print("TEST: Successfully modified \(projects.count) projects")
+	}*/
 	
 	/*
 	func testAccountRefactoring()

@@ -22,7 +22,7 @@ class USXWriter
 	func write(book: Book) -> String
 	{
 		// TODO: Add introductory paragraphs too
-		return "<book code=\"\(book.code.uppercased())\" style=\"id\">\(book.identifier)</book>"
+		return "<book code=\"\(book.code.code)\" style=\"id\">\(book.identifier)</book>"
 	}
 	
 	// Creates a string representing paragraph data

@@ -22,7 +22,7 @@ final class Book: Storable
 	static let idIndexMap: IdIndexMap = [PROPERTY_PROJECT, PROPERTY_CODE, "book_uid"]
 	
 	let uid: String
-	let code: String
+	let code: BookCode
 	let projectId: String
 	
 	var identifier: String
@@ -31,7 +31,7 @@ final class Book: Storable
 	
 	// COMP. PROPERTIES	----
 	
-	var idProperties: [Any] {return [projectId, code, uid]}
+	var idProperties: [Any] {return [projectId, code.code.lowercased(), uid]}
 	
 	var properties: [String : PropertyValue]
 	{
@@ -41,10 +41,10 @@ final class Book: Storable
 	
 	// INIT	----------------
 	
-	init(projectId: String, code: String, identifier: String, languageId: String, uid: String = UUID().uuidString.lowercased())
+	init(projectId: String, code: BookCode, identifier: String, languageId: String, uid: String = UUID().uuidString.lowercased())
 	{
 		self.projectId = projectId
-		self.code = code.lowercased()
+		self.code = code
 		self.identifier = identifier
 		self.languageId = languageId
 		self.uid = uid
@@ -54,7 +54,7 @@ final class Book: Storable
 	
 	static func create(from properties: PropertySet, withId id: Id) -> Book
 	{
-		return Book(projectId: id[PROPERTY_PROJECT].string(), code: id[PROPERTY_CODE].string(), identifier: properties["identifier"].string(), languageId: properties["language"].string(), uid: id["book_uid"].string())
+		return Book(projectId: id[PROPERTY_PROJECT].string(), code: BookCode.of(code: id[PROPERTY_CODE].string()), identifier: properties["identifier"].string(), languageId: properties["language"].string(), uid: id["book_uid"].string())
 	}
 	
 	

@@ -40,7 +40,7 @@ final class ProjectBooksView: View
 		{
 			book, emit in
 			
-			let key: [Any] = [book.languageId, book.projectId, book.code, book.identifier]
+			let key: [Any] = [book.languageId, book.projectId, book.code.code, book.identifier]
 			emit(key, nil)
 		},
 		version: "1")
@@ -50,8 +50,8 @@ final class ProjectBooksView: View
 	// OTHER METHODS	----
 	
 	// This query can be used for retrieving books associated with a specific project
-	func booksQuery(languageId: String? = nil, projectId: String? = nil, code: String? = nil, identifier: String? = nil) -> MyQuery
+	func booksQuery(languageId: String? = nil, projectId: String? = nil, code: BookCode? = nil, identifier: String? = nil) -> MyQuery
 	{
-		return createQuery(withKeys: ProjectBooksView.makeKeys(from: [languageId, projectId, code, identifier]))
+		return createQuery(withKeys: ProjectBooksView.makeKeys(from: [languageId, projectId, code?.code, identifier]))
 	}
 }
