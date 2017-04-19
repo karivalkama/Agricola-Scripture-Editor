@@ -140,7 +140,7 @@ class TranslationEditorTests: XCTestCase
 	func testParagraphProperties()
 	{
 		let language = Language(name: "English")
-		let book = Book(projectId: "test-project", code: "gal", identifier: "English: This and This Translation", languageId: language.idString)
+		let book = Book(projectId: "test-project", code: .galatians, identifier: "English: This and This Translation", languageId: language.idString)
 		
 		let paragraph = Paragraph(bookId: book.idString, chapterIndex: 1, sectionIndex: 1, index: 1, content: [], creatorId: "testuserid")
 		

@@ -43,7 +43,7 @@ final class ProjectBooksView: View
 			let key: [Any] = [book.languageId, book.projectId, book.code.code, book.identifier]
 			emit(key, nil)
 		},
-		version: "1")
+		version: "2")
 	}
 	
 	

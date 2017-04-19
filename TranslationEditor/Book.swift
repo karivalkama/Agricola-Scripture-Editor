@@ -110,8 +110,8 @@ final class Book: Storable
 	}
 	
 	// Parses the book code out of a book id string
-	static func code(fromId bookIdString: String) -> String
+	static func code(fromId bookIdString: String) -> BookCode
 	{
-		return createId(from: bookIdString)[PROPERTY_CODE].string()
+		return BookCode.of(code: createId(from: bookIdString)[PROPERTY_CODE].string())
 	}
 }

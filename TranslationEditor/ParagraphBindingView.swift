@@ -39,7 +39,7 @@ final class ParagraphBindingView: View
 		{
 			binding, emit in
 			
-			let key = [Book.code(fromId: binding.targetBookId), binding.targetBookId, binding.sourceBookId, binding.created] as [Any]
+			let key = [Book.code(fromId: binding.targetBookId).code, binding.targetBookId, binding.sourceBookId, binding.created] as [Any]
 			// let value = [binding.idString, binding.created] as [Any]
 			
 			emit(key, nil)
@@ -67,7 +67,7 @@ final class ParagraphBindingView: View
 			
 			return [mostRecentId, mostRecentTime]
 			
-		}*/, version: "5")
+		}*/, version: "6")
 	}
 	
 	
@@ -85,9 +85,9 @@ final class ParagraphBindingView: View
 		return try createQuery(code: Book.code(fromId: bookId), targetBookId: nil, sourceBookId: nil).resultRows().filter { $0.keys[ParagraphBindingView.KEY_TARGET_BOOK]?.string == bookId || $0.keys[ParagraphBindingView.KEY_SOURCE_BOOK]?.string == bookId }.map { try $0.object() }
 	}
 	
-	private func createQuery(code: String?, targetBookId: String?, sourceBookId: String?) -> MyQuery
+	private func createQuery(code: BookCode?, targetBookId: String?, sourceBookId: String?) -> MyQuery
 	{
-		let keys = ParagraphBindingView.makeKeys(from: [code, targetBookId, sourceBookId])
+		let keys = ParagraphBindingView.makeKeys(from: [code?.code, targetBookId, sourceBookId])
 		
 		var query = createQuery(withKeys: keys)
 		query.descending = true
