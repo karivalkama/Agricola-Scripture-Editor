@@ -383,6 +383,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				try newBindings.forEach { try $0.push() }
 			}
 			
+			// TODO: Create an empty book for the new code
+			
 			dismiss(animated: true, completion: nil)
 		}
 		catch

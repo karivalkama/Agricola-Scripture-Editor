@@ -128,6 +128,8 @@
 		7C7FD65E1EA620BA00ED2364 /* ParagraphUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7FD65D1EA620BA00ED2364 /* ParagraphUtils.swift */; };
 		7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE891DE6E1EA00C054EB /* PropertySet.swift */; };
 		7C82CE8E1DE6E29500C054EB /* PropertyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */; };
+		7C903F6D1EA7536A008EE1E6 /* BookCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C903F6C1EA7536A008EE1E6 /* BookCode.swift */; };
+		7C903F6F1EA760A8008EE1E6 /* ComparableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C903F6E1EA760A8008EE1E6 /* ComparableExtension.swift */; };
 		7C936C0D1E9B751300AC06BF /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C0C1E9B751300AC06BF /* VersionCell.swift */; };
 		7C936C0F1E9B7F6700AC06BF /* ResolveConflictVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C0E1E9B7F6700AC06BF /* ResolveConflictVC.swift */; };
 		7C936C111E9DF6AF00AC06BF /* TranslationCellAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C936C101E9DF6AF00AC06BF /* TranslationCellAction.swift */; };
@@ -351,6 +353,8 @@
 		7C82CE821DE6D91100C054EB /* TranslationEditorUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TranslationEditorUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		7C82CE891DE6E1EA00C054EB /* PropertySet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertySet.swift; sourceTree = "<group>"; };
 		7C82CE8D1DE6E29500C054EB /* PropertyValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyValue.swift; sourceTree = "<group>"; };
+		7C903F6C1EA7536A008EE1E6 /* BookCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCode.swift; sourceTree = "<group>"; };
+		7C903F6E1EA760A8008EE1E6 /* ComparableExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComparableExtension.swift; sourceTree = "<group>"; };
 		7C936C0C1E9B751300AC06BF /* VersionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionCell.swift; sourceTree = "<group>"; };
 		7C936C0E1E9B7F6700AC06BF /* ResolveConflictVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResolveConflictVC.swift; sourceTree = "<group>"; };
 		7C936C101E9DF6AF00AC06BF /* TranslationCellAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationCellAction.swift; sourceTree = "<group>"; };
@@ -667,6 +671,7 @@
 				7CD9ACF21E0914470032A7F8 /* DatabaseExtension.swift */,
 				7CA1BAB71E31F33000611FED /* DateExtension.swift */,
 				7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */,
+				7C903F6E1EA760A8008EE1E6 /* ComparableExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -702,6 +707,7 @@
 				7C40DF6B1DEC59AB0035B92E /* Book.swift */,
 				7C40DF7B1DED9FB90035B92E /* Language.swift */,
 				7CDBD6B71E26200200912320 /* ParagraphBinding.swift */,
+				7C903F6C1EA7536A008EE1E6 /* BookCode.swift */,
 			);
 			name = Translation;
 			sourceTree = "<group>";
@@ -1245,6 +1251,7 @@
 				7C4A50001E016A3B009F890E /* ParagraphHistoryView.swift in Sources */,
 				7C4A4FF01DFEDA59009F890E /* OptionalExtension.swift in Sources */,
 				7C0130D41E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift in Sources */,
+				7C903F6F1EA760A8008EE1E6 /* ComparableExtension.swift in Sources */,
 				7C4A4FF91E012375009F890E /* ConflictResolver.swift in Sources */,
 				7CAF6D861DB4F9AA00E10597 /* USXBookProcessor.swift in Sources */,
 				7CCC01441DAB7B0000F0562E /* USXParagraphProcessor.swift in Sources */,
@@ -1347,6 +1354,7 @@
 				7C6070491E52ECBA007718BC /* VerseCell.swift in Sources */,
 				7C0130CB1E41F4D30053C5C2 /* ProjectView.swift in Sources */,
 				7CCC013C1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
+				7C903F6D1EA7536A008EE1E6 /* BookCode.swift in Sources */,
 				7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
 				7C4A4F831DEEBAF2009F890E /* Row.swift in Sources */,
 				7CDBD6C81E28B69B00912320 /* TranslationTableViewDS.swift in Sources */,
