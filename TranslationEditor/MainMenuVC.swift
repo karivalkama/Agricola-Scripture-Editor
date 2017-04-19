@@ -92,6 +92,20 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		hostingSwitch.isEnabled = !P2PClientSession.isConnected
 		
 		queryManager?.start()
+		
+		// If there are USX files waiting for processing, displays import view
+		if let usxUrl = USXImportStack.instance.pop()
+		{
+			if let controller = UIStoryboard(name: "MainMenu", bundle: nil).instantiateViewController(withIdentifier: "ImportUSX") as? ImportUSXVC
+			{
+				controller.configure(usxFileURL: usxUrl)
+				present(controller, animated: true, completion: nil)
+			}
+			else
+			{
+				print("ERROR: Failed to open USX import view")
+			}
+		}
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)

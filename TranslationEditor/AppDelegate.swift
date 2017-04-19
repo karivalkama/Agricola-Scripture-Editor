@@ -95,21 +95,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 	
 	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool
 	{
-		/*
-		if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "someController") as? SomeController {
-		if let window = self.window, let rootViewController = window.rootViewController {
-		var currentController = rootViewController
-		while let presentedController = currentController.presentedViewController {
-		currentController = presentedController
+		// If a session is open, displays the USX import view
+		var didPresentController = false
+		if Session.instance.avatarId != nil && Session.instance.projectId != nil
+		{
+			if let controller = UIStoryboard(name: "MainMenu", bundle: nil).instantiateViewController(withIdentifier: "ImportUSX") as? ImportUSXVC
+			{
+				if let window = self.window, let rootViewController = window.rootViewController
+				{
+					var currentController = rootViewController
+					while let presentedController = currentController.presentedViewController
+					{
+						currentController = presentedController
+					}
+					
+					didPresentController = true
+					controller.configure(usxFileURL: url)
+					currentController.present(controller, animated: true, completion: nil)
+				}
+			}
 		}
-		currentController.present(controller, animated: true, completion: nil)
-		}
-		}
-		*/
 		
-		// TODO: Implement open url
-		print("STATUS: Received file with url: \(url)")
-		return false // TODO: Return true
+		// Otherwise stores the url until user has logged in
+		if (!didPresentController)
+		{
+			USXImportStack.instance.push(url)
+		}
+		
+		return true
 	}
 }
 

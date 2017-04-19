@@ -21,8 +21,8 @@ final class ParagraphBinding: Storable
 	let sourceBookId: String
 	let targetBookId: String
 	
-	let created: TimeInterval
-	let creatorId: String
+	var created: TimeInterval
+	var creatorId: String
 	
 	// Source paragraph id <-> Target paragraph id. Ordered by source
 	private var _bindings: [(String, String)]
@@ -84,6 +84,14 @@ final class ParagraphBinding: Storable
 	
 	func update(with properties: PropertySet) throws
 	{
+		if let creatorId = properties["creator"].string
+		{
+			self.creatorId = creatorId
+		}
+		if let created = properties["created"].double
+		{
+			self.created = created
+		}
 		if let bindings = properties["bindings"].array
 		{
 			self.bindings = ParagraphBinding.parseBindings(from: bindings)

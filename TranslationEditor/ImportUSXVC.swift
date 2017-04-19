@@ -109,6 +109,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		bookLabel.text = "\(book!.code): \(book!.identifier)"
 		
 		bookTableController = SelectBookTableController(table: selectBookTableView, newIdentifier: book!.identifier)
+		bookTableController?.delegate = self
 		
 		do
 		{
@@ -213,7 +214,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	func bookSelected(_ book: Book)
 	{
 		// Runs a matching algorithm on between the new and previous data, then updates each paragraph and the book
-		// TODO: Update book data (commit). Also update bindings
+		// Also updates bindings
 		
 		guard let avatarId = Session.instance.avatarId else
 		{
@@ -295,12 +296,43 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			// Updates the paragraph bindings if necessary
 			if !newInserts.isEmpty || !merges.isEmpty
 			{
+				let bindings = try ParagraphBindingView.instance.bindings(forBookWithId: book.idString)
 				
+				for binding in bindings
+				{
+					var sources: [Paragraph]!
+					var targets: [Paragraph]!
+					
+					if binding.sourceBookId == book.idString
+					{
+						sources = paragraphs
+						targets = try ParagraphView.instance.latestParagraphQuery(bookId: binding.targetBookId).resultObjects()
+					}
+					else
+					{
+						sources = try ParagraphView.instance.latestParagraphQuery(bookId: binding.sourceBookId).resultObjects()
+						targets = paragraphs
+					}
+					
+					let bindMatches = match(sources, and: targets).map { ($0.0.idString, $0.1.idString) }
+					
+					binding.created = Date().timeIntervalSince1970
+					binding.creatorId = avatarId
+					binding.bindings = bindMatches
+				}
+				
+				// Saves all changes at once
+				try DATABASE.tryTransaction
+				{
+					try bindings.forEach { try $0.push() }
+				}
 			}
+			
+			dismiss(animated: true, completion: nil)
 		}
 		catch
 		{
-			
+			print("ERROR: Failed to perform changes to the database. \(error)")
 		}
 	}
 	

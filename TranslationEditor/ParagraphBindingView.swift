@@ -19,12 +19,13 @@ final class ParagraphBindingView: View
 	
 	// ATTRIBUTES	----------------
 	
+	static let KEY_CODE = "code"
 	static let KEY_TARGET_BOOK = "target"
-	static let KEY_SOURCE_BOOK = "souce"
+	static let KEY_SOURCE_BOOK = "source"
 	static let KEY_CREATED = "created"
 	
 	static let instance = ParagraphBindingView()
-	static let keyNames = [KEY_TARGET_BOOK, KEY_SOURCE_BOOK, KEY_CREATED]
+	static let keyNames = [KEY_CODE, KEY_TARGET_BOOK, KEY_SOURCE_BOOK, KEY_CREATED]
 	
 	let view: CBLView
 	
@@ -38,10 +39,10 @@ final class ParagraphBindingView: View
 		{
 			binding, emit in
 			
-			let key = [binding.targetBookId, binding.sourceBookId, binding.created] as [Any]
-			let value = [binding.idString, binding.created] as [Any]
+			let key = [Book.code(fromId: binding.targetBookId), binding.targetBookId, binding.sourceBookId, binding.created] as [Any]
+			// let value = [binding.idString, binding.created] as [Any]
 			
-			emit(key, value)
+			emit(key, nil)
 			
 		}/*, reduce:
 		{
@@ -66,7 +67,7 @@ final class ParagraphBindingView: View
 			
 			return [mostRecentId, mostRecentTime]
 			
-		}*/, version: "4")
+		}*/, version: "5")
 	}
 	
 	
@@ -75,24 +76,18 @@ final class ParagraphBindingView: View
 	// Finds the latest existing binding between the two books
 	func latestBinding(from sourceBookId: String, to targetBookId: String) throws -> ParagraphBinding?
 	{
-		return try createQuery(deprecated: false, targetBookId: targetBookId, sourceBookId: sourceBookId).firstResultObject()
+		return try createQuery(code: Book.code(fromId: targetBookId), targetBookId: targetBookId, sourceBookId: sourceBookId).firstResultObject()
 	}
 	
 	// Finds all bindings that have the provided book id as either source or target
-	// NB: This is not the most efficient implementation of this feature
-	func bindings(concerning bookId: String) throws -> [ParagraphBinding]
+	func bindings(forBookWithId bookId: String) throws -> [ParagraphBinding]
 	{
-		return try createQuery().resultRows().filter { $0.keys[ParagraphBindingView.KEY_TARGET_BOOK]?.string == bookId || $0.keys[ParagraphBindingView.KEY_SOURCE_BOOK]?.string == bookId }.map { try $0.object() }
+		return try createQuery(code: Book.code(fromId: bookId), targetBookId: nil, sourceBookId: nil).resultRows().filter { $0.keys[ParagraphBindingView.KEY_TARGET_BOOK]?.string == bookId || $0.keys[ParagraphBindingView.KEY_SOURCE_BOOK]?.string == bookId }.map { try $0.object() }
 	}
 	
-	// TODO: Add other methods as necessary
-	// TODO: Add function for deprecating bindings between two books (called when structure changes)
-	
-	private func createQuery(deprecated: Bool, targetBookId: String?, sourceBookId: String?) -> MyQuery
+	private func createQuery(code: String?, targetBookId: String?, sourceBookId: String?) -> MyQuery
 	{
-		let keys = [ParagraphBindingView.KEY_TARGET_BOOK: Key(targetBookId),
-		            ParagraphBindingView.KEY_SOURCE_BOOK: Key(sourceBookId)
-		]
+		let keys = ParagraphBindingView.makeKeys(from: [code, targetBookId, sourceBookId])
 		
 		var query = createQuery(withKeys: keys)
 		query.descending = true
