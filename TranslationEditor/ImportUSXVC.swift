@@ -101,6 +101,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		
 		// Sets up the paragraph table
 		paragraphTableView.register(UINib(nibName: "ParagraphCell", bundle: nil), forCellReuseIdentifier: ParagraphCell.identifier)
+		//paragraphTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
 		paragraphTableView.rowHeight = UITableViewAutomaticDimension
 		paragraphTableView.estimatedRowHeight = 160
 		paragraphTableView.dataSource = self
@@ -108,6 +109,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		// Sets up other views
 		bookLabel.text = "\(book!.code): \(book!.identifier)"
 		
+		selectBookTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
 		bookTableController = SelectBookTableController(table: selectBookTableView, newIdentifier: book!.identifier)
 		bookTableController?.delegate = self
 		
@@ -116,6 +118,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			languages = try LanguageView.instance.createQuery().resultObjects()
 			selectLanguageView.datasource = self
 			selectLanguageView.delegate = self
+			selectLanguageView.reloadData()
 		}
 		catch
 		{
@@ -152,6 +155,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	{
 		let cell = tableView.dequeueReusableCell(withIdentifier: ParagraphCell.identifier, for: indexPath) as! ParagraphCell
 		cell.configure(paragraph: paragraphs[indexPath.row])
+		//let cell = tableView.dequeueReusableCell(withIdentifier: LabelCell.identifier, for: indexPath) as! LabelCell
+		//cell.configure(text: paragraphs[indexPath.row].idString)
 		return cell
 	}
 	
@@ -178,7 +183,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		// Reloads the available target books
 		do
 		{
-			let books = try ProjectBooksView.instance.booksQuery(languageId: languages[index].idString, projectId: projectId).resultObjects()
+			let books = try ProjectBooksView.instance.booksQuery(languageId: selectedLanguage!.idString, projectId: projectId, code: book?.code).resultObjects()
 			bookTableController?.update(books: books)
 		}
 		catch
@@ -214,6 +219,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	// TODO: Handle situations where some of the translations contain conflicts
 	func bookSelected(_ book: Book)
 	{
+		// TODO: Update notes where pathIds change
+		
 		// Runs a matching algorithm on between the new and previous data, then updates each paragraph and the book
 		// Also updates bindings
 		
@@ -295,6 +302,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			}
 			
 			// Updates the paragraph bindings if necessary
+			// Also updates notes
 			if !newInserts.isEmpty || !merges.isEmpty
 			{
 				let bindings = try ParagraphBindingView.instance.bindings(forBookWithId: book.idString)
@@ -326,6 +334,40 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				try DATABASE.tryTransaction
 				{
 					try bindings.forEach { try $0.push() }
+				}
+				
+				// Records all changed and deleted notes so that the changes can be made all at once
+				var notesToBeSaved = [ParagraphNotes]()
+				
+				let notesCollectionIds = try ResourceCollectionView.instance.collectionQuery(bookId: book.idString, category: .notes).resultRows().flatMap { $0.id }
+				for notesCollectionId in notesCollectionIds
+				{
+					// Creates a new note for each new inserted paragraph
+					for insertedParagraph in newInserts
+					{
+						notesToBeSaved.add(ParagraphNotes(collectionId: notesCollectionId, chapterIndex: insertedParagraph.chapterIndex, pathId: insertedParagraph.pathId))
+					}
+					
+					// Changes the path id of the merged paragraph notes
+					for (oldVersions, newVersion) in merges
+					{
+						for oldVersion in oldVersions
+						{
+							for note in try ParagraphNotesView.instance.notesForParagraph(collectionId: notesCollectionId, chapterIndex: oldVersion.chapterIndex, pathId: oldVersion.pathId)
+							{
+								note.pathId = newVersion.pathId
+								notesToBeSaved.add(note)
+							}
+						}
+					}
+					
+					// TODO: Should some notes be deleted?
+				}
+				
+				// Saves the changes
+				try DATABASE.tryTransaction
+				{
+					try notesToBeSaved.forEach { try $0.push() }
 				}
 			}
 			
@@ -388,7 +430,21 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			// If there is no target translation for the book yet, creates an empty copy of the just created book
 			if book.languageId != project.languageId && targetTranslations.isEmpty
 			{
-				_ = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId)
+				let emptyCopy = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId)
+				
+				// Creates a set of notes for the new translation too
+				// Creates the resource
+				let resource = ResourceCollection(languageId: project.languageId, bookId: emptyCopy.book.idString, category: .notes, name: "Notes")
+				
+				// Creates the notes
+				let notes = emptyCopy.paragraphs.map { ParagraphNotes(collectionId: resource.idString, chapterIndex: $0.chapterIndex, pathId: $0.pathId) }
+				
+				// Pushes the new data to the database
+				try DATABASE.tryTransaction
+				{
+					try resource.push()
+					try notes.forEach { try $0.push() }
+				}
 			}
 			
 			dismiss(animated: true, completion: nil)

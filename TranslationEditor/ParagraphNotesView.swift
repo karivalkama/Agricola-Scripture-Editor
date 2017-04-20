@@ -57,15 +57,10 @@ final class ParagraphNotesView: View
 		return createQuery(withKeys: keys)
 	}
 	
-	// Finds the paragraph notes instance for the provided paragraph
-	func notesForParagraph(collectionId: String, chapterIndex: Int, pathId: String) throws -> ParagraphNotes?
+	// Finds the paragraph notes instances for the provided paragraph
+	func notesForParagraph(collectionId: String, chapterIndex: Int, pathId: String) throws -> [ParagraphNotes]
 	{
-		let keys = [
-			ParagraphNotesView.KEY_COLLECTION: Key(collectionId),
-			ParagraphNotesView.KEY_CHAPTER: Key(chapterIndex),
-			ParagraphNotesView.KEY_PATH: Key(pathId)
-		]
-		
-		return try createQuery(withKeys: keys).firstResultObject()
+		let keys = ParagraphNotesView.makeKeys(from: [collectionId, chapterIndex, pathId])
+		return try createQuery(withKeys: keys).resultObjects()
 	}
 }

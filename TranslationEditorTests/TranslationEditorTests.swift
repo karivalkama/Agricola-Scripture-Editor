@@ -461,7 +461,7 @@ class TranslationEditorTests: XCTestCase
 	
 	func testMakeNotes()
 	{
-		let code = "gal"
+		let code = BookCode.galatians
 		let languageName = "Finnish"
 		let resourceName = "Notes"
 		let projectId = "20744647-9c04-4982-bb63-02de5d60eca0"
@@ -499,7 +499,7 @@ class TranslationEditorTests: XCTestCase
 	
 	func testMakeBind()
 	{
-		let bookCode = "gal"
+		let bookCode = BookCode.galatians
 		
 		let sourceProjectId = "20744647-9c04-4982-bb63-02de5d60eca0"
 		let sourceLanguageName = "English"

@@ -133,7 +133,7 @@ protocol FilteredSingleSelectionDelegate: class
 	
 	// OTHER METHODS	-------
 	
-	private func reloadData()
+	func reloadData()
 	{
 		guard let datasource = datasource else
 		{

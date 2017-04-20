@@ -73,6 +73,11 @@ final class ParagraphBindingView: View
 	
 	// OTHER METHODS	---------
 	
+	func createQuery(targetBookId: String, sourceBookId: String? = nil) -> MyQuery
+	{
+		return createQuery(code: Book.code(fromId: targetBookId), targetBookId: targetBookId, sourceBookId: sourceBookId)
+	}
+	
 	// Finds the latest existing binding between the two books
 	func latestBinding(from sourceBookId: String, to targetBookId: String) throws -> ParagraphBinding?
 	{

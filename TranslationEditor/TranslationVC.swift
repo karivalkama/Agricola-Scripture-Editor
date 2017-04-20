@@ -85,14 +85,43 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		
 		resourceManager = ResourceManager(resourceTableView: resourceTableView, addNotesDelegate: self, threadStatusListener: self)
 		
+		// Retrieves all bindings and notes for the target translation
+		do
+		{
+			let bindings = try ParagraphBindingView.instance.createQuery(targetBookId: book.idString).resultObjects()
+			let notes = try ResourceCollectionView.instance.collectionQuery(bookId: book.idString, category: .notes).resultObjects()
+			
+			let sourceBooks: [(Book, ParagraphBinding)] = try bindings.flatMap
+			{
+				binding in
+				
+				if let book = try Book.get(binding.targetBookId)
+				{
+					return (book, binding)
+				}
+				else
+				{
+					return nil
+				}
+			}
+			
+			resourceManager.setResources(sourceBooks: sourceBooks, notes: notes)
+		}
+		catch
+		{
+			print("ERROR: Failed to read resources for the target book")
+		}
+			
+		// TODO: Redo
 		// Sets initial resources (TEST)
+		/*
 		let sourceLanguage = try! LanguageView.instance.language(withName: "English")
 		if let sourceBook = try! ProjectBooksView.instance.booksQuery(languageId: sourceLanguage.idString, projectId: book.projectId, code: book.code).firstResultObject(), let binding = try! ParagraphBindingView.instance.latestBinding(from: sourceBook.idString, to: book.idString)
 		{
-			// TODO: Use a better query (more languages, etc.) (catch errors too)
-			let notesResources = try! ResourceCollectionView.instance.collectionQuery(bookId: book.idString, languageId: book.languageId, category: .notes).resultObjects()
+			// TODO: Use a better query (catch errors too)
+			let notesResources = try! ResourceCollectionView.instance.collectionQuery(bookId: book.idString, category: .notes).resultObjects()
 			resourceManager.setResources(sourceBooks: [(sourceBook, binding)], notes: notesResources)
-		}
+		}*/
 		
 		// Makes resource manager listen to paragraph content changes
 		targetTranslationDS.contentListener = resourceManager

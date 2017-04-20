@@ -77,7 +77,7 @@ final class Book: Storable
 	
 	// Creates a copy of this book that contains the same paragraph formatting but none of the original content
 	// The resulting book data is saved into database as part of this operation
-	func makeEmptyCopy(projectId: String, identifier: String, languageId: String, userId: String) throws -> Book
+	func makeEmptyCopy(projectId: String, identifier: String, languageId: String, userId: String) throws -> BookData
 	{
 		// Creates the new book instance
 		let newBook = Book(projectId: projectId, code: self.code, identifier: identifier, languageId: languageId)
@@ -106,7 +106,7 @@ final class Book: Storable
 		// Saves the binding to the database
 		try binding.push()
 		
-		return newBook
+		return BookData(book: newBook, paragraphs: newParagraphs)
 	}
 	
 	// Parses the book code out of a book id string
