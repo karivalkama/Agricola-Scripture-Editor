@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="355" height="109"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J9m-a9-iab" id="jBN-aP-2um">
-                <rect key="frame" x="0.0" y="0.0" width="355" height="108.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="355" height="109"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.84999999999999998" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="I3V-zo-ygG">

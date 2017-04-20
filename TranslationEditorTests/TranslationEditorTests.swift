@@ -144,7 +144,7 @@ class TranslationEditorTests: XCTestCase
 		
 		let paragraph = Paragraph(bookId: book.idString, chapterIndex: 1, sectionIndex: 1, index: 1, content: [], creatorId: "testuserid")
 		
-		assert(paragraph.bookCode == "gal")
+		assert(paragraph.bookCode == .galatians)
 		
 		let copyParagraph = try! Paragraph.create(from: paragraph.toPropertySet, withId: paragraph.id)
 		
@@ -461,7 +461,7 @@ class TranslationEditorTests: XCTestCase
 	
 	func testMakeNotes()
 	{
-		let code = BookCode.galatians
+		let code = BookCode.titus
 		let languageName = "Finnish"
 		let resourceName = "Notes"
 		let projectId = "20744647-9c04-4982-bb63-02de5d60eca0"
@@ -474,7 +474,7 @@ class TranslationEditorTests: XCTestCase
 		}
 		
 		// Makes sure there doesn't exist a notes resource already
-		guard try! ResourceCollectionView.instance.collectionQuery(bookId: book.idString, languageId: language.idString, category: .notes).firstResultRow() == nil else
+		guard try! ResourceCollectionView.instance.collectionQuery(bookId: book.idString, category: .notes).firstResultRow() == nil else
 		{
 			print("TEST: Notes already exist for book \(book.identifier)")
 			return
@@ -905,6 +905,25 @@ class TranslationEditorTests: XCTestCase
 		}
 		
 		return avatarInfo.avatarId
+	}
+	
+	func testRemoveDuplicateLanguages()
+	{
+		let languages = try! LanguageView.instance.createQuery().resultObjects()
+		
+		let languageMap = languages.toArrayDictionary { ($0.name.lowercased(), $0) }
+		
+		for name in languageMap.keys
+		{
+			let count = languageMap[name]!.count
+			print("TEST: \(name) - \(count) instances")
+			if count > 1
+			{
+				languageMap[name]!.dropFirst().forEach { try! $0.delete() }
+			}
+		}
+		
+		print("TEST: DONE")
 	}
 	
 	// TODO: WET WET

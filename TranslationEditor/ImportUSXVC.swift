@@ -336,7 +336,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 					try bindings.forEach { try $0.push() }
 				}
 				
-				// Records all changed and deleted notes so that the changes can be made all at once
+				// Records all changed notes so that the changes can be made all at once
 				var notesToBeSaved = [ParagraphNotes]()
 				
 				let notesCollectionIds = try ResourceCollectionView.instance.collectionQuery(bookId: book.idString, category: .notes).resultRows().flatMap { $0.id }

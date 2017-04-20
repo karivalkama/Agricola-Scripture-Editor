@@ -75,6 +75,7 @@ class Session
 		get { return keyChain.get(key) }
 		set
 		{
+			print("STATUS: Session changed: \(key) = \(newValue.or("empty"))")
 			if let newValue = newValue
 			{
 				keyChain.set(newValue, forKey: key)

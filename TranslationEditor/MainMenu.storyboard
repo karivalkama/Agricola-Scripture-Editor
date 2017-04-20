@@ -482,7 +482,85 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6tX-dL-cHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1104" y="51"/>
+            <point key="canvasLocation" x="677" y="52"/>
+        </scene>
+        <!--Error AlertVC-->
+        <scene sceneID="Q7D-Qi-gCi">
+            <objects>
+                <viewController storyboardIdentifier="ErrorAlert" id="4cw-ZD-X5Y" customClass="ErrorAlertVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uz0-u2-EZs"/>
+                        <viewControllerLayoutGuide type="bottom" id="fOj-8r-9EE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oYI-Em-Y3E">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J86-3m-6NX">
+                                <rect key="frame" x="269" y="215" width="486" height="339"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Bgw-3B-01J">
+                                        <rect key="frame" x="16" y="16" width="454" height="307"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error heading here!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eA8-T4-Rce">
+                                                <rect key="frame" x="0.0" y="0.0" width="454" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="E3m-B8-LaK"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.84999999999999998" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HJe-Np-pPo">
+                                                <rect key="frame" x="0.0" y="32" width="454" height="235"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6KA-NN-qeU" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="267" width="454" height="40"/>
+                                                <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="DLJ-BN-2ou"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <state key="normal" title="OK!">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="okButtonPressed:" destination="4cw-ZD-X5Y" eventType="touchUpInside" id="OHl-dx-bTI"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Bgw-3B-01J" firstAttribute="leading" secondItem="J86-3m-6NX" secondAttribute="leading" constant="16" id="G82-WP-WhE"/>
+                                    <constraint firstAttribute="bottom" secondItem="Bgw-3B-01J" secondAttribute="bottom" constant="16" id="ICM-Mc-Cch"/>
+                                    <constraint firstItem="Bgw-3B-01J" firstAttribute="top" secondItem="J86-3m-6NX" secondAttribute="top" constant="16" id="LAC-QC-aSe"/>
+                                    <constraint firstAttribute="trailing" secondItem="Bgw-3B-01J" secondAttribute="trailing" constant="16" id="MMj-g1-sdr"/>
+                                    <constraint firstAttribute="width" constant="486" id="TYl-wp-mlC"/>
+                                    <constraint firstAttribute="height" constant="339" id="qgt-xD-dNw"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="J86-3m-6NX" firstAttribute="centerY" secondItem="oYI-Em-Y3E" secondAttribute="centerY" id="15R-Ew-Vvc"/>
+                            <constraint firstItem="J86-3m-6NX" firstAttribute="centerX" secondItem="oYI-Em-Y3E" secondAttribute="centerX" id="ahH-X7-sqa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="errorHeadingLabel" destination="eA8-T4-Rce" id="Q7r-Yh-xv5"/>
+                        <outlet property="errorMessageTextView" destination="HJe-Np-pPo" id="9uQ-Nd-n6V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mU6-Ba-XeI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="676.7578125" y="908.59375"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="rzN-yh-Vvc">
@@ -592,7 +670,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="amO-7Z-aJO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1104" y="909"/>
+            <point key="canvasLocation" x="1308" y="909"/>
         </scene>
     </scenes>
     <resources>

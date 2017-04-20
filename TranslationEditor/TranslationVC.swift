@@ -95,7 +95,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 			{
 				binding in
 				
-				if let book = try Book.get(binding.targetBookId)
+				if let book = try Book.get(binding.sourceBookId)
 				{
 					return (book, binding)
 				}
