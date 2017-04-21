@@ -238,6 +238,29 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		
 		do
 		{
+			// If there are connected target translations that are in a conflicted state, can't perform the update
+			guard let projectId = Session.instance.projectId, let project = try Project.get(projectId) else
+			{
+				print("ERROR: Project must be selected before USX import")
+				return
+			}
+			
+			let targetTranslationIds = try project.targetTranslationQuery(bookCode: book.code).resultRows().flatMap { $0.id }.filter { $0 != book.idString }
+			guard try targetTranslationIds.forAll({ try !ParagraphHistoryView.instance.rangeContainsConflicts(bookId: $0) }) else
+			{
+				displayAlert(withIdentifier: "ErrorAlert", storyBoardId: "MainMenu")
+				{
+					vc in
+					
+					(vc as! ErrorAlertVC).configure(heading: "Conflicts in Target Translations", text: "Target translation(s) of \(book.code) contain conflicts. Please resolve them and try importing again afterwards.") { self.dismiss(animated: true, completion: nil) }
+				}
+				
+				return
+			}
+			
+			// If there are conflicts within the imported book, merges them before continuing
+			try ParagraphHistoryView.instance.autoCorrectConflictsInRange(bookId: book.idString)
+			
 			let existingParagraphs = try ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
 			let matches = match(existingParagraphs, and: paragraphs)
 			
@@ -309,6 +332,19 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				
 				for binding in bindings
 				{
+					// Makes sure the other side doesn't have any conflicts
+					let otherSideId = binding.sourceBookId == book.idString ? binding.targetBookId : binding.sourceBookId
+					// If both books belong to the same project, can just auto-resolve any conflicts
+					if Book.projectId(fromId: otherSideId) == book.projectId
+					{
+						try ParagraphHistoryView.instance.autoCorrectConflictsInRange(bookId: otherSideId)
+					}
+					// Otherwise will have to skip binding update
+					else if try ParagraphHistoryView.instance.rangeContainsConflicts(bookId: otherSideId)
+					{
+						continue
+					}
+					
 					var sources: [Paragraph]!
 					var targets: [Paragraph]!
 					
@@ -410,9 +446,26 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				return
 			}
 			
+			// If there are target translations that will be connected to this book, and those translations are in a conflicted state, 
+			// The database operations are postponed until the conflicts have been resolved
+			let targetTranslations = try project.targetTranslationQuery(bookCode: book.code).resultObjects()
+			
+			guard try targetTranslations.forAll({ try !ParagraphHistoryView.instance.rangeContainsConflicts(bookId: $0.idString) }) else
+			{
+				displayAlert(withIdentifier: "ErrorAlert", storyBoardId: "MainMenu")
+				{
+					vc in
+					
+					let translationString = targetTranslations.dropFirst().reduce("\(targetTranslations.first!.code)", { "\($0.0), \($0.1)" })
+					
+					(vc as! ErrorAlertVC).configure(heading: "Conflicts in Target Translation", text: "There are conflicts in target translation(s) of: \(translationString)\nPlease resolve the conflicts and import the file again afterwards") { self.dismiss(animated: true, completion: nil) }
+				}
+				
+				return
+			}
+			
 			// Creates new bindings for the books
 			var newBindings = [ParagraphBinding]()
-			let targetTranslations = try project.targetTranslationQuery(bookCode: book.code).resultObjects()
 			for targetBook in targetTranslations
 			{
 				let bindings = match(paragraphs, and: try ParagraphView.instance.latestParagraphQuery(bookId: targetBook.idString).resultObjects()).map { ($0.0.idString, $0.1.idString) }

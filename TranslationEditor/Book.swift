@@ -109,6 +109,12 @@ final class Book: Storable
 		return BookData(book: newBook, paragraphs: newParagraphs)
 	}
 	
+	// Parses a project id out of a book id string
+	static func projectId(fromId bookIdString: String) -> String
+	{
+		return property(withName: PROPERTY_PROJECT, fromId: bookIdString).string()
+	}
+	
 	// Parses the book code out of a book id string
 	static func code(fromId bookIdString: String) -> BookCode
 	{

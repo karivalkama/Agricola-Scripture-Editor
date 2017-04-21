@@ -187,6 +187,30 @@ final class ParagraphHistoryView: View
 		return try mostRecentId(bookId: Paragraph.bookId(fromId: paragraphId), chapterIndex: Paragraph.chapterIndex(fromId: paragraphId), pathId: Paragraph.pathId(fromId: paragraphId))
 	}
 	
+	// Checks whether the specified range contains any conflicts
+	func rangeContainsConflicts(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) throws -> Bool
+	{
+		let query = Query<ParagraphHistoryView>.reduceQuery(groupBy: ParagraphHistoryView.KEY_PATH_ID).withRange(createKey(bookId: bookId, firstChapter: firstChapter, lastChapter: lastChapter, pathId: nil))
+		
+		var conflictFound = false
+		try query.enumerateResult
+		{
+			row in
+			
+			if row.value.array().count > 1
+			{
+				conflictFound = true
+				return false
+			}
+			else
+			{
+				return true
+			}
+		}
+		
+		return conflictFound
+	}
+	
 	// Finds all conflicting paragraphs in certain chapter range
 	// Returns a map for each conflicting paragraph path that has all conflicting ids as values
 	func conflictsInRange(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) throws -> [String : [String]]
@@ -233,6 +257,53 @@ final class ParagraphHistoryView: View
 		else
 		{
 			return nil
+		}
+	}
+	
+	func autoCorrectConflictsInRange(bookId: String, firstChapter: Int? = nil, lastChapter: Int? = nil) throws
+	{
+		let conflicts = try conflictsInRange(bookId: bookId, firstChapter: firstChapter, lastChapter: lastChapter)
+		
+		// If there are no conflicts, skips the operation
+		guard !conflicts.isEmpty else
+		{
+			return
+		}
+		
+		// From paragraph id -> to paragraph id
+		var deprecateRanges = [(String, String?)]()
+		
+		for conflictIds in conflicts.values
+		{
+			let idsWithTimes = conflictIds.map { ($0, Paragraph.created(fromId: $0)) }
+			// Only keeps the most recent version
+			let mostRecentId = idsWithTimes.max { $0.0.1 <= $0.1.1 }!.0
+			
+			// Deprecates until common ancestor
+			let commonAncestorId = try ParagraphHistoryView.instance.commonAncestorOf(paragraphIds: conflictIds)?.idString
+			for paragraphId in conflictIds
+			{
+				if paragraphId != mostRecentId
+				{
+					deprecateRanges.add((paragraphId, commonAncestorId))
+				}
+			}
+		}
+		
+		// Performs the actual database updates
+		try DATABASE.tryTransaction
+		{
+			for (fromParagraphId, toParagraphId) in deprecateRanges
+			{
+				if let toParagraphId = toParagraphId
+				{
+					try Paragraph.get(fromParagraphId)?.deprecateWithHistory(until: toParagraphId)
+				}
+				else
+				{
+					try self.deprecatePath(ofId: fromParagraphId)
+				}
+			}
 		}
 	}
 	
