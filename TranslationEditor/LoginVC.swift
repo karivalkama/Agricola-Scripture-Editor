@@ -45,6 +45,8 @@ class LoginVC: UIViewController//, ConnectionListener
 	{
 		super.viewDidAppear(animated)
 		
+		ConnectionManager.instance.registerListener(joinView)
+		
 		// If the user is already logged in, just starts the background updates and moves on
 		if Session.instance.isAuthorized
 		{
@@ -56,6 +58,11 @@ class LoginVC: UIViewController//, ConnectionListener
 			print("STATUS: No login information present")
 			// ConnectionManager.instance.registerListener(self)
 		}
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		ConnectionManager.instance.removeListener(joinView)
 	}
 	
 	

@@ -86,7 +86,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 	{
 		super.viewDidAppear(animated)
 		
-		// The QR Code scanning feature could be unavailable, which will prevent the use of P2P joining
+		ConnectionManager.instance.registerListener(joinView)
 		joinView.updateAppearance()
 		hostingSwitch.isOn = P2PHostSession.instance != nil
 		hostingSwitch.isEnabled = !P2PClientSession.isConnected
@@ -110,6 +110,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{
+		ConnectionManager.instance.removeListener(joinView)
 		queryManager?.stop()
 	}
 	

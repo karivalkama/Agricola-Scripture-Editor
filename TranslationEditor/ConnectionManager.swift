@@ -115,6 +115,9 @@ class ConnectionManager
 		if !listeners.contains(where: { $0 === listener })
 		{
 			listeners.append(listener)
+			// Informs the listener of the initial status
+			listener.onConnectionStatusChange(newStatus: status)
+			listener.onConnectionProgressUpdate(transferred: completedTransferCount, of: targetTransferCount, progress: progress)
 		}
 	}
 	
