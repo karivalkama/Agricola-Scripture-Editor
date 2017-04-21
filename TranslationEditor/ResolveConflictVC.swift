@@ -39,10 +39,13 @@ class ResolveConflictVC: UIViewController, UICollectionViewDelegate, UICollectio
 		}
 		
 		cellWidth = versionCollectionView.frame.width / 2 - CGFloat(32)
+		print("STATUS: Estimated cell withd: \(cellWidth)")
 		
 		if let flowLayout = versionCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
 		{
-			flowLayout.estimatedItemSize = CGSize(width: cellWidth, height: 64)
+			//let size = CGSize(width: cellWidth, height: versionCollectionView.frame.height - 16)
+			flowLayout.estimatedItemSize = CGSize(width: cellWidth, height: versionCollectionView.frame.height - 128)
+			//flowLayout.itemSize = size
 		}
 		
 		// Loads the data for the collection view
@@ -62,6 +65,8 @@ class ResolveConflictVC: UIViewController, UICollectionViewDelegate, UICollectio
 		{
 			print("ERROR: Failed to setup version data. \(error)")
 		}
+		
+		print("STATUS: Found \(versions.count) versions")
 		
 		versionCollectionView.dataSource = self
 		versionCollectionView.delegate = self
@@ -83,6 +88,7 @@ class ResolveConflictVC: UIViewController, UICollectionViewDelegate, UICollectio
 		// Deprecates the other versions, leaving only the selected version in use
 		do
 		{
+			// TODO: If there is no common ancestor, just deprecate the whole path
 			guard let commonAncestor = try ParagraphHistoryView.instance.commonAncestorOf(paragraphIds: versions.map { $0.idString }) else
 			{
 				print("ERROR: Failed to find common ancestor for the specified paragraphs")
@@ -116,7 +122,7 @@ class ResolveConflictVC: UIViewController, UICollectionViewDelegate, UICollectio
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VersionCell.identifier, for: indexPath) as! VersionCell
 		
 		let version = versions[indexPath.row]
-		cell.configure(author: authors[version.creatorId].or("Someone"), created: Date(timeIntervalSince1970: version.created), text: version.toAttributedString(options: [Paragraph.optionDisplayParagraphRange: false]))
+		cell.configure(author: authors[version.creatorId].or("Someone"), created: Date(timeIntervalSince1970: version.created), content: version)
 		
 		return cell
 	}

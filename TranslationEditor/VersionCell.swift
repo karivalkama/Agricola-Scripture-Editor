@@ -26,7 +26,7 @@ class VersionCell: UICollectionViewCell
 	
 	// OTHER METHODS	----
 	
-	func configure(author: String, created: Date, text: NSAttributedString)
+	func configure(author: String, created: Date, content: Paragraph)
 	{
 		authorLabel.text = "\(author) wrote"
 		
@@ -35,6 +35,8 @@ class VersionCell: UICollectionViewCell
 		
 		timeLabel.text = formatter.string(from: created)
 
-		contentTextView.attributedText = text
+		contentTextView.display(paragraph: content)
+		
+		print("STATUS: Setting up cell for \(author)")
 	}
 }
