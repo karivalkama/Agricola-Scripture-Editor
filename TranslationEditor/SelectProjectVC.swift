@@ -60,20 +60,34 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	{
 		super.viewDidAppear(animated)
 		
+		// print("STATUS: Project view appeared (temporarily: \(willBeDismissed))")
+		
 		// If project is already selected, moves to the next view
 		// Otherwise listens to project data changes
-		if Session.instance.projectId == nil
+		if let projectId = Session.instance.projectId
 		{
-			queryManager?.start()
+			// Checks whether this login should be considered shared
+			do
+			{
+				selectedWithSharedAccount = try Project.get(projectId)?.sharedAccountId == Session.instance.accountId
+			}
+			catch
+			{
+				print("ERROR: Failed to read project data. \(error)")
+			}
+			
+			performSegue(withIdentifier: "SelectAvatar", sender: nil)
 		}
 		else
 		{
-			performSegue(withIdentifier: "SelectAvatar", sender: nil)
+			queryManager?.start()
 		}
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{
+		print("STATUS: Project view disappeared")
+		
 		queryManager?.stop()
 	}
     
@@ -163,6 +177,7 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	
 	func willDissmissBelow()
 	{
+		print("STATUS: Project view will be dismissed from below")
 		// Logs the user out before dimissing into login
 		Session.instance.logout()
 	}
