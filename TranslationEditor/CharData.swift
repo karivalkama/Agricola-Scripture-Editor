@@ -9,7 +9,7 @@
 import Foundation
 
 // Chardata is used for storing text within a verse or another container. Character data may have specific styling associated with it (quotation, special meaning, etc.)
-struct CharData: AttributedStringConvertible, JSONConvertible, Equatable
+struct CharData: AttributedStringConvertible, JSONConvertible, Equatable, USXConvertible
 {
 	// ATTRIBUTES	----
 	
@@ -24,6 +24,25 @@ struct CharData: AttributedStringConvertible, JSONConvertible, Equatable
 		return [
 			"style" : (style?.rawValue).value,
 			"text" : text.value]
+	}
+	
+	var toUSX: String
+	{
+		if let style = style
+		{
+			if text.isEmpty
+			{
+				return "<char style=\"\(style)\"/>"
+			}
+			else
+			{
+				return "<char style=\"\(style)\">\(text)</char>"
+			}
+		}
+		else
+		{
+			return text
+		}
 	}
 	
 	
@@ -73,6 +92,8 @@ struct CharData: AttributedStringConvertible, JSONConvertible, Equatable
 	
 	static func text(of data: [CharData]) -> String
 	{
+		return data.reduce("") { $0 + $1.text }
+		/*
 		var text = ""
 		
 		for charData in data
@@ -80,6 +101,6 @@ struct CharData: AttributedStringConvertible, JSONConvertible, Equatable
 			text.append(charData.text)
 		}
 		
-		return text
+		return text*/
 	}
 }

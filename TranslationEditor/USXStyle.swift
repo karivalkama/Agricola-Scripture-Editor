@@ -16,6 +16,7 @@ protocol USXStyle
 	//static func value(of code: String) -> USXStyle?
 }
 
+// Should accept styles which are not recognised
 enum CharStyle: String, USXStyle
 {
 	case quotation = "qt"
