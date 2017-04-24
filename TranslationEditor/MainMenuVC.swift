@@ -9,6 +9,8 @@
 import UIKit
 import MessageUI
 
+// TODO: Implement feature that opens mail for usx files. Check: http://stackoverflow.com/questions/29422917/how-to-launch-the-ios-mail-app-in-swift
+
 // This view controller handles the main menu features like connection hosting, and book selection
 class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate
 {
