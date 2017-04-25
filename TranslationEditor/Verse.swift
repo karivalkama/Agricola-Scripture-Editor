@@ -10,7 +10,6 @@ import Foundation
 
 // A verse has certain range but also text
 // The text on a verse is mutable
-// TODO: Struct or class?
 final class Verse: AttributedStringConvertible, JSONConvertible, Copyable
 {
 	// ATTRIBUTES	------

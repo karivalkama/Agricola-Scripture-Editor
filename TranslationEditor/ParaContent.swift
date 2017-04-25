@@ -13,6 +13,7 @@ import Foundation
 // Text elements should not contain verses but be stored under them instead
 protocol ParaContent: AttributedStringConvertible, USXConvertible, JSONConvertible
 {
-	// A simple text representation of the element
 	var text: String { get }
+	
+	var charData: [CharData] { get set }
 }
