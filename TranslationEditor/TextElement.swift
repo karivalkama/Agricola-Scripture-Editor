@@ -9,7 +9,7 @@
 import Foundation
 
 // A text element is para is a set of character data that can be used as para content
-class TextElement: ParaContent
+final class TextElement: ParaContent, Copyable
 {
 	// ATTRIBUTES	------------
 	
@@ -23,6 +23,9 @@ class TextElement: ParaContent
 	var toUSX: String { return charData.reduce("", { $0 + $1.toUSX }) }
 	
 	var properties: [String : PropertyValue] { return ["text": charData.value] }
+	
+	// Whether this text element contains no text whatsoever
+	var isEmpty: Bool { return charData.forAll { $0.isEmpty } }
 	
 	
 	// INIT	--------------------
@@ -46,5 +49,18 @@ class TextElement: ParaContent
 		let attStr = NSMutableAttributedString()
 		charData.forEach { attStr.append($0.toAttributedString(options: options)) }
 		return attStr
+	}
+	
+	func copy() -> TextElement
+	{
+		return TextElement(charData: charData)
+	}
+	
+	
+	// OTHER METHODS	--------
+	
+	func emptyCopy() -> TextElement
+	{
+		return TextElement(charData: charData.map{ $0.emptyCopy() })
 	}
 }

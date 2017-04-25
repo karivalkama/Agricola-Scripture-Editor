@@ -28,22 +28,22 @@ struct CharData: Equatable, USXConvertible, AttributedStringConvertible, JSONCon
 	
 	var toUSX: String
 	{
-		if let style = style
+		// Empty charData is not recorded in USX
+		if isEmpty
 		{
-			if text.isEmpty
-			{
-				return "<char style=\"\(style)\"/>"
-			}
-			else
-			{
-				return "<char style=\"\(style)\">\(text)</char>"
-			}
+			return ""
+		}
+		else if let style = style
+		{
+			return "<char style=\"\(style)\">\(text)</char>"
 		}
 		else
 		{
 			return text
 		}
 	}
+	
+	var isEmpty: Bool { return text.isEmpty }
 	
 	
 	// INIT	----
@@ -88,6 +88,11 @@ struct CharData: Equatable, USXConvertible, AttributedStringConvertible, JSONCon
 	func appended(_ text: String) -> CharData
 	{
 		return CharData(text: self.text + text, style: self.style)
+	}
+	
+	func emptyCopy() -> CharData
+	{
+		return CharData(text: "", style: style)
 	}
 	
 	static func text(of data: [CharData]) -> String

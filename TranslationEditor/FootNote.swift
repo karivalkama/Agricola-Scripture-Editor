@@ -8,11 +8,9 @@
 
 import Foundation
 
-class FootNote: ParaContent
+final class FootNote: ParaContent, Copyable
 {
 	// ATTRIBUTES	------------
-	
-	static let type = "footnote"
 	
 	var caller: String
 	var style: String
@@ -27,7 +25,7 @@ class FootNote: ParaContent
 	
 	var toUSX: String { return "<note caller=\"\(caller)\" style=\"\(style)\">\(originReference == nil ? "" : "<char style=\"fr\">\(originReference!)</char>")\(charData.reduce("", { $0 + $1.toUSX }))</note>" }
 	
-	var properties: [String : PropertyValue] { return [PROPERTY_TYPE: FootNote.type.value, "caller": caller.value, "style": style.value, "origin_reference": originReference.value, "text": charData.value] }
+	var properties: [String : PropertyValue] { return ["caller": caller.value, "style": style.value, "origin_reference": originReference.value, "text": charData.value] }
 	
 	
 	// INIT	--------------------
@@ -59,5 +57,18 @@ class FootNote: ParaContent
 		attSrt.addAttribute(IsNoteAttributeName, value: true, range: NSMakeRange(0, attSrt.length))
 		
 		return attSrt
+	}
+	
+	func copy() -> FootNote
+	{
+		return FootNote(caller: caller, style: style, originReference: originReference, charData: charData)
+	}
+	
+	
+	// OTHER METHODS	-----
+	
+	func emptyCopy() -> FootNote
+	{
+		return FootNote(caller: caller, style: style, originReference: originReference, charData: charData.map { $0.emptyCopy() })
 	}
 }
