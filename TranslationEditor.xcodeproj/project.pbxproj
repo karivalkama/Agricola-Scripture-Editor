@@ -83,6 +83,7 @@
 		7C506B7F1E892FA400ACB5AC /* MainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C506B7E1E892FA400ACB5AC /* MainMenuVC.swift */; };
 		7C506B811E8939A100ACB5AC /* P2PClientSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C506B801E8939A100ACB5AC /* P2PClientSession.swift */; };
 		7C532A5D1EA740F9002A7F7C /* USXImportStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C532A5C1EA740F9002A7F7C /* USXImportStack.swift */; };
+		7C541D401EB8741D0035CDF0 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C541D3F1EB8741D0035CDF0 /* CreateAccountVC.swift */; };
 		7C55A1F71E76C0580038C122 /* TranslationHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55A1F61E76C0580038C122 /* TranslationHistoryManager.swift */; };
 		7C55A1FF1E7970A70038C122 /* CreateAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55A1FE1E7970A70038C122 /* CreateAvatarView.swift */; };
 		7C57EBFE1E66BC2D000718E9 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EBFD1E66BC2D000718E9 /* LoginVC.swift */; };
@@ -90,7 +91,7 @@
 		7C57EC031E66E293000718E9 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC021E66E293000718E9 /* Session.swift */; };
 		7C57EC051E66F824000718E9 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC041E66F824000718E9 /* AccountView.swift */; };
 		7C57EC071E6709A2000718E9 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC061E6709A2000718E9 /* Server.swift */; };
-		7C57EC0B1E680AC6000718E9 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC0A1E680AC6000718E9 /* CreateAccountVC.swift */; };
+		7C57EC0B1E680AC6000718E9 /* CreateAccountVCOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C57EC0A1E680AC6000718E9 /* CreateAccountVCOld.swift */; };
 		7C57EC0D1E683753000718E9 /* TIT_DURI.usx in Resources */ = {isa = PBXBuildFile; fileRef = 7C57EC0C1E683753000718E9 /* TIT_DURI.usx */; };
 		7C57EC0F1E6948FC000718E9 /* TI2_ENG.usx in Resources */ = {isa = PBXBuildFile; fileRef = 7C57EC0E1E6948FC000718E9 /* TI2_ENG.usx */; };
 		7C57EC101E6948FC000718E9 /* TI2_ENG.usx in Resources */ = {isa = PBXBuildFile; fileRef = 7C57EC0E1E6948FC000718E9 /* TI2_ENG.usx */; };
@@ -314,6 +315,7 @@
 		7C506B7E1E892FA400ACB5AC /* MainMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuVC.swift; sourceTree = "<group>"; };
 		7C506B801E8939A100ACB5AC /* P2PClientSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P2PClientSession.swift; sourceTree = "<group>"; };
 		7C532A5C1EA740F9002A7F7C /* USXImportStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXImportStack.swift; sourceTree = "<group>"; };
+		7C541D3F1EB8741D0035CDF0 /* CreateAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
 		7C55A1F61E76C0580038C122 /* TranslationHistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationHistoryManager.swift; sourceTree = "<group>"; };
 		7C55A1FE1E7970A70038C122 /* CreateAvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAvatarView.swift; sourceTree = "<group>"; };
 		7C57EBFD1E66BC2D000718E9 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -322,7 +324,7 @@
 		7C57EC021E66E293000718E9 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		7C57EC041E66F824000718E9 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		7C57EC061E6709A2000718E9 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
-		7C57EC0A1E680AC6000718E9 /* CreateAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
+		7C57EC0A1E680AC6000718E9 /* CreateAccountVCOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountVCOld.swift; sourceTree = "<group>"; };
 		7C57EC0C1E683753000718E9 /* TIT_DURI.usx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TIT_DURI.usx; sourceTree = "<group>"; };
 		7C57EC0E1E6948FC000718E9 /* TI2_ENG.usx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TI2_ENG.usx; sourceTree = "<group>"; };
 		7C57EC111E694939000718E9 /* TI1_ENG.usx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TI1_ENG.usx; sourceTree = "<group>"; };
@@ -830,10 +832,11 @@
 			isa = PBXGroup;
 			children = (
 				7C57EBFD1E66BC2D000718E9 /* LoginVC.swift */,
-				7C57EC0A1E680AC6000718E9 /* CreateAccountVC.swift */,
+				7C57EC0A1E680AC6000718E9 /* CreateAccountVCOld.swift */,
 				7C57ECA91E6D5EDA000718E9 /* SelectProjectVC.swift */,
 				7C6070581E5C7BE0007718BC /* SelectAvatarVC.swift */,
 				7CA3B9BC1E840976002A6C48 /* CreateProjectVC.swift */,
+				7C541D3F1EB8741D0035CDF0 /* CreateAccountVC.swift */,
 			);
 			name = LoginView;
 			sourceTree = "<group>";
@@ -1323,6 +1326,7 @@
 				7C2518111E8E39F50089E1FD /* StackDismissable.swift in Sources */,
 				7C9496141EAE1CCE0063EA83 /* ParaContent.swift in Sources */,
 				7C4A4FDC1DFAE273009F890E /* Theme.swift in Sources */,
+				7C541D401EB8741D0035CDF0 /* CreateAccountVC.swift in Sources */,
 				7C57EC031E66E293000718E9 /* Session.swift in Sources */,
 				7C4A4FAA1DF836F1009F890E /* LiveQueryListener.swift in Sources */,
 				7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */,
@@ -1405,7 +1409,7 @@
 				7CA1BAC01E323A7700611FED /* ResourceManager.swift in Sources */,
 				7CCC00F61D9D235800F0562E /* USXAttributes.swift in Sources */,
 				7C20D7FF1D9A93AA00E84BA5 /* StringExtension.swift in Sources */,
-				7C57EC0B1E680AC6000718E9 /* CreateAccountVC.swift in Sources */,
+				7C57EC0B1E680AC6000718E9 /* CreateAccountVCOld.swift in Sources */,
 				7C60705B1E5D705B007718BC /* AvatarInfoView.swift in Sources */,
 				7C1515151E94BEDC00419DEA /* CircleImage.swift in Sources */,
 				7C4A4F971DEF0CDE009F890E /* LanguageView.swift in Sources */,
