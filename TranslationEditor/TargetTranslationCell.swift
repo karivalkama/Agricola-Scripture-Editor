@@ -20,7 +20,7 @@ class TargetTranslationCell: UITableViewCell, ParagraphAssociated, UITextViewDel
 	
 	static let identifier = "TranslationCell"
 	
-	private(set) var pathId: String?
+	private var originalParagraph: Paragraph?
 	
 	private var action: TranslationCellAction?
 	
@@ -28,6 +28,11 @@ class TargetTranslationCell: UITableViewCell, ParagraphAssociated, UITextViewDel
 	private weak var scrollManager: ScrollSyncManager?
 	
 	weak var delegate: TranslationCellDelegate?
+	
+	
+	// COMPUTED PROPERTIES	---
+	
+	var pathId: String? { return originalParagraph?.pathId }
 	
 	
 	// ACTIONS	-----------
@@ -68,9 +73,9 @@ class TargetTranslationCell: UITableViewCell, ParagraphAssociated, UITextViewDel
 	func textViewDidChange(_ textView: UITextView)
 	{
 		// Informs the listeners, if present
-		if let listener = inputListener, let contentPathId = pathId
+		if let listener = inputListener, let originalParagraph = originalParagraph
 		{
-			listener.cellContentChanged(id: contentPathId, newContent: textView.attributedText)
+			listener.cellContentChanged(originalParagraph: originalParagraph, newContent: textView.attributedText)
 		}
 	}
 	
@@ -93,6 +98,8 @@ class TargetTranslationCell: UITableViewCell, ParagraphAssociated, UITextViewDel
 			return false
 		}
 		
+		// TODO: Note markers shouldn't be edited either
+		
 		// TODO: Determine the attributes for the inserted text
 		inputTextField.typingAttributes = [NSFontAttributeName: defaultParagraphFont, NSForegroundColorAttributeName: Colour.Primary.dark.asColour]
 		return true
@@ -105,16 +112,17 @@ class TargetTranslationCell: UITableViewCell, ParagraphAssociated, UITextViewDel
 	
 	// OTHER METHODS	-----
 	
-	func setContent(paragraph: Paragraph)
+	func setContent(paragraph: Paragraph, attString: NSAttributedString? = nil)
 	{
-		pathId = paragraph.pathId
-		inputTextField.display(paragraph: paragraph)
-	}
-	
-	func setContent(usxString: NSAttributedString, pathId: String)
-	{
-		self.pathId = pathId
-		inputTextField.display(usxString: usxString)
+		originalParagraph = paragraph
+		if let attString = attString
+		{
+			inputTextField.display(usxString: attString)
+		}
+		else
+		{
+			inputTextField.display(paragraph: paragraph)
+		}
 	}
 	
 	func configure(showsHistory: Bool, inputListener: CellInputListener, scrollManager: ScrollSyncManager, action: TranslationCellAction? = nil)

@@ -10,7 +10,7 @@ import Foundation
 
 // Paragraph are used as the base translation units
 // A paragraph contains certain text range, and has some resources associated with it
-final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Storable, Copyable
+final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Storable, Copyable, USXConvertible
 {
 	// ATTRIBUTES	---------
 	
@@ -84,6 +84,8 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		return Book.idIndexMap.makeChildPath(parentPathName: PROPERTY_BOOK_ID, childPath: [PROPERTY_CHAPTER_INDEX, PROPERTY_PATH_ID, PROPERTY_CREATED])
 	}
 	
+	var toUSX: String { return content.reduce("", { $0 + $1.toUSX }) }
+	
 	
 	// INIT	-----------------
 	
@@ -104,15 +106,6 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		self.createdFrom = createdFrom
 		self.isDeprecated = deprecated
 		self.isMostRecent = mostRecent
-	}
-	
-	func copy() -> Paragraph
-	{
-		return Paragraph(
-			bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, index: index,
-			content: content.copy(), creatorId: creatorId,
-			createdFrom: createdFrom, pathId: pathId,
-			created: created, mostRecent: isMostRecent, deprecated: isDeprecated)
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> Paragraph
@@ -149,6 +142,20 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		{
 			self.creatorId = creatorId
 		}
+	}
+	
+	func copy() -> Paragraph
+	{
+		return Paragraph(
+			bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, index: index,
+			content: content.copy(), creatorId: creatorId,
+			createdFrom: createdFrom, pathId: pathId,
+			created: created, mostRecent: isMostRecent, deprecated: isDeprecated)
+	}
+	
+	func contentEquals(with other: Paragraph) -> Bool
+	{
+		return bookId == other.bookId && chapterIndex == other.chapterIndex && sectionIndex == other.sectionIndex && index == other.index && pathId == other.pathId && creatorId == other.creatorId && createdFrom == other.createdFrom && created == other.created && isDeprecated == other.isDeprecated && isMostRecent == other.isMostRecent && content.contentEquals(with: other.content)
 	}
 	
 	
@@ -196,16 +203,14 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	// Parameters content and text are mutually exclusive
 	func commit(userId: String, chapterIndex: Int? = nil, sectionIndex: Int? = nil, paragraphIndex: Int? = nil, content: [Para]? = nil, text: NSAttributedString? = nil) throws -> Paragraph
 	{
-		let content = content.or(text == nil ? self.content.copy() : [])
-		
 		let newVersion = Paragraph(
 			bookId: bookId, chapterIndex: chapterIndex.or(self.chapterIndex), sectionIndex: sectionIndex.or(self.sectionIndex), index: paragraphIndex.or(self.index),
-			content: content, creatorId: userId,
+			content: content.or(self.content.copy()), creatorId: userId,
 			createdFrom: idString, pathId: pathId)
 		
 		if let text = text
 		{
-			newVersion.replaceContents(with: text)
+			newVersion.update(with: text)
 		}
 		
 		// Only saves changes if there were any
@@ -289,6 +294,27 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		return str
 	}
 	
+	func update(with attString: NSAttributedString)
+	{
+		let paraRanges = parseParaRanges(from: attString)
+		
+		if paraRanges.count != content.count
+		{
+			print("ERROR: Updating paragraph with \(content.count) para elements with data that contains \(paraRanges.count) para elements")
+		}
+		
+		for i in 0 ..< content.count
+		{
+			if i < paraRanges.count
+			{
+				let (style, range) = paraRanges[i]
+				content[i].style = style
+				content[i].update(with: attString.attributedSubstring(from: range))
+			}
+		}
+	}
+	
+	/*
 	func replaceContents(with usxString: NSAttributedString)
 	{
 		// Deletes previous content
@@ -300,26 +326,11 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		{
 			content.append(Para(content: usxString.attributedSubstring(from: contentRange), style: style))
 		}
-	}
+	}*/
 	
 	func paraContentsEqual(with other: Paragraph) -> Bool
 	{
-		if content.count == other.content.count
-		{
-			for i in 0 ..< content.count
-			{
-				if !content[i].contentEquals(with: other.content[i])
-				{
-					return false
-				}
-			}
-			
-			return true
-		}
-		else
-		{
-			return false
-		}
+		return content.contentEquals(with: other.content)
 	}
 	
 	// Marks each of the provided ids as deprecated

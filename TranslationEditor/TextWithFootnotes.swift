@@ -50,16 +50,24 @@ final class TextWithFootnotes: USXConvertible, JSONConvertible, AttributedString
 	
 	var properties: [String : PropertyValue] { return ["text": textElements.value, "notes": footNotes.value] }
 	
+	var text: String { return content.reduce("", { $0 + $1.text }) }
+	
 	
 	// INIT	--------------------
 	
 	init()
 	{
-		self.textElements = []
+		self.textElements = [TextElement.empty()]
 		self.footNotes = []
 	}
 	
-	private init(textElements: [TextElement], footNotes: [FootNote])
+	init(text: String)
+	{
+		self.textElements = [TextElement(charData: [CharData(text: text)])]
+		self.footNotes = []
+	}
+	
+	init(textElements: [TextElement], footNotes: [FootNote])
 	{
 		self.textElements = textElements
 		self.footNotes = footNotes
@@ -86,6 +94,31 @@ final class TextWithFootnotes: USXConvertible, JSONConvertible, AttributedString
 	}
 	
 	
+	// OPERATORS	-----------
+	
+	static func +(_ left: TextWithFootnotes, _ right: TextWithFootnotes) -> TextWithFootnotes
+	{
+		if left.textElements.isEmpty
+		{
+			return right.copy()
+		}
+		else if right.textElements.isEmpty
+		{
+			return left.copy()
+		}
+		else
+		{
+			// The last text element of the left hand side is combined with the first text element on the right hand side so that there won't be two consecutive text elements
+			var newTextElements = [TextElement]()
+			newTextElements.append(contentsOf: left.textElements.dropLast().map { $0.copy() })
+			newTextElements.add(left.textElements.last! + right.textElements.first!)
+			newTextElements.append(contentsOf: right.textElements.dropFirst().map { $0.copy() })
+			
+			return TextWithFootnotes(textElements: newTextElements, footNotes: left.footNotes.map { $0.copy() } + right.footNotes.map { $0.copy() })
+		}
+	}
+	
+	
 	// OTHER METHODS	-------
 	
 	func emptyCopy() -> TextWithFootnotes
@@ -93,7 +126,12 @@ final class TextWithFootnotes: USXConvertible, JSONConvertible, AttributedString
 		return TextWithFootnotes(textElements: textElements.map { $0.emptyCopy() }, footNotes: footNotes.map { $0.emptyCopy() })
 	}
 	
-	func update(with attString: NSAttributedString)
+	func contentEquals(with other: TextWithFootnotes) -> Bool
+	{
+		return textElements.contentEquals(with: other.textElements) && footNotes.contentEquals(with: other.footNotes)
+	}
+	
+	func update(with attString: NSAttributedString) -> TextWithFootnotes?
 	{
 		// Finds all the notes markers from the string first
 		var notesRanges = [(Int, Int)]() // Note start index, note end index
@@ -146,6 +184,41 @@ final class TextWithFootnotes: USXConvertible, JSONConvertible, AttributedString
 				break
 			}
 		}
+		
+		// If there was less data provided than what there were slots in this element, 
+		// cuts the remaining elements and returns a new element based on that data
+		if charData.count < content.count
+		{
+			// If the last included element was a footnote, adds an empty text data element to the end of this element
+			if charData.count % 2 == 0
+			{
+				let splitIndex = charData.count / 2
+				
+				let cutElement = TextWithFootnotes(textElements: Array(textElements.dropFirst(splitIndex)), footNotes: Array(footNotes.dropFirst(splitIndex)))
+				
+				textElements = Array(textElements.prefix(splitIndex)) + TextElement.empty()
+				footNotes = Array(footNotes.prefix(splitIndex))
+				
+				return cutElement
+			}
+			// If the last included element was text data, adds an empty text data element to the beginning of the generated element
+			else
+			{
+				let noteSplitIndex = charData.count / 2
+				let textSplitIndex = noteSplitIndex + 1
+				
+				let cutElement = TextWithFootnotes(textElements: TextElement.empty() + Array(textElements.dropFirst(textSplitIndex)), footNotes: Array(footNotes.dropFirst(noteSplitIndex)))
+				
+				textElements = Array(textElements.prefix(textSplitIndex))
+				footNotes = Array(footNotes.prefix(noteSplitIndex))
+				
+				return cutElement
+			}
+		}
+		
+		// TODO: Handle cases where new chardata count is smaller than previous content count
+		
+		return nil
 	}
 	
 	private func parseCharData(from attStr: NSAttributedString, range: NSRange) -> [CharData]

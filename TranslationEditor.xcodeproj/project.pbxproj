@@ -147,6 +147,8 @@
 		7C9496181EAE1EA40063EA83 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9496171EAE1EA40063EA83 /* TextElement.swift */; };
 		7C94961A1EAE25190063EA83 /* FootNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9496191EAE25190063EA83 /* FootNote.swift */; };
 		7C94961C1EAF41180063EA83 /* TextWithFootnotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C94961B1EAF41180063EA83 /* TextWithFootnotes.swift */; };
+		7C94961E1EB351CB0063EA83 /* USXFootNoteProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C94961D1EB351CB0063EA83 /* USXFootNoteProcessor.swift */; };
+		7C9496201EB360EA0063EA83 /* USXTextAndNoteProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C94961F1EB360EA0063EA83 /* USXTextAndNoteProcessor.swift */; };
 		7C9BB7E31E8536AA0010DE5C /* MainMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */; };
 		7C9BB7E51E8538730010DE5C /* TopUserDisplay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C9BB7E41E8538730010DE5C /* TopUserDisplay.xib */; };
 		7C9BB7E71E853A250010DE5C /* TopUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9BB7E61E853A250010DE5C /* TopUserView.swift */; };
@@ -377,6 +379,8 @@
 		7C9496171EAE1EA40063EA83 /* TextElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextElement.swift; sourceTree = "<group>"; };
 		7C9496191EAE25190063EA83 /* FootNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootNote.swift; sourceTree = "<group>"; };
 		7C94961B1EAF41180063EA83 /* TextWithFootnotes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextWithFootnotes.swift; sourceTree = "<group>"; };
+		7C94961D1EB351CB0063EA83 /* USXFootNoteProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXFootNoteProcessor.swift; sourceTree = "<group>"; };
+		7C94961F1EB360EA0063EA83 /* USXTextAndNoteProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXTextAndNoteProcessor.swift; sourceTree = "<group>"; };
 		7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainMenu.storyboard; sourceTree = "<group>"; };
 		7C9BB7E41E8538730010DE5C /* TopUserDisplay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopUserDisplay.xib; sourceTree = "<group>"; };
 		7C9BB7E61E853A250010DE5C /* TopUserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopUserView.swift; sourceTree = "<group>"; };
@@ -743,6 +747,8 @@
 				7C4CC1761DB0EE1800BCF24B /* USXContainerElement.swift */,
 				7C936C1A1E9F7F1E00AC06BF /* USXBookFinder.swift */,
 				7C936C1C1E9F921200AC06BF /* BookData.swift */,
+				7C94961D1EB351CB0063EA83 /* USXFootNoteProcessor.swift */,
+				7C94961F1EB360EA0063EA83 /* USXTextAndNoteProcessor.swift */,
 			);
 			name = USXParsing;
 			sourceTree = "<group>";
@@ -1276,6 +1282,7 @@
 				7CDBD6A81E238A0200912320 /* ResourceCategory.swift in Sources */,
 				7C20D7EC1D8C1B7200E84BA5 /* CellContentListener.swift in Sources */,
 				7C25180F1E8D0F8A0089E1FD /* EditAvatarVC.swift in Sources */,
+				7C9496201EB360EA0063EA83 /* USXTextAndNoteProcessor.swift in Sources */,
 				7C9496181EAE1EA40063EA83 /* TextElement.swift in Sources */,
 				7C6070531E570C0B007718BC /* OpenThreadStatusListener.swift in Sources */,
 				7C6C3C1A1E373959001D56F4 /* PostThreadVC.swift in Sources */,
@@ -1388,6 +1395,7 @@
 				7CCC01201DA646F900F0562E /* USXContentParser.swift in Sources */,
 				7CA1BAA41E2FA5A500611FED /* NotesPostView.swift in Sources */,
 				7C6070491E52ECBA007718BC /* VerseCell.swift in Sources */,
+				7C94961E1EB351CB0063EA83 /* USXFootNoteProcessor.swift in Sources */,
 				7C0130CB1E41F4D30053C5C2 /* ProjectView.swift in Sources */,
 				7CCC013C1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
 				7C903F6D1EA7536A008EE1E6 /* BookCode.swift in Sources */,

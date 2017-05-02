@@ -41,6 +41,11 @@ final class TextElement: ParaContent, Copyable
 		return TextElement(charData: CharData.parseArray(from: properties["text"].array(), using: CharData.parse))
 	}
 	
+	static func empty() -> TextElement
+	{
+		return TextElement(charData: [CharData(text: "")])
+	}
+	
 	
 	// IMPLEMENTED METHODS	----
 	
@@ -57,10 +62,25 @@ final class TextElement: ParaContent, Copyable
 	}
 	
 	
+	// OPERATORS	------------
+	
+	// Combines two text elements into a third text element
+	// Does not affect the two parameters in any way
+	static func +(_ left: TextElement, _ right: TextElement) -> TextElement
+	{
+		return TextElement(charData: left.charData + right.charData)
+	}
+	
+	
 	// OTHER METHODS	--------
 	
 	func emptyCopy() -> TextElement
 	{
 		return TextElement(charData: charData.map{ $0.emptyCopy() })
+	}
+	
+	func contentEquals(with other: TextElement) -> Bool
+	{
+		return charData == other.charData
 	}
 }

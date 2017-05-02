@@ -14,7 +14,7 @@ class USXVerseProcessor: USXContentProcessor
 	// TYPES	-------------
 	
 	typealias Generated = Verse
-	typealias Processed = CharData
+	typealias Processed = TextWithFootnotes
 	
 	
 	// ATTRIBUTES	---------
@@ -32,9 +32,9 @@ class USXVerseProcessor: USXContentProcessor
 	// Creates a new parser for usx verse contents
 	// The parser should start after a verse marker
 	// The parser will stop at the start of the next verse marker or at the end of the para element
-	static func createVerseParser(caller: XMLParserDelegate, range: VerseRange, targetPointer: UnsafeMutablePointer<[Verse]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Verse, CharData>
+	static func createVerseParser(caller: XMLParserDelegate, range: VerseRange, targetPointer: UnsafeMutablePointer<[Generated]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Generated, Processed>
 	{
-		let parser = USXContentParser<Verse, CharData>(caller: caller, containingElement: .para, lowestBreakMarker: .verse, targetPointer: targetPointer, using: errorHandler)
+		let parser = USXContentParser<Generated, Processed>(caller: caller, containingElement: .para, lowestBreakMarker: .verse, targetPointer: targetPointer, using: errorHandler)
 		parser.processor = AnyUSXContentProcessor(USXVerseProcessor(range: range))
 		
 		return parser
@@ -43,21 +43,27 @@ class USXVerseProcessor: USXContentProcessor
 	
 	// USX Parsing	---------
 	
-	func getParser(_ caller: USXContentParser<Verse, CharData>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[CharData]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
+	func getParser(_ caller: USXContentParser<Generated, Processed>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
 	{
-		// Delegates all parsing to chardata parsers
-		return (USXCharParser(caller: caller, targetData: targetPointer), true)
+		// Delegates all parsing to text & footnote parsers
+		return (USXTextAndNoteProcessor.createParser(caller: caller, targetPointer: targetPointer, using: errorHandler), true)
 	}
 	
-	func getCharacterParser(_ caller: USXContentParser<Verse, CharData>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[CharData]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
+	func getCharacterParser(_ caller: USXContentParser<Generated, Processed>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
 	{
-		// Delegates character parsing as well
-		return USXCharParser(caller: caller, targetData: targetPointer)
+		return USXTextAndNoteProcessor.createParser(caller: caller, targetPointer: targetPointer, using: errorHandler)
 	}
 	
-	func generate(from content: [CharData], using errorHandler: @escaping ErrorHandler) -> Verse?
+	func generate(from content: [Processed], using errorHandler: @escaping ErrorHandler) -> Verse?
 	{
-		// Parses the char data into a verse
-		return Verse(range: range, content: content)
+		// Produces verse content based on the collected data
+		if content.isEmpty
+		{
+			return Verse(range: range)
+		}
+		else
+		{
+			return Verse(range: range, content: content.dropFirst().reduce(content.first!, + ))
+		}
 	}
 }

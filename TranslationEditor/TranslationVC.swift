@@ -45,8 +45,8 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	private var scrollManager: ScrollSyncManager!
 	
 	// paragraph data modified, but not committed by user
-	// Key = paragraph path id, value = edited text
-	private var inputData = [String : NSAttributedString]()
+	// Key = paragraph path id, value = original paragraph + edited text
+	private var inputData = [String : (Paragraph, NSAttributedString)]()
 	
 	// Open thread status
 	// path id -> [ resource ids for each resource containing open threads for the path ]
@@ -208,9 +208,9 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	
 	// CELL LISTENING	-------------
 	
-	func cellContentChanged(id: String, newContent: NSAttributedString)
+	func cellContentChanged(originalParagraph: Paragraph, newContent: NSAttributedString)
 	{
-		inputData[id] = newContent
+		inputData[originalParagraph.pathId] = (originalParagraph, newContent)
 		commitButton.isEnabled = true
 		
 		// Resets cell height
@@ -252,6 +252,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	
 	// CELL MANAGEMENT	-------------
 	
+	/*
 	func overrideContentForParagraph(_ paragraph: Paragraph) -> NSAttributedString?
 	{
 		// Checks if history is used
@@ -263,7 +264,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		{
 			return inputData[paragraph.pathId]
 		}
-	}
+	}*/
 	
 	func perform(action: TranslationCellAction, for cell: TargetTranslationCell)
 	{
@@ -403,10 +404,17 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	{
 		let cell = tableView.dequeueReusableCell(withIdentifier: TargetTranslationCell.identifier, for: indexPath) as! TargetTranslationCell
 		
-		// Sets the cell contents either based on collected user input or paragraph data
-		if let input = inputData[paragraph.pathId]
+		var displaysHistory = false
+		
+		if let history = targetHistoryManager.currentHistoryForParagraph(withId: paragraph.idString)
 		{
-			cell.setContent(usxString: input, pathId: paragraph.pathId)
+			cell.setContent(paragraph: history)
+			displaysHistory = true
+		}
+		// Sets the cell contents either based on displayed history, collected user input or paragraph data
+		else if let (originalParagraph, input) = inputData[paragraph.pathId]
+		{
+			cell.setContent(paragraph: originalParagraph, attString: input)
 		}
 		else
 		{
@@ -433,7 +441,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 			}
 		}
 			
-		cell.configure(showsHistory: targetHistoryManager.currentDepthForParagraph(withId: paragraph.idString) != 0, inputListener: self, scrollManager: scrollManager, action: action)
+		cell.configure(showsHistory: displaysHistory, inputListener: self, scrollManager: scrollManager, action: action)
 		cell.delegate = self
 		
 		return cell
@@ -484,12 +492,9 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 			do
 			{
 				// Saves each user input as a commit
-				for (pathId, text) in self.inputData
+				for (_, (paragraph, text)) in self.inputData
 				{
-					if let paragraph = self.targetTranslationDS?.paragraphForPath(pathId)
-					{
-						_ = try paragraph.commit(userId: avatarId, text: text)
-					}
+					_ = try paragraph.commit(userId: avatarId, text: text)
 				}
 				
 				// Clears the input afterwards
@@ -521,7 +526,6 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 			active = true
 			
 			// Retrieves edit data from the database
-			// TODO: rework after user data and book data are in place
 			if inputData.isEmpty
 			{
 				guard let avatarId = Session.instance.avatarId else
@@ -538,7 +542,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 				{
 					for paragraph in edit.edits.values
 					{
-						inputData[paragraph.pathId] = paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
+						inputData[paragraph.pathId] = (paragraph, paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false]))
 					}
 				}
 				
@@ -577,15 +581,13 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		
 		// Parses the input data into paragraphs, grouped by chapter index
 		var chapterData = [Int : [Paragraph]]()
-		for (pathId, inputText) in self.inputData
+		for (_, (paragraph, inputText)) in self.inputData
 		{
-			if let paragraphCopy = targetTranslationDS?.paragraphForPath(pathId)?.copy()
-			{
-				paragraphCopy.replaceContents(with: inputText)
-				
-				let chapterIndex = paragraphCopy.chapterIndex
-				chapterData[chapterIndex] = chapterData[chapterIndex].or([]) + paragraphCopy
-			}
+			let paragraphCopy = paragraph.copy()
+			paragraphCopy.update(with: inputText)
+			
+			let chapterIndex = paragraphCopy.chapterIndex
+			chapterData[chapterIndex] = chapterData[chapterIndex].or([]) + paragraphCopy
 		}
 		
 		// Saves paragraph edit status to the database

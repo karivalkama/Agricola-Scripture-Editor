@@ -47,6 +47,23 @@ enum CharStyle: String, USXStyle
 	}
 }
 
+enum FootNoteStyle: String, USXStyle
+{
+	case footNote = "f"
+	case endNote = "fe"
+	case studyNote = "ef"
+	
+	var code: String { return rawValue }
+}
+
+enum crossReferenceStyle: String, USXStyle
+{
+	case crossReference = "x"
+	case studyCrossReference = "ex"
+	
+	var code: String { return rawValue }
+}
+
 enum ParaStyle: USXStyle, Equatable
 {
 	// Paragraph styles

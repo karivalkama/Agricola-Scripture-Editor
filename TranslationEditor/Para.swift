@@ -10,17 +10,22 @@ import Foundation
 
 // A para is a range of text separated from others. A para has specific styling information 
 // associated with it
-final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConvertible, Copyable
+final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConvertible, Copyable, USXConvertible
 {
 	// ATTIRIBUTES	------
 	
 	// A para can have either defined verse content OR ambiguous text content. The two are exclusive.
 	var verses: [Verse] = []
-	var ambiguousContent: [CharData] = []
+	var ambiguousContent: TextWithFootnotes?
 	var style: ParaStyle
 	
 	
 	// COMPUTED PROPS.	---
+	
+	var toUSX: String
+	{
+		return "<para style=\"\(style.code)\">\(ambiguousContent == nil ? verses.reduce("", { $0 + $1.toUSX }) : ambiguousContent!.toUSX)</para>"
+	}
 	
 	// The verse range of the para. Nil if the paragraph doesn't contain any verse markers
 	var range: VerseRange?
@@ -56,27 +61,21 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 	}
 	
 	// A collection of the para contents, whether split between verses or not
-	var content: [CharData]
+	var content: [ParaContent]
 	{
-		if verses.isEmpty
+		if let ambiguousContent = ambiguousContent
 		{
-			return ambiguousContent
+			return ambiguousContent.content
 		}
 		else
 		{
-			var content = [CharData]()
-			for verse in verses
-			{
-				content.append(contentsOf: verse.content)
-			}
-			
-			return content
+			return verses.flatMap { $0.content.content }
 		}
 	}
 	
 	var text: String
 	{
-		return CharData.text(of: content)
+		return content.reduce("", { $0 + $1.text })
 	}
 	
 	
@@ -94,29 +93,18 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 	}
 	
 	// This initialiser doesn't specify any verse data in the para. Should be used only when verse range data is not available (headers, etc.)
-	init(content: [CharData], style: ParaStyle)
+	init(content: TextWithFootnotes, style: ParaStyle)
 	{
 		self.style = style
 		self.ambiguousContent = content
 	}
 	
+	/*
 	init(content: NSAttributedString, style: ParaStyle = .normal)
 	{
 		self.style = style
 		replaceContents(with: content)
-	}
-	
-	func copy() -> Para
-	{
-		if verses.isEmpty
-		{
-			return Para(content: ambiguousContent, style: style)
-		}
-		else
-		{
-			return Para(content: verses.copy(), style: style)
-		}
-	}
+	}*/
 	
 	// Parses a para element from JSON data
 	// Throws a JSONParseError if the contents of an optional 'verses' element were invalid or incomplete
@@ -135,30 +123,46 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 		}
 		else
 		{
-			return Para(content: CharData.parseArray(from: propertyData["ambiguous_content"].array(), using: CharData.parse), style: style)
+			return Para(content: TextWithFootnotes.parse(from: propertyData["ambiguous_content"].object()), style: style)
 		}
 	}
 	
 	
 	// IMPLEMENTED -----
 	
-	func contentEquals(with other: Para) -> Bool
+	func copy() -> Para
 	{
-		if style == other.style && ambiguousContent == other.ambiguousContent, verses.count == other.verses.count
+		if let ambiguousContent = ambiguousContent
 		{
-			for i in 0 ..< verses.count
-			{
-				if !verses[i].contentEquals(with: other.verses[i])
-				{
-					return false
-				}
-			}
-			
-			return true
+			return Para(content: ambiguousContent.copy(), style: style)
 		}
 		else
 		{
+			return Para(content: verses.copy(), style: style)
+		}
+	}
+	
+	func contentEquals(with other: Para) -> Bool
+	{
+		if style != other.style
+		{
 			return false
+		}
+		
+		if let ambiguousContent = ambiguousContent
+		{
+			if let otherAmbiguousContent = other.ambiguousContent
+			{
+				return ambiguousContent.contentEquals(with: otherAmbiguousContent)
+			}
+			else
+			{
+				return false
+			}
+		}
+		else
+		{
+			return verses.contentEquals(with: other.verses)
 		}
 	}
 	
@@ -166,15 +170,14 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 	{
 		let str = NSMutableAttributedString()
 		
-		// Adds all verse data
-		for verse in verses
+		// Adds either ambiguous content or verse data
+		if let ambiguousContent = ambiguousContent
 		{
-			str.append(verse.toAttributedString(options: options))
+			str.append(ambiguousContent.toAttributedString(options: options))
 		}
-		// or ambiguous content
-		for charData in ambiguousContent
+		else
 		{
-			str.append(charData.toAttributedString())
+			verses.forEach { str.append($0.toAttributedString(options: options)) }
 		}
 		
 		// Sets paragraph style as well
@@ -189,9 +192,128 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 	// Creates a copy of this para element without any character data content
 	func emptyCopy() -> Para
 	{
-		return Para(content: verses.map { $0.emptyCopy() }, style: style)
+		if let ambiguousContent = ambiguousContent
+		{
+			return Para(content: ambiguousContent.emptyCopy(), style: style)
+		}
+		else
+		{
+			return Para(content: verses.map { $0.emptyCopy() }, style: style)
+		}
 	}
 	
+	func update(with attString: NSAttributedString)
+	{
+		do
+		{
+			let verseRanges = try Para.parseRanges(from: attString)
+			
+			// If the old verses have a longer range, cuts out the unnecessary bits
+			let firstVerseIndex = verseRanges.first!.0.start
+			while let firstVerse = verses.first, firstVerse.range.start < firstVerseIndex
+			{
+				if firstVerse.range.contains(index: firstVerseIndex)
+				{
+					firstVerse.range = VerseRange(firstVerseIndex, firstVerse.range.end)
+				}
+				else
+				{
+					verses.removeFirst()
+				}
+			}
+			
+			let endIndex = verseRanges.last!.0.end
+			while let lastVerse = verses.last, lastVerse.range.end > endIndex
+			{
+				if lastVerse.range.contains(index: endIndex)
+				{
+					lastVerse.range = VerseRange(lastVerse.range.start, endIndex)
+				}
+				else
+				{
+					verses.removeLast()
+				}
+			}
+			
+			// If the parsed range is longer than the original, adds empty buffers
+			if verses.isEmpty
+			{
+				verses.add(Verse(range: VerseRange(firstVerseIndex, endIndex)))
+			}
+			else
+			{
+				if verses.first!.range.start > firstVerseIndex
+				{
+					verses.insert(Verse(range: VerseRange(firstVerseIndex, verses.first!.range.start)), at: 0)
+				}
+				if verses.last!.range.end < endIndex
+				{
+					verses.add(Verse(range: VerseRange(verses.last!.range.end, endIndex)))
+				}
+			}
+			
+			// Starts matching the verses, altering the range combinations to those of the new data
+			for i in 0 ..< verseRanges.count
+			{
+				let (verseRange, stringRange) = verseRanges[i]
+				let subString = attString.attributedSubstring(from: stringRange)
+				let matchingVerse = verses[i]
+				
+				// The starts of the verses should match on each iteration
+				if verseRange.start != matchingVerse.range.start
+				{
+					print("ERROR: Verse matching algorithm is malfunctioning. \(verseRange) is being matched against \(matchingVerse.range)")
+				}
+				
+				// If the new range is longer than the matched range, combines target verses until enough range is covered
+				while verseRange.end > matchingVerse.range.end, i + 1 < verses.count
+				{
+					let nextVerse = verses.remove(at: i + 1)
+					matchingVerse.content = matchingVerse.content + nextVerse.content
+					matchingVerse.range = VerseRange(matchingVerse.range.start, nextVerse.range.end)
+				}
+				
+				// If the new range is smaller than the now matched range, 
+				// Matches the new shorter data against the longer range, 
+				// then forms a new range from the cutOff material
+				if verseRange.end < matchingVerse.range.end
+				{
+					let newContent = matchingVerse.content.update(with: subString) ?? TextWithFootnotes()
+					verses.insert(Verse(range: VerseRange(verseRange.end, matchingVerse.range.end), content: newContent), at: i + 1)
+				}
+				// If the ranges match, just updates the verse
+				else
+				{
+					// There should be no cutoff in this merge
+					if let cutOff = matchingVerse.content.update(with: subString)
+					{
+						print("ERROR: Verse matching algorithm is not working correctly. '\(cutOff.text)' was removed from the matched verse upon update.")
+					}
+				}
+			}
+		}
+		catch VerseError.ambiguousRange
+		{
+			// If the range was ambiguous, parses the data into the ambiguous content slot
+			if let ambiguousContent = ambiguousContent
+			{
+				if let cutOff = ambiguousContent.update(with: attString)
+				{
+					print("ERROR: '\(cutOff.text)' was cut off when updating the para element")
+				}
+			}
+			else
+			{
+				print("ERROR: Para contains \(verses.count) verses but no verse range could be parsed from '\(attString.string)'")
+			}
+		}
+		catch
+		{
+			print("ERROR: Failed to update para data. \(error)")
+		}
+	}
+	
+	/*
 	func replaceContents(with usxString: NSAttributedString)
 	{
 		// Deletes previous contents
@@ -248,7 +370,7 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 		{
 			fatalError("unhandled error \(error)")
 		}
-	}
+	}*/
 	
 	// Parses the string range for each verse range in the provided 'usxString'
 	private static func parseRanges(from usxString: NSAttributedString) throws -> [(VerseRange, NSRange)]

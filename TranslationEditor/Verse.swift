@@ -10,7 +10,7 @@ import Foundation
 
 // A verse has certain range but also text
 // The text on a verse is mutable
-final class Verse: AttributedStringConvertible, JSONConvertible, Copyable
+final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXConvertible
 {
 	// ATTRIBUTES	------
 	
@@ -19,7 +19,7 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable
 	static let OptionDisplayVerseNumber = "displayVerseNumber"
 	
 	var range: VerseRange
-	var content: [CharData]
+	var content: TextWithFootnotes
 	
 	
 	// COMP. PROPS	------
@@ -31,13 +31,15 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable
 	
 	var text: String
 	{
-		return CharData.text(of: content)
+		return content.text
 	}
+	
+	var toUSX: String { return "<verse number=\"\(range)\" style=\"v\"/>\(content.toUSX)" }
 	
 	
 	// INIT	-------
 	
-	init(range: VerseRange, content: [CharData])
+	init(range: VerseRange, content: TextWithFootnotes)
 	{
 		self.range = range
 		self.content = content
@@ -47,11 +49,11 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable
 	{
 		if let content = content
 		{
-			self.init(range: range, content: [CharData(text: content)])
+			self.init(range: range, content: TextWithFootnotes(text: content))
 		}
 		else
 		{
-			self.init(range: range, content: [])
+			self.init(range: range, content: TextWithFootnotes())
 		}
 	}
 	
@@ -63,7 +65,7 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable
 		// The range must be parseable
 		if let rangeValue = propertyData["range"].object
 		{
-			return Verse(range: try VerseRange.parse(from: rangeValue), content: CharData.parseArray(from: propertyData["content"].array(), using: CharData.parse) )
+			return Verse(range: try VerseRange.parse(from: rangeValue), content: TextWithFootnotes.parse(from: propertyData["content"].object()))
 		}
 		else
 		{
@@ -74,9 +76,28 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable
 	
 	// OPERATORS	-----
 	
-	static func + (left: Verse, right: Verse) throws -> Verse
+	// Appends the ranges, combines the texts
+	static func + (_ left: Verse, _ right: Verse) throws -> Verse
 	{
-		return try left.appended(with: right)
+		// Doesn't work if the one verse is within another
+		if left.range.contains(range: right.range) || right.range.contains(range: left.range)
+		{
+			throw VerseError.ambiguousTextPosition
+		}
+		
+		// Determines how the text is ordered
+		var combined: TextWithFootnotes!
+		if left.range.start < right.range.start
+		{
+			combined = left.content + right.content
+		}
+		else
+		{
+			combined = right.content + left.content
+		}
+		
+		// Fails if the ranges don't connect
+		return try Verse(range: left.range + right.range, content: combined)
 	}
 	
 	
@@ -113,10 +134,7 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable
 		}
 		
 		// Adds the verse content afterwards
-		for part in content
-		{
-			str.append(part.toAttributedString())
-		}
+		str.append(content.toAttributedString(options: options))
 		
 		return str
 	}
@@ -124,35 +142,9 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable
 	
 	// OTHER	-----
 	
-	func appended(with other: Verse) throws -> Verse
-	{
-		// Appends the ranges, combines the texts
-		
-		// Doesn't work if the one verse is within another
-		if self.range.contains(range: other.range) || other.range.contains(range: self.range)
-		{
-			throw VerseError.ambiguousTextPosition
-		}
-		
-		// Determines how the text is ordered
-		// TODO: Might want to add a space between the texts
-		var combined = [CharData]()
-		if self.range.start < other.range.start
-		{
-			combined = self.content + other.content
-		}
-		else
-		{
-			combined = other.content + self.content
-		}
-		
-		// Fails if the ranges don't connect
-		return try Verse(range: self.range + other.range, content: combined)
-	}
-	
 	func contentEquals(with other: Verse) -> Bool
 	{
-		return range == other.range && content == other.content
+		return range == other.range && content.contentEquals(with: other.content)
 	}
 	
 	// Creates a copy of this verse that has no character data in it

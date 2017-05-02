@@ -16,7 +16,6 @@ class USXCharParser: TemporaryXMLParser
 	// ATTRIBUTES	---------
 	
 	private let charDataPointer: UnsafeMutablePointer<[CharData]>
-	private var skipNoteParser: TemporaryXMLParser!
 	
 	private var currentText = ""
 	private var currentStyle: CharStyle?
@@ -27,10 +26,7 @@ class USXCharParser: TemporaryXMLParser
 	init(caller: XMLParserDelegate, targetData: UnsafeMutablePointer<[CharData]>)
 	{
 		self.charDataPointer = targetData
-		
 		super.init(caller: caller)
-		
-		self.skipNoteParser = SkipOverElementParser(elementName: "note", caller: self)
 	}
 	
 	
@@ -40,7 +36,8 @@ class USXCharParser: TemporaryXMLParser
 	{
 		switch elementName
 		{
-		case "verse":
+			// When a note element is found, returns the parsing to the upper element
+		case "verse", "note":
 			// When a new verse starts, ends parsing
 			closeCurrentChar()
 			endParsingOnStartElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
@@ -51,10 +48,6 @@ class USXCharParser: TemporaryXMLParser
 			{
 				currentStyle = CharStyle(rawValue: newStyleAttribute)
 			}
-		case "note":
-			// When a note element is found, skips it
-			// TODO: Add parsing for notes as well
-			parser.delegate = skipNoteParser
 		default: break
 		}
 	}

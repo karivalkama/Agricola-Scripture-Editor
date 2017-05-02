@@ -13,7 +13,7 @@ final class FootNote: ParaContent, Copyable
 	// ATTRIBUTES	------------
 	
 	var caller: String
-	var style: String
+	var style: FootNoteStyle
 	var originReference: String?
 	// Text data and an attribute specifying whether the data is "closed"
 	var charData: [CharData]
@@ -23,14 +23,14 @@ final class FootNote: ParaContent, Copyable
 	
 	var text: String { return "(\(CharData.text(of: charData)))" }
 	
-	var toUSX: String { return "<note caller=\"\(caller)\" style=\"\(style)\">\(originReference == nil ? "" : "<char style=\"fr\">\(originReference!)</char>")\(charData.reduce("", { $0 + $1.toUSX }))</note>" }
+	var toUSX: String { return "<note caller=\"\(caller)\" style=\"\(style.code)\">\(originReference == nil ? "" : "<char style=\"fr\">\(originReference!)</char>")\(charData.reduce("", { $0 + $1.toUSX }))</note>" }
 	
-	var properties: [String : PropertyValue] { return ["caller": caller.value, "style": style.value, "origin_reference": originReference.value, "text": charData.value] }
+	var properties: [String : PropertyValue] { return ["caller": caller.value, "style": style.code.value, "origin_reference": originReference.value, "text": charData.value] }
 	
 	
 	// INIT	--------------------
 	
-	init(caller: String, style: String, originReference: String? = nil, charData: [CharData] = [])
+	init(caller: String, style: FootNoteStyle, originReference: String? = nil, charData: [CharData] = [])
 	{
 		self.caller = caller
 		self.style = style
@@ -40,7 +40,7 @@ final class FootNote: ParaContent, Copyable
 	
 	static func parse(from properties: PropertySet) -> FootNote
 	{
-		return FootNote(caller: properties["caller"].string(), style: properties["style"].string(), originReference: properties["origin_reference"].string, charData: CharData.parseArray(from: properties["text"].array(), using: CharData.parse))
+		return FootNote(caller: properties["caller"].string(), style: FootNoteStyle(rawValue: properties["style"].string()) ?? .footNote, originReference: properties["origin_reference"].string, charData: CharData.parseArray(from: properties["text"].array(), using: CharData.parse))
 	}
 	
 	
@@ -70,5 +70,10 @@ final class FootNote: ParaContent, Copyable
 	func emptyCopy() -> FootNote
 	{
 		return FootNote(caller: caller, style: style, originReference: originReference, charData: charData.map { $0.emptyCopy() })
+	}
+	
+	func contentEquals(with other: FootNote) -> Bool
+	{
+		return caller == other.caller && style == other.style && originReference == other.originReference && charData == other.charData
 	}
 }

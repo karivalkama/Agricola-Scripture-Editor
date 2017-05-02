@@ -13,5 +13,5 @@ protocol CellInputListener: class
 {
 	// This method is called each time the contents of a cell change
 	// Only user initiated changes are sent
-	func cellContentChanged(id: String, newContent: NSAttributedString)
+	func cellContentChanged(originalParagraph: Paragraph, newContent: NSAttributedString)
 }

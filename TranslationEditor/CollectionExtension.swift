@@ -86,6 +86,13 @@ extension Array
 		copy.append(right)
 		return copy
 	}
+	
+	static func +(_ element: Element, array: [Element]) -> [Element]
+	{
+		var copy = [element]
+		copy.append(contentsOf: array)
+		return copy
+	}
 }
 
 extension Array where Element: Equatable
@@ -124,6 +131,26 @@ extension Array where Element: Copyable
 	func copy() -> [Element]
 	{
 		return map { return $0.copy() }
+	}
+	
+	func contentEquals(with other: [Element]) -> Bool
+	{
+		if count == other.count
+		{
+			for i in 0 ..< count
+			{
+				if !self[i].contentEquals(with: other[i])
+				{
+					return false
+				}
+			}
+			
+			return true
+		}
+		else
+		{
+			return false
+		}
 	}
 }
 

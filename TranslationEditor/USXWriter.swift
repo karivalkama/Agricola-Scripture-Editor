@@ -45,7 +45,7 @@ class USXWriter
 				lastChapterIndex = paragraph.chapterIndex
 			}
 			
-			s += write(paragraph: paragraph)
+			s += paragraph.toUSX
 		}
 		
 		return s
@@ -57,6 +57,7 @@ class USXWriter
 		return "<chapter number=\"\(index)\" style=\"c\"/>"
 	}
 	
+	/*
 	// Creates a string representing paragraph contents in USX format
 	func write(paragraph: Paragraph) -> String
 	{
@@ -116,4 +117,5 @@ class USXWriter
 		elements.forEach { s += writer($0) }
 		return s
 	}
+	*/
 }

@@ -16,5 +16,6 @@ enum USXParseError: Error
 	case chapterIndexNotFound
 	case bookNameNotSpecified
 	case bookCodeNotFound
-	case paragraphsAreConflicted
+	case attributeMissing(requiredAttributeName: String)
+	case unknownNoteStyle(style: String)
 }
