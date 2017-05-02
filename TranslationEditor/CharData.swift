@@ -22,7 +22,7 @@ struct CharData: Equatable, USXConvertible, AttributedStringConvertible, JSONCon
 	var properties: [String : PropertyValue]
 	{
 		return [
-			"style" : (style?.rawValue).value,
+			"style" : (style?.code).value,
 			"text" : text.value]
 	}
 	
@@ -59,7 +59,7 @@ struct CharData: Equatable, USXConvertible, AttributedStringConvertible, JSONCon
 		var style: CharStyle? = nil
 		if let styleValue = propertyData["style"].string
 		{
-			style = CharStyle(rawValue: styleValue)
+			style = CharStyle.of(styleValue)
 		}
 		return CharData(text: propertyData["text"].string(), style: style)
 	}

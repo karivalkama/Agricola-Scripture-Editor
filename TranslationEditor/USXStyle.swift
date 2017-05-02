@@ -17,23 +17,37 @@ protocol USXStyle
 }
 
 // Should accept styles which are not recognised
-enum CharStyle: String, USXStyle
+enum CharStyle: USXStyle, Equatable
 {
-	case quotation = "qt"
-	case keyTerm = "k"
+	case quotation// = "qt"
+	case keyTerm// = "k"
+	case other(code: String)
 	
 	// TODO: Keep updated and create a unit test
 	static let values: [CharStyle] = [.quotation, .keyTerm]
 	
 	
-	// USXStyle	------
+	// IMPLEMENTED METHODS	-------------
 	
 	var code: String
 	{
-		return self.rawValue
+		switch self
+		{
+		case .quotation: return "qt"
+		case .keyTerm: return "k"
+		case .other(let code): return code
+		}
 	}
 	
-	static func value(of code: String) -> CharStyle?
+	static func ==(_ left: CharStyle, _ right: CharStyle) -> Bool
+	{
+		return left.code == right.code
+	}
+	
+	
+	// OTHER METHODS	-----------------
+	
+	static func of(_ code: String) -> CharStyle
 	{
 		for value in values
 		{
@@ -43,7 +57,7 @@ enum CharStyle: String, USXStyle
 			}
 		}
 		
-		return nil
+		return other(code: code)
 	}
 }
 

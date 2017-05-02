@@ -46,7 +46,7 @@ class USXCharParser: TemporaryXMLParser
 			closeCurrentChar()
 			if let newStyleAttribute = attributeDict["style"]
 			{
-				currentStyle = CharStyle(rawValue: newStyleAttribute)
+				currentStyle = CharStyle.of(newStyleAttribute)
 			}
 		default: break
 		}
