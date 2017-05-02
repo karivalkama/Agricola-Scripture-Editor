@@ -140,7 +140,8 @@ class LoginVC: UIViewController//, ConnectionListener
 	{
 		// Moves to the create account view
 		// ConnectionManager.instance.removeListener(self)
-		performSegue(withIdentifier: "CreateUser", sender: nil)
+		// performSegue(withIdentifier: "CreateUser", sender: nil)
+		displayAlert(withIdentifier: "CreateAccount", storyBoardId: "Login")
 	}
 	
 	

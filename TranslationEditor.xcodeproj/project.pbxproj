@@ -163,7 +163,7 @@
 		7CA1BAC01E323A7700611FED /* ResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BABF1E323A7700611FED /* ResourceManager.swift */; };
 		7CA1BAC41E323E6C00611FED /* LiveResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAC31E323E6C00611FED /* LiveResource.swift */; };
 		7CA1BAC81E35E72E00611FED /* TranslationParagraphListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1BAC71E35E72E00611FED /* TranslationParagraphListener.swift */; };
-		7CA3B9BD1E840976002A6C48 /* CreateProjectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA3B9BC1E840976002A6C48 /* CreateProjectVC.swift */; };
+		7CA3B9BD1E840976002A6C48 /* CreateProjectVCOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA3B9BC1E840976002A6C48 /* CreateProjectVCOld.swift */; };
 		7CA3B9BF1E8512F4002A6C48 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA3B9BE1E8512F4002A6C48 /* Attachment.swift */; };
 		7CAF6D821DB4F47700E10597 /* USXChapterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */; };
 		7CAF6D861DB4F9AA00E10597 /* USXBookProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D851DB4F9AA00E10597 /* USXBookProcessor.swift */; };
@@ -396,7 +396,7 @@
 		7CA1BABF1E323A7700611FED /* ResourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceManager.swift; sourceTree = "<group>"; };
 		7CA1BAC31E323E6C00611FED /* LiveResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveResource.swift; sourceTree = "<group>"; };
 		7CA1BAC71E35E72E00611FED /* TranslationParagraphListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationParagraphListener.swift; sourceTree = "<group>"; };
-		7CA3B9BC1E840976002A6C48 /* CreateProjectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProjectVC.swift; sourceTree = "<group>"; };
+		7CA3B9BC1E840976002A6C48 /* CreateProjectVCOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProjectVCOld.swift; sourceTree = "<group>"; };
 		7CA3B9BE1E8512F4002A6C48 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXChapterProcessor.swift; sourceTree = "<group>"; };
 		7CAF6D851DB4F9AA00E10597 /* USXBookProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXBookProcessor.swift; sourceTree = "<group>"; };
@@ -835,7 +835,7 @@
 				7C57EC0A1E680AC6000718E9 /* CreateAccountVCOld.swift */,
 				7C57ECA91E6D5EDA000718E9 /* SelectProjectVC.swift */,
 				7C6070581E5C7BE0007718BC /* SelectAvatarVC.swift */,
-				7CA3B9BC1E840976002A6C48 /* CreateProjectVC.swift */,
+				7CA3B9BC1E840976002A6C48 /* CreateProjectVCOld.swift */,
 				7C541D3F1EB8741D0035CDF0 /* CreateAccountVC.swift */,
 			);
 			name = LoginView;
@@ -1373,7 +1373,7 @@
 				7CDBD6FE1E2F7C1700912320 /* ParagraphNotesView.swift in Sources */,
 				7CA1BAB41E31F09200611FED /* PostCell.swift in Sources */,
 				7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */,
-				7CA3B9BD1E840976002A6C48 /* CreateProjectVC.swift in Sources */,
+				7CA3B9BD1E840976002A6C48 /* CreateProjectVCOld.swift in Sources */,
 				7C57ECAA1E6D5EDA000718E9 /* SelectProjectVC.swift in Sources */,
 				7C57EC071E6709A2000718E9 /* Server.swift in Sources */,
 				7C936C111E9DF6AF00AC06BF /* TranslationCellAction.swift in Sources */,

@@ -9,7 +9,8 @@
 import UIKit
 
 // This ciew controller handles the user input processing for basic project data. That is, for project name and language as well as the admin avatar.
-class CreateProjectVC: UIViewController
+@available(*, deprecated)
+class CreateProjectVCOld: UIViewController
 {
 	// OUTLETS	------------------
 	
