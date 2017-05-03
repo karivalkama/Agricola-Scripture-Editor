@@ -78,7 +78,7 @@
                                                                 <rect key="frame" x="0.0" y="28" width="552" height="44"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X1P-0t-QRE" id="mvV-WX-iNg">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="552" height="44"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="552" height="43.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Xqp-Uw-r9I">
@@ -301,56 +301,53 @@
                                 <rect key="frame" x="36" y="76" width="952" height="660"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="MIJ-bi-7Qz" userLabel="Read Data Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="660"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="588" height="660"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Galatians: King James Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYb-eo-8RK">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="33.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="588" height="33.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ksg-fs-xvJ">
-                                                <rect key="frame" x="0.0" y="49.5" width="600" height="610.5"/>
+                                                <rect key="frame" x="0.0" y="49.5" width="588" height="610.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="ACR-y9-OSh" userLabel="Selection Stack View">
-                                        <rect key="frame" x="632" y="0.0" width="320" height="660"/>
+                                        <rect key="frame" x="620" y="0.0" width="332" height="660"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="kr3-tq-0Ns" userLabel="Select Language Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="314"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="332" height="314"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OaF-XV-X24">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="332" height="20.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="fUH-YQ-xZW" customClass="FilteredSingleSelection" customModule="TranslationEditor" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="36.5" width="320" height="277.5"/>
+                                                        <rect key="frame" x="0.0" y="36.5" width="332" height="277.5"/>
                                                     </view>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hPn-uk-Mgg" userLabel="Select Book Stack View">
-                                                <rect key="frame" x="0.0" y="346" width="320" height="314"/>
+                                                <rect key="frame" x="0.0" y="346" width="332" height="314"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Select Book to Overwrite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CT7-Xc-Iak">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="332" height="20.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="40j-tK-L8p">
-                                                        <rect key="frame" x="0.0" y="28.5" width="320" height="285.5"/>
+                                                        <rect key="frame" x="0.0" y="28.5" width="332" height="285.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </tableView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="320" id="VJ2-rT-LhV"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>

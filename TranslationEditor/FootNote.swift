@@ -36,6 +36,8 @@ final class FootNote: ParaContent, Copyable
 		self.style = style
 		self.charData = charData
 		self.originReference = originReference
+		
+		// print("STATUS: Creates a new footNote with \(charData.count) elements: \(text) (caller = '\(caller)')")
 	}
 	
 	static func parse(from properties: PropertySet) -> FootNote

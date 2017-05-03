@@ -49,15 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 			return merged
 		}
 		
-		/*
-		ConflictResolver.instance.addMerger(
-		{
-			idString, conflicts in
-			
-			
-		},
-		forType: NotesThread.type)*/
-		
 		print("STATUS: Solved \(ConflictResolver.instance.run()) conflicts")
 		
 		return true

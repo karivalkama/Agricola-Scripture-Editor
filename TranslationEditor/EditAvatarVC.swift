@@ -19,7 +19,6 @@ class EditAvatarVC: UIViewController
 	
 	// ATTRIBUTES	--------------
 	
-	private var targetAccountId: String?
 	private var editedInfo: (Avatar, AvatarInfo)?
 	
 	
@@ -60,8 +59,13 @@ class EditAvatarVC: UIViewController
 		{
 			do
 			{
-				let isSharedAccount = try targetAccountId.exists { try (AgricolaAccount.get($0)?.isShared).or(true) }
-				createAvatarView.mustBeShared = isSharedAccount
+				guard let accountId = Session.instance.accountId, let account = try AgricolaAccount.get(accountId) else
+				{
+					print("ERROR: No account selected")
+					return
+				}
+				
+				createAvatarView.mustBeShared = account.isShared
 			}
 			catch
 			{
@@ -116,16 +120,15 @@ class EditAvatarVC: UIViewController
 			// Or creates a new avatar entirely
 			else
 			{
-				guard let projectId = Session.instance.projectId else
+				guard let accountId = Session.instance.accountId else
 				{
-					print("ERROR: No project selected")
+					print("ERROR: No account selected")
 					return
 				}
 				
-				// Finds the shared account for the project too
-				guard let project = try Project.get(projectId) else
+				guard let projectId = Session.instance.projectId else
 				{
-					print("ERROR: Target project doesn't exist")
+					print("ERROR: No project selected")
 					return
 				}
 				
@@ -140,7 +143,7 @@ class EditAvatarVC: UIViewController
 				
 				// Creates the new information
 				let avatar = Avatar(name: avatarName, projectId: projectId)
-				let info = AvatarInfo(avatarId: avatar.idString, accountId: targetAccountId.or(project.sharedAccountId), openName: createAvatarView.inProjectName, password: createAvatarView.offlinePassword, isShared: createAvatarView.isShared)
+				let info = AvatarInfo(avatarId: avatar.idString, accountId: accountId, openName: createAvatarView.inProjectName, password: createAvatarView.offlinePassword, isShared: createAvatarView.isShared)
 				
 				// Saves the changes to the database (inlcuding image attachment)
 				try DATABASE.tryTransaction

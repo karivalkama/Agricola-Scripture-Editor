@@ -114,7 +114,7 @@ class USXParaProcessor: USXContentProcessor
 		// Other content is delegated to separate Text / Note parser
 		else
 		{
-			return (USXTextAndNoteProcessor.createParser(caller: caller, targetPointer: &initialTextData, using: errorHandler), true)
+			return (USXTextAndNoteProcessor.createParser(caller: caller, targetPointer: &initialTextData, using: errorHandler), elementName != USXContainerElement.para.rawValue)
 		}
 	}
 	

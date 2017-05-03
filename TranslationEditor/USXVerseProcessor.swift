@@ -46,7 +46,7 @@ class USXVerseProcessor: USXContentProcessor
 	func getParser(_ caller: USXContentParser<Generated, Processed>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
 	{
 		// Delegates all parsing to text & footnote parsers
-		return (USXTextAndNoteProcessor.createParser(caller: caller, targetPointer: targetPointer, using: errorHandler), true)
+		return (USXTextAndNoteProcessor.createParser(caller: caller, targetPointer: targetPointer, using: errorHandler), elementName != USXMarkerElement.verse.rawValue)
 	}
 	
 	func getCharacterParser(_ caller: USXContentParser<Generated, Processed>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?

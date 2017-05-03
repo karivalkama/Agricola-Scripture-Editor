@@ -115,7 +115,7 @@ import UIKit
 	override func awakeFromNib()
 	{
 		imagePicker.delegate = self
-		imagePicker.allowsEditing = true
+		//imagePicker.allowsEditing = true
 	}
 	
 	override init(frame: CGRect)
@@ -156,6 +156,10 @@ import UIKit
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
 	{
 		if let image = info[UIImagePickerControllerEditedImage] as? UIImage
+		{
+			avatarImage = image
+		}
+		else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
 		{
 			avatarImage = image
 		}

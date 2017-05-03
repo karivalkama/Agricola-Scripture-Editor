@@ -90,6 +90,7 @@ class TranslationEditorTests: XCTestCase
 		}
 	}
 	
+	/*
 	func testParaParsing()
 	{
 		let chData1 = CharData(text: "Chardata 1")
@@ -136,6 +137,7 @@ class TranslationEditorTests: XCTestCase
 		
 		print("TEST: DONE")
 	}
+*/
 	
 	func testParagraphProperties()
 	{
@@ -221,11 +223,32 @@ class TranslationEditorTests: XCTestCase
 	func testClearDatabase()
 	{
 		try! DATABASE.delete()
+		Session.instance.avatarId = nil
+		Session.instance.projectId = nil
+		Session.instance.logout()
+	}
+	
+	func testPrintObjectsOfType()
+	{
+		let type = Paragraph.type
+		
+		let query = DATABASE.createAllDocumentsQuery()
+		let results = try! query.run()
+		
+		while let row = results.nextRow(), let document = row.document
+		{
+			if document[PROPERTY_TYPE] as? String == type, let properties = document.properties
+			{
+				print(properties)
+			}
+		}
+		
+		print("DONE")
 	}
 	
 	func testRemoveDataOfType()
 	{
-		let types = [NotesThread.type, NotesPost.type]
+		let types = [Avatar.type, AvatarInfo.type]
 		
 		print("STATUS: Database used: \(DATABASE.name)")
 		

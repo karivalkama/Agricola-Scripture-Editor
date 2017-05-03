@@ -49,16 +49,19 @@ class USXFootNoteProcessor: USXContentProcessor
 		// Delegates parsing to a char parser
 		if elementName == USXContainerElement.char.rawValue
 		{
+			print("STATUS: Foot note parser delegating char data element to char data parser")
 			return (USXCharParser(caller: caller, targetData: targetPointer), true)
 		}
 		else
 		{
+			print("ERROR: Unknown element '\(elementName)' in USXFootNoteProcessor")
 			return nil
 		}
 	}
 	
 	func getCharacterParser(_ caller: USXContentParser<FootNote, CharData>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[CharData]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
 	{
+		print("STATUS: Foot note parser delegating text to char data parser")
 		// Delegates all character data parsing to a char parser too
 		return USXCharParser(caller: caller, targetData: targetPointer)
 	}
