@@ -101,6 +101,11 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		dismiss(animated: true, completion: nil)
 	}
 	
+	@IBAction func createProjectPressed(_ sender: Any)
+	{
+		displayAlert(withIdentifier: "CreateProject", storyBoardId: "Login")
+	}
+	
 	
 	// IMPLEMENTED METHODS	------
 	

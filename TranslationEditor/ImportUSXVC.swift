@@ -11,11 +11,6 @@ import UIKit
 // This VC is used for importing new books / updating existing data from USX files
 class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDataSource, FilteredSingleSelectionDelegate, SelectBookTableControllerDelegate
 {
-	// TYPES	--------------
-	
-	typealias QueryTarget = LanguageView
-	
-	
 	// OUTLETS	--------------
 	
 	@IBOutlet weak var topUserView: TopUserView!
