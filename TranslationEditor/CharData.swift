@@ -9,8 +9,10 @@
 import Foundation
 
 // Chardata is used for storing text within a verse or another container. Character data may have specific styling associated with it (quotation, special meaning, etc.)
-struct CharData: Equatable, USXConvertible, AttributedStringConvertible, JSONConvertible
+struct CharData: Equatable, USXConvertible, AttributedStringConvertible, JSONConvertible, ExpressibleByStringLiteral
 {
+	// typealias ExtendedGraphemeClusterLiteralType = StringLiteralType
+	
 	// ATTRIBUTES	----
 	
 	var style: CharStyle?
@@ -52,6 +54,24 @@ struct CharData: Equatable, USXConvertible, AttributedStringConvertible, JSONCon
 	{
 		self.text = text
 		self.style = style
+	}
+	
+	init(stringLiteral value: String)
+	{
+		self.text = value
+		self.style = nil
+	}
+	
+	init(unicodeScalarLiteral value: String)
+	{
+		self.text = value
+		self.style = nil
+	}
+	
+	init(extendedGraphemeClusterLiteral value: String)
+	{
+		self.text = value
+		self.style = nil
 	}
 	
 	static func parse(from propertyData: PropertySet) -> CharData
