@@ -87,10 +87,11 @@ class CreateAccountVC: UIViewController
 			let newAccount = AgricolaAccount(name: userName, languageIds: [], isShared: false, password: password)
 			try newAccount.push()
 			
-			// Logs in with the
+			// Logs in with the new account
 			if !Session.instance.isAuthorized
 			{
-				try Session.instance.logIn(accountId: newAccount.idString, userName: userName, password: password)
+				print("STATUS: Logs in with the new account")
+				Session.instance.logIn(accountId: newAccount.idString, userName: userName, password: password)
 			}
 			
 			dismiss(animated: true, completion: nil)

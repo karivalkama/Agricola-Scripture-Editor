@@ -700,29 +700,26 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="485" height="86.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wh2-3I-Lsf" userLabel="Content Stack View">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wh2-3I-Lsf" userLabel="Content Stack View">
                                                                     <rect key="frame" x="16" y="14.5" width="453" height="57"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My First Translation Project" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPg-eE-ds2">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="324" height="33.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="453" height="33.5"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="54I-SZ-K7O" userLabel="Info Stack View">
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="54I-SZ-K7O" userLabel="Info Stack View">
                                                                             <rect key="frame" x="0.0" y="37.5" width="453" height="19.5"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finnish" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACo-ny-lib">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="325" height="19.5"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Finnish" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACo-ny-lib">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="51.5" height="19.5"/>
                                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30.2.2017" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oap-hn-qB3">
-                                                                                    <rect key="frame" x="325" y="0.0" width="128" height="19.5"/>
-                                                                                    <constraints>
-                                                                                        <constraint firstAttribute="width" constant="128" id="ez0-qo-R7P"/>
-                                                                                    </constraints>
+                                                                                    <rect key="frame" x="51.5" y="0.0" width="401.5" height="19.5"/>
                                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
@@ -730,10 +727,6 @@
                                                                             </subviews>
                                                                         </stackView>
                                                                     </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstItem="54I-SZ-K7O" firstAttribute="leading" secondItem="wh2-3I-Lsf" secondAttribute="leading" id="4Ij-0l-aw0"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="54I-SZ-K7O" secondAttribute="trailing" id="ZKi-Op-Aul"/>
-                                                                    </constraints>
                                                                 </stackView>
                                                             </subviews>
                                                             <constraints>

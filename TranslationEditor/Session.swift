@@ -57,7 +57,7 @@ class Session
 	}
 	
 	// Whether the current session is authorized (logged in)
-	var isAuthorized: Bool { return userName != nil && password != nil }
+	var isAuthorized: Bool { return userName != nil && password != nil && accountId != nil}
 	
 	
 	// INIT	-----------------------
@@ -91,7 +91,7 @@ class Session
 	// OTHER METHODS	-----------
 	
 	// Notice that this is the couchbase username, not the one typed by the user
-	func logIn(accountId: String, userName: String, password: String) throws
+	func logIn(accountId: String, userName: String, password: String)
 	{
 		self.accountId = accountId
 		self.userName = userName

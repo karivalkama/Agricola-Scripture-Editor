@@ -98,7 +98,7 @@ class LoginVC: UIViewController//, ConnectionListener
 				return
 			}
 			
-			try Session.instance.logIn(accountId: account.idString, userName: userName, password: password)
+			Session.instance.logIn(accountId: account.idString, userName: userName, password: password)
 			
 			// If there is a P2P session active, provides access to the host project
 			if P2PClientSession.isConnected
