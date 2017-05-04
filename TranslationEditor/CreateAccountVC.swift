@@ -60,7 +60,7 @@ class CreateAccountVC: UIViewController
 		do
 		{
 			// Makes sure there is no account with the provided name already
-			guard try AccountView.instance.accountQuery(displayName: userName).firstResultRow() == nil else
+			guard try AccountView.instance.accountQuery(name: userName).firstResultRow() == nil else
 			{
 				errorLabel.text = "Account with a similar name already exists!"
 				return
@@ -84,7 +84,7 @@ class CreateAccountVC: UIViewController
 		do
 		{
 			// Inserts the new account and moves on
-			let newAccount = AgricolaAccount(name: userName, languageIds: [], isShared: false, password: password)
+			let newAccount = AgricolaAccount(name: userName, isShared: false, password: password)
 			try newAccount.push()
 			
 			// Logs in with the new account

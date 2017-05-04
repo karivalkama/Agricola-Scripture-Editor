@@ -78,8 +78,8 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 	private var paragraphNames = [String : String]()
 	
 	// Avatar info (based on posts) data is cached before use as well
-	// Avatar Id -> Avatar Info Instance
-	private var avatarInfo = [String: AvatarInfo]()
+	// Avatar Id -> Avatar and Info Instances
+	private var avatarInfo = [String: (Avatar, AvatarInfo)]()
 	
 	// Instance id -> Custom visibility state
 	private var threadVisibleState = [String : Bool]()
@@ -158,9 +158,9 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 				{
 					do
 					{
-						if let avatarInfo = try AvatarInfo.get(avatarId: post.creatorId)
+						if let avatar = try Avatar.get(post.creatorId), let info = try avatar.info()
 						{
-							self.avatarInfo[post.creatorId] = avatarInfo
+							self.avatarInfo[post.creatorId] = (avatar, info)
 						}
 						else
 						{
@@ -257,7 +257,14 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 							cell = PostCell()
 						}
 						
-						cell.setContent(post: post, pathId: note.pathId, isResolved: thread.isResolved, creatorInfo: avatarInfo[post.creatorId])
+						if let (avatar, info) = avatarInfo[post.creatorId]
+						{
+							cell.setContent(post: post, pathId: note.pathId, isResolved: thread.isResolved, creator: avatar, creatorInfo: info)
+						}
+						else
+						{
+							print("ERROR: No creator info recorded for post: \(post.content)")
+						}
 						
 						return cell
 					}

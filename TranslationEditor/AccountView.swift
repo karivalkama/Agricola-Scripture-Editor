@@ -21,10 +21,9 @@ final class AccountView: View
 	
 	static let instance = AccountView()
 	
-	//static let KEY_DISPLAYNAME = "display_name"
-	static let KEY_KEYNAME = "name_key"
+	static let KEY_NAME = "name"
 	
-	static let keyNames = [KEY_KEYNAME]
+	static let keyNames = [KEY_NAME]
 	
 	let view = DATABASE.viewNamed("account_view")
 	
@@ -38,23 +37,17 @@ final class AccountView: View
 			account, emit in
 		
 			// Key = key name version
-			emit(account.cbUserName, nil)
+			emit(account.username, nil)
 			
-		}, version: "2")
+		}, version: "3")
 	}
 	
 	
 	// OTHER METHODS	---------
 	
-	// Creates a query for retrieving account data (should return a single account only)
-	func accountQuery(displayName: String) -> MyQuery
-	{
-		return accountQuery(nameKey: displayName.toKey)//createQuery(withKeys: [AccountView.KEY_KEYNAME: Key(displayName.toKey), AccountView.KEY_DISPLAYNAME: Key(displayName)])
-	}
-	
 	// Searches for an account with key name
-	func accountQuery(nameKey: String) -> MyQuery
+	func accountQuery(name: String) -> MyQuery
 	{
-		return createQuery(withKeys: [AccountView.KEY_KEYNAME: Key(nameKey)])
+		return createQuery(withKeys: AccountView.makeKeys(from: [name]))
 	}
 }

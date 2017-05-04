@@ -25,16 +25,18 @@ class PostCell: UITableViewCell, ParagraphAssociated
 	
 	private(set) var pathId: String?
 	private(set) var post: NotesPost!
-	private(set) var avatar: AvatarInfo?
+	private(set) var avatar: Avatar!
+	private(set) var avatarInfo: AvatarInfo!
 	
 	
 	// OTHER METHODS	------
 	
-	func setContent(post: NotesPost, pathId: String, isResolved: Bool, creatorInfo: AvatarInfo?)
+	func setContent(post: NotesPost, pathId: String, isResolved: Bool, creator: Avatar, creatorInfo: AvatarInfo)
 	{
 		self.post = post
 		self.pathId = pathId
-		self.avatar = creatorInfo
+		self.avatar = creator
+		self.avatarInfo = creatorInfo
 		postTextView.text = post.content
 		
 		let textColor = isResolved ? Colour.Text.Black.secondary.asColour : Colour.Text.Black.primary.asColour
@@ -60,14 +62,7 @@ class PostCell: UITableViewCell, ParagraphAssociated
 		}
 		
 		// Sets the user information
-		do
-		{
-			userImageView.image = (creatorInfo?.image).or(#imageLiteral(resourceName: "userIcon"))
-			userNameLabel.text = try creatorInfo?.displayName()
-		}
-		catch
-		{
-			print("ERROR: Failed to get user name. \(error)")
-		}
+		userImageView.image = creatorInfo.image.or(#imageLiteral(resourceName: "userIcon"))
+		userNameLabel.text = creator.name
 	}
 }

@@ -19,36 +19,41 @@ final class Avatar: Storable
 	static let type = "avatar"
 	
 	let projectId: String
-	let name: String
 	let created: TimeInterval
+	let uid: String
+	let accountId: String
+	
+	var name: String
 	
 	
 	// COMPUTED PROPERTIES	-----
 	
 	static var idIndexMap: IdIndexMap
 	{
-		return Project.idIndexMap.makeChildPath(parentPathName: PROPERTY_PROJECT, childPath: ["avatar_separator", "avatar_name_key"])
+		return Project.idIndexMap.makeChildPath(parentPathName: PROPERTY_PROJECT, childPath: ["avatar_separator", "avatar_uid"])
 	}
 	
-	var idProperties: [Any] { return [projectId, "avatar", name.toKey] }
+	var idProperties: [Any] { return [projectId, "avatar", uid] }
 	var properties: [String : PropertyValue]
 	{
-		return ["name": name.value, "created": created.value]
+		return ["name": name.value, "account": accountId.value, "created": created.value]
 	}
 	
 	
 	// INIT	---------------------
 	
-	init(name: String, projectId: String, created: TimeInterval = Date().timeIntervalSince1970)
+	init(name: String, projectId: String, accountId: String, uid: String = UUID().uuidString.lowercased(), created: TimeInterval = Date().timeIntervalSince1970)
 	{
 		self.projectId = projectId
 		self.name = name
 		self.created = created
+		self.uid = uid
+		self.accountId = accountId
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> Avatar
 	{
-		return Avatar(name: properties["name"].string(), projectId: id[PROPERTY_PROJECT].string(), created: properties["created"].time())
+		return Avatar(name: properties["name"].string(), projectId: id[PROPERTY_PROJECT].string(), accountId: properties["account"].string(), uid: id["avatar_uid"].string(), created: properties["created"].time())
 	}
 	
 	
@@ -56,14 +61,17 @@ final class Avatar: Storable
 	
 	func update(with properties: PropertySet)
 	{
-		// No mutable fields
+		if let name = properties["name"].string
+		{
+			self.name = name
+		}
 	}
 	
 	
 	// OTHER METHODS	---------
 	
 	// The private infor for this avatar instance
-	func privateInfo() throws -> AvatarInfo?
+	func info() throws -> AvatarInfo?
 	{
 		return try AvatarInfo.get(avatarId: idString)
 	}
@@ -74,21 +82,23 @@ final class Avatar: Storable
 	}
 	
 	// Creates a new avatar id based on the provided properties
+	/*
 	static func createId(projectId: String, avatarName: String) -> String
 	{
 		return parseId(from: [projectId, "avatar", avatarName.toKey])
-	}
+	}*/
 	
 	// Retrieves avatar data from the database
+	/*
 	static func get(projectId: String, avatarName: String) throws -> Avatar?
 	{
 		return try get(createId(projectId: projectId, avatarName: avatarName))
-	}
-	
+	}*/
+	/*
 	fileprivate static func nameKey(ofId avatarId: String) -> String
 	{
 		return property(withName: "avatar_name_key", fromId: avatarId).string()
-	}
+	}*/
 }
 
 // This class contains avatar info that is only visible in the project scope
@@ -102,12 +112,10 @@ final class AvatarInfo: Storable
 	
 	let avatarId: String
 	
-	var accountId: String
-	var openName: String?
 	var isShared: Bool
 	
 	// Phase id -> Carousel id
-	var carouselIds: [String : String]
+	// var carouselIds: [String : String]
 	
 	private var passwordHash: String?
 	
@@ -138,19 +146,19 @@ final class AvatarInfo: Storable
 	
 	static var idIndexMap: IdIndexMap
 	{
-		return Avatar.idIndexMap.makeChildPath(parentPathName: PROPERTY_AVATAR, childPath: ["private_separator"])
+		return Avatar.idIndexMap.makeChildPath(parentPathName: PROPERTY_AVATAR, childPath: ["info_separator"])
 	}
 	
-	var idProperties: [Any] { return [avatarId, "private"] }
+	var idProperties: [Any] { return [avatarId, "info"] }
 	var properties: [String : PropertyValue]
 	{
-		return ["open_name": openName.value, "account": accountId.value, "offline_password": passwordHash.value, "shared": isShared.value, "carousels": PropertySet(carouselIds).value]
+		return ["offline_password": passwordHash.value, "shared": isShared.value]
 	}
 	
 	var projectId: String { return Avatar.project(fromId: avatarId) }
 	
 	// The key version of the avatar's name
-	var nameKey: String { return Avatar.nameKey(ofId: avatarId) }
+	// var nameKey: String { return Avatar.nameKey(ofId: avatarId) }
 	
 	// Whether the info requires a password for authentication
 	var requiresPassword: Bool { return passwordHash != nil }
@@ -158,12 +166,9 @@ final class AvatarInfo: Storable
 	
 	// INIT	--------------------
 	
-	init(avatarId: String, accountId: String, openName: String? = nil, password: String? = nil, isShared: Bool = false, carousels: [String : String] = [:])
+	init(avatarId: String, password: String? = nil, isShared: Bool = false)
 	{
 		self.avatarId = avatarId
-		self.accountId = accountId
-		self.openName = openName
-		self.carouselIds = carousels
 		self.isShared = isShared
 		
 		if let password = password
@@ -173,19 +178,16 @@ final class AvatarInfo: Storable
 		}
 	}
 	
-	private init(avatarId: String, accountId: String, openName: String?, passwordHash: String?, isShared: Bool, carousels: [String : String])
+	private init(avatarId: String, passwordHash: String?, isShared: Bool)
 	{
 		self.avatarId = avatarId
-		self.accountId = accountId
-		self.openName = openName
 		self.passwordHash = passwordHash
 		self.isShared = isShared
-		self.carouselIds = carousels
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> AvatarInfo
 	{
-		return AvatarInfo(avatarId: id[PROPERTY_AVATAR].string(), accountId: properties["account"].string(), openName: properties["open_name"].string, passwordHash: properties["offline_password"].string, isShared: properties["shared"].bool(), carousels: properties["carousels"].object { $0.string })
+		return AvatarInfo(avatarId: id[PROPERTY_AVATAR].string(), passwordHash: properties["offline_password"].string, isShared: properties["shared"].bool())
 	}
 	
 	
@@ -193,21 +195,9 @@ final class AvatarInfo: Storable
 	
 	func update(with properties: PropertySet)
 	{
-		if let accountId = properties["account"].string
-		{
-			self.accountId = accountId
-		}
-		if let openName = properties["open_name"].string
-		{
-			self.openName = openName
-		}
 		if let isShared = properties["shared"].bool
 		{
 			self.isShared = isShared
-		}
-		if let carouselData = properties["carousels"].object
-		{
-			self.carouselIds = carouselData.properties.flatMapValues { $0.string }
 		}
 		if let passwordHash = properties["offline_password"].string
 		{
@@ -239,31 +229,13 @@ final class AvatarInfo: Storable
 	
 	func authenticate(loggedAccountId: String?, password: String) -> Bool
 	{
-		// If the avatar doesn't have a specified password, correct account login is enough
 		if passwordHash == nil
 		{
-			return self.accountId == loggedAccountId
+			return true
 		}
 		else
 		{
 			return createPasswordHash(password: password) == passwordHash
-		}
-	}
-	
-	// The name that should be displayed for this avatar in-project
-	func displayName() throws -> String
-	{
-		if let openName = openName
-		{
-			return openName
-		}
-		else if let avatar = try Avatar.get(avatarId)
-		{
-			return avatar.name
-		}
-		else
-		{
-			return nameKey
 		}
 	}
 	
@@ -274,7 +246,7 @@ final class AvatarInfo: Storable
 	
 	static func get(avatarId: String) throws -> AvatarInfo?
 	{
-		return try get(parseId(from: [avatarId, "private"]))
+		return try get(parseId(from: [avatarId, "info"]))
 	}
 	
 	// The avatar id portion of the avatar info id string

@@ -16,7 +16,6 @@ import UIKit
 	
 	@IBOutlet weak var avatarImageView: UIImageView!
 	@IBOutlet weak var avatarNameField: UITextField!
-	@IBOutlet weak var inProjectNameField: UITextField!
 	@IBOutlet weak var isSharedSwitch: UISwitch!
 	@IBOutlet weak var offlinePasswordField: UITextField!
 	@IBOutlet weak var repeatPasswordField: UITextField!
@@ -64,32 +63,6 @@ import UIKit
 	{
 		get { return (avatarNameField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)).or("") }
 		set { avatarNameField.text = newValue }
-	}
-	
-	var inProjectName: String?
-	{
-		get
-		{
-			if let rawName = inProjectNameField.text
-			{
-				let trimmed = rawName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-				
-				if trimmed.isEmpty
-				{
-					return nil
-				}
-				else
-				{
-					return trimmed
-				}
-			}
-			else
-			{
-				return nil
-			}
-		}
-		
-		set { inProjectNameField.text = newValue }
 	}
 	
 	var offlinePassword: String?

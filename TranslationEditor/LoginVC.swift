@@ -85,7 +85,8 @@ class LoginVC: UIViewController//, ConnectionListener
 		do
 		{
 			// Finds the correct target account
-			guard let account = try AccountView.instance.accountQuery(displayName: userName).firstResultObject() else
+			// TODO: Handle cases where there are multiple accounts with the same name
+			guard let account = try AccountView.instance.accountQuery(name: userName).firstResultObject() else
 			{
 				errorLabel.text = "Invalid username"
 				return

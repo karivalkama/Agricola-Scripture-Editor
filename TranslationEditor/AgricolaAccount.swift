@@ -13,48 +13,45 @@ final class AgricolaAccount: Storable
 {
 	// ATTRIBUTES	-----------
 	
-	static let PROPERTY_CB_USERNAME = "cbusername"
-	
 	static let type = "user"
-	static let idIndexMap: IdIndexMap = ["user_separator", PROPERTY_CB_USERNAME]
+	static let idIndexMap: IdIndexMap = ["user_uid"]
 	
-	let cbUserName: String
+	let uid: String
 	let isShared: Bool
 	
-	var displayName: String
-	var languageIds: [String]
+	var username: String
+	// var languageIds: [String]
 	
 	private var passwordHash: String
 	
 	
 	// COMPUTED PROPERTIES	---
 	
-	var idProperties: [Any] { return ["user", cbUserName] }
+	var idProperties: [Any] { return [uid] }
 	var properties: [String : PropertyValue]
 	{
-		return ["displayname": displayName.value, "shared": isShared.value, "languages": languageIds.value, "password": passwordHash.value]
+		return ["username": username.value, "shared": isShared.value, "password": passwordHash.value]
 	}
 	
 	
 	// INIT	-------------------
 	
-	convenience init(name: String, languageIds: [String], isShared: Bool, password: String)
+	convenience init(name: String, isShared: Bool, password: String)
 	{
-		self.init(cbUserName: name.toKey, displayName: name, languageIds: languageIds, isShared: isShared, passwordHash: AgricolaAccount.createPasswordHash(name: name.toKey, password: password))
+		self.init(username: name, isShared: isShared, passwordHash: AgricolaAccount.createPasswordHash(name: name.toKey, password: password))
 	}
 	
-	private init(cbUserName: String, displayName: String, languageIds: [String], isShared: Bool, passwordHash: String)
+	private init(username: String, isShared: Bool, passwordHash: String, uid: String = UUID().uuidString.lowercased())
 	{
-		self.languageIds = languageIds
-		self.displayName = displayName
-		self.cbUserName = cbUserName
+		self.username = username
 		self.isShared = isShared
 		self.passwordHash = passwordHash
+		self.uid = uid
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) -> AgricolaAccount
 	{
-		return AgricolaAccount(cbUserName: id[PROPERTY_CB_USERNAME].string(), displayName: properties["displayname"].string(), languageIds: properties["languages"].array { $0.string }, isShared: properties["shared"].bool(), passwordHash: properties["password"].string())
+		return AgricolaAccount(username: properties["username"].string(), isShared: properties["shared"].bool(), passwordHash: properties["password"].string(), uid: id["user_uid"].string())
 	}
 	
 	
@@ -62,13 +59,13 @@ final class AgricolaAccount: Storable
 	
 	func update(with properties: PropertySet)
 	{
-		if let displayName = properties["displayname"].string
+		if let username = properties["username"].string
 		{
-			self.displayName = displayName
+			self.username = username
 		}
-		if let languageData = properties["language"].array
+		if let passwordHash = properties["password"].string
 		{
-			languageIds = languageData.flatMap { $0.string }
+			self.passwordHash = passwordHash
 		}
 	}
 	
@@ -78,13 +75,13 @@ final class AgricolaAccount: Storable
 	// Tries to authorize the user using a specific password
 	func authorize(password: String) -> Bool
 	{
-		return AgricolaAccount.createPasswordHash(name: cbUserName, password: password) == passwordHash
+		return AgricolaAccount.createPasswordHash(name: username, password: password) == passwordHash
 	}
 	
 	// Changes the password of the account
 	func setPassword(password: String)
 	{
-		passwordHash = AgricolaAccount.createPasswordHash(name: cbUserName, password: password)
+		passwordHash = AgricolaAccount.createPasswordHash(name: username, password: password)
 	}
 	
 	private static func createPasswordHash(name: String, password: String) -> String

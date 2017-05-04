@@ -177,14 +177,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		{
 			do
 			{
-				if let avatarInfo = try AvatarInfo.get(avatarId: avatarId)
-				{
-					topUserView.configure(userName: try avatarInfo.displayName(), userIcon: avatarInfo.image.or(#imageLiteral(resourceName: "userIcon")))
-				}
-				else
-				{
-					print("ERROR: Couldn't find avatar information for id: \(avatarId)")
-				}
+				try topUserView.configure(avatarId: avatarId)
 			}
 			catch
 			{

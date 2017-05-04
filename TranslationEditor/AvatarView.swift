@@ -8,12 +8,12 @@
 
 import Foundation
 
-final class AvatarInfoView: View
+final class AvatarView: View
 {
 	// TYPES	----------
 	
-	typealias Queried = AvatarInfo
-	typealias MyQuery = Query<AvatarInfoView>
+	typealias Queried = Avatar
+	typealias MyQuery = Query<AvatarView>
 	
 	
 	// ATTRIBUTES	------
@@ -22,10 +22,10 @@ final class AvatarInfoView: View
 	static let KEY_ACCOUNT = "account"
 	static let KEY_NAME = "name"
 	
-	static let instance = AvatarInfoView()
+	static let instance = AvatarView()
 	static let keyNames = [KEY_PROJECT, KEY_ACCOUNT, KEY_NAME]
 	
-	let view = DATABASE.viewNamed("avatar_info")
+	let view = DATABASE.viewNamed("avatar")
 	
 	
 	// INIT	--------------
@@ -34,10 +34,10 @@ final class AvatarInfoView: View
 	{
 		view.setMapBlock(createMapBlock
 		{
-			info, emit in
+			avatar, emit in
 			
 			// Key = project id + account id + name key
-			let key: [Any] = [info.projectId, info.accountId, info.nameKey]
+			let key: [Any] = [avatar.projectId, avatar.accountId, avatar.name]
 			
 			emit(key, nil)
 		},
@@ -50,12 +50,6 @@ final class AvatarInfoView: View
 	// A query for retrieving avatar data for a certain project
 	func avatarQuery(projectId: String, accountId: String? = nil) -> MyQuery
 	{
-		let keys = [
-			AvatarInfoView.KEY_PROJECT: Key(projectId),
-			AvatarInfoView.KEY_ACCOUNT: Key(accountId),
-			AvatarInfoView.KEY_NAME: Key.undefined
-		]
-		
-		return createQuery(withKeys: keys)
+		return createQuery(withKeys: AvatarView.makeKeys(from: [projectId, accountId]))
 	}
 }

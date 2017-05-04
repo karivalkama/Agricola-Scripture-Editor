@@ -13,7 +13,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 {
 	// TYPES	-------------------
 	
-	typealias QueryTarget = AvatarInfoView
+	typealias QueryTarget = AvatarView
 	
 	
 	// OUTLETS	-------------------
@@ -66,11 +66,11 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 				usesSharedAccount = project.sharedAccountId == accountId
 				if usesSharedAccount
 				{
-					queryManager = AvatarInfoView.instance.avatarQuery(projectId: projectId).liveQueryManager
+					queryManager = AvatarView.instance.avatarQuery(projectId: projectId).liveQueryManager
 				}
 				else
 				{
-					queryManager = AvatarInfoView.instance.avatarQuery(projectId: projectId, accountId: accountId).liveQueryManager
+					queryManager = AvatarView.instance.avatarQuery(projectId: projectId, accountId: accountId).liveQueryManager
 				}
 			}
 		}
@@ -162,7 +162,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	
 	// IMPLEMENTED METHODS	-------
 	
-	func rowsUpdated(rows: [Row<AvatarInfoView>])
+	func rowsUpdated(rows: [Row<QueryTarget>])
 	{
 		do
 		{
@@ -171,9 +171,9 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			{
 				avatarData = try rows.map { try $0.object() }.flatMap
 				{
-					info in
+					avatar in
 					
-					if info.isShared, let avatar = try Avatar.get(info.avatarId)
+					if let info = try avatar.info(), info.isShared
 					{
 						return (avatar, info)
 					}
@@ -188,10 +188,10 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			// Otherwise just finds the first applicable avatar and uses that
 			else
 			{
-				if let infoId = rows.first?.id
+				if let avatarId = rows.first?.id
 				{
 					print("STATUS: Proceeding with non-shared account avatar")
-					Session.instance.avatarId = AvatarInfo.avatarId(fromAvatarInfoId: infoId)
+					Session.instance.avatarId = avatarId
 					proceed()
 				}
 			}
@@ -219,9 +219,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		else
 		{
 			let (avatar, info) = avatarData[indexPath.row]
-			let avatarName = info.openName.or(avatar.name)
-		
-			cell.configure(avatarName: avatarName, avatarImage: info.image)
+			cell.configure(avatarName: avatar.name, avatarImage: info.image)
 		}
 		
 		return cell

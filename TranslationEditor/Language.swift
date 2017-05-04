@@ -15,30 +15,30 @@ final class Language: Storable
 	
 	static let type = "language"
 	
-	private let uid: String
-	var name: String
+	static let PROPERTY_NAME = "name"
+	
+	let name: String
 	
 	
 	// COMP. PROPERTIES	----
 	
-	static let idIndexMap: IdIndexMap = ["lang_uid"]
+	static let idIndexMap: IdIndexMap = [PROPERTY_NAME]
 	
-	var idProperties: [Any] { return [uid] }
+	var idProperties: [Any] { return [name.toKey] }
 	
-	var properties: [String : PropertyValue] { return ["name" : name.value] }
+	var properties: [String : PropertyValue] { return ["name": name.value] }
 	
 	
 	// INIT	---------------
 	
-	init(name: String, uid: String = UUID().uuidString.lowercased())
+	init(name: String)
 	{
-		self.uid = uid
-		self.name = name
+		self.name = name.capitalized
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) -> Language
 	{
-		return Language(name: properties["name"].string(), uid: id["lang_uid"].string())
+		return Language(name: properties["name"].string.or(id[PROPERTY_NAME].string()))
 	}
 	
 	
@@ -46,9 +46,6 @@ final class Language: Storable
 	
 	func update(with properties: PropertySet)
 	{
-		if let name = properties["name"].string
-		{
-			self.name = name
-		}
+		// No mutable fields
 	}
 }

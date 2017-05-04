@@ -57,7 +57,7 @@ class ResolveConflictVC: UIViewController, UICollectionViewDelegate, UICollectio
 			{
 				if !authors.containsKey(version.creatorId)
 				{
-					authors[version.creatorId] = try AvatarInfo.get(avatarId: version.creatorId)?.displayName()
+					authors[version.creatorId] = try Avatar.get(version.creatorId)?.name
 				}
 			}
 		}

@@ -102,7 +102,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		// Makes sure there is no existing account with a similar name
 		do
 		{
-			guard try AccountView.instance.accountQuery(displayName: accountName).firstResultRow() == nil else
+			guard try AccountView.instance.accountQuery(name: accountName).firstResultRow() == nil else
 			{
 				errorLabel.text = "There already exists an account with a similar name!"
 				return
@@ -140,7 +140,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		do
 		{
 			// TODO: Add default book identifier field
-			let projectAccount = AgricolaAccount(name: accountName, languageIds: [], isShared: true, password: password)
+			let projectAccount = AgricolaAccount(name: accountName, isShared: true, password: password)
 			let project = Project(name: projectName, languageId: selectedLanguage.idString, ownerId: currentAccountId, contributorIds: [currentAccountId], sharedAccountId: projectAccount.idString, defaultBookIdentifier: defaultBookIdentifier)
 			
 			try DATABASE.tryTransaction

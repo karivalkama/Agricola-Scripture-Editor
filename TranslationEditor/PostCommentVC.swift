@@ -89,9 +89,9 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 			
 			var originalCommentWriter = "Someone"
 			
-			if let originalCommentCreatorId = originalComment?.creatorId, let originalCreatorInfo = try AvatarInfo.get(avatarId: originalCommentCreatorId)
+			if let originalCommentCreatorId = originalComment?.creatorId, let originalCreator = try Avatar.get(originalCommentCreatorId)
 			{
-				originalCommentWriter = try originalCreatorInfo.displayName()
+				originalCommentWriter = originalCreator.name
 			}
 			
 			originalCommentTitleLabel.text = "\(originalCommentWriter) wrote:"

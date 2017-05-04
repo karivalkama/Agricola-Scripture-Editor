@@ -57,9 +57,9 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		do
 		{
 			// Sets up user status
-			if let avatarId = Session.instance.avatarId, let avatarInfo = try AvatarInfo.get(avatarId: avatarId)
+			if let avatarId = Session.instance.avatarId
 			{
-				userView.configure(userName: try avatarInfo.displayName(), userIcon: avatarInfo.image.or(#imageLiteral(resourceName: "userIcon")))
+				try userView.configure(avatarId: avatarId)
 			}
 			
 			guard let projectId = Session.instance.projectId else

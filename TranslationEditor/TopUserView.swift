@@ -49,10 +49,9 @@ import UIKit
 	// Alternative way to configure the view
 	func configure(avatarId: String) throws
 	{
-		if let avatarInfo = try AvatarInfo.get(avatarId: avatarId)
+		if let avatar = try Avatar.get(avatarId)
 		{
-			userNameField.text = try avatarInfo.displayName()
-			userImage.image = avatarInfo.image
+			configure(userName: avatar.name, userIcon: (try avatar.info()?.image).or(#imageLiteral(resourceName: "userIcon")))
 		}
 	}
 }

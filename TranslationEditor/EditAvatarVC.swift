@@ -34,17 +34,13 @@ class EditAvatarVC: UIViewController
 		if let (avatar, info) = editedInfo
 		{
 			createAvatarView.avatarImage = info.image
-			
 			createAvatarView.avatarName = avatar.name
-			createAvatarView.avatarNameField.isEnabled = false
-			
-			createAvatarView.inProjectName = info.openName
 			
 			// Sharing can be enabled / disabled for non-shared accounts only
 			// (Shared account avatars have always sharing enabled)
 			do
 			{
-				if let account = try AgricolaAccount.get(info.accountId)
+				if let account = try AgricolaAccount.get(avatar.accountId)
 				{
 					createAvatarView.mustBeShared = account.isShared
 				}
@@ -103,18 +99,24 @@ class EditAvatarVC: UIViewController
 		do
 		{
 			// Makes the necessary modifications to the avatar
-			if let (_, info) = editedInfo
+			if let (avatar, info) = editedInfo
 			{
 				if let newImage = createAvatarView.avatarImage, info.image != newImage
 				{
 					try info.setImage(newImage)
 				}
 				
-				info.openName = createAvatarView.inProjectName
-				
 				if let newPassword = createAvatarView.offlinePassword
 				{
 					info.setPassword(newPassword)
+				}
+				
+				avatar.name = createAvatarView.avatarName
+				
+				try DATABASE.tryTransaction
+				{
+					try avatar.push()
+					try info.push()
 				}
 			}
 			// Or creates a new avatar entirely
@@ -135,15 +137,16 @@ class EditAvatarVC: UIViewController
 				let avatarName = createAvatarView.avatarName
 				
 				// Makes sure there is no avatar with the same name yet
+				/*
 				guard try Avatar.get(projectId: projectId, avatarName: avatarName) == nil else
 				{
 					errorLabel.text = "Avatar with the provided name already exists!"
 					return
-				}
+				}*/
 				
 				// Creates the new information
-				let avatar = Avatar(name: avatarName, projectId: projectId)
-				let info = AvatarInfo(avatarId: avatar.idString, accountId: accountId, openName: createAvatarView.inProjectName, password: createAvatarView.offlinePassword, isShared: createAvatarView.isShared)
+				let avatar = Avatar(name: avatarName, projectId: projectId, accountId: accountId)
+				let info = AvatarInfo(avatarId: avatar.idString, password: createAvatarView.offlinePassword, isShared: createAvatarView.isShared)
 				
 				// Saves the changes to the database (inlcuding image attachment)
 				try DATABASE.tryTransaction
