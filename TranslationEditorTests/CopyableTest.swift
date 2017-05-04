@@ -52,11 +52,52 @@ class CopyableTest: XCTestCase
 		}
 	}
 	
+	/*
 	func testTextAndNotes()
 	{
 		func represent(_ element: TextWithFootnotes) -> String { return element.text }
 		
-		let filled = TextWithFootnotes(textElements: [TextElement(charData: ["Eka", "Toka"])], footNotes: [FootNote(caller: "+", style: .footNote, originReference: nil, charData: ["Kommentti"])])
+		let filled = TextWithFootnotes(textElements: [TextElement(charData: ["Eka", CharData(text: "Toka", style: CharStyle.quotation)])], footNotes: [FootNote(caller: "+", style: .footNote, originReference: nil, charData: ["Kommentti"])])
+		
+		copyTest(TextWithFootnotes(), represent: represent)
+		{
+			
+		}
+	}
+*/
+	
+	func testParagraph()
+	{
+		func makeText(text1: String, text2: String, note: String) -> TextWithFootnotes
+		{
+			let firstChar = CharData(text: text1)
+			let secondChar = CharData(text: text2, style: .quotation)
+			let noteChar = CharData(text: note)
+			return TextWithFootnotes(textElements: [TextElement(charData: [firstChar]), TextElement(charData: [secondChar])], footNotes: [FootNote(caller: "+", style: .endNote, originReference: nil, charData: [noteChar])])
+		}
+		
+		func represent(_ paragraph: Paragraph) -> String { return paragraph.text }
+		
+		let filled = Paragraph(bookId: "test", chapterIndex: 1, sectionIndex: 1, index: 1, content: [Para(content: makeText(text1: "Eka", text2: "Toka", note: "Note"), style: .sectionHeading(1)), Para(content: [Verse(range: VerseRange(1, 2), content: makeText(text1: "Verse1 alkaa ", text2: "verse 1 loppuu", note: "muistiinpano"))], style: .normal)], creatorId: "test")
+		
+		copyTest(filled, represent: represent, modify: { $0.content = Array($0.content.dropFirst()) })
+		
+		let empty = filled.emptyCopy(forBook: "test", creatorId: "test")
+		
+		print("Original: \(filled.text)")
+		print("Empty Copy: \(empty.text)")
+		
+		let attString = filled.toAttributedString(options: [Paragraph.optionDisplayParagraphRange: false])
+		copyTest(empty, represent: represent, modify: { $0.update(with: attString) })
+		
+		print("Attributed representation: \(attString)")
+		empty.update(with: filled.toAttributedString(options: [Paragraph.optionDisplayParagraphRange: false]))
+		print("Filled again: \(empty.text)")
+		
+		print(empty.toAttributedString(options: [Paragraph.optionDisplayParagraphRange: false]))
+		
+		filled.update(with: attString)
+		assert(filled.toAttributedString(options: [Paragraph.optionDisplayParagraphRange: false]) == attString)
 	}
 	
 	func copyTest<T: Copyable>(_ original: T, represent: (T) -> String, modify: (T) -> ())
