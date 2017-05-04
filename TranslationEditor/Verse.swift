@@ -105,7 +105,7 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXCo
 	
 	func copy() -> Verse
 	{
-		return Verse(range: range, content: content)
+		return Verse(range: range, content: content.copy())
 	}
 	
 	// Adds the verse marker(s) for the verse, then the contents
