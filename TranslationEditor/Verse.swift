@@ -150,6 +150,6 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXCo
 	// Creates a copy of this verse that has no character data in it
 	func emptyCopy() -> Verse
 	{
-		return Verse(range: range)
+		return Verse(range: range, content: content.emptyCopy())
 	}
 }

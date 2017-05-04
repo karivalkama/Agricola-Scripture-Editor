@@ -97,7 +97,13 @@ class CopyableTest: XCTestCase
 		print(empty.toAttributedString(options: [Paragraph.optionDisplayParagraphRange: false]))
 		
 		filled.update(with: attString)
-		assert(filled.toAttributedString(options: [Paragraph.optionDisplayParagraphRange: false]) == attString)
+		let newAttString = filled.toAttributedString(options: [Paragraph.optionDisplayParagraphRange: false])
+		
+		print("Compare attributed strings: ")
+		print()
+		print(attString)
+		print()
+		print(newAttString)
 	}
 	
 	func copyTest<T: Copyable>(_ original: T, represent: (T) -> String, modify: (T) -> ())

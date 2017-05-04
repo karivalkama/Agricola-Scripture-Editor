@@ -167,7 +167,7 @@ final class TextWithFootnotes: USXConvertible, JSONConvertible, AttributedString
 		for breakIndex in breakIndices
 		{
 			charData.add(parseCharData(from: attString, range: NSMakeRange(textStartIndex, breakIndex - textStartIndex)))
-			textStartIndex = breakIndex
+			textStartIndex = breakIndex + 1
 		}
 		charData.add(parseCharData(from: attString, range: NSMakeRange(textStartIndex, attString.length - textStartIndex)))
 		
