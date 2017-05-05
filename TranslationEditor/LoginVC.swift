@@ -99,6 +99,17 @@ class LoginVC: UIViewController//, ConnectionListener
 				return
 			}
 			
+			// Registers all devices the user has logged in with
+			if let device = UIDevice.current.identifierForVendor?.uuidString
+			{
+				if !account.devices.contains(device)
+				{
+					// TODO: Some kind of security check could be made here
+					account.devices.add(device)
+					try account.push()
+				}
+			}
+			
 			Session.instance.logIn(accountId: account.idString, userName: userName, password: password)
 			
 			// If there is a P2P session active, provides access to the host project
@@ -143,6 +154,14 @@ class LoginVC: UIViewController//, ConnectionListener
 		// ConnectionManager.instance.removeListener(self)
 		// performSegue(withIdentifier: "CreateUser", sender: nil)
 		displayAlert(withIdentifier: "CreateAccount", storyBoardId: "Login")
+		{
+			accountVC in
+			
+			if let accountVC = accountVC as? CreateAccountVC
+			{
+				accountVC.configure { self.proceed() }
+			}
+		}
 	}
 	
 	

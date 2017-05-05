@@ -19,6 +19,7 @@ class TargetTranslationCell: UITableViewCell, ParagraphAssociated, UITextViewDel
 	// ATTRIBUTES	------
 	
 	static let identifier = "TranslationCell"
+	private static let copiedAttributeNames = [NSFontAttributeName, IsNoteAttributeName, CharStyleAttributeName, ParaStyleAttributeName, NSParagraphStyleAttributeName]
 	
 	private var originalParagraph: Paragraph?
 	
@@ -87,26 +88,37 @@ class TargetTranslationCell: UITableViewCell, ParagraphAssociated, UITextViewDel
 			return false
 		}
 		
-		// The new string can't remove verse markings
-		if textView.attributedText.containsAttribute(VerseIndexMarkerAttributeName, in: range) || textView.attributedText.containsAttribute(ParaMarkerAttributeName, in: range)
+		// The new string can't remove verse markers, paragraph markers or notes markers
+		if textView.attributedText.containsAttribute(VerseIndexMarkerAttributeName, in: range) || textView.attributedText.containsAttribute(ParaMarkerAttributeName, in: range) || textView.attributedText.containsAttribute(NoteMarkerAttributeName, in: range)
 		{
 			return false
 		}
-		// The verse markins can't be split either
-		else if textView.attributedText.attribute(VerseIndexMarkerAttributeName, surrounding: range) != nil || textView.attributedText.attribute(ParaMarkerAttributeName, surrounding: range) != nil
+		// The verse markers can't be split either
+		else if textView.attributedText.attribute(VerseIndexMarkerAttributeName, surrounding: range) != nil || textView.attributedText.attribute(ParaMarkerAttributeName, surrounding: range) != nil || textView.attributedText.attribute(NoteMarkerAttributeName, surrounding: range) != nil
 		{
 			return false
 		}
 		
-		// TODO: Note markers shouldn't be edited either
+		var newAttributes = [String: Any]()
 		
-		// TODO: Determine the attributes for the inserted text
-		inputTextField.typingAttributes = [NSFontAttributeName: defaultParagraphFont, NSForegroundColorAttributeName: Colour.Primary.dark.asColour]
+		// In case of replacing text, just copies the attributes from the original
+		// Otherwise copies from the left of the replaced text
+		let copyFromRange = range.length > 0 ? range : NSMakeRange(range.location - 1, 1)
+		textView.attributedText.enumerateAttributes(in: copyFromRange, options: [])
+		{
+			attributes, range, _ in
+			
+			let meaningfulAttributes = attributes.filter { TargetTranslationCell.copiedAttributeNames.contains($0.key) }.toDictionary { ($0.key, $0.value) }
+			newAttributes = newAttributes + meaningfulAttributes
+		}
+		
+		// Is note attribute is always determined by the surrounding area
+		newAttributes[IsNoteAttributeName] = textView.attributedText.attribute(IsNoteAttributeName, surrounding: range)
+		
+		// The color attribute is always overwritten
+		newAttributes[NSForegroundColorAttributeName] = Colour.Primary.dark.asColour
+		inputTextField.typingAttributes = newAttributes
 		return true
-		
-		// TODO: Implement uneditable verse markings here
-		//return textView.text.occurences(of: TranslationCell.verseRegex, within: range) == text.occurences(of: TranslationCell.verseRegex)
-		//return textView.text.occurrences(of: "#", within: range) == text.occurrences(of: "#")
 	}
 	
 	

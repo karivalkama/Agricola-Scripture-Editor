@@ -59,8 +59,8 @@ class USXCharParser: TemporaryXMLParser
 		case "char":
 			// When a char element ends it is recorded
 			closeCurrentChar()
-		case "para":
-			// When a para element ends, quits parsing
+		case "para", "note":
+			// When a containing para or note element ends, quits parsing
 			closeCurrentChar()
 			endParsingOnEndElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName)
 		default: break

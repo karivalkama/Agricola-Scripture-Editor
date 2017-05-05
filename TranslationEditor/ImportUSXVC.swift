@@ -214,6 +214,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	// TODO: Handle situations where some of the translations contain conflicts
 	func bookSelected(_ book: Book)
 	{
+		// TODO: This went into a forever loop?
 		// TODO: Update notes where pathIds change
 		
 		// Runs a matching algorithm on between the new and previous data, then updates each paragraph and the book

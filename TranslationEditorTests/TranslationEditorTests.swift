@@ -296,6 +296,7 @@ class TranslationEditorTests: XCTestCase
 		print("TEST: DONE")
 	}
 	
+	/*
 	func testQuery()
 	{
 		print("TEST: Starting")
@@ -304,6 +305,7 @@ class TranslationEditorTests: XCTestCase
 		try! query.resultRows().forEach { print("\($0.keys)") }
 		print("TEST: Done")
 	}
+*/
 
 	func testRemoveEdits()
 	{
@@ -520,6 +522,7 @@ class TranslationEditorTests: XCTestCase
 		print("TEST: DONE (inserted \(notes.count) notes)")
 	}
 	
+	/*
 	func testMakeBind()
 	{
 		let bookCode = BookCode.galatians
@@ -605,7 +608,7 @@ class TranslationEditorTests: XCTestCase
 		
 		print("TEST: DONE")
 	}
-	
+	*/
 	/*
 	func testReadBind()
 	{
@@ -656,6 +659,7 @@ class TranslationEditorTests: XCTestCase
 		print("TEST: DONE")
 	}
 	
+	/*
 	func testAddProject()
 	{
 		let userName = "Test"
@@ -718,6 +722,7 @@ class TranslationEditorTests: XCTestCase
 			try avatarInfo.push()
 		}
 	}
+*/
 	
 	/*
 	func testAddDefaultBookIdentifiersToProjects()
@@ -765,6 +770,7 @@ class TranslationEditorTests: XCTestCase
 		}
 	}*/
 	
+	/*
 	func testCopyBooks()
 	{
 		let languageName = "Finnish"
@@ -811,6 +817,7 @@ class TranslationEditorTests: XCTestCase
 		
 		print("STATUS: Copied \(newBooks.count) books and \(newParagraphs.count) paragraphs")
 	}
+*/
 	
 	func testAddPasswords()
 	{
@@ -912,6 +919,7 @@ class TranslationEditorTests: XCTestCase
 		print("DONE")
 	}*/
 	
+	/*
 	func avatarIdForProject(withId projectId: String) throws -> String?
 	{
 		// Finds the main avatar for the target project
@@ -929,6 +937,7 @@ class TranslationEditorTests: XCTestCase
 		
 		return avatarInfo.avatarId
 	}
+*/
 	
 	func testRemoveDuplicateLanguages()
 	{

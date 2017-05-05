@@ -20,6 +20,7 @@ final class AgricolaAccount: Storable
 	let isShared: Bool
 	
 	var username: String
+	var devices: [String]
 	// var languageIds: [String]
 	
 	private var passwordHash: String
@@ -36,22 +37,24 @@ final class AgricolaAccount: Storable
 	
 	// INIT	-------------------
 	
-	convenience init(name: String, isShared: Bool, password: String)
+	convenience init(name: String, isShared: Bool, password: String, firstDevice: String?)
 	{
-		self.init(username: name, isShared: isShared, passwordHash: AgricolaAccount.createPasswordHash(name: name.toKey, password: password))
+		let devices = firstDevice == nil ? [] : [firstDevice!]
+		self.init(username: name, isShared: isShared, passwordHash: AgricolaAccount.createPasswordHash(name: name, password: password), devices: devices)
 	}
 	
-	private init(username: String, isShared: Bool, passwordHash: String, uid: String = UUID().uuidString.lowercased())
+	private init(username: String, isShared: Bool, passwordHash: String, devices: [String], uid: String = UUID().uuidString.lowercased())
 	{
 		self.username = username
 		self.isShared = isShared
 		self.passwordHash = passwordHash
 		self.uid = uid
+		self.devices = devices
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) -> AgricolaAccount
 	{
-		return AgricolaAccount(username: properties["username"].string(), isShared: properties["shared"].bool(), passwordHash: properties["password"].string(), uid: id["user_uid"].string())
+		return AgricolaAccount(username: properties["username"].string(), isShared: properties["shared"].bool(), passwordHash: properties["password"].string(), devices: properties["devices"].array { $0.string }, uid: id["user_uid"].string())
 	}
 	
 	
@@ -66,6 +69,10 @@ final class AgricolaAccount: Storable
 		if let passwordHash = properties["password"].string
 		{
 			self.passwordHash = passwordHash
+		}
+		if let deviceArray = properties["devices"].array
+		{
+			self.devices = deviceArray.flatMap { $0.string }
 		}
 	}
 	

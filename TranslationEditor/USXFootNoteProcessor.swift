@@ -68,7 +68,18 @@ class USXFootNoteProcessor: USXContentProcessor
 	
 	func generate(from content: [CharData], using errorHandler: @escaping ErrorHandler) -> FootNote?
 	{
-		// TODO: Handle fr (origin reference) after refactoring charTypes
-		return FootNote(caller: caller, style: style, originReference: nil, charData: content)
+		// If there is an 'fr' (origin reference) char element in the mix, records it separately
+		let originReferenceIndex = content.index(where: { $0.style == .originReference })
+		
+		if let originReferenceIndex = originReferenceIndex
+		{
+			var remainingContent = content
+			remainingContent.remove(at: originReferenceIndex)
+			return FootNote(caller: caller, style: style, originReference: content[originReferenceIndex].text, charData: remainingContent)
+		}
+		else
+		{
+			return FootNote(caller: caller, style: style, originReference: nil, charData: content)
+		}
 	}
 }

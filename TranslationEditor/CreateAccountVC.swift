@@ -19,6 +19,11 @@ class CreateAccountVC: UIViewController
 	@IBOutlet weak var errorLabel: UILabel!
 	
 	
+	// ATTRIBUTES	--------------
+	
+	private var completion: (() -> ())?
+	
+	
 	// LOAD	----------------------
 	
     override func viewDidLoad()
@@ -84,7 +89,7 @@ class CreateAccountVC: UIViewController
 		do
 		{
 			// Inserts the new account and moves on
-			let newAccount = AgricolaAccount(name: userName, isShared: false, password: password)
+			let newAccount = AgricolaAccount(name: userName, isShared: false, password: password, firstDevice: UIDevice.current.identifierForVendor?.uuidString)
 			try newAccount.push()
 			
 			// Logs in with the new account
@@ -94,7 +99,7 @@ class CreateAccountVC: UIViewController
 				Session.instance.logIn(accountId: newAccount.idString, userName: userName, password: password)
 			}
 			
-			dismiss(animated: true, completion: nil)
+			dismiss(animated: true, completion: completion)
 		}
 		catch
 		{
@@ -102,5 +107,13 @@ class CreateAccountVC: UIViewController
 			print("ERROR: Failed to save account data. \(error)")
 			return
 		}
+	}
+	
+	
+	// OTHER METHODS	---------------
+	
+	func configure(completion: @escaping () -> ())
+	{
+		self.completion = completion
 	}
 }

@@ -30,4 +30,6 @@ let ChapterMarkerAttributeName = "chapterMarker"
 
 let chapterMarkerFont = UIFont(name: "Arial", size: 32.0)!
 let defaultParagraphFont = UIFont(name: "Arial", size: 16.0)!
-let notesFont = UIFont(name: "Arial", size: 14.0)!
+let headingFont = UIFont(name: "Arial", size: 24.0)!
+let quotationFont = defaultParagraphFont.withItalic ?? defaultParagraphFont
+let notesFont = UIFont(name: "Arial", size: 12.0)!

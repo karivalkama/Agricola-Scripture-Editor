@@ -46,7 +46,65 @@ extension UITextView
 	{
 		let newText = NSMutableAttributedString()
 		newText.append(usxString)
+		let wholeTextRange = NSMakeRange(0, newText.length)
 		
+		// Adds different fonts based on attribute values
+		newText.addAttribute(NSFontAttributeName, value: defaultParagraphFont, range: wholeTextRange)
+		usxString.enumerateAttribute(ParaStyleAttributeName, in: wholeTextRange, options: [])
+		{
+			style, range, _ in
+			
+			if let style = style as? ParaStyle
+			{
+				if style.isHeaderStyle()
+				{
+					newText.addAttribute(NSFontAttributeName, value: headingFont, range: range)
+				}
+			}
+		}
+		usxString.enumerateAttribute(IsNoteAttributeName, in: wholeTextRange, options: [])
+		{
+			isNote, range, _ in
+			
+			if isNote as? Bool ?? false
+			{
+				newText.addAttribute(NSFontAttributeName, value: notesFont, range: range)
+			}
+		}
+		usxString.enumerateAttribute(CharStyleAttributeName, in: wholeTextRange, options: [])
+		{
+			style, range, _ in
+			
+			if let style = style as? CharStyle
+			{
+				if style == .quotation
+				{
+					newText.addAttribute(NSFontAttributeName, value: quotationFont, range: range)
+				}
+			}
+		}
+		usxString.enumerateAttribute(ChapterMarkerAttributeName, in: wholeTextRange, options: [])
+		{
+			marker, range, _ in
+			
+			if marker != nil
+			{
+				newText.addAttribute(NSFontAttributeName, value: chapterMarkerFont, range: range)
+			}
+		}
+		
+		// All marker attrites are greyed
+		usxString.enumerateAttributes(in: wholeTextRange, options: [])
+		{
+			attributes, range, _ in
+			
+			if attributes.containsKey(VerseIndexMarkerAttributeName) || attributes.containsKey(ParaMarkerAttributeName) || attributes.containsKey(NoteMarkerAttributeName) || attributes.containsKey(ChapterMarkerAttributeName)
+			{
+				newText.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: range)
+			}
+		}
+		
+		/*
 		// Adds visual attributes based on the existing attribute data
 		usxString.enumerateAttributes(in: NSMakeRange(0, newText.length), options: [])
 		{
@@ -63,9 +121,7 @@ extension UITextView
 					{
 						switch style
 						{
-						// TODO: This font is just for testing purposes
-						case .quotation:
-							newText.addAttribute(NSFontAttributeName, value: UIFont(name: "Chalkduster", size: 18.0)!, range: range)
+						case .quotation: newText.addAttribute(NSFontAttributeName, value: quotationFont, range: range)
 						// TODO: Add exhaustive cases
 						default: break
 						}
@@ -74,7 +130,7 @@ extension UITextView
 				default: newText.addAttribute(NSFontAttributeName, value: defaultParagraphFont, range: range)
 				}
 			}
-		}
+		}*/
 		
 		// Sets text content
 		attributedText = newText
@@ -84,5 +140,42 @@ extension UITextView
 	func display(paragraph: Paragraph)
 	{
 		display(usxString: paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange: false]))
+	}
+}
+
+extension UIFont
+{
+	var isBold: Bool { return hasTrait(.traitBold) }
+	
+	var withBold: UIFont? { return withTrait(.traitBold) }
+	
+	var isItalic: Bool { return hasTrait(.traitItalic) }
+	
+	var withItalic: UIFont? { return withTrait(.traitItalic) }
+	
+	func hasTrait(_ trait: UIFontDescriptorSymbolicTraits) -> Bool
+	{
+		return fontDescriptor.symbolicTraits.contains(trait)
+	}
+	
+	func withTrait(_ trait: UIFontDescriptorSymbolicTraits) -> UIFont?
+	{
+		if hasTrait(trait)
+		{
+			return self
+		}
+		else
+		{
+			var symTraits = fontDescriptor.symbolicTraits
+			symTraits.insert([trait])
+			if let fontDescriptorVar = fontDescriptor.withSymbolicTraits(symTraits)
+			{
+				return UIFont(descriptor: fontDescriptorVar, size: pointSize)
+			}
+			else
+			{
+				return nil
+			}
+		}
 	}
 }
