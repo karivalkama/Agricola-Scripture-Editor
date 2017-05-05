@@ -214,7 +214,6 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	// TODO: Handle situations where some of the translations contain conflicts
 	func bookSelected(_ book: Book)
 	{
-		// TODO: This went into a forever loop?
 		// TODO: Update notes where pathIds change
 		
 		// Runs a matching algorithm on between the new and previous data, then updates each paragraph and the book
@@ -446,6 +445,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			// The database operations are postponed until the conflicts have been resolved
 			let targetTranslations = try project.targetTranslationQuery(bookCode: book.code).resultObjects()
 			
+			print("STATUS: Found \(targetTranslations.count) existing target translations")
+			
 			guard try targetTranslations.forAll({ try !ParagraphHistoryView.instance.rangeContainsConflicts(bookId: $0.idString) }) else
 			{
 				displayAlert(withIdentifier: "ErrorAlert", storyBoardId: "MainMenu")
@@ -460,6 +461,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				return
 			}
 			
+			print("STATUS: Creating bindings between the new book and target translation(s)")
+			
 			// Creates new bindings for the books
 			var newBindings = [ParagraphBinding]()
 			for targetBook in targetTranslations
@@ -467,6 +470,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				let bindings = match(paragraphs, and: try ParagraphView.instance.latestParagraphQuery(bookId: targetBook.idString).resultObjects()).map { ($0.0.idString, $0.1.idString) }
 				newBindings.add(ParagraphBinding(sourceBookId: book.idString, targetBookId: targetBook.idString, bindings: bindings, creatorId: avatarId))
 			}
+			
+			print("STATUS: Saving new book data")
 			
 			// Saves the new data to the database
 			try DATABASE.tryTransaction
@@ -479,6 +484,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			// If there is no target translation for the book yet, creates an empty copy of the just created book
 			if book.languageId != project.languageId && targetTranslations.isEmpty
 			{
+				print("STATUS: Creates a new target translation for the book")
+				
 				let emptyCopy = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId)
 				
 				// Creates a set of notes for the new translation too
