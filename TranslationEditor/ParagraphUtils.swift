@@ -10,8 +10,6 @@ import Foundation
 
 func match(_ sources: [Paragraph], and targets: [Paragraph]) -> [(source: Paragraph, target: Paragraph)]
 {
-	// TODO: You have to take chapter indices into account, else all is messed up!
-	
 	// Makes sure there actually are paragraphs to match
 	guard !sources.isEmpty && !targets.isEmpty else
 	{
@@ -33,7 +31,7 @@ func match(_ sources: [Paragraph], and targets: [Paragraph]) -> [(source: Paragr
 		}
 		else
 		{
-			print("ERROR: Either of the translations is missing chapter \(chapterIndex)")
+			print("ERROR: One of the translations is missing chapter \(chapterIndex)")
 		}
 	}
 	
