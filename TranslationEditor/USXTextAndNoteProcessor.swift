@@ -12,7 +12,7 @@ class USXTextAndNoteProcessor: USXContentProcessor
 {
 	// TYPES	-----------------
 	
-	typealias Generated = TextWithFootnotes
+	typealias Generated = TextWithNotes
 	typealias Processed = FootNote
 	
 	
@@ -38,7 +38,7 @@ class USXTextAndNoteProcessor: USXContentProcessor
 	
 	// IMPLEMENTED METHODS	-----
 	
-	func getParser(_ caller: USXContentParser<TextWithFootnotes, FootNote>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[FootNote]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
+	func getParser(_ caller: USXContentParser<TextWithNotes, FootNote>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[FootNote]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
 	{
 		// In case of a note element, delegates the parsing to a footnote processor (cross reference notes are skipped at this time)
 		if elementName == USXContainerElement.note.rawValue
@@ -94,7 +94,8 @@ class USXTextAndNoteProcessor: USXContentProcessor
 		textElements.add(TextElement(charData: lastCharData))
 		lastCharData = []
 		
-		let result = TextWithFootnotes(textElements: textElements, footNotes: content)
+		// TODO: Include cross references too
+		let result = TextWithNotes(textElements: textElements, footNotes: content)
 		textElements = []
 		
 		return result

@@ -8,11 +8,13 @@
 
 import Foundation
 
-// This element contains both text element and footnote data
+// This element contains both text element, cross reference and footnote data
 // The elements are ordered in a very specific way
-final class TextWithFootnotes: USXConvertible, JSONConvertible, AttributedStringConvertible, Copyable
+final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConvertible, Copyable
 {
 	// ATTRIBUTES	------------
+	
+	var crossReferences: [CrossReference]
 	
 	private(set) var textElements: [TextElement]
 	private(set) var footNotes: [FootNote]
@@ -46,9 +48,9 @@ final class TextWithFootnotes: USXConvertible, JSONConvertible, AttributedString
 		return content
 	}
 	
-	var toUSX: String { return content.reduce("", { $0 + $1.toUSX }) }
+	var toUSX: String { return crossReferences.reduce("", { $0 + $1.toUSX }) + content.reduce("", { $0 + $1.toUSX }) }
 	
-	var properties: [String : PropertyValue] { return ["text": textElements.value, "notes": footNotes.value] }
+	var properties: [String : PropertyValue] { return ["text": textElements.value, "notes": footNotes.value, "cross_references": crossReferences.value] }
 	
 	var text: String { return content.reduce("", { $0 + $1.text }) }
 	
@@ -59,23 +61,26 @@ final class TextWithFootnotes: USXConvertible, JSONConvertible, AttributedString
 	{
 		self.textElements = [TextElement.empty()]
 		self.footNotes = []
+		self.crossReferences = []
 	}
 	
 	init(text: String)
 	{
 		self.textElements = [TextElement(charData: [CharData(text: text)])]
 		self.footNotes = []
+		self.crossReferences = []
 	}
 	
-	init(textElements: [TextElement], footNotes: [FootNote])
+	init(textElements: [TextElement], footNotes: [FootNote], crossReferences: [CrossReference] = [])
 	{
 		self.textElements = textElements
 		self.footNotes = footNotes
+		self.crossReferences = crossReferences
 	}
 	
-	static func parse(from properties: PropertySet) -> TextWithFootnotes
+	static func parse(from properties: PropertySet) -> TextWithNotes
 	{
-		return TextWithFootnotes(textElements: TextElement.parseArray(from: properties["text"].array(), using: TextElement.parse), footNotes: FootNote.parseArray(from: properties["notes"].array(), using: FootNote.parse))
+		return TextWithNotes(textElements: TextElement.parseArray(from: properties["text"].array(), using: TextElement.parse), footNotes: FootNote.parseArray(from: properties["notes"].array(), using: FootNote.parse), crossReferences: CrossReference.parseArray(from: properties["cross_references"].array(), using: CrossReference.parse))
 	}
 	
 	
@@ -88,50 +93,51 @@ final class TextWithFootnotes: USXConvertible, JSONConvertible, AttributedString
 		return attStr
 	}
 	
-	func copy() -> TextWithFootnotes
+	func copy() -> TextWithNotes
 	{
-		return TextWithFootnotes(textElements: textElements.map { $0.copy() }, footNotes: footNotes.map { $0.copy() })
+		return TextWithNotes(textElements: textElements.map { $0.copy() }, footNotes: footNotes.map { $0.copy() }, crossReferences: crossReferences)
 	}
 	
 	
 	// OPERATORS	-----------
 	
-	static func +(_ left: TextWithFootnotes, _ right: TextWithFootnotes) -> TextWithFootnotes
+	static func +(_ left: TextWithNotes, _ right: TextWithNotes) -> TextWithNotes
 	{
+		// The last text element of the left hand side is combined with the first text element on the right hand side so that there won't be two consecutive text elements
+		var newTextElements = [TextElement]()
+		
 		if left.textElements.isEmpty
 		{
-			return right.copy()
+			newTextElements = right.textElements.copy()
 		}
 		else if right.textElements.isEmpty
 		{
-			return left.copy()
+			newTextElements = left.textElements.copy()
 		}
 		else
 		{
-			// The last text element of the left hand side is combined with the first text element on the right hand side so that there won't be two consecutive text elements
-			var newTextElements = [TextElement]()
 			newTextElements.append(contentsOf: left.textElements.dropLast().map { $0.copy() })
 			newTextElements.add(left.textElements.last! + right.textElements.first!)
 			newTextElements.append(contentsOf: right.textElements.dropFirst().map { $0.copy() })
-			
-			return TextWithFootnotes(textElements: newTextElements, footNotes: left.footNotes.map { $0.copy() } + right.footNotes.map { $0.copy() })
 		}
+		
+		return TextWithNotes(textElements: newTextElements, footNotes: left.footNotes.copy() + right.footNotes.copy(), crossReferences: left.crossReferences + right.crossReferences)
 	}
 	
 	
 	// OTHER METHODS	-------
 	
-	func emptyCopy() -> TextWithFootnotes
+	func emptyCopy() -> TextWithNotes
 	{
-		return TextWithFootnotes(textElements: textElements.map { $0.emptyCopy() }, footNotes: footNotes.map { $0.emptyCopy() })
+		return TextWithNotes(textElements: textElements.map { $0.emptyCopy() }, footNotes: footNotes.map { $0.emptyCopy() }, crossReferences: crossReferences.map { $0.emptyCopy() })
 	}
 	
-	func contentEquals(with other: TextWithFootnotes) -> Bool
+	func contentEquals(with other: TextWithNotes) -> Bool
 	{
-		return textElements.contentEquals(with: other.textElements) && footNotes.contentEquals(with: other.footNotes)
+		return textElements.contentEquals(with: other.textElements) && footNotes.contentEquals(with: other.footNotes) && crossReferences == other.crossReferences
 	}
 	
-	func update(with attString: NSAttributedString) -> TextWithFootnotes?
+	func update(with attString: NSAttributedString) -> TextWithNotes?
 	{
 		// Finds all the notes markers from the string first
 		var notesRanges = [(Int, Int)]() // Note start index, note end index
@@ -194,7 +200,7 @@ final class TextWithFootnotes: USXConvertible, JSONConvertible, AttributedString
 			{
 				let splitIndex = charData.count / 2
 				
-				let cutElement = TextWithFootnotes(textElements: Array(textElements.dropFirst(splitIndex)), footNotes: Array(footNotes.dropFirst(splitIndex)))
+				let cutElement = TextWithNotes(textElements: Array(textElements.dropFirst(splitIndex)), footNotes: Array(footNotes.dropFirst(splitIndex)))
 				
 				textElements = Array(textElements.prefix(splitIndex)) + TextElement.empty()
 				footNotes = Array(footNotes.prefix(splitIndex))
@@ -207,7 +213,7 @@ final class TextWithFootnotes: USXConvertible, JSONConvertible, AttributedString
 				let noteSplitIndex = charData.count / 2
 				let textSplitIndex = noteSplitIndex + 1
 				
-				let cutElement = TextWithFootnotes(textElements: TextElement.empty() + Array(textElements.dropFirst(textSplitIndex)), footNotes: Array(footNotes.dropFirst(noteSplitIndex)))
+				let cutElement = TextWithNotes(textElements: TextElement.empty() + Array(textElements.dropFirst(textSplitIndex)), footNotes: Array(footNotes.dropFirst(noteSplitIndex)))
 				
 				textElements = Array(textElements.prefix(textSplitIndex))
 				footNotes = Array(footNotes.prefix(noteSplitIndex))
@@ -217,7 +223,6 @@ final class TextWithFootnotes: USXConvertible, JSONConvertible, AttributedString
 		}
 		
 		// TODO: Handle cases where new chardata count is smaller than previous content count
-		
 		return nil
 	}
 	

@@ -37,7 +37,7 @@ class USXParaProcessor: USXContentProcessor
 	}
 	
 	private let style: ParaStyle
-	private var initialTextData = [TextWithFootnotes]()
+	private var initialTextData = [TextWithNotes]()
 	
 	
 	// INIT	---------------
@@ -131,7 +131,7 @@ class USXParaProcessor: USXContentProcessor
 		{
 			if initialTextData.isEmpty
 			{
-				return Para(content: TextWithFootnotes(), style: style)
+				return Para(content: TextWithNotes(), style: style)
 			}
 			else
 			{

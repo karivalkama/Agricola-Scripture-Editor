@@ -16,7 +16,7 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 	
 	// A para can have either defined verse content OR ambiguous text content. The two are exclusive.
 	var verses: [Verse] = []
-	var ambiguousContent: TextWithFootnotes?
+	var ambiguousContent: TextWithNotes?
 	var style: ParaStyle
 	
 	
@@ -93,7 +93,7 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 	}
 	
 	// This initialiser doesn't specify any verse data in the para. Should be used only when verse range data is not available (headers, etc.)
-	init(content: TextWithFootnotes, style: ParaStyle)
+	init(content: TextWithNotes, style: ParaStyle)
 	{
 		self.style = style
 		self.ambiguousContent = content
@@ -123,7 +123,7 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 		}
 		else
 		{
-			return Para(content: TextWithFootnotes.parse(from: propertyData["ambiguous_content"].object()), style: style)
+			return Para(content: TextWithNotes.parse(from: propertyData["ambiguous_content"].object()), style: style)
 		}
 	}
 	
@@ -278,7 +278,7 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 				// then forms a new range from the cutOff material
 				if verseRange.end < matchingVerse.range.end
 				{
-					let newContent = matchingVerse.content.update(with: subString) ?? TextWithFootnotes()
+					let newContent = matchingVerse.content.update(with: subString) ?? TextWithNotes()
 					verses.insert(Verse(range: VerseRange(verseRange.end, matchingVerse.range.end), content: newContent), at: i + 1)
 				}
 				// If the ranges match, just updates the verse

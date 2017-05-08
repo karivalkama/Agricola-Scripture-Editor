@@ -14,7 +14,7 @@ class USXVerseProcessor: USXContentProcessor
 	// TYPES	-------------
 	
 	typealias Generated = Verse
-	typealias Processed = TextWithFootnotes
+	typealias Processed = TextWithNotes
 	
 	
 	// ATTRIBUTES	---------

@@ -19,15 +19,14 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXCo
 	static let OptionDisplayVerseNumber = "displayVerseNumber"
 	
 	var range: VerseRange
-	var content: TextWithFootnotes
-	var crossReferences: [CrossReference]
+	var content: TextWithNotes
 	
 	
 	// COMP. PROPS	------
 	
 	var properties: [String : PropertyValue]
 	{
-		return ["range" : range.toPropertySet.value, "content" : content.value, "cross_references": crossReferences.value]
+		return ["range" : range.toPropertySet.value, "content" : content.value]
 	}
 	
 	var text: String
@@ -35,27 +34,26 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXCo
 		return content.text
 	}
 	
-	var toUSX: String { return "<verse number=\"\(range)\" style=\"v\"/>\(crossReferences.reduce("", { $0 + $1.toUSX }))\(content.toUSX)" }
+	var toUSX: String { return "<verse number=\"\(range)\" style=\"v\"/>\(content.toUSX)" }
 	
 	
 	// INIT	-------
 	
-	init(range: VerseRange, content: TextWithFootnotes, crossReferences: [CrossReference] = [])
+	init(range: VerseRange, content: TextWithNotes)
 	{
 		self.range = range
 		self.content = content
-		self.crossReferences = crossReferences
 	}
 	
 	convenience init(range: VerseRange, content: String? = nil)
 	{
 		if let content = content
 		{
-			self.init(range: range, content: TextWithFootnotes(text: content))
+			self.init(range: range, content: TextWithNotes(text: content))
 		}
 		else
 		{
-			self.init(range: range, content: TextWithFootnotes())
+			self.init(range: range, content: TextWithNotes())
 		}
 	}
 	
@@ -67,7 +65,7 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXCo
 		// The range must be parseable
 		if let rangeValue = propertyData["range"].object
 		{
-			return Verse(range: try VerseRange.parse(from: rangeValue), content: TextWithFootnotes.parse(from: propertyData["content"].object()), crossReferences: CrossReference.parseArray(from: propertyData["cross_references"].array(), using: CrossReference.parse))
+			return Verse(range: try VerseRange.parse(from: rangeValue), content: TextWithNotes.parse(from: propertyData["content"].object()))
 		}
 		else
 		{
@@ -88,21 +86,18 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXCo
 		}
 		
 		// Determines how the text is ordered
-		var combined: TextWithFootnotes!
-		var references: [CrossReference]!
+		var combined: TextWithNotes!
 		if left.range.start < right.range.start
 		{
 			combined = left.content + right.content
-			references = left.crossReferences + right.crossReferences
 		}
 		else
 		{
 			combined = right.content + left.content
-			references = right.crossReferences + left.crossReferences
 		}
 		
 		// Fails if the ranges don't connect
-		return try Verse(range: left.range + right.range, content: combined, crossReferences: references)
+		return try Verse(range: left.range + right.range, content: combined)
 	}
 	
 	
@@ -110,11 +105,10 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXCo
 	
 	func copy() -> Verse
 	{
-		return Verse(range: range, content: content.copy(), crossReferences: crossReferences)
+		return Verse(range: range, content: content.copy())
 	}
 	
 	// Adds the verse marker(s) for the verse, then the contents
-	// Doesn't convert cross references into attribute strings
 	func toAttributedString(options: [String : Any]) -> NSAttributedString
 	{
 		let str = NSMutableAttributedString()
@@ -150,12 +144,12 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXCo
 	
 	func contentEquals(with other: Verse) -> Bool
 	{
-		return range == other.range && content.contentEquals(with: other.content) && crossReferences == other.crossReferences
+		return range == other.range && content.contentEquals(with: other.content)
 	}
 	
 	// Creates a copy of this verse that has no character data in it
 	func emptyCopy() -> Verse
 	{
-		return Verse(range: range, content: content.emptyCopy(), crossReferences: crossReferences.map { $0.emptyCopy() })
+		return Verse(range: range, content: content.emptyCopy())
 	}
 }
