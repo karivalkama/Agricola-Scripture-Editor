@@ -33,7 +33,7 @@ class USXFootNoteProcessor: USXContentProcessor
 	// Creates a new parser for a note element
 	// The parser should start after the note element
 	// The parser will stop at the end of the note element (or at the next verse marker, if the content is somehow malformed like that)
-	static func createFootNoteParser(caller: XMLParserDelegate, callerAttValue: String, style: FootNoteStyle, targetPointer: UnsafeMutablePointer<[FootNote]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<FootNote, CharData>
+	static func createParser(caller: XMLParserDelegate, callerAttValue: String, style: FootNoteStyle, targetPointer: UnsafeMutablePointer<[FootNote]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<FootNote, CharData>
 	{
 		let parser = USXContentParser<Generated, Processed>(caller: caller, containingElement: .note, lowestBreakMarker: .verse, targetPointer: targetPointer, using: errorHandler)
 		parser.processor = AnyUSXContentProcessor(USXFootNoteProcessor(caller: callerAttValue, style: style))
@@ -61,6 +61,8 @@ class USXFootNoteProcessor: USXContentProcessor
 	func getCharacterParser(_ caller: USXContentParser<FootNote, CharData>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[CharData]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
 	{
 		// Delegates all character data parsing to a char parser too
+		// Shouldn't receive any raw character data though
+		print("ERROR: Raw character data received by USXFootNoteProcessor")
 		return USXCharParser(caller: caller, targetData: targetPointer)
 	}
 	

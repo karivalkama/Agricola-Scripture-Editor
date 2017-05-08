@@ -84,8 +84,7 @@ final class Book: Storable
 	func makeEmptyCopy(projectId: String, identifier: String, languageId: String, userId: String) throws -> BookData
 	{
 		// Creates the new book instance
-		// TODO: Possibly copy introduction format
-		let newBook = Book(projectId: projectId, code: self.code, identifier: identifier, languageId: languageId)
+		let newBook = Book(projectId: projectId, code: self.code, identifier: identifier, languageId: languageId, introduction: introduction.map { $0.emptyCopy() })
 		
 		// Finds the existing paragraphs
 		let existingParagraphs = try ParagraphView.instance.latestParagraphQuery(bookId: idString).resultObjects()

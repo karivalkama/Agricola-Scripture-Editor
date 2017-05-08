@@ -20,6 +20,7 @@ class USXTextAndNoteProcessor: USXContentProcessor
 	
 	private var textElements = [TextElement]()
 	private var lastCharData = [CharData]()
+	private var crossReferences = [CrossReference]()
 	
 	
 	// INIT	---------------------
@@ -52,12 +53,12 @@ class USXTextAndNoteProcessor: USXContentProcessor
 					lastCharData = []
 					
 					print("STATUS: Delegating '\(elementName)' to a FootNoteProcessor")
-					return (USXFootNoteProcessor.createFootNoteParser(caller: caller, callerAttValue: callerAttribute, style: style, targetPointer: targetPointer, using: errorHandler), false)
+					return (USXFootNoteProcessor.createParser(caller: caller, callerAttValue: callerAttribute, style: style, targetPointer: targetPointer, using: errorHandler), false)
 				}
-				else if CrossReferenceStyle(rawValue: styleString) != nil
+				else if let style = CrossReferenceStyle(rawValue: styleString)
 				{
-					// Cross references are skipped at this time. Add parsing later
-					return (SkipOverElementParser(elementName: elementName, caller: caller), false)
+					// Cross references are parsed separately from other data
+					return (USXCrossReferenceProcessor.createParser(caller: caller, callerAttValue: callerAttribute, style: style, targetPointer: &crossReferences, using: errorHandler), false)
 				}
 				else
 				{
