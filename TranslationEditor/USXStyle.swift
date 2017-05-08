@@ -72,7 +72,7 @@ enum FootNoteStyle: String, USXStyle
 	var code: String { return rawValue }
 }
 
-enum crossReferenceStyle: String, USXStyle
+enum CrossReferenceStyle: String, USXStyle
 {
 	case crossReference = "x"
 	case studyCrossReference = "ex"
