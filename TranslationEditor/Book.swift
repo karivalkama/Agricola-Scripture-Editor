@@ -27,6 +27,7 @@ final class Book: Storable
 	
 	var identifier: String
 	var languageId: String
+	var introduction: [Para]
 	
 	
 	// COMP. PROPERTIES	----
@@ -35,32 +36,31 @@ final class Book: Storable
 	
 	var properties: [String : PropertyValue]
 	{
-		return ["identifier" : identifier.value, "language" : languageId.value]
+		return ["identifier" : identifier.value, "language" : languageId.value, "introduction": introduction.value]
 	}
 	
 	
 	// INIT	----------------
 	
-	init(projectId: String, code: BookCode, identifier: String, languageId: String, uid: String = UUID().uuidString.lowercased())
+	init(projectId: String, code: BookCode, identifier: String, languageId: String, introduction: [Para] = [], uid: String = UUID().uuidString.lowercased())
 	{
 		self.projectId = projectId
 		self.code = code
 		self.identifier = identifier
 		self.languageId = languageId
 		self.uid = uid
-		
-		// TODO: It would be possible to throw an error for invalid parameters
+		self.introduction = introduction
 	}
 	
-	static func create(from properties: PropertySet, withId id: Id) -> Book
+	static func create(from properties: PropertySet, withId id: Id) throws -> Book
 	{
-		return Book(projectId: id[PROPERTY_PROJECT].string(), code: BookCode.of(code: id[PROPERTY_CODE].string()), identifier: properties["identifier"].string(), languageId: properties["language"].string(), uid: id["book_uid"].string())
+		return Book(projectId: id[PROPERTY_PROJECT].string(), code: BookCode.of(code: id[PROPERTY_CODE].string()), identifier: properties["identifier"].string(), languageId: properties["language"].string(), introduction: try Para.parseArray(from: properties["introduction"].array(), using: Para.parse), uid: id["book_uid"].string())
 	}
 	
 	
 	// IMPLEMENTED METHODS	----
 	
-	func update(with properties: PropertySet)
+	func update(with properties: PropertySet) throws
 	{
 		if let identifier = properties["identifier"].string
 		{
@@ -69,6 +69,10 @@ final class Book: Storable
 		if let language = properties["language"].string
 		{
 			self.languageId = language
+		}
+		if let introductionData = properties["introduction"].array
+		{
+			self.introduction = try Para.parseArray(from: introductionData, using: Para.parse)
 		}
 	}
 	
@@ -80,6 +84,7 @@ final class Book: Storable
 	func makeEmptyCopy(projectId: String, identifier: String, languageId: String, userId: String) throws -> BookData
 	{
 		// Creates the new book instance
+		// TODO: Possibly copy introduction format
 		let newBook = Book(projectId: projectId, code: self.code, identifier: identifier, languageId: languageId)
 		
 		// Finds the existing paragraphs
