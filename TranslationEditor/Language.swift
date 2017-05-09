@@ -22,9 +22,9 @@ final class Language: Storable
 	
 	// COMP. PROPERTIES	----
 	
-	static let idIndexMap: IdIndexMap = [PROPERTY_NAME]
+	static let idIndexMap: IdIndexMap = ["language_prefix", PROPERTY_NAME]
 	
-	var idProperties: [Any] { return [name.toKey] }
+	var idProperties: [Any] { return ["language", name.toKey] }
 	
 	var properties: [String : PropertyValue] { return ["name": name.value] }
 	
