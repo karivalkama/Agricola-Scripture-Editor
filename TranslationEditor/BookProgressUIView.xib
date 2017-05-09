@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookProgressUIView" customModule="TranslationEditor" customModuleProvider="target">
+            <connections>
+                <outlet property="completionLabel" destination="39R-Zu-5HQ" id="o5n-07-v7D"/>
+                <outlet property="progressBar" destination="xSt-zG-VUP" id="AOW-ir-FWl"/>
+                <outlet property="versionAmountLabel" destination="y5W-tq-BdH" id="e4f-bg-gVy"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="193" height="65"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Otn-cj-Vdi">
+                    <rect key="frame" x="0.0" y="0.0" width="193" height="65"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dWg-Vg-Fmm">
+                            <rect key="frame" x="0.0" y="0.0" width="193" height="35"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xud-wW-2UF">
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="35"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="30 %" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39R-Zu-5HQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="20.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.87999999523162842" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Translated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buS-jf-q8u">
+                                            <rect key="frame" x="0.0" y="20.5" width="60" height="14.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pPS-yh-3Im">
+                                    <rect key="frame" x="68" y="0.0" width="125" height="35"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.87999999523162842" contentMode="left" horizontalHuggingPriority="100" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="~2 Versions" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5W-tq-BdH">
+                                            <rect key="frame" x="0.0" y="0.0" width="125" height="20.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.87999999523162842" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="per Paragraph" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmT-Kl-qhl">
+                                            <rect key="frame" x="0.0" y="20.5" width="125" height="14.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                        <progressView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" progress="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="xSt-zG-VUP">
+                            <rect key="frame" x="0.0" y="39" width="193" height="26"/>
+                            <color key="tintColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </progressView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Otn-cj-Vdi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FzH-PZ-bDB"/>
+                <constraint firstAttribute="trailing" secondItem="Otn-cj-Vdi" secondAttribute="trailing" id="UoK-jm-xQi"/>
+                <constraint firstAttribute="bottom" secondItem="Otn-cj-Vdi" secondAttribute="bottom" id="Y2N-KL-LtS"/>
+                <constraint firstItem="Otn-cj-Vdi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZnQ-5W-V4m"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="275" y="-104"/>
+        </view>
+    </objects>
+</document>
