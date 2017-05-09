@@ -87,20 +87,6 @@ final class ParagraphHistoryView: View
 			}
 			
 		}, version: "2")
-		
-		/*
-		view.setMapBlock(createMapBlock
-		{
-			paragraph, emit in
-			
-			// Key = Previous paragraph id + deprecated
-			if let lastVersionId = paragraph.createdFrom
-			{
-				let key = [lastVersionId, paragraph.isDeprecated] as [Any]
-				emit(key, nil)
-			}
-			
-		}, reduce: countRowsReduce, version: "1")*/
 	}
 	
 	

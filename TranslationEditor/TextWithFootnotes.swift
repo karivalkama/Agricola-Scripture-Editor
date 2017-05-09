@@ -129,7 +129,7 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 	
 	func emptyCopy() -> TextWithNotes
 	{
-		return TextWithNotes(textElements: textElements.map { $0.emptyCopy() }, footNotes: footNotes.map { $0.emptyCopy() }, crossReferences: crossReferences.map { $0.emptyCopy() })
+		return TextWithNotes(textElements: textElements.map { $0.emptyCopy() }, footNotes: footNotes.map { $0.emptyCopy() }, crossReferences: crossReferences)
 	}
 	
 	func contentEquals(with other: TextWithNotes) -> Bool

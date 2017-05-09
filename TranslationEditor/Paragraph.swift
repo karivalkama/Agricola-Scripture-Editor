@@ -64,6 +64,9 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	// The code of the book this paragraph belongs to
 	var bookCode: BookCode { return Book.code(fromId: bookId) }
 	
+	// The id of the project the paragraph belongs to
+	var projectId: String { return Book.projectId(fromId: bookId) }
+	
 	var text: String
 	{
 		var text = ""

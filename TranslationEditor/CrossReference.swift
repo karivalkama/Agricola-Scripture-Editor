@@ -43,12 +43,4 @@ struct CrossReference: USXConvertible, JSONConvertible, Equatable
 	{
 		return left.caller == right.caller && left.style == right.style && left.charData == right.charData
 	}
-	
-	
-	// OTHER METHODS	------------
-	
-	func emptyCopy() -> CrossReference
-	{
-		return CrossReference(caller: caller, style: style, charData: charData.map { $0.emptyCopy() })
-	}
 }

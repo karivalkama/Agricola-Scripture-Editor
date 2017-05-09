@@ -9,6 +9,15 @@
 import Swift
 import Foundation
 
+extension Sequence
+{
+	// Counts the number of elements that satisfy the provided result
+	func count(where condition: (Self.Iterator.Element) -> (Bool)) -> Int
+	{
+		return reduce(0, { condition($1) ? $0 + 1 : $0 })
+	}
+}
+
 extension Array
 {
 	// Checks that the provided condition is true for all elements in the array
