@@ -135,6 +135,7 @@
 		7C8F4AFD1EC1920400F9B25F /* BookProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8F4AFC1EC1920400F9B25F /* BookProgressView.swift */; };
 		7C8F4AFF1EC1D75400F9B25F /* BookProgressUIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8F4AFE1EC1D75400F9B25F /* BookProgressUIView.xib */; };
 		7C8F4B011EC1E13F00F9B25F /* BookProgressUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8F4B001EC1E13F00F9B25F /* BookProgressUIView.swift */; };
+		7C8F4B031EC1F08C00F9B25F /* ImportBookVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8F4B021EC1F08C00F9B25F /* ImportBookVC.swift */; };
 		7C903F6D1EA7536A008EE1E6 /* BookCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C903F6C1EA7536A008EE1E6 /* BookCode.swift */; };
 		7C903F6F1EA760A8008EE1E6 /* ComparableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C903F6E1EA760A8008EE1E6 /* ComparableExtension.swift */; };
 		7C903F711EA8DBDE008EE1E6 /* ErrorAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C903F701EA8DBDE008EE1E6 /* ErrorAlertVC.swift */; };
@@ -374,6 +375,7 @@
 		7C8F4AFC1EC1920400F9B25F /* BookProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookProgressView.swift; sourceTree = "<group>"; };
 		7C8F4AFE1EC1D75400F9B25F /* BookProgressUIView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookProgressUIView.xib; sourceTree = "<group>"; };
 		7C8F4B001EC1E13F00F9B25F /* BookProgressUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookProgressUIView.swift; sourceTree = "<group>"; };
+		7C8F4B021EC1F08C00F9B25F /* ImportBookVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportBookVC.swift; sourceTree = "<group>"; };
 		7C903F6C1EA7536A008EE1E6 /* BookCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCode.swift; sourceTree = "<group>"; };
 		7C903F6E1EA760A8008EE1E6 /* ComparableExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComparableExtension.swift; sourceTree = "<group>"; };
 		7C903F701EA8DBDE008EE1E6 /* ErrorAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlertVC.swift; sourceTree = "<group>"; };
@@ -735,7 +737,6 @@
 				7C4A4FB11DF95FE3009F890E /* ParagraphEdit.swift */,
 				7C40DF6B1DEC59AB0035B92E /* Book.swift */,
 				7C40DF7B1DED9FB90035B92E /* Language.swift */,
-				7CDBD6B71E26200200912320 /* ParagraphBinding.swift */,
 				7C903F6C1EA7536A008EE1E6 /* BookCode.swift */,
 				7C9496131EAE1CCE0063EA83 /* ParaContent.swift */,
 				7C9496151EAE1D9F0063EA83 /* USXConverible.swift */,
@@ -833,6 +834,7 @@
 				7C25180E1E8D0F8A0089E1FD /* EditAvatarVC.swift */,
 				7C936C1E1E9FA81800AC06BF /* ImportUSXVC.swift */,
 				7C903F701EA8DBDE008EE1E6 /* ErrorAlertVC.swift */,
+				7C8F4B021EC1F08C00F9B25F /* ImportBookVC.swift */,
 			);
 			name = "Main Menu";
 			sourceTree = "<group>";
@@ -941,6 +943,7 @@
 			children = (
 				7CDBD6A71E238A0200912320 /* ResourceCategory.swift */,
 				7CDBD6AB1E238ACB00912320 /* ResourceCollection.swift */,
+				7CDBD6B71E26200200912320 /* ParagraphBinding.swift */,
 				7CDBD6ED1E2E30DD00912320 /* ParagraphNotes.swift */,
 				7CDBD6F11E2E3BEC00912320 /* NotesThread.swift */,
 				7CDBD6F51E2E3F5F00912320 /* NotesPost.swift */,
@@ -1281,6 +1284,7 @@
 				7CAF6D821DB4F47700E10597 /* USXChapterProcessor.swift in Sources */,
 				7C936C191E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift in Sources */,
 				7C20D7E81D8BF9B100E84BA5 /* Para.swift in Sources */,
+				7C8F4B031EC1F08C00F9B25F /* ImportBookVC.swift in Sources */,
 				7CDBD6CD1E28C1E700912320 /* TranslationCellManager.swift in Sources */,
 				7CA3B9BF1E8512F4002A6C48 /* Attachment.swift in Sources */,
 				7C6070591E5C7BE0007718BC /* SelectAvatarVC.swift in Sources */,

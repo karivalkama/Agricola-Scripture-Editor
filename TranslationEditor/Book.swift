@@ -81,7 +81,7 @@ final class Book: Storable
 	
 	// Creates a copy of this book that contains the same paragraph formatting but none of the original content
 	// The resulting book data is saved into database as part of this operation
-	func makeEmptyCopy(projectId: String, identifier: String, languageId: String, userId: String) throws -> BookData
+	func makeEmptyCopy(projectId: String, identifier: String, languageId: String, userId: String, resourceName: String) throws -> BookData
 	{
 		// Creates the new book instance
 		let newBook = Book(projectId: projectId, code: self.code, identifier: identifier, languageId: languageId, introduction: introduction.map { $0.emptyCopy() })
@@ -106,9 +106,17 @@ final class Book: Storable
 			bindings.append((existingParagraphs[i].idString, newParagraphs[i].idString))
 		}
 		
-		let binding = ParagraphBinding(sourceBookId: idString, targetBookId: newBook.idString, bindings: bindings, creatorId: userId)
-		// Saves the binding to the database
-		try binding.push()
+		// Creates a new resource for the binding
+		let resource = ResourceCollection(languageId: self.languageId, bookId: newBook.idString, category: .sourceTranslation, name: resourceName)
+		
+		let binding = ParagraphBinding(resourceCollectionId: resource.idString, sourceBookId: idString, targetBookId: newBook.idString, bindings: bindings, creatorId: userId)
+		
+		// Saves the resource data to the database
+		try DATABASE.tryTransaction
+		{
+			try resource.push()
+			try binding.push()
+		}
 		
 		return BookData(book: newBook, paragraphs: newParagraphs)
 	}

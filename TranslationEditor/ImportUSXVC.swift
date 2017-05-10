@@ -8,6 +8,8 @@
 
 import UIKit
 
+// TODO: Refactor. Also, create a way to name the imported translations
+
 // This VC is used for importing new books / updating existing data from USX files
 class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDataSource, FilteredSingleSelectionDelegate, SelectBookTableControllerDelegate
 {
@@ -464,11 +466,16 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			print("STATUS: Creating bindings between the new book and target translation(s)")
 			
 			// Creates new bindings for the books
+			var newResources = [ResourceCollection]()
 			var newBindings = [ParagraphBinding]()
 			for targetBook in targetTranslations
 			{
+				// TODO: Use different name here
+				let resource = ResourceCollection(languageId: selectedLanguage.idString, bookId: targetBook.idString, category: .sourceTranslation, name: book.identifier)
 				let bindings = match(paragraphs, and: try ParagraphView.instance.latestParagraphQuery(bookId: targetBook.idString).resultObjects()).map { ($0.0.idString, $0.1.idString) }
-				newBindings.add(ParagraphBinding(sourceBookId: book.idString, targetBookId: targetBook.idString, bindings: bindings, creatorId: avatarId))
+				
+				newResources.add(resource)
+				newBindings.add(ParagraphBinding(resourceCollectionId: resource.idString, sourceBookId: book.idString, targetBookId: targetBook.idString, bindings: bindings, creatorId: avatarId))
 			}
 			
 			print("STATUS: Saving new book data")
@@ -478,6 +485,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			{
 				try book.push()
 				try self.paragraphs.forEach { try $0.push() }
+				try newResources.forEach { try $0.push() }
 				try newBindings.forEach { try $0.push() }
 			}
 			
@@ -486,7 +494,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			{
 				print("STATUS: Creates a new target translation for the book")
 				
-				let emptyCopy = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId)
+				// TODO: Change this resource name
+				let emptyCopy = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId, resourceName: book.identifier)
 				
 				// Creates a set of notes for the new translation too
 				// Creates the resource

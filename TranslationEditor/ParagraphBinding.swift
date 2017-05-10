@@ -14,8 +14,9 @@ final class ParagraphBinding: Storable
 	// ATTRIBUTES	----------
 	
 	static let type = "binding"
-	static let idIndexMap: IdIndexMap = ["binding_uid"]
+	static let PROPERTY_RESOURCE = "resource_collection"
 	
+	let resourceCollectionId: String
 	let uid: String
 	
 	let sourceBookId: String
@@ -43,8 +44,10 @@ final class ParagraphBinding: Storable
 	
 	// COMPUTED PROPERTIES	--
 	
-	var idProperties: [Any] { return [uid] }
+	var idProperties: [Any] { return [resourceCollectionId, "binding", uid] }
 	var properties: [String : PropertyValue] { return ["source_book": sourceBookId.value, "target_book": targetBookId.value, "created": created.value, "creator": creatorId.value, "bindings": bindingDicts.map { PropertySet($0) }.value] }
+	
+	static var idIndexMap: IdIndexMap { return ResourceCollection.idIndexMap.makeChildPath(parentPathName: PROPERTY_RESOURCE, childPath: ["binding_separator", "binding_uid"]) }
 	
 	private var bindingDicts: [[String : String]]
 	{
@@ -61,8 +64,9 @@ final class ParagraphBinding: Storable
 	// INIT	------------------
 	
 	// The bindings are as follows: (source parameter id, target parameter id)
-	init(sourceBookId: String, targetBookId: String, bindings: [(String, String)], creatorId: String, created: TimeInterval = Date().timeIntervalSince1970, uid: String = UUID().uuidString.lowercased())
+	init(resourceCollectionId: String, sourceBookId: String, targetBookId: String, bindings: [(String, String)], creatorId: String, created: TimeInterval = Date().timeIntervalSince1970, uid: String = UUID().uuidString.lowercased())
 	{
+		self.resourceCollectionId = resourceCollectionId
 		self.uid = uid
 		self.sourceBookId = sourceBookId
 		self.targetBookId = targetBookId
@@ -76,7 +80,7 @@ final class ParagraphBinding: Storable
 	static func create(from properties: PropertySet, withId id: Id) throws -> ParagraphBinding
 	{
 		// Parses the bindings separately
-		return ParagraphBinding(sourceBookId: properties["source_book"].string(), targetBookId: properties["target_book"].string(), bindings: ParagraphBinding.parseBindings(from: properties["bindings"].array()), creatorId: properties["creator"].string(), created: properties["created"].time(), uid: id["binding_uid"].string())
+		return ParagraphBinding(resourceCollectionId: id[PROPERTY_RESOURCE].string(), sourceBookId: properties["source_book"].string(), targetBookId: properties["target_book"].string(), bindings: ParagraphBinding.parseBindings(from: properties["bindings"].array()), creatorId: properties["creator"].string(), created: properties["created"].time(), uid: id["binding_uid"].string())
 	}
 	
 	
@@ -109,6 +113,11 @@ final class ParagraphBinding: Storable
 	func sourcesForTarget(_ targetPath: String) -> [String]
 	{
 		return targetToSource[targetPath].or([])
+	}
+	
+	static func resourceCollectionId(fromId bindingId: String) -> String
+	{
+		return property(withName: PROPERTY_RESOURCE, fromId: bindingId).string()
 	}
 	
 	private func updateIdMaps()

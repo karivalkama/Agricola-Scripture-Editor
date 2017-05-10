@@ -68,12 +68,12 @@ class CopyableTest: XCTestCase
 	
 	func testParagraph()
 	{
-		func makeText(text1: String, text2: String, note: String) -> TextWithFootnotes
+		func makeText(text1: String, text2: String, note: String) -> TextWithNotes
 		{
 			let firstChar = CharData(text: text1)
 			let secondChar = CharData(text: text2, style: .quotation)
 			let noteChar = CharData(text: note)
-			return TextWithFootnotes(textElements: [TextElement(charData: [firstChar]), TextElement(charData: [secondChar])], footNotes: [FootNote(caller: "+", style: .endNote, originReference: nil, charData: [noteChar])])
+			return TextWithNotes(textElements: [TextElement(charData: [firstChar]), TextElement(charData: [secondChar])], footNotes: [FootNote(caller: "+", style: .endNote, originReference: nil, charData: [noteChar])])
 		}
 		
 		func represent(_ paragraph: Paragraph) -> String { return paragraph.text }
