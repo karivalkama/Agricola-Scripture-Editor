@@ -20,6 +20,10 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	@IBOutlet weak var paragraphTableView: UITableView!
 	@IBOutlet weak var selectLanguageView: FilteredSingleSelection!
 	@IBOutlet weak var selectBookTableView: UITableView!
+	@IBOutlet weak var insertSwitch: UISwitch!
+	@IBOutlet weak var nicknameField: UITextField!
+	@IBOutlet weak var nicknameView: UIView!
+	@IBOutlet weak var selectBookView: UIView!
 	
 	
 	// ATTRIBUTES	---------
@@ -138,6 +142,12 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	@IBAction func cancelButtonPressed(_ sender: Any)
 	{
 		dismiss(animated: true, completion: nil)
+	}
+	@IBAction func okButtonPressed(_ sender: Any) {
+	}
+	@IBAction func insertOptionChanged(_ sender: Any) {
+	}
+	@IBAction func nicknameFieldChanged(_ sender: Any) {
 	}
 	
 	
