@@ -606,6 +606,7 @@
                         <outlet property="insertSwitch" destination="YAb-pF-LjA" id="RBM-mn-5pV"/>
                         <outlet property="nicknameField" destination="op9-9o-ION" id="srD-oQ-ehG"/>
                         <outlet property="nicknameView" destination="LVq-tY-5Q5" id="pMY-lq-Ie9"/>
+                        <outlet property="okButton" destination="Atq-XX-P0r" id="Sri-hY-04B"/>
                         <outlet property="paragraphTableView" destination="ksg-fs-xvJ" id="PCs-7u-fiZ"/>
                         <outlet property="selectBookTableView" destination="40j-tK-L8p" id="qXn-gR-t0l"/>
                         <outlet property="selectBookView" destination="ope-ql-dz9" id="3XG-Wy-b8c"/>

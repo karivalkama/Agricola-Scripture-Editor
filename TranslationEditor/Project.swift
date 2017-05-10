@@ -97,7 +97,7 @@ final class Project: Storable
 	// By providing the bookCode parameter, you can limit the translations to certain book
 	func targetTranslationQuery(bookCode: BookCode? = nil) -> Query<ProjectBooksView>
 	{
-		return ProjectBooksView.instance.booksQuery(languageId: languageId, projectId: idString, code: bookCode)
+		return ProjectBooksView.instance.booksQuery(projectId: idString, languageId: languageId, code: bookCode)
 	}
 	
 	/*

@@ -24,6 +24,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	@IBOutlet weak var nicknameField: UITextField!
 	@IBOutlet weak var nicknameView: UIView!
 	@IBOutlet weak var selectBookView: UIView!
+	@IBOutlet weak var okButton: BasicButton!
 	
 	
 	// ATTRIBUTES	---------
@@ -36,6 +37,9 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	
 	private var paragraphs = [Paragraph]()
 	private var bookTableController: SelectBookTableController?
+	
+	private var bookToOverwrite: Book?
+	private var targetLanguageIsSelected = false
 	
 	
 	// COMPUTED PROPERTIES	--
@@ -80,6 +84,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		
 		guard usxParserDelegate.success else
 		{
+			// TODO: Display error message on failure
 			print("ERROR: USX parsing failed. \(usxParserDelegate.error!)")
 			return
 		}
@@ -100,6 +105,29 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		book = bookData.book
 		paragraphs = bookData.paragraphs
 		
+		// Checks if there already exists a book with an identical identifier, in which case rest of the next view is presented eventually
+		do
+		{
+			try ProjectBooksView.instance.booksQuery(projectId: projectId).enumerateResultObjects
+			{
+				existingBook in
+				
+				if existingBook.code == bookData.book.code && existingBook.identifier == bookData.book.identifier
+				{
+					bookToOverwrite = existingBook
+					return false
+				}
+				else
+				{
+					return true
+				}
+			}
+		}
+		catch
+		{
+			print("ERROR: Failed to check if there exists a book with an identical identifier. \(error)")
+		}
+		
 		// Sets up the paragraph table
 		paragraphTableView.register(UINib(nibName: "ParagraphCell", bundle: nil), forCellReuseIdentifier: ParagraphCell.identifier)
 		//paragraphTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
@@ -109,6 +137,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		
 		// Sets up other views
 		bookLabel.text = "\(book!.code): \(book!.identifier)"
+		setInsertStatus(true, lock: true) // Insert mode is used by default. It cannot be changed before language is selected
 		
 		selectBookTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
 		bookTableController = SelectBookTableController(table: selectBookTableView, newIdentifier: book!.identifier)
@@ -135,6 +164,15 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			print("ERROR: Failed to setup the view properly. \(error)")
 		}
     }
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		if bookToOverwrite != nil
+		{
+			print("STATUS: Found a a book with identical identifier, moves to overwrite preview.")
+			performSegue(withIdentifier: "ImportPreview", sender: nil)
+		}
+	}
 
 	
 	// ACTIONS	-------------
@@ -143,11 +181,28 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	{
 		dismiss(animated: true, completion: nil)
 	}
-	@IBAction func okButtonPressed(_ sender: Any) {
+	
+	@IBAction func okButtonPressed(_ sender: Any)
+	{
+		if bookToOverwrite == nil
+		{
+			// TODO: On insert completion, dismiss and open the newly added translation
+			insertBook()
+		}
+		else
+		{
+			performSegue(withIdentifier: "ImportPreview", sender: nil)
+		}
 	}
-	@IBAction func insertOptionChanged(_ sender: Any) {
+	
+	@IBAction func insertOptionChanged(_ sender: Any)
+	{
+		setInsertStatus(insertSwitch.isOn, lock: false)
 	}
-	@IBAction func nicknameFieldChanged(_ sender: Any) {
+	
+	@IBAction func nicknameFieldChanged(_ sender: Any)
+	{
+		updateOkButtonStatus()
 	}
 	
 	
@@ -179,23 +234,54 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	
 	func onItemSelected(index: Int)
 	{
+		bookToOverwrite = nil
+		
 		guard let projectId = Session.instance.projectId else
 		{
 			print("ERROR: Cannot find project books when project is not selected")
 			return
 		}
 		
-		selectedLanguage = languages[index]
-		
-		// Reloads the available target books
 		do
 		{
-			let books = try ProjectBooksView.instance.booksQuery(languageId: selectedLanguage!.idString, projectId: projectId, code: book?.code).resultObjects()
-			bookTableController?.update(books: books)
+			guard let project = try Project.get(projectId) else
+			{
+				print("ERROR: Couldn't find project data from the database")
+				return
+			}
+			
+			selectedLanguage = languages[index]
+			
+			// Checks if the selected language was the target language for the project
+			targetLanguageIsSelected = selectedLanguage?.idString == project.languageId
+			
+			if targetLanguageIsSelected
+			{
+				// If the target language is targeted, only allows update for the target translation
+				// If there is no previous version, forces insert
+				if let previousTargetTranslation = try project.targetTranslationQuery().firstResultObject()
+				{
+					bookToOverwrite = previousTargetTranslation
+					setInsertStatus(false, lock: true)
+				}
+				else
+				{
+					setInsertStatus(true, lock: true)
+				}
+			}
+			else
+			{
+				// If some other language is targeted, finds the existing books
+				let books = try ProjectBooksView.instance.booksQuery(projectId: projectId, languageId: selectedLanguage!.idString, code: book?.code).resultObjects()
+				bookTableController?.update(books: books)
+				
+				// If there are no books, forces insert
+				setInsertStatus(books.isEmpty ? true : insertSwitch.isOn, lock: books.isEmpty)
+			}
 		}
 		catch
 		{
-			print("ERROR: Failed to update book selection. \(error)")
+			print("ERROR: Failed to update status after language selection. \(error)")
 		}
 	}
 	
@@ -223,8 +309,47 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		}
 	}
 	
-	// TODO: Handle situations where some of the translations contain conflicts
 	func bookSelected(_ book: Book)
+	{
+		bookToOverwrite = book
+		updateOkButtonStatus()
+	}
+	
+	
+	// OTHER METHODS	----
+	
+	func configure(usxFileURL: URL)
+	{
+		usxURL = usxFileURL
+	}
+	
+	// Updates OK button enabled status
+	private func updateOkButtonStatus()
+	{
+		if insertSwitch.isOn
+		{
+			// If on insert mode, the ok button is available once both language and nickname have been selected
+			// If target language is targeted, doesn't need the nickname for the translation
+			okButton.isEnabled = selectedLanguage != nil && (targetLanguageIsSelected || (nicknameField.text != nil && !nicknameField.text!.isEmpty))
+		}
+		else
+		{
+			// If on overwrite mode, the overwritten book must be selected
+			okButton.isEnabled = bookToOverwrite != nil && selectedLanguage != nil
+		}
+	}
+	
+	private func setInsertStatus(_ isInsertMode: Bool, lock: Bool)
+	{
+		insertSwitch.isOn = isInsertMode
+		// If the target language was selected, doesn't need to provide additional data
+		nicknameView.isHidden = !isInsertMode || targetLanguageIsSelected
+		selectBookView.isHidden = isInsertMode || targetLanguageIsSelected || selectedLanguage == nil
+		insertSwitch.isEnabled = !lock
+	}
+	
+	// TODO: This should be moved to the preview VC
+	private func overwrite(_ book: Book)
 	{
 		// TODO: Update notes where pathIds change
 		
@@ -290,7 +415,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				{
 					newInserts.add(newParagraph)
 				}
-				// If there is only a single match, handles it as a new commit
+					// If there is only a single match, handles it as a new commit
 				else if matchingExisting.count == 1
 				{
 					commits.add((matchingExisting.first!, newParagraph))
@@ -346,7 +471,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 					{
 						try ParagraphHistoryView.instance.autoCorrectConflictsInRange(bookId: otherSideId)
 					}
-					// Otherwise will have to skip binding update
+						// Otherwise will have to skip binding update
 					else if try ParagraphHistoryView.instance.rangeContainsConflicts(bookId: otherSideId)
 					{
 						continue
@@ -422,7 +547,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		}
 	}
 	
-	func insertSelected()
+	private func insertBook()
 	{
 		guard let avatarId = Session.instance.avatarId else
 		{
@@ -453,7 +578,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				return
 			}
 			
-			// If there are target translations that will be connected to this book, and those translations are in a conflicted state, 
+			// If there are target translations that will be connected to this book, and those translations are in a conflicted state,
 			// The database operations are postponed until the conflicts have been resolved
 			let targetTranslations = try project.targetTranslationQuery(bookCode: book.code).resultObjects()
 			
@@ -480,8 +605,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			var newBindings = [ParagraphBinding]()
 			for targetBook in targetTranslations
 			{
-				// TODO: Use different name here
-				let resource = ResourceCollection(languageId: selectedLanguage.idString, bookId: targetBook.idString, category: .sourceTranslation, name: book.identifier)
+				let resource = ResourceCollection(languageId: selectedLanguage.idString, bookId: targetBook.idString, category: .sourceTranslation, name: nicknameField.text.or(book.identifier))
 				let bindings = match(paragraphs, and: try ParagraphView.instance.latestParagraphQuery(bookId: targetBook.idString).resultObjects()).map { ($0.0.idString, $0.1.idString) }
 				
 				newResources.add(resource)
@@ -504,8 +628,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			{
 				print("STATUS: Creates a new target translation for the book")
 				
-				// TODO: Change this resource name
-				let emptyCopy = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId, resourceName: book.identifier)
+				let emptyCopy = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId, resourceName: nicknameField.text.or(book.identifier))
 				
 				// Creates a set of notes for the new translation too
 				// Creates the resource
@@ -522,20 +645,13 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				}
 			}
 			
+			// TODO: Set the selected book to that just imported
 			dismiss(animated: true, completion: nil)
 		}
 		catch
 		{
 			print("ERROR: Couldn't save book data to the database. \(error)")
 		}
-	}
-	
-	
-	// OTHER METHODS	----
-	
-	func configure(usxFileURL: URL)
-	{
-		usxURL = usxFileURL
 	}
 }
 
@@ -549,7 +665,6 @@ fileprivate class SelectBookTableController: NSObject, UITableViewDataSource, UI
 	private let newIdentifier: String
 	
 	private var books = [Book]()
-	private var allowInsert = false
 	
 	
 	// INIT	----------------
@@ -571,8 +686,7 @@ fileprivate class SelectBookTableController: NSObject, UITableViewDataSource, UI
 	func update(books: [Book])
 	{
 		self.books = books
-		allowInsert = true
-		
+		table.selectRow(at: nil, animated: true, scrollPosition: .top)
 		table.reloadData()
 	}
 	
@@ -581,57 +695,25 @@ fileprivate class SelectBookTableController: NSObject, UITableViewDataSource, UI
 	
 	func numberOfSections(in tableView: UITableView) -> Int
 	{
-		return allowInsert ? 2 : 1
-	}
-	
-	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
-	{
-		switch section
-		{
-		case 0: return "Existing books"
-		case 1: return "Insert a new book"
-		default: return nil
-		}
+		return 1
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		if section == 0
-		{
-			return books.count
-		}
-		else
-		{
-			return 1
-		}
+		return books.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
 		let cell = tableView.dequeueReusableCell(withIdentifier: LabelCell.identifier, for: indexPath) as! LabelCell
-		
-		if indexPath.section == 0
-		{
-			cell.configure(text: books[indexPath.row].identifier)
-		}
-		else
-		{
-			cell.configure(text: "NEW: \(newIdentifier)")
-		}
+		cell.configure(text: books[indexPath.row].identifier)
 		
 		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 	{
-		if indexPath.section == 0
-		{
-			delegate?.bookSelected(books[indexPath.row])
-		}
-		else
-		{
-			delegate?.insertSelected()
-		}
+		delegate?.bookSelected(books[indexPath.row])
 	}
 }
 
@@ -639,7 +721,4 @@ fileprivate protocol SelectBookTableControllerDelegate: class
 {
 	// This method is called when an existing book is selected
 	func bookSelected(_ book: Book)
-	
-	// This method is called when the insert book option is selected
-	func insertSelected()
 }

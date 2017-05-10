@@ -75,7 +75,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 			}
 			
 			// Loads the available book data
-			queryManager = ProjectBooksView.instance.booksQuery(languageId: project.languageId, projectId: projectId).liveQueryManager
+			queryManager = ProjectBooksView.instance.booksQuery(projectId: projectId, languageId: project.languageId).liveQueryManager
 			queryManager?.addListener(AnyLiveQueryListener(self))
 		}
 		catch

@@ -8,8 +8,6 @@
 
 import Foundation
 
-// TODO: This will replace the original BookView eventually, probably
-
 final class ProjectBooksView: View
 {
 	// TYPES	------------
@@ -27,7 +25,7 @@ final class ProjectBooksView: View
 	static let KEY_CODE = "code"
 	static let KEY_IDENTIFIER = "identifier"
 	
-	static let keyNames = [KEY_LANGUAGE, KEY_PROJECT, KEY_CODE, KEY_IDENTIFIER]
+	static let keyNames = [KEY_PROJECT, KEY_LANGUAGE, KEY_CODE, KEY_IDENTIFIER]
 	
 	let view = DATABASE.viewNamed("project_books")
 	
@@ -40,18 +38,18 @@ final class ProjectBooksView: View
 		{
 			book, emit in
 			
-			let key: [Any] = [book.languageId, book.projectId, book.code.code, book.identifier]
+			let key: [Any] = [book.projectId, book.languageId, book.code.code, book.identifier]
 			emit(key, nil)
 		},
-		version: "2")
+		version: "3")
 	}
 	
 	
 	// OTHER METHODS	----
 	
 	// This query can be used for retrieving books associated with a specific project
-	func booksQuery(languageId: String? = nil, projectId: String? = nil, code: BookCode? = nil, identifier: String? = nil) -> MyQuery
+	func booksQuery(projectId: String? = nil, languageId: String? = nil, code: BookCode? = nil, identifier: String? = nil) -> MyQuery
 	{
-		return createQuery(withKeys: ProjectBooksView.makeKeys(from: [languageId, projectId, code?.code, identifier]))
+		return createQuery(withKeys: ProjectBooksView.makeKeys(from: [projectId, languageId, code?.code, identifier]))
 	}
 }
