@@ -175,7 +175,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		if foundMatchWithIdentifier && bookToOverwrite != nil
 		{
 			print("STATUS: Found a a book with identical identifier, moves to overwrite preview.")
-			performSegue(withIdentifier: "ImportPreview", sender: nil)
+			continueToOverwrite()
 		}
 	}
 
@@ -189,45 +189,12 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	
 	@IBAction func okButtonPressed(_ sender: Any)
 	{
-		if let bookToOverwrite = bookToOverwrite
+		if bookToOverwrite != nil
 		{
-			// Makes sure there are no conflicts within the target translation(s) for the book
-			do
-			{
-				// If there are connected target translations that are in a conflicted state, can't perform the update
-				guard let projectId = Session.instance.projectId, let project = try Project.get(projectId) else
-				{
-					print("ERROR: Project must be selected before USX import")
-					return
-				}
-				
-				let targetTranslationIds = try project.targetTranslationQuery(bookCode: bookToOverwrite.code).resultRows().flatMap { $0.id }.filter { $0 != bookToOverwrite.idString }
-				guard try targetTranslationIds.forAll({ try !ParagraphHistoryView.instance.rangeContainsConflicts(bookId: $0) }) else
-				{
-					displayAlert(withIdentifier: "ErrorAlert", storyBoardId: "MainMenu")
-					{
-						vc in
-						
-						(vc as! ErrorAlertVC).configure(heading: "Conflicts in Target Translations", text: "Target translation of \(bookToOverwrite.code) contain conflicts. Please resolve them and try importing again afterwards.") { self.dismiss(animated: true, completion: nil) }
-					}
-					
-					return
-				}
-				
-				// If there are conflicts within the book, merges them before continuing
-				try ParagraphHistoryView.instance.autoCorrectConflictsInRange(bookId: bookToOverwrite.idString)
-				
-				// Displays the preview which allows overwrite
-				performSegue(withIdentifier: "ImportPreview", sender: nil)
-			}
-			catch
-			{
-				print("ERROR: Failed to check for conflicts in target translations. \(error)")
-			}
+			continueToOverwrite()
 		}
 		else
 		{
-			// TODO: On insert completion, dismiss and open the newly added translation
 			insertBook()
 		}
 	}
@@ -409,6 +376,52 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		nicknameView.isHidden = !isInsertMode || targetLanguageIsSelected
 		selectBookView.isHidden = isInsertMode || targetLanguageIsSelected || selectedLanguage == nil
 		insertSwitch.isEnabled = !lock
+	}
+	
+	private func displayError(heading: String, message: String)
+	{
+		displayAlert(withIdentifier: "ErrorAlert", storyBoardId: "MainMenu")
+		{
+			($0 as! ErrorAlertVC).configure(heading: heading, text: message) { self.dismiss(animated: true, completion: nil) }
+		}
+	}
+	
+	private func continueToOverwrite()
+	{
+		// Makes sure there are no conflicts within the target translation(s) for the book
+		do
+		{
+			guard let bookToOverwrite = bookToOverwrite else
+			{
+				print("ERROR: Cannot continue to preview without first selecting book to overwrite")
+				return
+			}
+			
+			// If there are connected target translations that are in a conflicted state, can't perform the update
+			guard let projectId = Session.instance.projectId, let project = try Project.get(projectId) else
+			{
+				print("ERROR: Project must be selected before USX import")
+				return
+			}
+			
+			let targetTranslationIds = try project.targetTranslationQuery(bookCode: bookToOverwrite.code).resultRows().flatMap { $0.id }.filter { $0 != bookToOverwrite.idString }
+			guard try targetTranslationIds.forAll({ try !ParagraphHistoryView.instance.rangeContainsConflicts(bookId: $0) }) else
+			{
+				displayError(heading: "Conflicts in Target Translations", message: "Target translation of \(bookToOverwrite.code) contain conflicts. Please resolve them and try importing again afterwards.")
+				return
+			}
+			
+			// If there are conflicts within the book, merges them before continuing
+			try ParagraphHistoryView.instance.autoCorrectConflictsInRange(bookId: bookToOverwrite.idString)
+			
+			// Displays the preview which allows overwrite
+			performSegue(withIdentifier: "ImportPreview", sender: nil)
+		}
+		catch
+		{
+			print("ERROR: Failed to check for conflicts in target translations. \(error)")
+			displayError(heading: "Internal Error Occurred!", message: "Failed to handle translation conflict state due to an internal error")
+		}
 	}
 	
 	private func insertBook()
