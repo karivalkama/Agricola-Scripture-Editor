@@ -10,7 +10,7 @@ import Foundation
 
 fileprivate struct BookResourceData
 {
-	let book: Book
+	let resource: ResourceCollection
 	let binding: ParagraphBinding
 	let datasource: TranslationTableViewDS
 }
@@ -21,9 +21,16 @@ fileprivate struct NotesData
 	let datasource: NotesTableDS
 }
 
+// TODO: Terminate resource listening once done
+
 // This class handles the functions concerning the resource table
-class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
+class ResourceManager: TranslationParagraphListener, TableCellSelectionListener, LiveQueryListener
 {
+	// TYPES	---------------
+	
+	typealias QueryTarget = ResourceCollectionView
+	
+	
 	// ATTRIBUTES	-----------
 	
 	private weak var resourceTableView: UITableView!
@@ -36,6 +43,8 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 	private var currentLiveResource: LiveResource?
 	private var currentResourceIndex: Int?
 	
+	private var queryManager: LiveQueryManager<QueryTarget>!
+	
 	
 	// COMPUTED PROPERTIES	---
 	
@@ -43,7 +52,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 	
 	var resourceTitles: [String]
 	{
-		return sourceBooks.map { $0.book.identifier } + notes.map { $0.resource.name }
+		return sourceBooks.map { $0.resource.name } + notes.map { $0.resource.name }
 	}
 	
 	// Currently selected book data, if one is selected
@@ -75,15 +84,55 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 	
 	// INIT	-------------------
 	
-	init(resourceTableView: UITableView, addNotesDelegate: AddNotesDelegate, threadStatusListener: OpenThreadListener?)
+	init(resourceTableView: UITableView, targetBookId: String, addNotesDelegate: AddNotesDelegate, threadStatusListener: OpenThreadListener?)
 	{
 		self.resourceTableView = resourceTableView
 		self.addNotesDelegate = addNotesDelegate
 		self.threadStatusListener = threadStatusListener
+		
+		queryManager = ResourceCollectionView.instance.collectionQuery(bookId: targetBookId).liveQueryManager
+		queryManager.start()
 	}
 	
 	
 	// IMPLEMENTED METHODS	---
+	
+	func rowsUpdated(rows: [Row<ResourceCollectionView>])
+	{
+		// Deactivates the old resources
+		// TODO: One might completely remove the data here
+		sourceBooks.forEach { $0.datasource.pause() }
+		notes.forEach { $0.datasource.pause() }
+		
+		do
+		{
+			let resources = try rows.map { try $0.object() }
+			let bookResources = resources.filter { $0.category == .sourceTranslation }
+			let notesResources = resources.filter { $0.category == .notes }
+			
+			try sourceBooks = bookResources.flatMap
+			{
+				resource in
+				
+				if let binding = try ParagraphBinding.get(resourceCollectionId: resource.idString)
+				{
+					return BookResourceData(resource: resource, binding: binding, datasource: TranslationTableViewDS(tableView: resourceTableView!, bookId: binding.sourceBookId, configureCell: configureSourceCell))
+				}
+				else
+				{
+					return nil
+				}
+			}
+			
+			notes = notesResources.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString, threadListener: self.threadStatusListener)) }
+		}
+		catch
+		{
+			print("ERROR: Failed to update resource data. \(error)")
+		}
+		
+		selectResource(atIndex: 0)
+	}
 	
 	// This method should be called whenever the paragraph data on the translation side is updated
 	// Makes sure right notes resources are displayed
@@ -129,29 +178,6 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 	
 	
 	// OTHER METHODS	-------
-	
-	func setResources(sourceBooks: [(Book, ParagraphBinding)], notes: [ResourceCollection])
-	{
-		func configureSourceCell(tableView: UITableView, indexPath: IndexPath, paragraph: Paragraph) -> UITableViewCell
-		{
-			let cell = tableView.dequeueReusableCell(withIdentifier: SourceTranslationCell.identifier, for: indexPath) as! SourceTranslationCell
-			cell.configure(paragraph: paragraph)
-			
-			return cell
-		}
-		
-		// TODO: Deactivate old resources if they are not present anymore
-		self.sourceBooks = sourceBooks.map
-		{
-			book, binding in
-			
-			return BookResourceData(book: book, binding: binding, datasource: TranslationTableViewDS(tableView: resourceTableView!, bookId: book.idString, configureCell: configureSourceCell))
-		}
-		
-		self.notes = notes.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString, threadListener: self.threadStatusListener)) }
-		
-		selectResource(atIndex: 0)
-	}
 	
 	func indexPathsForTargetPathId(_ targetPathId: String) -> [IndexPath]
 	{
@@ -222,29 +248,29 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 	}
 	
 	// Retrieves the index of a resource (collection) with the specified id
-	// Only works with resources that are tied to a certain resource collection instance 
-	// (Eg. not books)
 	func indexForResource(withId resourceId: String) -> Int?
 	{
-		for i in 0 ..< notes.count
-		{
-			if notes[i].resource.idString == resourceId
-			{
-				return sourceBooks.count + i
-			}
-		}
-		
-		return nil
+		return sourceBooks.index(where: { $0.resource.idString == resourceId }) ?? notes.index(where: { $0.resource.idString == resourceId }).map { $0 + sourceBooks.count }
 	}
 	
 	func pause()
 	{
 		currentLiveResource?.pause()
+		queryManager.pause()
 	}
 	
 	func activate()
 	{
 		currentLiveResource?.activate()
+		queryManager.start()
+	}
+	
+	private func configureSourceCell(tableView: UITableView, indexPath: IndexPath, paragraph: Paragraph) -> UITableViewCell
+	{
+		let cell = tableView.dequeueReusableCell(withIdentifier: SourceTranslationCell.identifier, for: indexPath) as! SourceTranslationCell
+		cell.configure(paragraph: paragraph)
+		
+		return cell
 	}
 	
 	// Finds the associated paragraphs from the resource data
@@ -258,11 +284,11 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener
 			{
 				let sourcePathIds = bookData.binding.sourcesForTarget(pathId)
 				
-				if !sourcePathIds.isEmpty, let languageName = try Language.get(bookData.book.languageId)?.name
+				if !sourcePathIds.isEmpty, let languageName = try Language.get(bookData.resource.languageId)?.name
 				{
 					for i in 0 ..< sourcePathIds.count
 					{
-						if let paragraphId = try ParagraphHistoryView.instance.mostRecentId(bookId: bookData.book.idString, chapterIndex: chapterIndex, pathId: sourcePathIds[i]), let paragraph = try Paragraph.get(paragraphId)
+						if let paragraphId = try ParagraphHistoryView.instance.mostRecentId(bookId: bookData.binding.sourceBookId, chapterIndex: chapterIndex, pathId: sourcePathIds[i]), let paragraph = try Paragraph.get(paragraphId)
 						{
 							let title = languageName + (sourcePathIds.count == 1 ? ":" : " (\(i + 1)):")
 							data.append((title, paragraph))
