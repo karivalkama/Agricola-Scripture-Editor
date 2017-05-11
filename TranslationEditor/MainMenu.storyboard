@@ -807,10 +807,10 @@
             </objects>
             <point key="canvasLocation" x="1325" y="52"/>
         </scene>
-        <!--View Controller-->
+        <!--Overwrite PreviewVC-->
         <scene sceneID="rzN-yh-Vvc">
             <objects>
-                <viewController storyboardIdentifier="ImportPreview" id="5Q3-b0-bhS" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImportPreview" id="5Q3-b0-bhS" customClass="OverwritePreviewVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="06g-mb-BTg"/>
                         <viewControllerLayoutGuide type="bottom" id="7Nt-7t-rCc"/>
@@ -829,6 +829,9 @@
                                     <navigationItem title="Preview Import" id="KIR-gC-jOu">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="2mb-qs-nHB">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="backPressed:" destination="5Q3-b0-bhS" id="uKU-Vd-Cbu"/>
+                                            </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" id="hoq-07-cZu">
                                             <view key="customView" contentMode="scaleToFill" id="hfe-20-SwZ" customClass="TopUserView" customModule="TranslationEditor" customModuleProvider="target">
@@ -840,23 +843,28 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="7oy-1t-aRQ" userLabel="Content Stack View">
-                                <rect key="frame" x="20" y="60" width="984" height="692"/>
+                                <rect key="frame" x="20" y="52" width="984" height="700"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="SnG-2Z-yrR" userLabel="Previous Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="484" height="692"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="SnG-2Z-yrR" userLabel="Left Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="484" height="700"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Previous Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXo-zG-QkS">
-                                                <rect key="frame" x="0.0" y="0.0" width="484" height="26.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="61H-Kl-wXT">
-                                                <rect key="frame" x="0.0" y="42.5" width="484" height="593.5"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </tableView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AZN-KQ-cO8" userLabel="Previous Stack View">
+                                                <rect key="frame" x="0.0" y="0.0" width="484" height="644"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Previous Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXo-zG-QkS">
+                                                        <rect key="frame" x="0.0" y="0.0" width="484" height="26.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="61H-Kl-wXT">
+                                                        <rect key="frame" x="0.0" y="34.5" width="484" height="609.5"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </tableView>
+                                                </subviews>
+                                            </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJE-Tt-HfA" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="652" width="484" height="40"/>
+                                                <rect key="frame" x="0.0" y="660" width="484" height="40"/>
                                                 <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="owF-zy-7LC"/>
@@ -865,24 +873,32 @@
                                                 <state key="normal" title="Abort">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="abortPressed:" destination="5Q3-b0-bhS" eventType="touchUpInside" id="Xla-y9-Ivx"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ToJ-Ad-Ide" userLabel="New Stack View">
-                                        <rect key="frame" x="500" y="0.0" width="484" height="692"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ToJ-Ad-Ide" userLabel="Right Stack View">
+                                        <rect key="frame" x="500" y="0.0" width="484" height="700"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="New Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OD-u7-rre">
-                                                <rect key="frame" x="0.0" y="0.0" width="484" height="26.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TH7-MB-hlA">
-                                                <rect key="frame" x="0.0" y="42.5" width="484" height="593.5"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </tableView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="w9q-GI-tCN" userLabel="New Stack View">
+                                                <rect key="frame" x="0.0" y="0.0" width="484" height="644"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="New Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OD-u7-rre">
+                                                        <rect key="frame" x="0.0" y="0.0" width="484" height="26.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TH7-MB-hlA">
+                                                        <rect key="frame" x="0.0" y="34.5" width="484" height="609.5"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </tableView>
+                                                </subviews>
+                                            </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCx-AJ-uv9" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="652" width="484" height="40"/>
+                                                <rect key="frame" x="0.0" y="660" width="484" height="40"/>
                                                 <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="tZa-L8-fSP"/>
@@ -894,6 +910,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="acceptPressed:" destination="5Q3-b0-bhS" eventType="touchUpInside" id="Mvn-mh-Sc2"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -908,10 +927,14 @@
                             <constraint firstItem="7oy-1t-aRQ" firstAttribute="leading" secondItem="e1g-76-J1G" secondAttribute="leadingMargin" id="i3Z-QU-DgZ"/>
                             <constraint firstItem="7Nt-7t-rCc" firstAttribute="top" secondItem="7oy-1t-aRQ" secondAttribute="bottom" constant="16" id="jcc-VJ-TVc"/>
                             <constraint firstItem="Eep-a7-Je6" firstAttribute="leading" secondItem="e1g-76-J1G" secondAttribute="leading" id="kw2-mW-CTp"/>
-                            <constraint firstItem="7oy-1t-aRQ" firstAttribute="top" secondItem="Eep-a7-Je6" secondAttribute="bottom" constant="16" id="nwS-3b-bul"/>
+                            <constraint firstItem="7oy-1t-aRQ" firstAttribute="top" secondItem="Eep-a7-Je6" secondAttribute="bottom" constant="8" id="nwS-3b-bul"/>
                             <constraint firstAttribute="trailing" secondItem="Eep-a7-Je6" secondAttribute="trailing" id="qt8-mi-rhq"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="newVersionTable" destination="TH7-MB-hlA" id="7tF-YK-rbf"/>
+                        <outlet property="oldVersionTable" destination="61H-Kl-wXT" id="iIr-sZ-IGV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="amO-7Z-aJO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

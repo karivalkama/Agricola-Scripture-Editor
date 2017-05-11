@@ -11,7 +11,7 @@ import UIKit
 // TODO: Refactor. Also, create a way to name the imported translations
 
 // This VC is used for importing new books / updating existing data from USX files
-class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDataSource, FilteredSingleSelectionDelegate, SelectBookTableControllerDelegate
+class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDataSource, FilteredSingleSelectionDelegate, SelectBookTableControllerDelegate, StackDismissable
 {
 	// OUTLETS	--------------
 	
@@ -40,11 +40,14 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	
 	private var bookToOverwrite: Book?
 	private var targetLanguageIsSelected = false
+	private var foundMatchWithIdentifier = false
 	
 	
 	// COMPUTED PROPERTIES	--
 	
 	var numberOfOptions: Int { return languages.count }
+	
+	var shouldDismissBelow: Bool { return foundMatchWithIdentifier }
 	
 	
 	// LOAD	-----------------
@@ -115,6 +118,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				if existingBook.code == bookData.book.code && existingBook.identifier == bookData.book.identifier
 				{
 					bookToOverwrite = existingBook
+					book?.languageId = existingBook.languageId
+					foundMatchWithIdentifier = true
 					return false
 				}
 				else
@@ -167,7 +172,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
-		if bookToOverwrite != nil
+		if foundMatchWithIdentifier && bookToOverwrite != nil
 		{
 			print("STATUS: Found a a book with identical identifier, moves to overwrite preview.")
 			performSegue(withIdentifier: "ImportPreview", sender: nil)
@@ -184,14 +189,46 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	
 	@IBAction func okButtonPressed(_ sender: Any)
 	{
-		if bookToOverwrite == nil
+		if let bookToOverwrite = bookToOverwrite
 		{
-			// TODO: On insert completion, dismiss and open the newly added translation
-			insertBook()
+			// Makes sure there are no conflicts within the target translation(s) for the book
+			do
+			{
+				// If there are connected target translations that are in a conflicted state, can't perform the update
+				guard let projectId = Session.instance.projectId, let project = try Project.get(projectId) else
+				{
+					print("ERROR: Project must be selected before USX import")
+					return
+				}
+				
+				let targetTranslationIds = try project.targetTranslationQuery(bookCode: bookToOverwrite.code).resultRows().flatMap { $0.id }.filter { $0 != bookToOverwrite.idString }
+				guard try targetTranslationIds.forAll({ try !ParagraphHistoryView.instance.rangeContainsConflicts(bookId: $0) }) else
+				{
+					displayAlert(withIdentifier: "ErrorAlert", storyBoardId: "MainMenu")
+					{
+						vc in
+						
+						(vc as! ErrorAlertVC).configure(heading: "Conflicts in Target Translations", text: "Target translation of \(bookToOverwrite.code) contain conflicts. Please resolve them and try importing again afterwards.") { self.dismiss(animated: true, completion: nil) }
+					}
+					
+					return
+				}
+				
+				// If there are conflicts within the book, merges them before continuing
+				try ParagraphHistoryView.instance.autoCorrectConflictsInRange(bookId: bookToOverwrite.idString)
+				
+				// Displays the preview which allows overwrite
+				performSegue(withIdentifier: "ImportPreview", sender: nil)
+			}
+			catch
+			{
+				print("ERROR: Failed to check for conflicts in target translations. \(error)")
+			}
 		}
 		else
 		{
-			performSegue(withIdentifier: "ImportPreview", sender: nil)
+			// TODO: On insert completion, dismiss and open the newly added translation
+			insertBook()
 		}
 	}
 	
@@ -208,6 +245,19 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	
 	// IMPLEMENTED METHODS	---
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+	{
+		if let previewVC = segue.destination as? OverwritePreviewVC
+		{
+			previewVC.configure(oldBook: book!, newBook: bookToOverwrite!, newParagraphs: paragraphs)
+		}
+	}
+	
+	func willDissmissBelow()
+	{
+		bookToOverwrite = nil
+	}
+	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
 		return paragraphs.count
@@ -217,8 +267,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	{
 		let cell = tableView.dequeueReusableCell(withIdentifier: ParagraphCell.identifier, for: indexPath) as! ParagraphCell
 		cell.configure(paragraph: paragraphs[indexPath.row])
-		//let cell = tableView.dequeueReusableCell(withIdentifier: LabelCell.identifier, for: indexPath) as! LabelCell
-		//cell.configure(text: paragraphs[indexPath.row].idString)
+		
 		return cell
 	}
 	
@@ -323,6 +372,20 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		usxURL = usxFileURL
 	}
 	
+	func close()
+	{
+		bookToOverwrite = nil
+		
+		if let presentingViewController = presentingViewController
+		{
+			presentingViewController.dismiss(animated: true, completion: nil)
+		}
+		else
+		{
+			dismiss(animated: true, completion: nil)
+		}
+	}
+	
 	// Updates OK button enabled status
 	private func updateOkButtonStatus()
 	{
@@ -346,205 +409,6 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		nicknameView.isHidden = !isInsertMode || targetLanguageIsSelected
 		selectBookView.isHidden = isInsertMode || targetLanguageIsSelected || selectedLanguage == nil
 		insertSwitch.isEnabled = !lock
-	}
-	
-	// TODO: This should be moved to the preview VC
-	private func overwrite(_ book: Book)
-	{
-		// TODO: Update notes where pathIds change
-		
-		// Runs a matching algorithm on between the new and previous data, then updates each paragraph and the book
-		// Also updates bindings
-		
-		guard let avatarId = Session.instance.avatarId else
-		{
-			print("ERROR: Cannot save new data without a selected avatar")
-			return
-		}
-		
-		guard let newBook = self.book else
-		{
-			print("ERROR: No new book data available")
-			return
-		}
-		
-		do
-		{
-			// If there are connected target translations that are in a conflicted state, can't perform the update
-			guard let projectId = Session.instance.projectId, let project = try Project.get(projectId) else
-			{
-				print("ERROR: Project must be selected before USX import")
-				return
-			}
-			
-			let targetTranslationIds = try project.targetTranslationQuery(bookCode: book.code).resultRows().flatMap { $0.id }.filter { $0 != book.idString }
-			guard try targetTranslationIds.forAll({ try !ParagraphHistoryView.instance.rangeContainsConflicts(bookId: $0) }) else
-			{
-				displayAlert(withIdentifier: "ErrorAlert", storyBoardId: "MainMenu")
-				{
-					vc in
-					
-					(vc as! ErrorAlertVC).configure(heading: "Conflicts in Target Translations", text: "Target translation(s) of \(book.code) contain conflicts. Please resolve them and try importing again afterwards.") { self.dismiss(animated: true, completion: nil) }
-				}
-				
-				return
-			}
-			
-			// If there are conflicts within the imported book, merges them before continuing
-			try ParagraphHistoryView.instance.autoCorrectConflictsInRange(bookId: book.idString)
-			
-			let existingParagraphs = try ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
-			let matches = match(existingParagraphs, and: paragraphs)
-			
-			// New paragraphs can be resolved in 3 ways
-			var newInserts = [Paragraph]() // Completely new versions
-			var commits = [(Paragraph, Paragraph)]() // Old version -> New version
-			var merges = [([Paragraph], Paragraph)]() // Old versions -> New independent version
-			
-			// Existing paragraphs that have already been associated with a new paragraph / paragraphs
-			var matchedExisting = [Paragraph]()
-			
-			for newParagraph in paragraphs
-			{
-				// Finds out how many connections (existing -> new) were made to each new paragraph
-				// Only counts paragraphs that have not been matched already
-				let matchingExisting = matches.filter { $0.1 === newParagraph }.map { $0.0 }.filter { !matchedExisting.containsReference(to: $0) }
-				
-				// If there are 0 previous versions, or if all of those were already matched to different paragraphs, inserts the new paragraph as a completely new entry
-				if matchingExisting.isEmpty
-				{
-					newInserts.add(newParagraph)
-				}
-					// If there is only a single match, handles it as a new commit
-				else if matchingExisting.count == 1
-				{
-					commits.add((matchingExisting.first!, newParagraph))
-					matchedExisting.add(matchingExisting.first!)
-				}
-				else
-				{
-					merges.add((matchingExisting, newParagraph))
-					matchedExisting.append(contentsOf: matchingExisting)
-				}
-			}
-			
-			// Saves new data to the database all at once
-			try DATABASE.tryTransaction
-			{
-				try newInserts.forEach { try $0.push() }
-				
-				for (oldVersion, newVersion) in commits
-				{
-					_ = try oldVersion.commit(userId: avatarId, chapterIndex: newVersion.chapterIndex, sectionIndex: newVersion.sectionIndex, paragraphIndex: newVersion.index, content: newVersion.content)
-				}
-				
-				for (oldVersions, newVersion) in merges
-				{
-					// On merge, all old versions are deprecated while the new version is inserted separately
-					try oldVersions.forEach { try ParagraphHistoryView.instance.deprecatePath(ofId: $0.idString) }
-					try newVersion.push()
-				}
-				
-				// Old paragraphs that were left without any matches are deprecated
-				try existingParagraphs.filter { !matchedExisting.containsReference(to: $0) }.forEach { try ParagraphHistoryView.instance.deprecatePath(ofId: $0.idString) }
-				
-				// Updates book identifier too, if necessary
-				if book.identifier != newBook.identifier
-				{
-					book.identifier = newBook.identifier
-					try book.push()
-				}
-			}
-			
-			// Updates the paragraph bindings if necessary
-			// Also updates notes
-			if !newInserts.isEmpty || !merges.isEmpty
-			{
-				let bindings = try ParagraphBindingView.instance.bindings(forBookWithId: book.idString)
-				
-				for binding in bindings
-				{
-					// Makes sure the other side doesn't have any conflicts
-					let otherSideId = binding.sourceBookId == book.idString ? binding.targetBookId : binding.sourceBookId
-					// If both books belong to the same project, can just auto-resolve any conflicts
-					if Book.projectId(fromId: otherSideId) == book.projectId
-					{
-						try ParagraphHistoryView.instance.autoCorrectConflictsInRange(bookId: otherSideId)
-					}
-						// Otherwise will have to skip binding update
-					else if try ParagraphHistoryView.instance.rangeContainsConflicts(bookId: otherSideId)
-					{
-						continue
-					}
-					
-					var sources: [Paragraph]!
-					var targets: [Paragraph]!
-					
-					if binding.sourceBookId == book.idString
-					{
-						sources = paragraphs
-						targets = try ParagraphView.instance.latestParagraphQuery(bookId: binding.targetBookId).resultObjects()
-					}
-					else
-					{
-						sources = try ParagraphView.instance.latestParagraphQuery(bookId: binding.sourceBookId).resultObjects()
-						targets = paragraphs
-					}
-					
-					let bindMatches = match(sources, and: targets).map { ($0.0.idString, $0.1.idString) }
-					
-					binding.created = Date().timeIntervalSince1970
-					binding.creatorId = avatarId
-					binding.bindings = bindMatches
-				}
-				
-				// Saves all changes at once
-				try DATABASE.tryTransaction
-				{
-					try bindings.forEach { try $0.push() }
-				}
-				
-				// Records all changed notes so that the changes can be made all at once
-				var notesToBeSaved = [ParagraphNotes]()
-				
-				let notesCollectionIds = try ResourceCollectionView.instance.collectionQuery(bookId: book.idString, category: .notes).resultRows().flatMap { $0.id }
-				for notesCollectionId in notesCollectionIds
-				{
-					// Creates a new note for each new inserted paragraph
-					for insertedParagraph in newInserts
-					{
-						notesToBeSaved.add(ParagraphNotes(collectionId: notesCollectionId, chapterIndex: insertedParagraph.chapterIndex, pathId: insertedParagraph.pathId))
-					}
-					
-					// Changes the path id of the merged paragraph notes
-					for (oldVersions, newVersion) in merges
-					{
-						for oldVersion in oldVersions
-						{
-							for note in try ParagraphNotesView.instance.notesForParagraph(collectionId: notesCollectionId, chapterIndex: oldVersion.chapterIndex, pathId: oldVersion.pathId)
-							{
-								note.pathId = newVersion.pathId
-								notesToBeSaved.add(note)
-							}
-						}
-					}
-					
-					// TODO: Should some notes be deleted?
-				}
-				
-				// Saves the changes
-				try DATABASE.tryTransaction
-				{
-					try notesToBeSaved.forEach { try $0.push() }
-				}
-			}
-			
-			dismiss(animated: true, completion: nil)
-		}
-		catch
-		{
-			print("ERROR: Failed to perform changes to the database. \(error)")
-		}
 	}
 	
 	private func insertBook()
@@ -592,7 +456,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 					
 					let translationString = targetTranslations.dropFirst().reduce("\(targetTranslations.first!.code)", { "\($0.0), \($0.1)" })
 					
-					(vc as! ErrorAlertVC).configure(heading: "Conflicts in Target Translation", text: "There are conflicts in target translation(s) of: \(translationString)\nPlease resolve the conflicts and import the file again afterwards") { self.dismiss(animated: true, completion: nil) }
+					(vc as! ErrorAlertVC).configure(heading: "Conflicts in Target Translation", text: "There are conflicts in target translation of: \(translationString)\nPlease resolve the conflicts and import the file again afterwards") { self.dismiss(animated: true, completion: nil) }
 				}
 				
 				return

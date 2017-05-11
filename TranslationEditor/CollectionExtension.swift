@@ -55,14 +55,17 @@ extension Array
 	
 	// Converts the array into a dictionary that supports multiple values for a single key
 	// The provided function returns key value pair for each element
-	func toArrayDictionary<Key: Hashable, Value>(using converter: (Element) -> (Key, Value)) -> [Key : [Value]]
+	// If the converter returns nil for any element, that element is skipped
+	func toArrayDictionary<Key: Hashable, Value>(using converter: (Element) -> (Key, Value)?) -> [Key : [Value]]
 	{
 		var dict = [Key : [Value]]()
 		
 		for element in self
 		{
-			let (key, value) = converter(element)
-			dict.append(key: key, value: value, empty: [])
+			if let (key, value) = converter(element)
+			{
+				dict.append(key: key, value: value, empty: [])
+			}
 		}
 		
 		return dict
@@ -125,6 +128,12 @@ extension Array where Element: AnyObject
 	func containsReferences(to elements: [Element]) -> Bool
 	{
 		return elements.forAll(containsReference)
+	}
+	
+	// Finds an element from the array, but only works with exact references (not equality)
+	func index(referencing element: Element) -> Int?
+	{
+		return index(where: { $0 === element })
 	}
 	
 	// Returns the array without any reference to the specified element

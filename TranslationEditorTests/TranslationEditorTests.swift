@@ -492,7 +492,7 @@ class TranslationEditorTests: XCTestCase
 		let projectId = "20744647-9c04-4982-bb63-02de5d60eca0"
 		
 		let language = try! LanguageView.instance.language(withName: languageName)
-		guard let book = try! ProjectBooksView.instance.booksQuery(languageId: language.idString, projectId: projectId, code: code).firstResultObject() else
+		guard let book = try! ProjectBooksView.instance.booksQuery(projectId: projectId, languageId: language.idString, code: code).firstResultObject() else
 		{
 			print("TEST: No book \(code) for language \(languageName)")
 			return
