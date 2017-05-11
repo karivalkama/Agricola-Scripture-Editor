@@ -525,7 +525,7 @@
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                                 <connections>
-                                                                    <action selector="nicknameFieldChanged:" destination="6ZB-aJ-eNh" eventType="valueChanged" id="50D-tS-3f1"/>
+                                                                    <action selector="nicknameFieldChanged:" destination="6ZB-aJ-eNh" eventType="editingDidEnd" id="zH2-9a-Owg"/>
                                                                 </connections>
                                                             </textField>
                                                         </subviews>

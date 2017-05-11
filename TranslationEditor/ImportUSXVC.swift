@@ -143,6 +143,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		// Sets up other views
 		bookLabel.text = "\(book!.code): \(book!.identifier)"
 		setInsertStatus(true, lock: true) // Insert mode is used by default. It cannot be changed before language is selected
+		updateOkButtonStatus()
 		
 		selectBookTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
 		bookTableController = SelectBookTableController(table: selectBookTableView, newIdentifier: book!.identifier)
@@ -294,6 +295,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				// If there are no books, forces insert
 				setInsertStatus(books.isEmpty ? true : insertSwitch.isOn, lock: books.isEmpty)
 			}
+			
+			updateOkButtonStatus()
 		}
 		catch
 		{
@@ -360,7 +363,9 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		{
 			// If on insert mode, the ok button is available once both language and nickname have been selected
 			// If target language is targeted, doesn't need the nickname for the translation
-			okButton.isEnabled = selectedLanguage != nil && (targetLanguageIsSelected || (nicknameField.text != nil && !nicknameField.text!.isEmpty))
+			let enabled = selectedLanguage != nil && (targetLanguageIsSelected || (nicknameField.text != nil && !nicknameField.text!.isEmpty))
+			print("STATUS: Updating OK button status. New enabled status: \(enabled)")
+			okButton.isEnabled = enabled
 		}
 		else
 		{
