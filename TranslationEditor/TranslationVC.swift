@@ -9,7 +9,7 @@
 import UIKit
 
 // TranslationVC is the view controller used in the translation / review / work view
-class TranslationVC: UIViewController, CellInputListener, AppStatusListener, AddNotesDelegate, OpenThreadListener, UIGestureRecognizerDelegate, TranslationCellDelegate
+class TranslationVC: UIViewController, CellInputListener, AppStatusListener, AddNotesDelegate, OpenThreadListener, UIGestureRecognizerDelegate, TranslationCellDelegate, ResourceUpdateListener
 {
 	// TYPES	----------
 	
@@ -83,24 +83,13 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		targetTranslationDS = TranslationTableViewDS(tableView: translationTableView, bookId: book.idString, configureCell: configureTargetTranslationCell, prepareUpdate: updateConflictData)
 		translationTableView.dataSource = targetTranslationDS
 		
-		resourceManager = ResourceManager(resourceTableView: resourceTableView, targetBookId: book.idString, addNotesDelegate: self, threadStatusListener: self)
+		resourceManager = ResourceManager(resourceTableView: resourceTableView, targetBookId: book.idString, addNotesDelegate: self, threadStatusListener: self, updateListener: self)
 		
 		// Makes resource manager listen to paragraph content changes
 		targetTranslationDS.contentListener = resourceManager
 		
-		resourceSegmentControl.removeAllSegments()
-		let resourceTitles = resourceManager.resourceTitles
-		for i in 0 ..< resourceTitles.count
-		{
-			resourceSegmentControl.insertSegment(withTitle: resourceTitles[i], at: i, animated: false)
-		}
-		if !resourceTitles.isEmpty
-		{
-			resourceSegmentControl.selectedSegmentIndex = 0
-		}
-		
 		// Sets scroll syncing
-		scrollManager = ScrollSyncManager(leftTable: resourceTableView, rightTable: translationTableView, leftResourceId: resourceTitles.isEmpty ? "none" : resourceTitles.first!, rightResourceId: "target")
+		scrollManager = ScrollSyncManager(leftTable: resourceTableView, rightTable: translationTableView, leftResourceId: "none", rightResourceId: "target")
 		{
 			tableView, oppositePathId in
 			
@@ -292,6 +281,19 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		}
 		
 		translationTableView.reloadData()
+	}
+	
+	func onResourcesUpdated(optionLabels: [String])
+	{
+		resourceSegmentControl.removeAllSegments()
+		for i in 0 ..< optionLabels.count
+		{
+			resourceSegmentControl.insertSegment(withTitle:optionLabels[i], at: i, animated: false)
+		}
+		if !optionLabels.isEmpty
+		{
+			resourceSegmentControl.selectedSegmentIndex = 0
+		}
 	}
 	
 	

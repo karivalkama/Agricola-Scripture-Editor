@@ -206,8 +206,8 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	// Parameters content and text are mutually exclusive
 	func commit(userId: String, chapterIndex: Int? = nil, sectionIndex: Int? = nil, paragraphIndex: Int? = nil, content: [Para]? = nil, text: NSAttributedString? = nil) throws -> Paragraph
 	{
-		// print("STATUS: Preparing paragraph for commit")
-		// print("STATUS: Text before commit: \(self.text)")
+		print("STATUS: Preparing paragraph for commit")
+		print("STATUS: Text before commit: \(self.text)")
 		
 		let newVersion = Paragraph(
 			bookId: bookId, chapterIndex: chapterIndex.or(self.chapterIndex), sectionIndex: sectionIndex.or(self.sectionIndex), index: paragraphIndex.or(self.index),
@@ -217,12 +217,14 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		if let text = text
 		{
 			newVersion.update(with: text)
-			// print("STATUS: Committing with text. \nOld Version: \(self.text)\nNew Version: \(newVersion.text)")
+			print("STATUS: Committing with text. \nOld Version: \(self.text)\nNew Version: \(newVersion.text)")
 		}
 		
 		// Only saves changes if there were any
 		if newVersion.chapterIndex != self.chapterIndex || newVersion.sectionIndex != self.sectionIndex || newVersion.index != self.index || !paraContentsEqual(with: newVersion)
 		{
+			print("STATUS: Found differences -> saves data")
+			
 			try newVersion.push()
 			
 			// This version is no longer the most recent out there

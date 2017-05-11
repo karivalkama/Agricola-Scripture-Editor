@@ -52,7 +52,7 @@ class USXTextAndNoteProcessor: USXContentProcessor
 					textElements.add(TextElement(charData: lastCharData))
 					lastCharData = []
 					
-					print("STATUS: Delegating '\(elementName)' to a FootNoteProcessor")
+					// print("STATUS: Delegating '\(elementName)' to a FootNoteProcessor")
 					return (USXFootNoteProcessor.createParser(caller: caller, callerAttValue: callerAttribute, style: style, targetPointer: targetPointer, using: errorHandler), false)
 				}
 				else if let style = CrossReferenceStyle(rawValue: styleString)

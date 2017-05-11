@@ -36,6 +36,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 	private weak var resourceTableView: UITableView!
 	private weak var addNotesDelegate: AddNotesDelegate!
 	private weak var threadStatusListener: OpenThreadListener?
+	private weak var updateListener: ResourceUpdateListener?
 	
 	private var sourceBooks = [BookResourceData]()
 	private var notes = [NotesData]()
@@ -84,13 +85,15 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 	
 	// INIT	-------------------
 	
-	init(resourceTableView: UITableView, targetBookId: String, addNotesDelegate: AddNotesDelegate, threadStatusListener: OpenThreadListener?)
+	init(resourceTableView: UITableView, targetBookId: String, addNotesDelegate: AddNotesDelegate, threadStatusListener: OpenThreadListener?, updateListener: ResourceUpdateListener?)
 	{
+		self.updateListener = updateListener
 		self.resourceTableView = resourceTableView
 		self.addNotesDelegate = addNotesDelegate
 		self.threadStatusListener = threadStatusListener
 		
 		queryManager = ResourceCollectionView.instance.collectionQuery(bookId: targetBookId).liveQueryManager
+		queryManager.addListener(AnyLiveQueryListener(self))
 		queryManager.start()
 	}
 	
@@ -131,7 +134,10 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 			print("ERROR: Failed to update resource data. \(error)")
 		}
 		
+		print("STATUS: Updating resources. Found \(sourceBooks.count) source books and \(notes.count) notes")
 		selectResource(atIndex: 0)
+		
+		updateListener?.onResourcesUpdated(optionLabels: resourceTitles)
 	}
 	
 	// This method should be called whenever the paragraph data on the translation side is updated
