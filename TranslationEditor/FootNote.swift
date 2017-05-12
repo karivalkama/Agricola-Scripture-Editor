@@ -76,6 +76,9 @@ final class FootNote: ParaContent, Copyable
 	
 	func contentEquals(with other: FootNote) -> Bool
 	{
-		return caller == other.caller && style == other.style && originReference == other.originReference && charData == other.charData
+		let equals = caller == other.caller && style == other.style && originReference == other.originReference && charData == other.charData
+		// print("STATUS: Comparing two foot notes: \n1) caller: \(caller), style: \(style), origin reference: \(String(describing: originReference)), text: \(text)\n2) caller: \(other.caller), style: \(other.style), origin reference: \(String(describing: other.originReference)), text: \(other.text)")
+		// print("STATUS: Footnotes are considered equal: \(equals)")
+		return equals
 	}
 }

@@ -144,7 +144,9 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXCo
 	
 	func contentEquals(with other: Verse) -> Bool
 	{
-		return range == other.range && content.contentEquals(with: other.content)
+		let equals = range == other.range && content.contentEquals(with: other.content)
+		// print("STATUS: Comparing two verses. Ranges: \(range) and \(other.range). Are considered equal: \(equals)")
+		return equals
 	}
 	
 	// Creates a copy of this verse that has no character data in it

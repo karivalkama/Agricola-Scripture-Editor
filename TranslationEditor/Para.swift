@@ -144,8 +144,10 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 	
 	func contentEquals(with other: Para) -> Bool
 	{
+		// print("STATUS: Checking if two para element contents are equal")
 		if style != other.style
 		{
+			// print("STATUS: Different style -> Not equal")
 			return false
 		}
 		
@@ -153,15 +155,18 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 		{
 			if let otherAmbiguousContent = other.ambiguousContent
 			{
+				// print("STATUS: Comparing ambiguous para contents")
 				return ambiguousContent.contentEquals(with: otherAmbiguousContent)
 			}
 			else
 			{
+				// print("STATUS: Only one of the paras has verses")
 				return false
 			}
 		}
 		else
 		{
+			// print("STATUS: Comparing verses (\(verses.count) vs \(other.verses.count))")
 			return verses.contentEquals(with: other.verses)
 		}
 	}
@@ -405,17 +410,17 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 					
 					// If the indices are side by side, they are considered to be one longer range
 					// (ie. The later index is simply ignored and added to the previous one(s) after the end of that range is reached)
+					/*
 					if lastVerseIndex!.startPosition >= range.location
 					{
 						lastVerseIndex = (lastVerseIndex!.minIndex, newIndex, range.location + range.length)
-					}
+					}*/
 						// Otherwise completes and records the preceeding range
-					else
-					{
-						verseRanges.append((VerseRange(lastVerseIndex!.minIndex, newIndex), NSMakeRange(lastVerseIndex!.startPosition, range.location - lastVerseIndex!.startPosition)))
-						
-						lastVerseIndex = (newIndex, newIndex, range.location + range.length)
-					}
+					//else
+					//{
+					verseRanges.append((VerseRange(lastVerseIndex!.minIndex, newIndex), NSMakeRange(lastVerseIndex!.startPosition, range.location - lastVerseIndex!.startPosition)))
+					lastVerseIndex = (newIndex, newIndex, range.location + range.length)
+					//}
 				}
 			}
 		}

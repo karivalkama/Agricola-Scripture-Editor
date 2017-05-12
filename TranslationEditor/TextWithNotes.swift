@@ -134,6 +134,12 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 	
 	func contentEquals(with other: TextWithNotes) -> Bool
 	{
+		/*
+		print("STATUS: Comparing two texts: '\(text)' and '\(other.text)'")
+		print("STATUS: Text elements are equal: \(textElements.contentEquals(with: other.textElements))")
+		print("STATUS: Footnotes are equal: \(footNotes.contentEquals(with: other.footNotes))")
+		print("STATUS: Cross references are equal: \(crossReferences == other.crossReferences)")
+		*/
 		return textElements.contentEquals(with: other.textElements) && footNotes.contentEquals(with: other.footNotes) && crossReferences == other.crossReferences
 	}
 	
