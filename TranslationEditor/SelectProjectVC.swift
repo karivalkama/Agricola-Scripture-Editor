@@ -8,6 +8,8 @@
 
 import UIKit
 
+// TODO: Remove keyboard reactions if necessary, there's no input areas available
+
 // This VC handles project selection (including accepting invitations to other people's projects)
 class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSource, UITableViewDelegate, StackDismissable
 {
@@ -19,6 +21,10 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	// OUTLETS	------------------
 	
 	@IBOutlet weak var projectTableView: UITableView!
+	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var contentView: KeyboardReactiveView!
+	@IBOutlet weak var createProjectButton: BasicButton!
 	
 	
 	// ATTRIBUTES	--------------
@@ -54,6 +60,8 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		
 		queryManager = ProjectView.instance.projectQuery(forContributorId: accountId).liveQueryManager
 		queryManager?.addListener(AnyLiveQueryListener(self))
+		
+		contentView.configure(mainView: view, elements: [createProjectButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
     }
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -81,6 +89,7 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		else
 		{
 			queryManager?.start()
+			contentView.startKeyboardListening()
 		}
 	}
 	
@@ -88,6 +97,7 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	{
 		print("STATUS: Project view disappeared")
 		
+		contentView.endKeyboardListening()
 		queryManager?.stop()
 	}
     

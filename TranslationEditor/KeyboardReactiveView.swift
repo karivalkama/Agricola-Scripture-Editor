@@ -8,13 +8,21 @@
 
 import UIKit
 
+enum ReactionStyle
+{
+	case slide
+	case squish
+}
+
+// TODO: On slide mode, activate height constraint
+
 class KeyboardReactiveView: UIView
 {
 	// ATTRIBUTES	-------------
 	
 	private weak var mainView: UIView!
 	private var _importantElements = [Weak<UIView>]()
-	var importantElements: [UIView]
+	private var importantElements: [UIView]
 	{
 		get
 		{
@@ -26,12 +34,16 @@ class KeyboardReactiveView: UIView
 		}
 	}
 	
-	var margin: CGFloat = 16
-	var topConstraint: NSLayoutConstraint?
-	var bottomConstraint: NSLayoutConstraint?
+	private var margin: CGFloat = 16
+	private weak var topConstraint: NSLayoutConstraint?
+	private weak var bottomConstraint: NSLayoutConstraint?
 	
 	private var observers = [Any]()
 	private var totalRaise: CGFloat = 0
+	private var style = ReactionStyle.slide
+	
+	private var topMarginBeforeSquish: CGFloat?
+	private var disabledTopConstraint: NSLayoutConstraint? // Strong temporary storage for disabled constraint
 	
 	
 	// COPUTED PROPERTIES	-----
@@ -49,13 +61,14 @@ class KeyboardReactiveView: UIView
 	
 	// OTHER METHODS	--------
 	
-	func configure(mainView: UIView, elements: [UIView], topConstraint: NSLayoutConstraint? = nil, bottomConstraint: NSLayoutConstraint? = nil, margin: CGFloat = 16)
+	func configure(mainView: UIView, elements: [UIView], topConstraint: NSLayoutConstraint? = nil, bottomConstraint: NSLayoutConstraint? = nil, style: ReactionStyle = .slide, margin: CGFloat = 16)
 	{
 		self.mainView = mainView
 		self.importantElements = elements
 		self.topConstraint = topConstraint
 		self.bottomConstraint = bottomConstraint
 		self.margin = margin
+		self.style = style
 	}
 	
 	// Starts listening to keyboard state changes
@@ -132,33 +145,43 @@ class KeyboardReactiveView: UIView
 		}
 		else
 		{
-			// If all the components cannot be fit on the visible area checks if any of the views is currently in focus / first reponder
-			if let firstResponderElement = firstResponderElement
+			// If the components cannot be fit, either
+			// a) slides so that some of the elements are outside of visible area
+			// or b) Just squishes the top and slides as much as necessary to show the lowest components
+			if style == .slide
 			{
-				let firstResponderTop = firstResponderElement.frame(in: mainView).minY
-				let firstResponderBottom = firstResponderElement.frame(in: mainView).maxX
-				let maxRaise = firstResponderTop - margin
-				
-				// If there is a first responder element, checks whether the first responder element should be made more visible
-				if firstResponderBottom + margin > visibleAreaHeight + totalRaise
+				// If all the components cannot be fit on the visible area checks if any of the views is currently in focus / first reponder
+				if let firstResponderElement = firstResponderElement
 				{
-					// Moves the view until the element is visible. Makes sure the top of the element stays visible too
-					setRaise(to: max(firstResponderBottom + margin, maxRaise))
+					let firstResponderTop = firstResponderElement.frame(in: mainView).minY
+					let firstResponderBottom = firstResponderElement.frame(in: mainView).maxX
+					let maxRaise = firstResponderTop - margin
+					
+					// If there is a first responder element, checks whether the first responder element should be made more visible
+					if firstResponderBottom + margin > visibleAreaHeight + totalRaise
+					{
+						// Moves the view until the element is visible. Makes sure the top of the element stays visible too
+						setRaise(to: max(firstResponderBottom + margin, maxRaise))
+					}
+						// Also checks if the view is raised too much for the element to show properly
+					else if totalRaise > maxRaise
+					{
+						setRaise(to: maxRaise)
+					}
 				}
-					// Also checks if the view is raised too much for the element to show properly
-				else if totalRaise > maxRaise
+				else
 				{
-					setRaise(to: maxRaise)
+					// If any of the views wasn't the first responder, raises the view as much as possible without hiding the top element(s)
+					let minRaise = contentTopY - margin
+					if totalRaise < minRaise
+					{
+						setRaise(to: minRaise)
+					}
 				}
 			}
 			else
 			{
-				// If any of the views wasn't the first responder, raises the view as much as possible without hiding the top element(s)
-				let minRaise = contentTopY - margin
-				if totalRaise < minRaise
-				{
-					setRaise(to: minRaise)
-				}
+				setRaise(to: contentBottomY - keyboardY + margin)
 			}
 		}
 	}
@@ -172,13 +195,45 @@ class KeyboardReactiveView: UIView
 	{
 		totalRaise += raise
 		
-		// mainView.translatesAutoresizingMaskIntoConstraints = true
-		// mainView.frame.origin.y -= raise
 		UIView.animate(withDuration: 0.5)
 		{
 			if let bottomConstraint = self.bottomConstraint
 			{
 				bottomConstraint.constant += raise
+				
+				if let topConstraint = self.topConstraint ?? self.disabledTopConstraint
+				{
+					// When on squish style, also alters the top constraint
+					if self.style == .squish
+					{
+						// When lowered, returns the original form
+						if self.totalRaise <= 0, let originalTopMargin = self.topMarginBeforeSquish
+						{
+							topConstraint.constant = originalTopMargin
+							self.topMarginBeforeSquish = nil
+						}
+						else if self.topMarginBeforeSquish == nil
+						{
+							self.topMarginBeforeSquish = topConstraint.constant
+							topConstraint.constant = self.margin
+						}
+					}
+					else
+					{
+						// On slide style, the top constraint is disabled while sliding
+						if self.totalRaise <= 0, let disabledTopConstraint = self.disabledTopConstraint
+						{
+							NSLayoutConstraint.activate([disabledTopConstraint])
+							self.topConstraint = disabledTopConstraint
+							self.disabledTopConstraint = nil
+						}
+						else if self.disabledTopConstraint == nil
+						{
+							self.disabledTopConstraint = topConstraint
+							NSLayoutConstraint.deactivate([topConstraint])
+						}
+					}
+				}
 			}
 			else
 			{
@@ -186,14 +241,6 @@ class KeyboardReactiveView: UIView
 			}
 			self.mainView.layoutIfNeeded()
 		}
-		
-		/*
-		let newY = mainView.frame.origin.y - raise
-		UIView.animate(withDuration: 1.0)
-		{
-		self.mainView.frame = CGRect(x: self.mainView.frame.origin.x, y: newY, width: self.mainView.frame.width, height: self.mainView.frame.height)
-		self.mainView.layoutSubviews()
-		}*/
 	}
 	
 	private func lowerView()
