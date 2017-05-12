@@ -249,7 +249,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zNV-df-0JY">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zNV-df-0JY" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
                                 <rect key="frame" x="314.5" y="148" width="396.5" height="271.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="YU1-T2-T93" userLabel="Content Stack View">
@@ -374,6 +374,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contentTopConstraint" destination="tyD-Wr-QKK" id="MTD-Hd-qA8"/>
+                        <outlet property="contentView" destination="zNV-df-0JY" id="Iko-jt-Im4"/>
+                        <outlet property="createAccountButton" destination="V7n-6d-wMW" id="ooo-D1-tCv"/>
                         <outlet property="errorLabel" destination="Ed3-25-IDt" id="kTO-Ba-IFS"/>
                         <outlet property="passwordField" destination="1sC-Q4-e9p" id="9E4-1q-HLq"/>
                         <outlet property="repeatPasswordField" destination="INL-Qa-Eon" id="6OI-0C-YQp"/>
@@ -710,7 +713,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="485" height="87"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sG3-be-bJb" id="EcI-Gu-8tF">
-                                                            <rect key="frame" x="0.0" y="0.0" width="485" height="87"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="485" height="86.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wh2-3I-Lsf" userLabel="Content Stack View">
@@ -758,7 +761,7 @@
                                                         <rect key="frame" x="0.0" y="115" width="485" height="176"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vde-PQ-RQ0" id="TeY-rK-FQx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="485" height="176"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="485" height="175.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="A6x-z7-cDy" userLabel="Content Stack View">

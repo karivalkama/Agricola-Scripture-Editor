@@ -17,12 +17,14 @@ class CreateAccountVC: UIViewController
 	@IBOutlet weak var passwordField: UITextField!
 	@IBOutlet weak var repeatPasswordField: UITextField!
 	@IBOutlet weak var errorLabel: UILabel!
+	@IBOutlet weak var contentView: KeyboardReactiveView!
+	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var createAccountButton: BasicButton!
 	
 	
 	// ATTRIBUTES	--------------
 	
 	private var completion: (() -> ())?
-	// private var viewManager: KeyboardViewManager!
 	
 	
 	// LOAD	----------------------
@@ -32,9 +34,20 @@ class CreateAccountVC: UIViewController
         super.viewDidLoad()
 
 		errorLabel.text = nil
-		
-		// viewManager = KeyboardViewManager(view: view, importantElements: [userNameField, passwordField, repeatPasswordField, errorLabel])
+		contentView.configure(mainView: view, elements: [userNameField, passwordField, repeatPasswordField, errorLabel, createAccountButton], topConstraint: contentTopConstraint)
     }
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		super.viewDidAppear(animated)
+		contentView.startKeyboardListening()
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		super.viewDidDisappear(animated)
+		contentView.endKeyboardListening()
+	}
 	
 	
 	// ACTIONS	------------------

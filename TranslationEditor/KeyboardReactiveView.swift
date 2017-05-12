@@ -56,8 +56,6 @@ class KeyboardReactiveView: UIView
 		self.topConstraint = topConstraint
 		self.bottomConstraint = bottomConstraint
 		self.margin = margin
-		
-		startKeyboardListening()
 	}
 	
 	// Starts listening to keyboard state changes
