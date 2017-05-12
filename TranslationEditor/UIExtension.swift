@@ -39,6 +39,15 @@ extension UIViewController
 	}
 }
 
+extension UIView
+{
+	// Returns the view's frame inside another view's coordinate system
+	func frame(in view: UIView) -> CGRect
+	{
+		return view.convert(frame, from: superview)
+	}
+}
+
 extension UITextView
 {
 	// Displays a usx string with the correct format

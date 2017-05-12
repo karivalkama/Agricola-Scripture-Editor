@@ -22,11 +22,13 @@ class LoginVC: UIViewController//, ConnectionListener
 	@IBOutlet weak var loginButton: BasicButton!
 	@IBOutlet weak var joinView: P2PJoinView!
 	
+	@IBOutlet weak var contentView: KeyboardReactiveView!
+	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
+	
 	
 	// ATTRIBUTES	----------------
 	
-	// private var loginUsername: String?
-	// private var loginPassword: String?
+	// private var viewManager: KeyboardViewManager!
 	
 
 	// INIT	------------------------
@@ -39,6 +41,9 @@ class LoginVC: UIViewController//, ConnectionListener
 		joinView.onlineStatusView = onlineStatusView
 		
 		errorLabel.text = nil
+		
+		// viewManager = KeyboardViewManager(view: view, importantElements: [userNameField, passwordField, errorLabel, loginButton, joinView])
+		contentView.configure(mainView: view, elements: [userNameField, passwordField, errorLabel, loginButton, joinView], topConstraint: contentTopConstraint)
     }
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -58,10 +63,15 @@ class LoginVC: UIViewController//, ConnectionListener
 			print("STATUS: No login information present")
 			// ConnectionManager.instance.registerListener(self)
 		}
+		
+		// viewManager.startKeyboardListening()
+		contentView.startKeyboardListening()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{
+		// viewManager.endKeyboardListening()
+		contentView.endKeyboardListening()
 		ConnectionManager.instance.removeListener(joinView)
 	}
 	

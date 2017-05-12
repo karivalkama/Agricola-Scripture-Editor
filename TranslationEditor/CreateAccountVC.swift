@@ -22,6 +22,7 @@ class CreateAccountVC: UIViewController
 	// ATTRIBUTES	--------------
 	
 	private var completion: (() -> ())?
+	// private var viewManager: KeyboardViewManager!
 	
 	
 	// LOAD	----------------------
@@ -31,6 +32,8 @@ class CreateAccountVC: UIViewController
         super.viewDidLoad()
 
 		errorLabel.text = nil
+		
+		// viewManager = KeyboardViewManager(view: view, importantElements: [userNameField, passwordField, repeatPasswordField, errorLabel])
     }
 	
 	
