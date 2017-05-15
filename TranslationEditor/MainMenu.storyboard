@@ -641,26 +641,26 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDj-dm-OwG" userLabel="Content View">
-                                <rect key="frame" x="576" y="28" width="416" height="708"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDj-dm-OwG" userLabel="Content View" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
+                                <rect key="frame" x="112" y="28" width="880" height="708"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="NzD-Hx-uxn" userLabel="Content Stack View">
-                                        <rect key="frame" x="16" y="16" width="384" height="676"/>
+                                        <rect key="frame" x="16" y="16" width="848" height="676"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Yi2-g3-zAs" customClass="CreateAvatarView" customModule="TranslationEditor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="384" height="583.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="848" height="583.5"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Errors are displayed here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3S4-fY-xGT">
-                                                <rect key="frame" x="0.0" y="599.5" width="384" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="599.5" width="848" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="7Jy-Xk-xai">
-                                                <rect key="frame" x="0.0" y="636" width="384" height="40"/>
+                                                <rect key="frame" x="0.0" y="636" width="848" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pbo-Z6-pUu" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="184" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="416" height="40"/>
                                                         <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <state key="normal" title="Cancel">
@@ -671,7 +671,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lyw-Ql-b3R" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                        <rect key="frame" x="200" y="0.0" width="184" height="40"/>
+                                                        <rect key="frame" x="432" y="0.0" width="416" height="40"/>
                                                         <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="o4N-pV-pQp"/>
@@ -696,7 +696,6 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="NzD-Hx-uxn" secondAttribute="bottom" constant="16" id="07b-Mx-8dw"/>
                                     <constraint firstItem="NzD-Hx-uxn" firstAttribute="leading" secondItem="dDj-dm-OwG" secondAttribute="leading" constant="16" id="RL8-4f-P7l"/>
-                                    <constraint firstAttribute="width" constant="416" id="U6h-gd-8gC"/>
                                     <constraint firstItem="NzD-Hx-uxn" firstAttribute="top" secondItem="dDj-dm-OwG" secondAttribute="top" constant="16" id="Z38-L5-u24"/>
                                     <constraint firstAttribute="trailing" secondItem="NzD-Hx-uxn" secondAttribute="trailing" constant="16" id="zTq-An-VGm"/>
                                 </constraints>
@@ -706,6 +705,7 @@
                         <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="dDj-dm-OwG" firstAttribute="top" secondItem="vFt-Fp-5oD" secondAttribute="bottom" constant="8" id="6S5-XZ-edY"/>
+                            <constraint firstItem="dDj-dm-OwG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6dP-5p-62T" secondAttribute="leadingMargin" constant="64" id="F3R-ko-rUE"/>
                             <constraint firstItem="85E-9l-LWE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dDj-dm-OwG" secondAttribute="bottom" constant="32" id="bGX-V0-5fq"/>
                             <constraint firstAttribute="trailing" secondItem="dDj-dm-OwG" secondAttribute="trailing" constant="32" id="oed-n8-4wc"/>
                         </constraints>
@@ -716,8 +716,12 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="contentBottomConstraint" destination="bGX-V0-5fq" id="ZHr-0p-Vba"/>
+                        <outlet property="contentTopConstraint" destination="6S5-XZ-edY" id="tfa-RY-7wL"/>
+                        <outlet property="contentView" destination="dDj-dm-OwG" id="BZD-Wg-lod"/>
                         <outlet property="createAvatarView" destination="Yi2-g3-zAs" id="TAC-4F-utp"/>
                         <outlet property="errorLabel" destination="3S4-fY-xGT" id="eEv-Za-gBD"/>
+                        <outlet property="saveButton" destination="lyw-Ql-b3R" id="wdH-Wg-sTz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6tX-dL-cHk" userLabel="First Responder" sceneMemberID="firstResponder"/>

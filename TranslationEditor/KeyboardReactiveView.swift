@@ -35,6 +35,7 @@ class KeyboardReactiveView: UIView
 	}
 	
 	private var margin: CGFloat = 16
+	private var squishModifier: CGFloat = 0
 	private weak var topConstraint: NSLayoutConstraint?
 	private weak var bottomConstraint: NSLayoutConstraint?
 	
@@ -47,10 +48,15 @@ class KeyboardReactiveView: UIView
 	private var topMarginBeforeSquish: CGFloat?
 	private var disabledTopConstraint: NSLayoutConstraint? // Strong temporary storage for disabled constraint
 	
+	private var generatedBottomConstraint: NSLayoutConstraint?
+	private var generatedHeightConstraint: NSLayoutConstraint?
+	
 	
 	// COPUTED PROPERTIES	-----
 	
 	private var firstResponderElement: UIView? { return importantElements.first(where: { $0.isFirstResponder }) }
+	
+	private var isRaised: Bool { return totalRaise > 0 }
 	
 	
 	// IMPLEMENTED METHODS	----
@@ -63,7 +69,7 @@ class KeyboardReactiveView: UIView
 	
 	// OTHER METHODS	--------
 	
-	func configure(mainView: UIView, elements: [UIView], topConstraint: NSLayoutConstraint? = nil, bottomConstraint: NSLayoutConstraint? = nil, style: ReactionStyle = .slide, margin: CGFloat = 16)
+	func configure(mainView: UIView, elements: [UIView], topConstraint: NSLayoutConstraint? = nil, bottomConstraint: NSLayoutConstraint? = nil, style: ReactionStyle = .slide, margin: CGFloat = 16, squishModifier: CGFloat = 0)
 	{
 		self.mainView = mainView
 		self.importantElements = elements
@@ -71,6 +77,7 @@ class KeyboardReactiveView: UIView
 		self.bottomConstraint = bottomConstraint
 		self.margin = margin
 		self.style = style
+		self.squishModifier = squishModifier
 	}
 	
 	// Starts listening to keyboard state changes
@@ -189,7 +196,8 @@ class KeyboardReactiveView: UIView
 			}
 			else
 			{
-				setRaise(to: contentBottomY - keyboardY + margin)
+				print("STATUS: Squishing by \(contentBottomY - keyboardY + margin) pixels")
+				setRaise(to: contentBottomY - keyboardY + margin + squishModifier)
 			}
 		}
 	}
@@ -203,6 +211,7 @@ class KeyboardReactiveView: UIView
 	{
 		totalRaise += raise
 		
+		// TODO: Move the contents of this closure into a separate function
 		UIView.animate(withDuration: 0.5)
 		{
 			if let bottomConstraint = self.bottomConstraint
@@ -215,12 +224,12 @@ class KeyboardReactiveView: UIView
 					if self.style == .squish
 					{
 						// When lowered, returns the original form
-						if self.totalRaise <= 0, let originalTopMargin = self.topMarginBeforeSquish
+						if !self.isRaised, let originalTopMargin = self.topMarginBeforeSquish
 						{
 							topConstraint.constant = originalTopMargin
 							self.topMarginBeforeSquish = nil
 						}
-						else if self.topMarginBeforeSquish == nil
+						else if self.topMarginBeforeSquish == nil, topConstraint.constant > self.margin
 						{
 							self.topMarginBeforeSquish = topConstraint.constant
 							topConstraint.constant = self.margin
@@ -228,25 +237,58 @@ class KeyboardReactiveView: UIView
 					}
 					else
 					{
-						// On slide style, the top constraint is disabled while sliding
-						if self.totalRaise <= 0, let disabledTopConstraint = self.disabledTopConstraint
+						// On slide style, the top constraint is replaced with a height constraint while sliding
+						if !self.isRaised, let disabledTopConstraint = self.disabledTopConstraint
 						{
+							if let generatedHeightConstraint = self.generatedHeightConstraint
+							{
+								NSLayoutConstraint.deactivate([generatedHeightConstraint])
+								self.generatedHeightConstraint = nil
+							}
+							
 							NSLayoutConstraint.activate([disabledTopConstraint])
 							self.topConstraint = disabledTopConstraint
 							self.disabledTopConstraint = nil
 						}
 						else if self.disabledTopConstraint == nil
 						{
+							self.generatedHeightConstraint = self.heightAnchor.constraint(equalToConstant: self.frame.height)
+							NSLayoutConstraint.activate([self.generatedHeightConstraint!])
+							
 							self.disabledTopConstraint = topConstraint
 							NSLayoutConstraint.deactivate([topConstraint])
 						}
 					}
 				}
 			}
+			else if let topConstraint = self.topConstraint
+			{
+				topConstraint.constant -= raise
+			}
 			else
 			{
-				self.topConstraint?.constant -= raise
+				// If there are no defined constraints, generates one (or disables it)
+				if let generatedBottomConstraint = self.generatedBottomConstraint
+				{
+					if !self.isRaised
+					{
+						NSLayoutConstraint.deactivate([generatedBottomConstraint])
+						self.generatedBottomConstraint = nil
+					}
+					else
+					{
+						generatedBottomConstraint.constant += raise
+					}
+				}
+				else if self.isRaised
+				{
+					let originalBottomMargin = self.mainView.frame.height - self.frame(in: self.mainView).maxY
+					print("STATUS: Original margin from bottom: \(originalBottomMargin), raises by: \(self.totalRaise)")
+					self.generatedBottomConstraint = self.bottomAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: -(originalBottomMargin + self.totalRaise))
+					NSLayoutConstraint.activate([self.generatedBottomConstraint!])
+				}
 			}
+			
 			self.mainView.layoutIfNeeded()
 		}
 	}

@@ -15,6 +15,10 @@ class EditAvatarVC: UIViewController
 	
 	@IBOutlet weak var createAvatarView: CreateAvatarView!
 	@IBOutlet weak var errorLabel: UILabel!
+	@IBOutlet weak var saveButton: BasicButton!
+	@IBOutlet weak var contentView: KeyboardReactiveView!
+	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
 	
 	
 	// ATTRIBUTES	--------------
@@ -70,7 +74,22 @@ class EditAvatarVC: UIViewController
 		}
 		
 		createAvatarView.viewController = self
+		contentView.configure(mainView: view, elements: [createAvatarView, errorLabel, saveButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
     }
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		super.viewDidAppear(animated)
+		
+		contentView.startKeyboardListening()
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		super.viewDidDisappear(animated)
+		
+		contentView.endKeyboardListening()
+	}
 	
 	
 	// ACTIONS	------------------

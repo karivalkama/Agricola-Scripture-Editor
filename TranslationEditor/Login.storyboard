@@ -1215,7 +1215,7 @@
                                 <rect key="frame" x="32" y="76" width="960" height="660"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Gl1-bU-GwW" userLabel="Content Stack View">
-                                        <rect key="frame" x="296" y="0.0" width="664" height="596"/>
+                                        <rect key="frame" x="288" y="0.0" width="672" height="596"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="MrN-tq-oVe" userLabel="Basic Info Stack View">
                                                 <rect key="frame" x="0.0" y="0.0" width="256" height="596"/>
@@ -1276,7 +1276,7 @@
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GwQ-wJ-TU4" customClass="CreateAvatarView" customModule="TranslationEditor" customModuleProvider="target">
-                                                <rect key="frame" x="288" y="0.0" width="376" height="596"/>
+                                                <rect key="frame" x="288" y="0.0" width="384" height="596"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="384" id="AX6-6O-Udh"/>
                                                 </constraints>
@@ -1373,7 +1373,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="A90-4V-FHe">
                                                     <rect key="frame" x="8" y="8" width="296" height="330"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="EUL-Rd-u9X" customClass="CircleImage" customModule="TranslationEditor" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="EUL-Rd-u9X" customClass="CircleImage" customModule="TranslationEditor" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="EUL-Rd-u9X" secondAttribute="height" id="YGD-FT-gb9"/>
@@ -1410,7 +1410,7 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oz8-mI-VI2" userLabel="Password View">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oz8-mI-VI2" userLabel="Password View" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
                                 <rect key="frame" x="318" y="297.5" width="388" height="173.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BRS-qN-0CT">
@@ -1506,7 +1506,7 @@
                         <constraints>
                             <constraint firstItem="tJb-C9-MzN" firstAttribute="top" secondItem="WPR-I3-vDQ" secondAttribute="top" id="4xm-u8-3ea"/>
                             <constraint firstAttribute="trailing" secondItem="tJb-C9-MzN" secondAttribute="trailing" id="DgB-kA-fpt"/>
-                            <constraint firstItem="oz8-mI-VI2" firstAttribute="centerY" secondItem="WPR-I3-vDQ" secondAttribute="centerY" id="IEO-Iy-qcS"/>
+                            <constraint firstItem="oz8-mI-VI2" firstAttribute="centerY" secondItem="WPR-I3-vDQ" secondAttribute="centerY" priority="750" id="IEO-Iy-qcS"/>
                             <constraint firstItem="tJb-C9-MzN" firstAttribute="leading" secondItem="WPR-I3-vDQ" secondAttribute="leading" id="Rzv-cz-USv"/>
                             <constraint firstItem="UrZ-ky-uDt" firstAttribute="leading" secondItem="WPR-I3-vDQ" secondAttribute="leadingMargin" constant="16" id="Uju-iN-UgP"/>
                             <constraint firstItem="Vbd-3v-8fx" firstAttribute="top" secondItem="UrZ-ky-uDt" secondAttribute="bottom" constant="32" id="anx-nL-SNl"/>

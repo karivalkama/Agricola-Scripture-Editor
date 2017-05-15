@@ -21,7 +21,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet weak var avatarCollectionView: UICollectionView!
 	@IBOutlet weak var passwordField: UITextField!
 	@IBOutlet weak var loginButton: BasicButton!
-	@IBOutlet weak var passwordView: UIView!
+	@IBOutlet weak var passwordView: KeyboardReactiveView!
 	@IBOutlet weak var errorLabel: UILabel!
 	
 	
@@ -83,6 +83,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		avatarCollectionView.dataSource = self
 		
 		queryManager?.addListener(AnyLiveQueryListener(self))
+		passwordView.configure(mainView: view, elements: [loginButton, errorLabel, passwordField])
     }
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -99,10 +100,12 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		
 		// Otherwise starts the queries
 		queryManager?.start()
+		passwordView.startKeyboardListening()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{
+		passwordView.endKeyboardListening()
 		// Doen't need to continue with live queries while the view is not visible
 		queryManager?.stop()
 	}
