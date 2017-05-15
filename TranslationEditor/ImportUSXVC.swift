@@ -25,6 +25,9 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	@IBOutlet weak var nicknameView: UIView!
 	@IBOutlet weak var selectBookView: UIView!
 	@IBOutlet weak var okButton: BasicButton!
+	@IBOutlet weak var contentView: KeyboardReactiveView!
+	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
 	
 	
 	// ATTRIBUTES	---------
@@ -55,6 +58,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
     override func viewDidLoad()
 	{
         super.viewDidLoad()
+		
+		contentView.configure(mainView: view, elements: [selectLanguageView, insertSwitch, nicknameField, okButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint)
 		
 		// Reads paragraph data first
 		guard let usxURL = usxURL else
@@ -173,11 +178,21 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
+		super.viewDidAppear(animated)
+		
 		if foundMatchWithIdentifier && bookToOverwrite != nil
 		{
 			print("STATUS: Found a a book with identical identifier, moves to overwrite preview.")
 			continueToOverwrite()
 		}
+		
+		contentView.startKeyboardListening()
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		super.viewDidDisappear(animated)
+		contentView.endKeyboardListening()
 	}
 
 	
