@@ -35,7 +35,6 @@ class KeyboardReactiveView: UIView
 	}
 	
 	private var margin: CGFloat = 16
-	private var squishModifier: CGFloat = 0
 	private weak var topConstraint: NSLayoutConstraint?
 	private weak var bottomConstraint: NSLayoutConstraint?
 	
@@ -69,7 +68,7 @@ class KeyboardReactiveView: UIView
 	
 	// OTHER METHODS	--------
 	
-	func configure(mainView: UIView, elements: [UIView], topConstraint: NSLayoutConstraint? = nil, bottomConstraint: NSLayoutConstraint? = nil, style: ReactionStyle = .slide, margin: CGFloat = 16, squishModifier: CGFloat = 0)
+	func configure(mainView: UIView, elements: [UIView], topConstraint: NSLayoutConstraint? = nil, bottomConstraint: NSLayoutConstraint? = nil, style: ReactionStyle = .slide, margin: CGFloat = 16)
 	{
 		self.mainView = mainView
 		self.importantElements = elements
@@ -77,7 +76,6 @@ class KeyboardReactiveView: UIView
 		self.bottomConstraint = bottomConstraint
 		self.margin = margin
 		self.style = style
-		self.squishModifier = squishModifier
 	}
 	
 	// Starts listening to keyboard state changes
@@ -146,6 +144,7 @@ class KeyboardReactiveView: UIView
 		
 		if visibleAreaHeight > contentHeight
 		{
+			print("STATUS: Content fits into the visible area")
 			// If all elements could fit, checks if there is enough room for margins
 			if visibleAreaHeight > contentHeight + 2 * margin
 			{
@@ -165,29 +164,34 @@ class KeyboardReactiveView: UIView
 			// or b) Just squishes the top and slides as much as necessary to show the lowest components
 			if style == .slide
 			{
+				let minRaise = contentTopY - margin
+				
 				// If all the components cannot be fit on the visible area checks if any of the views is currently in focus / first reponder
 				if let firstResponderElement = firstResponderElement
 				{
 					let firstResponderTop = firstResponderElement.frame(in: mainView).minY
-					let firstResponderBottom = firstResponderElement.frame(in: mainView).maxX
+					let firstResponderBottom = firstResponderElement.frame(in: mainView).maxY
 					let maxRaise = firstResponderTop - margin
 					
 					// If there is a first responder element, checks whether the first responder element should be made more visible
 					if firstResponderBottom + margin > visibleAreaHeight + totalRaise
 					{
 						// Moves the view until the element is visible. Makes sure the top of the element stays visible too
-						setRaise(to: max(firstResponderBottom + margin, maxRaise))
+						setRaise(to: max(min(firstResponderBottom + margin - visibleAreaHeight, maxRaise), minRaise))
 					}
 						// Also checks if the view is raised too much for the element to show properly
 					else if totalRaise > maxRaise
 					{
 						setRaise(to: maxRaise)
 					}
+					else if totalRaise < minRaise
+					{
+						setRaise(to: minRaise)
+					}
 				}
 				else
 				{
 					// If any of the views wasn't the first responder, raises the view as much as possible without hiding the top element(s)
-					let minRaise = contentTopY - margin
 					if totalRaise < minRaise
 					{
 						setRaise(to: minRaise)
@@ -196,8 +200,7 @@ class KeyboardReactiveView: UIView
 			}
 			else
 			{
-				print("STATUS: Squishing by \(contentBottomY - keyboardY + margin) pixels")
-				setRaise(to: contentBottomY - keyboardY + margin + squishModifier)
+				setRaise(to: contentBottomY - keyboardY + margin)
 			}
 		}
 	}
@@ -283,7 +286,6 @@ class KeyboardReactiveView: UIView
 				else if self.isRaised
 				{
 					let originalBottomMargin = self.mainView.frame.height - self.frame(in: self.mainView).maxY
-					print("STATUS: Original margin from bottom: \(originalBottomMargin), raises by: \(self.totalRaise)")
 					self.generatedBottomConstraint = self.bottomAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: -(originalBottomMargin + self.totalRaise))
 					NSLayoutConstraint.activate([self.generatedBottomConstraint!])
 				}
@@ -295,7 +297,6 @@ class KeyboardReactiveView: UIView
 	
 	private func lowerView()
 	{
-		//print("STATUS: Setting view to original state")
 		setRaise(to: 0)
 	}
 }

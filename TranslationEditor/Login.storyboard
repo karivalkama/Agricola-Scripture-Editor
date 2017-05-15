@@ -978,7 +978,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dI-DI-BNw">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dI-DI-BNw" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
                                 <rect key="frame" x="316" y="52" width="656" height="524"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="F8A-N7-Lmv" userLabel="Content Stack View">
@@ -1165,13 +1165,17 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="dfD-xw-Ndt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9dI-DI-BNw" secondAttribute="bottom" constant="64" id="0ST-rw-aue"/>
                             <constraint firstItem="9dI-DI-BNw" firstAttribute="top" secondItem="wpa-4D-cLy" secondAttribute="bottom" constant="32" id="1P3-BK-aeG"/>
-                            <constraint firstItem="dfD-xw-Ndt" firstAttribute="top" secondItem="9dI-DI-BNw" secondAttribute="bottom" constant="192" id="Q03-eD-rFC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9dI-DI-BNw" secondAttribute="trailing" constant="32" id="kHd-rn-rUf"/>
+                            <constraint firstItem="9dI-DI-BNw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="E5O-GD-Nho" secondAttribute="leadingMargin" constant="32" id="vuE-wb-PrM"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="accountNameField" destination="oM2-KS-I2J" id="2a5-zq-ccM"/>
+                        <outlet property="contentBottomConstraint" destination="0ST-rw-aue" id="QuZ-M6-dGY"/>
+                        <outlet property="contentTopConstraint" destination="1P3-BK-aeG" id="gWk-KO-PKF"/>
+                        <outlet property="contentView" destination="9dI-DI-BNw" id="NAN-xF-KXn"/>
                         <outlet property="createProjectButton" destination="3OS-MG-og8" id="Yrg-cB-yjm"/>
                         <outlet property="defaultBookIdentifierField" destination="b14-Ie-qIj" id="qU8-yd-qRZ"/>
                         <outlet property="errorLabel" destination="0df-tq-SiK" id="BsQ-p7-89C"/>

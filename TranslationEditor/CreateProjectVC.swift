@@ -21,6 +21,9 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 	@IBOutlet weak var errorLabel: UILabel!
 	@IBOutlet weak var selectLanguageView: FilteredSingleSelection!
 	@IBOutlet weak var createProjectButton: BasicButton!
+	@IBOutlet weak var contentView: KeyboardReactiveView!
+	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
 	
 	
 	// ATTRIBUTES	-----------------
@@ -56,7 +59,21 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		selectLanguageView.delegate = self
 		selectLanguageView.datasource = self
 		selectLanguageView.reloadData()
+		
+		contentView.configure(mainView: view, elements: [projectNameField, defaultBookIdentifierField, accountNameField, passwordField, repeatPasswordField, errorLabel, selectLanguageView, createProjectButton], topConstraint: contentTopConstraint)
     }
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		super.viewDidAppear(animated)
+		contentView.startKeyboardListening()
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		super.viewDidDisappear(animated)
+		contentView.endKeyboardListening()
+	}
 
 	
 	// ACTIONS	---------------------
