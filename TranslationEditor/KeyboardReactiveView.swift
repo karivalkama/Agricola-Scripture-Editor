@@ -42,6 +42,8 @@ class KeyboardReactiveView: UIView
 	private var totalRaise: CGFloat = 0
 	private var style = ReactionStyle.slide
 	
+	private var keyboardIsShown = false
+	
 	private var topMarginBeforeSquish: CGFloat?
 	private var disabledTopConstraint: NSLayoutConstraint? // Strong temporary storage for disabled constraint
 	
@@ -81,6 +83,7 @@ class KeyboardReactiveView: UIView
 			let didHideObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidHide, object: nil, queue: nil)
 			{
 				_ in
+				self.keyboardIsShown = false
 				self.lowerView()
 			}
 			
@@ -97,7 +100,12 @@ class KeyboardReactiveView: UIView
 	
 	private func onKeyboardShow(_ notification: Notification)
 	{
-		//print("STATUS: View adjusting to new keyboard status")
+		guard !keyboardIsShown else
+		{
+			return
+		}
+		
+		keyboardIsShown = true
 		
 		guard let keyboardSize = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect else
 		{
@@ -110,9 +118,9 @@ class KeyboardReactiveView: UIView
 			return
 		}
 		
-		let originalY = mainView.frame.origin.y - totalRaise
+		// let originalY = mainView.frame.origin.y - totalRaise
 		let keyboardY = mainView.frame.height - keyboardSize.height
-		let visibleAreaHeight = keyboardY - originalY
+		let visibleAreaHeight = keyboardY
 		
 		let contentBottomY = importantElements.map { $0.frame(in: mainView).maxY }.max()!
 		// print("STATUS: Content bottom Y: \(contentBottomY)")
