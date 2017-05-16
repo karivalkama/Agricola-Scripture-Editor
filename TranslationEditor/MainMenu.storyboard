@@ -41,16 +41,16 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yA3-Zr-TLc" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
-                                <rect key="frame" x="20" y="52" width="984" height="700"/>
+                                <rect key="frame" x="20" y="56" width="984" height="696"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="uy8-ke-poe" userLabel="Content Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="984" height="700"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="984" height="696"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="05I-9f-Rzi" userLabel="Filter Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="256" height="700"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="256" height="696"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HkM-Jv-uyz" userLabel="Language Filter Stack View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="256" height="342"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="256" height="340"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Filter By Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ny-gG-O9i">
                                                                 <rect key="frame" x="0.0" y="0.0" width="256" height="20.5"/>
@@ -59,13 +59,12 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ala-Rm-q2w" customClass="FilteredMultiSelection" customModule="TranslationEditor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28.5" width="256" height="313.5"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <rect key="frame" x="0.0" y="28.5" width="256" height="311.5"/>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OzB-Ln-feU" userLabel="Book Filter Stack View">
-                                                        <rect key="frame" x="0.0" y="358" width="256" height="342"/>
+                                                        <rect key="frame" x="0.0" y="356" width="256" height="340"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Filter By Book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpq-nv-2e7">
                                                                 <rect key="frame" x="0.0" y="0.0" width="256" height="20.5"/>
@@ -74,8 +73,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyb-El-Joj" customClass="FilteredMultiSelection" customModule="TranslationEditor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28.5" width="256" height="313.5"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <rect key="frame" x="0.0" y="28.5" width="256" height="311.5"/>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
@@ -84,84 +82,125 @@
                                                     <constraint firstAttribute="width" constant="256" id="u7Q-r2-aJC"/>
                                                 </constraints>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Zm8-UO-lUK" userLabel="Select Book Stack View">
-                                                <rect key="frame" x="272" y="0.0" width="712" height="700"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DeQ-xM-zg5">
+                                                <rect key="frame" x="272" y="0.0" width="712" height="696"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Select a Book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nhs-du-rpP">
-                                                        <rect key="frame" x="0.0" y="0.0" width="712" height="20.5"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h1N-6x-c60">
-                                                        <rect key="frame" x="0.0" y="28.5" width="712" height="671.5"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImportBookCell" rowHeight="57" id="fTI-cv-o5L" customClass="ImportBookCell" customModule="TranslationEditor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="712" height="57"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
-                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fTI-cv-o5L" id="r8w-6k-53f">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="712" height="56.5"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
-                                                                    <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mvm-r5-vkT">
-                                                                            <rect key="frame" x="16" y="8" width="680" height="40.5"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Zm8-UO-lUK" userLabel="Select Book Stack View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="712" height="625.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Select a Book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nhs-du-rpP">
+                                                                <rect key="frame" x="0.0" y="0.0" width="712" height="20.5"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h1N-6x-c60">
+                                                                <rect key="frame" x="0.0" y="28.5" width="712" height="597"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <prototypes>
+                                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImportBookCell" rowHeight="57" id="fTI-cv-o5L" customClass="ImportBookCell" customModule="TranslationEditor" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="28" width="712" height="57"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fTI-cv-o5L" id="r8w-6k-53f">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="712" height="56.5"/>
+                                                                            <autoresizingMask key="autoresizingMask"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6j-jQ-28W">
-                                                                                    <rect key="frame" x="0.0" y="7" width="71.5" height="26.5"/>
-                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                                                    <nil key="textColor"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.87999999523162842" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Galatians" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2m-GN-bIw">
-                                                                                    <rect key="frame" x="87.5" y="7" width="91.5" height="26.5"/>
-                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                                                    <nil key="textColor"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
-                                                                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tia-Yq-5t6">
-                                                                                    <rect key="frame" x="195" y="3" width="277" height="35"/>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mvm-r5-vkT">
+                                                                                    <rect key="frame" x="16" y="8" width="680" height="40.5"/>
                                                                                     <subviews>
-                                                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.87999999523162842" contentMode="left" horizontalHuggingPriority="100" verticalHuggingPriority="251" text="Test Translation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUz-AU-6vT">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="277" height="20.5"/>
-                                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6j-jQ-28W">
+                                                                                            <rect key="frame" x="0.0" y="7" width="71.5" height="26.5"/>
+                                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
-                                                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="100" verticalHuggingPriority="251" text="Test Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2DL-Ye-dYg">
-                                                                                            <rect key="frame" x="0.0" y="20.5" width="277" height="14.5"/>
-                                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.87999999523162842" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Galatians" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2m-GN-bIw">
+                                                                                            <rect key="frame" x="87.5" y="7" width="91.5" height="26.5"/>
+                                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
+                                                                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tia-Yq-5t6">
+                                                                                            <rect key="frame" x="195" y="3" width="277" height="35"/>
+                                                                                            <subviews>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.87999999523162842" contentMode="left" horizontalHuggingPriority="100" verticalHuggingPriority="251" text="Test Translation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUz-AU-6vT">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="277" height="20.5"/>
+                                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                                                    <nil key="textColor"/>
+                                                                                                    <nil key="highlightedColor"/>
+                                                                                                </label>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="100" verticalHuggingPriority="251" text="Test Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2DL-Ye-dYg">
+                                                                                                    <rect key="frame" x="0.0" y="20.5" width="277" height="14.5"/>
+                                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                                                    <nil key="textColor"/>
+                                                                                                    <nil key="highlightedColor"/>
+                                                                                                </label>
+                                                                                            </subviews>
+                                                                                        </stackView>
+                                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AN5-9w-jPu" customClass="BookProgressUIView" customModule="TranslationEditor" customModuleProvider="target">
+                                                                                            <rect key="frame" x="488" y="0.0" width="192" height="40.5"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="width" constant="192" id="xGc-BB-smq"/>
+                                                                                            </constraints>
+                                                                                        </view>
                                                                                     </subviews>
                                                                                 </stackView>
-                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AN5-9w-jPu" customClass="BookProgressUIView" customModule="TranslationEditor" customModuleProvider="target">
-                                                                                    <rect key="frame" x="488" y="0.0" width="192" height="40.5"/>
-                                                                                    <constraints>
-                                                                                        <constraint firstAttribute="width" constant="192" id="xGc-BB-smq"/>
-                                                                                    </constraints>
-                                                                                </view>
                                                                             </subviews>
-                                                                        </stackView>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="mvm-r5-vkT" secondAttribute="bottom" constant="8" id="ZkC-uv-8Q6"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="mvm-r5-vkT" secondAttribute="trailing" constant="16" id="d5G-2i-gfr"/>
-                                                                        <constraint firstItem="mvm-r5-vkT" firstAttribute="top" secondItem="r8w-6k-53f" secondAttribute="top" constant="8" id="iL5-Aw-szW"/>
-                                                                        <constraint firstItem="mvm-r5-vkT" firstAttribute="leading" secondItem="r8w-6k-53f" secondAttribute="leading" constant="16" id="pqJ-R2-xL8"/>
-                                                                    </constraints>
-                                                                </tableViewCellContentView>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="bottom" secondItem="mvm-r5-vkT" secondAttribute="bottom" constant="8" id="ZkC-uv-8Q6"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="mvm-r5-vkT" secondAttribute="trailing" constant="16" id="d5G-2i-gfr"/>
+                                                                                <constraint firstItem="mvm-r5-vkT" firstAttribute="top" secondItem="r8w-6k-53f" secondAttribute="top" constant="8" id="iL5-Aw-szW"/>
+                                                                                <constraint firstItem="mvm-r5-vkT" firstAttribute="leading" secondItem="r8w-6k-53f" secondAttribute="leading" constant="16" id="pqJ-R2-xL8"/>
+                                                                            </constraints>
+                                                                        </tableViewCellContentView>
+                                                                        <connections>
+                                                                            <outlet property="bookLabel" destination="n2m-GN-bIw" id="Mi4-nM-CzL"/>
+                                                                            <outlet property="identifierLabel" destination="wUz-AU-6vT" id="EQ9-7F-DHM"/>
+                                                                            <outlet property="languageLabel" destination="h6j-jQ-28W" id="839-Fq-fHa"/>
+                                                                            <outlet property="progressView" destination="AN5-9w-jPu" id="yyf-4d-EL2"/>
+                                                                            <outlet property="projectLabel" destination="2DL-Ye-dYg" id="qGy-Po-DMq"/>
+                                                                        </connections>
+                                                                    </tableViewCell>
+                                                                </prototypes>
+                                                            </tableView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="tFb-oh-tcP">
+                                                        <rect key="frame" x="0.0" y="641.5" width="712" height="54.5"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="z4g-i6-zSB">
+                                                                <rect key="frame" x="0.0" y="0.0" width="348" height="54.5"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Nickname*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SD-c4-9aN">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="348" height="20.5"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DN7-cN-NXz">
+                                                                        <rect key="frame" x="0.0" y="24.5" width="348" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <connections>
+                                                                            <action selector="bookNameChanged:" destination="jRE-kJ-8QQ" eventType="editingDidEnd" id="kXU-bm-nJw"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAS-pL-VyU">
+                                                                <rect key="frame" x="364" y="0.0" width="348" height="54.5"/>
+                                                                <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                                <state key="normal" title="Import">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </state>
                                                                 <connections>
-                                                                    <outlet property="bookLabel" destination="n2m-GN-bIw" id="Mi4-nM-CzL"/>
-                                                                    <outlet property="identifierLabel" destination="wUz-AU-6vT" id="EQ9-7F-DHM"/>
-                                                                    <outlet property="languageLabel" destination="h6j-jQ-28W" id="839-Fq-fHa"/>
-                                                                    <outlet property="progressView" destination="AN5-9w-jPu" id="yyf-4d-EL2"/>
-                                                                    <outlet property="projectLabel" destination="2DL-Ye-dYg" id="qGy-Po-DMq"/>
+                                                                    <action selector="importButtonPressed:" destination="jRE-kJ-8QQ" eventType="touchUpInside" id="otx-iS-dUe"/>
                                                                 </connections>
-                                                            </tableViewCell>
-                                                        </prototypes>
-                                                    </tableView>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -182,17 +221,19 @@
                             <constraint firstItem="JS0-sm-3UP" firstAttribute="leading" secondItem="iQn-s2-sqd" secondAttribute="leading" id="1E7-j1-hl3"/>
                             <constraint firstItem="EsM-m0-YXJ" firstAttribute="top" secondItem="yA3-Zr-TLc" secondAttribute="bottom" constant="16" id="GCc-OI-isV"/>
                             <constraint firstAttribute="trailing" secondItem="JS0-sm-3UP" secondAttribute="trailing" id="JDh-FZ-aM8"/>
-                            <constraint firstItem="yA3-Zr-TLc" firstAttribute="top" secondItem="JS0-sm-3UP" secondAttribute="bottom" constant="8" id="Jcy-Eg-N45"/>
+                            <constraint firstItem="yA3-Zr-TLc" firstAttribute="top" secondItem="JS0-sm-3UP" secondAttribute="bottom" constant="12" id="Jcy-Eg-N45"/>
                             <constraint firstItem="JS0-sm-3UP" firstAttribute="top" secondItem="iQn-s2-sqd" secondAttribute="top" id="KmJ-X9-JOJ"/>
                             <constraint firstItem="yA3-Zr-TLc" firstAttribute="leading" secondItem="iQn-s2-sqd" secondAttribute="leadingMargin" id="t2a-rl-sO5"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="bookFilterView" destination="hyb-El-Joj" id="cnY-Ew-ZaC"/>
+                        <outlet property="bookNameField" destination="DN7-cN-NXz" id="gNd-Ew-nTT"/>
                         <outlet property="bookSelectionTable" destination="h1N-6x-c60" id="0PJ-X0-Gsa"/>
                         <outlet property="contentBottomConstraint" destination="GCc-OI-isV" id="oFl-JK-GEP"/>
                         <outlet property="contentTopConstraint" destination="Jcy-Eg-N45" id="nTD-zX-UUa"/>
                         <outlet property="contentView" destination="yA3-Zr-TLc" id="0LQ-TY-sUg"/>
+                        <outlet property="importButton" destination="LAS-pL-VyU" id="IIW-pb-6nt"/>
                         <outlet property="languageFilterView" destination="ala-Rm-q2w" id="7Xk-Zx-GMf"/>
                     </connections>
                 </viewController>

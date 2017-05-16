@@ -525,22 +525,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			{
 				print("STATUS: Creates a new target translation for the book")
 				
-				let emptyCopy = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId, resourceName: nicknameField.text.or(book.identifier))
-				
-				// Creates a set of notes for the new translation too
-				// Creates the resource
-				let resource = ResourceCollection(languageId: project.languageId, bookId: emptyCopy.book.idString, category: .notes, name: "Notes")
-				
-				// Creates the notes
-				let notes = emptyCopy.paragraphs.map { ParagraphNotes(collectionId: resource.idString, chapterIndex: $0.chapterIndex, pathId: $0.pathId) }
-				
-				// Pushes the new data to the database
-				try DATABASE.tryTransaction
-				{
-					try resource.push()
-					try notes.forEach { try $0.push() }
+				_ = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId, resourceName: nicknameField.text.or(book.identifier))
 				}
-			}
 			
 			// TODO: Set the selected book to that just imported
 			dismiss(animated: true, completion: nil)

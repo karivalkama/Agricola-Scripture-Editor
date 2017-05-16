@@ -81,6 +81,7 @@ final class Book: Storable
 	
 	// Creates a copy of this book that contains the same paragraph formatting but none of the original content
 	// The resulting book data is saved into database as part of this operation
+	// Also creates a binding for the new book, as well as notes
 	func makeEmptyCopy(projectId: String, identifier: String, languageId: String, userId: String, resourceName: String) throws -> BookData
 	{
 		// Creates the new book instance
@@ -107,15 +108,21 @@ final class Book: Storable
 		}
 		
 		// Creates a new resource for the binding
-		let resource = ResourceCollection(languageId: self.languageId, bookId: newBook.idString, category: .sourceTranslation, name: resourceName)
+		let bindingResource = ResourceCollection(languageId: self.languageId, bookId: newBook.idString, category: .sourceTranslation, name: resourceName)
+		let binding = ParagraphBinding(resourceCollectionId: bindingResource.idString, sourceBookId: idString, targetBookId: newBook.idString, bindings: bindings, creatorId: userId)
 		
-		let binding = ParagraphBinding(resourceCollectionId: resource.idString, sourceBookId: idString, targetBookId: newBook.idString, bindings: bindings, creatorId: userId)
+		// Creates a set of notes for the new translation too
+		let notesResource = ResourceCollection(languageId: self.languageId, bookId: newBook.idString, category: .notes, name: "Notes")
+		let notes = newParagraphs.map { ParagraphNotes(collectionId: notesResource.idString, chapterIndex: $0.chapterIndex, pathId: $0.pathId) }
 		
 		// Saves the resource data to the database
 		try DATABASE.tryTransaction
 		{
-			try resource.push()
+			try bindingResource.push()
 			try binding.push()
+			
+			try notesResource.push()
+			try notes.forEach { try $0.push() }
 		}
 		
 		return BookData(book: newBook, paragraphs: newParagraphs)

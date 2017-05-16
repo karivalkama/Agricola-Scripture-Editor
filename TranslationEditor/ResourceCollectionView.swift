@@ -13,42 +13,48 @@ final class ResourceCollectionView: View
 	// TYPES	-------------------
 	
 	typealias Queried = ResourceCollection
+	typealias MyQuery = Query<ResourceCollectionView>
 	
 	
 	// ATTRIBUTES	---------------
 	
+	static let KEY_PROJECT = "project"
 	static let KEY_BOOK = "book"
 	static let KEY_CATEGORY = "category"
 	static let KEY_NAME = "name"
 	
 	static let instance: ResourceCollectionView = ResourceCollectionView()
-	static let keyNames = [KEY_BOOK, KEY_CATEGORY, KEY_NAME]
+	static let keyNames = [KEY_PROJECT, KEY_BOOK, KEY_CATEGORY, KEY_NAME]
 	
-	let view: CBLView
+	let view = DATABASE.viewNamed("resource_collection_view")
 	
 	
 	// INIT	-----------------------
 	
 	private init()
 	{
-		view = DATABASE.viewNamed("resource_collection_view")
 		view.setMapBlock(createMapBlock
 		{
 			collection, emit in
 			
-			// Key = book id, category (raw), name
-			let key: [Any] = [collection.bookId, collection.category.rawValue, collection.name]
+			// Key = project id, book id, category (raw), name
+			let key: [Any] = [Book.projectId(fromId: collection.bookId), collection.bookId, collection.category.rawValue, collection.name]
 			emit(key, nil)
 			
-		}, version: "2")
+		}, version: "3")
 	}
 	
 	
 	// OTHER METHODS	----------
 	
-	func collectionQuery(bookId: String, category: ResourceCategory? = nil, name: String? = nil) -> Query<ResourceCollectionView>
+	func collectionQuery(bookId: String, category: ResourceCategory? = nil, name: String? = nil) -> MyQuery
 	{
-		let keys = ResourceCollectionView.makeKeys(from: [bookId, category?.rawValue, name])
+		let keys = ResourceCollectionView.makeKeys(from: [Book.projectId(fromId: bookId), bookId, category?.rawValue, name])
 		return createQuery(withKeys: keys)
+	}
+	
+	func collectionQuery(projectId: String) -> MyQuery
+	{
+		return createQuery(withKeys: ResourceCollectionView.makeKeys(from: [projectId]))
 	}
 }

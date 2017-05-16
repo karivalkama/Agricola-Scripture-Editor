@@ -105,6 +105,16 @@ class LiveQueryManager<QueryTarget: View>: NSObject
 			listeners.append(listener)
 		}
 	}
+	
+	func addListener(calling update: @escaping ([QueryTarget.Queried]) -> ())
+	{
+		addListener(AnyLiveQueryListener(ObjectListenerClosure<QueryTarget>(function: update)))
+	}
+	
+	func addListener(calling update: @escaping ([Row<QueryTarget>]) -> ())
+	{
+		addListener(AnyLiveQueryListener(RowListenerClosure<QueryTarget>(function: update)))
+	}
 
 	// Removes a listener from this manager. This manager won't be calling the listener in the future
 	func removeListener(_ listener: AnyLiveQueryListener<QueryTarget>)
@@ -122,5 +132,68 @@ class LiveQueryManager<QueryTarget: View>: NSObject
 	func removeListeners()
 	{
 		listeners = []
+	}
+}
+
+fileprivate class ObjectListenerClosure<T: View>: LiveQueryListener
+{
+	// TYPES	------------
+	
+	typealias QueryTarget = T
+	
+	
+	// ATTRIBUTES	--------
+	
+	private let f: ([T.Queried]) -> ()
+	
+	
+	// INIT	----------------
+	
+	init(function: @escaping ([T.Queried]) -> ())
+	{
+		self.f = function
+	}
+	
+	
+	// IMPLEMENTED METHODS	--
+	
+	func rowsUpdated(rows: [Row<T>])
+	{
+		do
+		{
+			f(try rows.map { try $0.object() })
+		}
+		catch
+		{
+			print("ERROR: Failed to retrieve object data from query. \(error)")
+		}
+	}
+}
+
+fileprivate class RowListenerClosure<T: View>: LiveQueryListener
+{
+	// TYPES	------------
+	
+	typealias QueryTarget = T
+	
+	
+	// ATTRIBUTES	--------
+	
+	private let f: ([Row<T>]) -> ()
+	
+	
+	// INIT	----------------
+	
+	init(function: @escaping ([Row<T>]) -> ())
+	{
+		self.f = function
+	}
+	
+	
+	// IMPLEMENTED METHODS	---
+	
+	func rowsUpdated(rows: [Row<T>])
+	{
+		f(rows)
 	}
 }

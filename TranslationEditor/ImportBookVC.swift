@@ -9,7 +9,7 @@
 import UIKit
 
 // This view controller is used for importing books from other projects
-class ImportBookVC: UIViewController, UITableViewDataSource
+class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener
 {
 	// OUTLETS	------------------
 	
@@ -19,11 +19,19 @@ class ImportBookVC: UIViewController, UITableViewDataSource
 	@IBOutlet weak var contentView: KeyboardReactiveView!
 	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var bookNameField: UITextField!
+	@IBOutlet weak var importButton: UIButton!
+	
+	
+	// TYPES	------------------
+	
+	typealias QueryTarget = ProjectBooksView
 	
 	
 	// ATTRIBUTES	--------------
 	
 	private var books = [Book]()
+	// Key = book id, value = book progress
 	private var progress = [String: BookProgressStatus]()
 	// Key = language id, value = language name
 	private var languageNames = [String: String]()
@@ -36,6 +44,8 @@ class ImportBookVC: UIViewController, UITableViewDataSource
 	
 	private var displayedOptions = [(book: Book, languageName: String, projectName: String, progress: BookProgressStatus?)]()
 	
+	private var bookQueryManager: LiveQueryManager<ProjectBooksView>?
+	
 	
 	// LOAD	----------------------
 	
@@ -43,8 +53,33 @@ class ImportBookVC: UIViewController, UITableViewDataSource
 	{
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+		bookQueryManager = ProjectBooksView.instance.createQuery().liveQueryManager
+		
+		bookSelectionTable.dataSource = self
     }
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		bookQueryManager?.addListener(AnyLiveQueryListener(self))
+		bookQueryManager?.start()
+		
+		// Updates the book progress data
+		do
+		{
+			progress = try BookProgressView.instance.progressForAllBooks()
+			update()
+		}
+		catch
+		{
+			print("ERROR: Failed to retrieve book progress data. \(error)")
+		}
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		bookQueryManager?.stop()
+		bookQueryManager?.removeListeners()
+	}
 	
 	
 	// ACTIONS	------------------
@@ -54,6 +89,10 @@ class ImportBookVC: UIViewController, UITableViewDataSource
 		dismiss(animated: true, completion: nil)
 	}
 	
+	@IBAction func bookNameChanged(_ sender: Any) {
+	}
+	@IBAction func importButtonPressed(_ sender: Any) {
+	}
     
 
 	// IMPLEMENTED METHODS	------
@@ -73,8 +112,34 @@ class ImportBookVC: UIViewController, UITableViewDataSource
 		return cell
 	}
 	
+	func rowsUpdated(rows: [Row<ProjectBooksView>])
+	{
+		do
+		{
+			books = try rows.map { try $0.object() }
+			update()
+		}
+		catch
+		{
+			print("ERROR: Failed to read through book data. \(error)")
+		}
+	}
+	
 	
 	// OTHER METHODS	----------
+	
+	private func resourceRowsUpdated(rows: [Row<ResourceCollectionView>])
+	{
+		do
+		{
+			alreadyImportedIds = try rows.flatMap { $0.id }.flatMap { try ParagraphBinding.get(resourceCollectionId: $0)?.idString }
+			update()
+		}
+		catch
+		{
+			print("ERROR: Failed to read through imported resource data. \(error)")
+		}
+	}
 	
 	private func update()
 	{
@@ -177,4 +242,28 @@ class ImportBookVC: UIViewController, UITableViewDataSource
 			return ""
 		}
 	}
+	
+	/*
+	private func importBook(_ book: Book)
+	{
+		do
+		{
+			guard let projectId = Session.instance.projectId, let project = try Project.get(projectId) else
+			{
+				print("ERROR: No project to insert a book into.")
+				return
+			}
+			
+			let targetTranslations = try project.targetTranslationQuery(bookCode: book.code).resultObjects()
+			
+			
+			// If there is no target translation for the book already, creates one by making an empty copy
+			
+		}
+		catch
+		{
+			print("ERROR: Book import failed. \(error)")
+		}
+	}
+*/
 }
