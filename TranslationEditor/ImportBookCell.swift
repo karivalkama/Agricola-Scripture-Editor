@@ -20,14 +20,28 @@ class ImportBookCell: UITableViewCell
 	@IBOutlet weak var progressView: BookProgressUIView!
 	
 	
+	// ATTRIBUTES	---------------
+	
+	static let identifier = "ImportBookCell"
+	
+	
 	// OTHER METHODS	-----------
 	
-	func configure(languageName: String, code: BookCode, identifier: String, projectName: String, progress: BookProgressStatus)
+	func configure(languageName: String, code: BookCode, identifier: String, projectName: String, progress: BookProgressStatus?)
 	{
 		languageLabel.text = languageName
 		bookLabel.text = code.description
 		identifierLabel.text = identifier
 		projectLabel.text = projectName
-		progressView.configure(status: progress)
+		
+		if let progress = progress
+		{
+			progressView.isHidden = false
+			progressView.configure(status: progress)
+		}
+		else
+		{
+			progressView.isHidden = true
+		}
 	}
 }

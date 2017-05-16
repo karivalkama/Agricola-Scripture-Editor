@@ -18,6 +18,20 @@ protocol Comparable: Equatable
 
 extension Comparable
 {
+	// Compares the two elements with '<' operator. If the result is ambiguous (elements are equal), returns nil
+	// These can be combined to create a more cohesive check
+	func compare(with other: Self) -> Bool?
+	{
+		if self == other
+		{
+			return nil
+		}
+		else
+		{
+			return self < other
+		}
+	}
+	
 	static func <=(_ left: Self, _ right: Self) -> Bool
 	{
 		return left == right || left < right
@@ -31,6 +45,22 @@ extension Comparable
 	static func >=(_ left: Self, _ right: Self) -> Bool
 	{
 		return !(left < right)
+	}
+	
+	// Compares multiple value arrays going left to right
+	// If the first two elements are equal, moves to the next two and so on
+	// Returns nil for equal arrays
+	static func compare(_ left: [Self], and right: [Self]) -> Bool?
+	{
+		for i in 0 ..< min(left.count, right.count)
+		{
+			if let result = left[i].compare(with: right[i])
+			{
+				return result
+			}
+		}
+		
+		return left.count.compare(with: right.count)
 	}
 }
 

@@ -9,7 +9,7 @@
 import Foundation
 
 // This is a simple struct for storing book completion status
-struct BookProgressStatus
+struct BookProgressStatus: Comparable
 {
 	// ATTRIBUTES	---------------
 	
@@ -45,5 +45,18 @@ struct BookProgressStatus
 	var averageCommitsPerParagraph: Double
 	{
 		return Double(totalCommits) / Double(filledParagraphAmount)
+	}
+	
+	
+	// OPERATORS	---------------
+	
+	static func ==(_ left: BookProgressStatus, _ right: BookProgressStatus) -> Bool
+	{
+		return left.paragraphAmount == right.paragraphAmount && left.emptyParagraphAmount == right.emptyParagraphAmount && left.totalCommits == right.totalCommits
+	}
+	
+	static func <(_ left: BookProgressStatus, _ right: BookProgressStatus) -> Bool
+	{
+		return left.fullness.compare(with: right.fullness) ?? left.averageCommitsPerParagraph.compare(with: right.averageCommitsPerParagraph) ?? left.totalCommits.compare(with: right.totalCommits) ?? (left.paragraphAmount < right.paragraphAmount)
 	}
 }
