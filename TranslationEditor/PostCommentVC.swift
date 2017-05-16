@@ -19,6 +19,9 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 	@IBOutlet weak var verseTable: UITableView!
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var originalCommentTitleLabel: UILabel!
+	@IBOutlet weak var contentView: KeyboardReactiveView!
+	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
 	
 	
 	// ATTRIBUTES	--------
@@ -101,7 +104,21 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 		{
 			print("ERROR: Failed to read database data. \(error)")
 		}
+		
+		contentView.configure(mainView: view, elements: [commentTextView, postButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
     }
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		super.viewDidAppear(animated)
+		contentView.startKeyboardListening()
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		super.viewDidDisappear(animated)
+		contentView.endKeyboardListening()
+	}
 	
 	
 	// IB ACTIONS	---------

@@ -716,7 +716,7 @@
                                                                 <rect key="frame" x="0.0" y="28" width="557" height="87"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sG3-be-bJb" id="EcI-Gu-8tF">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="557" height="86"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="557" height="86.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wh2-3I-Lsf" userLabel="Content Stack View">
@@ -764,7 +764,7 @@
                                                                 <rect key="frame" x="0.0" y="115" width="557" height="176"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vde-PQ-RQ0" id="TeY-rK-FQx">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="557" height="175"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="557" height="175.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="A6x-z7-cDy" userLabel="Content Stack View">

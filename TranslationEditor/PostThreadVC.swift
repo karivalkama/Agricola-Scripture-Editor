@@ -9,16 +9,18 @@
 import UIKit
 import HTagView
 
-class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, HTagViewDataSource, UITextViewDelegate
+class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate
 {
 	// IB OUTLETS	-----------
 	
 	@IBOutlet weak var subjectTextField: UITextField!
 	@IBOutlet weak var versePickerView: UIPickerView!
 	@IBOutlet weak var commentTextView: UITextView!
-	@IBOutlet weak var tagView: HTagView!
 	@IBOutlet weak var postButton: BasicButton!
 	@IBOutlet weak var contextTableView: UITableView!
+	@IBOutlet weak var contentView: KeyboardReactiveView!
+	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
 	
 	
 	// ATTRIBUTES	-----------
@@ -31,7 +33,7 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	
 	private var contextDS: VerseTableDS?
 	
-	private let tags = ["These", "Are", "Just", "Placeholder", "Tags"]
+	// private let tags = ["These", "Are", "Just", "Placeholder", "Tags"]
 	
 	
 	// COMPUTED PROPS	-------
@@ -74,13 +76,14 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		versePickerView.dataSource = self
 		versePickerView.delegate = self
 		
+		/*
 		tagView.dataSource = self
 		tagView.tagMainTextColor = Colour.Text.Black.primary.asColour
 		tagView.tagMainBackColor = Colour.Primary.asColour
 		tagView.tagSecondTextColor = Colour.Text.Black.secondary.asColour
 		tagView.tagSecondBackColor = Colour.Primary.light.asColour
 		tagView.tagBorderColor = Colour.Text.Black.secondary.asColour.cgColor
-		
+		*/
 		postButton.isEnabled = false
 		
 		contextTableView.estimatedRowHeight = 64
@@ -89,7 +92,21 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		contextDS = VerseTableDS(originalParagraph: originalParagraph, resourceData: contextData)
 		contextTableView.register(UINib(nibName: "VerseDataCell", bundle: nil), forCellReuseIdentifier: VerseCell.identifier)
 		contextTableView.dataSource = contextDS
+		
+		contentView.configure(mainView: view, elements: [subjectTextField, versePickerView, commentTextView, postButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
     }
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		super.viewDidAppear(animated)
+		contentView.startKeyboardListening()
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		super.viewDidDisappear(animated)
+		contentView.endKeyboardListening()
+	}
 
 	
 	// IB ACTIONS	-----------
@@ -200,6 +217,7 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		contextTableView.reloadData()
 	}
 	
+	/*
 	func numberOfTags(_ tagView: HTagView) -> Int
 	{
 		return tags.count
@@ -213,7 +231,7 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	func tagView(_ tagView: HTagView, tagTypeAtIndex index: Int) -> HTagType
 	{
 		return .select
-	}
+	}*/
 	
 	
 	// OTHER METHODS	------

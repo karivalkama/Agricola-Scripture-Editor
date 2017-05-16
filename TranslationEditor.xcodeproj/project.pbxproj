@@ -114,6 +114,7 @@
 		7C60705B1E5D705B007718BC /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60705A1E5D705B007718BC /* AvatarView.swift */; };
 		7C60705D1E5D79D8007718BC /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60705C1E5D79D8007718BC /* AvatarCell.swift */; };
 		7C6070601E5D89E0007718BC /* Alpine.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C60705F1E5D89E0007718BC /* Alpine.ttf */; };
+		7C64E1621ECAD9BB00E1580C /* ImportBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C64E1611ECAD9BB00E1580C /* ImportBookCell.swift */; };
 		7C6B7B181E645EC00005AD43 /* FilteredMultiSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B7B171E645EC00005AD43 /* FilteredMultiSelection.xib */; };
 		7C6B7B1C1E6554920005AD43 /* LabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B7B1B1E6554920005AD43 /* LabelCell.xib */; };
 		7C6B7B1E1E6555140005AD43 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B7B1D1E6555140005AD43 /* LabelCell.swift */; };
@@ -356,6 +357,7 @@
 		7C60705A1E5D705B007718BC /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		7C60705C1E5D79D8007718BC /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
 		7C60705F1E5D89E0007718BC /* Alpine.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Alpine.ttf; sourceTree = "<group>"; };
+		7C64E1611ECAD9BB00E1580C /* ImportBookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportBookCell.swift; sourceTree = "<group>"; };
 		7C6B7B171E645EC00005AD43 /* FilteredMultiSelection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilteredMultiSelection.xib; sourceTree = "<group>"; };
 		7C6B7B1B1E6554920005AD43 /* LabelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelCell.xib; sourceTree = "<group>"; };
 		7C6B7B1D1E6555140005AD43 /* LabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
@@ -886,6 +888,7 @@
 			isa = PBXGroup;
 			children = (
 				7C7834CA1E977D1C000556B0 /* BookCell.swift */,
+				7C64E1611ECAD9BB00E1580C /* ImportBookCell.swift */,
 			);
 			name = "Main Menu";
 			sourceTree = "<group>";
@@ -1316,6 +1319,7 @@
 				7C1515181E94D58000419DEA /* USXWriter.swift in Sources */,
 				7CCC00EA1D9BD3FC00F0562E /* VerseError.swift in Sources */,
 				7C40DF6C1DEC59AB0035B92E /* Book.swift in Sources */,
+				7C64E1621ECAD9BB00E1580C /* ImportBookCell.swift in Sources */,
 				7C40DF781DED6C530035B92E /* Paragraph.swift in Sources */,
 				7C0130C21E3F2D520053C5C2 /* ProjectSettings.swift in Sources */,
 				7CA1BAA01E2F9C2100611FED /* NotesThreadView.swift in Sources */,

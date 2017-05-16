@@ -13,17 +13,36 @@ class ImportBookVC: UIViewController
 {
 	// OUTLETS	------------------
 	
+	@IBOutlet weak var languageFilterView: FilteredMultiSelection!
+	@IBOutlet weak var bookFilterView: FilteredMultiSelection!
+	@IBOutlet weak var bookSelectionTable: UITableView!
+	@IBOutlet weak var contentView: KeyboardReactiveView!
+	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
+	
 	
 	// ATTRIBUTES	--------------
 	
 	
+	
+	
 	// LOAD	----------------------
 	
-    override func viewDidLoad() {
+    override func viewDidLoad()
+	{
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+	
+	
+	// ACTIONS	------------------
+	
+	@IBAction func backButtonPressed(_ sender: Any)
+	{
+		
+	}
+	
     
 
 	// IMPLEMENTED METHODS	------

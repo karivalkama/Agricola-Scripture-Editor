@@ -152,6 +152,12 @@ final class BookProgressView: View
 		return try collectProgressResults(query: createProgressQuery(bookId: bookId), groupByKey: BookProgressView.KEY_CHAPTER, valueToKey: { $0.int() })
 	}
 	
+	// Retrieves progress status for all books
+	func progressForAllBooks() throws -> [String: BookProgressStatus]
+	{
+		return try collectProgressResults(query: createQuery(ofType: .reduce), groupByKey: BookProgressView.KEY_BOOK, valueToKey: { $0.string() })
+	}
+	
 	private func collectProgressResults<T: Hashable>(query: MyQuery, groupByKey: String, valueToKey: (PropertyValue) -> T) throws -> [T: BookProgressStatus]
 	{
 		var groupedQuery = query

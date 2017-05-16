@@ -23,6 +23,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	@IBOutlet weak var resourceTableView: UITableView!
 	@IBOutlet weak var resourceSegmentControl: UISegmentedControl!
 	@IBOutlet weak var topUserView: TopUserView!
+	@IBOutlet weak var titleLabel: UILabel!
 	
 	
 	// PROPERTIES	---------
@@ -134,6 +135,18 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 			{
 				print("ERROR: Couldn't read avatar information. \(error)")
 			}
+		}
+		
+		do
+		{
+			if let language = try Language.get(book.languageId)
+			{
+				titleLabel.text = "\(language.name): \(book.identifier)"
+			}
+		}
+		catch
+		{
+			print("ERROR: Failed to retrieve target language data. \(error)")
 		}
 	}
 	
