@@ -152,6 +152,16 @@ extension UITextView
 	}
 }
 
+extension UITextField
+{
+	// Whether the text field is still empty
+	var isEmpty: Bool { return trimmedText.isEmpty }
+	
+	// A trimmed version of the text field contents
+	// An empty string is returned for empty fields
+	var trimmedText: String { return (text ?? "").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
+}
+
 extension UIFont
 {
 	var isBold: Bool { return hasTrait(.traitBold) }

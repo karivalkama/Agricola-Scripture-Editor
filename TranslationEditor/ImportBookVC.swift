@@ -9,7 +9,7 @@
 import UIKit
 
 // This view controller is used for importing books from other projects
-class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener
+class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, UITableViewDelegate
 {
 	// OUTLETS	------------------
 	
@@ -46,6 +46,8 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener
 	
 	private var bookQueryManager: LiveQueryManager<ProjectBooksView>?
 	
+	private var selectedBook: Book?
+	
 	
 	// LOAD	----------------------
 	
@@ -56,6 +58,9 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener
 		bookQueryManager = ProjectBooksView.instance.createQuery().liveQueryManager
 		
 		bookSelectionTable.dataSource = self
+		bookSelectionTable.delegate = self
+		
+		contentView.configure(mainView: view, elements: [languageFilterView, bookFilterView, bookNameField, importButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
     }
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -73,12 +78,16 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener
 		{
 			print("ERROR: Failed to retrieve book progress data. \(error)")
 		}
+		
+		contentView.startKeyboardListening()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{
 		bookQueryManager?.stop()
 		bookQueryManager?.removeListeners()
+		
+		contentView.endKeyboardListening()
 	}
 	
 	
@@ -89,9 +98,24 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener
 		dismiss(animated: true, completion: nil)
 	}
 	
-	@IBAction func bookNameChanged(_ sender: Any) {
+	@IBAction func bookNameChanged(_ sender: Any)
+	{
+		updateImportButtonStatus()
 	}
-	@IBAction func importButtonPressed(_ sender: Any) {
+	
+	@IBAction func importButtonPressed(_ sender: Any)
+	{
+		guard let book = selectedBook else
+		{
+			print("ERROR: Trying to import book before selecting one first")
+			return
+		}
+		
+		if importBook(book)
+		{
+			// TODO: Open the newly updated book
+			dismiss(animated: true, completion: nil)
+		}
 	}
     
 
@@ -112,6 +136,12 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener
 		return cell
 	}
 	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+	{
+		selectedBook = displayedOptions[indexPath.row].book
+		updateImportButtonStatus()
+	}
+	
 	func rowsUpdated(rows: [Row<ProjectBooksView>])
 	{
 		do
@@ -127,6 +157,11 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener
 	
 	
 	// OTHER METHODS	----------
+	
+	private func updateImportButtonStatus()
+	{
+		importButton.isEnabled = selectedBook != nil && !bookNameField.isEmpty
+	}
 	
 	private func resourceRowsUpdated(rows: [Row<ResourceCollectionView>])
 	{
@@ -243,27 +278,89 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener
 		}
 	}
 	
-	/*
-	private func importBook(_ book: Book)
+	private func importBook(_ book: Book) -> Bool
 	{
 		do
 		{
+			// The new book cannot contain any conflicts in order to be imported
+			guard try !ParagraphHistoryView.instance.rangeContainsConflicts(bookId: book.idString) else
+			{
+				displayAlert(withIdentifier: "ErrorAlert", storyBoardId: "MainMenu")
+				{
+					vc in
+					
+					if let errorVC = vc as? ErrorAlertVC
+					{
+						errorVC.configure(heading: "Conflicts in Selected Book", text: "The selected book, \(book.code): \(book.identifier) contains conflicts and cannot be imported at this time.")
+					}
+				}
+				return false
+			}
+			
 			guard let projectId = Session.instance.projectId, let project = try Project.get(projectId) else
 			{
 				print("ERROR: No project to insert a book into.")
-				return
+				return false
 			}
 			
 			let targetTranslations = try project.targetTranslationQuery(bookCode: book.code).resultObjects()
 			
+			// Makes sure there are no conflicts within the target translations
+			guard try targetTranslations.forAll({ try !ParagraphHistoryView.instance.rangeContainsConflicts(bookId: $0.idString) }) else
+			{
+				displayAlert(withIdentifier: "ErrorAlert", storyBoardId: "MainMenu")
+				{
+					vc in
+					
+					if let errorVC = vc as? ErrorAlertVC
+					{
+						errorVC.configure(heading: "Conflicts in Target Translation", text: "Target translation of \(book.code) contains conflicts. Please resolve those conlicts first and then try again.")
+					}
+				}
+				
+				return false
+			}
+			
+			guard let avatarId = Session.instance.avatarId else
+			{
+				print("ERROR: Avatar must be selected before data can be saved")
+				return false
+			}
+			
+			// Updates bindings for each of the target translations
+			var newResources = [ResourceCollection]()
+			var newBindings = [ParagraphBinding]()
+			
+			for targetTranslation in targetTranslations
+			{
+				let resource = ResourceCollection(languageId: book.languageId, bookId: targetTranslation.idString, category: .sourceTranslation, name: bookNameField.trimmedText)
+				let bindings = match(try ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects(), and: try ParagraphView.instance.latestParagraphQuery(bookId: targetTranslation.idString).resultObjects()).map { ($0.source.idString, $0.target.idString) }
+				
+				newResources.add(resource)
+				newBindings.add(ParagraphBinding(resourceCollectionId: resource.idString, sourceBookId: book.idString, targetBookId: targetTranslation.idString, bindings: bindings, creatorId: avatarId))
+			}
+			
+			if !newResources.isEmpty
+			{
+				try DATABASE.tryTransaction
+				{
+					try newResources.forEach { try $0.push() }
+					try newBindings.forEach { try $0.push() }
+				}
+			}
 			
 			// If there is no target translation for the book already, creates one by making an empty copy
+			if targetTranslations.isEmpty
+			{
+				_ = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId, resourceName: bookNameField.trimmedText)
+			}
 			
+			return true
 		}
 		catch
 		{
 			print("ERROR: Book import failed. \(error)")
+			return false
 		}
 	}
-*/
 }

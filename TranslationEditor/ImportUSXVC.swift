@@ -526,7 +526,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				print("STATUS: Creates a new target translation for the book")
 				
 				_ = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId, resourceName: nicknameField.text.or(book.identifier))
-				}
+			}
 			
 			// TODO: Set the selected book to that just imported
 			dismiss(animated: true, completion: nil)
