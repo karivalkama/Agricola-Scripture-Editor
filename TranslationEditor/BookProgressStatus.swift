@@ -44,7 +44,14 @@ struct BookProgressStatus: Comparable
 	// This reflects the quality of the translation
 	var averageCommitsPerParagraph: Double
 	{
-		return Double(totalCommits) / Double(filledParagraphAmount)
+		if filledParagraphAmount == 0
+		{
+			return 0
+		}
+		else
+		{
+			return Double(totalCommits) / Double(filledParagraphAmount)
+		}
 	}
 	
 	

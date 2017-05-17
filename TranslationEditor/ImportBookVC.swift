@@ -47,6 +47,9 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	private var bookQueryManager: LiveQueryManager<ProjectBooksView>?
 	private var resourceQueryManager: LiveQueryManager<ResourceCollectionView>?
 	
+	private var languageFilterManager: LanguageFilterManager?
+	private var bookFilterManager: BookFilterManager?
+	
 	private var selectedBook: Book?
 	
 	
@@ -63,6 +66,28 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		
 		contentView.configure(mainView: view, elements: [languageFilterView, bookFilterView, bookNameField, importButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
 		
+		bookFilterManager = BookFilterManager()
+		bookFilterManager?.delegate = self
+		bookFilterView.dataSource = bookFilterManager
+		bookFilterView.delegate = bookFilterManager
+		
+		bookFilterView.reloadData()
+		
+		do
+		{
+			let languages = try LanguageView.instance.createQuery().resultObjects()
+			languageFilterManager = LanguageFilterManager(languages: languages)
+			languageFilterManager?.delegate = self
+			languageFilterView.dataSource = languageFilterManager
+			languageFilterView.delegate = languageFilterManager
+			
+			languageFilterView.reloadData()
+		}
+		catch
+		{
+			print("ERROR: Failed to retrieve language data. \(error)")
+		}
+		
 		guard let projectId = Session.instance.projectId else
 		{
 			print("ERROR: No project selected")
@@ -70,6 +95,7 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		}
 		
 		resourceQueryManager = ResourceCollectionView.instance.collectionQuery(projectId: projectId).liveQueryManager
+		updateImportButtonStatus()
     }
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -402,7 +428,7 @@ fileprivate class LanguageFilterManager: FilteredSelectionDataSource, FilteredMu
 	// ATTRIBUTES	-------------
 	
 	private let languages: [Language]
-	private weak var delegate: LanguageFilterDelegate?
+	weak var delegate: LanguageFilterDelegate?
 	
 	
 	// COMPUTED PROPERTIES	----
@@ -441,7 +467,7 @@ fileprivate class BookFilterManager: FilteredSelectionDataSource, FilteredMultiS
 	// ATTRIBUTES	-----------
 	
 	private let codes = BookCode.oldTestamentBooks + BookCode.newTestamentBooks
-	private weak var delegate: BookFilterDelegate?
+	weak var delegate: BookFilterDelegate?
 	
 	
 	// COMPUTED PROPERTIES	---

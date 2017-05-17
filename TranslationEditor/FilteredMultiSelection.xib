@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,14 +22,14 @@
             <rect key="frame" x="0.0" y="0.0" width="381" height="512"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="rPt-Xh-d4Z">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="rPt-Xh-d4Z">
                     <rect key="frame" x="0.0" y="0.0" width="381" height="512"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="TVa-2Q-ZeD">
-                            <rect key="frame" x="0.0" y="0.0" width="379" height="32"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TVa-2Q-ZeD">
+                            <rect key="frame" x="0.0" y="0.0" width="381" height="32"/>
                             <subviews>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r7a-mh-Tjm">
-                                    <rect key="frame" x="0.0" y="1" width="335" height="30"/>
+                                    <rect key="frame" x="0.0" y="1" width="341" height="30"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -37,10 +38,9 @@
                                     </connections>
                                 </textField>
                                 <imageView userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="m9O-t4-rN7">
-                                    <rect key="frame" x="339" y="4" width="40" height="24"/>
+                                    <rect key="frame" x="349" y="0.0" width="32" height="32"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="24" id="1dQ-ah-6ZD"/>
-                                        <constraint firstAttribute="width" constant="40" id="Ypm-cq-r45"/>
+                                        <constraint firstAttribute="width" secondItem="m9O-t4-rN7" secondAttribute="height" multiplier="1:1" id="Hka-r1-6gK"/>
                                     </constraints>
                                 </imageView>
                             </subviews>
@@ -51,12 +51,16 @@
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wLG-4W-ByU">
                             <rect key="frame" x="0.0" y="48" width="381" height="352"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="AY8-0T-Wvs"/>
+                            </constraints>
                             <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gLm-Tm-mGh" customClass="HTagView" customModule="HTagView">
                             <rect key="frame" x="0.0" y="416" width="381" height="96"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="96" id="fPd-tl-vSq"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="900" constant="48" id="5pZ-OK-0c7"/>
+                                <constraint firstAttribute="height" priority="750" constant="96" id="fPd-tl-vSq"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="marg">
@@ -80,14 +84,6 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="gLm-Tm-mGh" secondAttribute="trailing" id="Gya-o1-Qkc"/>
-                        <constraint firstItem="TVa-2Q-ZeD" firstAttribute="leading" secondItem="rPt-Xh-d4Z" secondAttribute="leading" id="Oja-vj-DF0"/>
-                        <constraint firstAttribute="trailing" secondItem="TVa-2Q-ZeD" secondAttribute="trailing" constant="2" id="SWd-KN-uH1"/>
-                        <constraint firstItem="wLG-4W-ByU" firstAttribute="leading" secondItem="rPt-Xh-d4Z" secondAttribute="leading" id="qRc-Pu-xPf"/>
-                        <constraint firstAttribute="trailing" secondItem="wLG-4W-ByU" secondAttribute="trailing" id="t9a-wf-bgQ"/>
-                        <constraint firstItem="gLm-Tm-mGh" firstAttribute="leading" secondItem="rPt-Xh-d4Z" secondAttribute="leading" id="vaL-85-Om4"/>
-                    </constraints>
                 </stackView>
             </subviews>
             <constraints>

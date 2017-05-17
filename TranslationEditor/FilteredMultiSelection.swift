@@ -137,7 +137,7 @@ protocol FilteredMultiSelectionDelegate: class
 		reloadData()
 	}
 	
-	private func reloadData()
+	func reloadData()
 	{
 		guard let dataSouce = dataSource else
 		{
