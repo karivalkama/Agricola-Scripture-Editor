@@ -20,3 +20,12 @@ protocol FilteredSelectionDataSource: class
 	// Checks whether the item at the specified index should be included in the target group of the provided filter
 	func indexIsIncludedInFilter(index: Int, filter: String) -> Bool
 }
+
+extension FilteredSelectionDataSource
+{
+	// By default, the filter is used with the labels
+	func indexIsIncludedInFilter(index: Int, filter: String) -> Bool
+	{
+		return labelForOption(atIndex: index).lowercased().contains(filter.lowercased())
+	}
+}

@@ -9,6 +9,12 @@
 import UIKit
 import HTagView
 
+protocol FilteredMultiSelectionDelegate: class
+{
+	// This function will be called whether the selection status in the multi selection changes
+	func onSelectionChange(selectedIndices: [Int])
+}
+
 // This UI element allows the user to pick multiple elements from a table that also supports filtering
 @IBDesignable class FilteredMultiSelection: CustomXibView, UITableViewDataSource, UITableViewDelegate, HTagViewDataSource, HTagViewDelegate, UITextFieldDelegate
 {
@@ -22,6 +28,7 @@ import HTagView
 	// ATTRIBUTES	-------------
 	
 	weak var dataSource: FilteredSelectionDataSource?
+	weak var delegate: FilteredMultiSelectionDelegate?
 	
 	private(set) var selectedIndices = [Int]()
 	private var displayedIndices = [Int]()
@@ -87,6 +94,8 @@ import HTagView
 		// Moves the element to selected indices, updates data
 		selectedIndices.append(displayedIndices[indexPath.row])
 		reloadData()
+		
+		delegate?.onSelectionChange(selectedIndices: selectedIndices)
 	}
 	
 	func numberOfTags(_ tagView: HTagView) -> Int
@@ -115,6 +124,8 @@ import HTagView
 		// Deselects the element and refreshes data
 		selectedIndices.remove(at: index)
 		reloadData()
+		
+		delegate?.onSelectionChange(selectedIndices: selectedIndices)
 	}
 	
 	

@@ -9,7 +9,7 @@
 import UIKit
 
 // This view controller is used for importing books from other projects
-class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, UITableViewDelegate
+class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, UITableViewDelegate, LanguageFilterDelegate, BookFilterDelegate
 {
 	// OUTLETS	------------------
 	
@@ -45,6 +45,7 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	private var displayedOptions = [(book: Book, languageName: String, projectName: String, progress: BookProgressStatus?)]()
 	
 	private var bookQueryManager: LiveQueryManager<ProjectBooksView>?
+	private var resourceQueryManager: LiveQueryManager<ResourceCollectionView>?
 	
 	private var selectedBook: Book?
 	
@@ -61,12 +62,23 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		bookSelectionTable.delegate = self
 		
 		contentView.configure(mainView: view, elements: [languageFilterView, bookFilterView, bookNameField, importButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
+		
+		guard let projectId = Session.instance.projectId else
+		{
+			print("ERROR: No project selected")
+			return
+		}
+		
+		resourceQueryManager = ResourceCollectionView.instance.collectionQuery(projectId: projectId).liveQueryManager
     }
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
 		bookQueryManager?.addListener(AnyLiveQueryListener(self))
 		bookQueryManager?.start()
+		
+		resourceQueryManager?.addListener(calling: resourceRowsUpdated)
+		resourceQueryManager?.start()
 		
 		// Updates the book progress data
 		do
@@ -86,6 +98,9 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	{
 		bookQueryManager?.stop()
 		bookQueryManager?.removeListeners()
+		
+		resourceQueryManager?.stop()
+		resourceQueryManager?.removeListeners()
 		
 		contentView.endKeyboardListening()
 	}
@@ -153,6 +168,18 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		{
 			print("ERROR: Failed to read through book data. \(error)")
 		}
+	}
+	
+	func onLanguageFilterChange(languageFilter: [String])
+	{
+		self.filterLanguageIds = languageFilter
+		update()
+	}
+	
+	func onBookFilterChange(bookFilter: [BookCode])
+	{
+		self.filterCodes = bookFilter
+		update()
 	}
 	
 	
@@ -362,5 +389,75 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 			print("ERROR: Book import failed. \(error)")
 			return false
 		}
+	}
+}
+
+fileprivate protocol LanguageFilterDelegate: class
+{
+	func onLanguageFilterChange(languageFilter: [String])
+}
+
+fileprivate class LanguageFilterManager: FilteredSelectionDataSource, FilteredMultiSelectionDelegate
+{
+	// ATTRIBUTES	-------------
+	
+	private let languages: [Language]
+	private weak var delegate: LanguageFilterDelegate?
+	
+	
+	// COMPUTED PROPERTIES	----
+	
+	var numberOfOptions: Int { return languages.count }
+	
+	
+	// INIT	---------------------
+	
+	init(languages: [Language])
+	{
+		self.languages = languages
+	}
+	
+	
+	// IMPLEMENTED METHODS	-----
+	
+	func labelForOption(atIndex index: Int) -> String
+	{
+		return languages[index].name
+	}
+	
+	func onSelectionChange(selectedIndices: [Int])
+	{
+		delegate?.onLanguageFilterChange(languageFilter: selectedIndices.map { languages[$0].idString })
+	}
+}
+
+fileprivate protocol BookFilterDelegate: class
+{
+	func onBookFilterChange(bookFilter: [BookCode])
+}
+
+fileprivate class BookFilterManager: FilteredSelectionDataSource, FilteredMultiSelectionDelegate
+{
+	// ATTRIBUTES	-----------
+	
+	private let codes = BookCode.oldTestamentBooks + BookCode.newTestamentBooks
+	private weak var delegate: BookFilterDelegate?
+	
+	
+	// COMPUTED PROPERTIES	---
+	
+	var numberOfOptions: Int { return codes.count }
+	
+	
+	// IMPLEMENTED METHODS	---
+	
+	func labelForOption(atIndex index: Int) -> String
+	{
+		return codes[index].description
+	}
+	
+	func onSelectionChange(selectedIndices: [Int])
+	{
+		delegate?.onBookFilterChange(bookFilter: selectedIndices.map { codes[$0] })
 	}
 }
