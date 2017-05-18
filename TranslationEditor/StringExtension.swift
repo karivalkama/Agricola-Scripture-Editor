@@ -13,6 +13,9 @@ fileprivate let keyRegex = try! NSRegularExpression(pattern: "[a-z0-9_@\\-\\+\\.
 // A global set of utility functions
 extension String
 {
+	// A non-empty version of this string. If the string was empty, nil is returned
+	var nonEmpty: String? { return isEmpty ? nil : self }
+	
 	var length: Int { return (self as NSString).length }
 	
 	// The range of this string instance

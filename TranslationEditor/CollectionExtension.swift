@@ -20,6 +20,19 @@ extension Sequence
 
 extension Array
 {
+	// Finds an element from the array. If the index is out of bounds, nil is returned
+	subscript(safe index: Int) -> Element?
+	{
+		if index >= 0 && index < count
+		{
+			return self[index]
+		}
+		else
+		{
+			return nil
+		}
+	}
+	
 	// Checks that the provided condition is true for all elements in the array
 	// Returns true if the array is empty
 	func forAll(_ condition: (Element) throws -> Bool) rethrows -> Bool

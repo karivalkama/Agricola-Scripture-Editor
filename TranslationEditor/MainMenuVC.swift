@@ -124,17 +124,11 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		// TODO: When hosting, generates the appropriate QR code / hosting session
 		qrView.isHidden = !hostingSwitch.isOn
 		
-		guard let projectId = Session.instance.projectId else
-		{
-			print("ERROR: No project selected for sharing")
-			return
-		}
-		
 		if hostingSwitch.isOn
 		{
 			do
 			{
-				let session = try P2PHostSession.start(projectId: projectId)
+				let session = try P2PHostSession.start(projectId: Session.instance.projectId, hostAvatarId: Session.instance.avatarId)
 				
 				// Sets the new QR Image based on session information
 				if var qrCode = session.connectionInformation?.qrCode

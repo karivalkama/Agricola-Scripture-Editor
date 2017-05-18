@@ -125,7 +125,7 @@ class LoginVC: UIViewController//, ConnectionListener
 			// If there is a P2P session active, provides access to the host project
 			if P2PClientSession.isConnected
 			{
-				if let project = try Project.get(P2PClientSession.instance!.projectId)
+				if let projectId = P2PClientSession.instance!.projectId, let project = try Project.get(projectId)
 				{
 					if !project.contributorIds.contains(account.idString)
 					{
@@ -133,7 +133,7 @@ class LoginVC: UIViewController//, ConnectionListener
 						try project.push()
 					}
 					
-					Session.instance.projectId = project.idString
+					Session.instance.projectId = projectId
 				}
 			}
 			

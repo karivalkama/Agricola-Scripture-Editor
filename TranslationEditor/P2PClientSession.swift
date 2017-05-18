@@ -17,7 +17,8 @@ struct P2PConnectionInformation: CustomStringConvertible
 	var serverURL: String
 	var userName: String
 	var password: String
-	var projectId: String
+	var projectId: String?
+	var hostAvatarId: String?
 	
 	
 	// COMPUTED PROPERTIES	-----
@@ -25,7 +26,7 @@ struct P2PConnectionInformation: CustomStringConvertible
 	// A string compression of the information
 	var stringRepresentation: String
 	{
-		return "\(serverURL)#\(userName)#\(password)#\(projectId)"
+		return "\(serverURL)#\(userName)#\(password)#\(projectId ?? "")#\(hostAvatarId ?? "")"
 	}
 	
 	// A QR code representation of this information
@@ -34,7 +35,7 @@ struct P2PConnectionInformation: CustomStringConvertible
 		return QRCode(stringRepresentation)
 	}
 	
-	var description: String { return "Server URL: \(serverURL)\nUsername: \(userName)\nPassword: \(password)\nProject: \(projectId)" }
+	var description: String { return "Server URL: \(serverURL)\nUsername: \(userName)\nPassword: \(password)\nProject: \(projectId ?? "None")\nHost Avatar: \(hostAvatarId ?? "None")" }
 	
 	
 	// INIT	---------------------
@@ -44,12 +45,12 @@ struct P2PConnectionInformation: CustomStringConvertible
 	{
 		let components = string.components(separatedBy: "#")
 		
-		guard components.count == 4 else
+		guard components.count >= 3 else
 		{
 			return nil
 		}
 		
-		return P2PConnectionInformation(serverURL: components[0], userName: components[1], password: components[2], projectId: components[3])
+		return P2PConnectionInformation(serverURL: components[0], userName: components[1], password: components[2], projectId: components[safe: 3].flatMap { $0.nonEmpty }, hostAvatarId: components[safe: 4].flatMap { $0.nonEmpty })
 	}
 }
 
@@ -61,7 +62,8 @@ class P2PClientSession: ConnectionListener
 	
 	private(set) static var instance: P2PClientSession?
 	
-	let projectId: String
+	let projectId: String?
+	let hostAvatarId: String?
 	
 	private(set) var status: ConnectionStatus
 	
@@ -80,6 +82,7 @@ class P2PClientSession: ConnectionListener
 	private init(_ info: P2PConnectionInformation)
 	{
 		self.projectId = info.projectId
+		self.hostAvatarId = info.hostAvatarId
 		self.status = .connecting
 		
 		// Starts online connection and listens for the new status

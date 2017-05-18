@@ -33,7 +33,8 @@ class P2PHostSession
 	
 	private(set) static var instance: P2PHostSession?
 	
-	let projectId: String
+	let projectId: String?
+	let hostAvatarId: String?
 	
 	private let userName: String
 	private let password: String
@@ -51,15 +52,16 @@ class P2PHostSession
 			return nil
 		}
 		
-		return P2PConnectionInformation(serverURL: url, userName: userName, password: password, projectId: projectId)
+		return P2PConnectionInformation(serverURL: url, userName: userName, password: password, projectId: projectId, hostAvatarId: hostAvatarId)
 	}
 	
 	
 	// INIT	--------------------------
 	
-	private init(projectId: String) throws
+	private init(projectId: String?, hostAvatarId: String?) throws
 	{
 		self.projectId = projectId
+		self.hostAvatarId = hostAvatarId
 		
 		userName = randomAlphaNumericString(length: 16)
 		password = randomAlphaNumericString(length: 16)
@@ -76,11 +78,11 @@ class P2PHostSession
 	
 	// Starts a new hosting session
 	// If there is already a session, may just continue that or replace it with a new one (depending on target project)
-	static func start(projectId: String) throws -> P2PHostSession
+	static func start(projectId: String?, hostAvatarId: String?) throws -> P2PHostSession
 	{
 		if let instance = instance
 		{
-			if instance.projectId == projectId
+			if instance.projectId == projectId, instance.hostAvatarId == hostAvatarId
 			{
 				return instance
 			}
@@ -90,7 +92,7 @@ class P2PHostSession
 			}
 		}
 		
-		instance = try P2PHostSession(projectId: projectId)
+		instance = try P2PHostSession(projectId: projectId, hostAvatarId: hostAvatarId)
 		print("STATUS: Started hosting a P2P session")
 		
 		if let info = instance?.connectionInformation
