@@ -182,6 +182,7 @@
 		7CAF6D8A1DB5F5FB00E10597 /* USXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D891DB5F5FB00E10597 /* USXParser.swift */; };
 		7CB5B29C1ECC43A20066446F /* Connect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB5B29B1ECC43A10066446F /* Connect.xib */; };
 		7CB5B29E1ECC7D0B0066446F /* ConnectionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5B29D1ECC7D0B0066446F /* ConnectionUIView.swift */; };
+		7CB5B2A01ECD94600066446F /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB5B29F1ECD94600066446F /* Common.storyboard */; };
 		7CCC00EA1D9BD3FC00F0562E /* VerseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00E91D9BD3FC00F0562E /* VerseError.swift */; };
 		7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00EB1D9D067C00F0562E /* CharData.swift */; };
 		7CCC00EE1D9D193F00F0562E /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00ED1D9D193F00F0562E /* CollectionExtension.swift */; };
@@ -430,6 +431,7 @@
 		7CAF6D891DB5F5FB00E10597 /* USXParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXParser.swift; sourceTree = "<group>"; };
 		7CB5B29B1ECC43A10066446F /* Connect.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Connect.xib; sourceTree = "<group>"; };
 		7CB5B29D1ECC7D0B0066446F /* ConnectionUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionUIView.swift; sourceTree = "<group>"; };
+		7CB5B29F1ECD94600066446F /* Common.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
 		7CCC00E91D9BD3FC00F0562E /* VerseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseError.swift; sourceTree = "<group>"; };
 		7CCC00EB1D9D067C00F0562E /* CharData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharData.swift; sourceTree = "<group>"; };
 		7CCC00ED1D9D193F00F0562E /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
@@ -920,6 +922,7 @@
 				7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */,
 				7C6070551E5C601D007718BC /* Login.storyboard */,
 				7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */,
+				7CB5B29F1ECD94600066446F /* Common.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -1143,6 +1146,7 @@
 				7C7FD65A1EA5E18600ED2364 /* ParagraphCell.xib in Resources */,
 				7C15151A1E961B6300419DEA /* P2PJoinView.xib in Resources */,
 				7C57ECAE1E6D970C000718E9 /* CreateAvatar.xib in Resources */,
+				7CB5B2A01ECD94600066446F /* Common.storyboard in Resources */,
 				7C6B7B181E645EC00005AD43 /* FilteredMultiSelection.xib in Resources */,
 				7C6B7B251E659CA00005AD43 /* OnlineStatusView.xib in Resources */,
 				7CB5B29C1ECC43A20066446F /* Connect.xib in Resources */,

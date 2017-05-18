@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="Xk3-wP-e3X">
+            <objects>
+                <viewController storyboardIdentifier="ConnectionVC" id="Qhh-ZC-jdN" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Um-Z4-k0D"/>
+                        <viewControllerLayoutGuide type="bottom" id="tca-PB-LSU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZwX-H7-Trw">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUM-R1-CTj">
+                                <rect key="frame" x="615" y="36" width="373" height="668"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ihe-oP-hey">
+                                        <rect key="frame" x="16" y="16" width="341" height="636"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xk0-G6-g8V" customClass="ConnectionUIView" customModule="TranslationEditor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="341" height="596"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbp-A2-kJ8" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="596" width="341" height="40"/>
+                                                <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Q7p-YL-laZ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <state key="normal" title="Close">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Ihe-oP-hey" firstAttribute="leading" secondItem="FUM-R1-CTj" secondAttribute="leading" constant="16" id="JGl-ve-CvX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ihe-oP-hey" secondAttribute="trailing" constant="16" id="KVw-8c-90c"/>
+                                    <constraint firstItem="Ihe-oP-hey" firstAttribute="top" secondItem="FUM-R1-CTj" secondAttribute="top" constant="16" id="Kmk-1J-YNw"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ihe-oP-hey" secondAttribute="bottom" constant="16" id="bSv-FI-fzA"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="FUM-R1-CTj" secondAttribute="trailing" constant="16" id="P6h-14-OBT"/>
+                            <constraint firstItem="tca-PB-LSU" firstAttribute="top" secondItem="FUM-R1-CTj" secondAttribute="bottom" constant="64" id="WXx-ff-wGk"/>
+                            <constraint firstItem="FUM-R1-CTj" firstAttribute="top" secondItem="8Um-Z4-k0D" secondAttribute="bottom" constant="16" id="edN-dn-c9N"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IhM-vr-2ed" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-28.124999999999996" y="122.65625"/>
+        </scene>
+    </scenes>
+</document>
