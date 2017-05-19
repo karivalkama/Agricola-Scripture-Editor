@@ -16,32 +16,30 @@ class BookCell: UITableViewCell
 	
 	@IBOutlet weak var codeLabel: UILabel!
 	@IBOutlet weak var bookNameLabel: UILabel!
-	@IBOutlet weak var sendButton: UIButton!
+	@IBOutlet weak var progressView: BookProgressUIView!
 	
 	
 	// ATTRIBUTES	------------
 	
 	static let identifier = "BookCell"
 	
-	private var sendAction: ((BookCell) -> ())?
-	
-	
-	// ACTIONS	-----------------
-	
-	@IBAction func sendButtonPressed(_ sender: Any)
-	{
-		sendAction?(self)
-	}
-	
 	
 	// OTHER METHODS	---------
 	
 	// Configures the cell to display correct data
-	func configure(bookCode: BookCode, identifier: String, sendActionAvailable: Bool, sendAction: @escaping (BookCell) -> ())
+	func configure(bookCode: BookCode, identifier: String, progress: BookProgressStatus?)
 	{
 		codeLabel.text = bookCode.name
 		bookNameLabel.text = identifier
-		sendButton.isEnabled = sendActionAvailable
-		self.sendAction = sendAction
+		
+		if let progress = progress
+		{
+			progressView.configure(status: progress)
+			progressView.isHidden = false
+		}
+		else
+		{
+			progressView.isHidden = true
+		}
 	}
 }

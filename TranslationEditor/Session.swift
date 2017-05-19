@@ -20,6 +20,7 @@ class Session
 	private static let KEY_PASSWORD = "agricola_password"
 	private static let KEY_PROJECT = "agricola_project"
 	private static let KEY_AVATAR = "agricola_avatar"
+	private static let KEY_BOOK = "agricola_book"
 	
 	private var keyChain = KeychainSwift()
 	
@@ -36,6 +37,12 @@ class Session
 	{
 		get { return self[Session.KEY_AVATAR] }
 		set { self[Session.KEY_AVATAR] = newValue }
+	}
+	
+	var bookId: String?
+	{
+		get { return self[Session.KEY_BOOK] }
+		set { self[Session.KEY_BOOK] = newValue }
 	}
 	
 	private(set) var accountId: String?
