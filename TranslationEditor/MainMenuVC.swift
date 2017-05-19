@@ -187,7 +187,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 				return
 			}
 			
-			displayAlert(withIdentifier: "EditAvatar", storyBoardId: "MainMenu")
+			displayAlert(withIdentifier: EditAvatarVC.identifier, storyBoardId: "MainMenu")
 			{
 				newVC in
 				

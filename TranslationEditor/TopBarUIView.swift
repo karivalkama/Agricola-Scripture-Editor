@@ -1,0 +1,119 @@
+//
+//  TopBarUIView.swift
+//  TranslationEditor
+//
+//  Created by Mikko Hilpinen on 19.5.2017.
+//  Copyright © 2017 Mikko Hilpinen. All rights reserved.
+//
+
+import UIKit
+
+// This view is used for basic navigation and info display on multiple different views
+// The bar also provides access to P2P and other sharing options
+class TopBarUIView: UIView
+{
+	// OUTLETS	------------------
+	
+	@IBOutlet weak var leftSideButton: UIButton!
+	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var userView: TopUserView!
+	
+	
+	// ATTRIBUTES	--------------
+	
+	private weak var viewController: UIViewController?
+	private var leftSideAction: (() -> ())?
+	
+	private var avatar: Avatar?
+	private var info: AvatarInfo?
+	
+	
+	// LOAD	----------------------
+	
+	override func awakeFromNib()
+	{
+		var foundUserData = false
+		
+		// Sets up the user view
+		if let projectId = Session.instance.projectId, let avatarId = Session.instance.avatarId
+		{
+			do
+			{
+				if let project = try Project.get(projectId), let avatar = try Avatar.get(avatarId), let info = try avatar.info()
+				{
+					self.avatar = avatar
+					self.info = info
+					userView.configure(projectName: project.name, username: avatar.name, image: info.image)
+					foundUserData = true
+				}
+			}
+			catch
+			{
+				print("ERROR: Failed to load user information for the top bar. \(error)")
+			}
+		}
+		
+		userView.isHidden = !foundUserData
+	}
+	
+	
+	// ACTIONS	------------------
+	
+	@IBAction func leftSideButtonPressed(_ sender: Any)
+	{
+		leftSideAction?()
+	}
+	
+	@IBAction func connectButtonPressed(_ sender: Any)
+	{
+		guard let viewController = viewController else
+		{
+			print("ERROR: Cannot display connect VC without a view controller")
+			return
+		}
+		
+		viewController.displayAlert(withIdentifier: ConnectionVC.identifier, storyBoardId: "Common")
+	}
+	
+	@IBAction func userViewTapped(_ sender: Any)
+	{
+		guard let viewController = viewController else
+		{
+			print("ERROR: Cannot display user view without a view controller")
+			return
+		}
+		
+		guard let avatar = avatar, let info = info else
+		{
+			print("ERROR: No user data to edit")
+			return
+		}
+		
+		viewController.displayAlert(withIdentifier: EditAvatarVC.identifier, storyBoardId: "MainMenu")
+		{
+			($0 as! EditAvatarVC).configureForEdit(avatar: avatar, avatarInfo: info)
+		}
+	}
+	
+	
+	// OTHER METHODS	--------------
+	
+	func configure(hostVC: UIViewController, title: String, leftButtonText: String? = nil, leftButtonAction: (() -> ())? = nil)
+	{
+		viewController = hostVC
+		titleLabel.text = title
+		
+		if let leftButtonText = leftButtonText
+		{
+			leftSideButton.titleLabel?.text = leftButtonText
+			leftSideButton.isHidden = false
+			
+			self.leftSideAction = leftButtonAction
+			leftSideButton.isEnabled = leftButtonAction != nil
+		}
+		else
+		{
+			leftSideButton.isHidden = true
+		}
+	}
+}

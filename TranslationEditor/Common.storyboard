@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--ConnectionVC-->
         <scene sceneID="Xk3-wP-e3X">
             <objects>
-                <viewController storyboardIdentifier="ConnectionVC" id="Qhh-ZC-jdN" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConnectionVC" id="Qhh-ZC-jdN" customClass="ConnectionVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8Um-Z4-k0D"/>
                         <viewControllerLayoutGuide type="bottom" id="tca-PB-LSU"/>
@@ -22,14 +22,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cnG-le-gaA" userLabel="Background">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUM-R1-CTj">
                                 <rect key="frame" x="615" y="36" width="373" height="668"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ihe-oP-hey">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Ihe-oP-hey">
                                         <rect key="frame" x="16" y="16" width="341" height="636"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xk0-G6-g8V" customClass="ConnectionUIView" customModule="TranslationEditor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="341" height="596"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="341" height="564"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbp-A2-kJ8" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
@@ -42,6 +46,9 @@
                                                 <state key="normal" title="Close">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="closeButtonPressed:" destination="Qhh-ZC-jdN" eventType="touchUpInside" id="p6Z-3O-ShU"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -55,14 +62,21 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="tca-PB-LSU" firstAttribute="top" secondItem="cnG-le-gaA" secondAttribute="bottom" id="1rQ-x1-oWg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FUM-R1-CTj" secondAttribute="trailing" constant="16" id="P6h-14-OBT"/>
+                            <constraint firstItem="cnG-le-gaA" firstAttribute="top" secondItem="ZwX-H7-Trw" secondAttribute="top" id="QEl-v6-7ZL"/>
                             <constraint firstItem="tca-PB-LSU" firstAttribute="top" secondItem="FUM-R1-CTj" secondAttribute="bottom" constant="64" id="WXx-ff-wGk"/>
+                            <constraint firstItem="cnG-le-gaA" firstAttribute="leading" secondItem="ZwX-H7-Trw" secondAttribute="leading" id="YbH-Vn-M7H"/>
                             <constraint firstItem="FUM-R1-CTj" firstAttribute="top" secondItem="8Um-Z4-k0D" secondAttribute="bottom" constant="16" id="edN-dn-c9N"/>
+                            <constraint firstAttribute="trailing" secondItem="cnG-le-gaA" secondAttribute="trailing" id="kSf-cf-rpc"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="connectionView" destination="Xk0-G6-g8V" id="DSa-gA-dL6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IhM-vr-2ed" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

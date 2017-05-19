@@ -23,6 +23,8 @@ class EditAvatarVC: UIViewController
 	
 	// ATTRIBUTES	--------------
 	
+	static let identifier = "EditAvatar"
+	
 	private var editedInfo: (Avatar, AvatarInfo)?
 	
 	

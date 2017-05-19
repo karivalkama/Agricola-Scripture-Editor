@@ -183,6 +183,9 @@
 		7CB5B29C1ECC43A20066446F /* Connect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB5B29B1ECC43A10066446F /* Connect.xib */; };
 		7CB5B29E1ECC7D0B0066446F /* ConnectionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5B29D1ECC7D0B0066446F /* ConnectionUIView.swift */; };
 		7CB5B2A01ECD94600066446F /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB5B29F1ECD94600066446F /* Common.storyboard */; };
+		7CB5B2A31ECDB43E0066446F /* ConnectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5B2A21ECDB43E0066446F /* ConnectionVC.swift */; };
+		7CB5B2A51ECDB9F70066446F /* TopBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB5B2A41ECDB9F70066446F /* TopBar.xib */; };
+		7CB5B2A71ECEBEB30066446F /* TopBarUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5B2A61ECEBEB30066446F /* TopBarUIView.swift */; };
 		7CCC00EA1D9BD3FC00F0562E /* VerseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00E91D9BD3FC00F0562E /* VerseError.swift */; };
 		7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00EB1D9D067C00F0562E /* CharData.swift */; };
 		7CCC00EE1D9D193F00F0562E /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00ED1D9D193F00F0562E /* CollectionExtension.swift */; };
@@ -432,6 +435,9 @@
 		7CB5B29B1ECC43A10066446F /* Connect.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Connect.xib; sourceTree = "<group>"; };
 		7CB5B29D1ECC7D0B0066446F /* ConnectionUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionUIView.swift; sourceTree = "<group>"; };
 		7CB5B29F1ECD94600066446F /* Common.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
+		7CB5B2A21ECDB43E0066446F /* ConnectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionVC.swift; sourceTree = "<group>"; };
+		7CB5B2A41ECDB9F70066446F /* TopBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopBar.xib; sourceTree = "<group>"; };
+		7CB5B2A61ECEBEB30066446F /* TopBarUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarUIView.swift; sourceTree = "<group>"; };
 		7CCC00E91D9BD3FC00F0562E /* VerseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseError.swift; sourceTree = "<group>"; };
 		7CCC00EB1D9D067C00F0562E /* CharData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharData.swift; sourceTree = "<group>"; };
 		7CCC00ED1D9D193F00F0562E /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
@@ -610,6 +616,7 @@
 		7C20D7E11D8BF89200E84BA5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7CB5B2A11ECDB40D0066446F /* Common */,
 				7C506B7D1E892F8400ACB5AC /* Main Menu */,
 				7C6070571E5C7BA4007718BC /* LoginView */,
 				7CDBD6CB1E28C17E00912320 /* TranslationView */,
@@ -845,6 +852,7 @@
 				7C7FD65B1EA5E5D400ED2364 /* ParagraphCell.swift */,
 				7C8F4B001EC1E13F00F9B25F /* BookProgressUIView.swift */,
 				7CB5B29D1ECC7D0B0066446F /* ConnectionUIView.swift */,
+				7CB5B2A61ECEBEB30066446F /* TopBarUIView.swift */,
 			);
 			name = XibViews;
 			sourceTree = "<group>";
@@ -941,6 +949,7 @@
 				7C7FD6591EA5E18600ED2364 /* ParagraphCell.xib */,
 				7C8F4AFE1EC1D75400F9B25F /* BookProgressUIView.xib */,
 				7CB5B29B1ECC43A10066446F /* Connect.xib */,
+				7CB5B2A41ECDB9F70066446F /* TopBar.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -955,6 +964,14 @@
 				7C0130C11E3F2D520053C5C2 /* ProjectSettings.swift */,
 			);
 			name = Project;
+			sourceTree = "<group>";
+		};
+		7CB5B2A11ECDB40D0066446F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7CB5B2A21ECDB43E0066446F /* ConnectionVC.swift */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		7CD8EA581DB60C4800364B70 /* TestResources */ = {
@@ -1133,6 +1150,7 @@
 				7C57EC151E694975000718E9 /* TIT_ENG.usx in Resources */,
 				7C18A1991D8BBEBD00DD1B03 /* LaunchScreen.storyboard in Resources */,
 				7C57EC0F1E6948FC000718E9 /* TI2_ENG.usx in Resources */,
+				7CB5B2A51ECDB9F70066446F /* TopBar.xib in Resources */,
 				7C936C151E9E582C00AC06BF /* FilteredSingleSelection.xib in Resources */,
 				7C18A1961D8BBEBD00DD1B03 /* Assets.xcassets in Resources */,
 				7C9BB7E31E8536AA0010DE5C /* MainMenu.storyboard in Resources */,
@@ -1405,6 +1423,7 @@
 				7CA1BAB01E31E8DD00611FED /* ThreadCell.swift in Sources */,
 				7CDBD6BC1E2657F900912320 /* ParagraphBindingView.swift in Sources */,
 				7C936C1B1E9F7F1E00AC06BF /* USXBookFinder.swift in Sources */,
+				7CB5B2A31ECDB43E0066446F /* ConnectionVC.swift in Sources */,
 				7C903F711EA8DBDE008EE1E6 /* ErrorAlertVC.swift in Sources */,
 				7C25180D1E8B8A930089E1FD /* ProjectBooksView.swift in Sources */,
 				7C40DF5F1DE71E490035B92E /* DatabaseUtilities.swift in Sources */,
@@ -1446,6 +1465,7 @@
 				7C936C0F1E9B7F6700AC06BF /* ResolveConflictVC.swift in Sources */,
 				7C0130C51E3F3DFB0053C5C2 /* PropertyValueWrapable.swift in Sources */,
 				7CCC01481DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
+				7CB5B2A71ECEBEB30066446F /* TopBarUIView.swift in Sources */,
 				7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */,
 				7CCC00F21D9D1B4E00F0562E /* AttributedStringConvertible.swift in Sources */,
 				7C4A4FA61DF835E1009F890E /* LiveQueryManager.swift in Sources */,

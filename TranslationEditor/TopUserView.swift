@@ -15,6 +15,7 @@ import UIKit
 	
 	@IBOutlet weak var userNameField: UILabel!
 	@IBOutlet weak var userImage: UIImageView!
+	@IBOutlet weak var projectNameLabel: UILabel!
 	
 	
 	// ATTRIBUTES	------------
@@ -36,10 +37,29 @@ import UIKit
 		setupXib(nibName: "TopUserDisplay")
 	}
 	
+	// LOAD	--------------------
+	
+	override func awakeFromNib()
+	{
+		if let textColor = textColor
+		{
+			userNameField.textColor = textColor
+			projectNameLabel.textColor = textColor
+		}
+	}
+	
 	
 	// OTHER METHODS	--------
 	
+	func configure(projectName: String, username: String, image: UIImage? = nil)
+	{
+		userNameField.text = username
+		projectNameLabel.text = projectName
+		userImage.image = image
+	}
+	
 	// Sets up the correct data for the view
+	@available(*, deprecated)
 	func configure(userName: String, userIcon: UIImage)
 	{
 		userNameField.text = userName
@@ -47,6 +67,7 @@ import UIKit
 	}
 	
 	// Alternative way to configure the view
+	@available(*, deprecated)
 	func configure(avatarId: String) throws
 	{
 		if let avatar = try Avatar.get(avatarId)
