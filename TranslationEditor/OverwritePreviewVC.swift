@@ -15,6 +15,7 @@ class OverwritePreviewVC: UIViewController
 	
 	@IBOutlet weak var oldVersionTable: UITableView!
 	@IBOutlet weak var newVersionTable: UITableView!
+	@IBOutlet weak var topBar: TopBarUIView!
 	
 	
 	// ATTRIBUTES	------------
@@ -40,6 +41,23 @@ class OverwritePreviewVC: UIViewController
 		guard configured else
 		{
 			fatalError("ERROR: OverWritePreviewVC must be configured before use")
+		}
+		
+		let title = "Preview Changes"
+		if let presentingViewController = presentingViewController
+		{
+			if let presentingViewController = presentingViewController as? ImportUSXVC
+			{
+				topBar.configure(hostVC: self, title: title, leftButtonText: presentingViewController.shouldDismissBelow ? "Cancel" : "Back", leftButtonAction: { presentingViewController.dismissFromAbove() })
+			}
+			else
+			{
+				topBar.configure(hostVC: self, title: title, leftButtonText: "Cancel", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
+			}
+		}
+		else
+		{
+			topBar.configure(hostVC: self, title: title)
 		}
 		
 		// Loads the old paragraphs from the database
@@ -77,18 +95,6 @@ class OverwritePreviewVC: UIViewController
 	@IBAction func acceptPressed(_ sender: Any)
 	{
 		overwrite()
-	}
-	
-	@IBAction func backPressed(_ sender: Any)
-	{
-		if let importVC = presentingViewController as? ImportUSXVC
-		{
-			importVC.dismissFromAbove()
-		}
-		else
-		{
-			dismiss(animated: true, completion: nil)
-		}
 	}
 	
 	
@@ -188,11 +194,12 @@ class OverwritePreviewVC: UIViewController
 				}
 			}
 			
+			let bookId = oldBook.idString
+			
 			// Updates the paragraph bindings if necessary
 			// Also updates notes
 			if !newInserts.isEmpty || !merges.isEmpty
 			{
-				let bookId = oldBook.idString
 				let bindings = try ParagraphBindingView.instance.bindings(forBookWithId: bookId)
 				
 				for binding in bindings
@@ -272,7 +279,8 @@ class OverwritePreviewVC: UIViewController
 				}
 			}
 			
-			// TODO: Select the newly update book too
+			// Selects the newly updated book
+			Session.instance.bookId = bookId
 			closeImport()
 		}
 		catch

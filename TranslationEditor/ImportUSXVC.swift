@@ -15,7 +15,6 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 {
 	// OUTLETS	--------------
 	
-	@IBOutlet weak var topUserView: TopUserView!
 	@IBOutlet weak var bookLabel: UILabel!
 	@IBOutlet weak var paragraphTableView: UITableView!
 	@IBOutlet weak var selectLanguageView: FilteredSingleSelection!
