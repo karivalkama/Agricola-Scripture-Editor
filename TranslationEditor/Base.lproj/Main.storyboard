@@ -22,31 +22,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tth-WK-l9P">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="48"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.88728448280000005" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="TKx-6u-taf"/>
-                                </constraints>
-                                <color key="barTintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem title="Translation" id="jFy-f6-kP1">
-                                        <barButtonItem key="backBarButtonItem" title="Back" id="vNs-s3-cee"/>
-                                        <barButtonItem key="leftBarButtonItem" title="Main Menu" id="ghq-0y-9uU">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <action selector="backButtonPressed:" destination="BYZ-38-t0r" id="K8m-tM-sSl"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" id="Y5E-mq-OgS">
-                                            <view key="customView" contentMode="scaleToFill" id="XCj-1P-hIs" customClass="TopUserView" customModule="TranslationEditor" customModuleProvider="target">
-                                                <rect key="frame" x="844" y="2" width="160" height="48"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </view>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="yBB-ki-v5F">
                                 <rect key="frame" x="16" y="64" width="992" height="688"/>
                                 <subviews>
@@ -394,16 +369,22 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAq-ZS-dKK" customClass="TopBarUIView" customModule="TranslationEditor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="nOd-Hz-s7v"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="EAq-ZS-dKK" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="8VR-Cs-t7i"/>
+                            <constraint firstAttribute="trailing" secondItem="EAq-ZS-dKK" secondAttribute="trailing" id="9F9-Pk-IAs"/>
+                            <constraint firstItem="EAq-ZS-dKK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="C4j-b6-lQq"/>
+                            <constraint firstItem="yBB-ki-v5F" firstAttribute="top" secondItem="EAq-ZS-dKK" secondAttribute="bottom" constant="16" id="CF8-6i-sW5"/>
                             <constraint firstAttribute="trailing" secondItem="yBB-ki-v5F" secondAttribute="trailing" constant="16" id="CbK-No-jxG"/>
-                            <constraint firstItem="Tth-WK-l9P" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="FwA-ou-fcx"/>
-                            <constraint firstAttribute="trailing" secondItem="Tth-WK-l9P" secondAttribute="trailing" id="Ibp-0r-LH2"/>
-                            <constraint firstAttribute="trailing" secondItem="Tth-WK-l9P" secondAttribute="trailing" id="TQb-YJ-Vo2"/>
-                            <constraint firstItem="yBB-ki-v5F" firstAttribute="top" secondItem="Tth-WK-l9P" secondAttribute="bottom" constant="16" id="bob-wo-gdQ"/>
                             <constraint firstAttribute="bottom" secondItem="yBB-ki-v5F" secondAttribute="bottom" constant="16" id="dUQ-nU-LoX"/>
-                            <constraint firstItem="Tth-WK-l9P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fdA-13-NNl"/>
                             <constraint firstItem="yBB-ki-v5F" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="fj0-Od-Amv"/>
                         </constraints>
                     </view>
@@ -412,7 +393,7 @@
                         <outlet property="resourceSegmentControl" destination="ree-vj-F6F" id="v1v-I9-yL9"/>
                         <outlet property="resourceTableView" destination="2EI-Mh-Uso" id="hhv-Px-gYO"/>
                         <outlet property="titleLabel" destination="6vN-kF-8Bu" id="fxr-9f-FZy"/>
-                        <outlet property="topUserView" destination="XCj-1P-hIs" id="UQf-4I-8u3"/>
+                        <outlet property="topBar" destination="EAq-ZS-dKK" id="CEC-ue-TKw"/>
                         <outlet property="translationTableView" destination="7zH-vr-M2m" id="37F-w5-az9"/>
                     </connections>
                 </viewController>

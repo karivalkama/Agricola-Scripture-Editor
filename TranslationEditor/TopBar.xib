@@ -27,10 +27,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="C4y-wF-a8Z">
-                    <rect key="frame" x="16" y="8" width="756" height="45"/>
+                    <rect key="frame" x="16" y="0.0" width="756" height="61"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wnD-br-fTf">
-                            <rect key="frame" x="0.0" y="0.0" width="38" height="45"/>
+                            <rect key="frame" x="0.0" y="0.0" width="38" height="61"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                             <state key="normal" title="Back">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -40,13 +40,13 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="zt5-DZ-uy4">
-                            <rect key="frame" x="102" y="0.0" width="329" height="45"/>
+                            <rect key="frame" x="102" y="0.0" width="313" height="61"/>
                             <fontDescription key="fontDescription" name="Alpine-Regular" family="Alpine" pointSize="32"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8w-Wi-SHD">
-                            <rect key="frame" x="495" y="0.0" width="65" height="45"/>
+                            <rect key="frame" x="479" y="0.0" width="65" height="61"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                             <state key="normal" title="Connect">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -55,8 +55,8 @@
                                 <action selector="connectButtonPressed:" destination="-1" eventType="touchUpInside" id="Rse-i0-FUA"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="nSb-ZT-onS" customClass="TopUserView" customModule="TranslationEditor" customModuleProvider="target">
-                            <rect key="frame" x="624" y="0.0" width="132" height="45"/>
+                        <view contentMode="scaleToFill" horizontalHuggingPriority="500" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="nSb-ZT-onS" customClass="TopUserView" customModule="TranslationEditor" customModuleProvider="target">
+                            <rect key="frame" x="608" y="0.0" width="148" height="61"/>
                             <gestureRecognizers/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" priority="750" constant="192" id="bai-TJ-0tW"/>
@@ -71,9 +71,9 @@
             <color key="backgroundColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="C4y-wF-a8Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="0rI-Xc-Oe6"/>
-                <constraint firstAttribute="bottom" secondItem="C4y-wF-a8Z" secondAttribute="bottom" constant="8" id="Cvc-Nb-O71"/>
+                <constraint firstAttribute="bottom" secondItem="C4y-wF-a8Z" secondAttribute="bottom" id="Cvc-Nb-O71"/>
                 <constraint firstAttribute="trailing" secondItem="C4y-wF-a8Z" secondAttribute="trailing" constant="40" id="NVr-fV-4hh"/>
-                <constraint firstItem="C4y-wF-a8Z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="mzN-2l-l6d"/>
+                <constraint firstItem="C4y-wF-a8Z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="mzN-2l-l6d"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-55" y="-373.5"/>

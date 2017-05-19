@@ -22,8 +22,8 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	@IBOutlet weak var translationTableView: UITableView!
 	@IBOutlet weak var resourceTableView: UITableView!
 	@IBOutlet weak var resourceSegmentControl: UISegmentedControl!
-	@IBOutlet weak var topUserView: TopUserView!
 	@IBOutlet weak var titleLabel: UILabel!
+	@IBOutlet weak var topBar: TopBarUIView!
 	
 	
 	// PROPERTIES	---------
@@ -74,6 +74,12 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		
 		commitButton.isEnabled = false
 		
+		topBar.configure(hostVC: self, title: "Translation", leftButtonText: "To Main Menu")
+		{
+			Session.instance.bookId = nil
+			self.dismiss(animated: true, completion: nil)
+		}
+		
 		// (Epic hack which) Makes table view cells have automatic height
 		translationTableView.rowHeight = UITableViewAutomaticDimension
 		translationTableView.estimatedRowHeight = 320
@@ -122,19 +128,6 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 			targetSwipeRecognizerRight?.direction = .right
 			translationTableView.addGestureRecognizer(targetSwipeRecognizerRight!)
 			targetSwipeRecognizerRight?.delegate = self
-		}
-		
-		// Sets up top user view
-		if let avatarId = Session.instance.avatarId
-		{
-			do
-			{
-				try topUserView.configure(avatarId: avatarId)
-			}
-			catch
-			{
-				print("ERROR: Couldn't read avatar information. \(error)")
-			}
 		}
 		
 		do
@@ -311,11 +304,6 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	
 	
 	// IB ACTIONS	-----------------
-	
-	@IBAction func backButtonPressed(_ sender: Any)
-	{
-		dismiss(animated: true, completion: nil)
-	}
 	
 	@IBAction func commitPressed(_ sender: Any)
 	{

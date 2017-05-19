@@ -146,6 +146,8 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 				print("ERROR: Failed to read book data. \(error)")
 			}
 		}
+		
+		print("Main VC has presenting VC: \(presentingViewController != nil)")
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)

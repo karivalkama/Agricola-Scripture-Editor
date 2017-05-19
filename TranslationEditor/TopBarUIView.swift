@@ -117,7 +117,7 @@ import UIKit
 		
 		if let leftButtonText = leftButtonText
 		{
-			leftSideButton.titleLabel?.text = leftButtonText
+			leftSideButton.setTitle(leftButtonText, for: .normal)
 			leftSideButton.isHidden = false
 			
 			self.leftSideAction = leftButtonAction
