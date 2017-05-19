@@ -28,6 +28,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	@IBOutlet weak var contentView: KeyboardReactiveView!
 	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var topBar: TopBarUIView!
 	
 	
 	// ATTRIBUTES	---------
@@ -60,6 +61,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
         super.viewDidLoad()
 		
 		contentView.configure(mainView: view, elements: [selectLanguageView, insertSwitch, nicknameField, okButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint)
+		topBar.configure(hostVC: self, title: "Import USX File", leftButtonText: "Cancel", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
 		
 		// Reads paragraph data first
 		guard let usxURL = usxURL else
@@ -165,15 +167,6 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		{
 			print("ERROR: Couldn't read language data from the database")
 		}
-		
-		do
-		{
-			try topUserView.configure(avatarId: avatarId)
-		}
-		catch
-		{
-			print("ERROR: Failed to setup the view properly. \(error)")
-		}
     }
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -197,11 +190,6 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 
 	
 	// ACTIONS	-------------
-	
-	@IBAction func cancelButtonPressed(_ sender: Any)
-	{
-		dismiss(animated: true, completion: nil)
-	}
 	
 	@IBAction func okButtonPressed(_ sender: Any)
 	{
@@ -521,14 +509,16 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			}
 			
 			// If there is no target translation for the book yet, creates an empty copy of the just created book
+			var newBookId: String?
 			if book.languageId != project.languageId && targetTranslations.isEmpty
 			{
 				print("STATUS: Creates a new target translation for the book")
 				
-				_ = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId, resourceName: nicknameField.text.or(book.identifier))
+				newBookId = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId, resourceName: nicknameField.text.or(book.identifier)).book.idString
 			}
 			
-			// TODO: Set the selected book to that just imported
+			// The newly update book will be opened afterwards
+			Session.instance.bookId = newBookId ?? targetTranslations.first?.idString
 			dismiss(animated: true, completion: nil)
 		}
 		catch

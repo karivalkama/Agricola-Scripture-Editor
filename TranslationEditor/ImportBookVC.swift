@@ -21,6 +21,7 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var bookNameField: UITextField!
 	@IBOutlet weak var importButton: UIButton!
+	@IBOutlet weak var topBar: TopBarUIView!
 	
 	
 	// TYPES	------------------
@@ -59,6 +60,8 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	{
         super.viewDidLoad()
 
+		topBar.configure(hostVC: self, title: "Import Book", leftButtonText: "Cancel", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
+		
 		bookQueryManager = ProjectBooksView.instance.createQuery().liveQueryManager
 		
 		bookSelectionTable.dataSource = self
@@ -133,11 +136,6 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	
 	
 	// ACTIONS	------------------
-	
-	@IBAction func backButtonPressed(_ sender: Any)
-	{
-		dismiss(animated: true, completion: nil)
-	}
 	
 	@IBAction func bookNameChanged(_ sender: Any)
 	{
