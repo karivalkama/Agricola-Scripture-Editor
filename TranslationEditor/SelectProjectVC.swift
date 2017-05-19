@@ -25,6 +25,7 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var contentView: KeyboardReactiveView!
 	@IBOutlet weak var createProjectButton: BasicButton!
+	@IBOutlet weak var topBar: TopBarUIView!
 	
 	
 	// ATTRIBUTES	--------------
@@ -39,7 +40,7 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	
 	// COMPUTED PROPERTIES	------
 	
-	var shouldDismissBelow: Bool { return selectedWithSharedAccount || P2PClientSession.isConnected }
+	var shouldDismissBelow: Bool { return selectedWithSharedAccount }
 	
 	
 	// INIT	----------------------
@@ -60,6 +61,12 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		
 		queryManager = ProjectView.instance.projectQuery(forContributorId: accountId).liveQueryManager
 		queryManager?.addListener(AnyLiveQueryListener(self))
+		
+		topBar.configure(hostVC: self, title: "Select Project", leftButtonText: "Log Out")
+		{
+			Session.instance.logout()
+			self.dismiss(animated: true, completion: nil)
+		}
 		
 		contentView.configure(mainView: view, elements: [createProjectButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
     }
@@ -103,13 +110,6 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
     
 
 	// ACTIONS	------------------
-	
-	@IBAction func logoutButtonPressed(_ sender: Any)
-	{
-		// Ends the session and returns to login
-		Session.instance.logout()
-		dismiss(animated: true, completion: nil)
-	}
 	
 	@IBAction func createProjectPressed(_ sender: Any)
 	{

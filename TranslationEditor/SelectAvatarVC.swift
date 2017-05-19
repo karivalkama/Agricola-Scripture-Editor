@@ -23,6 +23,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet weak var loginButton: BasicButton!
 	@IBOutlet weak var passwordView: KeyboardReactiveView!
 	@IBOutlet weak var errorLabel: UILabel!
+	@IBOutlet weak var topBar: TopBarUIView!
 	
 	
 	// ATTRIBUTES	---------------
@@ -44,6 +45,28 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
     override func viewDidLoad()
 	{
         super.viewDidLoad()
+		
+		// Sets up the top bar
+		let title = "Select Avatar"
+		if let presentingViewController = presentingViewController
+		{
+			if let presentingViewController = presentingViewController as? SelectProjectVC
+			{
+				topBar.configure(hostVC: self, title: title, leftButtonText: presentingViewController.shouldDismissBelow ? "Log Out" : "Switch Project")
+				{
+					Session.instance.projectId = nil
+					presentingViewController.dismissFromAbove()
+				}
+			}
+			else
+			{
+				topBar.configure(hostVC: self, title: title, leftButtonText: "Back", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
+			}
+		}
+		else
+		{
+			topBar.configure(hostVC: self, title: title)
+		}
 		
 		guard let projectId = Session.instance.projectId else
 		{
@@ -143,24 +166,6 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		Session.instance.avatarId = selectedAvatar.idString
 		proceed()
 	}
-	
-	@IBAction func backButtonPressed(_ sender: Any)
-	{
-		// Deselects the current project
-		Session.instance.projectId = nil
-		
-		// Dimisses the view controller below
-		if let projectVC = presentingViewController as? SelectProjectVC
-		{
-			projectVC.dismissFromAbove()
-		}
-		else
-		{
-			print("ERROR: Avatar selection not presented from project selection")
-			dismiss(animated: true, completion: nil)
-		}
-	}
-	
 	
 	
 	// IMPLEMENTED METHODS	-------

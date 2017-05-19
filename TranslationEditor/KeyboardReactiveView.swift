@@ -35,6 +35,7 @@ class KeyboardReactiveView: UIView
 	private var margin: CGFloat = 16
 	private weak var topConstraint: NSLayoutConstraint?
 	private weak var bottomConstraint: NSLayoutConstraint?
+	private weak var centeringConstraint: NSLayoutConstraint?
 	
 	private var observers = [Any]()
 	private var totalRaise: CGFloat = 0
@@ -44,6 +45,7 @@ class KeyboardReactiveView: UIView
 	
 	private var topMarginBeforeSquish: CGFloat?
 	private var disabledTopConstraint: NSLayoutConstraint? // Strong temporary storage for disabled constraint
+	private var disabledCenteringConstraint: NSLayoutConstraint?
 	
 	private var generatedBottomConstraint: NSLayoutConstraint?
 	private var generatedHeightConstraint: NSLayoutConstraint?
@@ -66,7 +68,7 @@ class KeyboardReactiveView: UIView
 	
 	// OTHER METHODS	--------
 	
-	func configure(mainView: UIView, elements: [UIView], topConstraint: NSLayoutConstraint? = nil, bottomConstraint: NSLayoutConstraint? = nil, style: ReactionStyle = .slide, margin: CGFloat = 16)
+	func configure(mainView: UIView, elements: [UIView], topConstraint: NSLayoutConstraint? = nil, bottomConstraint: NSLayoutConstraint? = nil, centeringConstraint: NSLayoutConstraint? = nil, style: ReactionStyle = .slide, margin: CGFloat = 16)
 	{
 		self.mainView = mainView
 		self.importantElements = elements
@@ -74,6 +76,7 @@ class KeyboardReactiveView: UIView
 		self.bottomConstraint = bottomConstraint
 		self.margin = margin
 		self.style = style
+		self.centeringConstraint = centeringConstraint
 	}
 	
 	// Starts listening to keyboard state changes
@@ -225,6 +228,21 @@ class KeyboardReactiveView: UIView
 	
 	private func updateRaiseConstraints(raise: CGFloat)
 	{
+		// A centering constraint is always disabled while the keyboard is raised
+		if isRaised
+		{
+			if let centeringConstraint = centeringConstraint
+			{
+				disabledCenteringConstraint = centeringConstraint
+				NSLayoutConstraint.deactivate([centeringConstraint])
+			}
+		}
+		else if let disabledCenteringConstraint = disabledCenteringConstraint
+		{
+			NSLayoutConstraint.activate([disabledCenteringConstraint])
+			centeringConstraint = disabledCenteringConstraint
+		}
+		
 		if let bottomConstraint = bottomConstraint
 		{
 			bottomConstraint.constant += raise

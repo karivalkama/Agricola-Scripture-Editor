@@ -11,46 +11,35 @@ import UIKit
 // Login VC handles user authorization and login (duh)
 // The process may be skipped / sped up after the first success
 // (user data is stored in the keychain)
-class LoginVC: UIViewController//, ConnectionListener
+class LoginVC: UIViewController
 {
 	// OUTLETS	--------------------
 	
 	@IBOutlet weak var userNameField: UITextField!
-	@IBOutlet weak var onlineStatusView: OnlineStatusView!
 	@IBOutlet weak var passwordField: UITextField!
 	@IBOutlet weak var errorLabel: UILabel!
 	@IBOutlet weak var loginButton: BasicButton!
-	@IBOutlet weak var joinView: P2PJoinView!
+	@IBOutlet weak var topBar: TopBarUIView!
 	
+	@IBOutlet weak var centeringConstraint: NSLayoutConstraint!
 	@IBOutlet weak var contentView: KeyboardReactiveView!
-	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
 	
 	
-	// ATTRIBUTES	----------------
-	
-	// private var viewManager: KeyboardViewManager!
-	
-
 	// INIT	------------------------
 	
     override func viewDidLoad()
 	{
         super.viewDidLoad()
 		
-		joinView.viewController = self
-		joinView.onlineStatusView = onlineStatusView
-		
 		errorLabel.text = nil
+		topBar.configure(hostVC: self, title: "Login")
 		
-		// viewManager = KeyboardViewManager(view: view, importantElements: [userNameField, passwordField, errorLabel, loginButton, joinView])
-		contentView.configure(mainView: view, elements: [userNameField, passwordField, errorLabel, loginButton, joinView], topConstraint: contentTopConstraint)
+		contentView.configure(mainView: view, elements: [userNameField, passwordField, errorLabel, loginButton], centeringConstraint: centeringConstraint)
     }
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
 		super.viewDidAppear(animated)
-		
-		ConnectionManager.instance.registerListener(joinView)
 		
 		// If the user is already logged in, just starts the background updates and moves on
 		if Session.instance.isAuthorized
@@ -72,7 +61,6 @@ class LoginVC: UIViewController//, ConnectionListener
 	{
 		// viewManager.endKeyboardListening()
 		contentView.endKeyboardListening()
-		ConnectionManager.instance.removeListener(joinView)
 	}
 	
 	

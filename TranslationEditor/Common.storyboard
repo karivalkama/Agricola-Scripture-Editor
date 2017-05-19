@@ -27,10 +27,10 @@
                                 <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUM-R1-CTj">
-                                <rect key="frame" x="615" y="36" width="373" height="668"/>
+                                <rect key="frame" x="599" y="36" width="389" height="668"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Ihe-oP-hey">
-                                        <rect key="frame" x="16" y="16" width="341" height="636"/>
+                                        <rect key="frame" x="24" y="16" width="341" height="636"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xk0-G6-g8V" customClass="ConnectionUIView" customModule="TranslationEditor" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="341" height="564"/>
@@ -55,8 +55,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Ihe-oP-hey" firstAttribute="leading" secondItem="FUM-R1-CTj" secondAttribute="leading" constant="16" id="JGl-ve-CvX"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ihe-oP-hey" secondAttribute="trailing" constant="16" id="KVw-8c-90c"/>
+                                    <constraint firstItem="Ihe-oP-hey" firstAttribute="leading" secondItem="FUM-R1-CTj" secondAttribute="leading" constant="24" id="JGl-ve-CvX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ihe-oP-hey" secondAttribute="trailing" constant="24" id="KVw-8c-90c"/>
                                     <constraint firstItem="Ihe-oP-hey" firstAttribute="top" secondItem="FUM-R1-CTj" secondAttribute="top" constant="16" id="Kmk-1J-YNw"/>
                                     <constraint firstAttribute="bottom" secondItem="Ihe-oP-hey" secondAttribute="bottom" constant="16" id="bSv-FI-fzA"/>
                                 </constraints>

@@ -21,7 +21,7 @@ protocol StackDismissable
 }
 
 extension StackDismissable where Self: UIViewController
-{
+{	
 	// Dismisses this view controller and possibly other view controllers below that
 	func dismissFromAbove()
 	{

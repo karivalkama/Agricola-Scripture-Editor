@@ -10,7 +10,7 @@ import UIKit
 
 // This view is used for basic navigation and info display on multiple different views
 // The bar also provides access to P2P and other sharing options
-class TopBarUIView: UIView
+@IBDesignable class TopBarUIView: CustomXibView
 {
 	// OUTLETS	------------------
 	
@@ -29,6 +29,18 @@ class TopBarUIView: UIView
 	
 	
 	// LOAD	----------------------
+	
+	override init(frame: CGRect)
+	{
+		super.init(frame: frame)
+		setupXib(nibName: "TopBar")
+	}
+	
+	required init?(coder: NSCoder)
+	{
+		super.init(coder: coder)
+		setupXib(nibName: "TopBar")
+	}
 	
 	override func awakeFromNib()
 	{

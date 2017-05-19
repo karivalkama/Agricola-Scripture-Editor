@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7HQ-at-0Yn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7HQ-at-0Yn">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -29,10 +29,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WYz-Uf-C1K" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
-                                <rect key="frame" x="209.5" y="52" width="605" height="625.5"/>
+                                <rect key="frame" x="209.5" y="171.5" width="605" height="425.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="6iV-fs-Bhb" userLabel="Content Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="605" height="625.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="605" height="425.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tTQ-ez-qc3" userLabel="Title Stack View">
                                                 <rect key="frame" x="0.0" y="0.0" width="605" height="217.5"/>
@@ -56,7 +56,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="lc9-4f-cax" userLabel="Content Stack View">
-                                                <rect key="frame" x="82.5" y="265.5" width="440" height="360"/>
+                                                <rect key="frame" x="82.5" y="265.5" width="440" height="160"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="7X2-Hd-R1C" userLabel="Auth Stack View">
                                                         <rect key="frame" x="0.0" y="0.0" width="440" height="160"/>
@@ -176,26 +176,6 @@
                                                             <constraint firstAttribute="trailing" secondItem="jZr-uV-CHp" secondAttribute="trailing" id="EWU-me-C9E"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1Ub-4E-7lQ" userLabel="Online Stack View">
-                                                        <rect key="frame" x="76" y="192" width="288" height="168"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BFv-nT-Cd3" customClass="P2PJoinView" customModule="TranslationEditor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="288" height="96"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="96" id="jtP-wE-Cog"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpl-Mu-LaE" customClass="OnlineStatusView" customModule="TranslationEditor">
-                                                                <rect key="frame" x="0.0" y="104" width="288" height="64"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" priority="750" constant="64" id="aJW-eb-oV6"/>
-                                                                </constraints>
-                                                            </view>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="288" id="afa-IO-eDl"/>
-                                                        </constraints>
-                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -208,22 +188,31 @@
                                     <constraint firstAttribute="trailing" secondItem="6iV-fs-Bhb" secondAttribute="trailing" id="vPD-vt-17B"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ry6-hh-I2P" customClass="TopBarUIView" customModule="TranslationEditor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Azf-wV-IxX"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="WYz-Uf-C1K" firstAttribute="centerX" secondItem="hMo-7h-QZX" secondAttribute="centerX" id="1m0-Bg-rwk"/>
-                            <constraint firstItem="WYz-Uf-C1K" firstAttribute="top" secondItem="MsI-kg-kWV" secondAttribute="bottom" constant="32" id="Fi5-tZ-8sy"/>
+                            <constraint firstItem="WYz-Uf-C1K" firstAttribute="centerY" secondItem="hMo-7h-QZX" secondAttribute="centerY" id="EEX-5J-qVN"/>
+                            <constraint firstItem="ry6-hh-I2P" firstAttribute="top" secondItem="hMo-7h-QZX" secondAttribute="top" id="IFu-Y0-cJZ"/>
+                            <constraint firstItem="ry6-hh-I2P" firstAttribute="leading" secondItem="hMo-7h-QZX" secondAttribute="leading" id="ee6-GC-gKn"/>
+                            <constraint firstAttribute="trailing" secondItem="ry6-hh-I2P" secondAttribute="trailing" id="mbj-Dl-kYV"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contentTopConstraint" destination="Fi5-tZ-8sy" id="s8S-mD-2LT"/>
+                        <outlet property="centeringConstraint" destination="EEX-5J-qVN" id="vgD-t8-gjD"/>
                         <outlet property="contentView" destination="WYz-Uf-C1K" id="qLb-8s-bwh"/>
                         <outlet property="errorLabel" destination="jZr-uV-CHp" id="7RG-Eu-HAt"/>
-                        <outlet property="joinView" destination="BFv-nT-Cd3" id="x6K-gE-1JB"/>
                         <outlet property="loginButton" destination="8EW-FA-pFd" id="3Kv-dk-yoj"/>
-                        <outlet property="onlineStatusView" destination="Mpl-Mu-LaE" id="WR3-3f-wK6"/>
                         <outlet property="passwordField" destination="CnF-lF-3AM" id="79x-tJ-ON1"/>
+                        <outlet property="topBar" destination="ry6-hh-I2P" id="J1F-Ty-jVc"/>
                         <outlet property="userNameField" destination="lIj-GE-Qvn" id="DTx-Jj-iSz"/>
                         <segue destination="kXv-Dx-fTW" kind="presentation" identifier="SelectProject" id="HNA-AV-7xQ"/>
                     </connections>
@@ -661,31 +650,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exh-JZ-L1D">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="dfm-Nt-4On"/>
-                                </constraints>
-                                <color key="barTintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem title="Select Project" id="fEl-Mi-qaS">
-                                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="YWp-8U-OOF">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <action selector="logoutButtonPressed:" destination="kXv-Dx-fTW" id="BL5-w4-6aa"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SW8-1F-Sq4" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
-                                <rect key="frame" x="32" y="68" width="960" height="636"/>
+                                <rect key="frame" x="32" y="72" width="960" height="632"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="tKd-Cu-57K" userLabel="Content Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="960" height="636"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="960" height="632"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="Qn1-aN-GAg">
-                                                <rect key="frame" x="0.0" y="22.5" width="355" height="591.5"/>
+                                                <rect key="frame" x="0.0" y="20.5" width="355" height="591.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="355" id="f53-5n-HuG"/>
                                                 </constraints>
@@ -694,7 +666,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Q0h-a8-VBV" userLabel="Project Stack View">
-                                                <rect key="frame" x="403" y="0.0" width="557" height="636"/>
+                                                <rect key="frame" x="403" y="0.0" width="557" height="632"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select an existing project" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BvU-lB-5ab">
                                                         <rect key="frame" x="0.0" y="0.0" width="557" height="21.5"/>
@@ -706,7 +678,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="87" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7bl-Kc-0Yq">
-                                                        <rect key="frame" x="0.0" y="37.5" width="557" height="550.5"/>
+                                                        <rect key="frame" x="0.0" y="37.5" width="557" height="546.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="352" id="QfX-T5-ECe"/>
@@ -888,7 +860,7 @@
                                                         </prototypes>
                                                     </tableView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="v4y-YB-fIL" userLabel="Option Stack View">
-                                                        <rect key="frame" x="298" y="604" width="259" height="32"/>
+                                                        <rect key="frame" x="298" y="600" width="259" height="32"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Itv-Lg-4xh">
                                                                 <rect key="frame" x="0.0" y="0.0" width="19" height="32"/>
@@ -935,31 +907,39 @@
                                     <constraint firstItem="tKd-Cu-57K" firstAttribute="leading" secondItem="SW8-1F-Sq4" secondAttribute="leading" id="G3V-Qo-Uxc"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RHV-pp-iR2" customClass="TopBarUIView" customModule="TranslationEditor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="7eY-nu-Lmd"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="exh-JZ-L1D" firstAttribute="leading" secondItem="VwM-pl-KLa" secondAttribute="leading" id="8Fk-9I-OeB"/>
+                            <constraint firstAttribute="trailing" secondItem="RHV-pp-iR2" secondAttribute="trailing" id="HTt-X4-o85"/>
                             <constraint firstAttribute="trailing" secondItem="SW8-1F-Sq4" secondAttribute="trailing" constant="32" id="KtO-Ie-6Np"/>
-                            <constraint firstItem="exh-JZ-L1D" firstAttribute="top" secondItem="VwM-pl-KLa" secondAttribute="top" id="Lyx-1U-rb4"/>
                             <constraint firstItem="SW8-1F-Sq4" firstAttribute="leading" secondItem="VwM-pl-KLa" secondAttribute="leading" constant="32" id="N2S-xB-7HQ"/>
                             <constraint firstAttribute="bottom" secondItem="SW8-1F-Sq4" secondAttribute="bottom" constant="64" id="QAw-Xs-PLU"/>
-                            <constraint firstAttribute="trailing" secondItem="exh-JZ-L1D" secondAttribute="trailing" id="kAe-cf-WL7"/>
-                            <constraint firstItem="SW8-1F-Sq4" firstAttribute="top" secondItem="exh-JZ-L1D" secondAttribute="bottom" constant="24" id="w4k-xr-CXX"/>
+                            <constraint firstItem="RHV-pp-iR2" firstAttribute="top" secondItem="VwM-pl-KLa" secondAttribute="top" id="aSR-7M-viz"/>
+                            <constraint firstItem="SW8-1F-Sq4" firstAttribute="top" secondItem="RHV-pp-iR2" secondAttribute="bottom" constant="24" id="b64-WB-1rG"/>
+                            <constraint firstItem="RHV-pp-iR2" firstAttribute="leading" secondItem="VwM-pl-KLa" secondAttribute="leading" id="lSx-S1-ryD"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contentBottomConstraint" destination="QAw-Xs-PLU" id="5W7-QR-9te"/>
-                        <outlet property="contentTopConstraint" destination="w4k-xr-CXX" id="3Nu-Yp-wDf"/>
+                        <outlet property="contentBottomConstraint" destination="QAw-Xs-PLU" id="ebL-Pr-WRu"/>
+                        <outlet property="contentTopConstraint" destination="b64-WB-1rG" id="kDS-Wn-dti"/>
                         <outlet property="contentView" destination="SW8-1F-Sq4" id="Vsl-ql-K3c"/>
                         <outlet property="createProjectButton" destination="Obr-6h-dYp" id="Dhj-IQ-K0T"/>
                         <outlet property="projectTableView" destination="7bl-Kc-0Yq" id="dia-bn-OrJ"/>
+                        <outlet property="topBar" destination="RHV-pp-iR2" id="oGj-vo-Zqw"/>
                         <segue destination="dMv-eu-RFU" kind="presentation" identifier="SelectAvatar" id="OS0-uP-3up"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I99-Xe-Pjq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-164" y="13"/>
+            <point key="canvasLocation" x="-164.0625" y="12.5"/>
         </scene>
         <!--Create ProjectVC-->
         <scene sceneID="9xi-ph-cc5">
@@ -1343,22 +1323,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tJb-C9-MzN">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
-                                <color key="barTintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem title="Select Avatar" id="u3U-kN-nj5">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="D2B-E3-E4J">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <action selector="backButtonPressed:" destination="dMv-eu-RFU" id="mJQ-09-OTD"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UrZ-ky-uDt">
-                                <rect key="frame" x="36" y="76" width="952" height="660"/>
+                                <rect key="frame" x="28" y="72" width="968" height="672"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rMz-gR-dIP">
                                     <size key="itemSize" width="272" height="305"/>
@@ -1415,10 +1381,10 @@
                                 </cells>
                             </collectionView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oz8-mI-VI2" userLabel="Password View" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
-                                <rect key="frame" x="318" y="297.5" width="388" height="173.5"/>
+                                <rect key="frame" x="318" y="316" width="388" height="137"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BRS-qN-0CT">
-                                        <rect key="frame" x="16" y="16" width="356" height="141.5"/>
+                                        <rect key="frame" x="16" y="16" width="356" height="105"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Iso-tx-Yzq">
                                                 <rect key="frame" x="0.0" y="0.0" width="356" height="56"/>
@@ -1451,13 +1417,13 @@
                                                 </constraints>
                                             </stackView>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The password was incorrect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjy-Eb-Ez7">
-                                                <rect key="frame" x="0.0" y="72" width="215" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="64" width="215" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VHK-wj-yaw">
-                                                <rect key="frame" x="0.0" y="108.5" width="356" height="33"/>
+                                                <rect key="frame" x="0.0" y="72" width="356" height="33"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L73-tV-GnT" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="170" height="33"/>
@@ -1504,18 +1470,25 @@
                                     <constraint firstAttribute="bottom" secondItem="BRS-qN-0CT" secondAttribute="bottom" constant="16" id="Xh8-ed-vhn"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bg9-8Z-bsm" customClass="TopBarUIView" customModule="TranslationEditor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="u7R-S5-HH2"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="tJb-C9-MzN" firstAttribute="top" secondItem="WPR-I3-vDQ" secondAttribute="top" id="4xm-u8-3ea"/>
-                            <constraint firstAttribute="trailing" secondItem="tJb-C9-MzN" secondAttribute="trailing" id="DgB-kA-fpt"/>
+                            <constraint firstItem="bg9-8Z-bsm" firstAttribute="leading" secondItem="WPR-I3-vDQ" secondAttribute="leading" id="7dx-o5-lLk"/>
                             <constraint firstItem="oz8-mI-VI2" firstAttribute="centerY" secondItem="WPR-I3-vDQ" secondAttribute="centerY" priority="750" id="IEO-Iy-qcS"/>
-                            <constraint firstItem="tJb-C9-MzN" firstAttribute="leading" secondItem="WPR-I3-vDQ" secondAttribute="leading" id="Rzv-cz-USv"/>
-                            <constraint firstItem="UrZ-ky-uDt" firstAttribute="leading" secondItem="WPR-I3-vDQ" secondAttribute="leadingMargin" constant="16" id="Uju-iN-UgP"/>
-                            <constraint firstItem="Vbd-3v-8fx" firstAttribute="top" secondItem="UrZ-ky-uDt" secondAttribute="bottom" constant="32" id="anx-nL-SNl"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="UrZ-ky-uDt" secondAttribute="trailing" constant="16" id="gOg-6j-50E"/>
-                            <constraint firstItem="UrZ-ky-uDt" firstAttribute="top" secondItem="tJb-C9-MzN" secondAttribute="bottom" constant="32" id="naF-Qn-qDN"/>
+                            <constraint firstItem="UrZ-ky-uDt" firstAttribute="top" secondItem="bg9-8Z-bsm" secondAttribute="bottom" constant="24" id="M1C-rL-UQA"/>
+                            <constraint firstAttribute="trailing" secondItem="bg9-8Z-bsm" secondAttribute="trailing" id="Ql7-F7-BSV"/>
+                            <constraint firstItem="UrZ-ky-uDt" firstAttribute="leading" secondItem="WPR-I3-vDQ" secondAttribute="leadingMargin" constant="8" id="Uju-iN-UgP"/>
+                            <constraint firstItem="bg9-8Z-bsm" firstAttribute="top" secondItem="WPR-I3-vDQ" secondAttribute="top" id="Wiz-El-ptO"/>
+                            <constraint firstItem="Vbd-3v-8fx" firstAttribute="top" secondItem="UrZ-ky-uDt" secondAttribute="bottom" constant="24" id="anx-nL-SNl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UrZ-ky-uDt" secondAttribute="trailing" constant="8" id="gOg-6j-50E"/>
                             <constraint firstItem="oz8-mI-VI2" firstAttribute="centerX" secondItem="WPR-I3-vDQ" secondAttribute="centerX" id="tvH-3M-ifY"/>
                         </constraints>
                     </view>
@@ -1525,11 +1498,12 @@
                         <outlet property="loginButton" destination="uC0-5u-oCf" id="MBb-5p-DAI"/>
                         <outlet property="passwordField" destination="tKq-yi-0bd" id="31R-Es-lbc"/>
                         <outlet property="passwordView" destination="oz8-mI-VI2" id="2Ig-Od-7fS"/>
+                        <outlet property="topBar" destination="bg9-8Z-bsm" id="7QO-e5-VPl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SI4-Qj-Joy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="477" y="13"/>
+            <point key="canvasLocation" x="516.796875" y="13.28125"/>
         </scene>
     </scenes>
     <resources>

@@ -26,17 +26,17 @@
                     <rect key="frame" x="0.0" y="0.0" width="259" height="84"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dwI-lC-Gd8">
-                            <rect key="frame" x="0.0" y="21.5" width="167" height="41"/>
+                            <rect key="frame" x="0.0" y="24.5" width="167" height="35"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Username" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWj-1Y-Idg">
                                     <rect key="frame" x="0.0" y="0.0" width="167" height="20.5"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="395-aB-Ga5">
-                                    <rect key="frame" x="0.0" y="20.5" width="167" height="20.5"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <rect key="frame" x="0.0" y="20.5" width="167" height="14.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -53,9 +53,9 @@
             </subviews>
             <constraints>
                 <constraint firstItem="aN0-cu-cLs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Deo-el-IYn"/>
-                <constraint firstAttribute="bottom" secondItem="aN0-cu-cLs" secondAttribute="bottom" id="HRy-A7-MKC"/>
+                <constraint firstAttribute="bottom" secondItem="aN0-cu-cLs" secondAttribute="bottom" priority="999" id="HRy-A7-MKC"/>
                 <constraint firstItem="aN0-cu-cLs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oiW-Q9-r1h"/>
-                <constraint firstAttribute="trailing" secondItem="aN0-cu-cLs" secondAttribute="trailing" id="tAc-3k-0vs"/>
+                <constraint firstAttribute="trailing" secondItem="aN0-cu-cLs" secondAttribute="trailing" priority="999" id="tAc-3k-0vs"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
