@@ -90,6 +90,7 @@ import MessageUI
 	
 	@IBAction func hostingSwitchChanged(_ sender: Any)
 	{
+		// TODO: Animate
 		if hostingSwitch.isOn
 		{
 			if P2PHostSession.instance == nil
@@ -136,6 +137,7 @@ import MessageUI
 	
 	@IBAction func sendEmailButtonPressed(_ sender: Any)
 	{
+		// TODO: Animate
 		// When send email button is pressed, book selection is displayed
 		bookSelectionView.isHidden = false
 		sendEmailButton.isEnabled = false
@@ -143,6 +145,7 @@ import MessageUI
 	
 	@IBAction func cancelSendButtonPressed(_ sender: Any)
 	{
+		// TODO: Animate
 		// Hides the book selection
 		sendEmailButton.isEnabled = true
 		bookSelectionView.isHidden = true
@@ -162,6 +165,7 @@ import MessageUI
 			print("STATUS: Starting P2P client session")
 			print("STATUS: \(info)")
 			
+			// TODO: Animate
 			P2PClientSession.start(info)
 			updateStatus()
 		}

@@ -223,6 +223,7 @@ class TranslationEditorTests: XCTestCase
 	func testClearDatabase()
 	{
 		try! DATABASE.delete()
+		Session.instance.bookId = nil
 		Session.instance.avatarId = nil
 		Session.instance.projectId = nil
 		Session.instance.logout()

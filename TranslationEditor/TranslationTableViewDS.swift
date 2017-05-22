@@ -27,7 +27,12 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	private(set) var currentData = [Paragraph]()
 	
 	// Content listener is informed whenever the table contents have been updated
-	var contentListener: TranslationParagraphListener?
+	private var _contentListeners = [Weak<TranslationParagraphListener>]()
+	var contentListeners: [TranslationParagraphListener]
+	{
+		get { return _contentListeners.flatMap { $0.value } }
+		set { _contentListeners = newValue.weakReference }
+	}
 	
 	private let configureCell: (UITableView, IndexPath, Paragraph) -> UITableViewCell
 	private let prepareUpdate: (() -> ())?
@@ -69,7 +74,7 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		prepareUpdate?()
 		tableView.reloadData()
 		
-		contentListener?.translationParagraphsUpdated(currentData)
+		contentListeners.forEach { $0.translationParagraphsUpdated(currentData) }
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int

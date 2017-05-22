@@ -9,7 +9,7 @@
 import Foundation
 
 // Classes conforming to this protocol should be informed when translation data changes
-protocol TranslationParagraphListener
+protocol TranslationParagraphListener: class
 {
 	// This method is called each time the translation paragraphs have been updated
 	func translationParagraphsUpdated(_ paragraphs: [Paragraph])

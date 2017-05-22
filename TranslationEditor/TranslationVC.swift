@@ -9,7 +9,7 @@
 import UIKit
 
 // TranslationVC is the view controller used in the translation / review / work view
-class TranslationVC: UIViewController, CellInputListener, AppStatusListener, AddNotesDelegate, OpenThreadListener, UIGestureRecognizerDelegate, TranslationCellDelegate, ResourceUpdateListener
+class TranslationVC: UIViewController, CellInputListener, AppStatusListener, AddNotesDelegate, OpenThreadListener, UIGestureRecognizerDelegate, TranslationCellDelegate, ResourceUpdateListener, TranslationParagraphListener
 {
 	// TYPES	----------
 	
@@ -58,6 +58,10 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	
 	private var active = false
 	
+	// Tracking of edit (cursor) status
+	private var lastEditPath: String?
+	private var lastEditRange: NSRange?
+	
 	
 	// VIEW CONTROLLER	-----
 	
@@ -87,13 +91,13 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		resourceTableView.rowHeight = UITableViewAutomaticDimension
 		resourceTableView.estimatedRowHeight = 320
 		
-		targetTranslationDS = TranslationTableViewDS(tableView: translationTableView, bookId: book.idString, configureCell: configureTargetTranslationCell, prepareUpdate: updateConflictData)
+		targetTranslationDS = TranslationTableViewDS(tableView: translationTableView, bookId: book.idString, configureCell: configureTargetTranslationCell, prepareUpdate: prepareForTargetUpdate)
 		translationTableView.dataSource = targetTranslationDS
 		
 		resourceManager = ResourceManager(resourceTableView: resourceTableView, targetBookId: book.idString, addNotesDelegate: self, threadStatusListener: self, updateListener: self)
 		
 		// Makes resource manager listen to paragraph content changes
-		targetTranslationDS.contentListener = resourceManager
+		targetTranslationDS.contentListeners = [self, resourceManager]
 		
 		// Sets scroll syncing
 		scrollManager = ScrollSyncManager(leftTable: resourceTableView, rightTable: translationTableView, leftResourceId: "none", rightResourceId: "target")
@@ -302,6 +306,21 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		}
 	}
 	
+	func translationParagraphsUpdated(_ paragraphs: [Paragraph])
+	{
+		// Sets the focus back to the text view that was last edited
+		if let lastEditPath = lastEditPath, let lastEditRange = lastEditRange
+		{
+			if let index = targetTranslationDS.indexForPath(lastEditPath), let cell = translationTableView.cellForRow(at: index) as? TargetTranslationCell
+			{
+				if cell.inputTextField.becomeFirstResponder()
+				{
+					cell.inputTextField.selectedRange = lastEditRange
+				}
+			}
+		}
+	}
+	
 	
 	// IB ACTIONS	-----------------
 	
@@ -403,6 +422,33 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		cell.delegate = self
 		
 		return cell
+	}
+	
+	private func prepareForTargetUpdate()
+	{
+		// Records which cell was the first responder before the update and what the selected range was
+		var foundActiveCell = false
+		for cell in translationTableView.visibleCells
+		{
+			if let cell = cell as? TargetTranslationCell
+			{
+				if cell.inputTextField.isFirstResponder
+				{
+					lastEditPath = cell.pathId
+					lastEditRange = cell.inputTextField.selectedRange
+					foundActiveCell = true
+					break
+				}
+			}
+		}
+		
+		if !foundActiveCell
+		{
+			lastEditPath = nil
+			lastEditRange = nil
+		}
+		
+		updateConflictData()
 	}
 	
 	private func updateConflictData()
