@@ -246,7 +246,7 @@
                                                     <rect key="frame" x="0.0" y="24.5" width="274" height="0.0"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="160" id="HiA-ky-Ono"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="800" constant="160" id="HiA-ky-Ono"/>
                                                     </constraints>
                                                 </tableView>
                                                 <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFx-pC-y1k" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
@@ -261,7 +261,6 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="cancelSendButtonPressed:" destination="-1" eventType="touchUpInside" id="uJj-mi-UEw"/>
-                                                        <action selector="sendEmailButtonPressed:" destination="-1" eventType="touchUpInside" id="tyu-eS-zgC"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

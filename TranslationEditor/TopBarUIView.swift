@@ -124,7 +124,7 @@ import UIKit
 				{
 					self.avatar = avatar
 					self.info = info
-					userView.configure(projectName: project.name, username: avatar.name, image: info.image)
+					userView.configure(projectName: project.name, username: avatar.name, image: info.image ?? #imageLiteral(resourceName: "userIcon"))
 					foundUserData = true
 				}
 			}

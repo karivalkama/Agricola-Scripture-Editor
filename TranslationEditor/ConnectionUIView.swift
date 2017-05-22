@@ -144,8 +144,8 @@ import MessageUI
 	@IBAction func cancelSendButtonPressed(_ sender: Any)
 	{
 		// Hides the book selection
-		bookSelectionView.isHidden = true
 		sendEmailButton.isEnabled = true
+		bookSelectionView.isHidden = true
 	}
 	
 	
@@ -187,12 +187,14 @@ import MessageUI
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		return 0
+		return targetTranslations.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		return tableView.dequeueReusableCell(withIdentifier: LabelCell.identifier, for: indexPath)
+		let cell = tableView.dequeueReusableCell(withIdentifier: LabelCell.identifier, for: indexPath) as! LabelCell
+		cell.configure(text: targetTranslations[indexPath.row].code.description)
+		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
@@ -230,6 +232,11 @@ import MessageUI
 		{
 			print("ERROR: Failed to read translation data. \(error)")
 		}
+	}
+	
+	func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?)
+	{
+		controller.dismiss(animated: true, completion: nil)
 	}
 	
 	func onConnectionStatusChange(newStatus status: ConnectionStatus)
