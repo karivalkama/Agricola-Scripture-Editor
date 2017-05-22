@@ -24,6 +24,16 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>QRCode.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>QRCodeReader.swift.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>SCrypto.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -42,6 +52,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>15685605D3BC43A326FF01BCA122E14B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>28295D02E79D07F49ABFB45CC6D4594F</key>
 		<dict>
 			<key>primary</key>
@@ -52,7 +67,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6A3EA4406C6E0C60E916470A42F9851B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8B75DCD80272A5272F2120E405576D35</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>AC6C1A149239200877BECF12B0E7BBEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B381F39C22B3998F4CEE26A38EB574FC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C581AB4E1267B8E9D1CEED8FB0289ACF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C7055B32761C829C8C2705B2E53EEF92</key>
 		<dict>
 			<key>primary</key>
 			<true/>
