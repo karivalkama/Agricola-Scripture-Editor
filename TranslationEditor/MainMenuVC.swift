@@ -37,6 +37,8 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 	{
         super.viewDidLoad()
 		
+		topBar.configure(hostVC: self, title: "Main Menu")
+		
 		// Sets up the table
 		// bookTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
 		bookTableView.dataSource = self
@@ -92,7 +94,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		}
 		else
 		{
-			topBar.configure(hostVC: self, title: title)
+			topBar.updateUserView()
 		}
 		
 		queryManager?.start()
@@ -146,8 +148,6 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 				print("ERROR: Failed to read book data. \(error)")
 			}
 		}
-		
-		print("Main VC has presenting VC: \(presentingViewController != nil)")
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)

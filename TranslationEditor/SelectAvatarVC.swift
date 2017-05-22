@@ -46,6 +46,8 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	{
         super.viewDidLoad()
 		
+		topBar.configure(hostVC: self, title: "Select Avatar")
+		
 		guard let projectId = Session.instance.projectId else
 		{
 			print("ERROR: No selected project -> No available avatar data")
@@ -107,10 +109,6 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			{
 				topBar.configure(hostVC: self, title: title, leftButtonText: "Back", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
 			}
-		}
-		else
-		{
-			topBar.configure(hostVC: self, title: title)
 		}
 		
 		// If the avatar has already been chosen, skips this phase

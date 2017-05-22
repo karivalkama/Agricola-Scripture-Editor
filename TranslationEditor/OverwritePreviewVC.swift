@@ -43,6 +43,8 @@ class OverwritePreviewVC: UIViewController
 			fatalError("ERROR: OverWritePreviewVC must be configured before use")
 		}
 		
+		topBar.configure(hostVC: self, title: "Preview Changes")
+		
 		// Loads the old paragraphs from the database
 		do
 		{
@@ -85,7 +87,7 @@ class OverwritePreviewVC: UIViewController
 		}
 		else
 		{
-			topBar.configure(hostVC: self, title: title)
+			topBar.updateUserView()
 		}
 	}
 	

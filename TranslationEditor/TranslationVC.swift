@@ -72,6 +72,12 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 			fatalError("Translation VC must be configured before use")
 		}
 		
+		topBar.configure(hostVC: self, title: "Translation", leftButtonText: "To Main Menu")
+		{
+			Session.instance.bookId = nil
+			self.dismiss(animated: true, completion: nil)
+		}
+		
 		commitButton.isEnabled = false
 		
 		// (Epic hack which) Makes table view cells have automatic height
@@ -139,12 +145,6 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
-		topBar.configure(hostVC: self, title: "Translation", leftButtonText: "To Main Menu")
-		{
-			Session.instance.bookId = nil
-			self.dismiss(animated: true, completion: nil)
-		}
-		
 		AppStatusHandler.instance.registerListener(self)
 		activate()
 	}

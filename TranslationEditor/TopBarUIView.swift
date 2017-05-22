@@ -105,6 +105,12 @@ import UIKit
 		updateUserView()
 	}
 	
+	func setLeftButtonAction(_ action: @escaping () -> ())
+	{
+		leftSideAction = action
+		leftSideButton.isEnabled = true
+	}
+	
 	func updateUserView()
 	{
 		var foundUserData = false

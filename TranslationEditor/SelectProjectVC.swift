@@ -52,6 +52,12 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		projectTableView.delegate = self
 		projectTableView.dataSource = self
 		
+		topBar.configure(hostVC: self, title: "Select Project", leftButtonText: "Log Out")
+		{
+			Session.instance.logout()
+			self.dismiss(animated: true, completion: nil)
+		}
+		
 		// If using a shared account, selects the project automatically
 		guard let accountId = Session.instance.accountId else
 		{
@@ -68,12 +74,6 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	override func viewDidAppear(_ animated: Bool)
 	{
 		super.viewDidAppear(animated)
-		
-		topBar.configure(hostVC: self, title: "Select Project", leftButtonText: "Log Out")
-		{
-			Session.instance.logout()
-			self.dismiss(animated: true, completion: nil)
-		}
 		
 		// If project is already selected, moves to the next view
 		// Otherwise listens to project data changes
