@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6A3EA4406C6E0C60E916470A42F9851B"
-               BuildableName = "Pods_TranslationEditorUITests.framework"
-               BlueprintName = "Pods-TranslationEditorUITests"
+               BlueprintIdentifier = "C581AB4E1267B8E9D1CEED8FB0289ACF"
+               BuildableName = "QRCode.framework"
+               BlueprintName = "QRCode"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6A3EA4406C6E0C60E916470A42F9851B"
-            BuildableName = "Pods_TranslationEditorUITests.framework"
-            BlueprintName = "Pods-TranslationEditorUITests"
+            BlueprintIdentifier = "C581AB4E1267B8E9D1CEED8FB0289ACF"
+            BuildableName = "QRCode.framework"
+            BlueprintName = "QRCode"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6A3EA4406C6E0C60E916470A42F9851B"
-            BuildableName = "Pods_TranslationEditorUITests.framework"
-            BlueprintName = "Pods-TranslationEditorUITests"
+            BlueprintIdentifier = "C581AB4E1267B8E9D1CEED8FB0289ACF"
+            BuildableName = "QRCode.framework"
+            BlueprintName = "QRCode"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
