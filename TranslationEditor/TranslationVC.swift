@@ -138,7 +138,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		{
 			if let language = try Language.get(book.languageId)
 			{
-				titleLabel.text = "\(language.name): \(book.identifier)"
+				titleLabel.text = "\(book.code) (\(language.name))"
 			}
 		}
 		catch

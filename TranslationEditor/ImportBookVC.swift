@@ -279,7 +279,7 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 				}
 				else if let firstProgress = first.progress, let secondProgress = second.progress, let progressResult = firstProgress.compare(with: secondProgress)
 				{
-					return progressResult
+					return !progressResult
 				}
 				else
 				{
