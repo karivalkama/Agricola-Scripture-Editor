@@ -42,32 +42,6 @@ import UIKit
 		setupXib(nibName: "TopBar")
 	}
 	
-	override func awakeFromNib()
-	{
-		var foundUserData = false
-		
-		// Sets up the user view
-		if let projectId = Session.instance.projectId, let avatarId = Session.instance.avatarId
-		{
-			do
-			{
-				if let project = try Project.get(projectId), let avatar = try Avatar.get(avatarId), let info = try avatar.info()
-				{
-					self.avatar = avatar
-					self.info = info
-					userView.configure(projectName: project.name, username: avatar.name, image: info.image)
-					foundUserData = true
-				}
-			}
-			catch
-			{
-				print("ERROR: Failed to load user information for the top bar. \(error)")
-			}
-		}
-		
-		userView.isHidden = !foundUserData
-	}
-	
 	
 	// ACTIONS	------------------
 	
@@ -127,5 +101,33 @@ import UIKit
 		{
 			leftSideButton.isHidden = true
 		}
+		
+		updateUserView()
+	}
+	
+	func updateUserView()
+	{
+		var foundUserData = false
+		
+		// Sets up the user view
+		if let projectId = Session.instance.projectId, let avatarId = Session.instance.avatarId
+		{
+			do
+			{
+				if let project = try Project.get(projectId), let avatar = try Avatar.get(avatarId), let info = try avatar.info()
+				{
+					self.avatar = avatar
+					self.info = info
+					userView.configure(projectName: project.name, username: avatar.name, image: info.image)
+					foundUserData = true
+				}
+			}
+			catch
+			{
+				print("ERROR: Failed to load user information for the top bar. \(error)")
+			}
+		}
+		
+		userView.isHidden = !foundUserData
 	}
 }

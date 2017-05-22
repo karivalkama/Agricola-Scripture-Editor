@@ -32,7 +32,6 @@ class LoginVC: UIViewController
         super.viewDidLoad()
 		
 		errorLabel.text = nil
-		topBar.configure(hostVC: self, title: "Login")
 		
 		contentView.configure(mainView: view, elements: [userNameField, passwordField, errorLabel, loginButton], centeringConstraint: centeringConstraint)
     }
@@ -40,6 +39,8 @@ class LoginVC: UIViewController
 	override func viewDidAppear(_ animated: Bool)
 	{
 		super.viewDidAppear(animated)
+		
+		topBar.configure(hostVC: self, title: "Login")
 		
 		// If the user is already logged in, just starts the background updates and moves on
 		if Session.instance.isAuthorized

@@ -62,12 +62,6 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		queryManager = ProjectView.instance.projectQuery(forContributorId: accountId).liveQueryManager
 		queryManager?.addListener(AnyLiveQueryListener(self))
 		
-		topBar.configure(hostVC: self, title: "Select Project", leftButtonText: "Log Out")
-		{
-			Session.instance.logout()
-			self.dismiss(animated: true, completion: nil)
-		}
-		
 		contentView.configure(mainView: view, elements: [createProjectButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
     }
 	
@@ -75,7 +69,11 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	{
 		super.viewDidAppear(animated)
 		
-		// print("STATUS: Project view appeared (temporarily: \(willBeDismissed))")
+		topBar.configure(hostVC: self, title: "Select Project", leftButtonText: "Log Out")
+		{
+			Session.instance.logout()
+			self.dismiss(animated: true, completion: nil)
+		}
 		
 		// If project is already selected, moves to the next view
 		// Otherwise listens to project data changes

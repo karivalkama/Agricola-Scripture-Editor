@@ -43,23 +43,6 @@ class OverwritePreviewVC: UIViewController
 			fatalError("ERROR: OverWritePreviewVC must be configured before use")
 		}
 		
-		let title = "Preview Changes"
-		if let presentingViewController = presentingViewController
-		{
-			if let presentingViewController = presentingViewController as? ImportUSXVC
-			{
-				topBar.configure(hostVC: self, title: title, leftButtonText: presentingViewController.shouldDismissBelow ? "Cancel" : "Back", leftButtonAction: { presentingViewController.dismissFromAbove() })
-			}
-			else
-			{
-				topBar.configure(hostVC: self, title: title, leftButtonText: "Cancel", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
-			}
-		}
-		else
-		{
-			topBar.configure(hostVC: self, title: title)
-		}
-		
 		// Loads the old paragraphs from the database
 		do
 		{
@@ -83,6 +66,28 @@ class OverwritePreviewVC: UIViewController
 		oldVersionTable.dataSource = oldSideDS
 		newVersionTable.dataSource = newSideDS
     }
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		super.viewDidAppear(animated)
+		
+		let title = "Preview Changes"
+		if let presentingViewController = presentingViewController
+		{
+			if let presentingViewController = presentingViewController as? ImportUSXVC
+			{
+				topBar.configure(hostVC: self, title: title, leftButtonText: presentingViewController.shouldDismissBelow ? "Cancel" : "Back", leftButtonAction: { presentingViewController.dismissFromAbove() })
+			}
+			else
+			{
+				topBar.configure(hostVC: self, title: title, leftButtonText: "Cancel", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
+			}
+		}
+		else
+		{
+			topBar.configure(hostVC: self, title: title)
+		}
+	}
 	
 	
 	// ACTIONS	---------------

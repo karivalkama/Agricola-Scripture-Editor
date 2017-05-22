@@ -46,28 +46,6 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	{
         super.viewDidLoad()
 		
-		// Sets up the top bar
-		let title = "Select Avatar"
-		if let presentingViewController = presentingViewController
-		{
-			if let presentingViewController = presentingViewController as? SelectProjectVC
-			{
-				topBar.configure(hostVC: self, title: title, leftButtonText: presentingViewController.shouldDismissBelow ? "Log Out" : "Switch Project")
-				{
-					Session.instance.projectId = nil
-					presentingViewController.dismissFromAbove()
-				}
-			}
-			else
-			{
-				topBar.configure(hostVC: self, title: title, leftButtonText: "Back", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
-			}
-		}
-		else
-		{
-			topBar.configure(hostVC: self, title: title)
-		}
-		
 		guard let projectId = Session.instance.projectId else
 		{
 			print("ERROR: No selected project -> No available avatar data")
@@ -112,6 +90,28 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	override func viewDidAppear(_ animated: Bool)
 	{
 		hidePasswordView()
+		
+		// Sets up the top bar
+		let title = "Select Avatar"
+		if let presentingViewController = presentingViewController
+		{
+			if let presentingViewController = presentingViewController as? SelectProjectVC
+			{
+				topBar.configure(hostVC: self, title: title, leftButtonText: presentingViewController.shouldDismissBelow ? "Log Out" : "Switch Project")
+				{
+					Session.instance.projectId = nil
+					presentingViewController.dismissFromAbove()
+				}
+			}
+			else
+			{
+				topBar.configure(hostVC: self, title: title, leftButtonText: "Back", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
+			}
+		}
+		else
+		{
+			topBar.configure(hostVC: self, title: title)
+		}
 		
 		// If the avatar has already been chosen, skips this phase
 		if Session.instance.avatarId != nil

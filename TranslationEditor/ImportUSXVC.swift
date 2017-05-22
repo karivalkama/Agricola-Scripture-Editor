@@ -60,7 +60,6 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
         super.viewDidLoad()
 		
 		contentView.configure(mainView: view, elements: [selectLanguageView, insertSwitch, nicknameField, okButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint)
-		topBar.configure(hostVC: self, title: "Import USX File", leftButtonText: "Cancel", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
 		
 		// Reads paragraph data first
 		guard let usxURL = usxURL else
@@ -171,6 +170,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	override func viewDidAppear(_ animated: Bool)
 	{
 		super.viewDidAppear(animated)
+		
+		topBar.configure(hostVC: self, title: "Import USX File", leftButtonText: "Cancel", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
 		
 		if foundMatchWithIdentifier && bookToOverwrite != nil
 		{

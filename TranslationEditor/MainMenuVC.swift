@@ -42,31 +42,6 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		bookTableView.dataSource = self
 		bookTableView.delegate = self
 		
-		// Sets up the top bar
-		let title = "Main Menu"
-		if let presentingViewController = presentingViewController
-		{
-			if let presentingViewController = presentingViewController as? SelectAvatarVC
-			{
-				topBar.configure(hostVC: self, title: title, leftButtonText: presentingViewController.shouldDismissBelow ? "Switch Project" : "Switch Avatar")
-				{
-					Session.instance.avatarId = nil
-					presentingViewController.dismissFromAbove()
-				}
-			}
-			else
-			{
-				topBar.configure(hostVC: self, title: title, leftButtonText: "Back")
-				{
-					self.dismiss(animated: true, completion: nil)
-				}
-			}
-		}
-		else
-		{
-			topBar.configure(hostVC: self, title: title)
-		}
-		
 		do
 		{
 			guard let projectId = Session.instance.projectId else
@@ -94,6 +69,31 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 	override func viewDidAppear(_ animated: Bool)
 	{
 		super.viewDidAppear(animated)
+		
+		// Sets up the top bar
+		let title = "Main Menu"
+		if let presentingViewController = presentingViewController
+		{
+			if let presentingViewController = presentingViewController as? SelectAvatarVC
+			{
+				topBar.configure(hostVC: self, title: title, leftButtonText: presentingViewController.shouldDismissBelow ? "Switch Project" : "Switch Avatar")
+				{
+					Session.instance.avatarId = nil
+					presentingViewController.dismissFromAbove()
+				}
+			}
+			else
+			{
+				topBar.configure(hostVC: self, title: title, leftButtonText: "Back")
+				{
+					self.dismiss(animated: true, completion: nil)
+				}
+			}
+		}
+		else
+		{
+			topBar.configure(hostVC: self, title: title)
+		}
 		
 		queryManager?.start()
 		

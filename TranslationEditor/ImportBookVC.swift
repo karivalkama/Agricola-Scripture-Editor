@@ -59,8 +59,6 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
     override func viewDidLoad()
 	{
         super.viewDidLoad()
-
-		topBar.configure(hostVC: self, title: "Import Book", leftButtonText: "Cancel", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
 		
 		bookQueryManager = ProjectBooksView.instance.createQuery().liveQueryManager
 		
@@ -103,6 +101,8 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
+		topBar.configure(hostVC: self, title: "Import Book", leftButtonText: "Cancel", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
+		
 		bookQueryManager?.addListener(AnyLiveQueryListener(self))
 		bookQueryManager?.start()
 		
