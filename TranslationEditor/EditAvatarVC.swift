@@ -26,6 +26,7 @@ class EditAvatarVC: UIViewController
 	static let identifier = "EditAvatar"
 	
 	private var editedInfo: (Avatar, AvatarInfo)?
+	private var completionHandler: (() -> ())?
 	
 	
 	// LOAD	----------------------
@@ -41,6 +42,7 @@ class EditAvatarVC: UIViewController
 		{
 			createAvatarView.avatarImage = info.image
 			createAvatarView.avatarName = avatar.name
+			createAvatarView.isShared = info.isShared
 			
 			// Sharing can be enabled / disabled for non-shared accounts only
 			// (Shared account avatars have always sharing enabled)
@@ -98,7 +100,7 @@ class EditAvatarVC: UIViewController
 	
 	@IBAction func cancelButtonPressed(_ sender: Any)
 	{
-		dismiss(animated: true, completion: nil)
+		dismiss(animated: true, completion: completionHandler)
 	}
 	
 	@IBAction func saveButtonPressed(_ sender: Any)
@@ -187,14 +189,15 @@ class EditAvatarVC: UIViewController
 			print("ERROR: Failed to perform the required database operations. \(error)")
 		}
 		
-		dismiss(animated: true, completion: nil)
+		dismiss(animated: true, completion: completionHandler)
 	}
 	
 	
 	// OTHER METHODS	--------------
 	
-	func configureForEdit(avatar: Avatar, avatarInfo: AvatarInfo)
+	func configureForEdit(avatar: Avatar, avatarInfo: AvatarInfo, completion: (() -> ())? = nil)
 	{
 		self.editedInfo = (avatar, avatarInfo)
+		self.completionHandler = completion
 	}
 }

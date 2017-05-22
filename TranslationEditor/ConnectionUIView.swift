@@ -330,6 +330,16 @@ import MessageUI
 						hostImageView.image = hostInfo.image ?? #imageLiteral(resourceName: "userIcon")
 						hostNameLabel.text = "Joined \(hostAvatar.name)"
 						hostProjectLabel.text = "on project: \(project.name)"
+						
+						// Makes sure the current user also has access to the project
+						if let accountId = Session.instance.accountId
+						{
+							if !project.contributorIds.contains(accountId)
+							{
+								project.contributorIds.append(accountId)
+								try project.push()
+							}
+						}
 					}
 				}
 				catch

@@ -77,7 +77,7 @@ import UIKit
 		
 		viewController.displayAlert(withIdentifier: EditAvatarVC.identifier, storyBoardId: "MainMenu")
 		{
-			($0 as! EditAvatarVC).configureForEdit(avatar: avatar, avatarInfo: info)
+			($0 as! EditAvatarVC).configureForEdit(avatar: avatar, avatarInfo: info, completion: self.updateUserView)
 		}
 	}
 	

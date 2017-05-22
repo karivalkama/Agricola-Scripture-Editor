@@ -142,7 +142,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="750" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="X21-HG-aX0" userLabel="Host Info Stack View">
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="0.0"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="750" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="w66-gI-xMp">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="750" image="userIcon" translatesAutoresizingMaskIntoConstraints="NO" id="w66-gI-xMp" customClass="CircleImage" customModule="TranslationEditor" customModuleProvider="target">
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="w66-gI-xMp" secondAttribute="height" multiplier="1:1" id="ZSV-54-q01"/>
                                                     </constraints>

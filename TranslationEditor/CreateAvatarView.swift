@@ -80,7 +80,15 @@ import UIKit
 		return !isShared || offlinePasswordField.text == repeatPasswordField.text
 	}
 	
-	var isShared: Bool { return mustBeShared || isSharedSwitch.isOn }
+	var isShared: Bool
+	{
+		get { return mustBeShared || isSharedSwitch.isOn }
+		set
+		{
+			isSharedSwitch.isOn = newValue
+			updatePasswordVisibility()
+		}
+	}
 	
 	
 	// INIT	--------------------
