@@ -93,35 +93,39 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	{
 		hidePasswordView()
 		
-		// Sets up the top bar
-		let title = "Select Avatar"
-		if let presentingViewController = presentingViewController
+		// If the project has not been chosen, doesn't configure anything
+		if Session.instance.projectId != nil
 		{
-			if let presentingViewController = presentingViewController as? SelectProjectVC
+			// Sets up the top bar
+			let title = "Select Avatar"
+			if let presentingViewController = presentingViewController
 			{
-				topBar.configure(hostVC: self, title: title, leftButtonText: presentingViewController.shouldDismissBelow ? "Log Out" : "Switch Project")
+				if let presentingViewController = presentingViewController as? SelectProjectVC
 				{
-					Session.instance.projectId = nil
-					presentingViewController.dismissFromAbove()
+					topBar.configure(hostVC: self, title: title, leftButtonText: presentingViewController.shouldDismissBelow ? "Log Out" : "Switch Project")
+					{
+						Session.instance.projectId = nil
+						presentingViewController.dismissFromAbove()
+					}
+				}
+				else
+				{
+					topBar.configure(hostVC: self, title: title, leftButtonText: "Back", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
 				}
 			}
-			else
+			
+			// If the avatar has already been chosen, skips this phase
+			if Session.instance.avatarId != nil
 			{
-				topBar.configure(hostVC: self, title: title, leftButtonText: "Back", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
+				print("STATUS: Avatar already selected")
+				proceed(animated: false)
+				return
 			}
+			
+			// Otherwise starts the queries
+			queryManager?.start()
+			passwordView.startKeyboardListening()
 		}
-		
-		// If the avatar has already been chosen, skips this phase
-		if Session.instance.avatarId != nil
-		{
-			print("STATUS: Avatar already selected")
-			proceed(animated: false)
-			return
-		}
-		
-		// Otherwise starts the queries
-		queryManager?.start()
-		passwordView.startKeyboardListening()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)
