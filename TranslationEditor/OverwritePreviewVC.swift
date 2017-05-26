@@ -31,6 +31,8 @@ class OverwritePreviewVC: UIViewController
 	private var oldSideDS: VersionTableDS!
 	private var newSideDS: VersionTableDS!
 	
+	private var scrollManager: ScrollSyncManager!
+	
 	
 	// LOAD	--------------------
 	
@@ -55,6 +57,8 @@ class OverwritePreviewVC: UIViewController
 			print("ERROR: Failed to load old version data")
 		}
 		
+		// print("STATUS: Found \(oldParagraphs.count) old paragraphs")
+		
 		// Sets up the paragraph tables
 		let tables = [oldVersionTable, newVersionTable]
 		tables.forEach { $0?.register(UINib(nibName: "ParagraphCell", bundle: nil), forCellReuseIdentifier: ParagraphCell.identifier) }
@@ -67,6 +71,21 @@ class OverwritePreviewVC: UIViewController
 		
 		oldVersionTable.dataSource = oldSideDS
 		newVersionTable.dataSource = newSideDS
+		
+		// Adds scroll sync
+		scrollManager = ScrollSyncManager(leftTable: oldVersionTable, rightTable: newVersionTable, leftResourceId: "old", rightResourceId: "new")
+		{
+			tableView, oppositePathId in
+			
+			if tableView == self.oldVersionTable
+			{
+				return self.oldSideDS.indexPaths(forOppositePathId: oppositePathId)
+			}
+			else
+			{
+				return self.newSideDS.indexPaths(forOppositePathId: oppositePathId)
+			}
+		}
     }
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -286,8 +305,19 @@ class OverwritePreviewVC: UIViewController
 				}
 			}
 			
-			// Selects the newly updated book
-			Session.instance.bookId = bookId
+			// Selects a target translation matching the newly updated book
+			do
+			{
+				if let projectId = Session.instance.projectId, let project = try Project.get(projectId)
+				{
+					Session.instance.bookId = try project.targetTranslationQuery().firstResultRow()?.id
+				}
+			}
+			catch
+			{
+				print("ERROR: Failed to find associated target translation")
+			}
+			
 			closeImport()
 		}
 		catch

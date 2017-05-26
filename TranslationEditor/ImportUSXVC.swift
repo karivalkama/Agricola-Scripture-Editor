@@ -221,7 +221,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	{
 		if let previewVC = segue.destination as? OverwritePreviewVC
 		{
-			previewVC.configure(oldBook: book!, newBook: bookToOverwrite!, newParagraphs: paragraphs)
+			previewVC.configure(oldBook: bookToOverwrite!, newBook: book!, newParagraphs: paragraphs)
 		}
 	}
 	

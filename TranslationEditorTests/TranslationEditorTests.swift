@@ -412,6 +412,39 @@ class TranslationEditorTests: XCTestCase
 		}
 	}
 	
+	func testPrintCrossReferences()
+	{
+		for book in try! ProjectBooksView.instance.booksQuery().resultObjects()
+		{
+			print()
+			print("\(book.code): \(book.identifier)")
+			
+			for paragraph in try! ParagraphView.instance.latestParagraphQuery(bookId: book.idString).resultObjects()
+			{
+				for para in paragraph.content
+				{
+					if let ambiguousContent = para.ambiguousContent
+					{
+						for crossReference in ambiguousContent.crossReferences
+						{
+							print("- \(crossReference.text)")
+						}
+					}
+					else
+					{
+						for verse in para.verses
+						{
+							for crossReference in verse.content.crossReferences
+							{
+								print("- \(crossReference.text)")
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	func testVerseConsistency()
 	{
 		let books = try! ProjectBooksView.instance.createQuery().resultObjects()

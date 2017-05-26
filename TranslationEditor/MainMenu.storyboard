@@ -476,7 +476,7 @@
                                                             <constraint firstItem="Cha-Sh-Ham" firstAttribute="top" secondItem="LVq-tY-5Q5" secondAttribute="top" id="Q7t-QY-EqU"/>
                                                             <constraint firstItem="Cha-Sh-Ham" firstAttribute="leading" secondItem="LVq-tY-5Q5" secondAttribute="leading" id="T7k-o8-i37"/>
                                                             <constraint firstAttribute="trailing" secondItem="Cha-Sh-Ham" secondAttribute="trailing" id="cQJ-Hb-1FD"/>
-                                                            <constraint firstAttribute="bottom" secondItem="Cha-Sh-Ham" secondAttribute="bottom" id="tvr-xz-hnO"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Cha-Sh-Ham" secondAttribute="bottom" priority="999" id="tvr-xz-hnO"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ope-ql-dz9" userLabel="Select Book View">
@@ -503,7 +503,7 @@
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="hPn-uk-Mgg" secondAttribute="trailing" id="5fM-V0-nGg"/>
-                                                            <constraint firstAttribute="bottom" secondItem="hPn-uk-Mgg" secondAttribute="bottom" id="M0k-Rc-bfC"/>
+                                                            <constraint firstAttribute="bottom" secondItem="hPn-uk-Mgg" secondAttribute="bottom" priority="999" id="M0k-Rc-bfC"/>
                                                             <constraint firstItem="hPn-uk-Mgg" firstAttribute="top" secondItem="ope-ql-dz9" secondAttribute="top" id="MGK-NB-p2g"/>
                                                             <constraint firstItem="hPn-uk-Mgg" firstAttribute="leading" secondItem="ope-ql-dz9" secondAttribute="leading" id="kHq-kK-aWC"/>
                                                         </constraints>

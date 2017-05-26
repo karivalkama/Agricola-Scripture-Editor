@@ -57,6 +57,7 @@ class USXTextAndNoteProcessor: USXContentProcessor
 				}
 				else if let style = CrossReferenceStyle(rawValue: styleString)
 				{
+					// print("STATUS: Delegating '\(elementName)' of style '\(style.rawValue)' to a cross reference parser")
 					// Cross references are parsed separately from other data
 					return (USXCrossReferenceProcessor.createParser(caller: caller, callerAttValue: callerAttribute, style: style, targetPointer: &crossReferences, using: errorHandler), false)
 				}
@@ -95,9 +96,9 @@ class USXTextAndNoteProcessor: USXContentProcessor
 		textElements.add(TextElement(charData: lastCharData))
 		lastCharData = []
 		
-		// TODO: Include cross references too
-		let result = TextWithNotes(textElements: textElements, footNotes: content)
+		let result = TextWithNotes(textElements: textElements, footNotes: content, crossReferences: crossReferences)
 		textElements = []
+		crossReferences = []
 		
 		return result
 	}

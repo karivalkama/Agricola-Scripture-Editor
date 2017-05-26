@@ -9,7 +9,7 @@
 import UIKit
 
 // This cell displays text for a single paragraph
-class ParagraphCell: UITableViewCell
+class ParagraphCell: UITableViewCell, ParagraphAssociated
 {
 	// OUTLETS	-----------------
 	
@@ -20,11 +20,14 @@ class ParagraphCell: UITableViewCell
 	
 	static let identifier = "ParagraphCell"
 	
+	var pathId: String?
+	
 	
 	// OTHER METHODS	--------
 	
 	func configure(paragraph: Paragraph)
 	{
+		pathId = paragraph.pathId
 		contentTextView.display(paragraph: paragraph)
 	}
 }
