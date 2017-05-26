@@ -89,6 +89,22 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	
 	var toUSX: String { return content.reduce("", { $0 + $1.toUSX }) }
 	
+	// Whether all of the paragraph is filled with text
+	var isFilled: Bool { return content.forAll { $0.isFilled } }
+	
+	// Counts how much of the paragraph has been filled
+	// Counts the number of filled verses, and the verses in total
+	var completion: (filledVerses: Int, total: Int)
+	{
+		return content.reduce((filledVerses: 0, total: 0))
+		{
+			previous, para in
+			
+			let paraCompletion = para.completion
+			return (filledVerses: previous.filledVerses + paraCompletion.filledVerses, total: previous.total + paraCompletion.total)
+		}
+	}
+	
 	
 	// INIT	-----------------
 	

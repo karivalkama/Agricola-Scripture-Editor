@@ -8,17 +8,18 @@
 
 import Foundation
 
-fileprivate typealias ReduceResult = [String: (mostRecentCount: Int, historyCount: Int)]
+fileprivate typealias ReduceResult = (mostRecentFilled: Int, mostRecentTotal: Int, historyFilled: Int)
 
-fileprivate func increment(result: inout ReduceResult, pathId: String, mostRecentCountIncrease: Int = 0, historyCountIncrease: Int = 0)
+fileprivate func increment(result: inout ReduceResult, filledCountIncrease: Int = 0, totalCountIncrease: Int = 0, isMostRecent: Bool)
 {
-	if let (previousMostRecentCount, previousHistoryCount) = result[pathId]
+	if isMostRecent
 	{
-		result[pathId] = (previousMostRecentCount + mostRecentCountIncrease, previousHistoryCount + historyCountIncrease)
+		result.mostRecentFilled += filledCountIncrease
+		result.mostRecentTotal += totalCountIncrease
 	}
 	else
 	{
-		result[pathId] = (mostRecentCountIncrease, historyCountIncrease)
+		result.historyFilled += filledCountIncrease
 	}
 }
 
@@ -56,8 +57,10 @@ final class BookProgressView: View
 			
 			if !paragraph.isDeprecated
 			{
-				let key: [Any] = [paragraph.projectId, paragraph.bookId, paragraph.chapterIndex, paragraph.pathId]
-				let value = paragraph.isMostRecent
+				let key: [Any] = [paragraph.projectId, paragraph.bookId, paragraph.chapterIndex, paragraph.pathId, paragraph.isMostRecent]
+				// Value is the amount of filled verses + total number of verses
+				let completion = paragraph.completion
+				let value = [completion.filledVerses, completion.total]
 				
 				emit(key, value)
 			}
@@ -71,43 +74,28 @@ final class BookProgressView: View
 				guard let values = values as? [ReduceResult] else
 				{
 					print("ERROR: Invalid type in BookProgressView rereduce")
-					return ReduceResult()
+					return ReduceResult(0, 0, 0)
 				}
 				
 				// Merges the results
-				return values.reduce(ReduceResult())
-				{
-					left, right in
-					
-					var combo = left
-					right.forEach { increment(result: &combo, pathId: $0.key, mostRecentCountIncrease: $0.value.mostRecentCount, historyCountIncrease: $0.value.historyCount) }
-					
-					return combo
-				}
+				return values.reduce(ReduceResult(0, 0, 0)) { ReduceResult(mostRecentFilled: $0.0.mostRecentFilled + $0.1.mostRecentFilled, mostRecentTotal: $0.0.mostRecentTotal + $0.1.mostRecentTotal, historyFilled: $0.0.historyFilled + $0.1.historyFilled) }
 			}
 			else
 			{
 				guard let keys = keys as? [[Any]] else
 				{
 					print("ERROR: Invalid key type in BookProgressView reduce block")
-					return ReduceResult()
+					return ReduceResult(0, 0, 0)
 				}
 				
-				// Counts the number of most recent (and other) rows for each path id
-				var result = ReduceResult()
+				// Counts together the number of filled and empty verses. A separate count is used for history paragraphs
+				var result = ReduceResult(0, 0, 0)
 				
 				for i in 0 ..< keys.count
 				{
-					if let pathId = keys[i][3] as? String, let isMostRecent = values[i] as? Bool
+					if let isMostRecent = keys[i][4] as? Bool, let counts = values[i] as? [Int], counts.count >= 2
 					{
-						if isMostRecent
-						{
-							increment(result: &result, pathId: pathId, mostRecentCountIncrease: 1)
-						}
-						else
-						{
-							increment(result: &result, pathId: pathId, historyCountIncrease: 1)
-						}
+						increment(result: &result, filledCountIncrease: counts[0], totalCountIncrease: counts[1], isMostRecent: isMostRecent)
 					}
 					else
 					{
@@ -118,7 +106,7 @@ final class BookProgressView: View
 				return result
 			}
 			
-		}, version: "1")
+		}, version: "2")
 	}
 	
 	
@@ -134,7 +122,7 @@ final class BookProgressView: View
 		else
 		{
 			print("ERROR: No reduce result in BookProgressView query")
-			return BookProgressStatus(paragraphAmount: 0, emptyParagraphAmount: 0, totalCommits: 0)
+			return BookProgressStatus(totalElementAmount: 0, filledElementAmount: 0, filledHistoryElementAmount: 0)
 		}
 	}
 	
@@ -193,10 +181,6 @@ final class BookProgressView: View
 	
 	private func statusForResult(_ result: ReduceResult) -> BookProgressStatus
 	{
-		let paragraphAmount = result.values.count(where: { $0.mostRecentCount > 0 })
-		let emptyParagraphAmount = result.values.count(where: { $0.historyCount == 0 })
-		let totalCommits = result.values.reduce(0, { $0 + $1.historyCount })
-		
-		return BookProgressStatus(paragraphAmount: paragraphAmount, emptyParagraphAmount: emptyParagraphAmount, totalCommits: totalCommits)
+		return BookProgressStatus(totalElementAmount: result.mostRecentTotal, filledElementAmount: result.mostRecentFilled, filledHistoryElementAmount: result.historyFilled)
 	}
 }

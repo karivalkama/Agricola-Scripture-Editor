@@ -54,6 +54,9 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 	
 	var text: String { return content.reduce("", { $0 + $1.text }) }
 	
+	// Whether all of this element contains text (doesn't require notes to contain any text)
+	var isFilled: Bool { return textElements.forAll { !$0.isEmpty } }
+	
 	
 	// INIT	--------------------
 	

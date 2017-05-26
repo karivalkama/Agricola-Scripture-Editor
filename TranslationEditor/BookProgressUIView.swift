@@ -38,7 +38,7 @@ import Foundation
 	func configure(status: BookProgressStatus)
 	{
 		completionLabel.text = "\(Int((status.fullness * 100).rounded())) %"
-		versionAmountLabel.text = "~\(Int(status.averageCommitsPerParagraph.rounded())) Versions"
+		versionAmountLabel.text = "~\(Int(status.averageCommitsPerVerse.rounded())) Versions"
 		progressBar.progress = Float(status.fullness)
 	}
 }

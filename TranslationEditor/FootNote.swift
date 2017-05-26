@@ -27,6 +27,9 @@ final class FootNote: ParaContent, Copyable
 	
 	var properties: [String : PropertyValue] { return ["caller": caller.value, "style": style.code.value, "origin_reference": originReference.value, "text": charData.value] }
 	
+	// Whether the note contains no textual data
+	var isEmpty: Bool { return charData.forAll { $0.isEmpty } }
+	
 	
 	// INIT	--------------------
 	

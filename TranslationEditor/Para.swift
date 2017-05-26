@@ -78,6 +78,33 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 		return content.reduce("", { $0 + $1.text })
 	}
 	
+	// Whether the whole para element is filled with text
+	var isFilled: Bool
+	{
+		if let ambiguousContent = ambiguousContent
+		{
+			return ambiguousContent.isFilled
+		}
+		else
+		{
+			return verses.forAll { $0.content.isFilled }
+		}
+	}
+	
+	// Calculates how much of the para element has been filled / completed
+	// Checks on verse by berse basis, although paras with no verses are considered to have 1 element
+	var completion: (filledVerses: Int, total: Int)
+	{
+		if let ambiguousContent = ambiguousContent
+		{
+			return ambiguousContent.isFilled ? (1, 1) : (0, 1)
+		}
+		else
+		{
+			return (verses.count(where: { $0.content.isFilled }), verses.count)
+		}
+	}
+	
 	
 	// INIT	------
 	
