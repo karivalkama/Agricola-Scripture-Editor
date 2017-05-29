@@ -15,8 +15,17 @@ final class FootNote: ParaContent, Copyable
 	var caller: String
 	var style: FootNoteStyle
 	var originReference: String?
-	// Text data and an attribute specifying whether the data is "closed"
+	
+	private var _charData = [CharData]()
 	var charData: [CharData]
+	{
+		get { return _charData }
+		set
+		{
+			// There can't be char data without a specified style in a footnote
+			_charData = newValue.map { $0.style == nil ? CharData(text: $0.text, style: .notesText) : $0 }
+		}
+	}
 	
 	
 	// COMPUTED PROPERTIES	----

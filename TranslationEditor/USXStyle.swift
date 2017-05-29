@@ -22,10 +22,11 @@ enum CharStyle: USXStyle, Equatable
 	case quotation// = "qt"
 	case keyTerm// = "k"
 	case originReference
+	case notesText
 	case other(code: String)
 	
 	// TODO: Keep updated and create a unit test
-	static let values: [CharStyle] = [.quotation, .keyTerm, .originReference]
+	static let values: [CharStyle] = [.quotation, .keyTerm, .originReference, .notesText]
 	
 	
 	// IMPLEMENTED METHODS	-------------
@@ -37,6 +38,7 @@ enum CharStyle: USXStyle, Equatable
 		case .quotation: return "qt"
 		case .keyTerm: return "k"
 		case .originReference: return "fr"
+		case .notesText: return "ft"
 		case .other(let code): return code
 		}
 	}

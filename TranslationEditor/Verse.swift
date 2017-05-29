@@ -154,4 +154,80 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXCo
 	{
 		return Verse(range: range, content: content.emptyCopy())
 	}
+	
+	static func contentEqualsBetween(_ left: [Verse], and right: [Verse]) -> Bool
+	{
+		// Checks whether any of the arrays is empty
+		if left.isEmpty
+		{
+			return right.isEmpty
+		}
+		else if right.isEmpty
+		{
+			return false
+		}
+		
+		// The start and end ranges should be the same
+		if left.first!.range.start != right.first!.range.start || left.last!.range.end != right.last!.range.end
+		{
+			return false
+		}
+		
+		// Starts comparing verses one by one
+		var nextLeftIndex = 0
+		var nextRightIndex = 0
+		
+		while (nextLeftIndex < left.count && nextRightIndex < right.count)
+		{
+			// Makes sure the verses start at the same spot
+			if left[nextLeftIndex].range.start != right[nextRightIndex].range.start
+			{
+				return false
+			}
+			
+			// Finds the shortest equal range between the two groups, starting from the selected verses
+			var finalLeftIndex = nextLeftIndex
+			var finalRightIndex = nextRightIndex
+			
+			while (left[finalLeftIndex].range.end != right[finalRightIndex].range.end)
+			{
+				if left[finalLeftIndex].range.end < right[finalRightIndex].range.end
+				{
+					finalLeftIndex += 1
+				}
+				else
+				{
+					finalRightIndex += 1
+				}
+			}
+			
+			// The groups are equal if the first verses have equal content and the remaining elements are all empty
+			if !left[nextLeftIndex].contentEquals(with: right[nextRightIndex])
+			{
+				return false
+			}
+			
+			for i in stride(from: nextLeftIndex + 1, through: finalLeftIndex, by: 1)
+			{
+				if !left[i].content.isEmpty
+				{
+					return false
+				}
+			}
+			
+			for i in stride(from: nextRightIndex + 1, through: finalRightIndex, by: 1)
+			{
+				if !right[i].content.isEmpty
+				{
+					return false
+				}
+			}
+			
+			// Moves to the next range
+			nextLeftIndex = finalLeftIndex + 1
+			nextRightIndex = finalRightIndex + 1
+		}
+		
+		return true
+	}
 }

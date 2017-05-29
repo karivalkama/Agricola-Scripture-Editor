@@ -57,6 +57,9 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 	// Whether all of this element contains text (doesn't require notes to contain any text)
 	var isFilled: Bool { return textElements.forAll { !$0.isEmpty } }
 	
+	// Whether the element is completely empty of any text and doesn't contain a single note element
+	var isEmpty: Bool { return textElements.forAll { $0.isEmpty } && footNotes.isEmpty && crossReferences.isEmpty }
+	
 	
 	// INIT	--------------------
 	

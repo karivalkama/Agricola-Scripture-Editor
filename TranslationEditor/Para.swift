@@ -193,8 +193,8 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 		}
 		else
 		{
-			// print("STATUS: Comparing verses (\(verses.count) vs \(other.verses.count))")
-			return verses.contentEquals(with: other.verses)
+			return Verse.contentEqualsBetween(verses, and: other.verses)
+			// return verses.contentEquals(with: other.verses)
 		}
 	}
 	

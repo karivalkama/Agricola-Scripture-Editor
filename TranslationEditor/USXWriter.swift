@@ -50,6 +50,30 @@ class USXWriter
 		return s
 	}
 	
+	/*
+	func write(verse: Verse, nextStartsMidVerse: Bool = false) -> String
+	{
+		// The context determines, whether the verse ends are left open or not
+		var range = verse.range
+		if nextStartsMidVerse
+		{
+			if !verse.range.end.midVerse
+			{
+				range = VerseRange(verse.range.start, VerseIndex(verse.range.end.index - 1, midVerse: true))
+			}
+		}
+		else
+		{
+			if verse.range.end.midVerse
+			{
+				range = VerseRange(verse.range.start, VerseIndex(verse.range.end.index))
+			}
+		}
+		
+		return "<verse number=\"\(range)\" style=\"v\"/>\(verse.content.toUSX)"
+	}
+	*/
+	
 	// Creates a string representing a USX chapter marker
 	func chapterMarker(withIndex index: Int) -> String
 	{
