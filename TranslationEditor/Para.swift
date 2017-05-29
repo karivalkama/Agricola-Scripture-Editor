@@ -298,7 +298,6 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 				}
 				
 				// If the new range is longer than the matched range, combines target verses until enough range is covered
-				// TODO: Should only work / combine where are no footnotes or cross references in the following verse(s)
 				while verseRange.end > matchingVerse.range.end, i + 1 < verses.count
 				{
 					let nextVerse = verses.remove(at: i + 1)
@@ -311,7 +310,7 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 				// then forms a new range from the cutOff material
 				if verseRange.end < matchingVerse.range.end
 				{
-					let newContent = matchingVerse.content.update(with: subString) ?? TextWithNotes()
+					let newContent = matchingVerse.content.update(with: subString, cutOutCrossReferencesOutside: verseRange) ?? TextWithNotes()
 					verses.insert(Verse(range: VerseRange(verseRange.end, matchingVerse.range.end), content: newContent), at: i + 1)
 					matchingVerse.range = verseRange
 				}
@@ -439,17 +438,16 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 					
 					// If the indices are side by side, they are considered to be one longer range
 					// (ie. The later index is simply ignored and added to the previous one(s) after the end of that range is reached)
-					/*
 					if lastVerseIndex!.startPosition >= range.location
 					{
 						lastVerseIndex = (lastVerseIndex!.minIndex, newIndex, range.location + range.length)
-					}*/
-						// Otherwise completes and records the preceeding range
-					//else
-					//{
-					verseRanges.append((VerseRange(lastVerseIndex!.minIndex, newIndex), NSMakeRange(lastVerseIndex!.startPosition, range.location - lastVerseIndex!.startPosition)))
-					lastVerseIndex = (newIndex, newIndex, range.location + range.length)
-					//}
+					}
+					// Otherwise completes and records the preceeding range
+					else
+					{
+						verseRanges.append((VerseRange(lastVerseIndex!.minIndex, newIndex), NSMakeRange(lastVerseIndex!.startPosition, range.location - lastVerseIndex!.startPosition)))
+						lastVerseIndex = (newIndex, newIndex, range.location + range.length)
+					}
 				}
 			}
 		}

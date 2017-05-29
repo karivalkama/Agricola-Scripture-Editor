@@ -37,7 +37,7 @@ struct CharData: Equatable, USXConvertible, AttributedStringConvertible, JSONCon
 		}
 		else if let style = style
 		{
-			return "<char style=\"\(style)\">\(text)</char>"
+			return "<char style=\"\(style.code)\">\(text)</char>"
 		}
 		else
 		{

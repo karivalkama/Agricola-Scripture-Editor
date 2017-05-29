@@ -158,7 +158,7 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 		footNotes.forEach { $0.charData = [] }
 	}
 	
-	func update(with attString: NSAttributedString) -> TextWithNotes?
+	func update(with attString: NSAttributedString, cutOutCrossReferencesOutside rangeLimit: VerseRange? = nil) -> TextWithNotes?
 	{
 		// Finds all the notes markers from the string first
 		var notesRanges = [(Int, Int)]() // Note start index, note end index
@@ -212,6 +212,14 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 			}
 		}
 		
+		// Finds out which cross references to keep and which to cut
+		var cutCrossReferences: [CrossReference]?
+		if let rangeLimit = rangeLimit
+		{
+			cutCrossReferences = crossReferences.filter { $0.originVerseIndex != nil && !rangeLimit.contains(index: $0.originVerseIndex!) }
+			crossReferences = crossReferences - cutCrossReferences!
+		}
+		
 		// If there was less data provided than what there were slots in this element, 
 		// cuts the remaining elements and returns a new element based on that data
 		if charData.count < content.count
@@ -223,7 +231,7 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 			{
 				let splitIndex = charData.count / 2
 				
-				let cutElement = TextWithNotes(textElements: Array(textElements.dropFirst(splitIndex)), footNotes: Array(footNotes.dropFirst(splitIndex)))
+				let cutElement = TextWithNotes(textElements: Array(textElements.dropFirst(splitIndex)), footNotes: Array(footNotes.dropFirst(splitIndex)), crossReferences: cutCrossReferences ?? [])
 				
 				textElements = Array(textElements.prefix(splitIndex)) + TextElement.empty()
 				footNotes = Array(footNotes.prefix(splitIndex))
@@ -236,7 +244,7 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 				let noteSplitIndex = charData.count / 2
 				let textSplitIndex = noteSplitIndex + 1
 				
-				let cutElement = TextWithNotes(textElements: TextElement.empty() + Array(textElements.dropFirst(textSplitIndex)), footNotes: Array(footNotes.dropFirst(noteSplitIndex)))
+				let cutElement = TextWithNotes(textElements: TextElement.empty() + Array(textElements.dropFirst(textSplitIndex)), footNotes: Array(footNotes.dropFirst(noteSplitIndex)), crossReferences: cutCrossReferences ?? [])
 				
 				textElements = Array(textElements.prefix(textSplitIndex))
 				footNotes = Array(footNotes.prefix(noteSplitIndex))
@@ -246,7 +254,14 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 		}
 		
 		// TODO: Handle cases where new chardata count is smaller than previous content count
-		return nil
+		if let cutCrossReferences = cutCrossReferences
+		{
+			return TextWithNotes(textElements: [TextElement.empty()], footNotes: [], crossReferences: cutCrossReferences)
+		}
+		else
+		{
+			return nil
+		}
 	}
 	
 	private func parseCharData(from attStr: NSAttributedString, range: NSRange) -> [CharData]

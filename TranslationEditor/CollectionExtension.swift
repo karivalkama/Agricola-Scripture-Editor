@@ -127,6 +127,11 @@ extension Array where Element: Equatable
 	{
 		return array.filter { $0 != element }
 	}
+	
+	static func - (_ left: Array<Element>, _ right: Array<Element>) -> Array<Element>
+	{
+		return left.filter { !right.contains($0) }
+	}
 }
 
 extension Array where Element: AnyObject
