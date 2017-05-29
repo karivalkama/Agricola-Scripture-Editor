@@ -60,6 +60,9 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 	// Whether the element is completely empty of any text and doesn't contain a single note element
 	var isEmpty: Bool { return textElements.forAll { $0.isEmpty } && footNotes.isEmpty && crossReferences.isEmpty }
 	
+	// Whether this element contains any notes (empty or not)
+	var containsNotes: Bool { return !crossReferences.isEmpty || !footNotes.isEmpty }
+	
 	
 	// INIT	--------------------
 	
@@ -149,6 +152,12 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 		return textElements.contentEquals(with: other.textElements) && footNotes.contentEquals(with: other.footNotes) && crossReferences == other.crossReferences
 	}
 	
+	func clearText()
+	{
+		textElements.forEach { $0.charData = [] }
+		footNotes.forEach { $0.charData = [] }
+	}
+	
 	func update(with attString: NSAttributedString) -> TextWithNotes?
 	{
 		// Finds all the notes markers from the string first
@@ -207,6 +216,8 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 		// cuts the remaining elements and returns a new element based on that data
 		if charData.count < content.count
 		{
+			// TODO: Distribute cross reference instances between the two parts
+			
 			// If the last included element was a footnote, adds an empty text data element to the end of this element
 			if charData.count % 2 == 0
 			{

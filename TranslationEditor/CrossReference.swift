@@ -16,6 +16,7 @@ struct CrossReference: USXConvertible, JSONConvertible, Equatable
 	var caller: String
 	var style: CrossReferenceStyle
 	var charData: [CharData]
+	var originVerseIndex: VerseIndex?
 	
 	
 	// COMPUTED PROPERTIES	---------
@@ -25,7 +26,7 @@ struct CrossReference: USXConvertible, JSONConvertible, Equatable
 	
 	var toUSX: String { return "<note caller=\"\(caller)\" style=\"\(style.code)\">\(charData.reduce("", { $0 + $1.toUSX }))</note>" }
 	
-	var properties: [String : PropertyValue] { return ["style": style.code.value, "caller": caller.value, "content": charData.value] }
+	var properties: [String : PropertyValue] { return ["style": style.code.value, "caller": caller.value, "content": charData.value, "origin_index": originVerseIndex.value] }
 	
 	
 	// INIT	-------------------------
@@ -33,7 +34,13 @@ struct CrossReference: USXConvertible, JSONConvertible, Equatable
 	// Parses a cross reference from a JSON representation
 	static func parse(from properties: PropertySet) -> CrossReference
 	{
-		return CrossReference(caller: properties["caller"].string(), style: CrossReferenceStyle(rawValue: properties["style"].string()) ?? .crossReference, charData: CharData.parseArray(from: properties["content"].array(), using: CharData.parse))
+		var verseIndex: VerseIndex?
+		if let indexProperties = properties["origin_index"].object
+		{
+			verseIndex = try? VerseIndex.parse(from: indexProperties)
+		}
+		
+		return CrossReference(caller: properties["caller"].string(), style: CrossReferenceStyle(rawValue: properties["style"].string()) ?? .crossReference, charData: CharData.parseArray(from: properties["content"].array(), using: CharData.parse), originVerseIndex: verseIndex)
 	}
 	
 	
@@ -41,6 +48,6 @@ struct CrossReference: USXConvertible, JSONConvertible, Equatable
 	
 	static func ==(_ left: CrossReference, _ right: CrossReference) -> Bool
 	{
-		return left.caller == right.caller && left.style == right.style && left.charData == right.charData
+		return left.caller == right.caller && left.style == right.style && left.charData == right.charData && left.originVerseIndex == right.originVerseIndex
 	}
 }

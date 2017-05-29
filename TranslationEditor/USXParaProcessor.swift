@@ -72,9 +72,9 @@ class USXParaProcessor: USXContentProcessor
 				
 				if parts.count == 1
 				{
-					if let index = Int(parts[0])
+					if let index = VerseIndex.parse(from: parts[0])
 					{
-						range = VerseRange(VerseIndex(index), VerseIndex(index + 1))
+						range = VerseRange(index, index.nextComplete)
 					}
 					else
 					{
@@ -84,9 +84,9 @@ class USXParaProcessor: USXContentProcessor
 				}
 				else
 				{
-					if let startIndex = Int(parts[0]), let endIndex = Int(parts[1])
+					if let startIndex = VerseIndex.parse(from: parts[0]), let endIndex = VerseIndex.parse(from: parts[1])
 					{
-						range = VerseRange(VerseIndex(startIndex), VerseIndex(endIndex + 1))
+						range = VerseRange(startIndex, endIndex.nextComplete)
 					}
 					else
 					{
@@ -114,14 +114,14 @@ class USXParaProcessor: USXContentProcessor
 		// Other content is delegated to separate Text / Note parser
 		else
 		{
-			return (USXTextAndNoteProcessor.createParser(caller: caller, targetPointer: &initialTextData, using: errorHandler), elementName != USXContainerElement.para.rawValue)
+			return (USXTextAndNoteProcessor.createParser(caller: caller, lastVerseIndex: nil, targetPointer: &initialTextData, using: errorHandler), elementName != USXContainerElement.para.rawValue)
 		}
 	}
 	
 	func getCharacterParser(_ caller: USXContentParser<Para, Verse>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[Verse]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
 	{
 		// character parsing is delegated to separate text / note parser
-		return USXTextAndNoteProcessor.createParser(caller: caller, targetPointer: &initialTextData, using: errorHandler)
+		return USXTextAndNoteProcessor.createParser(caller: caller, lastVerseIndex: nil, targetPointer: &initialTextData, using: errorHandler)
 	}
 	
 	func generate(from content: [Verse], using errorHandler: @escaping ErrorHandler) -> Para?

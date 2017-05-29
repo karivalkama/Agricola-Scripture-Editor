@@ -26,6 +26,11 @@ struct VerseIndex: JSONConvertible, Comparable, ExpressibleByIntegerLiteral
 		return ["index" : index.value, "mid_verse" : midVerse.value]
 	}
 	
+	var nextComplete: VerseIndex
+	{
+		return VerseIndex(index + 1)
+	}
+	
 	
 	// INIT	--------
 	
@@ -52,6 +57,31 @@ struct VerseIndex: JSONConvertible, Comparable, ExpressibleByIntegerLiteral
 		else
 		{
 			throw JSONParseError(data: propertyData, message: "Invalid index in verse index data")
+		}
+	}
+	
+	// Parses a verseindex instance from a string, if possible
+	// Viable strings are something like '11' or '13a'
+	static func parse(from string: String) -> VerseIndex?
+	{
+		if let letterIndex = string.rangeOfCharacter(from: CharacterSet.letters)?.lowerBound
+		{
+			if let index = Int(string.substring(to: letterIndex))
+			{
+				return VerseIndex(index, midVerse: true)
+			}
+			else
+			{
+				return nil
+			}
+		}
+		else if let index = Int(string)
+		{
+			return VerseIndex(index)
+		}
+		else
+		{
+			return nil
 		}
 	}
 	

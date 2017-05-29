@@ -21,23 +21,25 @@ class USXCrossReferenceProcessor: USXContentProcessor
 	
 	private let style: CrossReferenceStyle
 	private let caller: String
+	private let verseIndex: VerseIndex?
 	
 	
 	// INIT	------------------------------
 	
-	init(caller: String, style: CrossReferenceStyle)
+	init(caller: String, style: CrossReferenceStyle, lastVerseIndex: VerseIndex?)
 	{
 		self.caller = caller
 		self.style = style
+		self.verseIndex = lastVerseIndex
 	}
 	
 	// Creates a new parser for a note element
 	// The parser should start after the note element start
 	// The parser will stop at the end of the note element (or at the next verse marker, if the content is somehow malformed like that)
-	static func createParser(caller: XMLParserDelegate, callerAttValue: String, style: CrossReferenceStyle, targetPointer: UnsafeMutablePointer<[CrossReference]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<CrossReference, CharData>
+	static func createParser(caller: XMLParserDelegate, callerAttValue: String, style: CrossReferenceStyle, lastVerseIndex: VerseIndex?, targetPointer: UnsafeMutablePointer<[CrossReference]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<CrossReference, CharData>
 	{
 		let parser = USXContentParser<Generated, Processed>(caller: caller, containingElement: .note, lowestBreakMarker: .verse, targetPointer: targetPointer, using: errorHandler)
-		parser.processor = AnyUSXContentProcessor(USXCrossReferenceProcessor(caller: callerAttValue, style: style))
+		parser.processor = AnyUSXContentProcessor(USXCrossReferenceProcessor(caller: callerAttValue, style: style, lastVerseIndex: lastVerseIndex))
 		
 		return parser
 	}
@@ -68,6 +70,22 @@ class USXCrossReferenceProcessor: USXContentProcessor
 	
 	func generate(from content: [CharData], using errorHandler: @escaping ErrorHandler) -> CrossReference?
 	{
-		return CrossReference(caller: caller, style: style, charData: content)
+		var originIndex = verseIndex
+		
+		// Checks if the origin reference can be parsed from character data
+		if let originReference = content.first(where: { $0.style == .crossReferenceOriginReference })
+		{
+			if let startIndex = originReference.text.range(of: ".")?.upperBound
+			{
+				let remaining = originReference.text.substring(from: startIndex)
+				
+				if let endIndex = remaining.rangeOfCharacter(from: CharacterSet(charactersIn: ",. :-"))?.lowerBound
+				{
+					originIndex = VerseIndex.parse(from: remaining.substring(to: endIndex)) ?? originIndex
+				}
+			}
+		}
+		
+		return CrossReference(caller: caller, style: style, charData: content, originVerseIndex: originIndex)
 	}
 }

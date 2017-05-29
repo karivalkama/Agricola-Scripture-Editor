@@ -69,7 +69,7 @@ class USXFootNoteProcessor: USXContentProcessor
 	func generate(from content: [CharData], using errorHandler: @escaping ErrorHandler) -> FootNote?
 	{
 		// If there is an 'fr' (origin reference) char element in the mix, records it separately
-		let originReferenceIndex = content.index(where: { $0.style == .originReference })
+		let originReferenceIndex = content.index(where: { $0.style == .footNoteOriginReference })
 		
 		if let originReferenceIndex = originReferenceIndex
 		{

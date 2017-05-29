@@ -18,6 +18,8 @@ class USXTextAndNoteProcessor: USXContentProcessor
 	
 	// ATTRIBUTES	-------------
 	
+	private let lastVerseIndex: VerseIndex?
+	
 	private var textElements = [TextElement]()
 	private var lastCharData = [CharData]()
 	private var crossReferences = [CrossReference]()
@@ -25,13 +27,18 @@ class USXTextAndNoteProcessor: USXContentProcessor
 	
 	// INIT	---------------------
 	
+	init(lastVerseIndex: VerseIndex?)
+	{
+		self.lastVerseIndex = lastVerseIndex
+	}
+	
 	// Creates a new parser
 	// The parser should start *after* verse or para element start
 	// The parser will stop at the next verse marker or at the end of the para element
-	static func createParser(caller: XMLParserDelegate, targetPointer: UnsafeMutablePointer<[Generated]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Generated, Processed>
+	static func createParser(caller: XMLParserDelegate, lastVerseIndex: VerseIndex?, targetPointer: UnsafeMutablePointer<[Generated]>, using errorHandler: @escaping ErrorHandler) -> USXContentParser<Generated, Processed>
 	{
 		let parser = USXContentParser<Generated, Processed>(caller: caller, containingElement: .para, lowestBreakMarker: .verse, targetPointer: targetPointer, using: errorHandler)
-		parser.processor = AnyUSXContentProcessor(USXTextAndNoteProcessor())
+		parser.processor = AnyUSXContentProcessor(USXTextAndNoteProcessor(lastVerseIndex: lastVerseIndex))
 		
 		return parser
 	}
@@ -59,7 +66,7 @@ class USXTextAndNoteProcessor: USXContentProcessor
 				{
 					// print("STATUS: Delegating '\(elementName)' of style '\(style.rawValue)' to a cross reference parser")
 					// Cross references are parsed separately from other data
-					return (USXCrossReferenceProcessor.createParser(caller: caller, callerAttValue: callerAttribute, style: style, targetPointer: &crossReferences, using: errorHandler), false)
+					return (USXCrossReferenceProcessor.createParser(caller: caller, callerAttValue: callerAttribute, style: style, lastVerseIndex: lastVerseIndex, targetPointer: &crossReferences, using: errorHandler), false)
 				}
 				else
 				{

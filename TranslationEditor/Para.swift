@@ -298,6 +298,7 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 				}
 				
 				// If the new range is longer than the matched range, combines target verses until enough range is covered
+				// TODO: Should only work / combine where are no footnotes or cross references in the following verse(s)
 				while verseRange.end > matchingVerse.range.end, i + 1 < verses.count
 				{
 					let nextVerse = verses.remove(at: i + 1)
@@ -312,6 +313,7 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 				{
 					let newContent = matchingVerse.content.update(with: subString) ?? TextWithNotes()
 					verses.insert(Verse(range: VerseRange(verseRange.end, matchingVerse.range.end), content: newContent), at: i + 1)
+					matchingVerse.range = verseRange
 				}
 				// If the ranges match, just updates the verse
 				else

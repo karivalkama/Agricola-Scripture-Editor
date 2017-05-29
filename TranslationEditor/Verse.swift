@@ -155,6 +155,11 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXCo
 		return Verse(range: range, content: content.emptyCopy())
 	}
 	
+	static func merge(_ verses: [Verse]) throws -> Verse
+	{
+		return try verses.dropFirst().reduce(verses.first!, { try $0 + $1 })
+	}
+	
 	static func contentEqualsBetween(_ left: [Verse], and right: [Verse]) -> Bool
 	{
 		// Checks whether any of the arrays is empty
@@ -201,26 +206,21 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXCo
 				}
 			}
 			
-			// The groups are equal if the first verses have equal content and the remaining elements are all empty
-			if !left[nextLeftIndex].contentEquals(with: right[nextRightIndex])
+			// The merged content of the groups must be equal
+			do
 			{
+				let leftSideMerge = try Verse.merge(Array(left[nextLeftIndex ... finalLeftIndex]))
+				let rightSideMerge = try Verse.merge(Array(right[nextRightIndex ... finalRightIndex]))
+				
+				if !leftSideMerge.contentEquals(with: rightSideMerge)
+				{
+					return false
+				}
+			}
+			catch
+			{
+				print("ERROR: Verse contents couldn't be merged. \(error)")
 				return false
-			}
-			
-			for i in stride(from: nextLeftIndex + 1, through: finalLeftIndex, by: 1)
-			{
-				if !left[i].content.isEmpty
-				{
-					return false
-				}
-			}
-			
-			for i in stride(from: nextRightIndex + 1, through: finalRightIndex, by: 1)
-			{
-				if !right[i].content.isEmpty
-				{
-					return false
-				}
 			}
 			
 			// Moves to the next range
