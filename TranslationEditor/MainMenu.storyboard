@@ -590,9 +590,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wTr-aO-PFN">
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wTr-aO-PFN">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cxb-R0-fbd" userLabel="Background View">
@@ -664,9 +663,13 @@
                         <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="dDj-dm-OwG" firstAttribute="top" secondItem="vFt-Fp-5oD" secondAttribute="bottom" constant="8" id="6S5-XZ-edY"/>
+                            <constraint firstItem="wTr-aO-PFN" firstAttribute="top" secondItem="6dP-5p-62T" secondAttribute="top" id="Bv3-iD-qVj"/>
                             <constraint firstItem="dDj-dm-OwG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6dP-5p-62T" secondAttribute="leadingMargin" constant="64" id="F3R-ko-rUE"/>
+                            <constraint firstItem="wTr-aO-PFN" firstAttribute="leading" secondItem="6dP-5p-62T" secondAttribute="leading" id="MoF-QG-IZW"/>
                             <constraint firstItem="85E-9l-LWE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dDj-dm-OwG" secondAttribute="bottom" constant="32" id="bGX-V0-5fq"/>
+                            <constraint firstAttribute="trailing" secondItem="wTr-aO-PFN" secondAttribute="trailing" id="isA-d3-2S1"/>
                             <constraint firstAttribute="trailing" secondItem="dDj-dm-OwG" secondAttribute="trailing" constant="32" id="oed-n8-4wc"/>
+                            <constraint firstItem="85E-9l-LWE" firstAttribute="top" secondItem="wTr-aO-PFN" secondAttribute="bottom" id="r03-nh-nJP"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">

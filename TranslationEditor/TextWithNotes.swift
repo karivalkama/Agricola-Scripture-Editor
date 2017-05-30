@@ -161,8 +161,8 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 	func update(with attString: NSAttributedString, cutOutCrossReferencesOutside rangeLimit: VerseRange? = nil) -> TextWithNotes?
 	{
 		// Finds all the notes markers from the string first
-		var notesRanges = [(Int, Int)]() // Note start index, note end index
-		var openStartIndex: Int?
+		var notesRanges = [(startMarker: NSRange, endMarker: NSRange)]() // Note start range, note end range
+		var openStartMarker: NSRange?
 		
 		attString.enumerateAttribute(NoteMarkerAttributeName, in: NSMakeRange(0, attString.length), options: [])
 		{
@@ -173,28 +173,28 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 				// The previous note must be ended before a new one can begin
 				if isNoteStart
 				{
-					if openStartIndex == nil
+					if openStartMarker == nil
 					{
-						openStartIndex = range.location
+						openStartMarker = range
 					}
 				}
-				else if let startIndex = openStartIndex
+				else if let startMarker = openStartMarker
 				{
-					notesRanges.add((startIndex, range.location))
-					openStartIndex = nil
+					notesRanges.add((startMarker: startMarker, endMarker: range))
+					openStartMarker = nil
 				}
 			}
 		}
 		
-		let breakIndices = notesRanges.flatMap { [$0.0, $0.1] }
+		let breakMarkers = notesRanges.flatMap { [$0.startMarker, $0.endMarker] }
 		
 		// Parses the character data
 		var charData = [[CharData]]()
 		var textStartIndex = 0
-		for breakIndex in breakIndices
+		for breakMarker in breakMarkers
 		{
-			charData.add(parseCharData(from: attString, range: NSMakeRange(textStartIndex, breakIndex - textStartIndex)))
-			textStartIndex = breakIndex + 1
+			charData.add(parseCharData(from: attString, range: NSMakeRange(textStartIndex, breakMarker.location - textStartIndex)))
+			textStartIndex = breakMarker.location + breakMarker.length
 		}
 		charData.add(parseCharData(from: attString, range: NSMakeRange(textStartIndex, attString.length - textStartIndex)))
 		

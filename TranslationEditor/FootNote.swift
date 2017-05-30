@@ -66,7 +66,7 @@ final class FootNote: ParaContent, Copyable
 		let attSrt = NSMutableAttributedString()
 		attSrt.append(NSAttributedString(string: "(", attributes: [NoteMarkerAttributeName: true]))
 		charData.forEach { attSrt.append($0.toAttributedString(options: options)) }
-		attSrt.append(NSAttributedString(string: ")", attributes: [NoteMarkerAttributeName: false]))
+		attSrt.append(NSAttributedString(string: ") ", attributes: [NoteMarkerAttributeName: false]))
 		
 		attSrt.addAttribute(IsNoteAttributeName, value: true, range: NSMakeRange(0, attSrt.length))
 		
