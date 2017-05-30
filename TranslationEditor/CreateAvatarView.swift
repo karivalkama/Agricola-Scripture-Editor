@@ -67,7 +67,21 @@ import UIKit
 	
 	var offlinePassword: String?
 	{
-		return offlinePasswordField.text
+		if let offlinePassword = offlinePasswordField.text
+		{
+			if offlinePassword.isEmpty
+			{
+				return nil
+			}
+			else
+			{
+				return offlinePassword
+			}
+		}
+		else
+		{
+			return nil
+		}
 	}
 	
 	var allFieldsFilled: Bool

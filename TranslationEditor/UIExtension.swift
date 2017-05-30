@@ -46,6 +46,13 @@ extension UIView
 	{
 		return view.convert(frame, from: superview)
 	}
+	
+	// Intensity should be between 0 and 1
+	func roundCorners(intensity: CGFloat = 0.5)
+	{
+		layer.cornerRadius = (min(frame.width, frame.height) / 2) * intensity
+		clipsToBounds = true
+	}
 }
 
 extension UITextView

@@ -24,7 +24,26 @@
                         <subviews>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cnG-le-gaA" userLabel="Background">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9M-u4-oN1">
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backgroundButtonPressed:" destination="Qhh-ZC-jdN" eventType="touchUpInside" id="kP3-QF-jr3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="M9M-u4-oN1" firstAttribute="leading" secondItem="cnG-le-gaA" secondAttribute="leading" id="5vT-6a-dxq"/>
+                                    <constraint firstAttribute="trailing" secondItem="M9M-u4-oN1" secondAttribute="trailing" id="LL3-Ua-oiq"/>
+                                    <constraint firstItem="M9M-u4-oN1" firstAttribute="top" secondItem="cnG-le-gaA" secondAttribute="top" id="Odj-sC-zeg"/>
+                                    <constraint firstAttribute="bottom" secondItem="M9M-u4-oN1" secondAttribute="bottom" id="ftA-rb-ZHp"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUM-R1-CTj">
                                 <rect key="frame" x="599" y="36" width="389" height="668"/>

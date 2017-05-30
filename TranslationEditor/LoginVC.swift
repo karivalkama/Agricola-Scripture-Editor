@@ -20,6 +20,7 @@ class LoginVC: UIViewController
 	@IBOutlet weak var errorLabel: UILabel!
 	@IBOutlet weak var loginButton: BasicButton!
 	@IBOutlet weak var topBar: TopBarUIView!
+	@IBOutlet weak var continueButton: BasicButton!
 	
 	@IBOutlet weak var centeringConstraint: NSLayoutConstraint!
 	@IBOutlet weak var contentView: KeyboardReactiveView!
@@ -35,7 +36,7 @@ class LoginVC: UIViewController
 		
 		errorLabel.text = nil
 		
-		contentView.configure(mainView: view, elements: [userNameField, passwordField, errorLabel, loginButton], centeringConstraint: centeringConstraint)
+		contentView.configure(mainView: view, elements: [userNameField, passwordField, errorLabel, loginButton, continueButton], centeringConstraint: centeringConstraint)
     }
 	
 	override func viewDidAppear(_ animated: Bool)

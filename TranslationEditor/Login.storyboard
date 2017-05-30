@@ -209,6 +209,7 @@
                     <connections>
                         <outlet property="centeringConstraint" destination="EEX-5J-qVN" id="vgD-t8-gjD"/>
                         <outlet property="contentView" destination="WYz-Uf-C1K" id="qLb-8s-bwh"/>
+                        <outlet property="continueButton" destination="M0d-2V-9K6" id="ja4-p8-Gku"/>
                         <outlet property="errorLabel" destination="jZr-uV-CHp" id="7RG-Eu-HAt"/>
                         <outlet property="loginButton" destination="8EW-FA-pFd" id="3Kv-dk-yoj"/>
                         <outlet property="passwordField" destination="CnF-lF-3AM" id="79x-tJ-ON1"/>
@@ -1381,7 +1382,7 @@
                                 </cells>
                             </collectionView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oz8-mI-VI2" userLabel="Password View" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
-                                <rect key="frame" x="318" y="316" width="388" height="137"/>
+                                <rect key="frame" x="318" y="315.5" width="388" height="137"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BRS-qN-0CT">
                                         <rect key="frame" x="16" y="16" width="356" height="105"/>

@@ -59,4 +59,10 @@ class BasicButton: UIButton
 		
 		setVisualTheme(theme)
 	}
+	
+	override func layoutSubviews()
+	{
+		super.layoutSubviews()
+		roundCorners(intensity: 0.2)
+	}
 }
