@@ -75,6 +75,8 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	{
 		super.viewDidAppear(animated)
 		
+		topBar.updateUserView()
+		
 		// If project is already selected, moves to the next view
 		// Otherwise listens to project data changes
 		if let projectId = Session.instance.projectId

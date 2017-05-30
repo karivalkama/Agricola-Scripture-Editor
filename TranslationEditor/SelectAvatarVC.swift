@@ -92,6 +92,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	override func viewDidAppear(_ animated: Bool)
 	{
 		hidePasswordView()
+		topBar.updateUserView()
 		
 		// If the project has not been chosen, doesn't configure anything
 		if Session.instance.projectId != nil

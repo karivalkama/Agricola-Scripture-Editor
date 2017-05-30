@@ -57,6 +57,8 @@ class LoginVC: UIViewController
 		
 		// viewManager.startKeyboardListening()
 		contentView.startKeyboardListening()
+		
+		topBar.updateUserView()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool)
