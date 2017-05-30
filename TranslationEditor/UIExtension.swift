@@ -57,7 +57,7 @@ extension UITextView
 		newText.append(usxString)
 		let wholeTextRange = NSMakeRange(0, newText.length)
 		
-		// Adds different fonts based on attribute values
+		// Adds different fonts / etc. based on attribute values
 		newText.addAttribute(NSFontAttributeName, value: defaultParagraphFont, range: wholeTextRange)
 		usxString.enumerateAttribute(ParaStyleAttributeName, in: wholeTextRange, options: [])
 		{
@@ -68,6 +68,26 @@ extension UITextView
 				if style.isHeaderStyle()
 				{
 					newText.addAttribute(NSFontAttributeName, value: headingFont, range: range)
+				}
+				
+				var paragraphStyling: ParagraphStyling?
+				switch style
+				{
+				case .embeddedTextOpening, .embeddedTextClosing, .embeddedTextParagraph:
+					paragraphStyling = .indented(level: 1)
+				case .embeddedTextRefrain, .closureOfLetter, .liturgicalNote, .poeticLineRight: paragraphStyling = .rightAlignment
+				case .centered, .poeticLineCentered: paragraphStyling = .centered
+				case .indented(let level): paragraphStyling = .indented(level: level)
+				case .indentedFlushLeft: paragraphStyling = .thin
+				case .listItem(let level): paragraphStyling = .list(level: level)
+				case .poeticLine(let level): paragraphStyling = .indented(level: level)
+				case .embeddedTextPoeticLine(let level): paragraphStyling = .indented(level: level)
+				default: break
+				}
+				
+				if let paragraphStyling = paragraphStyling
+				{
+					newText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyling.style, range: range)
 				}
 			}
 		}

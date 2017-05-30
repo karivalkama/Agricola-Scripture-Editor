@@ -144,6 +144,15 @@ struct VerseRange: JSONConvertible, Equatable, CustomStringConvertible
 		}
 	}
 	
+	// Whether this verse range contains any complete markers
+	var containsVerseMarkers: Bool
+	{
+		let startIndex = start.midVerse ? start.index + 1 : start.index
+		let endIndex = end.midVerse ? end.index + 1 : end.index
+		
+		return startIndex < endIndex
+	}
+	
 	// The length of the range in verses (mid verses are counted as 1/2 verse)
 	var length: Double
 	{

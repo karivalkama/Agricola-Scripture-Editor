@@ -34,7 +34,17 @@ final class Verse: AttributedStringConvertible, JSONConvertible, Copyable, USXCo
 		return content.text
 	}
 	
-	var toUSX: String { return "<verse number=\"\(range)\" style=\"v\"/>\(content.toUSX)" }
+	var toUSX: String
+	{
+		if range.containsVerseMarkers
+		{
+			return "<verse number=\"\(range.simpleName)\" style=\"v\"/>\(content.toUSX)"
+		}
+		else
+		{
+			return content.toUSX
+		}
+	}
 	
 	
 	// INIT	-------

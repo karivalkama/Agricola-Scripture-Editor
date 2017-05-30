@@ -24,7 +24,7 @@ final class Para: AttributedStringConvertible, PotentialVerseRangeable, JSONConv
 	
 	var toUSX: String
 	{
-		return "<para style=\"\(style.code)\">\(ambiguousContent == nil ? verses.reduce("", { $0 + $1.toUSX }) : ambiguousContent!.toUSX)</para>"
+		return "\n<para style=\"\(style.code)\">\(ambiguousContent == nil ? verses.reduce("", { $0 + $1.toUSX }) : ambiguousContent!.toUSX)</para>"
 	}
 	
 	// The verse range of the para. Nil if the paragraph doesn't contain any verse markers

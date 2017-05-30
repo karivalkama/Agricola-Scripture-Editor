@@ -34,12 +34,13 @@ class USXWriter
 		}
 		
 		var lastChapterIndex = paragraphs.first!.chapterIndex
-		var s = chapterMarker(withIndex: lastChapterIndex)
+		var s = "\n" + chapterMarker(withIndex: lastChapterIndex)
 		
 		for paragraph in paragraphs
 		{
 			if paragraph.chapterIndex != lastChapterIndex
 			{
+				s += "\n"
 				s += chapterMarker(withIndex: paragraph.chapterIndex)
 				lastChapterIndex = paragraph.chapterIndex
 			}
