@@ -39,6 +39,9 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	private var targetSwipeRecognizerLeft: UISwipeGestureRecognizer?
 	private var targetSwipeRecognizerRight: UISwipeGestureRecognizer?
 	
+	private var resourceSwipeRecognizerLeft: UISwipeGestureRecognizer?
+	private var resourceSwipeRecognizerRight: UISwipeGestureRecognizer?
+	
 	// resource table managing
 	private var resourceManager: ResourceManager!
 	
@@ -118,6 +121,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		scrollManager.registerSelectionListener(resourceManager)
 		
 		// Adds swipe listening
+		// TODO: WET WET
 		if targetSwipeRecognizerLeft == nil
 		{
 			targetSwipeRecognizerLeft = UISwipeGestureRecognizer(target: self, action: #selector(targetTableSwiped(recognizer:)))
@@ -127,12 +131,26 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		}
 		if targetSwipeRecognizerRight == nil
 		{
-			
 			targetSwipeRecognizerRight = UISwipeGestureRecognizer(target: self, action: #selector(targetTableSwiped(recognizer:)))
 			targetSwipeRecognizerRight?.direction = .right
 			translationTableView.addGestureRecognizer(targetSwipeRecognizerRight!)
 			targetSwipeRecognizerRight?.delegate = self
 		}
+		if resourceSwipeRecognizerLeft == nil
+		{
+			resourceSwipeRecognizerLeft = UISwipeGestureRecognizer(target: self, action: #selector(sourceTableSwiped(recognizer:)))
+			resourceSwipeRecognizerLeft?.direction = .left
+			resourceTableView.addGestureRecognizer(resourceSwipeRecognizerLeft!)
+			resourceSwipeRecognizerLeft?.delegate = self
+		}
+		if resourceSwipeRecognizerRight == nil
+		{
+			resourceSwipeRecognizerRight = UISwipeGestureRecognizer(target: self, action: #selector(sourceTableSwiped(recognizer:)))
+			resourceSwipeRecognizerRight?.direction = .right
+			resourceTableView.addGestureRecognizer(resourceSwipeRecognizerRight!)
+			resourceSwipeRecognizerRight?.delegate = self
+		}
+		
 		
 		do
 		{
@@ -372,6 +390,31 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		{
 			translationTableView.reloadRows(at: [index], with: recognizer.direction == .left ? .left : .right)
 		}
+	}
+	
+	func sourceTableSwiped(recognizer: UISwipeGestureRecognizer)
+	{
+		// Switches a resource that is displayed
+		var newIndex = resourceSegmentControl.selectedSegmentIndex
+		
+		if recognizer.direction == .left
+		{
+			newIndex += 1
+			if newIndex >= resourceSegmentControl.numberOfSegments
+			{
+				newIndex = 0
+			}
+		}
+		else if recognizer.direction == .right
+		{
+			newIndex -= 1
+			if newIndex < 0
+			{
+				newIndex = resourceSegmentControl.numberOfSegments - 1
+			}
+		}
+		
+		switchToResource(atIndex: newIndex)
 	}
 	
 	
