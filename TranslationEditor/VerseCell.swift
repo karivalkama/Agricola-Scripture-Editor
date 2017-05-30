@@ -25,9 +25,9 @@ class VerseCell: UITableViewCell
 	// OTHER METHODS	--------
 
 	// Sets up the cell contents
-	func configure(languageName: String, textContent: String)
+	func configure(title: String, paragraph: Paragraph)
 	{
-		languageNameLabel.text = languageName
-		verseContentTextView.text = textContent
+		languageNameLabel.text = title
+		verseContentTextView.display(paragraph: paragraph)
 	}
 }

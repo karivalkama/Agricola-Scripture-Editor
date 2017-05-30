@@ -62,7 +62,7 @@ class VerseTableDS: NSObject, UITableViewDataSource
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		print("STATUS: Displays \(data.count) different versions for paragraph")
+		// print("STATUS: Displays \(data.count) different versions for paragraph")
 		return data.count
 	}
 	
@@ -77,20 +77,18 @@ class VerseTableDS: NSObject, UITableViewDataSource
 		// If a specific range is specified, limits the content to that range
 		if let targetVerseIndex = targetVerseIndex
 		{
-			var text = ""
-			for verse in data[indexPath.row].1.content.flatMap({ $0.verses })
+			let paragraph = data[indexPath.row].1.copy()
+			for para in paragraph.content
 			{
-				if verse.range.contains(index: targetVerseIndex)
-				{
-					text += verse.text
-				}
+				para.verses = para.verses.filter { $0.range.contains(index: targetVerseIndex) }
 			}
+			paragraph.content = paragraph.content.filter { !$0.verses.isEmpty }
 			
-			cell.configure(languageName: title, textContent: text)
+			cell.configure(title: title, paragraph: paragraph)
 		}
 		else
 		{
-			cell.configure(languageName: title, textContent: data[indexPath.row].1.text)
+			cell.configure(title: title, paragraph: data[indexPath.row].1)
 		}
 		
 		return cell
