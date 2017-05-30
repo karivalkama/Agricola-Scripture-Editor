@@ -83,6 +83,11 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		dismiss(animated: true, completion: nil)
 	}
 	
+	@IBAction func backgroundButtonTapped(_ sender: Any)
+	{
+		dismiss(animated: true, completion: nil)
+	}
+	
 	@IBAction func createProjectPressed(_ sender: Any)
 	{
 		// Makes sure all the fields are filled

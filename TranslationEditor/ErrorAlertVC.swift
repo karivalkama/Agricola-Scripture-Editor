@@ -49,6 +49,11 @@ class ErrorAlertVC: UIViewController
 		dismiss(animated: true, completion: completion)
 	}
 	
+	@IBAction func backgroundTapped(_ sender: Any)
+	{
+		dismiss(animated: true, completion: completion)
+	}
+	
 	
 	// OTHER METHODS	-----------
 	

@@ -167,6 +167,11 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 		dismiss(animated: true, completion: nil)
 	}
 	
+	@IBAction func backgroundTapped(_ sender: Any)
+	{
+		dismiss(animated: true, completion: nil)
+	}
+	
 	
 	// IMPLEMENTED METHODS	----
 	

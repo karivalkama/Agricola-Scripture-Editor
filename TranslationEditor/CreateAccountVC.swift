@@ -57,6 +57,11 @@ class CreateAccountVC: UIViewController
 		dismiss(animated: true, completion: nil)
 	}
 	
+	@IBAction func backgroundTapped(_ sender: Any)
+	{
+		dismiss(animated: true, completion: nil)
+	}
+	
 	@IBAction func createAccountPressed(_ sender: Any)
 	{
 		// Makes sure all the fields are filled

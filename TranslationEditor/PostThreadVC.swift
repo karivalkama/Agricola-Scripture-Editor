@@ -143,6 +143,11 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		dismiss(animated: true, completion: nil)
 	}
 	
+	@IBAction func backgroundTapped(_ sender: Any)
+	{
+		dismiss(animated: true, completion: nil)
+	}
+	
 	/*
 	// Post button is enabled only when there is a subject
 	if subjectTextField.text == nil || subjectTextField.text!.isEmpty

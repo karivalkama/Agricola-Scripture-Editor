@@ -103,6 +103,11 @@ class EditAvatarVC: UIViewController
 		dismiss(animated: true, completion: completionHandler)
 	}
 	
+	@IBAction func backgroundTapped(_ sender: Any)
+	{
+		dismiss(animated: true, completion: completionHandler)
+	}
+	
 	@IBAction func saveButtonPressed(_ sender: Any)
 	{
 		// Checks that all necessary fields are filled
