@@ -26,7 +26,7 @@ class EditAvatarVC: UIViewController
 	static let identifier = "EditAvatar"
 	
 	private var editedInfo: (Avatar, AvatarInfo)?
-	private var completionHandler: (() -> ())?
+	private var completionHandler: ((Avatar, AvatarInfo) -> ())?
 	
 	
 	// LOAD	----------------------
@@ -100,12 +100,12 @@ class EditAvatarVC: UIViewController
 	
 	@IBAction func cancelButtonPressed(_ sender: Any)
 	{
-		dismiss(animated: true, completion: completionHandler)
+		dismiss(animated: true)
 	}
 	
 	@IBAction func backgroundTapped(_ sender: Any)
 	{
-		dismiss(animated: true, completion: completionHandler)
+		dismiss(animated: true)
 	}
 	
 	@IBAction func saveButtonPressed(_ sender: Any)
@@ -146,6 +146,8 @@ class EditAvatarVC: UIViewController
 					try avatar.push()
 					try info.push()
 				}
+				
+				dismiss(animated: true, completion: { self.completionHandler?(avatar, info) })
 			}
 			// Or creates a new avatar entirely
 			else
@@ -187,22 +189,27 @@ class EditAvatarVC: UIViewController
 						try info.setImage(image)
 					}
 				}
+				
+				dismiss(animated: true, completion: { self.completionHandler?(avatar, info) })
 			}
 		}
 		catch
 		{
 			print("ERROR: Failed to perform the required database operations. \(error)")
 		}
-		
-		dismiss(animated: true, completion: completionHandler)
 	}
 	
 	
 	// OTHER METHODS	--------------
 	
-	func configureForEdit(avatar: Avatar, avatarInfo: AvatarInfo, completion: (() -> ())? = nil)
+	func configureForEdit(avatar: Avatar, avatarInfo: AvatarInfo, successHandler: ((Avatar, AvatarInfo) -> ())? = nil)
 	{
 		self.editedInfo = (avatar, avatarInfo)
-		self.completionHandler = completion
+		self.completionHandler = successHandler
+	}
+	
+	func configureForCreate(successHandler: @escaping (Avatar, AvatarInfo) -> ())
+	{
+		self.completionHandler = successHandler
 	}
 }

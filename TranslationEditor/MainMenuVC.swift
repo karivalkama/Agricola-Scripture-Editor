@@ -78,7 +78,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		{
 			if let presentingViewController = presentingViewController as? SelectAvatarVC
 			{
-				topBar.configure(hostVC: self, title: title, leftButtonText: presentingViewController.shouldDismissBelow ? "Switch Project" : "Switch Avatar")
+				topBar.configure(hostVC: self, title: title, leftButtonText: presentingViewController.shouldDismissBelow ? "Switch Project" : "Switch User")
 				{
 					Session.instance.avatarId = nil
 					presentingViewController.dismissFromAbove()

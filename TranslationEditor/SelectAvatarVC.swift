@@ -46,7 +46,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	{
         super.viewDidLoad()
 		
-		topBar.configure(hostVC: self, title: "Select Avatar")
+		topBar.configure(hostVC: self, title: "Select User")
 		
 		guard let projectId = Session.instance.projectId else
 		{
@@ -98,7 +98,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		if Session.instance.projectId != nil
 		{
 			// Sets up the top bar
-			let title = "Select Avatar"
+			let title = "Select User"
 			if let presentingViewController = presentingViewController
 			{
 				if let presentingViewController = presentingViewController as? SelectProjectVC
@@ -225,7 +225,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		// The last row is used for the avatar addition
 		if indexPath.row == avatarData.count
 		{
-			cell.configure(avatarName: "New Avatar", avatarImage: #imageLiteral(resourceName: "addIcon"))
+			cell.configure(avatarName: "New User", avatarImage: #imageLiteral(resourceName: "addIcon"))
 		}
 		else
 		{
@@ -245,6 +245,15 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			if indexPath.row == avatarData.count
 			{
 				displayAlert(withIdentifier: "EditAvatar", storyBoardId: "MainMenu")
+				{
+					($0 as! EditAvatarVC).configureForCreate()
+					{
+						avatar, _ in
+						
+						Session.instance.avatarId = avatar.idString
+						self.proceed()
+					}
+				}
 			}
 			else
 			{
