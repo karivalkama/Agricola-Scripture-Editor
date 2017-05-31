@@ -161,7 +161,11 @@ class LoginVC: UIViewController
 			
 			if let accountVC = accountVC as? CreateAccountVC
 			{
-				accountVC.configure { self.proceed() }
+				accountVC.configure
+				{
+					self.checkP2PProjectAccess(for: $0)
+					self.proceed()
+				}
 			}
 		}
 	}
@@ -224,6 +228,63 @@ class LoginVC: UIViewController
 
 	
 	// OTHER METHODS	-----------
+	
+	private func checkP2PProjectAccess(for account: AgricolaAccount)
+	{
+		// If there is a P2P session active, provides access to the host project
+		if P2PClientSession.isConnected
+		{
+			do
+			{
+				if let projectId = P2PClientSession.instance!.projectId, let project = try Project.get(projectId)
+				{
+					if !project.contributorIds.contains(account.idString)
+					{
+						project.contributorIds.add(account.idString)
+						try project.push()
+					}
+					
+					Session.instance.projectId = projectId
+				}
+			}
+			catch
+			{
+				print("ERROR: Failed to provide project access. \(error)")
+			}
+		}
+	}
+	
+	/*
+	private func connectionDialogClosed()
+	{
+		// If the user has joined a P2P session with a project, offers to auto-login with the project's shared account
+		if P2PClientSession.isConnected
+		{
+			guard let projectId = P2PClientSession.instance?.projectId else
+			{
+				return
+			}
+			
+			displayAlert(withIdentifier: AutoLoginAlertVC.identifier, storyBoardId: "Login")
+			{
+				alertVC in
+				
+				(alertVC as! AutoLoginAlertVC).configure()
+				{
+					result in
+					
+					if result
+					{
+						do
+						{
+							
+						}
+						// Session.instance.accountId =
+					}
+				}
+			}
+		}
+	}*/
 	
 	private func proceed(animated: Bool = true)
 	{

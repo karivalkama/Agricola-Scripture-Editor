@@ -21,6 +21,9 @@ import UIKit
 	
 	// ATTRIBUTES	--------------
 	
+	// This will be called each time connection view is closed
+	var connectionCompletionHandler: (() -> ())?
+	
 	private weak var viewController: UIViewController?
 	private var leftSideAction: (() -> ())?
 	
@@ -58,7 +61,17 @@ import UIKit
 			return
 		}
 		
-		viewController.displayAlert(withIdentifier: ConnectionVC.identifier, storyBoardId: "Common")
+		if let completionHandler = connectionCompletionHandler
+		{
+			viewController.displayAlert(withIdentifier: ConnectionVC.identifier, storyBoardId: "Common")
+			{
+				($0 as! ConnectionVC).configure(completion: completionHandler)
+			}
+		}
+		else
+		{
+			viewController.displayAlert(withIdentifier: ConnectionVC.identifier, storyBoardId: "Common")
+		}
 	}
 	
 	@IBAction func userViewTapped(_ sender: Any)

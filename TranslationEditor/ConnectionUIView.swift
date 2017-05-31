@@ -332,6 +332,7 @@ import MessageUI
 						hostProjectLabel.text = "on project: \(project.name)"
 						
 						// Makes sure the current user also has access to the project
+						/*
 						if let accountId = Session.instance.accountId
 						{
 							if !project.contributorIds.contains(accountId)
@@ -340,6 +341,7 @@ import MessageUI
 								try project.push()
 							}
 						}
+						*/
 					}
 				}
 				catch

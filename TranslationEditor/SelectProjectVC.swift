@@ -57,6 +57,7 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 			Session.instance.logout()
 			self.dismiss(animated: true, completion: nil)
 		}
+		topBar.connectionCompletionHandler = onConnectionDialogClose
 		
 		// If using a shared account, selects the project automatically
 		guard let accountId = Session.instance.accountId else
@@ -195,5 +196,36 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		print("STATUS: Project view will be dismissed from below")
 		// Logs the user out before dimissing into login
 		Session.instance.logout()
+	}
+	
+	
+	// OTHER METHODS	------------------
+	
+	private func onConnectionDialogClose()
+	{
+		if P2PClientSession.isConnected
+		{
+			do
+			{
+				guard let projectId = P2PClientSession.instance?.projectId, let project = try Project.get(projectId) else
+				{
+					return
+				}
+				
+				// Makes sure the current user also has access to the project
+				if let accountId = Session.instance.accountId
+				{
+					if !project.contributorIds.contains(accountId)
+					{
+						project.contributorIds.append(accountId)
+						try project.push()
+					}
+				}
+			}
+			catch
+			{
+				print("ERROR: Failed to provide project access. \(error)")
+			}
+		}
 	}
 }

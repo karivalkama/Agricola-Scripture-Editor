@@ -16,6 +16,142 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Auto Login AlertVC-->
+        <scene sceneID="NPR-Z3-QMN">
+            <objects>
+                <viewController storyboardIdentifier="AutoLoginAlert" id="7LX-8i-dYi" customClass="AutoLoginAlertVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="R0H-ZX-RWk"/>
+                        <viewControllerLayoutGuide type="bottom" id="6f1-pS-DJ8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MEC-Ke-z4B">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1iI-ZI-Cp8">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sz-BE-wh5">
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                        <connections>
+                                            <action selector="backgroundTapped:" destination="7LX-8i-dYi" eventType="touchUpInside" id="Vgo-mD-bgQ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="2sz-BE-wh5" firstAttribute="leading" secondItem="1iI-ZI-Cp8" secondAttribute="leading" id="4EZ-2g-uS5"/>
+                                    <constraint firstAttribute="bottom" secondItem="2sz-BE-wh5" secondAttribute="bottom" id="YUk-09-LQP"/>
+                                    <constraint firstItem="2sz-BE-wh5" firstAttribute="top" secondItem="1iI-ZI-Cp8" secondAttribute="top" id="hcb-pn-gwd"/>
+                                    <constraint firstAttribute="trailing" secondItem="2sz-BE-wh5" secondAttribute="trailing" id="xjR-Ra-nGt"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hOl-Ja-Rfe">
+                                <rect key="frame" x="257" y="218" width="512" height="332.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Q6N-fe-Pc7">
+                                        <rect key="frame" x="16" y="16" width="480" height="304.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Shared Project Account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DfV-UO-F3l">
+                                                <rect key="frame" x="0.0" y="0.0" width="480" height="26.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CsG-Hw-TLg">
+                                                <rect key="frame" x="0.0" y="50.5" width="480" height="123.5"/>
+                                                <subviews>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.55000000000000004" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="V2V-ii-I6u">
+                                                        <rect key="frame" x="0.0" y="0.0" width="480" height="96"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="96" id="bDA-dp-KSh"/>
+                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="480" id="rZw-N4-dwu"/>
+                                                        </constraints>
+                                                        <string key="text">You are currently connected with another project member. Do you wish to quickly access the project using the shared project account?</string>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIP: Use shared accounts when multiple people use this tablet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYb-5k-q4F">
+                                                        <rect key="frame" x="0.0" y="104" width="480" height="19.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="WC4-iP-Nxv">
+                                                <rect key="frame" x="0.0" y="198" width="480" height="106.5"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNV-wk-4tL" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
+                                                        <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="8eq-A0-vJp"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                        <state key="normal" title="Yes, log me in with the shared project account">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="yesButtonPressed:" destination="7LX-8i-dYi" eventType="touchUpInside" id="goa-zB-Ple"/>
+                                                        </connections>
+                                                    </button>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MQY-AX-B5d">
+                                                        <rect key="frame" x="0.0" y="52" width="480" height="54.5"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cy-Fb-A1P" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
+                                                                <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="mNT-fi-XwK"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <state key="normal" title="No, I want to use my private account">
+                                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="noButtonPressed:" destination="7LX-8i-dYi" eventType="touchUpInside" id="Lrk-Vo-1Rg"/>
+                                                                </connections>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will be granted access to the project when you log in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBi-ep-ibD">
+                                                                <rect key="frame" x="0.0" y="40" width="480" height="14.5"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Q6N-fe-Pc7" secondAttribute="trailing" constant="16" id="KDa-X6-UhQ"/>
+                                    <constraint firstItem="Q6N-fe-Pc7" firstAttribute="top" secondItem="hOl-Ja-Rfe" secondAttribute="top" constant="16" id="YZz-Bf-mJt"/>
+                                    <constraint firstItem="Q6N-fe-Pc7" firstAttribute="leading" secondItem="hOl-Ja-Rfe" secondAttribute="leading" constant="16" id="iVF-ew-48m"/>
+                                    <constraint firstAttribute="bottom" secondItem="Q6N-fe-Pc7" secondAttribute="bottom" constant="12" id="s3k-cd-lcs"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="1iI-ZI-Cp8" secondAttribute="trailing" id="4lr-Gm-INg"/>
+                            <constraint firstItem="6f1-pS-DJ8" firstAttribute="top" secondItem="1iI-ZI-Cp8" secondAttribute="bottom" id="Lxm-ud-tnk"/>
+                            <constraint firstItem="hOl-Ja-Rfe" firstAttribute="centerY" secondItem="MEC-Ke-z4B" secondAttribute="centerY" priority="750" id="Sqq-st-j3o"/>
+                            <constraint firstItem="1iI-ZI-Cp8" firstAttribute="leading" secondItem="MEC-Ke-z4B" secondAttribute="leading" id="eXI-Q2-xuU"/>
+                            <constraint firstItem="1iI-ZI-Cp8" firstAttribute="top" secondItem="MEC-Ke-z4B" secondAttribute="top" id="ngl-lY-4nU"/>
+                            <constraint firstItem="hOl-Ja-Rfe" firstAttribute="centerX" secondItem="MEC-Ke-z4B" secondAttribute="centerX" id="oAP-4p-orb"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QSp-Ub-n8n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-817.3828125" y="-658.59375"/>
+        </scene>
         <!--LoginVC-->
         <scene sceneID="6Nn-CK-z0g">
             <objects>
@@ -675,7 +811,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="960" height="632"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="Qn1-aN-GAg">
-                                                <rect key="frame" x="0.0" y="20.5" width="355" height="591.5"/>
+                                                <rect key="frame" x="0.0" y="25" width="355" height="582.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="355" id="f53-5n-HuG"/>
                                                 </constraints>
@@ -706,7 +842,7 @@
                                                                 <rect key="frame" x="0.0" y="28" width="557" height="87"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sG3-be-bJb" id="EcI-Gu-8tF">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="557" height="86"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="557" height="86.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wh2-3I-Lsf" userLabel="Content Stack View">
@@ -754,7 +890,7 @@
                                                                 <rect key="frame" x="0.0" y="115" width="557" height="176"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vde-PQ-RQ0" id="TeY-rK-FQx">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="557" height="175"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="557" height="175.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="A6x-z7-cDy" userLabel="Content Stack View">
@@ -1416,7 +1552,7 @@
                                 </cells>
                             </collectionView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oz8-mI-VI2" userLabel="Password View" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
-                                <rect key="frame" x="318" y="315.5" width="388" height="137"/>
+                                <rect key="frame" x="318" y="316.5" width="388" height="137"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BRS-qN-0CT">
                                         <rect key="frame" x="16" y="16" width="356" height="105"/>

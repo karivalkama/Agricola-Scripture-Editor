@@ -20,6 +20,8 @@ class ConnectionVC: UIViewController
 	
 	static let identifier = "ConnectionVC"
 	
+	private var completionHandler: (() -> ())?
+	
 	
 	// LOAD	--------------------
 	
@@ -47,11 +49,19 @@ class ConnectionVC: UIViewController
 	
 	@IBAction func closeButtonPressed(_ sender: Any)
 	{
-		dismiss(animated: true, completion: nil)
+		dismiss(animated: true, completion: completionHandler)
 	}
 	
 	@IBAction func backgroundButtonPressed(_ sender: Any)
 	{
-		dismiss(animated: true, completion: nil)
+		dismiss(animated: true, completion: completionHandler)
+	}
+	
+	
+	// OTHER METHODS	-------
+	
+	func configure(completion: @escaping () -> ())
+	{
+		self.completionHandler = completion
 	}
 }

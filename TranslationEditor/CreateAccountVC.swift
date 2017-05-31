@@ -24,7 +24,7 @@ class CreateAccountVC: UIViewController
 	
 	// ATTRIBUTES	--------------
 	
-	private var completion: (() -> ())?
+	private var completion: ((AgricolaAccount) -> ())?
 	
 	
 	// LOAD	----------------------
@@ -120,7 +120,7 @@ class CreateAccountVC: UIViewController
 				Session.instance.logIn(accountId: newAccount.idString, userName: userName, password: password)
 			}
 			
-			dismiss(animated: true, completion: completion)
+			dismiss(animated: true, completion: { self.completion?(newAccount) })
 		}
 		catch
 		{
@@ -133,7 +133,7 @@ class CreateAccountVC: UIViewController
 	
 	// OTHER METHODS	---------------
 	
-	func configure(completion: @escaping () -> ())
+	func configure(completion: @escaping (AgricolaAccount) -> ())
 	{
 		self.completion = completion
 	}
