@@ -248,7 +248,7 @@ import MessageUI
 		onlineStatusView.status = status
 		
 		// When in idle mode and client session is active, updates host info
-		if status == .done && P2PClientSession.isConnected
+		if (status == .done || status == .upToDate) && P2PClientSession.isConnected
 		{
 			updateHostInfoViewStatus()
 		}

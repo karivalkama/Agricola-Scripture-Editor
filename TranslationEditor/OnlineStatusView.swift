@@ -80,14 +80,14 @@ import UIKit
 		
 		switch _status
 		{
-		case .active: text = "Transferring"
-		case .connecting: text = "Establishing Connection"
-		case .disconnected: text = "Not Connected"
-		case .offline: text = "No Internet Connection"
-		case .unauthorized: text = "Access Denied"
-		case .upToDate: text = "Waiting for Updates"
-		case .done: text = "Transfer Complete"
-		case .failed: text = "Transfer Failed"
+		case .active: text = NSLocalizedString("Transferring", comment: "Online status when data is being transferred between devices")
+		case .connecting: text = NSLocalizedString("Establishing Connection", comment: "Online status while the system is connecting")
+		case .disconnected: text = NSLocalizedString("Off", comment: "Online status when connection is disconnected and there are no attempts of changing it")
+		case .offline: text = NSLocalizedString("No Connection", comment: "Online status when connection is offline")
+		case .unauthorized: text = NSLocalizedString("Access Denied", comment: "Online status when provided credentials don't match the required")
+		case .upToDate: text = NSLocalizedString("Waiting for Updates", comment: "Online status when the connection is up to date")
+		case .done: text = NSLocalizedString("Transfer Complete", comment: "Online status when a single time transaction has been completed")
+		case .failed: text = NSLocalizedString("Transfer Failed", comment: "Online status when a single time transaction failed with an error")
 		}
 		
 		if progressTotal != progressComplete
