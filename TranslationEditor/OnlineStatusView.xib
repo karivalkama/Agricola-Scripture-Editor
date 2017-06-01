@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,36 +27,41 @@
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="zDl-1S-mND">
                             <rect key="frame" x="0.0" y="13" width="37" height="37"/>
                             <constraints>
-                                <constraint firstAttribute="width" priority="750" constant="37" id="Zb2-hk-ylH"/>
-                                <constraint firstAttribute="height" priority="750" constant="37" id="zzI-NY-Ahv"/>
+                                <constraint firstAttribute="width" priority="999" constant="37" id="Zb2-hk-ylH"/>
+                                <constraint firstAttribute="height" priority="999" constant="37" id="zzI-NY-Ahv"/>
                             </constraints>
                             <color key="color" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </activityIndicatorView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zOW-R6-AtH">
-                            <rect key="frame" x="45" y="5.5" width="277" height="52"/>
+                            <rect key="frame" x="45" y="6" width="277" height="51"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2zG-6w-CUX">
-                                    <rect key="frame" x="0.0" y="0.0" width="277" height="42"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="277" height="41"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Online Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIf-1Q-NKZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="277" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" priority="750" constant="21" id="ijq-yD-rNA"/>
-                                            </constraints>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Online Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIf-1Q-NKZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="277" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <attributedString key="userComments">
+                                                <fragment content="Online status title label">
+                                                    <attributes>
+                                                        <font key="NSFont" metaFont="smallSystem"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not connected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDP-cm-UQy">
-                                            <rect key="frame" x="0.0" y="21" width="277" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="900" text="Not connected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDP-cm-UQy">
+                                            <rect key="frame" x="0.0" y="20.5" width="277" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </stackView>
-                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="x7I-8l-G7R">
-                                    <rect key="frame" x="0.0" y="50" width="277" height="2"/>
+                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="800" verticalCompressionResistancePriority="900" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="x7I-8l-G7R">
+                                    <rect key="frame" x="0.0" y="49" width="277" height="2"/>
                                     <color key="progressTintColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </progressView>
                             </subviews>
@@ -67,7 +72,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="pHZ-1D-Z2l" secondAttribute="trailing" id="25D-9T-dC9"/>
                 <constraint firstItem="pHZ-1D-Z2l" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="J40-nR-Lkh"/>
-                <constraint firstAttribute="bottom" secondItem="pHZ-1D-Z2l" secondAttribute="bottom" priority="750" id="nCT-yy-PgJ"/>
+                <constraint firstAttribute="bottom" secondItem="pHZ-1D-Z2l" secondAttribute="bottom" priority="999" id="nCT-yy-PgJ"/>
                 <constraint firstItem="pHZ-1D-Z2l" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nJw-37-iqZ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

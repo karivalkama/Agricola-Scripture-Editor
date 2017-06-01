@@ -65,6 +65,14 @@
                                                 <state key="normal" title="Close">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
+                                                <attributedString key="userComments">
+                                                    <fragment content="Close connection dialog -button">
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="smallSystem"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
                                                 <connections>
                                                     <action selector="closeButtonPressed:" destination="Qhh-ZC-jdN" eventType="touchUpInside" id="p6Z-3O-ShU"/>
                                                 </connections>
