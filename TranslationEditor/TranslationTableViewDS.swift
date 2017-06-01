@@ -107,6 +107,16 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		return "Chapter \(section + 1)"
 	}
 	
+	func sectionIndexTitles(for tableView: UITableView) -> [String]?
+	{
+		return Array(currentData.keys).sorted().map { "\($0)" }
+	}
+	
+	func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int
+	{
+		return Int(title)! - 1
+	}
+	
 	
 	// OTHER METHODS	----------
 	
