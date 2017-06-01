@@ -20,11 +20,12 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	
 	private weak var tableView: UITableView!
 	
-	// Path id -> Current Data index
-	private var pathIndex = [String : Int]()
+	// Path id -> Chapter index + index in current data array
+	private var pathIndex = [String : (chapterIndex: Int, index: Int)]()
 	private var queryManager: LiveQueryManager<QueryTarget>
 	
-	private(set) var currentData = [Paragraph]()
+	// Chapter index -> Paragraphs per chapter
+	private var currentData = [Int: [Paragraph]]()
 	
 	// Content listener is informed whenever the table contents have been updated
 	private var _contentListeners = [Weak<TranslationParagraphListener>]()
@@ -51,6 +52,8 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		let query = ParagraphView.instance.latestParagraphQuery(bookId: bookId)
 		self.queryManager = query.liveQueryManager
 		
+		tableView.register(UINib(nibName: "ChapterHeaderCell", bundle: nil), forCellReuseIdentifier: ChapterHeaderCell.identifier)
+		
 		super.init()
 		
 		self.queryManager.addListener(AnyLiveQueryListener(self))
@@ -62,48 +65,46 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	func rowsUpdated(rows: [Row<ParagraphView>])
 	{
 		// Updates paragraph data
-		currentData = rows.flatMap { try? $0.object() }
+		let paragraphs = rows.flatMap { try? $0.object() }
+		
+		currentData = paragraphs.toArrayDictionary { ($0.chapterIndex, $0) }
 		
 		// Updates the path index too
 		pathIndex = [:]
-		for i in 0 ..< currentData.count
+		for (chapterIndex, paragraphs) in currentData
 		{
-			pathIndex[currentData[i].pathId] = i
+			for i in 0 ..< paragraphs.count
+			{
+				pathIndex[paragraphs[i].pathId] = (chapterIndex: chapterIndex, index: i)
+			}
 		}
 		
 		prepareUpdate?()
 		tableView.reloadData()
 		
-		contentListeners.forEach { $0.translationParagraphsUpdated(currentData) }
+		contentListeners.forEach { $0.translationParagraphsUpdated(paragraphs) }
+	}
+	
+	func numberOfSections(in tableView: UITableView) -> Int
+	{
+		return currentData.keys.max() ?? 0
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		return currentData.count
+		return currentData[section + 1]?.count ?? 0
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
 		// Updates cell content (either from current data or from current input status)
-		let paragraph = currentData[indexPath.row]
+		let paragraph = currentData[indexPath.section + 1]![indexPath.row]
 		return configureCell(tableView, indexPath, paragraph)
-		
-		/*
-		var stringContents: NSAttributedString!
-		if let input = cellManager?.overrideContentForParagraph(paragraph)
-		{
-			stringContents = input
-			print("STATUS: Presenting input data")
-		}
-		else
-		{
-			stringContents = paragraph.toAttributedString(options: [Paragraph.optionDisplayParagraphRange : false])
-		}
-		
-		cell.setContent(stringContents, withId: paragraph.pathId)
-		cellManager?.cellUpdated(cell, paragraph: paragraph)
-		return cell
-		*/
+	}
+	
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+	{
+		return "Chapter \(section + 1)"
 	}
 	
 	
@@ -126,9 +127,9 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	
 	func paragraphForPath(_ pathId: String) -> Paragraph?
 	{
-		if let index = pathIndex[pathId]
+		if let (chapterIndex, index) = pathIndex[pathId]
 		{
-			return currentData[index]
+			return currentData[chapterIndex]![index]
 		}
 		else
 		{
@@ -138,9 +139,9 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	
 	func indexForPath(_ pathId: String) -> IndexPath?
 	{
-		if let index = pathIndex[pathId]
+		if let (chapterIndex, index) = pathIndex[pathId]
 		{
-			return IndexPath(row: index, section: 0)
+			return IndexPath(row: index, section: chapterIndex - 1)
 		}
 		else
 		{
@@ -148,16 +149,21 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		}
 	}
 	
-	// Finds the paragraph displayed at certain index path (row)
+	// Finds the paragraph displayed at certain index path
 	func paragraphAtIndex(_ index: IndexPath) -> Paragraph?
 	{
-		if index.row < 0 || index.row >= currentData.count
+		guard let chapterParagraphs = currentData[index.section + 1] else
+		{
+			return nil
+		}
+		
+		if index.row < 0 || index.row >= chapterParagraphs.count
 		{
 			return nil
 		}
 		else
 		{
-			return currentData[index.row]
+			return chapterParagraphs[index.row]
 		}
 	}
 }

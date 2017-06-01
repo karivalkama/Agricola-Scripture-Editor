@@ -376,7 +376,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	private func cellHeight(side: Side, index: IndexPath) -> CGFloat
 	{
-		return cellHeights[currentHeightIds[side]!]![index].or(defaultCellHeight)
+		return cellHeights[currentHeightIds[side]!]![index] ?? defaultCellHeight
 	}
 	
 	private func matchIndex(of indexes: [IndexPath], onSide side: Side, atPosition position: MatchPosition) -> IndexPath?

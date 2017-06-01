@@ -14,8 +14,9 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 {
 	// ATTRIBUTES	---------
 	
-	// Attributed string conversion option that defines whether paragraph ranges are displayed at paragraph starts. Default true
+	// Attributed string conversion option that defines whether paragraph ranges are displayed at paragraph starts. Default false
 	static let optionDisplayParagraphRange = "displayParagraphRange"
+	static let optionDisplayChapterMarker = "displayChapterMarker"
 	
 	static let PROPERTY_BOOK_ID = "bookid"
 	static let PROPERTY_CHAPTER_INDEX = "chapter_index"
@@ -263,16 +264,13 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 		return Paragraph(bookId: bookId, chapterIndex: chapterIndex, sectionIndex: sectionIndex, index: index, content: content.map { $0.emptyCopy() }, creatorId: creatorId)
 	}
 	
-	// Display paragraph range option available
+	// Display paragraph range option available (default = false)
 	func toAttributedString(options: [String : Any]) -> NSAttributedString
 	{
 		let str = NSMutableAttributedString()
 		
-		var displayParagraphRange = true
-		if let displayRangeOption = options[Paragraph.optionDisplayParagraphRange] as? Bool
-		{
-			displayParagraphRange = displayRangeOption
-		}
+		let displayParagraphRange = options[Paragraph.optionDisplayParagraphRange] as? Bool ?? false
+		let displayChapterMarker = options[Paragraph.optionDisplayChapterMarker] as? Bool ?? false
 		
 		for para in content
 		{
@@ -283,7 +281,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 			// At this point the paragraph range is used to mark the start. Replace with a better solution when possible
 			if str.length == 0
 			{
-				if isFirstInChapter
+				if isFirstInChapter && displayChapterMarker
 				{
 					paraIdentifier = "\(chapterIndex). "
 				}

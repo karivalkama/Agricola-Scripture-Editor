@@ -225,6 +225,8 @@
 		7CDBD6FA1E2F65E900912320 /* ResourceCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6F91E2F65E900912320 /* ResourceCollectionView.swift */; };
 		7CDBD6FE1E2F7C1700912320 /* ParagraphNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6FD1E2F7C1700912320 /* ParagraphNotesView.swift */; };
 		7CE062621EDEDCD500A998E4 /* AutoLoginAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE062611EDEDCD500A998E4 /* AutoLoginAlertVC.swift */; };
+		7CE062641EDFFE4C00A998E4 /* ChapterHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */; };
+		7CE062661EDFFF7B00A998E4 /* ChapterHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE062651EDFFF7B00A998E4 /* ChapterHeaderCell.swift */; };
 		7CE0E2C01EC5CD97008D7A6E /* KeyboardReactiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0E2BF1EC5CD97008D7A6E /* KeyboardReactiveView.swift */; };
 		89DB5B1F0997FCC7DC1FE193 /* Pods_TranslationEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A629A8BBB661036AD32A63 /* Pods_TranslationEditor.framework */; };
 		E34ED533901B5B0626CD192D /* Pods_TranslationEditorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D52CD448467628FBD04BFD /* Pods_TranslationEditorTests.framework */; };
@@ -474,6 +476,8 @@
 		7CDBD6F91E2F65E900912320 /* ResourceCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceCollectionView.swift; sourceTree = "<group>"; };
 		7CDBD6FD1E2F7C1700912320 /* ParagraphNotesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphNotesView.swift; sourceTree = "<group>"; };
 		7CE062611EDEDCD500A998E4 /* AutoLoginAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLoginAlertVC.swift; sourceTree = "<group>"; };
+		7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChapterHeaderCell.xib; sourceTree = "<group>"; };
+		7CE062651EDFFF7B00A998E4 /* ChapterHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterHeaderCell.swift; sourceTree = "<group>"; };
 		7CE0E2BF1EC5CD97008D7A6E /* KeyboardReactiveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardReactiveView.swift; sourceTree = "<group>"; };
 		C1D52CD448467628FBD04BFD /* Pods_TranslationEditorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2CCD571AB68ECBDE6770270 /* Pods_TranslationEditorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -855,6 +859,7 @@
 				7C8F4B001EC1E13F00F9B25F /* BookProgressUIView.swift */,
 				7CB5B29D1ECC7D0B0066446F /* ConnectionUIView.swift */,
 				7CB5B2A61ECEBEB30066446F /* TopBarUIView.swift */,
+				7CE062651EDFFF7B00A998E4 /* ChapterHeaderCell.swift */,
 			);
 			name = XibViews;
 			sourceTree = "<group>";
@@ -953,6 +958,7 @@
 				7C8F4AFE1EC1D75400F9B25F /* BookProgressUIView.xib */,
 				7CB5B29B1ECC43A10066446F /* Connect.xib */,
 				7CB5B2A41ECDB9F70066446F /* TopBar.xib */,
+				7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -1160,6 +1166,7 @@
 				7C18A1961D8BBEBD00DD1B03 /* Assets.xcassets in Resources */,
 				7C9BB7E31E8536AA0010DE5C /* MainMenu.storyboard in Resources */,
 				7C6070561E5C601D007718BC /* Login.storyboard in Resources */,
+				7CE062641EDFFE4C00A998E4 /* ChapterHeaderCell.xib in Resources */,
 				7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */,
 				7CD8EA5F1DB61A3C00364B70 /* MAT.usx in Resources */,
 				7C9BB7E51E8538730010DE5C /* TopUserDisplay.xib in Resources */,
@@ -1403,6 +1410,7 @@
 				7CD9ACF31E0914470032A7F8 /* DatabaseExtension.swift in Sources */,
 				7CDBD6D11E28E53500912320 /* ScrollSyncManager.swift in Sources */,
 				7C4A4FCC1DFACC58009F890E /* Copyable.swift in Sources */,
+				7CE062661EDFFF7B00A998E4 /* ChapterHeaderCell.swift in Sources */,
 				7C2518111E8E39F50089E1FD /* StackDismissable.swift in Sources */,
 				7C9496141EAE1CCE0063EA83 /* ParaContent.swift in Sources */,
 				7C4A4FDC1DFAE273009F890E /* Theme.swift in Sources */,
