@@ -28,7 +28,7 @@ class VersionCell: UICollectionViewCell
 	
 	func configure(author: String, created: Date, content: Paragraph)
 	{
-		authorLabel.text = "\(author) wrote"
+		authorLabel.text = "\(author) \(NSLocalizedString("wrote", comment: "Part of conflict version description. Preceeded by author name"))"
 		
 		let formatter = DateFormatter()
 		formatter.dateStyle = .medium

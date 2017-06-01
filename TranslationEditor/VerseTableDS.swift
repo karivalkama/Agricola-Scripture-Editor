@@ -14,10 +14,20 @@ class VerseTableDS: NSObject, UITableViewDataSource
 	// ATTRIBUTES	---------------------
 	
 	// Language / section name -> Paragraph
-	private let data: [(String, Paragraph)]
+	private let data: [(title: String, paragraph: Paragraph)]
+	private var filteredData: [(title: String, paragraph: Paragraph)]
 	
 	// The specific verse index the context is limited to
+	private var _targetVerseIndex: VerseIndex?
 	var targetVerseIndex: VerseIndex?
+	{
+		get { return _targetVerseIndex }
+		set
+		{
+			_targetVerseIndex = newValue
+			filterData()
+		}
+	}
 	
 	
 	// INIT	-----------------------------
@@ -55,6 +65,7 @@ class VerseTableDS: NSObject, UITableViewDataSource
 		
 		// Also includes other data
 		self.data = data + resourceData
+		self.filteredData = self.data
 	}
 	
 	
@@ -62,8 +73,7 @@ class VerseTableDS: NSObject, UITableViewDataSource
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		// print("STATUS: Displays \(data.count) different versions for paragraph")
-		return data.count
+		return filteredData.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -71,26 +81,41 @@ class VerseTableDS: NSObject, UITableViewDataSource
 		// Finds a reusable cell first
 		let cell = tableView.dequeueReusableCell(withIdentifier: VerseCell.identifier, for: indexPath) as! VerseCell
 		
-		// Configures the cell with correct data
-		let title = data[indexPath.row].0
+		let data = filteredData[indexPath.row]
+		cell.configure(title: data.title, paragraph: data.paragraph)
 		
-		// If a specific range is specified, limits the content to that range
+		return cell
+	}
+	
+	
+	// OTHER METHODS	--------------
+	
+	func filterData()
+	{
 		if let targetVerseIndex = targetVerseIndex
 		{
-			let paragraph = data[indexPath.row].1.copy()
-			for para in paragraph.content
+			filteredData = data.flatMap
 			{
-				para.verses = para.verses.filter { $0.range.contains(index: targetVerseIndex) }
+				let paragraph = $0.paragraph.copy()
+				for para in paragraph.content
+				{
+					para.verses = para.verses.filter { $0.range.contains(index: targetVerseIndex) }
+				}
+				paragraph.content = paragraph.content.filter { !$0.verses.isEmpty }
+
+				if paragraph.content.isEmpty
+				{
+					return nil
+				}
+				else
+				{
+					return ($0.title, paragraph)
+				}
 			}
-			paragraph.content = paragraph.content.filter { !$0.verses.isEmpty }
-			
-			cell.configure(title: title, paragraph: paragraph)
 		}
 		else
 		{
-			cell.configure(title: title, paragraph: data[indexPath.row].1)
+			filteredData = data
 		}
-		
-		return cell
 	}
 }

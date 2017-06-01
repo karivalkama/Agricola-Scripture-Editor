@@ -11,6 +11,7 @@ import AVFoundation
 import QRCodeReader
 
 // This view displays option to join P2P connection with other users
+@available(*, deprecated)
 @IBDesignable class P2PJoinView: CustomXibView, QRCodeReaderViewControllerDelegate, ConnectionListener
 {
 	// OUTLETS	----------------

@@ -225,7 +225,7 @@ import MessageUI
 			let mailVC = MFMailComposeViewController()
 			mailVC.mailComposeDelegate = self
 			mailVC.addAttachmentData(data, mimeType: "application/xml", fileName: "\(book.code.code).usx")
-			mailVC.setSubject("\(book.code.name) - \(book.identifier) USX Export")
+			mailVC.setSubject("\(book.code.name) - \(book.identifier) \(NSLocalizedString("USX Export", comment: "Part of the default export email subject"))")
 			
 			sendEmailButton.isEnabled = true
 			bookSelectionView.isHidden = true
@@ -328,8 +328,8 @@ import MessageUI
 					{
 						infoFound = true
 						hostImageView.image = hostInfo.image ?? #imageLiteral(resourceName: "userIcon")
-						hostNameLabel.text = "Joined \(hostAvatar.name)"
-						hostProjectLabel.text = "on project: \(project.name)"
+						hostNameLabel.text = "\(NSLocalizedString("Joined", comment: "Part of host info desciption. Followed by host user name.")) \(hostAvatar.name)"
+						hostProjectLabel.text = "\(NSLocalizedString("on project:", comment: "Part of host info description. Followed by project name")) \(project.name)"
 						
 						// Makes sure the current user also has access to the project
 						/*

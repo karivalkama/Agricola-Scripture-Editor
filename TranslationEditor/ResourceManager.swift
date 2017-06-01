@@ -290,18 +290,18 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 			{
 				let sourcePathIds = bookData.binding.sourcesForTarget(pathId)
 				
-				if !sourcePathIds.isEmpty, let languageName = try Language.get(bookData.resource.languageId)?.name
+				if !sourcePathIds.isEmpty//, let languageName = try Language.get(bookData.resource.languageId)?.name
 				{
 					for i in 0 ..< sourcePathIds.count
 					{
 						if let paragraphId = try ParagraphHistoryView.instance.mostRecentId(bookId: bookData.binding.sourceBookId, chapterIndex: chapterIndex, pathId: sourcePathIds[i]), let paragraph = try Paragraph.get(paragraphId)
 						{
-							let title = languageName + (sourcePathIds.count == 1 ? ":" : " (\(i + 1)):")
+							let title = bookData.resource.name + (sourcePathIds.count == 1 ? ":" : " (\(i + 1)):")
 							data.append((title, paragraph))
 						}
 						else
 						{
-							print("ERROR: Failed to find the latest version of associated paragraph in \(languageName) with path: \(sourcePathIds[i])")
+							print("ERROR: Failed to find the latest version of associated paragraph in \(bookData.resource.name) with path: \(sourcePathIds[i])")
 						}
 					}
 				}
