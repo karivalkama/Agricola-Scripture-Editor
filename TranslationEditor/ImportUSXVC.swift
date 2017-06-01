@@ -387,11 +387,13 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		insertSwitch.isEnabled = !lock
 	}
 	
+	// Localization added automatically
 	private func displayError(heading: String, message: String)
 	{
 		displayAlert(withIdentifier: "ErrorAlert", storyBoardId: "MainMenu")
 		{
-			($0 as! ErrorAlertVC).configure(heading: heading, text: message) { self.dismiss(animated: true, completion: nil) }
+			// TODO: Add message localization. Problem: The message may be / is an interpolated string
+			($0 as! ErrorAlertVC).configure(heading: NSLocalizedString(heading, comment: "An error heading"), text: message) { self.dismiss(animated: true, completion: nil) }
 		}
 	}
 	

@@ -97,12 +97,13 @@ import UIKit
 	
 	// OTHER METHODS	--------------
 	
+	// Localisation added automatically
 	func configure(hostVC: UIViewController, title: String, leftButtonText: String? = nil, leftButtonAction: (() -> ())? = nil)
 	{
 		viewController = hostVC
-		titleLabel.text = title
+		titleLabel.text = NSLocalizedString(title, comment: "A title shown in the top bar")
 		
-		if let leftButtonText = leftButtonText
+		if let leftButtonText = leftButtonText.map({ NSLocalizedString($0, comment: "A button text in the top bar") })
 		{
 			leftSideButton.setTitle(leftButtonText, for: .normal)
 			leftSideButton.isHidden = false

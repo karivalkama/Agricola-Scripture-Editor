@@ -113,14 +113,14 @@ class EditAvatarVC: UIViewController
 		// Checks that all necessary fields are filled
 		guard createAvatarView.allFieldsFilled else
 		{
-			errorLabel.text = "Please fill in the required fields"
+			errorLabel.text = NSLocalizedString("Please fill in the required fields", comment: "An error message displayed when trying to create new avatar without first filling all required fields")
 			return
 		}
 		
 		// Makes sure the passwords match
 		guard createAvatarView.passwordsMatch else
 		{
-			errorLabel.text = "The passwords don't match!"
+			errorLabel.text = NSLocalizedString("The passwords don't match!", comment: "An error message displayed when new avatar password is not repeated correctly")
 			return
 		}
 		
