@@ -227,6 +227,8 @@
 		7CE062621EDEDCD500A998E4 /* AutoLoginAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE062611EDEDCD500A998E4 /* AutoLoginAlertVC.swift */; };
 		7CE062641EDFFE4C00A998E4 /* ChapterHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */; };
 		7CE062661EDFFF7B00A998E4 /* ChapterHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE062651EDFFF7B00A998E4 /* ChapterHeaderCell.swift */; };
+		7CE062681EE132F400A998E4 /* SelectResourcesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE062671EE132F400A998E4 /* SelectResourcesVC.swift */; };
+		7CE0626A1EE135A900A998E4 /* ResourceSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE062691EE135A900A998E4 /* ResourceSelectionCell.swift */; };
 		7CE0E2C01EC5CD97008D7A6E /* KeyboardReactiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0E2BF1EC5CD97008D7A6E /* KeyboardReactiveView.swift */; };
 		89DB5B1F0997FCC7DC1FE193 /* Pods_TranslationEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A629A8BBB661036AD32A63 /* Pods_TranslationEditor.framework */; };
 		E34ED533901B5B0626CD192D /* Pods_TranslationEditorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D52CD448467628FBD04BFD /* Pods_TranslationEditorTests.framework */; };
@@ -478,6 +480,8 @@
 		7CE062611EDEDCD500A998E4 /* AutoLoginAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLoginAlertVC.swift; sourceTree = "<group>"; };
 		7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChapterHeaderCell.xib; sourceTree = "<group>"; };
 		7CE062651EDFFF7B00A998E4 /* ChapterHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterHeaderCell.swift; sourceTree = "<group>"; };
+		7CE062671EE132F400A998E4 /* SelectResourcesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectResourcesVC.swift; sourceTree = "<group>"; };
+		7CE062691EE135A900A998E4 /* ResourceSelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceSelectionCell.swift; sourceTree = "<group>"; };
 		7CE0E2BF1EC5CD97008D7A6E /* KeyboardReactiveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardReactiveView.swift; sourceTree = "<group>"; };
 		C1D52CD448467628FBD04BFD /* Pods_TranslationEditorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2CCD571AB68ECBDE6770270 /* Pods_TranslationEditorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -819,6 +823,7 @@
 				7CA1BAB31E31F09200611FED /* PostCell.swift */,
 				7C6070481E52ECBA007718BC /* VerseCell.swift */,
 				7C936C0C1E9B751300AC06BF /* VersionCell.swift */,
+				7CE062691EE135A900A998E4 /* ResourceSelectionCell.swift */,
 			);
 			name = Translation;
 			sourceTree = "<group>";
@@ -1028,6 +1033,7 @@
 				7C936C101E9DF6AF00AC06BF /* TranslationCellAction.swift */,
 				7C936C121E9DF87700AC06BF /* TranslationCellDelegate.swift */,
 				7C8F4B061EC4916900F9B25F /* ResourceUpdateListener.swift */,
+				7CE062671EE132F400A998E4 /* SelectResourcesVC.swift */,
 			);
 			name = TranslationView;
 			sourceTree = "<group>";
@@ -1341,6 +1347,7 @@
 			files = (
 				7C4A4FB61DF96730009F890E /* ParagraphEditView.swift in Sources */,
 				7CAF6D821DB4F47700E10597 /* USXChapterProcessor.swift in Sources */,
+				7CE0626A1EE135A900A998E4 /* ResourceSelectionCell.swift in Sources */,
 				7C936C191E9F4D3C00AC06BF /* FilteredSelectionDataSource.swift in Sources */,
 				7C20D7E81D8BF9B100E84BA5 /* Para.swift in Sources */,
 				7C8F4B031EC1F08C00F9B25F /* ImportBookVC.swift in Sources */,
@@ -1389,6 +1396,7 @@
 				7CCC01281DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */,
 				7C532A5D1EA740F9002A7F7C /* USXImportStack.swift in Sources */,
 				7CCC01401DA7D12800F0562E /* USXParaProcessor.swift in Sources */,
+				7CE062681EE132F400A998E4 /* SelectResourcesVC.swift in Sources */,
 				7CDBD6C01E28AE0300912320 /* TranslationCell.swift in Sources */,
 				7C6070471E51B113007718BC /* TableCellSelectionListener.swift in Sources */,
 				7C0130BF1E3F25920053C5C2 /* Phase.swift in Sources */,

@@ -75,12 +75,12 @@ class LoginVC: UIViewController
 		// Makes sure the username and password have been provided first
 		guard let userName = userNameField.text, !userName.isEmpty else
 		{
-			errorLabel.text = "Please provide a username"
+			errorLabel.text = NSLocalizedString("Please provide an account name", comment: "An error message shown when username / account name is missing in login")
 			return
 		}
 		guard let password = passwordField.text, !password.isEmpty else
 		{
-			errorLabel.text = "Please provide a password"
+			errorLabel.text = NSLocalizedString("Please provide a password", comment: "An error message shown when password is missing in login")
 			return
 		}
 		
@@ -90,14 +90,14 @@ class LoginVC: UIViewController
 			// TODO: Handle cases where there are multiple accounts with the same name
 			guard let account = try AccountView.instance.accountQuery(name: userName).firstResultObject() else
 			{
-				errorLabel.text = "Invalid username"
+				errorLabel.text = NSLocalizedString("Invalid account name", comment: "An error message shown when trying to login with non-existing account")
 				return
 			}
 			
 			// Checks that the passwords match
 			guard account.authorize(password: password) else
 			{
-				errorLabel.text = "Invalid password"
+				errorLabel.text = NSLocalizedString("Invalid password", comment: "An error message shown when user provides an invalid password in login")
 				return
 			}
 			
@@ -134,7 +134,7 @@ class LoginVC: UIViewController
 		catch
 		{
 			print("ERROR: Login failed. \(error)")
-			errorLabel.text = "Internal error occurred!"
+			errorLabel.text = NSLocalizedString("Internal error occurred!", comment: "An error message shown when login fails due to an internal error")
 		}
 		
 		/*

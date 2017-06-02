@@ -12,49 +12,45 @@ final class Carousel: Storable
 {
 	// ATTRIBUTES	--------------
 	
-	static let PROPERTY_PROJECT = "project"
+	static let PROPERTY_AVATAR = "avatar"
+	static let PROPERTY_BOOK_CODE = "book_code"
 	
 	static let type = "carousel"
-	//static let idIndexMap = ["carousel_uid": IdIndex(0)]
 	
-	let uid: String
-	let projectId: String
-	let isTemplate: Bool
-	let ownerId: String
+	let avatarId: String
+	let bookCode: BookCode
 	
-	var sourceBookIds: [String]
-	var resourceIds: [String]
+	private(set) var resourceIds: [String]
+	private(set) var updated: TimeInterval
 	
 	
 	// COMPUTED PROPERTIES	-----
 	
 	static var idIndexMap: IdIndexMap
 	{
-		return Project.idIndexMap.makeChildPath(parentPathName: PROPERTY_PROJECT, childPath: ["carousel_separator", "carousel_uid"])
+		return Avatar.idIndexMap.makeChildPath(parentPathName: PROPERTY_AVATAR, childPath: ["carousel_separator", PROPERTY_BOOK_CODE])
 	}
 	
-	var idProperties: [Any] { return [projectId, "carousel", uid] }
+	var idProperties: [Any] { return [avatarId, "carousel", bookCode.code.lowercased()] }
 	var properties: [String : PropertyValue]
 	{
-		return ["template": isTemplate.value, "owner": ownerId.value, "source_books": sourceBookIds.value, "resources": resourceIds.value]
+		return ["resources": resourceIds.value, "updated": updated.value]
 	}
 	
 	
 	// INIT	---------------------
 	
-	init(projectId: String, sourceBookIds: [String], resourceIds: [String], ownerId: String, isTemplate: Bool, uid: String = UUID().uuidString.lowercased())
+	init(avatarId: String, bookCode: BookCode, resourceIds: [String], updated: TimeInterval = Date().timeIntervalSince1970)
 	{
-		self.projectId = projectId
-		self.sourceBookIds = sourceBookIds
+		self.bookCode = bookCode
 		self.resourceIds = resourceIds
-		self.ownerId = ownerId
-		self.isTemplate = isTemplate
-		self.uid = uid
+		self.avatarId = avatarId
+		self.updated = updated
 	}
 	
 	static func create(from properties: PropertySet, withId id: Id) -> Carousel
 	{
-		return Carousel(projectId: id[PROPERTY_PROJECT].string(), sourceBookIds: properties["source_books"].array { $0.string }, resourceIds: properties["resources"].array { $0.string }, ownerId: properties["owner"].string(), isTemplate: properties["template"].bool(), uid: id["carousel_uid"].string())
+		return Carousel(avatarId: id[PROPERTY_AVATAR].string(), bookCode: BookCode.of(code: id[PROPERTY_BOOK_CODE].string()), resourceIds: properties["resources"].array { $0.string }, updated: properties["updated"].time())
 	}
 	
 	
@@ -62,13 +58,13 @@ final class Carousel: Storable
 	
 	func update(with properties: PropertySet)
 	{
-		if let sourceBookData = properties["source_books"].array
-		{
-			self.sourceBookIds = sourceBookData.flatMap { $0.string }
-		}
 		if let resourceData = properties["resources"].array
 		{
 			self.resourceIds = resourceData.flatMap { $0.string }
+		}
+		if let updated = properties["updated"].double
+		{
+			self.updated = updated
 		}
 	}
 }

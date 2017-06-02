@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Select ResourcesVC-->
         <scene sceneID="oqR-Km-A6W">
             <objects>
-                <viewController storyboardIdentifier="SelectResourcesVC" id="FdE-mq-a6s" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectResourcesVC" id="FdE-mq-a6s" customClass="SelectResourcesVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Tu-EW-GjE"/>
                         <viewControllerLayoutGuide type="bottom" id="kFb-x9-381"/>
@@ -27,6 +27,9 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9G-5U-yNA">
                                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                        <connections>
+                                            <action selector="backgroundTapped:" destination="FdE-mq-a6s" eventType="touchUpInside" id="MrP-g6-U7H"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
@@ -70,7 +73,7 @@
                                                 <rect key="frame" x="0.0" y="28.5" width="448" height="476"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ResourceCell" id="nVd-df-hzC">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ResourceCell" id="nVd-df-hzC" customClass="ResourceSelectionCell" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="448" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nVd-df-hzC" id="tMB-cq-cXJ">
@@ -96,6 +99,9 @@
                                                                             <rect key="frame" x="399" y="0.0" width="51" height="27.5"/>
                                                                             <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <color key="onTintColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <connections>
+                                                                                <action selector="resourceStateChanged:" destination="nVd-df-hzC" eventType="valueChanged" id="9cH-P9-AFv"/>
+                                                                            </connections>
                                                                         </switch>
                                                                     </subviews>
                                                                 </stackView>
@@ -107,6 +113,11 @@
                                                                 <constraint firstAttribute="trailing" secondItem="BLh-dq-aWV" secondAttribute="trailing" id="xha-9A-000"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="resourceLanguageLabel" destination="SMb-y4-mUj" id="GQB-gp-Dmf"/>
+                                                            <outlet property="resourceNameLabel" destination="UXl-eu-CQS" id="nh2-6n-Hqn"/>
+                                                            <outlet property="resourceStateSwitch" destination="3ua-lu-YVF" id="kwB-Ph-QFP"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
@@ -126,6 +137,9 @@
                                                 <state key="normal" title="Close">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="closeButtonPressed:" destination="FdE-mq-a6s" eventType="touchUpInside" id="942-Ly-6d0"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -153,6 +167,9 @@
                             <constraint firstAttribute="trailing" secondItem="nvY-U8-l9I" secondAttribute="trailing" id="vdp-fB-VbS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="resourceTableView" destination="vg1-r1-eUY" id="OW9-Yr-abG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMr-aL-ZVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
