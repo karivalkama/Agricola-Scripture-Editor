@@ -342,6 +342,11 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	
 	// IB ACTIONS	-----------------
 	
+	@IBAction func resourceEditPressed(_ sender: Any)
+	{
+		displayAlert(withIdentifier: SelectResourcesVC.identifier, storyBoardId: "Main")
+	}
+	
 	@IBAction func commitPressed(_ sender: Any)
 	{
 		// Makes a new commit

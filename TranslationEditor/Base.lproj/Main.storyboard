@@ -193,26 +193,43 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="apn-1P-Iz2" userLabel="Resource Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="488" height="688"/>
                                         <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ree-vj-F6F">
-                                                <rect key="frame" x="0.0" y="0.0" width="488" height="33"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="32" id="AHj-DG-JMh"/>
-                                                </constraints>
-                                                <segments>
-                                                    <segment title="English - Good News"/>
-                                                    <segment title="Notes"/>
-                                                </segments>
-                                                <color key="tintColor" red="0.92156862745098034" green="0.33725490196078434" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="4"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="resouceSegmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="o4y-Ko-hoR"/>
-                                                </connections>
-                                            </segmentedControl>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ogd-fn-3eV">
+                                                <rect key="frame" x="0.0" y="0.0" width="488" height="32"/>
+                                                <subviews>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ree-vj-F6F">
+                                                        <rect key="frame" x="0.0" y="0.0" width="442" height="33"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="32" id="AHj-DG-JMh"/>
+                                                        </constraints>
+                                                        <segments>
+                                                            <segment title="English - Good News"/>
+                                                            <segment title="Notes"/>
+                                                        </segments>
+                                                        <color key="tintColor" red="0.92156862745098034" green="0.33725490196078434" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="4"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="resouceSegmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="o4y-Ko-hoR"/>
+                                                        </connections>
+                                                    </segmentedControl>
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbA-yd-hUR" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                        <rect key="frame" x="450" y="0.0" width="38" height="32"/>
+                                                        <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                                        <state key="normal" title="Edit">
+                                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="resourceEditPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m51-SM-KLT"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2EI-Mh-Uso">
                                                 <rect key="frame" x="0.0" y="48" width="488" height="640"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

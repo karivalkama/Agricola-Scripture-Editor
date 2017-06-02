@@ -67,4 +67,26 @@ final class Carousel: Storable
 			self.updated = updated
 		}
 	}
+	
+	
+	// OTHER METHODS	-------
+	
+	// Saves new resource state to the database
+	func pushResources(_ resourceIds: [String]) throws
+	{
+		self.resourceIds = resourceIds
+		self.updated = Date().timeIntervalSince1970
+		
+		try push()
+	}
+	
+	static func push(avatarId: String, bookCode: BookCode, resourceIds: [String]) throws
+	{
+		try Carousel(avatarId: avatarId, bookCode: bookCode, resourceIds: resourceIds).push()
+	}
+	
+	static func get(avatarId: String, bookCode: BookCode) throws -> Carousel?
+	{
+		return try get(parseId(from: [avatarId, "carousel", bookCode.code.lowercased()]))
+	}
 }

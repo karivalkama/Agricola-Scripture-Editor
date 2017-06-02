@@ -33,6 +33,27 @@ extension Array
 		}
 	}
 	
+	// Allows manipulation of elements when index must be searched
+	subscript(where condition: (Element) -> Bool) -> Element?
+	{
+		get { return first(where: condition) }
+		set
+		{
+			if let index = index(where: condition)
+			{
+				// Either switches or removes the matching element
+				if let newValue = newValue
+				{
+					self[index] = newValue
+				}
+				else
+				{
+					remove(at: index)
+				}
+			}
+		}
+	}
+	
 	// Checks that the provided condition is true for all elements in the array
 	// Returns true if the array is empty
 	func forAll(_ condition: (Element) throws -> Bool) rethrows -> Bool
