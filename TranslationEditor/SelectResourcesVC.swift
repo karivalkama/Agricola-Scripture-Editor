@@ -9,7 +9,7 @@
 import UIKit
 
 // This view controller is used for determining, which resources are available to the user at which time
-class SelectResourcesVC: UIViewController, UITableViewDataSource
+class SelectResourcesVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
 	// OUTLETS	---------------------
 	
@@ -22,7 +22,8 @@ class SelectResourcesVC: UIViewController, UITableViewDataSource
 	
 	var completionHandler: (() -> ())?
 	
-	private var resources = [(resource: ResourceCollection, state: Bool)]()
+	private var booksResources = [(resource: ResourceCollection, state: Bool)]()
+	private var notesResources = [(resource: ResourceCollection, state: Bool)]()
 	// Language id -> language name
 	private var languageNames = [String: String]()
 	
@@ -33,6 +34,7 @@ class SelectResourcesVC: UIViewController, UITableViewDataSource
 	{
         super.viewDidLoad()
 
+		resourceTableView.delegate = self
 		resourceTableView.dataSource = self
 		resourceTableView.isEditing = true
     }
@@ -46,13 +48,15 @@ class SelectResourcesVC: UIViewController, UITableViewDataSource
 	override func viewDidDisappear(_ animated: Bool)
 	{
 		super.viewDidDisappear(animated)
-		resources = []
+		booksResources = []
+		notesResources = []
 	}
 	
 	override func didReceiveMemoryWarning()
 	{
 		super.didReceiveMemoryWarning()
-		resources = []
+		booksResources = []
+		notesResources = []
 		languageNames = [:]
 	}
 
@@ -72,16 +76,30 @@ class SelectResourcesVC: UIViewController, UITableViewDataSource
 	
 	// IMPLEMENTED METHODS	--------
 	
+	func numberOfSections(in tableView: UITableView) -> Int
+	{
+		return 2
+	}
+	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		return resources.count
+		if section == 0
+		{
+			return booksResources.count
+		}
+		else
+		{
+			return notesResources.count
+		}
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
 		let cell = tableView.dequeueReusableCell(withIdentifier: ResourceSelectionCell.identifier, for: indexPath) as! ResourceSelectionCell
-		let (resource, state) = resources[indexPath.row]
-		cell.configure(resourceId: resource.idString, resourceName: resource.name, resourceLanguage: languageNames[resource.languageId] ?? "", resourceState: state, onResourceStateChange: resourceStateChanged)
+		let (resource, state) = indexPath.section == 0 ? booksResources[indexPath.row] : notesResources[indexPath.row]
+		cell.configure(resourceName: resource.name, resourceLanguage: languageNames[resource.languageId] ?? "", resourceState: state, onResourceStateChange: resourceStateChanged)
+		
+		cell.showsReorderControl = true
 		
 		return cell
 	}
@@ -93,25 +111,82 @@ class SelectResourcesVC: UIViewController, UITableViewDataSource
 	
 	func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
 	{
-		let movedElement = resources.remove(at: sourceIndexPath.row)
-		resources.insert(movedElement, at: destinationIndexPath.row)
+		if sourceIndexPath.section == 0 && destinationIndexPath.section == 0
+		{
+			let movedElement = booksResources.remove(at: sourceIndexPath.row)
+			booksResources.insert(movedElement, at: destinationIndexPath.row)
+		}
+		else if sourceIndexPath.section == 1 && destinationIndexPath.section == 1
+		{
+			let movedElement = notesResources.remove(at: sourceIndexPath.row)
+			notesResources.insert(movedElement, at: destinationIndexPath.row)
+		}
 		
 		save()
+	}
+	
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+	{
+		if section == 0
+		{
+			return "Books"
+		}
+		else
+		{
+			return "Notes"
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath
+	{
+		if sourceIndexPath.section != proposedDestinationIndexPath.section
+		{
+			var row = 0
+			if sourceIndexPath.section < proposedDestinationIndexPath.section
+			{
+				row = tableView.numberOfRows(inSection: sourceIndexPath.section) - 1
+			}
+			
+			return IndexPath(row: row, section: sourceIndexPath.section)
+		}
+		else
+		{
+			return proposedDestinationIndexPath
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle
+	{
+		return UITableViewCellEditingStyle.none
 	}
 
 	
 	// OTHER METHODS	------------
 	
-	private func resourceStateChanged(resourceId: String, newState: Bool)
+	private func resourceStateChanged(forCell cell: UITableViewCell, newState: Bool)
 	{
-		resources = resources.map { (resource, state) in resource.idString == resourceId ? (resource, newState) : (resource, state) }
+		guard let indexPath = resourceTableView.indexPath(for: cell) else
+		{
+			print("ERROR: Can't find indexpath for cell")
+			return
+		}
+		
+		if indexPath.section == 0
+		{
+			booksResources[indexPath.row] = (booksResources[indexPath.row].resource, newState)
+		}
+		else
+		{
+			notesResources[indexPath.row] = (notesResources[indexPath.row].resource, newState)
+		}
+		
 		save()
 	}
 	
 	private func setup()
 	{
 		// Doesn't need to reload resources if they are already loaded
-		guard resources.isEmpty else
+		guard booksResources.isEmpty && notesResources.isEmpty else
 		{
 			return
 		}
@@ -125,17 +200,21 @@ class SelectResourcesVC: UIViewController, UITableViewDataSource
 		do
 		{
 			let allResources = try ResourceCollectionView.instance.collectionQuery(bookId: bookId).resultObjects()
+			var filteredResources = [(ResourceCollection, Bool)]()
 			
 			// If there's an existing carousel, uses ordering and states from that one
 			if let carousel = try Carousel.get(avatarId: avatarId, bookCode: Book.code(fromId: bookId))
 			{
-				resources = carousel.resourceIds.flatMap { id in allResources.first(where: { $0.idString == id }).map { ($0, true) } } + allResources.filter { !carousel.resourceIds.contains($0.idString) }.map { ($0, false) }
+				filteredResources = carousel.resourceIds.flatMap { id in allResources.first(where: { $0.idString == id }).map { ($0, true) } } + allResources.filter { !carousel.resourceIds.contains($0.idString) }.map { ($0, false) }
 			}
 			else
 			{
 				// Otherwise enables all resources and uses the default order
-				resources = allResources.map { ($0, true) }
+				filteredResources = allResources.map { ($0, true) }
 			}
+			
+			booksResources = filteredResources.filter { $0.0.category == ResourceCategory.sourceTranslation }
+			notesResources = filteredResources.filter { $0.0.category == ResourceCategory.notes }
 			
 			// Reads language names to memory too
 			for resource in allResources
@@ -165,7 +244,7 @@ class SelectResourcesVC: UIViewController, UITableViewDataSource
 		
 		do
 		{
-			try Carousel.push(avatarId: avatarId, bookCode: Book.code(fromId: bookId), resourceIds: resources.flatMap { $0.state ? $0.resource.idString : nil } )
+			try Carousel.push(avatarId: avatarId, bookCode: Book.code(fromId: bookId), resourceIds: (booksResources + notesResources).flatMap { $0.state ? $0.resource.idString : nil } )
 		}
 		catch
 		{

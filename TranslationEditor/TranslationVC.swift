@@ -345,6 +345,9 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	@IBAction func resourceEditPressed(_ sender: Any)
 	{
 		displayAlert(withIdentifier: SelectResourcesVC.identifier, storyBoardId: "Main")
+		{
+			vc in (vc as! SelectResourcesVC).completionHandler = { self.resourceManager.updateCarousel() }
+		}
 	}
 	
 	@IBAction func commitPressed(_ sender: Any)

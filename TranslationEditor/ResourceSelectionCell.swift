@@ -22,23 +22,21 @@ class ResourceSelectionCell: UITableViewCell
 	
 	static let identifier = "ResourceCell"
 	
-	private(set) var resourceId: String!
-	private var onStateChange: ((String, Bool) -> ())!
+	private var onStateChange: ((UITableViewCell, Bool) -> ())!
 	
 	
 	// ACTIONS	------------------
 	
 	@IBAction func resourceStateChanged(_ sender: Any)
 	{
-		onStateChange(resourceId, resourceStateSwitch.isOn)
+		onStateChange(self, resourceStateSwitch.isOn)
 	}
 	
 	
 	// OTHER METHODS	----------
 	
-	func configure(resourceId: String, resourceName: String, resourceLanguage: String, resourceState: Bool, onResourceStateChange: @escaping (String, Bool) -> ())
+	func configure(resourceName: String, resourceLanguage: String, resourceState: Bool, onResourceStateChange: @escaping (UITableViewCell, Bool) -> ())
 	{
-		self.resourceId = resourceId
 		self.onStateChange = onResourceStateChange
 		
 		resourceNameLabel.text = resourceName

@@ -38,8 +38,14 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 	private weak var threadStatusListener: OpenThreadListener?
 	private weak var updateListener: ResourceUpdateListener?
 	
-	private var sourceBooks = [BookResourceData]()
-	private var notes = [NotesData]()
+	private let targetBookId: String
+	
+	private var allSourceBooks = [BookResourceData]()
+	private var allNotes = [NotesData]()
+	private var carousel: Carousel?
+	
+	private var displayedSourceBooks = [BookResourceData]()
+	private var displayedNotes = [NotesData]()
 	
 	private var currentLiveResource: LiveResource?
 	private var currentResourceIndex: Int?
@@ -53,15 +59,15 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 	
 	var resourceTitles: [String]
 	{
-		return sourceBooks.map { $0.resource.name } + notes.map { $0.resource.name }
+		return displayedSourceBooks.map { $0.resource.name } + displayedNotes.map { $0.resource.name }
 	}
 	
 	// Currently selected book data, if one is selected
 	private var currentSourceBookData: BookResourceData?
 	{
-		if let currentResourceIndex = currentResourceIndex, currentResourceIndex < sourceBooks.count
+		if let currentResourceIndex = currentResourceIndex, currentResourceIndex < displayedSourceBooks.count
 		{
-			return sourceBooks[currentResourceIndex]
+			return displayedSourceBooks[currentResourceIndex]
 		}
 		else
 		{
@@ -72,9 +78,9 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 	// Currently selected notes data, if one is selected
 	private var currentNotesData: NotesData?
 	{
-		if let currentResourceIndex = currentResourceIndex, currentResourceIndex >= sourceBooks.count
+		if let currentResourceIndex = currentResourceIndex, currentResourceIndex >= displayedSourceBooks.count
 		{
-			return notes[currentResourceIndex - sourceBooks.count]
+			return displayedNotes[currentResourceIndex - displayedSourceBooks.count]
 		}
 		else
 		{
@@ -87,10 +93,23 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 	
 	init(resourceTableView: UITableView, targetBookId: String, addNotesDelegate: AddNotesDelegate, threadStatusListener: OpenThreadListener?, updateListener: ResourceUpdateListener?)
 	{
+		self.targetBookId = targetBookId
 		self.updateListener = updateListener
 		self.resourceTableView = resourceTableView
 		self.addNotesDelegate = addNotesDelegate
 		self.threadStatusListener = threadStatusListener
+		
+		if let avatarId = Session.instance.avatarId
+		{
+			do
+			{
+				self.carousel = try Carousel.get(avatarId: avatarId, bookCode: Book.code(fromId: targetBookId))
+			}
+			catch
+			{
+				print("ERROR: Failed to read user carousel data. \(error)")
+			}
+		}
 		
 		queryManager = ResourceCollectionView.instance.collectionQuery(bookId: targetBookId).liveQueryManager
 		queryManager.addListener(AnyLiveQueryListener(self))
@@ -104,8 +123,8 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 	{
 		// Deactivates the old resources
 		// TODO: One might completely remove the data here
-		sourceBooks.forEach { $0.datasource.pause() }
-		notes.forEach { $0.datasource.pause() }
+		allSourceBooks.forEach { $0.datasource.pause() }
+		allNotes.forEach { $0.datasource.pause() }
 		
 		do
 		{
@@ -113,7 +132,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 			let bookResources = resources.filter { $0.category == .sourceTranslation }
 			let notesResources = resources.filter { $0.category == .notes }
 			
-			try sourceBooks = bookResources.flatMap
+			try allSourceBooks = bookResources.flatMap
 			{
 				resource in
 				
@@ -127,24 +146,22 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 				}
 			}
 			
-			notes = notesResources.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString, threadListener: self.threadStatusListener)) }
+			allNotes = notesResources.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString, threadListener: self.threadStatusListener)) }
 		}
 		catch
 		{
 			print("ERROR: Failed to update resource data. \(error)")
 		}
 		
-		print("STATUS: Updating resources. Found \(sourceBooks.count) source books and \(notes.count) notes")
-		selectResource(atIndex: 0)
-		
-		updateListener?.onResourcesUpdated(optionLabels: resourceTitles)
+		print("STATUS: Updating resources. Found \(allSourceBooks.count) source books and \(allNotes.count) notes")
+		updateDisplayedResources()
 	}
 	
 	// This method should be called whenever the paragraph data on the translation side is updated
 	// Makes sure right notes resources are displayed
 	func translationParagraphsUpdated(_ paragraphs: [Paragraph])
 	{
-		for noteData in notes
+		for noteData in displayedNotes
 		{
 			noteData.datasource.translationParagraphsUpdated(paragraphs)
 		}
@@ -224,7 +241,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 			return
 		}
 		
-		guard index >= 0 && index < sourceBooks.count + notes.count else
+		guard index >= 0 && index < displayedSourceBooks.count + displayedNotes.count else
 		{
 			print("ERROR: Trying to activate a resource at non-existing index")
 			return
@@ -234,15 +251,15 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 		currentLiveResource?.pause()
 		
 		// Finds the new resource and activates it
-		if index < sourceBooks.count
+		if index < displayedSourceBooks.count
 		{
-			let datasource = sourceBooks[index].datasource
+			let datasource = displayedSourceBooks[index].datasource
 			currentLiveResource = datasource
 			resourceTableView.dataSource = datasource
 		}
 		else
 		{
-			let datasource = notes[index - sourceBooks.count].datasource
+			let datasource = displayedNotes[index - displayedSourceBooks.count].datasource
 			currentLiveResource = datasource
 			resourceTableView.dataSource = datasource
 		}
@@ -256,7 +273,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 	// Retrieves the index of a resource (collection) with the specified id
 	func indexForResource(withId resourceId: String) -> Int?
 	{
-		return sourceBooks.index(where: { $0.resource.idString == resourceId }) ?? notes.index(where: { $0.resource.idString == resourceId }).map { $0 + sourceBooks.count }
+		return displayedSourceBooks.index(where: { $0.resource.idString == resourceId }) ?? displayedNotes.index(where: { $0.resource.idString == resourceId }).map { $0 + displayedSourceBooks.count }
 	}
 	
 	func pause()
@@ -269,6 +286,39 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 	{
 		currentLiveResource?.activate()
 		queryManager.start()
+	}
+	
+	func updateCarousel()
+	{
+		if let avatarId = Session.instance.avatarId
+		{
+			do
+			{
+				carousel = try Carousel.get(avatarId: avatarId, bookCode: Book.code(fromId: targetBookId))
+				updateDisplayedResources()
+			}
+			catch
+			{
+				print("Failed to read carousel data. \(error)")
+			}
+		}
+	}
+	
+	private func updateDisplayedResources()
+	{
+		if let carousel = carousel
+		{
+			displayedSourceBooks = carousel.resourceIds.flatMap { id in self.allSourceBooks.first(where: { $0.resource.idString == id }) }
+			displayedNotes = carousel.resourceIds.flatMap { id in self.allNotes.first(where: { $0.resource.idString == id }) }
+		}
+		else
+		{
+			displayedSourceBooks = allSourceBooks
+			displayedNotes = allNotes
+		}
+		
+		selectResource(atIndex: 0)
+		updateListener?.onResourcesUpdated(optionLabels: resourceTitles)
 	}
 	
 	private func configureSourceCell(tableView: UITableView, indexPath: IndexPath, paragraph: Paragraph) -> UITableViewCell
@@ -286,7 +336,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 		
 		do
 		{
-			for bookData in sourceBooks
+			for bookData in displayedSourceBooks
 			{
 				let sourcePathIds = bookData.binding.sourcesForTarget(pathId)
 				
