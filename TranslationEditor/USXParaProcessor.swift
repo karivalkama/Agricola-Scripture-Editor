@@ -25,7 +25,7 @@ class USXParaProcessor: USXContentProcessor
 		{
 			do
 			{
-				_verseRegex = try NSRegularExpression(pattern: "\\-\\,", options: [])
+				_verseRegex = try NSRegularExpression(pattern: "\\-|\\,", options: [])
 			}
 			catch
 			{

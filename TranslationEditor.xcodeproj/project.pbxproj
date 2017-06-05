@@ -1125,14 +1125,14 @@
 					};
 					7C18A19E1D8BBEBD00DD1B03 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 998YFRKMC3;
+						DevelopmentTeam = 4QFE6EUS3B;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 7C18A18A1D8BBEBD00DD1B03;
 					};
 					7C18A1A91D8BBEBD00DD1B03 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 998YFRKMC3;
+						DevelopmentTeam = 4QFE6EUS3B;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 7C18A18A1D8BBEBD00DD1B03;
@@ -1730,7 +1730,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 998YFRKMC3;
+				DEVELOPMENT_TEAM = 4QFE6EUS3B;
 				INFOPLIST_FILE = TranslationEditorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditorTests;
@@ -1749,7 +1749,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 998YFRKMC3;
+				DEVELOPMENT_TEAM = 4QFE6EUS3B;
 				INFOPLIST_FILE = TranslationEditorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditorTests;
@@ -1766,7 +1766,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 998YFRKMC3;
+				DEVELOPMENT_TEAM = 4QFE6EUS3B;
 				INFOPLIST_FILE = TranslationEditorUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditorUITests;
@@ -1784,7 +1784,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 998YFRKMC3;
+				DEVELOPMENT_TEAM = 4QFE6EUS3B;
 				INFOPLIST_FILE = TranslationEditorUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditorUITests;

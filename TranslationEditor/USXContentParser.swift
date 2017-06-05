@@ -107,6 +107,8 @@ class USXContentParser<Generated, Contained>: TemporaryXMLParser
 	
 	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
 	{
+		// print("STATUS: New element: '\(elementName)'")
+		
 		// The parser may be set to stop parsing at a start of a certain marker
 		// Also ends parsing when finding a higher level 'marker' element
 		if let marker = USXMarkerElement(rawValue: elementName), marker >= lowestBreakMarker || marker == nextStopMarker
