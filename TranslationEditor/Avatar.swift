@@ -24,6 +24,8 @@ final class Avatar: Storable
 	let accountId: String
 	
 	var name: String
+	var isAdmin: Bool
+	var isDisabled: Bool
 	
 	
 	// COMPUTED PROPERTIES	-----
@@ -36,14 +38,16 @@ final class Avatar: Storable
 	var idProperties: [Any] { return [projectId, "avatar", uid] }
 	var properties: [String : PropertyValue]
 	{
-		return ["name": name.value, "account": accountId.value, "created": created.value]
+		return ["name": name.value, "account": accountId.value, "created": created.value, "admin": isAdmin.value, "disabled": isDisabled.value]
 	}
 	
 	
 	// INIT	---------------------
 	
-	init(name: String, projectId: String, accountId: String, uid: String = UUID().uuidString.lowercased(), created: TimeInterval = Date().timeIntervalSince1970)
+	init(name: String, projectId: String, accountId: String, isAdmin: Bool = false, isDisabled: Bool = false, uid: String = UUID().uuidString.lowercased(), created: TimeInterval = Date().timeIntervalSince1970)
 	{
+		self.isAdmin = isAdmin
+		self.isDisabled = isDisabled
 		self.projectId = projectId
 		self.name = name
 		self.created = created
@@ -53,7 +57,7 @@ final class Avatar: Storable
 	
 	static func create(from properties: PropertySet, withId id: Id) throws -> Avatar
 	{
-		return Avatar(name: properties["name"].string(), projectId: id[PROPERTY_PROJECT].string(), accountId: properties["account"].string(), uid: id["avatar_uid"].string(), created: properties["created"].time())
+		return Avatar(name: properties["name"].string(), projectId: id[PROPERTY_PROJECT].string(), accountId: properties["account"].string(), isAdmin: properties["admin"].bool(), isDisabled: properties["disabled"].bool(), uid: id["avatar_uid"].string(), created: properties["created"].time())
 	}
 	
 	
@@ -64,6 +68,14 @@ final class Avatar: Storable
 		if let name = properties["name"].string
 		{
 			self.name = name
+		}
+		if let isAdmin = properties["admin"].bool
+		{
+			self.isAdmin = isAdmin
+		}
+		if let isDisabled = properties["disabled"].bool
+		{
+			self.isDisabled = isDisabled
 		}
 	}
 	

@@ -116,11 +116,27 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			}
 			
 			// If the avatar has already been chosen, skips this phase
-			if Session.instance.avatarId != nil
+			// (The avatar must be enabled, however)
+			if let avatarId = Session.instance.avatarId
 			{
-				print("STATUS: Avatar already selected")
-				proceed(animated: false)
-				return
+				do
+				{
+					if let avatar = try Avatar.get(avatarId), !avatar.isDisabled
+					{
+						print("STATUS: Avatar already selected")
+						proceed(animated: false)
+						return
+					}
+					else
+					{
+						Session.instance.bookId = nil
+						Session.instance.avatarId = nil
+					}
+				}
+				catch
+				{
+					print("ERROR: Failed to read avatar data. \(error)")
+				}
 			}
 			
 			// Otherwise starts the queries
@@ -184,7 +200,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 				{
 					avatar in
 					
-					if let info = try avatar.info(), info.isShared
+					if !avatar.isDisabled, let info = try avatar.info(), info.isShared
 					{
 						return (avatar, info)
 					}
@@ -199,10 +215,17 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			// Otherwise just finds the first applicable avatar and uses that
 			else
 			{
-				if let avatarId = rows.first?.id
+				if let avatar = try rows.first?.object()
 				{
+					// If the user's avatar was disabled for some reason, enables it
+					if avatar.isDisabled
+					{
+						avatar.isDisabled = false
+						try avatar.push()
+					}
+					
 					print("STATUS: Proceeding with non-shared account avatar")
-					Session.instance.avatarId = avatarId
+					Session.instance.avatarId = avatar.idString
 					proceed()
 				}
 			}

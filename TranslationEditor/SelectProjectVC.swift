@@ -80,18 +80,37 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		
 		// If project is already selected, moves to the next view
 		// Otherwise listens to project data changes
-		if let projectId = Session.instance.projectId
+		var continuesWithProject = false
+		
+		if let projectId = Session.instance.projectId, let accountId = Session.instance.accountId
 		{
-			// Checks whether this login should be considered shared
 			do
 			{
-				selectedWithSharedAccount = try Project.get(projectId)?.sharedAccountId == Session.instance.accountId
+				if let project = try Project.get(projectId)
+				{
+					// The user must still have access to the project though
+					if project.contributorIds.contains(accountId)
+					{
+						// Checks whether this login should be considered shared
+						selectedWithSharedAccount = project.sharedAccountId == accountId
+						continuesWithProject = true
+					}
+					else
+					{
+						Session.instance.bookId = nil
+						Session.instance.avatarId = nil
+						Session.instance.projectId = nil
+					}
+				}
 			}
 			catch
 			{
 				print("ERROR: Failed to read project data. \(error)")
 			}
-			
+		}
+		
+		if continuesWithProject
+		{
 			performSegue(withIdentifier: "SelectAvatar", sender: nil)
 		}
 		else
