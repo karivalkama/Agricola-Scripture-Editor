@@ -123,6 +123,8 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				
 				if existingBook.code == bookData.book.code && existingBook.identifier == bookData.book.identifier
 				{
+					print("STATUS: Found a matching identfier")
+					
 					bookToOverwrite = existingBook
 					book?.languageId = existingBook.languageId
 					foundMatchWithIdentifier = true
@@ -280,7 +282,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			{
 				// If the target language is targeted, only allows update for the target translation
 				// If there is no previous version, forces insert
-				if let previousTargetTranslation = try project.targetTranslationQuery().firstResultObject()
+				if let previousTargetTranslation = try project.targetTranslationQuery(bookCode: book?.code).firstResultObject()
 				{
 					bookToOverwrite = previousTargetTranslation
 					setInsertStatus(false, lock: true)
@@ -512,12 +514,28 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 			}
 			
 			// If there is no target translation for the book yet, creates an empty copy of the just created book
+			// Or, if this book was the first target translation version, creates notes
 			var newBookId: String?
-			if book.languageId != project.languageId && targetTranslations.isEmpty
+			if targetTranslations.isEmpty
 			{
-				print("STATUS: Creates a new target translation for the book")
-				
-				newBookId = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId, resourceName: nicknameField.text.or(book.identifier)).book.idString
+				if book.languageId == project.languageId
+				{
+					let notesResource = ResourceCollection(languageId: book.languageId, bookId: book.idString, category: .notes, name: NSLocalizedString("Notes", comment: "The generated name of the notes resource"))
+					let notes = self.paragraphs.map { ParagraphNotes(collectionId: notesResource.idString, chapterIndex: $0.chapterIndex, pathId: $0.pathId) }
+					
+					try DATABASE.tryTransaction
+					{
+						try notesResource.push()
+						try notes.forEach { try $0.push() }
+					}
+					
+					newBookId = book.idString
+				}
+				else
+				{
+					print("STATUS: Creates a new target translation for the book")
+					newBookId = try book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId, resourceName: nicknameField.text.or(book.identifier)).book.idString
+				}
 			}
 			
 			// The newly update book will be opened afterwards
