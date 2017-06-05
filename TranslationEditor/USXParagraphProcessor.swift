@@ -23,6 +23,7 @@ class USXParagraphProcessor: USXContentProcessor
 	private let userId: String
 	
 	private var paragraphStyleFound = false
+	private var sectionHeadingFound = false
 	private var contentParsed = false
 	
 	
@@ -62,15 +63,11 @@ class USXParagraphProcessor: USXContentProcessor
 				style = ParaStyle.value(of: styleAttribute)
 			}
 			
-			// A section heading para is the last thing parsed by this parser (section heading paragraph can contain only that singe para)
-			if style.isSectionHeadingStyle()
-			{
-				caller.nextStopContainer = .para
-			}
-			
-			// If some content was parsed previously and a section heading is found
-			// OR if multiple paragraph style paras would be included, stops parsing right there
-			if (contentParsed && style.isSectionHeadingStyle()) || (paragraphStyleFound && style.isParagraphStyle())
+			// Stops parsing if
+			// a) Section heading was found previously and receives something other than a heading description
+			// b) Paragraph style was found previously and receives another pararaph style
+			// c) Some content was read and receives a section header
+			if (sectionHeadingFound && !style.isHeaderDescriptionStyle()) || (paragraphStyleFound && style.isParagraphStyle()) || (contentParsed && style.isSectionHeadingStyle())
 			{
 				caller.stopsAfterCurrentParse = true
 				return nil
@@ -78,10 +75,16 @@ class USXParagraphProcessor: USXContentProcessor
 			// Otherwise parses normally uning a para parser
 			else
 			{
+				if style.isSectionHeadingStyle()
+				{
+					sectionHeadingFound = true
+				}
+				
 				if style.isParagraphStyle()
 				{
 					paragraphStyleFound = true
 				}
+				
 				contentParsed = true
 				
 				return (USXParaProcessor.createParaParser(caller: caller, style: style, targetPointer: targetPointer, using: errorHandler), false)
@@ -89,6 +92,7 @@ class USXParagraphProcessor: USXContentProcessor
 		}
 		else
 		{
+			print("ERROR: ParagraphProcessor received element '\(elementName)'")
 			return nil
 		}
 	}

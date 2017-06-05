@@ -85,6 +85,7 @@ class USXSectionProcessor: USXContentProcessor
 		}
 		else
 		{
+			print("ERROR: Element '\(elementName)' in SectionProcessor")
 			return nil
 		}
 	}

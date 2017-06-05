@@ -103,8 +103,13 @@ enum ParaStyle: USXStyle, Equatable
 	// Heading and title styles
 	case sectionHeading(Int)
 	case sectionHeadingMajor(Int)
-	case descriptiveTitle
 	case speakerIdentification
+	
+	// Reference ranges / heading references
+	case sectionReferenceRangeMajor
+	case sectionReferenceRange
+	case parallerReferenceRange
+	case descriptiveTitle
 	
 	// Poetry
 	case poeticLine(Int)
@@ -119,9 +124,9 @@ enum ParaStyle: USXStyle, Equatable
 	
 	
 	// Style collections
-	private static let nonIndentedHeaderStyles: [ParaStyle] = [.descriptiveTitle, .speakerIdentification, .acrosticHeading]
+	private static let nonIndentedHeaderStyles: [ParaStyle] = [.speakerIdentification, .acrosticHeading]
 	private static let nonIndentedParagraphStyles: [ParaStyle] = [.normal, .margin, .embeddedTextOpening, .embeddedTextParagraph, .embeddedTextClosing, .embeddedTextRefrain, .indentedFlushLeft, .closureOfLetter, .centered]
-	private static let nonIndentedStyles: [ParaStyle] = [.liturgicalNote, .poeticLineRight, .poeticLineCentered, .blank] + nonIndentedHeaderStyles + nonIndentedParagraphStyles
+	private static let nonIndentedStyles: [ParaStyle] = [.descriptiveTitle, .sectionReferenceRange, .sectionReferenceRangeMajor, .liturgicalNote, .poeticLineRight, .poeticLineCentered, .blank] + nonIndentedHeaderStyles + nonIndentedParagraphStyles
 	
 	private static func indentedHeaderStyles(with indentation: Int) -> [ParaStyle]
 	{
@@ -171,6 +176,9 @@ enum ParaStyle: USXStyle, Equatable
 		case .liturgicalNote: return "lit"
 		case .sectionHeadingMajor(let depth): return "ms\(depth)"
 		case .sectionHeading(let depth): return "s\(depth)"
+		case .sectionReferenceRangeMajor: return "mr"
+		case .sectionReferenceRange: return "sr"
+		case .parallerReferenceRange: return "r"
 		case .descriptiveTitle: return "d"
 		case .speakerIdentification: return "sp"
 		case .poeticLine(let depth): return "q\(depth)"
@@ -259,7 +267,16 @@ enum ParaStyle: USXStyle, Equatable
 	{
 		switch self
 		{
-		case .sectionHeading, .sectionHeadingMajor, .descriptiveTitle, .speakerIdentification, .acrosticHeading: return true
+		case .sectionHeading, .sectionHeadingMajor, .speakerIdentification, .acrosticHeading: return true
+		default: return false
+		}
+	}
+	
+	func isHeaderDescriptionStyle() -> Bool
+	{
+		switch self
+		{
+		case .descriptiveTitle, .sectionReferenceRange, .sectionReferenceRangeMajor: return true
 		default: return false
 		}
 	}
