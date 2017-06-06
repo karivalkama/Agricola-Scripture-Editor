@@ -67,7 +67,6 @@ class ManageUsersVC: UIViewController, UITableViewDataSource
 	
 	@IBAction func noButtonPressed(_ sender: Any)
 	{
-		(deleteTargetCell as? UserCell)?.clearPasswordButton.isEnabled = true
 		hideConfirm()
 	}
 	
@@ -150,6 +149,7 @@ class ManageUsersVC: UIViewController, UITableViewDataSource
 			avatar.isAdmin = newState
 			try avatar.push()
 			
+			print("STATUS: changed admin status to \(newState)")
 			userTableView.reloadRows(at: [indexPath], with: .automatic)
 		}
 		catch

@@ -52,6 +52,7 @@ class UserCell: UITableViewCell
 	{
 		self.passwordAction = clearPasswordAction
 		self.deleteAction = deleteAction
+		self.setAdminAction = setAdminAction
 		
 		nameLabel.text = name
 		isAdminSwitch.isOn = isAdmin

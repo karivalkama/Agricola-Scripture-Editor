@@ -294,7 +294,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Select a Book to Work on" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjb-YB-WnE">
                                                 <rect key="frame" x="0.0" y="0.0" width="776" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <attributedString key="userComments">
@@ -374,11 +374,11 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="nxL-V3-oJZ">
-                                        <rect key="frame" x="792" y="0.0" width="192" height="84.5"/>
+                                        <rect key="frame" x="792" y="0.0" width="192" height="155"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Manage Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EgS-5U-bC2">
                                                 <rect key="frame" x="0.0" y="0.0" width="192" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <attributedString key="userComments">
@@ -434,6 +434,34 @@ Cg
                                                     <segue destination="jRE-kJ-8QQ" kind="show" id="Ar9-wm-5nl"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Admin Tools" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hgw-PE-EAt">
+                                                <rect key="frame" x="0.0" y="92.5" width="192" height="14.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <attributedString key="userComments">
+                                                    <fragment content="Project management features -hint text">
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="smallSystem"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOG-9c-Tto" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="115" width="192" height="40"/>
+                                                <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="XU5-dS-Ela"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <state key="normal" title="Manage Users">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="manageUsersPressed:" destination="itN-2l-wFE" eventType="touchUpInside" id="YMO-S8-vDf"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="192" id="elt-Zh-pAk"/>
@@ -467,6 +495,7 @@ Cg
                     </view>
                     <connections>
                         <outlet property="bookTableView" destination="Nmh-Sf-zta" id="q3N-LD-4sf"/>
+                        <outlet property="manageUsersButton" destination="GOG-9c-Tto" id="Od9-ms-Dp0"/>
                         <outlet property="topBar" destination="i6E-WL-VRW" id="axH-Ii-LFh"/>
                     </connections>
                 </viewController>
@@ -899,7 +928,7 @@ Cg
                                                 <constraints>
                                                     <constraint firstItem="go0-cR-dl3" firstAttribute="top" secondItem="sxU-WS-cLv" secondAttribute="top" id="Evx-Ih-EFw"/>
                                                     <constraint firstAttribute="bottom" secondItem="go0-cR-dl3" secondAttribute="bottom" priority="999" id="OC3-zp-bbe"/>
-                                                    <constraint firstAttribute="height" constant="40" id="cg1-rx-KwP"/>
+                                                    <constraint firstAttribute="height" priority="999" constant="40" id="cg1-rx-KwP"/>
                                                     <constraint firstAttribute="trailing" secondItem="go0-cR-dl3" secondAttribute="trailing" priority="999" id="hAz-We-WDs"/>
                                                     <constraint firstItem="go0-cR-dl3" firstAttribute="leading" secondItem="sxU-WS-cLv" secondAttribute="leading" id="sme-8x-fmS"/>
                                                 </constraints>
@@ -928,6 +957,7 @@ Cg
                                     <constraint firstItem="P9P-Go-YGR" firstAttribute="top" secondItem="fMS-Le-Sjp" secondAttribute="top" constant="16" id="aDZ-dV-Zl2"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="680" id="bx1-L2-kjD"/>
                                     <constraint firstItem="P9P-Go-YGR" firstAttribute="leading" secondItem="fMS-Le-Sjp" secondAttribute="leading" constant="16" id="lgH-do-h3g"/>
+                                    <constraint firstAttribute="width" priority="500" constant="680" id="ygA-RK-W17"/>
                                 </constraints>
                             </view>
                         </subviews>

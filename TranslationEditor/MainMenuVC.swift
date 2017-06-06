@@ -22,6 +22,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 	
 	@IBOutlet weak var topBar: TopBarUIView!
 	@IBOutlet weak var bookTableView: UITableView!
+	@IBOutlet weak var manageUsersButton: BasicButton!
 	
 	
 	// ATTRIBUTES	--------------
@@ -116,6 +117,21 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 			print("ERROR: Failed to read book progress status")
 		}
 		
+		// Admin tools are only enabled for admin users
+		var adminToolsEnabled = false
+		do
+		{
+			if let avatarId = Session.instance.avatarId, let avatar = try Avatar.get(avatarId), avatar.isAdmin
+			{
+				adminToolsEnabled = true
+			}
+		}
+		catch
+		{
+			print("ERROR: Failed to read avatar data. \(error)")
+		}
+		manageUsersButton.isEnabled = adminToolsEnabled
+		
 		// If there are USX files waiting for processing, displays import view
 		if let usxUrl = USXImportStack.instance.pop()
 		{
@@ -154,6 +170,15 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 	{
 		queryManager?.stop()
 	}
+	
+	
+	// ACTIONS	-----------------
+	
+	@IBAction func manageUsersPressed(_ sender: Any)
+	{
+		displayAlert(withIdentifier: ManageUsersVC.identifier, storyBoardId: "MainMenu")
+	}
+	
 	
 	
 	// IMPLEMENTED METHODS	-----

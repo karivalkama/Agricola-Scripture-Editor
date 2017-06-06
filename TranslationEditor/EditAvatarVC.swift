@@ -158,7 +158,7 @@ class EditAvatarVC: UIViewController
 					return
 				}
 				
-				guard let projectId = Session.instance.projectId else
+				guard let projectId = Session.instance.projectId, let project = try Project.get(projectId) else
 				{
 					print("ERROR: No project selected")
 					return
@@ -174,8 +174,19 @@ class EditAvatarVC: UIViewController
 					return
 				}*/
 				
+				// Checks whether admin rights should be given to the new avatar
+				// (must be the owner of the project, and the first avatar if account is shared)
+				var makeAdmin = false
+				if project.ownerId == accountId, let account = try AgricolaAccount.get(accountId)
+				{
+					if try (!account.isShared || AvatarView.instance.avatarQuery(projectId: projectId, accountId: accountId).firstResultRow() == nil)
+					{
+						makeAdmin = true
+					}
+				}
+				
 				// Creates the new information
-				let avatar = Avatar(name: avatarName, projectId: projectId, accountId: accountId)
+				let avatar = Avatar(name: avatarName, projectId: projectId, accountId: accountId, isAdmin: makeAdmin)
 				let info = AvatarInfo(avatarId: avatar.idString, password: createAvatarView.offlinePassword, isShared: createAvatarView.isShared)
 				
 				// Saves the changes to the database (inlcuding image attachment)
