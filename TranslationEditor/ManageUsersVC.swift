@@ -171,7 +171,7 @@ class ManageUsersVC: UIViewController, UITableViewDataSource
 		{
 			let info = avatars[indexPath.row].info
 			info.resetPassword()
-			try info.push()
+			try info.push(overwrite: true)
 			
 			userTableView.reloadRows(at: [indexPath], with: .automatic)
 		}
