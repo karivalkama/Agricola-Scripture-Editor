@@ -239,6 +239,11 @@ final class AvatarInfo: Storable
 		passwordHash = createPasswordHash(password: password)
 	}
 	
+	func resetPassword()
+	{
+		passwordHash = nil
+	}
+	
 	func authenticate(loggedAccountId: String?, password: String) -> Bool
 	{
 		if passwordHash == nil

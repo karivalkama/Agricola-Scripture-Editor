@@ -124,6 +124,8 @@
 		7C6B7B271E659E220005AD43 /* OnlineStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B7B261E659E220005AD43 /* OnlineStatusView.swift */; };
 		7C6C3C1A1E373959001D56F4 /* PostThreadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C191E373959001D56F4 /* PostThreadVC.swift */; };
 		7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */; };
+		7C7767211EE675C700952D5B /* ManageUsersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7767201EE675C700952D5B /* ManageUsersVC.swift */; };
+		7C7767231EE67D0000952D5B /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7767221EE67D0000952D5B /* UserCell.swift */; };
 		7C7834CB1E977D1C000556B0 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7834CA1E977D1C000556B0 /* BookCell.swift */; };
 		7C7FD65A1EA5E18600ED2364 /* ParagraphCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7FD6591EA5E18600ED2364 /* ParagraphCell.xib */; };
 		7C7FD65C1EA5E5D400ED2364 /* ParagraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7FD65B1EA5E5D400ED2364 /* ParagraphCell.swift */; };
@@ -378,6 +380,8 @@
 		7C6B7B261E659E220005AD43 /* OnlineStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineStatusView.swift; sourceTree = "<group>"; };
 		7C6C3C191E373959001D56F4 /* PostThreadVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostThreadVC.swift; sourceTree = "<group>"; };
 		7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNotesDelegate.swift; sourceTree = "<group>"; };
+		7C7767201EE675C700952D5B /* ManageUsersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageUsersVC.swift; sourceTree = "<group>"; };
+		7C7767221EE67D0000952D5B /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		7C7834CA1E977D1C000556B0 /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		7C7FD6591EA5E18600ED2364 /* ParagraphCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParagraphCell.xib; sourceTree = "<group>"; };
 		7C7FD65B1EA5E5D400ED2364 /* ParagraphCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphCell.swift; sourceTree = "<group>"; };
@@ -878,6 +882,7 @@
 				7C8F4B041EC42E6700F9B25F /* OverwritePreviewVC.swift */,
 				7C903F701EA8DBDE008EE1E6 /* ErrorAlertVC.swift */,
 				7C8F4B021EC1F08C00F9B25F /* ImportBookVC.swift */,
+				7C7767201EE675C700952D5B /* ManageUsersVC.swift */,
 			);
 			name = "Main Menu";
 			sourceTree = "<group>";
@@ -917,6 +922,7 @@
 			children = (
 				7C7834CA1E977D1C000556B0 /* BookCell.swift */,
 				7C64E1611ECAD9BB00E1580C /* ImportBookCell.swift */,
+				7C7767221EE67D0000952D5B /* UserCell.swift */,
 			);
 			name = "Main Menu";
 			sourceTree = "<group>";
@@ -1488,6 +1494,7 @@
 				7C0130C51E3F3DFB0053C5C2 /* PropertyValueWrapable.swift in Sources */,
 				7CCC01481DAB88AE00F0562E /* USXSectionProcessor.swift in Sources */,
 				7CB5B2A71ECEBEB30066446F /* TopBarUIView.swift in Sources */,
+				7C7767231EE67D0000952D5B /* UserCell.swift in Sources */,
 				7C18A1911D8BBEBD00DD1B03 /* TranslationVC.swift in Sources */,
 				7CCC00F21D9D1B4E00F0562E /* AttributedStringConvertible.swift in Sources */,
 				7C4A4FA61DF835E1009F890E /* LiveQueryManager.swift in Sources */,
@@ -1507,6 +1514,7 @@
 				7C0130CB1E41F4D30053C5C2 /* ProjectView.swift in Sources */,
 				7CCC013C1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
 				7C903F6D1EA7536A008EE1E6 /* BookCode.swift in Sources */,
+				7C7767211EE675C700952D5B /* ManageUsersVC.swift in Sources */,
 				7C8F4AFD1EC1920400F9B25F /* BookProgressView.swift in Sources */,
 				7C82CE8A1DE6E1EA00C054EB /* PropertySet.swift in Sources */,
 				7C4A4F831DEEBAF2009F890E /* Row.swift in Sources */,

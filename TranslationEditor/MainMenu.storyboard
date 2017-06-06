@@ -712,10 +712,10 @@ Cg
             </objects>
             <point key="canvasLocation" x="28.710937499999996" y="908.59375"/>
         </scene>
-        <!--View Controller-->
+        <!--Manage UsersVC-->
         <scene sceneID="BMQ-Vo-MJ0">
             <objects>
-                <viewController storyboardIdentifier="ManageUsersVC" id="Urf-I4-xni" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ManageUsersVC" id="Urf-I4-xni" customClass="ManageUsersVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VDS-tK-We6"/>
                         <viewControllerLayoutGuide type="bottom" id="mT1-cG-Gjs"/>
@@ -729,6 +729,9 @@ Cg
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Qe-NA-Yu0">
                                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                        <connections>
+                                            <action selector="backgroundTapped:" destination="Urf-I4-xni" eventType="touchUpInside" id="i9L-Zp-ZCK"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
@@ -749,7 +752,7 @@ Cg
                                                 <rect key="frame" x="0.0" y="0.0" width="648" height="412"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" rowHeight="50" id="c4X-LY-Oow">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" rowHeight="50" id="c4X-LY-Oow" customClass="UserCell" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="648" height="50"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c4X-LY-Oow" id="szy-1l-exz">
@@ -788,6 +791,9 @@ Cg
                                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wO8-8d-fzr">
                                                                                     <rect key="frame" x="61.5" y="0.0" width="51" height="31"/>
                                                                                     <color key="onTintColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                    <connections>
+                                                                                        <action selector="adminValueChanged:" destination="c4X-LY-Oow" eventType="valueChanged" id="MEd-Mk-fDt"/>
+                                                                                    </connections>
                                                                                 </switch>
                                                                             </subviews>
                                                                         </stackView>
@@ -802,6 +808,9 @@ Cg
                                                                                     <state key="normal" title="Clear Password">
                                                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                                     </state>
+                                                                                    <connections>
+                                                                                        <action selector="clearPasswordPressed:" destination="c4X-LY-Oow" eventType="touchUpInside" id="v94-fg-6T6"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aFn-c2-1Bu" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
                                                                                     <rect key="frame" x="143" y="0.0" width="71" height="33.5"/>
@@ -811,6 +820,9 @@ Cg
                                                                                     <state key="normal" title="Delete!">
                                                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                                     </state>
+                                                                                    <connections>
+                                                                                        <action selector="deletePressed:" destination="c4X-LY-Oow" eventType="touchUpInside" id="kjT-Sd-fAS"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                             </subviews>
                                                                         </stackView>
@@ -824,6 +836,13 @@ Cg
                                                                 <constraint firstAttribute="trailing" secondItem="DCF-01-Sq9" secondAttribute="trailing" id="kPh-A2-M8O"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="clearPasswordButton" destination="ef0-I2-3bp" id="fEF-wH-pug"/>
+                                                            <outlet property="createdLabel" destination="m63-gu-E22" id="RsN-dl-2WN"/>
+                                                            <outlet property="deleteButton" destination="aFn-c2-1Bu" id="XPY-YD-DGP"/>
+                                                            <outlet property="isAdminSwitch" destination="wO8-8d-fzr" id="Z0C-zE-TrJ"/>
+                                                            <outlet property="nameLabel" destination="26J-Co-4s9" id="sFQ-jm-noW"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
@@ -850,6 +869,9 @@ Cg
                                                                         <state key="normal" title="No">
                                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="noButtonPressed:" destination="Urf-I4-xni" eventType="touchUpInside" id="GqZ-4I-5Sd"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSn-jc-wRB" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
                                                                         <rect key="frame" x="53" y="0.0" width="45" height="40"/>
@@ -862,6 +884,9 @@ Cg
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
                                                                         </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="yesButtonPressed:" destination="Urf-I4-xni" eventType="touchUpInside" id="r3c-Kv-5kI"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <constraints>
@@ -889,6 +914,9 @@ Cg
                                                 <state key="normal" title="Close">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="closeButtonPressed:" destination="Urf-I4-xni" eventType="touchUpInside" id="qEO-rw-MS5"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -917,6 +945,10 @@ Cg
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="fMS-Le-Sjp" secondAttribute="trailing" constant="32" id="vWK-Sm-vNc"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="confirmView" destination="sxU-WS-cLv" id="NxZ-jN-XUs"/>
+                        <outlet property="userTableView" destination="rMh-As-6XX" id="3P6-Yq-uy5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y5S-OA-BGX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
