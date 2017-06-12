@@ -289,12 +289,16 @@ import MessageUI
 				return
 			}
 			
+			sendEmailButton.isEnabled = true
+			bookSelectionView.isHidden = true
+			
 			let dir = FileManager.default.urls(for: FileManager.SearchPathDirectory.cachesDirectory, in: FileManager.SearchPathDomainMask.userDomainMask).first!
 			let fileurl =  dir.appendingPathComponent("\(book.code.code).usx")
 			
 			try data.write(to: fileurl, options: Data.WritingOptions.atomic)
 			
 			let shareVC = UIActivityViewController(activityItems: [fileurl], applicationActivities: nil)
+			shareVC.popoverPresentationController?.sourceView = sendEmailButton
 			
 			/*
 			let mailVC = MFMailComposeViewController()
@@ -302,9 +306,6 @@ import MessageUI
 			mailVC.addAttachmentData(data, mimeType: "application/xml", fileName: "\(book.code.code).usx")
 			mailVC.setSubject("\(book.code.name) - \(book.identifier) \(NSLocalizedString("USX Export", comment: "Part of the default export email subject"))")
 			*/
-
-			sendEmailButton.isEnabled = true
-			bookSelectionView.isHidden = true
 			
 			viewController.present(shareVC, animated: true, completion: nil)
 			// viewController.present(mailVC, animated: true, completion: nil)
