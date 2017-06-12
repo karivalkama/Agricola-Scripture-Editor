@@ -93,31 +93,31 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		// Makes sure all the fields are filled
 		guard let projectName = projectNameField.text, !projectName.isEmpty else
 		{
-			errorLabel.text = "Please provide a project name"
+			errorLabel.text = NSLocalizedString("Please provide a project name", comment: "An error displayed when required project name field is left empty")
 			return
 		}
 		
 		guard let defaultBookIdentifier = defaultBookIdentifierField.text, !defaultBookIdentifier.isEmpty else
 		{
-			errorLabel.text = "Please provide a default name for the translation"
+			errorLabel.text = NSLocalizedString("Please provide a default name for the translation", comment: "An error displayed when required translation name field is left empty")
 			return
 		}
 		
 		guard let accountName = accountNameField.text, !accountName.isEmpty else
 		{
-			errorLabel.text = "Please provide a name for the shared project account"
+			errorLabel.text = NSLocalizedString("Please provide a name for the shared project account", comment: "An error displayed when required shared account name field is left empty")
 			return
 		}
 		
 		guard let password = passwordField.text, !password.isEmpty else
 		{
-			errorLabel.text = "Please provide a password for the shared project account"
+			errorLabel.text = NSLocalizedString("Please provide a password for the shared project account", comment: "An error displayed when required password name field is left empty")
 			return
 		}
 		
 		guard let repeatedPassword = repeatPasswordField.text, !repeatedPassword.isEmpty else
 		{
-			errorLabel.text = "Please repeat the password you provided"
+			errorLabel.text = NSLocalizedString("Please repeat the password you provided", comment: "An error message displayed when the required repeat password field is left empty")
 			return
 		}
 		
@@ -126,13 +126,13 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		{
 			guard try AccountView.instance.accountQuery(name: accountName).firstResultRow() == nil else
 			{
-				errorLabel.text = "There already exists an account with a similar name!"
+				errorLabel.text = NSLocalizedString("There already exists an account with a similar name!", comment: "An error message displayed when there already exists an account that has the same name as the provided shared account name")
 				return
 			}
 		}
 		catch
 		{
-			errorLabel.text = "Internal error occurred"
+			errorLabel.text = NSLocalizedString("Internal error occurred", comment: "An error message displayed when project creation fails due to an unexpected error")
 			print("ERROR: Failed to check if account exists. \(error)")
 			return
 		}
@@ -140,20 +140,20 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		// Makes sure the password is repeated correctly
 		guard password == repeatedPassword else
 		{
-			errorLabel.text = "The passwords don't match!"
+			errorLabel.text = NSLocalizedString("The passwords don't match!", comment: "An error message displayed when the provided account passwords don't match each other")
 			repeatPasswordField.text = nil
 			return
 		}
 		
 		guard let selectedLanguage = selectedLanguage else
 		{
-			errorLabel.text = "Please select the target language"
+			errorLabel.text = NSLocalizedString("Please select the target language", comment: "An error message when the user hasn't selected project language when trying to create a project")
 			return
 		}
 		
 		guard let currentAccountId = Session.instance.accountId else
 		{
-			errorLabel.text = "Cannot create project if not logged in!"
+			errorLabel.text = NSLocalizedString("Cannot create project if not logged in!", comment: "An error message displayed when trying to create a new project without an account")
 			print("ERROR: No account selected at create project")
 			return
 		}
@@ -176,7 +176,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		catch
 		{
 			print("ERROR: Failed to create project. \(error)")
-			errorLabel.text = "Internal error occurred!"
+			errorLabel.text = NSLocalizedString("Internal error occurred!", comment: "An error message displayed when project creation fails due to an unexpected error")
 			return
 		}
 	}

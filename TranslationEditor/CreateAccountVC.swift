@@ -67,19 +67,19 @@ class CreateAccountVC: UIViewController
 		// Makes sure all the fields are filled
 		guard let userName = userNameField.text, !userName.isEmpty else
 		{
-			errorLabel.text = "Please fill the username field"
+			errorLabel.text = NSLocalizedString("Please fill the account name field", comment: "An error message displayed when the required account name field is empty")
 			return
 		}
 		
 		guard let password = passwordField.text, !password.isEmpty else
 		{
-			errorLabel.text = "Please provide a password"
+			errorLabel.text = NSLocalizedString("Please provide a password", comment: "An error message displayed when the required password field is empty")
 			return
 		}
 		
 		guard let passwordRepeated = repeatPasswordField.text, !passwordRepeated.isEmpty else
 		{
-			errorLabel.text = "Please repeat the password"
+			errorLabel.text = NSLocalizedString("Please repeat the password", comment: "An error message displayed when the required repeat password field is empty")
 			return
 		}
 		
@@ -88,13 +88,13 @@ class CreateAccountVC: UIViewController
 			// Makes sure there is no account with the provided name already
 			guard try AccountView.instance.accountQuery(name: userName).firstResultRow() == nil else
 			{
-				errorLabel.text = "Account with a similar name already exists!"
+				errorLabel.text = NSLocalizedString("Account with a similar name already exists!", comment: "An error message displayed when trying to create a duplicate account")
 				return
 			}
 		}
 		catch
 		{
-			errorLabel.text = "Internal error occurred. Please try again."
+			errorLabel.text = NSLocalizedString("Internal error occurred. Please try again.", comment: "An error message displayed when account creation fails due to an unexpected error")
 			print("ERROR: Couldn't check if account exists. \(error)")
 			return
 		}
@@ -102,7 +102,7 @@ class CreateAccountVC: UIViewController
 		// Checks that the passwords match
 		guard password == passwordRepeated else
 		{
-			errorLabel.text = "The passwords don't match!"
+			errorLabel.text = NSLocalizedString("The passwords don't match!", comment: "An error message displayed when two passwords fields contents don't match")
 			repeatPasswordField.text = nil
 			return
 		}
@@ -124,7 +124,7 @@ class CreateAccountVC: UIViewController
 		}
 		catch
 		{
-			errorLabel.text = "Internal error occurred while saving data."
+			errorLabel.text = NSLocalizedString("Internal error occurred while saving data.", comment: "An error message displayed when account creation fails due to an unexpected error")
 			print("ERROR: Failed to save account data. \(error)")
 			return
 		}

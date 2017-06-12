@@ -90,14 +90,14 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 				originalComment = selectedComment
 			}
 			
-			var originalCommentWriter = "Someone"
+			var originalCommentWriter = NSLocalizedString("Someone", comment: "A placeholder for comment author title. Used when no user name is available")
 			
 			if let originalCommentCreatorId = originalComment?.creatorId, let originalCreator = try Avatar.get(originalCommentCreatorId)
 			{
 				originalCommentWriter = originalCreator.name
 			}
 			
-			originalCommentTitleLabel.text = "\(originalCommentWriter) wrote:"
+			originalCommentTitleLabel.text = "\(originalCommentWriter) \(NSLocalizedString("wrote", comment: "a portion of a comment's title. Something like 'this and this wrote:'")):"
 			originalCommentTextView.text = originalComment?.content
 		}
 		catch

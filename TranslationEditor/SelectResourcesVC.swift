@@ -129,11 +129,11 @@ class SelectResourcesVC: UIViewController, UITableViewDataSource, UITableViewDel
 	{
 		if section == 0
 		{
-			return "Books"
+			return NSLocalizedString("Books", comment: "A section header for book / source translation resources")
 		}
 		else
 		{
-			return "Notes"
+			return NSLocalizedString("Notes", comment: "A section header for notes resource(s)")
 		}
 	}
 	

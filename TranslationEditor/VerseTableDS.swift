@@ -37,20 +37,23 @@ class VerseTableDS: NSObject, UITableViewDataSource
 	{
 		var data = [(String, Paragraph)]()
 		
+		let originalTitle = NSLocalizedString("Original:", comment: "A title for the original version of a paragraph / paragraph portion in comment context")
+		let currentTitle = NSLocalizedString("Current:", comment: "A title for the curent version of a paragraph / paragraph portion in comment context")
+		
 		// Adds the current (and original) version of the targeted paragraph first
 		if originalParagraph.isMostRecent
 		{
-			data.append(("Current:", originalParagraph))
+			data.append((originalTitle, originalParagraph))
 		}
 		else
 		{
-			data.append(("Original:", originalParagraph))
+			data.append((originalTitle, originalParagraph))
 			
 			do
 			{
 				if let latestId = try ParagraphHistoryView.instance.mostRecentId(forParagraphWithId: originalParagraph.idString), let latestVersion = try Paragraph.get(latestId)
 				{
-					data.append(("Current:", latestVersion))
+					data.append((currentTitle, latestVersion))
 				}
 				else
 				{

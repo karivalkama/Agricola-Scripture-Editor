@@ -104,7 +104,7 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
 	{
-		return "Chapter \(section + 1)"
+		return "\(NSLocalizedString("Chapter", comment: "A section header in translation table. Followed by the chapter number.")) \(section + 1)"
 	}
 	
 	func sectionIndexTitles(for tableView: UITableView) -> [String]?

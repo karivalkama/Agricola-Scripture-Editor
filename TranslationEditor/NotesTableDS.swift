@@ -302,7 +302,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 				else if (paragraph.content.first?.style.isSectionHeadingStyle()).or(false)
 				{
 					let headingText = paragraph.text
-					paragraphNames[paragraph.pathId] = "\(paragraph.chapterIndex) - \(headingText.isEmpty ? "Heading" : headingText)"
+					paragraphNames[paragraph.pathId] = "\(paragraph.chapterIndex) - \(headingText.isEmpty ? NSLocalizedString("Heading", comment: "A title for heading note sections where the translation is still empty") : headingText)"
 				}
 				else
 				{

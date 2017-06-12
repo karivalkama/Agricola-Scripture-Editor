@@ -122,7 +122,7 @@ class ResolveConflictVC: UIViewController, UICollectionViewDelegate, UICollectio
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VersionCell.identifier, for: indexPath) as! VersionCell
 		
 		let version = versions[indexPath.row]
-		cell.configure(author: authors[version.creatorId].or("Someone"), created: Date(timeIntervalSince1970: version.created), content: version)
+		cell.configure(author: authors[version.creatorId] ?? NSLocalizedString("Someone", comment: "A replacement string used when conflicting version author is not recognizable"), created: Date(timeIntervalSince1970: version.created), content: version)
 		
 		return cell
 	}
