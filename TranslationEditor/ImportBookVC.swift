@@ -9,12 +9,10 @@
 import UIKit
 
 // This view controller is used for importing books from other projects
-class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, UITableViewDelegate, LanguageFilterDelegate, BookFilterDelegate
+class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, UITableViewDelegate
 {
 	// OUTLETS	------------------
 	
-	@IBOutlet weak var languageFilterView: FilteredMultiSelection!
-	@IBOutlet weak var bookFilterView: FilteredMultiSelection!
 	@IBOutlet weak var bookSelectionTable: UITableView!
 	@IBOutlet weak var contentView: KeyboardReactiveView!
 	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
@@ -22,6 +20,8 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	@IBOutlet weak var bookNameField: UITextField!
 	@IBOutlet weak var importButton: UIButton!
 	@IBOutlet weak var topBar: TopBarUIView!
+	@IBOutlet weak var languageFilterField: UITextField!
+	@IBOutlet weak var bookFilterField: UITextField!
 	
 	
 	// TYPES	------------------
@@ -40,16 +40,13 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	private var projectNames = [String: String]()
 	
 	private var alreadyImportedIds = [String]()
-	private var filterCodes = [BookCode]()
-	private var filterLanguageIds = [String]()
+	private var languageFilter: String?
+	private var bookFilter: String?
 	
 	private var displayedOptions = [(book: Book, languageName: String, projectName: String, progress: BookProgressStatus?)]()
 	
 	private var bookQueryManager: LiveQueryManager<ProjectBooksView>?
 	private var resourceQueryManager: LiveQueryManager<ResourceCollectionView>?
-	
-	private var languageFilterManager: LanguageFilterManager?
-	private var bookFilterManager: BookFilterManager?
 	
 	private var selectedBook: Book?
 	
@@ -67,29 +64,7 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		bookSelectionTable.dataSource = self
 		bookSelectionTable.delegate = self
 		
-		contentView.configure(mainView: view, elements: [languageFilterView, bookFilterView, bookNameField, importButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
-		
-		bookFilterManager = BookFilterManager()
-		bookFilterManager?.delegate = self
-		bookFilterView.dataSource = bookFilterManager
-		bookFilterView.delegate = bookFilterManager
-		
-		bookFilterView.reloadData()
-		
-		do
-		{
-			let languages = try LanguageView.instance.createQuery().resultObjects()
-			languageFilterManager = LanguageFilterManager(languages: languages)
-			languageFilterManager?.delegate = self
-			languageFilterView.dataSource = languageFilterManager
-			languageFilterView.delegate = languageFilterManager
-			
-			languageFilterView.reloadData()
-		}
-		catch
-		{
-			print("ERROR: Failed to retrieve language data. \(error)")
-		}
+		contentView.configure(mainView: view, elements: [languageFilterField, bookFilterField, bookNameField, importButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
 		
 		guard let projectId = Session.instance.projectId else
 		{
@@ -157,6 +132,18 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		}
 	}
     
+	@IBAction func languageFilterChanged(_ sender: Any)
+	{
+		languageFilter = filterFromField(languageFilterField)
+		update()
+	}
+	
+	@IBAction func bookFilterChanged(_ sender: Any)
+	{
+		bookFilter = filterFromField(bookFilterField)
+		update()
+	}
+	
 
 	// IMPLEMENTED METHODS	------
 	
@@ -192,18 +179,6 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		{
 			print("ERROR: Failed to read through book data. \(error)")
 		}
-	}
-	
-	func onLanguageFilterChange(languageFilter: [String])
-	{
-		self.filterLanguageIds = languageFilter
-		update()
-	}
-	
-	func onBookFilterChange(bookFilter: [BookCode])
-	{
-		self.filterCodes = bookFilter
-		update()
 	}
 	
 	
@@ -245,11 +220,11 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 			{
 				return false
 			}
-			else if !filterCodes.isEmpty && !filterCodes.contains(book.code)
+			else if languageFilter != nil && !((try? nameOfLanguage(withId: book.languageId).lowercased().contains(languageFilter!)) ?? false)
 			{
 				return false
 			}
-			else if !filterLanguageIds.isEmpty && !filterLanguageIds.contains(book.languageId)
+			else if bookFilter != nil && !book.code.code.lowercased().contains(bookFilter!) && !book.code.name.lowercased().contains(bookFilter!)
 			{
 				return false
 			}
@@ -326,6 +301,20 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		else
 		{
 			return ""
+		}
+	}
+	
+	private func filterFromField(_ field: UITextField) -> String?
+	{
+		let filter = field.text?.lowercased().trimmingCharacters(in: CharacterSet.whitespaces)
+		
+		if filter == nil || filter!.isEmpty
+		{
+			return nil
+		}
+		else
+		{
+			return filter
 		}
 	}
 	
@@ -416,6 +405,7 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	}
 }
 
+/*
 fileprivate protocol LanguageFilterDelegate: class
 {
 	func onLanguageFilterChange(languageFilter: [String])
@@ -485,3 +475,4 @@ fileprivate class BookFilterManager: FilteredSelectionDataSource, FilteredMultiS
 		delegate?.onBookFilterChange(bookFilter: selectedIndices.map { codes[$0] })
 	}
 }
+*/
