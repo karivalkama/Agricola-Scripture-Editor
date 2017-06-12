@@ -46,6 +46,7 @@
 		7C25180D1E8B8A930089E1FD /* ProjectBooksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C25180C1E8B8A930089E1FD /* ProjectBooksView.swift */; };
 		7C25180F1E8D0F8A0089E1FD /* EditAvatarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C25180E1E8D0F8A0089E1FD /* EditAvatarVC.swift */; };
 		7C2518111E8E39F50089E1FD /* StackDismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518101E8E39F50089E1FD /* StackDismissable.swift */; };
+		7C2E27A21EE6D6DB003602B0 /* Connect2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2E27A11EE6D6DB003602B0 /* Connect2.xib */; };
 		7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF5A1DE718DA0035B92E /* Storable.swift */; };
 		7C40DF5F1DE71E490035B92E /* DatabaseUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */; };
 		7C40DF631DEC14C80035B92E /* JSONConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF621DEC14C80035B92E /* JSONConvertible.swift */; };
@@ -182,7 +183,6 @@
 		7CAF6D821DB4F47700E10597 /* USXChapterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */; };
 		7CAF6D861DB4F9AA00E10597 /* USXBookProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D851DB4F9AA00E10597 /* USXBookProcessor.swift */; };
 		7CAF6D8A1DB5F5FB00E10597 /* USXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D891DB5F5FB00E10597 /* USXParser.swift */; };
-		7CB5B29C1ECC43A20066446F /* Connect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB5B29B1ECC43A10066446F /* Connect.xib */; };
 		7CB5B29E1ECC7D0B0066446F /* ConnectionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5B29D1ECC7D0B0066446F /* ConnectionUIView.swift */; };
 		7CB5B2A01ECD94600066446F /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB5B29F1ECD94600066446F /* Common.storyboard */; };
 		7CB5B2A31ECDB43E0066446F /* ConnectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5B2A21ECDB43E0066446F /* ConnectionVC.swift */; };
@@ -304,6 +304,7 @@
 		7C25180C1E8B8A930089E1FD /* ProjectBooksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectBooksView.swift; sourceTree = "<group>"; };
 		7C25180E1E8D0F8A0089E1FD /* EditAvatarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAvatarVC.swift; sourceTree = "<group>"; };
 		7C2518101E8E39F50089E1FD /* StackDismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackDismissable.swift; sourceTree = "<group>"; };
+		7C2E27A11EE6D6DB003602B0 /* Connect2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Connect2.xib; sourceTree = "<group>"; };
 		7C40DF5A1DE718DA0035B92E /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseUtilities.swift; sourceTree = "<group>"; };
 		7C40DF621DEC14C80035B92E /* JSONConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONConvertible.swift; sourceTree = "<group>"; };
@@ -441,7 +442,6 @@
 		7CAF6D811DB4F47700E10597 /* USXChapterProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXChapterProcessor.swift; sourceTree = "<group>"; };
 		7CAF6D851DB4F9AA00E10597 /* USXBookProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXBookProcessor.swift; sourceTree = "<group>"; };
 		7CAF6D891DB5F5FB00E10597 /* USXParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXParser.swift; sourceTree = "<group>"; };
-		7CB5B29B1ECC43A10066446F /* Connect.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Connect.xib; sourceTree = "<group>"; };
 		7CB5B29D1ECC7D0B0066446F /* ConnectionUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionUIView.swift; sourceTree = "<group>"; };
 		7CB5B29F1ECD94600066446F /* Common.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
 		7CB5B2A21ECDB43E0066446F /* ConnectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionVC.swift; sourceTree = "<group>"; };
@@ -967,8 +967,8 @@
 				7C936C141E9E582C00AC06BF /* FilteredSingleSelection.xib */,
 				7C7FD6591EA5E18600ED2364 /* ParagraphCell.xib */,
 				7C8F4AFE1EC1D75400F9B25F /* BookProgressUIView.xib */,
-				7CB5B29B1ECC43A10066446F /* Connect.xib */,
 				7CB5B2A41ECDB9F70066446F /* TopBar.xib */,
+				7C2E27A11EE6D6DB003602B0 /* Connect2.xib */,
 				7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */,
 			);
 			name = Xibs;
@@ -1175,6 +1175,7 @@
 				7C57EC0F1E6948FC000718E9 /* TI2_ENG.usx in Resources */,
 				7CB5B2A51ECDB9F70066446F /* TopBar.xib in Resources */,
 				7C936C151E9E582C00AC06BF /* FilteredSingleSelection.xib in Resources */,
+				7C2E27A21EE6D6DB003602B0 /* Connect2.xib in Resources */,
 				7C18A1961D8BBEBD00DD1B03 /* Assets.xcassets in Resources */,
 				7C9BB7E31E8536AA0010DE5C /* MainMenu.storyboard in Resources */,
 				7C6070561E5C601D007718BC /* Login.storyboard in Resources */,
@@ -1191,7 +1192,6 @@
 				7CB5B2A01ECD94600066446F /* Common.storyboard in Resources */,
 				7C6B7B181E645EC00005AD43 /* FilteredMultiSelection.xib in Resources */,
 				7C6B7B251E659CA00005AD43 /* OnlineStatusView.xib in Resources */,
-				7CB5B29C1ECC43A20066446F /* Connect.xib in Resources */,
 				7C6B7B1C1E6554920005AD43 /* LabelCell.xib in Resources */,
 				7C6070601E5D89E0007718BC /* Alpine.ttf in Resources */,
 				7C57EC121E694939000718E9 /* TI1_ENG.usx in Resources */,

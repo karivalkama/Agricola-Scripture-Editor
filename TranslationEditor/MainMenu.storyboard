@@ -816,6 +816,14 @@ Cg
                                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
+                                                                                    <attributedString key="userComments">
+                                                                                        <fragment content="Label for switch that determines whether the user has administrator rights or not">
+                                                                                            <attributes>
+                                                                                                <font key="NSFont" metaFont="smallSystem"/>
+                                                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                            </attributes>
+                                                                                        </fragment>
+                                                                                    </attributedString>
                                                                                 </label>
                                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wO8-8d-fzr">
                                                                                     <rect key="frame" x="61.5" y="0.0" width="51" height="31"/>
@@ -837,6 +845,14 @@ Cg
                                                                                     <state key="normal" title="Clear Password">
                                                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                                     </state>
+                                                                                    <attributedString key="userComments">
+                                                                                        <fragment content="Button used for resetting / clearing a user's password (in case of the user has forgot their password)">
+                                                                                            <attributes>
+                                                                                                <font key="NSFont" metaFont="smallSystem"/>
+                                                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                            </attributes>
+                                                                                        </fragment>
+                                                                                    </attributedString>
                                                                                     <connections>
                                                                                         <action selector="clearPasswordPressed:" destination="c4X-LY-Oow" eventType="touchUpInside" id="v94-fg-6T6"/>
                                                                                     </connections>
@@ -849,6 +865,14 @@ Cg
                                                                                     <state key="normal" title="Delete!">
                                                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                                     </state>
+                                                                                    <attributedString key="userComments">
+                                                                                        <fragment content="Button used for deleting user data">
+                                                                                            <attributes>
+                                                                                                <font key="NSFont" metaFont="smallSystem"/>
+                                                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                            </attributes>
+                                                                                        </fragment>
+                                                                                    </attributedString>
                                                                                     <connections>
                                                                                         <action selector="deletePressed:" destination="c4X-LY-Oow" eventType="touchUpInside" id="kjT-Sd-fAS"/>
                                                                                     </connections>
@@ -886,6 +910,14 @@ Cg
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <attributedString key="userComments">
+                                                                    <fragment content="A confirmation question displayed when the user is about to delete user data">
+                                                                        <attributes>
+                                                                            <font key="NSFont" metaFont="smallSystem"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Nbt-29-0Us" userLabel="Button Stack View">
                                                                 <rect key="frame" x="550" y="0.0" width="98" height="40"/>
@@ -898,6 +930,14 @@ Cg
                                                                         <state key="normal" title="No">
                                                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                         </state>
+                                                                        <attributedString key="userComments">
+                                                                            <fragment content="Button that cancels user data removal">
+                                                                                <attributes>
+                                                                                    <font key="NSFont" metaFont="smallSystem"/>
+                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                </attributes>
+                                                                            </fragment>
+                                                                        </attributedString>
                                                                         <connections>
                                                                             <action selector="noButtonPressed:" destination="Urf-I4-xni" eventType="touchUpInside" id="GqZ-4I-5Sd"/>
                                                                         </connections>
@@ -910,6 +950,14 @@ Cg
                                                                         <state key="normal" title="Yes">
                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </state>
+                                                                        <attributedString key="userComments">
+                                                                            <fragment content="Button that proceeds with user data removal">
+                                                                                <attributes>
+                                                                                    <font key="NSFont" metaFont="smallSystem"/>
+                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                </attributes>
+                                                                            </fragment>
+                                                                        </attributedString>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
                                                                         </userDefinedRuntimeAttributes>
@@ -943,6 +991,14 @@ Cg
                                                 <state key="normal" title="Close">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
+                                                <attributedString key="userComments">
+                                                    <fragment content="Button that closes user management view">
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="smallSystem"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
                                                 <connections>
                                                     <action selector="closeButtonPressed:" destination="Urf-I4-xni" eventType="touchUpInside" id="qEO-rw-MS5"/>
                                                 </connections>

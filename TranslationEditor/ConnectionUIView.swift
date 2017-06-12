@@ -15,10 +15,10 @@ import MessageUI
 {
 	// OUTLETS	--------------
 	
-	@IBOutlet weak var hostingSwitch: UISwitch!
+	//@IBOutlet weak var hostingSwitch: UISwitch!
 	@IBOutlet weak var qrView: UIView!
 	@IBOutlet weak var qrImageView: UIImageView!
-	@IBOutlet weak var joinSwitch: UISwitch!
+	//@IBOutlet weak var joinSwitch: UISwitch!
 	@IBOutlet weak var onlineStatusView: OnlineStatusView!
 	@IBOutlet weak var hostInfoView: UIView!
 	@IBOutlet weak var hostImageView: UIImageView!
@@ -27,14 +27,16 @@ import MessageUI
 	@IBOutlet weak var sendEmailButton: BasicButton!
 	@IBOutlet weak var bookSelectionView: UIView!
 	@IBOutlet weak var bookSelectionTableView: UITableView!
+	@IBOutlet weak var connectionSegmentedControl: UISegmentedControl!
 	
 	
 	// ATTRIBUTES	----------
 	
 	weak var viewController: UIViewController?
 	
-	private let canSendMail = MFMailComposeViewController.canSendMail()
+	// private let canSendMail = MFMailComposeViewController.canSendMail()
 	private var targetTranslations = [Book]()
+	private var joining = false
 	
 	// The reader used for capturing QR codes, initialized only when used
 	private lazy var readerVC: QRCodeReaderViewController =
@@ -53,17 +55,19 @@ import MessageUI
 	override init(frame: CGRect)
 	{
 		super.init(frame: frame)
-		setupXib(nibName: "Connect")
+		setupXib(nibName: "Connect2")
 	}
 	
 	required init?(coder: NSCoder)
 	{
 		super.init(coder: coder)
-		setupXib(nibName: "Connect")
+		setupXib(nibName: "Connect2")
 	}
 	
 	override func awakeFromNib()
 	{
+		bookSelectionView.isHidden = true
+		
 		bookSelectionTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
 		bookSelectionTableView.dataSource = self
 		bookSelectionTableView.delegate = self
@@ -82,12 +86,68 @@ import MessageUI
 		
 		updateStatus()
 		
-		sendEmailButton.isEnabled = canSendMail && !targetTranslations.isEmpty
+		sendEmailButton.isEnabled = /*canSendMail &&*/ !targetTranslations.isEmpty
 	}
 	
 	
 	// ACTIONS	--------------
 	
+	@IBAction func connectionModeChanged(_ sender: Any)
+	{
+		// 1 = Join
+		if connectionSegmentedControl.selectedSegmentIndex == 1
+		{
+			guard let viewController = viewController else
+			{
+				print("ERROR: No view controller to host the QR scanner")
+				return
+			}
+			
+			if QRCodeReader.isAvailable()
+			{
+				joining = true
+			
+				// Presents a join P2P VC
+				readerVC.delegate = self
+				readerVC.modalPresentationStyle = .formSheet
+				viewController.present(readerVC, animated: true, completion: nil)
+			}
+			else
+			{
+				connectionSegmentedControl.selectedSegmentIndex = 0
+				// TODO: Show some kind of error label
+			}
+		}
+		else
+		{
+			P2PClientSession.stop()
+		}
+		
+		// 2 = Hosting
+		if connectionSegmentedControl.selectedSegmentIndex == 2
+		{
+			if P2PHostSession.instance == nil
+			{
+				do
+				{
+					_ = try P2PHostSession.start(projectId: Session.instance.projectId, hostAvatarId: Session.instance.avatarId)
+				}
+				catch
+				{
+					print("ERROR: Failed to start a P2P hosting session")
+				}
+			}
+		}
+		else
+		{
+			P2PHostSession.stop()
+		}
+		
+		// TODO: Animate
+		updateStatus()
+	}
+	
+	/*
 	@IBAction func hostingSwitchChanged(_ sender: Any)
 	{
 		// TODO: Animate
@@ -134,6 +194,7 @@ import MessageUI
 			updateStatus()
 		}
 	}
+*/
 	
 	@IBAction func sendEmailButtonPressed(_ sender: Any)
 	{
@@ -160,19 +221,22 @@ import MessageUI
 		print("STATUS: Scanned QR code result: \(result.value) (of type \(result.metadataType))")
 		viewController.or(reader).dismiss(animated: true, completion: nil)
 		
+		joining = false
+		
 		if let info = P2PConnectionInformation.parse(from: result.value)
 		{
 			print("STATUS: Starting P2P client session")
 			print("STATUS: \(info)")
 			
-			// TODO: Animate
 			P2PClientSession.start(info)
-			updateStatus()
 		}
 		else
 		{
 			print("ERROR: Failed to parse connection information from \(result.value)")
 		}
+		
+		// TODO: Animate
+		updateStatus()
 	}
 	
 	func reader(_ reader: QRCodeReaderViewController, didSwitchCamera newCaptureDevice: AVCaptureDeviceInput)
@@ -186,7 +250,10 @@ import MessageUI
 		print("STATUS: QR Capture session cancelled")
 		viewController.or(reader).dismiss(animated: true, completion: nil)
 		
-		joinSwitch.isOn = false
+		joining = false
+		// connectionSegmentedControl.selectedSegmentIndex = 0
+		// joinSwitch.isOn = false
+		updateStatus()
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -205,7 +272,7 @@ import MessageUI
 	{
 		guard let viewController = viewController else
 		{
-			print("ERROR: No view controller to host the mail view.")
+			print("ERROR: No view controller to host the share view.")
 			return
 		}
 		
@@ -222,19 +289,29 @@ import MessageUI
 				return
 			}
 			
+			let dir = FileManager.default.urls(for: FileManager.SearchPathDirectory.cachesDirectory, in: FileManager.SearchPathDomainMask.userDomainMask).first!
+			let fileurl =  dir.appendingPathComponent("\(book.code.code).usx")
+			
+			try data.write(to: fileurl, options: Data.WritingOptions.atomic)
+			
+			let shareVC = UIActivityViewController(activityItems: [fileurl], applicationActivities: nil)
+			
+			/*
 			let mailVC = MFMailComposeViewController()
 			mailVC.mailComposeDelegate = self
 			mailVC.addAttachmentData(data, mimeType: "application/xml", fileName: "\(book.code.code).usx")
 			mailVC.setSubject("\(book.code.name) - \(book.identifier) \(NSLocalizedString("USX Export", comment: "Part of the default export email subject"))")
-			
+			*/
+
 			sendEmailButton.isEnabled = true
 			bookSelectionView.isHidden = true
 			
-			viewController.present(mailVC, animated: true, completion: nil)
+			viewController.present(shareVC, animated: true, completion: nil)
+			// viewController.present(mailVC, animated: true, completion: nil)
 		}
 		catch
 		{
-			print("ERROR: Failed to read translation data. \(error)")
+			print("ERROR: Failed to read, parse and send translation data. \(error)")
 		}
 	}
 	
@@ -264,11 +341,38 @@ import MessageUI
 	
 	private func updateStatus()
 	{
-		updateHostViewStatus()
-		updateJoinViewStatus()
+		if let hostSession = P2PHostSession.instance
+		{
+			connectionSegmentedControl.selectedSegmentIndex = 2
+			
+			// QR view and the QR tag are displayed when there's an active host session
+			if qrView.isHidden, let qrImage = hostSession.connectionInformation?.qrCode?.image
+			{
+				qrImageView.image = qrImage
+				qrView.isHidden = false
+			}
+		}
+		else
+		{
+			qrImageView.image = nil
+			qrView.isHidden = true
+			
+			if P2PClientSession.isConnected
+			{
+				connectionSegmentedControl.selectedSegmentIndex = 1
+				onlineStatusView.isHidden = false
+			}
+			else
+			{
+				connectionSegmentedControl.selectedSegmentIndex = joining ? 1 : 0
+				onlineStatusView.isHidden = true
+			}
+		}
+		
 		updateHostInfoViewStatus()
 	}
 	
+	/*
 	private func updateHostViewStatus()
 	{
 		if let hostSession = P2PHostSession.instance
@@ -311,7 +415,7 @@ import MessageUI
 			// TODO: Add camera check
 			joinSwitch.isEnabled = P2PHostSession.instance == nil
 		}
-	}
+	}*/
 	
 	private func updateHostInfoViewStatus()
 	{
