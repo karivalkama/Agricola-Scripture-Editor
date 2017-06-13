@@ -45,7 +45,7 @@ class Session
 		set { self[Session.KEY_BOOK] = newValue }
 	}
 	
-	private(set) var accountId: String?
+	var accountId: String?
 	{
 		get { return self[Session.KEY_ACCOUNT] }
 		set { self[Session.KEY_ACCOUNT] = newValue }

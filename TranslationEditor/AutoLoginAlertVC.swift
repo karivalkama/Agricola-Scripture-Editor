@@ -31,7 +31,7 @@ class AutoLoginAlertVC: UIViewController
 	
 	@IBAction func backgroundTapped(_ sender: Any)
 	{
-		dismiss(animated: true, completion: nil)
+		dismiss(animated: true, completion: { self.completionHandler?(false) })
 	}
 	
 	

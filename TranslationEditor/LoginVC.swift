@@ -33,6 +33,7 @@ class LoginVC: UIViewController
         super.viewDidLoad()
 		
 		topBar.configure(hostVC: self, title: "Login")
+		topBar.connectionCompletionHandler = handleConnectionChange
 		
 		errorLabel.text = nil
 		
@@ -115,20 +116,7 @@ class LoginVC: UIViewController
 			Session.instance.logIn(accountId: account.idString, userName: userName, password: password)
 			
 			// If there is a P2P session active, provides access to the host project
-			if P2PClientSession.isConnected
-			{
-				if let projectId = P2PClientSession.instance!.projectId, let project = try Project.get(projectId)
-				{
-					if !project.contributorIds.contains(account.idString)
-					{
-						project.contributorIds.add(account.idString)
-						try project.push()
-					}
-					
-					Session.instance.projectId = projectId
-				}
-			}
-			
+			checkP2PProjectAccess(for: account)
 			proceed()
 		}
 		catch
@@ -250,6 +238,35 @@ class LoginVC: UIViewController
 			catch
 			{
 				print("ERROR: Failed to provide project access. \(error)")
+			}
+		}
+	}
+	
+	private func handleConnectionChange()
+	{
+		// If joined on a P2P connection that has a hosting project and shared account, checks if the user would like to auto-login with said account
+		if P2PClientSession.isConnected, let projectId = P2PClientSession.instance?.projectId
+		{
+			do
+			{
+				if let project = try Project.get(projectId), let sharedAccountId = project.sharedAccountId
+				{
+					displayAlert(withIdentifier: AutoLoginAlertVC.identifier, storyBoardId: "Login")
+					{
+						vc in (vc as! AutoLoginAlertVC).configure
+						{
+							if $0
+							{
+								Session.instance.accountId = sharedAccountId
+								self.proceed()
+							}
+						}
+					}
+				}
+			}
+			catch
+			{
+				print("ERROR: Failed to read project / account data and enable auto-login")
 			}
 		}
 	}
