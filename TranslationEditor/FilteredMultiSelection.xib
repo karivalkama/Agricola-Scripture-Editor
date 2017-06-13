@@ -28,8 +28,14 @@
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TVa-2Q-ZeD">
                             <rect key="frame" x="0.0" y="0.0" width="381" height="32"/>
                             <subviews>
+                                <imageView userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="m9O-t4-rN7">
+                                    <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="m9O-t4-rN7" secondAttribute="height" multiplier="1:1" id="Hka-r1-6gK"/>
+                                    </constraints>
+                                </imageView>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r7a-mh-Tjm">
-                                    <rect key="frame" x="0.0" y="1" width="341" height="30"/>
+                                    <rect key="frame" x="40" y="1" width="341" height="30"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -37,12 +43,6 @@
                                         <action selector="filterChanged:" destination="-1" eventType="editingChanged" id="WFM-Gc-8wi"/>
                                     </connections>
                                 </textField>
-                                <imageView userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="m9O-t4-rN7">
-                                    <rect key="frame" x="349" y="0.0" width="32" height="32"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" secondItem="m9O-t4-rN7" secondAttribute="height" multiplier="1:1" id="Hka-r1-6gK"/>
-                                    </constraints>
-                                </imageView>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="5Ym-Uc-Brq"/>

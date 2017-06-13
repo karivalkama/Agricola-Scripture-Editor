@@ -15,9 +15,6 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 	
 	@IBOutlet weak var projectNameField: UITextField!
 	@IBOutlet weak var defaultBookIdentifierField: UITextField!
-	@IBOutlet weak var accountNameField: UITextField!
-	@IBOutlet weak var passwordField: UITextField!
-	@IBOutlet weak var repeatPasswordField: UITextField!
 	@IBOutlet weak var errorLabel: UILabel!
 	@IBOutlet weak var selectLanguageView: FilteredSingleSelection!
 	@IBOutlet weak var createProjectButton: BasicButton!
@@ -27,6 +24,8 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 	
 	
 	// ATTRIBUTES	-----------------
+	
+	private var newSharedAccount: AgricolaAccount?
 	
 	private var languages = [Language]()
 	private var selectedLanguage: Language?
@@ -46,22 +45,27 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		errorLabel.text = nil
 		createProjectButton.isEnabled = false
 		
+		selectLanguageView.delegate = self
+		selectLanguageView.datasource = self
+		
+		contentView.configure(mainView: view, elements: [projectNameField, defaultBookIdentifierField, errorLabel, selectLanguageView, createProjectButton], topConstraint: contentTopConstraint)
+    }
+	
+	override func viewWillAppear(_ animated: Bool)
+	{
+		super.viewWillAppear(animated)
+		
 		// Loads the language data
 		do
 		{
 			languages = try LanguageView.instance.createQuery().resultObjects()
+			selectLanguageView.reloadData()
 		}
 		catch
 		{
 			print("ERROR: Failed to load language data. \(error)")
 		}
-		
-		selectLanguageView.delegate = self
-		selectLanguageView.datasource = self
-		selectLanguageView.reloadData()
-		
-		contentView.configure(mainView: view, elements: [projectNameField, defaultBookIdentifierField, accountNameField, passwordField, repeatPasswordField, errorLabel, selectLanguageView, createProjectButton], topConstraint: contentTopConstraint)
-    }
+	}
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
@@ -73,6 +77,8 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 	{
 		super.viewDidDisappear(animated)
 		contentView.endKeyboardListening()
+		
+		languages = []
 	}
 
 	
@@ -91,57 +97,12 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 	@IBAction func createProjectPressed(_ sender: Any)
 	{
 		// Makes sure all the fields are filled
-		guard let projectName = projectNameField.text, !projectName.isEmpty else
-		{
-			errorLabel.text = NSLocalizedString("Please provide a project name", comment: "An error displayed when required project name field is left empty")
-			return
-		}
+		let projectName = projectNameField.trimmedText
+		let translationName = defaultBookIdentifierField.trimmedText
 		
-		guard let defaultBookIdentifier = defaultBookIdentifierField.text, !defaultBookIdentifier.isEmpty else
+		guard !projectName.isEmpty && !translationName.isEmpty else
 		{
-			errorLabel.text = NSLocalizedString("Please provide a default name for the translation", comment: "An error displayed when required translation name field is left empty")
-			return
-		}
-		
-		guard let accountName = accountNameField.text, !accountName.isEmpty else
-		{
-			errorLabel.text = NSLocalizedString("Please provide a name for the shared project account", comment: "An error displayed when required shared account name field is left empty")
-			return
-		}
-		
-		guard let password = passwordField.text, !password.isEmpty else
-		{
-			errorLabel.text = NSLocalizedString("Please provide a password for the shared project account", comment: "An error displayed when required password name field is left empty")
-			return
-		}
-		
-		guard let repeatedPassword = repeatPasswordField.text, !repeatedPassword.isEmpty else
-		{
-			errorLabel.text = NSLocalizedString("Please repeat the password you provided", comment: "An error message displayed when the required repeat password field is left empty")
-			return
-		}
-		
-		// Makes sure there is no existing account with a similar name
-		do
-		{
-			guard try AccountView.instance.accountQuery(name: accountName).firstResultRow() == nil else
-			{
-				errorLabel.text = NSLocalizedString("There already exists an account with a similar name!", comment: "An error message displayed when there already exists an account that has the same name as the provided shared account name")
-				return
-			}
-		}
-		catch
-		{
-			errorLabel.text = NSLocalizedString("Internal error occurred", comment: "An error message displayed when project creation fails due to an unexpected error")
-			print("ERROR: Failed to check if account exists. \(error)")
-			return
-		}
-		
-		// Makes sure the password is repeated correctly
-		guard password == repeatedPassword else
-		{
-			errorLabel.text = NSLocalizedString("The passwords don't match!", comment: "An error message displayed when the provided account passwords don't match each other")
-			repeatPasswordField.text = nil
+			errorLabel.text = NSLocalizedString("Please fill all required fields", comment: "An error displayed when some required fields are left empty")
 			return
 		}
 		
@@ -151,23 +112,21 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 			return
 		}
 		
-		guard let currentAccountId = Session.instance.accountId else
+		guard let currentAccountId = Session.instance.accountId ?? newSharedAccount?.idString else
 		{
 			errorLabel.text = NSLocalizedString("Cannot create project if not logged in!", comment: "An error message displayed when trying to create a new project without an account")
 			print("ERROR: No account selected at create project")
 			return
 		}
 		
-		// Creates a new project with a project specific account
+		// Creates a new project and sasves the project account, if applicable
 		do
 		{
-			// TODO: Add default book identifier field
-			let projectAccount = AgricolaAccount(name: accountName, isShared: true, password: password, firstDevice: UIDevice.current.identifierForVendor?.uuidString)
-			let project = Project(name: projectName, languageId: selectedLanguage.idString, ownerId: currentAccountId, contributorIds: [currentAccountId], defaultBookIdentifier: defaultBookIdentifier, sharedAccountId: projectAccount.idString)
+			let project = Project(name: projectName, languageId: selectedLanguage.idString, ownerId: currentAccountId, contributorIds: [currentAccountId], defaultBookIdentifier: translationName, sharedAccountId: newSharedAccount?.idString)
 			
 			try DATABASE.tryTransaction
 			{
-				try projectAccount.push()
+				try self.newSharedAccount?.push()
 				try project.push()
 			}
 			
@@ -221,5 +180,13 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 				return nil
 			}
 		}
+	}
+	
+	
+	// OTHER METHODS	---------
+	
+	func configureForSharedAccountCreation(newAccount: AgricolaAccount)
+	{
+		self.newSharedAccount = newAccount
 	}
 }
