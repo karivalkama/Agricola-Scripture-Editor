@@ -25,7 +25,10 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 	
 	// ATTRIBUTES	-----------------
 	
+	static let identifier = "CreateProject"
+	
 	private var newSharedAccount: AgricolaAccount?
+	private var completion: ((Bool) -> ())?
 	
 	private var languages = [Language]()
 	private var selectedLanguage: Language?
@@ -86,12 +89,12 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 	
 	@IBAction func cancelButtonPressed(_ sender: Any)
 	{
-		dismiss(animated: true, completion: nil)
+		dismiss(animated: true, completion: { self.completion?(false) })
 	}
 	
 	@IBAction func backgroundButtonTapped(_ sender: Any)
 	{
-		dismiss(animated: true, completion: nil)
+		dismiss(animated: true, completion: { self.completion?(false) })
 	}
 	
 	@IBAction func createProjectPressed(_ sender: Any)
@@ -130,7 +133,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 				try project.push()
 			}
 			
-			dismiss(animated: true, completion: nil)
+			dismiss(animated: true, completion: { self.completion?(true) })
 		}
 		catch
 		{
@@ -185,8 +188,9 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 	
 	// OTHER METHODS	---------
 	
-	func configureForSharedAccountCreation(newAccount: AgricolaAccount)
+	func configureForSharedAccountCreation(newAccount: AgricolaAccount, completion: ((Bool) -> ())? = nil)
 	{
 		self.newSharedAccount = newAccount
+		self.completion = completion
 	}
 }

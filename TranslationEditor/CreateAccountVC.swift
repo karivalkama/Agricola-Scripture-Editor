@@ -20,6 +20,8 @@ class CreateAccountVC: UIViewController
 	@IBOutlet weak var contentView: KeyboardReactiveView!
 	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var createAccountButton: BasicButton!
+	@IBOutlet weak var sharingSwitch: UISwitch!
+	@IBOutlet weak var sharingDescriptionLabel: UILabel!
 	
 	
 	// ATTRIBUTES	--------------
@@ -52,6 +54,11 @@ class CreateAccountVC: UIViewController
 	
 	// ACTIONS	------------------
 	
+	@IBAction func sharingStatusSwitched(_ sender: Any)
+	{
+		sharingDescriptionLabel.isHidden = !sharingSwitch.isOn
+	}
+	
 	@IBAction func cancelPressed(_ sender: Any)
 	{
 		dismiss(animated: true, completion: nil)
@@ -65,28 +72,20 @@ class CreateAccountVC: UIViewController
 	@IBAction func createAccountPressed(_ sender: Any)
 	{
 		// Makes sure all the fields are filled
-		guard let userName = userNameField.text, !userName.isEmpty else
-		{
-			errorLabel.text = NSLocalizedString("Please fill the account name field", comment: "An error message displayed when the required account name field is empty")
-			return
-		}
+		let name = userNameField.trimmedText
+		let password = passwordField.trimmedText
+		let passwordRepeated = repeatPasswordField.trimmedText
 		
-		guard let password = passwordField.text, !password.isEmpty else
+		guard !name.isEmpty && !password.isEmpty && !passwordRepeated.isEmpty else
 		{
-			errorLabel.text = NSLocalizedString("Please provide a password", comment: "An error message displayed when the required password field is empty")
-			return
-		}
-		
-		guard let passwordRepeated = repeatPasswordField.text, !passwordRepeated.isEmpty else
-		{
-			errorLabel.text = NSLocalizedString("Please repeat the password", comment: "An error message displayed when the required repeat password field is empty")
+			errorLabel.text = NSLocalizedString("Please fill all required fields", comment: "An error message displayed when some of the required fields are left empty")
 			return
 		}
 		
 		do
 		{
 			// Makes sure there is no account with the provided name already
-			guard try AccountView.instance.accountQuery(name: userName).firstResultRow() == nil else
+			guard try AccountView.instance.accountQuery(name: name).firstResultRow() == nil else
 			{
 				errorLabel.text = NSLocalizedString("Account with a similar name already exists!", comment: "An error message displayed when trying to create a duplicate account")
 				return
@@ -109,18 +108,28 @@ class CreateAccountVC: UIViewController
 		
 		do
 		{
-			// Inserts the new account and moves on
-			let newAccount = AgricolaAccount(name: userName, isShared: false, password: password, firstDevice: UIDevice.current.identifierForVendor?.uuidString)
-			try newAccount.push()
+			// Creates the new account. If it is a shared account, a project must be created as well
+			let isShared = sharingSwitch.isOn
+			let newAccount = AgricolaAccount(name: name, isShared: isShared, password: password, firstDevice: UIDevice.current.identifierForVendor?.uuidString)
 			
-			// Logs in with the new account
-			if !Session.instance.isAuthorized
+			if isShared
 			{
-				print("STATUS: Logs in with the new account")
-				Session.instance.logIn(accountId: newAccount.idString, userName: userName, password: password)
+				displayAlert(withIdentifier: CreateProjectVC.identifier, storyBoardId: "Login")
+				{
+					vc in (vc as! CreateProjectVC).configureForSharedAccountCreation(newAccount: newAccount)
+					{
+						if $0
+						{
+							self.loginAndClose(newAccount: newAccount, userName: name, password: password)
+						}
+					}
+				}
 			}
-			
-			dismiss(animated: true, completion: { self.completion?(newAccount) })
+			else
+			{
+				try newAccount.push()
+				loginAndClose(newAccount: newAccount, userName: name, password: password)
+			}
 		}
 		catch
 		{
@@ -136,5 +145,17 @@ class CreateAccountVC: UIViewController
 	func configure(completion: @escaping (AgricolaAccount) -> ())
 	{
 		self.completion = completion
+	}
+	
+	private func loginAndClose(newAccount: AgricolaAccount, userName: String, password: String)
+	{
+		// Logs in with the new account
+		if !Session.instance.isAuthorized
+		{
+			print("STATUS: Logs in with the new account")
+			Session.instance.logIn(accountId: newAccount.idString, userName: userName, password: password)
+		}
+		
+		dismiss(animated: true, completion: { self.completion?(newAccount) })
 	}
 }
