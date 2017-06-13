@@ -123,7 +123,7 @@
                                                                 <rect key="frame" x="0.0" y="28" width="984" height="57"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fTI-cv-o5L" id="r8w-6k-53f">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="984" height="56"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="984" height="56.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mvm-r5-vkT">
@@ -327,7 +327,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="776" height="50"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X1P-0t-QRE" id="mvV-WX-iNg">
-                                                            <rect key="frame" x="0.0" y="0.0" width="776" height="49"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="776" height="49.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="NUP-IX-Jos">
@@ -491,7 +491,6 @@ Project Account</string>
                                                         </state>
                                                         <connections>
                                                             <action selector="manageAccountPressed:" destination="itN-2l-wFE" eventType="touchUpInside" id="06a-fL-Inm"/>
-                                                            <action selector="manageUsersPressed:" destination="itN-2l-wFE" eventType="touchUpInside" id="x3u-dy-IYJ"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -820,7 +819,7 @@ Project Account</string>
                                                         <rect key="frame" x="0.0" y="28" width="648" height="50"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c4X-LY-Oow" id="szy-1l-exz">
-                                                            <rect key="frame" x="0.0" y="0.0" width="648" height="50"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="648" height="49.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="DCF-01-Sq9">

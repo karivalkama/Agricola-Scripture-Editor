@@ -42,6 +42,8 @@ class EditSharedAccountVC: UIViewController
 	{
 		super.viewWillAppear(animated)
 		
+		contentView.startKeyboardListening()
+		
 		// Finds shared account data for edit, if there is one
 		do
 		{
@@ -67,6 +69,7 @@ class EditSharedAccountVC: UIViewController
 	{
 		super.viewDidDisappear(animated)
 		
+		contentView.endKeyboardListening()
 		project = nil
 		editedAccount = nil
 	}

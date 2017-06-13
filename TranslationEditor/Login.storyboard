@@ -47,22 +47,22 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hOl-Ja-Rfe">
-                                <rect key="frame" x="256.5" y="226" width="512" height="316.5"/>
+                                <rect key="frame" x="265.5" y="226" width="494.5" height="316.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Q6N-fe-Pc7">
-                                        <rect key="frame" x="16" y="16" width="480" height="288.5"/>
+                                        <rect key="frame" x="16" y="16" width="462.5" height="288.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Shared Project Account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DfV-UO-F3l">
-                                                <rect key="frame" x="0.0" y="0.0" width="480" height="26.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="462.5" height="26.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CsG-Hw-TLg">
-                                                <rect key="frame" x="0.0" y="42.5" width="480" height="123.5"/>
+                                                <rect key="frame" x="0.0" y="42.5" width="462.5" height="123.5"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.55000000000000004" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="V2V-ii-I6u">
-                                                        <rect key="frame" x="0.0" y="0.0" width="480" height="96"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="462.5" height="96"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="96" id="bDA-dp-KSh"/>
@@ -73,7 +73,7 @@
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIP: Use shared accounts when multiple people use this device" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYb-5k-q4F">
-                                                        <rect key="frame" x="0.0" y="104" width="480" height="19.5"/>
+                                                        <rect key="frame" x="0.0" y="104" width="462.5" height="19.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -81,10 +81,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="WC4-iP-Nxv">
-                                                <rect key="frame" x="0.0" y="182" width="480" height="106.5"/>
+                                                <rect key="frame" x="0.0" y="182" width="462.5" height="106.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNV-wk-4tL" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="462.5" height="40"/>
                                                         <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="8eq-A0-vJp"/>
@@ -98,10 +98,10 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MQY-AX-B5d">
-                                                        <rect key="frame" x="0.0" y="52" width="480" height="54.5"/>
+                                                        <rect key="frame" x="0.0" y="52" width="462.5" height="54.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cy-Fb-A1P" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="462.5" height="40"/>
                                                                 <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="mNT-fi-XwK"/>
@@ -115,7 +115,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will be granted access to the project when you log in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBi-ep-ibD">
-                                                                <rect key="frame" x="0.0" y="40" width="480" height="14.5"/>
+                                                                <rect key="frame" x="0.0" y="40" width="462.5" height="14.5"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -926,7 +926,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="960" height="632"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="Qn1-aN-GAg">
-                                                <rect key="frame" x="0.0" y="25" width="355" height="582.5"/>
+                                                <rect key="frame" x="0.0" y="20.5" width="355" height="591.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="355" id="f53-5n-HuG"/>
                                                 </constraints>
@@ -1759,10 +1759,10 @@
                                 </cells>
                             </collectionView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oz8-mI-VI2" userLabel="Password View" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
-                                <rect key="frame" x="318" y="315.5" width="388" height="137"/>
+                                <rect key="frame" x="318" y="297.5" width="388" height="173.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BRS-qN-0CT">
-                                        <rect key="frame" x="16" y="16" width="356" height="105"/>
+                                        <rect key="frame" x="16" y="16" width="356" height="141.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Iso-tx-Yzq">
                                                 <rect key="frame" x="0.0" y="0.0" width="356" height="56"/>
@@ -1803,7 +1803,7 @@
                                                 </constraints>
                                             </stackView>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The password was incorrect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjy-Eb-Ez7">
-                                                <rect key="frame" x="0.0" y="64" width="215" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="72" width="215" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1817,7 +1817,7 @@
                                                 </attributedString>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VHK-wj-yaw">
-                                                <rect key="frame" x="0.0" y="72" width="356" height="33"/>
+                                                <rect key="frame" x="0.0" y="108.5" width="356" height="33"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L73-tV-GnT" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="170" height="33"/>
