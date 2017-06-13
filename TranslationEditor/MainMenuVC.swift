@@ -23,6 +23,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 	@IBOutlet weak var topBar: TopBarUIView!
 	@IBOutlet weak var bookTableView: UITableView!
 	@IBOutlet weak var manageUsersButton: BasicButton!
+	@IBOutlet weak var manageSharedAccountButton: BasicButton!
 	
 	
 	// ATTRIBUTES	--------------
@@ -131,6 +132,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 			print("ERROR: Failed to read avatar data. \(error)")
 		}
 		manageUsersButton.isEnabled = adminToolsEnabled
+		manageSharedAccountButton.isEnabled = adminToolsEnabled
 		
 		// If there are USX files waiting for processing, displays import view
 		if let usxUrl = USXImportStack.instance.pop()
@@ -179,6 +181,10 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		displayAlert(withIdentifier: ManageUsersVC.identifier, storyBoardId: "MainMenu")
 	}
 	
+	@IBAction func manageAccountPressed(_ sender: Any)
+	{
+		displayAlert(withIdentifier: EditSharedAccountVC.identifier, storyBoardId: "Common")
+	}
 	
 	
 	// IMPLEMENTED METHODS	-----

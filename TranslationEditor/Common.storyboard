@@ -109,5 +109,234 @@
             </objects>
             <point key="canvasLocation" x="-28.124999999999996" y="122.65625"/>
         </scene>
+        <!--Edit Shared AccountVC-->
+        <scene sceneID="Ny7-Uf-pMg">
+            <objects>
+                <viewController storyboardIdentifier="EditSharedAccountVC" id="5om-uD-ZNQ" customClass="EditSharedAccountVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Ye-oc-53C"/>
+                        <viewControllerLayoutGuide type="bottom" id="bDU-th-ZXs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8Sf-J5-ulY">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rEe-uC-sC6" userLabel="Background">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Twe-Ff-hdZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                        <connections>
+                                            <action selector="backgroundTapped:" destination="5om-uD-ZNQ" eventType="touchUpInside" id="v9e-oI-xal"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Twe-Ff-hdZ" secondAttribute="bottom" id="ICy-0j-3qm"/>
+                                    <constraint firstItem="Twe-Ff-hdZ" firstAttribute="top" secondItem="rEe-uC-sC6" secondAttribute="top" id="Sa8-V1-udJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Twe-Ff-hdZ" secondAttribute="trailing" id="d5E-AV-vdK"/>
+                                    <constraint firstItem="Twe-Ff-hdZ" firstAttribute="leading" secondItem="rEe-uC-sC6" secondAttribute="leading" id="sos-Tq-cZ5"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fH0-W4-BU4" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
+                                <rect key="frame" x="336" y="200.5" width="352" height="369"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="6hw-oo-MAa" userLabel="Content Stack View">
+                                        <rect key="frame" x="16" y="16" width="320" height="337"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="800" text="A shared account is always tied to a single project. Use a shared account when you have multiple users on the same device." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zng-fH-PJW">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="61.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <attributedString key="userComments">
+                                                    <fragment content="A description of the idea of a shared project account">
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="smallSystem"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="S3p-0P-fYV" userLabel="Input Stack View">
+                                                <rect key="frame" x="0.0" y="85.5" width="320" height="187.5"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Qq1-zj-GYs" userLabel="Account Name Stack View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="54.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Shared Account Name*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P91-EO-QBx">
+                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="20.5"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <attributedString key="userComments">
+                                                                    <fragment content="Label for shared account creation account name input">
+                                                                        <attributes>
+                                                                            <font key="NSFont" metaFont="smallSystem"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                            </label>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o12-8r-ce6">
+                                                                <rect key="frame" x="0.0" y="24.5" width="320" height="30"/>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pbw-P5-9c2" userLabel="Passwords Stack View">
+                                                        <rect key="frame" x="0.0" y="70.5" width="320" height="117"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="jJy-qr-tcP" userLabel="Password Stack View">
+                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="54.5"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Shared Account Password*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29p-ee-NQq">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="20.5"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                        <attributedString key="userComments">
+                                                                            <fragment content="Label for shared account creation password input">
+                                                                                <attributes>
+                                                                                    <font key="NSFont" metaFont="smallSystem"/>
+                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                </attributes>
+                                                                            </fragment>
+                                                                        </attributedString>
+                                                                    </label>
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mVP-TM-F9s">
+                                                                        <rect key="frame" x="0.0" y="24.5" width="320" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                                    </textField>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Tst-Bc-b4K" userLabel="Repeat Stack View">
+                                                                <rect key="frame" x="0.0" y="62.5" width="320" height="54.5"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Repeat Password*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNa-Ve-hCi">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="20.5"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                        <attributedString key="userComments">
+                                                                            <fragment content="Label for shared account creation password repeat field">
+                                                                                <attributes>
+                                                                                    <font key="NSFont" metaFont="smallSystem"/>
+                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                </attributes>
+                                                                            </fragment>
+                                                                        </attributedString>
+                                                                    </label>
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="881-ZM-qPB">
+                                                                        <rect key="frame" x="0.0" y="24.5" width="320" height="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                                    </textField>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Error Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPs-jY-mfW">
+                                                        <rect key="frame" x="0.0" y="187.5" width="320" height="0.0"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <color key="textColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="4yn-aj-mQY" userLabel="Button Stack View">
+                                                <rect key="frame" x="0.0" y="297" width="320" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xno-SJ-mzv" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="152" height="40"/>
+                                                        <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <state key="normal" title="Cancel">
+                                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        </state>
+                                                        <attributedString key="userComments">
+                                                            <fragment content="Button closes shared account management view without saving changes">
+                                                                <attributes>
+                                                                    <font key="NSFont" metaFont="smallSystem"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <connections>
+                                                            <action selector="cancelButtonPressed:" destination="5om-uD-ZNQ" eventType="touchUpInside" id="lHD-qK-EKt"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbZ-H8-YFE" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                        <rect key="frame" x="168" y="0.0" width="152" height="40"/>
+                                                        <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                        <state key="normal" title="OK">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <attributedString key="userComments">
+                                                            <fragment content="Button that saves shared account changes and closes the view">
+                                                                <attributes>
+                                                                    <font key="NSFont" metaFont="smallSystem"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="okButtonPressed:" destination="5om-uD-ZNQ" eventType="touchUpInside" id="O48-05-fre"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="JUc-es-83V"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="320" id="MFU-qr-sZb"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="6hw-oo-MAa" secondAttribute="trailing" constant="16" id="227-PO-xJ0"/>
+                                    <constraint firstItem="6hw-oo-MAa" firstAttribute="top" secondItem="fH0-W4-BU4" secondAttribute="top" constant="16" id="EcN-kh-JTh"/>
+                                    <constraint firstAttribute="bottom" secondItem="6hw-oo-MAa" secondAttribute="bottom" constant="16" id="NkJ-m4-6kz"/>
+                                    <constraint firstItem="6hw-oo-MAa" firstAttribute="leading" secondItem="fH0-W4-BU4" secondAttribute="leading" constant="16" id="k9k-sE-N1h"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="bDU-th-ZXs" firstAttribute="top" secondItem="rEe-uC-sC6" secondAttribute="bottom" id="8Cr-tb-VyA"/>
+                            <constraint firstAttribute="trailing" secondItem="rEe-uC-sC6" secondAttribute="trailing" id="E0E-GI-uYg"/>
+                            <constraint firstItem="fH0-W4-BU4" firstAttribute="centerY" secondItem="8Sf-J5-ulY" secondAttribute="centerY" priority="900" id="OZT-jA-Lje"/>
+                            <constraint firstItem="fH0-W4-BU4" firstAttribute="centerX" secondItem="8Sf-J5-ulY" secondAttribute="centerX" id="Qfw-94-u0j"/>
+                            <constraint firstItem="rEe-uC-sC6" firstAttribute="top" secondItem="8Sf-J5-ulY" secondAttribute="top" id="aJe-o0-iAD"/>
+                            <constraint firstItem="rEe-uC-sC6" firstAttribute="leading" secondItem="8Sf-J5-ulY" secondAttribute="leading" id="wlD-UC-vSr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="accountNameField" destination="o12-8r-ce6" id="4jg-aB-EA1"/>
+                        <outlet property="contentView" destination="fH0-W4-BU4" id="mkt-87-zEu"/>
+                        <outlet property="errorLabel" destination="tPs-jY-mfW" id="ksU-qP-T9f"/>
+                        <outlet property="okButton" destination="tbZ-H8-YFE" id="tMf-OU-656"/>
+                        <outlet property="passwordField" destination="mVP-TM-F9s" id="z05-uB-uC9"/>
+                        <outlet property="repeatPasswordField" destination="881-ZM-qPB" id="dd4-di-gXC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vnx-m5-haB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-28.124999999999996" y="811.71875"/>
+        </scene>
     </scenes>
 </document>

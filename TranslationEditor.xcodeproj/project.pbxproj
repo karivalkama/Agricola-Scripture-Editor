@@ -226,6 +226,7 @@
 		7CDBD6F61E2E3F5F00912320 /* NotesPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6F51E2E3F5F00912320 /* NotesPost.swift */; };
 		7CDBD6FA1E2F65E900912320 /* ResourceCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6F91E2F65E900912320 /* ResourceCollectionView.swift */; };
 		7CDBD6FE1E2F7C1700912320 /* ParagraphNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6FD1E2F7C1700912320 /* ParagraphNotesView.swift */; };
+		7CDD78101EEFC31A0048C07D /* EditSharedAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD780F1EEFC31A0048C07D /* EditSharedAccountVC.swift */; };
 		7CE062621EDEDCD500A998E4 /* AutoLoginAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE062611EDEDCD500A998E4 /* AutoLoginAlertVC.swift */; };
 		7CE062641EDFFE4C00A998E4 /* ChapterHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */; };
 		7CE062661EDFFF7B00A998E4 /* ChapterHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE062651EDFFF7B00A998E4 /* ChapterHeaderCell.swift */; };
@@ -481,6 +482,7 @@
 		7CDBD6F51E2E3F5F00912320 /* NotesPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesPost.swift; sourceTree = "<group>"; };
 		7CDBD6F91E2F65E900912320 /* ResourceCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceCollectionView.swift; sourceTree = "<group>"; };
 		7CDBD6FD1E2F7C1700912320 /* ParagraphNotesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphNotesView.swift; sourceTree = "<group>"; };
+		7CDD780F1EEFC31A0048C07D /* EditSharedAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSharedAccountVC.swift; sourceTree = "<group>"; };
 		7CE062611EDEDCD500A998E4 /* AutoLoginAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLoginAlertVC.swift; sourceTree = "<group>"; };
 		7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChapterHeaderCell.xib; sourceTree = "<group>"; };
 		7CE062651EDFFF7B00A998E4 /* ChapterHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterHeaderCell.swift; sourceTree = "<group>"; };
@@ -990,6 +992,7 @@
 			isa = PBXGroup;
 			children = (
 				7CB5B2A21ECDB43E0066446F /* ConnectionVC.swift */,
+				7CDD780F1EEFC31A0048C07D /* EditSharedAccountVC.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1388,6 +1391,7 @@
 				7C6C3C1A1E373959001D56F4 /* PostThreadVC.swift in Sources */,
 				7C20D7FC1D9A87F500E84BA5 /* Verse.swift in Sources */,
 				7C4A50001E016A3B009F890E /* ParagraphHistoryView.swift in Sources */,
+				7CDD78101EEFC31A0048C07D /* EditSharedAccountVC.swift in Sources */,
 				7C4A4FF01DFEDA59009F890E /* OptionalExtension.swift in Sources */,
 				7C0130D41E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift in Sources */,
 				7C903F6F1EA760A8008EE1E6 /* ComparableExtension.swift in Sources */,

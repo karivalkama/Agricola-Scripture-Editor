@@ -36,7 +36,7 @@ class LoginVC: UIViewController
 		
 		errorLabel.text = nil
 		
-		contentView.configure(mainView: view, elements: [userNameField, passwordField, errorLabel, loginButton, continueButton], centeringConstraint: centeringConstraint)
+		contentView.configure(mainView: view, elements: [userNameField, passwordField, errorLabel, loginButton, continueButton])
     }
 	
 	override func viewDidAppear(_ animated: Bool)

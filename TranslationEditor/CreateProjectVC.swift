@@ -163,7 +163,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		{
 			// TODO: Add default book identifier field
 			let projectAccount = AgricolaAccount(name: accountName, isShared: true, password: password, firstDevice: UIDevice.current.identifierForVendor?.uuidString)
-			let project = Project(name: projectName, languageId: selectedLanguage.idString, ownerId: currentAccountId, contributorIds: [currentAccountId], sharedAccountId: projectAccount.idString, defaultBookIdentifier: defaultBookIdentifier)
+			let project = Project(name: projectName, languageId: selectedLanguage.idString, ownerId: currentAccountId, contributorIds: [currentAccountId], defaultBookIdentifier: defaultBookIdentifier, sharedAccountId: projectAccount.idString)
 			
 			try DATABASE.tryTransaction
 			{
