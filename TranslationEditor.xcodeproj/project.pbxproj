@@ -227,6 +227,7 @@
 		7CDBD6FA1E2F65E900912320 /* ResourceCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6F91E2F65E900912320 /* ResourceCollectionView.swift */; };
 		7CDBD6FE1E2F7C1700912320 /* ParagraphNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDBD6FD1E2F7C1700912320 /* ParagraphNotesView.swift */; };
 		7CDD78101EEFC31A0048C07D /* EditSharedAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD780F1EEFC31A0048C07D /* EditSharedAccountVC.swift */; };
+		7CDD78121EF10D310048C07D /* ImportBookPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD78111EF10D310048C07D /* ImportBookPreviewVC.swift */; };
 		7CE062621EDEDCD500A998E4 /* AutoLoginAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE062611EDEDCD500A998E4 /* AutoLoginAlertVC.swift */; };
 		7CE062641EDFFE4C00A998E4 /* ChapterHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */; };
 		7CE062661EDFFF7B00A998E4 /* ChapterHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE062651EDFFF7B00A998E4 /* ChapterHeaderCell.swift */; };
@@ -483,6 +484,7 @@
 		7CDBD6F91E2F65E900912320 /* ResourceCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceCollectionView.swift; sourceTree = "<group>"; };
 		7CDBD6FD1E2F7C1700912320 /* ParagraphNotesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphNotesView.swift; sourceTree = "<group>"; };
 		7CDD780F1EEFC31A0048C07D /* EditSharedAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSharedAccountVC.swift; sourceTree = "<group>"; };
+		7CDD78111EF10D310048C07D /* ImportBookPreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportBookPreviewVC.swift; sourceTree = "<group>"; };
 		7CE062611EDEDCD500A998E4 /* AutoLoginAlertVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLoginAlertVC.swift; sourceTree = "<group>"; };
 		7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChapterHeaderCell.xib; sourceTree = "<group>"; };
 		7CE062651EDFFF7B00A998E4 /* ChapterHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterHeaderCell.swift; sourceTree = "<group>"; };
@@ -885,6 +887,7 @@
 				7C903F701EA8DBDE008EE1E6 /* ErrorAlertVC.swift */,
 				7C8F4B021EC1F08C00F9B25F /* ImportBookVC.swift */,
 				7C7767201EE675C700952D5B /* ManageUsersVC.swift */,
+				7CDD78111EF10D310048C07D /* ImportBookPreviewVC.swift */,
 			);
 			name = "Main Menu";
 			sourceTree = "<group>";
@@ -1525,6 +1528,7 @@
 				7CDBD6C81E28B69B00912320 /* TranslationTableViewDS.swift in Sources */,
 				7CA1BAC01E323A7700611FED /* ResourceManager.swift in Sources */,
 				7CCC00F61D9D235800F0562E /* USXAttributes.swift in Sources */,
+				7CDD78121EF10D310048C07D /* ImportBookPreviewVC.swift in Sources */,
 				7C20D7FF1D9A93AA00E84BA5 /* StringExtension.swift in Sources */,
 				7C60705B1E5D705B007718BC /* AvatarView.swift in Sources */,
 				7C1515151E94BEDC00419DEA /* CircleImage.swift in Sources */,

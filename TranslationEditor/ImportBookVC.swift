@@ -17,8 +17,6 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	@IBOutlet weak var contentView: KeyboardReactiveView!
 	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
-	@IBOutlet weak var bookNameField: UITextField!
-	@IBOutlet weak var importButton: UIButton!
 	@IBOutlet weak var topBar: TopBarUIView!
 	@IBOutlet weak var languageFilterField: UITextField!
 	@IBOutlet weak var bookFilterField: UITextField!
@@ -48,8 +46,6 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	private var bookQueryManager: LiveQueryManager<ProjectBooksView>?
 	private var resourceQueryManager: LiveQueryManager<ResourceCollectionView>?
 	
-	private var selectedBook: Book?
-	
 	
 	// LOAD	----------------------
 	
@@ -64,7 +60,7 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		bookSelectionTable.dataSource = self
 		bookSelectionTable.delegate = self
 		
-		contentView.configure(mainView: view, elements: [languageFilterField, bookFilterField, bookNameField, importButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
+		contentView.configure(mainView: view, elements: [languageFilterField, bookFilterField], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
 		
 		guard let projectId = Session.instance.projectId else
 		{
@@ -73,7 +69,6 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		}
 		
 		resourceQueryManager = ResourceCollectionView.instance.collectionQuery(projectId: projectId).liveQueryManager
-		updateImportButtonStatus()
     }
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -111,26 +106,6 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	
 	
 	// ACTIONS	------------------
-	
-	@IBAction func bookNameChanged(_ sender: Any)
-	{
-		updateImportButtonStatus()
-	}
-	
-	@IBAction func importButtonPressed(_ sender: Any)
-	{
-		guard let book = selectedBook else
-		{
-			print("ERROR: Trying to import book before selecting one first")
-			return
-		}
-		
-		if importBook(book)
-		{
-			// TODO: Open the newly updated book
-			dismiss(animated: true, completion: nil)
-		}
-	}
     
 	@IBAction func languageFilterChanged(_ sender: Any)
 	{
@@ -164,8 +139,17 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 	{
-		selectedBook = displayedOptions[indexPath.row].book
-		updateImportButtonStatus()
+		let book = displayedOptions[indexPath.row].book
+		displayAlert(withIdentifier: ImportBookPreviewVC.identifier, storyBoardId: "MainMenu")
+		{
+			vc in (vc as! ImportBookPreviewVC).configure(bookToImport: book)
+			{
+				if $0
+				{
+					self.dismiss(animated: true, completion: nil)
+				}
+			}
+		}
 	}
 	
 	func rowsUpdated(rows: [Row<ProjectBooksView>])
@@ -183,11 +167,6 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	
 	
 	// OTHER METHODS	----------
-	
-	private func updateImportButtonStatus()
-	{
-		importButton.isEnabled = selectedBook != nil && !bookNameField.isEmpty
-	}
 	
 	private func resourceRowsUpdated(rows: [Row<ResourceCollectionView>])
 	{
@@ -318,6 +297,7 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		}
 	}
 	
+	/*
 	private func importBook(_ book: Book) -> Bool
 	{
 		do
@@ -403,6 +383,7 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 			return false
 		}
 	}
+*/
 }
 
 /*

@@ -11,6 +11,191 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Import Book PreviewVC-->
+        <scene sceneID="tF3-Na-6HX">
+            <objects>
+                <viewController storyboardIdentifier="ImportBookPreviewVC" id="mDm-AW-kbR" customClass="ImportBookPreviewVC" customModule="TranslationEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="92y-rt-gsR"/>
+                        <viewControllerLayoutGuide type="bottom" id="aVA-i3-ady"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Xt-EK-7VK">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jt1-I5-8P5" userLabel="Background">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZO7-9G-6XA">
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                        <connections>
+                                            <action selector="backgroundTapped:" destination="mDm-AW-kbR" eventType="touchUpInside" id="Ldh-QF-U26"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="ZO7-9G-6XA" firstAttribute="leading" secondItem="jt1-I5-8P5" secondAttribute="leading" id="Avr-wQ-FzX"/>
+                                    <constraint firstItem="ZO7-9G-6XA" firstAttribute="top" secondItem="jt1-I5-8P5" secondAttribute="top" id="LZU-DJ-aIN"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZO7-9G-6XA" secondAttribute="trailing" id="TNN-a6-Cyk"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZO7-9G-6XA" secondAttribute="bottom" id="fte-0I-QaC"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Tf-cI-tRF" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
+                                <rect key="frame" x="68" y="52" width="888" height="652"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="JFO-Ck-Ekm" userLabel="Content Stack View">
+                                        <rect key="frame" x="16" y="12" width="856" height="624"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jue-3X-kqJ" userLabel="Preview Stack View">
+                                                <rect key="frame" x="0.0" y="0.0" width="856" height="485.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Preview" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YF1-xu-qS8">
+                                                        <rect key="frame" x="0.0" y="0.0" width="856" height="26.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <attributedString key="userComments">
+                                                            <fragment content="A title for the preview imported book view">
+                                                                <attributes>
+                                                                    <font key="NSFont" metaFont="smallSystem"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                    </label>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WJ6-DU-FQN">
+                                                        <rect key="frame" x="0.0" y="34.5" width="856" height="451"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </tableView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="YUW-EO-vRL">
+                                                <rect key="frame" x="0.0" y="501.5" width="856" height="30"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname for the Book*" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9D-Pp-6Ns">
+                                                        <rect key="frame" x="0.0" y="0.0" width="472" height="30"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <attributedString key="userComments">
+                                                            <fragment content="A label for book / resource nickname input">
+                                                                <attributes>
+                                                                    <font key="NSFont" metaFont="smallSystem"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="500" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zHs-94-r3Q">
+                                                        <rect key="frame" x="488" y="0.0" width="368" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="5jG-iz-PV8"/>
+                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="368" id="MUH-Ux-ZL2"/>
+                                                        </constraints>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="bookNameChanged:" destination="mDm-AW-kbR" eventType="editingChanged" id="ubR-QS-C5W"/>
+                                                        </connections>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="900" text="Errors are displayed here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTa-9T-igA">
+                                                <rect key="frame" x="0.0" y="547.5" width="856" height="20.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <color key="textColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gAy-xd-eFS" userLabel="Button Stack View">
+                                                <rect key="frame" x="0.0" y="584" width="856" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAM-73-JEj" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="420" height="40"/>
+                                                        <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <state key="normal" title="Cancel">
+                                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        </state>
+                                                        <attributedString key="userComments">
+                                                            <fragment content="a button for cancelling out of an import of a book (based on preview)">
+                                                                <attributes>
+                                                                    <font key="NSFont" metaFont="smallSystem"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <connections>
+                                                            <action selector="cancelPressed:" destination="mDm-AW-kbR" eventType="touchUpInside" id="whd-ps-cpE"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVT-oJ-eUv" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                        <rect key="frame" x="436" y="0.0" width="420" height="40"/>
+                                                        <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                        <state key="normal" title="Import">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <attributedString key="userComments">
+                                                            <fragment content="A button for accepting a resource / preview and importing it as a new book to project">
+                                                                <attributes>
+                                                                    <font key="NSFont" metaFont="smallSystem"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="importButtonPressed:" destination="mDm-AW-kbR" eventType="touchUpInside" id="FSo-WH-vVy"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="wGB-s6-bZc"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="JFO-Ck-Ekm" secondAttribute="trailing" constant="16" id="0ap-Uv-6je"/>
+                                    <constraint firstItem="JFO-Ck-Ekm" firstAttribute="top" secondItem="9Tf-cI-tRF" secondAttribute="top" constant="12" id="H2A-VC-SOY"/>
+                                    <constraint firstAttribute="bottom" secondItem="JFO-Ck-Ekm" secondAttribute="bottom" constant="16" id="j4Q-I7-ZFm"/>
+                                    <constraint firstItem="JFO-Ck-Ekm" firstAttribute="leading" secondItem="9Tf-cI-tRF" secondAttribute="leading" constant="16" id="wS9-Dt-NOH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="jt1-I5-8P5" firstAttribute="leading" secondItem="2Xt-EK-7VK" secondAttribute="leading" id="DTg-hf-vcN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9Tf-cI-tRF" secondAttribute="trailing" constant="48" id="EHR-u7-XHk"/>
+                            <constraint firstItem="jt1-I5-8P5" firstAttribute="top" secondItem="2Xt-EK-7VK" secondAttribute="top" id="Ibq-vA-Vzo"/>
+                            <constraint firstItem="aVA-i3-ady" firstAttribute="top" secondItem="9Tf-cI-tRF" secondAttribute="bottom" constant="64" id="Rrq-JW-kaK"/>
+                            <constraint firstItem="9Tf-cI-tRF" firstAttribute="leading" secondItem="2Xt-EK-7VK" secondAttribute="leadingMargin" constant="48" id="ZKW-Pe-47A"/>
+                            <constraint firstItem="9Tf-cI-tRF" firstAttribute="top" secondItem="92y-rt-gsR" secondAttribute="bottom" constant="32" id="a51-Iv-0Aa"/>
+                            <constraint firstItem="aVA-i3-ady" firstAttribute="top" secondItem="jt1-I5-8P5" secondAttribute="bottom" id="b64-XI-zdw"/>
+                            <constraint firstAttribute="trailing" secondItem="jt1-I5-8P5" secondAttribute="trailing" id="egt-Pm-ZDR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bookNameField" destination="zHs-94-r3Q" id="abE-jH-NbN"/>
+                        <outlet property="bottomConstraint" destination="Rrq-JW-kaK" id="Ymv-S3-ftn"/>
+                        <outlet property="contentView" destination="9Tf-cI-tRF" id="yRh-EL-nQc"/>
+                        <outlet property="errorLabel" destination="eTa-9T-igA" id="Qry-AV-L8O"/>
+                        <outlet property="importButton" destination="YVT-oJ-eUv" id="0pC-Zx-iHZ"/>
+                        <outlet property="previewTableView" destination="WJ6-DU-FQN" id="lLC-Xh-zWx"/>
+                        <outlet property="topConstraint" destination="a51-Iv-0Aa" id="BDn-pi-2HR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sr0-8c-x2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="29.882812499999996" y="-1359.375"/>
+        </scene>
         <!--Import BookVC-->
         <scene sceneID="g4J-Ai-4BS">
             <objects>
@@ -124,14 +309,14 @@
                                                         </subviews>
                                                     </stackView>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h1N-6x-c60">
-                                                        <rect key="frame" x="0.0" y="70.5" width="984" height="551"/>
+                                                        <rect key="frame" x="0.0" y="70.5" width="984" height="621.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImportBookCell" rowHeight="57" id="fTI-cv-o5L" customClass="ImportBookCell" customModule="TranslationEditor" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="28" width="984" height="57"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fTI-cv-o5L" id="r8w-6k-53f">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="984" height="56"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="984" height="56.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mvm-r5-vkT">
@@ -192,61 +377,6 @@
                                                             </tableViewCell>
                                                         </prototypes>
                                                     </tableView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="tFb-oh-tcP">
-                                                        <rect key="frame" x="0.0" y="637.5" width="984" height="54.5"/>
-                                                        <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="z4g-i6-zSB">
-                                                                <rect key="frame" x="0.0" y="0.0" width="484" height="54.5"/>
-                                                                <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Nickname*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SD-c4-9aN">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="484" height="20.5"/>
-                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                        <nil key="textColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                        <attributedString key="userComments">
-                                                                            <fragment content="Book nickname input label">
-                                                                                <attributes>
-                                                                                    <font key="NSFont" metaFont="smallSystem"/>
-                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                </attributes>
-                                                                            </fragment>
-                                                                        </attributedString>
-                                                                    </label>
-                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DN7-cN-NXz">
-                                                                        <rect key="frame" x="0.0" y="24.5" width="484" height="30"/>
-                                                                        <nil key="textColor"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                        <textInputTraits key="textInputTraits"/>
-                                                                        <connections>
-                                                                            <action selector="bookNameChanged:" destination="jRE-kJ-8QQ" eventType="editingChanged" id="7Nf-UR-peR"/>
-                                                                        </connections>
-                                                                    </textField>
-                                                                </subviews>
-                                                            </stackView>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAS-pL-VyU" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                                <rect key="frame" x="500" y="0.0" width="484" height="54.5"/>
-                                                                <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                <state key="normal" title="Import">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                </state>
-                                                                <attributedString key="userComments">
-                                                                    <fragment content="Button for importing the selected book">
-                                                                        <attributes>
-                                                                            <font key="NSFont" metaFont="smallSystem"/>
-                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                        </attributes>
-                                                                    </fragment>
-                                                                </attributedString>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                                <connections>
-                                                                    <action selector="importButtonPressed:" destination="jRE-kJ-8QQ" eventType="touchUpInside" id="otx-iS-dUe"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -281,12 +411,10 @@
                     </view>
                     <connections>
                         <outlet property="bookFilterField" destination="uBO-FF-jAs" id="07A-dd-s5p"/>
-                        <outlet property="bookNameField" destination="DN7-cN-NXz" id="gNd-Ew-nTT"/>
                         <outlet property="bookSelectionTable" destination="h1N-6x-c60" id="0PJ-X0-Gsa"/>
                         <outlet property="contentBottomConstraint" destination="GCc-OI-isV" id="oFl-JK-GEP"/>
                         <outlet property="contentTopConstraint" destination="7Ae-qK-caj" id="LSe-o2-p1R"/>
                         <outlet property="contentView" destination="yA3-Zr-TLc" id="0LQ-TY-sUg"/>
-                        <outlet property="importButton" destination="LAS-pL-VyU" id="IIW-pb-6nt"/>
                         <outlet property="languageFilterField" destination="jCu-Gm-Vhp" id="3in-bF-uf6"/>
                         <outlet property="topBar" destination="vSF-OG-rbj" id="fVn-A7-RjP"/>
                     </connections>
@@ -335,7 +463,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="776" height="50"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X1P-0t-QRE" id="mvV-WX-iNg">
-                                                            <rect key="frame" x="0.0" y="0.0" width="776" height="49"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="776" height="49.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="NUP-IX-Jos">
@@ -827,7 +955,7 @@ Project Account</string>
                                                         <rect key="frame" x="0.0" y="28" width="648" height="50"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c4X-LY-Oow" id="szy-1l-exz">
-                                                            <rect key="frame" x="0.0" y="0.0" width="648" height="50"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="648" height="49.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="DCF-01-Sq9">
