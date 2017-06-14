@@ -193,7 +193,7 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	{
 		do
 		{
-			alreadyImportedIds = try rows.flatMap { $0.id }.flatMap { try ParagraphBinding.get(resourceCollectionId: $0)?.idString }
+			alreadyImportedIds = try rows.flatMap { $0.id }.flatMap { try ParagraphBinding.get(resourceCollectionId: $0)?.sourceBookId }
 			update()
 		}
 		catch
