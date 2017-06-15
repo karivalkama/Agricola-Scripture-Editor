@@ -192,6 +192,8 @@
 		7CCBE9FE1EF1691B001FE7E7 /* SimpleSingleSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBE9FD1EF1691B001FE7E7 /* SimpleSingleSelectionView.swift */; };
 		7CCBEA021EF277A5001FE7E7 /* Squishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA011EF277A5001FE7E7 /* Squishable.swift */; };
 		7CCBEA041EF278BB001FE7E7 /* SquishableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA031EF278BB001FE7E7 /* SquishableStackView.swift */; };
+		7CCBEA081EF2B432001FE7E7 /* DefaultLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBEA071EF2B432001FE7E7 /* DefaultLoadingView.xib */; };
+		7CCBEA0A1EF2B6B9001FE7E7 /* DefaultLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA091EF2B6B9001FE7E7 /* DefaultLoadingView.swift */; };
 		7CCC00EA1D9BD3FC00F0562E /* VerseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00E91D9BD3FC00F0562E /* VerseError.swift */; };
 		7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00EB1D9D067C00F0562E /* CharData.swift */; };
 		7CCC00EE1D9D193F00F0562E /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00ED1D9D193F00F0562E /* CollectionExtension.swift */; };
@@ -457,6 +459,8 @@
 		7CCBE9FD1EF1691B001FE7E7 /* SimpleSingleSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleSingleSelectionView.swift; sourceTree = "<group>"; };
 		7CCBEA011EF277A5001FE7E7 /* Squishable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Squishable.swift; sourceTree = "<group>"; };
 		7CCBEA031EF278BB001FE7E7 /* SquishableStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquishableStackView.swift; sourceTree = "<group>"; };
+		7CCBEA071EF2B432001FE7E7 /* DefaultLoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultLoadingView.xib; sourceTree = "<group>"; };
+		7CCBEA091EF2B6B9001FE7E7 /* DefaultLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLoadingView.swift; sourceTree = "<group>"; };
 		7CCC00E91D9BD3FC00F0562E /* VerseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseError.swift; sourceTree = "<group>"; };
 		7CCC00EB1D9D067C00F0562E /* CharData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharData.swift; sourceTree = "<group>"; };
 		7CCC00ED1D9D193F00F0562E /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
@@ -884,6 +888,7 @@
 				7CB5B2A61ECEBEB30066446F /* TopBarUIView.swift */,
 				7CE062651EDFFF7B00A998E4 /* ChapterHeaderCell.swift */,
 				7CCBE9FD1EF1691B001FE7E7 /* SimpleSingleSelectionView.swift */,
+				7CCBEA091EF2B6B9001FE7E7 /* DefaultLoadingView.swift */,
 			);
 			name = XibViews;
 			sourceTree = "<group>";
@@ -987,6 +992,7 @@
 				7C2E27A11EE6D6DB003602B0 /* Connect2.xib */,
 				7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */,
 				7CCBE9FB1EF16707001FE7E7 /* SimpleSingleSelection.xib */,
+				7CCBEA071EF2B432001FE7E7 /* DefaultLoadingView.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -1204,6 +1210,7 @@
 				7C9BB7E51E8538730010DE5C /* TopUserDisplay.xib in Resources */,
 				7CD8EA661DB644E300364B70 /* GAL.usx in Resources */,
 				7C60704D1E533ED3007718BC /* VerseDataCell.xib in Resources */,
+				7CCBEA081EF2B432001FE7E7 /* DefaultLoadingView.xib in Resources */,
 				7C8F4AFF1EC1D75400F9B25F /* BookProgressUIView.xib in Resources */,
 				7C7FD65A1EA5E18600ED2364 /* ParagraphCell.xib in Resources */,
 				7C15151A1E961B6300419DEA /* P2PJoinView.xib in Resources */,
@@ -1535,6 +1542,7 @@
 				7C94961E1EB351CB0063EA83 /* USXFootNoteProcessor.swift in Sources */,
 				7C0130CB1E41F4D30053C5C2 /* ProjectView.swift in Sources */,
 				7CCC013C1DA7BA2D00F0562E /* USXParseError.swift in Sources */,
+				7CCBEA0A1EF2B6B9001FE7E7 /* DefaultLoadingView.swift in Sources */,
 				7C903F6D1EA7536A008EE1E6 /* BookCode.swift in Sources */,
 				7C7767211EE675C700952D5B /* ManageUsersVC.swift in Sources */,
 				7C8F4AFD1EC1920400F9B25F /* BookProgressView.swift in Sources */,
