@@ -9,18 +9,22 @@
 import UIKit
 
 // This view controller is used for adding of new projects
-class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSingleSelectionDelegate
+class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSingleSelectionViewDelegate
 {
 	// OUTLETS	---------------------
 	
 	@IBOutlet weak var projectNameField: UITextField!
 	@IBOutlet weak var defaultBookIdentifierField: UITextField!
 	@IBOutlet weak var errorLabel: UILabel!
-	@IBOutlet weak var selectLanguageView: FilteredSingleSelection!
+	@IBOutlet weak var selectLanguageView: SimpleSingleSelectionView!
 	@IBOutlet weak var createProjectButton: BasicButton!
 	@IBOutlet weak var contentView: KeyboardReactiveView!
 	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var projectNameStackView: UIStackView!
+	@IBOutlet weak var translationNameStackView: UIStackView!
+	@IBOutlet weak var contentStackView: SquishableStackView!
+	@IBOutlet weak var inputStackView: SquishableStackView!
 	
 	
 	// ATTRIBUTES	-----------------
@@ -32,6 +36,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 	
 	private var languages = [Language]()
 	private var selectedLanguage: Language?
+	private var languageName = ""
 	
 	
 	// COMPUTED PROPERTIES	---------
@@ -51,7 +56,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		selectLanguageView.delegate = self
 		selectLanguageView.datasource = self
 		
-		contentView.configure(mainView: view, elements: [projectNameField, defaultBookIdentifierField, errorLabel, selectLanguageView, createProjectButton], topConstraint: contentTopConstraint)
+		contentView.configure(mainView: view, elements: [projectNameField, defaultBookIdentifierField, errorLabel, selectLanguageView, createProjectButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish, squishedElements: [contentStackView, inputStackView], switchedStackViews: [projectNameStackView, translationNameStackView])
     }
 	
 	override func viewWillAppear(_ animated: Bool)
@@ -97,6 +102,16 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		dismiss(animated: true, completion: { self.completion?(false) })
 	}
 	
+	@IBAction func projectNameUpdated(_ sender: Any)
+	{
+		updateCreateButtonStatus()
+	}
+	
+	@IBAction func translationNameUpdated(_ sender: Any)
+	{
+		updateCreateButtonStatus()
+	}
+	
 	@IBAction func createProjectPressed(_ sender: Any)
 	{
 		// Makes sure all the fields are filled
@@ -109,7 +124,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 			return
 		}
 		
-		guard let selectedLanguage = selectedLanguage else
+		guard !languageName.isEmpty else
 		{
 			errorLabel.text = NSLocalizedString("Please select the target language", comment: "An error message when the user hasn't selected project language when trying to create a project")
 			return
@@ -125,7 +140,22 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		// Creates a new project and sasves the project account, if applicable
 		do
 		{
-			let project = Project(name: projectName, languageId: selectedLanguage.idString, ownerId: currentAccountId, contributorIds: [currentAccountId], defaultBookIdentifier: translationName, sharedAccountId: newSharedAccount?.idString)
+			// May need to insert the language as a new instance
+			var language: Language!
+			if let selectedLanguage = selectedLanguage
+			{
+				language = selectedLanguage
+			}
+			else if let matchingLanguage = languages.first(where: { $0.name.lowercased().contains(languageName.lowercased()) })
+			{
+				language = matchingLanguage
+			}
+			else
+			{
+				language = try LanguageView.instance.language(withName: languageName.capitalized)
+			}
+			
+			let project = Project(name: projectName, languageId: language.idString, ownerId: currentAccountId, contributorIds: [currentAccountId], defaultBookIdentifier: translationName, sharedAccountId: newSharedAccount?.idString)
 			
 			try DATABASE.tryTransaction
 			{
@@ -151,38 +181,16 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 		return languages[index].name
 	}
 	
-	func indexIsIncludedInFilter(index: Int, filter: String) -> Bool
+	func onValueChanged(_ newValue: String, selectedAt index: Int?)
 	{
-		return labelForOption(atIndex: index).contains(filter)
-	}
-	
-	func onItemSelected(index: Int)
-	{
-		createProjectButton.isEnabled = true
-		selectedLanguage = languages[index]
-	}
-	
-	func insertItem(named: String) -> Int?
-	{
-		// Checks if there already exists a language with the same name
-		if let existingIndex = languages.index(where: { $0.name.lowercased() == named })
+		languageName = newValue
+		
+		if let index = index
 		{
-			return existingIndex
+			selectedLanguage = languages[index]
 		}
-		else
-		{
-			do
-			{
-				let newLanguage = try LanguageView.instance.language(withName: named)
-				languages.add(newLanguage)
-				return languages.count - 1
-			}
-			catch
-			{
-				print("ERROR: Failed to insert a new language. \(error)")
-				return nil
-			}
-		}
+		
+		updateCreateButtonStatus()
 	}
 	
 	
@@ -192,5 +200,10 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, FilteredSi
 	{
 		self.newSharedAccount = newAccount
 		self.completion = completion
+	}
+	
+	private func updateCreateButtonStatus()
+	{
+		createProjectButton.isEnabled = !projectNameField.trimmedText.isEmpty && !defaultBookIdentifierField.trimmedText.isEmpty && !languageName.isEmpty
 	}
 }

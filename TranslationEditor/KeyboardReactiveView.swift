@@ -32,6 +32,8 @@ class KeyboardReactiveView: UIView
 		}
 	}
 	
+	private var squishableElements = [Weak<Squishable>]()
+	private var switchableStackViews = [Weak<UIStackView>]()
 	private var margin: CGFloat = 16
 	private weak var topConstraint: NSLayoutConstraint?
 	private weak var bottomConstraint: NSLayoutConstraint?
@@ -68,7 +70,7 @@ class KeyboardReactiveView: UIView
 	
 	// OTHER METHODS	--------
 	
-	func configure(mainView: UIView, elements: [UIView], topConstraint: NSLayoutConstraint? = nil, bottomConstraint: NSLayoutConstraint? = nil, style: ReactionStyle = .slide, margin: CGFloat = 16)
+	func configure(mainView: UIView, elements: [UIView], topConstraint: NSLayoutConstraint? = nil, bottomConstraint: NSLayoutConstraint? = nil, style: ReactionStyle = .slide, squishedElements: [Squishable] = [], switchedStackViews: [UIStackView] = [], margin: CGFloat = 16)
 	{
 		self.mainView = mainView
 		self.importantElements = elements
@@ -76,6 +78,8 @@ class KeyboardReactiveView: UIView
 		self.bottomConstraint = bottomConstraint
 		self.margin = margin
 		self.style = style
+		self.switchableStackViews = switchedStackViews.weakReference
+		self.squishableElements = squishedElements.weakReference
 		// self.centeringConstraint = centeringConstraint
 	}
 	
@@ -112,6 +116,10 @@ class KeyboardReactiveView: UIView
 		}
 		
 		keyboardIsShown = true
+		
+		// Switches the axis of certain stack views and squishes others
+		switchableStackViews.forEach { $0.value?.switchAxis() }
+		squishableElements.forEach { $0.value?.setSquish(true, along: .vertical) }
 		
 		guard let keyboardSize = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect else
 		{
@@ -208,6 +216,13 @@ class KeyboardReactiveView: UIView
 	
 	private func setRaise(to raise: CGFloat)
 	{
+		// If the view is lowered back, also resets the stack views and squishable elements
+		if raise == 0 && isRaised
+		{
+			squishableElements.forEach { $0.value?.setSquish(false, along: .vertical) }
+			switchableStackViews.forEach { $0.value?.switchAxis() }
+		}
+		
 		raiseView(by: raise - totalRaise)
 	}
 	

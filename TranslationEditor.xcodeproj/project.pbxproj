@@ -188,6 +188,10 @@
 		7CB5B2A31ECDB43E0066446F /* ConnectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5B2A21ECDB43E0066446F /* ConnectionVC.swift */; };
 		7CB5B2A51ECDB9F70066446F /* TopBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB5B2A41ECDB9F70066446F /* TopBar.xib */; };
 		7CB5B2A71ECEBEB30066446F /* TopBarUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5B2A61ECEBEB30066446F /* TopBarUIView.swift */; };
+		7CCBE9FC1EF16707001FE7E7 /* SimpleSingleSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBE9FB1EF16707001FE7E7 /* SimpleSingleSelection.xib */; };
+		7CCBE9FE1EF1691B001FE7E7 /* SimpleSingleSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBE9FD1EF1691B001FE7E7 /* SimpleSingleSelectionView.swift */; };
+		7CCBEA021EF277A5001FE7E7 /* Squishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA011EF277A5001FE7E7 /* Squishable.swift */; };
+		7CCBEA041EF278BB001FE7E7 /* SquishableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA031EF278BB001FE7E7 /* SquishableStackView.swift */; };
 		7CCC00EA1D9BD3FC00F0562E /* VerseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00E91D9BD3FC00F0562E /* VerseError.swift */; };
 		7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00EB1D9D067C00F0562E /* CharData.swift */; };
 		7CCC00EE1D9D193F00F0562E /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00ED1D9D193F00F0562E /* CollectionExtension.swift */; };
@@ -449,6 +453,10 @@
 		7CB5B2A21ECDB43E0066446F /* ConnectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionVC.swift; sourceTree = "<group>"; };
 		7CB5B2A41ECDB9F70066446F /* TopBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopBar.xib; sourceTree = "<group>"; };
 		7CB5B2A61ECEBEB30066446F /* TopBarUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarUIView.swift; sourceTree = "<group>"; };
+		7CCBE9FB1EF16707001FE7E7 /* SimpleSingleSelection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleSingleSelection.xib; sourceTree = "<group>"; };
+		7CCBE9FD1EF1691B001FE7E7 /* SimpleSingleSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleSingleSelectionView.swift; sourceTree = "<group>"; };
+		7CCBEA011EF277A5001FE7E7 /* Squishable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Squishable.swift; sourceTree = "<group>"; };
+		7CCBEA031EF278BB001FE7E7 /* SquishableStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquishableStackView.swift; sourceTree = "<group>"; };
 		7CCC00E91D9BD3FC00F0562E /* VerseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseError.swift; sourceTree = "<group>"; };
 		7CCC00EB1D9D067C00F0562E /* CharData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharData.swift; sourceTree = "<group>"; };
 		7CCC00ED1D9D193F00F0562E /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
@@ -843,6 +851,8 @@
 				7C4A4FDB1DFAE273009F890E /* Theme.swift */,
 				7C4A4FD71DFAE0AA009F890E /* BasicButton.swift */,
 				7C1515141E94BEDC00419DEA /* CircleImage.swift */,
+				7CCBEA011EF277A5001FE7E7 /* Squishable.swift */,
+				7CCBEA031EF278BB001FE7E7 /* SquishableStackView.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -873,6 +883,7 @@
 				7CB5B29D1ECC7D0B0066446F /* ConnectionUIView.swift */,
 				7CB5B2A61ECEBEB30066446F /* TopBarUIView.swift */,
 				7CE062651EDFFF7B00A998E4 /* ChapterHeaderCell.swift */,
+				7CCBE9FD1EF1691B001FE7E7 /* SimpleSingleSelectionView.swift */,
 			);
 			name = XibViews;
 			sourceTree = "<group>";
@@ -975,6 +986,7 @@
 				7CB5B2A41ECDB9F70066446F /* TopBar.xib */,
 				7C2E27A11EE6D6DB003602B0 /* Connect2.xib */,
 				7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */,
+				7CCBE9FB1EF16707001FE7E7 /* SimpleSingleSelection.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -1178,6 +1190,7 @@
 			files = (
 				7C57EC151E694975000718E9 /* TIT_ENG.usx in Resources */,
 				7C18A1991D8BBEBD00DD1B03 /* LaunchScreen.storyboard in Resources */,
+				7CCBE9FC1EF16707001FE7E7 /* SimpleSingleSelection.xib in Resources */,
 				7C57EC0F1E6948FC000718E9 /* TI2_ENG.usx in Resources */,
 				7CB5B2A51ECDB9F70066446F /* TopBar.xib in Resources */,
 				7C936C151E9E582C00AC06BF /* FilteredSingleSelection.xib in Resources */,
@@ -1451,6 +1464,7 @@
 				7C0130B81E3B6A1D0053C5C2 /* Avatar.swift in Sources */,
 				7C6B7B201E6557270005AD43 /* FilteredMultiSelection.swift in Sources */,
 				7C8F4B011EC1E13F00F9B25F /* BookProgressUIView.swift in Sources */,
+				7CCBEA041EF278BB001FE7E7 /* SquishableStackView.swift in Sources */,
 				7CD8EA621DB62BFD00364B70 /* USXVerseProcessor.swift in Sources */,
 				7C40DF7C1DED9FB90035B92E /* Language.swift in Sources */,
 				7C20D7FA1D9A768700E84BA5 /* VerseRange.swift in Sources */,
@@ -1494,6 +1508,7 @@
 				7C4A4F8B1DEEC4BD009F890E /* View.swift in Sources */,
 				7C6070501E55860B007718BC /* Keyboard.swift in Sources */,
 				7CA1BAB81E31F33000611FED /* DateExtension.swift in Sources */,
+				7CCBEA021EF277A5001FE7E7 /* Squishable.swift in Sources */,
 				7CCC01341DA7964000F0562E /* XmlParserUtil.swift in Sources */,
 				7C94961A1EAE25190063EA83 /* FootNote.swift in Sources */,
 				7C936C1D1E9F921200AC06BF /* BookData.swift in Sources */,
@@ -1544,6 +1559,7 @@
 				7C40DF701DEC6AB00035B92E /* Id.swift in Sources */,
 				7C6B7B231E6565CC0005AD43 /* CustomXibView.swift in Sources */,
 				7C4A4F8F1DEEF891009F890E /* ParagraphView.swift in Sources */,
+				7CCBE9FE1EF1691B001FE7E7 /* SimpleSingleSelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

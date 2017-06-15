@@ -189,6 +189,21 @@ extension UITextField
 	var trimmedText: String { return (text ?? "").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
 }
 
+extension UIStackView
+{
+	func switchAxis()
+	{
+		if axis == .horizontal
+		{
+			axis = .vertical
+		}
+		else
+		{
+			axis = .horizontal
+		}
+	}
+}
+
 extension UIFont
 {
 	var isBold: Bool { return hasTrait(.traitBold) }
