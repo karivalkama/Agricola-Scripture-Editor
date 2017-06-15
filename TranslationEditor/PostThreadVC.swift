@@ -13,6 +13,7 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 {
 	// IB OUTLETS	-----------
 	
+	@IBOutlet weak var contentStackView: SquishableStackView!
 	@IBOutlet weak var subjectTextField: UITextField!
 	@IBOutlet weak var versePickerView: UIPickerView!
 	@IBOutlet weak var commentTextView: UITextView!
@@ -93,7 +94,7 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		contextTableView.register(UINib(nibName: "VerseDataCell", bundle: nil), forCellReuseIdentifier: VerseCell.identifier)
 		contextTableView.dataSource = contextDS
 		
-		contentView.configure(mainView: view, elements: [subjectTextField, versePickerView, commentTextView, postButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
+		contentView.configure(mainView: view, elements: [subjectTextField, versePickerView, commentTextView, postButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish, squishedElements: [contentStackView])
     }
 	
 	override func viewDidAppear(_ animated: Bool)

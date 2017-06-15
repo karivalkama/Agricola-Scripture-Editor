@@ -12,6 +12,7 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 {
 	// OUTLETS	------------
 	
+	@IBOutlet weak var allContentStackView: SquishableStackView!
 	@IBOutlet weak var commentTextView: UITextView!
 	@IBOutlet weak var postButton: BasicButton!
 	@IBOutlet weak var originalCommentTextView: UITextView!
@@ -105,7 +106,7 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 			print("ERROR: Failed to read database data. \(error)")
 		}
 		
-		contentView.configure(mainView: view, elements: [commentTextView, postButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
+		contentView.configure(mainView: view, elements: [commentTextView, postButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish, squishedElements: [allContentStackView])
     }
 	
 	override func viewDidAppear(_ animated: Bool)

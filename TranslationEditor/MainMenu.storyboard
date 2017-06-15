@@ -316,7 +316,7 @@
                                                                 <rect key="frame" x="0.0" y="28" width="984" height="57"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fTI-cv-o5L" id="r8w-6k-53f">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="984" height="56.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="984" height="56"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mvm-r5-vkT">
@@ -961,7 +961,7 @@ Project Account</string>
                                                         <rect key="frame" x="0.0" y="28" width="648" height="50"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c4X-LY-Oow" id="szy-1l-exz">
-                                                            <rect key="frame" x="0.0" y="0.0" width="648" height="49.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="648" height="50"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="DCF-01-Sq9">
@@ -1389,7 +1389,7 @@ Project Account</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J86-3m-6NX">
-                                <rect key="frame" x="269" y="215" width="486" height="339"/>
+                                <rect key="frame" x="269" y="214.5" width="486" height="339"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Bgw-3B-01J">
                                         <rect key="frame" x="16" y="16" width="454" height="307"/>
