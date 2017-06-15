@@ -11,6 +11,54 @@ import AVFoundation
 import QRCodeReader
 import MessageUI
 
+
+fileprivate enum ConnectionState
+{
+	case disconnected, joined, hosting
+	
+	var actionText: String
+	{
+		var text = ""
+		
+		switch self
+		{
+		case .disconnected: text = "Disconnect"
+		case .joined: text = "Join"
+		case .hosting: text = "Host"
+		}
+		
+		return NSLocalizedString(text, comment: "A label for an action that changes an online state")
+	}
+	
+	var processingText: String
+	{
+		var text = ""
+		
+		switch self
+		{
+		case .disconnected: text = "Disconnecting"
+		case .joined: text = "Joining"
+		case .hosting: text = "Hosting"
+		}
+		
+		return NSLocalizedString(text, comment: "A label for a processing online state")
+	}
+	
+	var ongoingText: String
+	{
+		var text = ""
+		
+		switch self
+		{
+		case .disconnected: text = "Disconnected"
+		case .joined: text = "Joined"
+		case .hosting: text = "Hosting"
+		}
+		
+		return NSLocalizedString(text, comment: "A label for an ongoing online state")
+	}
+}
+
 @IBDesignable class ConnectionUIView: CustomXibView, QRCodeReaderViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, ConnectionListener
 {
 	// OUTLETS	--------------
@@ -49,6 +97,31 @@ import MessageUI
 		return QRCodeReaderViewController(builder: builder)
 	}()
 	
+	private var canHost = false
+	private var canJoin = false
+	
+	
+	// COMPUTED PROPERTIES	----
+	
+	private var availableConnectionStates: [(ConnectionState, Int)]
+	{
+		var states = [(ConnectionState.disconnected, 0)]
+		var nextIndex = 1
+		
+		if canJoin
+		{
+			states.add((ConnectionState.joined, nextIndex))
+			nextIndex += 1
+		}
+		if canHost
+		{
+			states.add((ConnectionState.hosting, nextIndex))
+			nextIndex += 1
+		}
+		
+		return states
+	}
+	
 	
 	// INIT	--------------------
 	
@@ -72,16 +145,30 @@ import MessageUI
 		bookSelectionTableView.dataSource = self
 		bookSelectionTableView.delegate = self
 		
+		var projectFound = false
 		do
 		{
 			if let projectId = Session.instance.projectId, let project = try Project.get(projectId)
 			{
 				targetTranslations = try project.targetTranslationQuery().resultObjects()
+				projectFound = true
 			}
 		}
 		catch
 		{
 			print("ERROR: Failed to read target translation data. \(error)")
+		}
+		
+		canHost = projectFound || P2PHostSession.instance != nil
+		canJoin = QRCodeReader.isAvailable()
+		
+		if !canHost
+		{
+			connectionSegmentedControl.removeSegment(at: 2, animated: false)
+		}
+		if !canJoin
+		{
+			connectionSegmentedControl.removeSegment(at: 1, animated: false)
 		}
 		
 		updateStatus()
@@ -340,11 +427,28 @@ import MessageUI
 	
 	// OTHER METHODS	-----
 	
+	private func selectConnectionState(_ selectedState: ConnectionState, isProcessing: Bool = false)
+	{
+		// Updates labels and selection
+		for (state, index) in availableConnectionStates
+		{
+			if state == selectedState
+			{
+				connectionSegmentedControl.setTitle(isProcessing ? state.processingText : state.ongoingText, forSegmentAt: index)
+				connectionSegmentedControl.selectedSegmentIndex = index
+			}
+			else
+			{
+				connectionSegmentedControl.setTitle(state.actionText, forSegmentAt: index)
+			}
+		}
+	}
+	
 	private func updateStatus()
 	{
 		if let hostSession = P2PHostSession.instance
 		{
-			connectionSegmentedControl.selectedSegmentIndex = 2
+			selectConnectionState(.hosting)
 			
 			// QR view and the QR tag are displayed when there's an active host session
 			if qrView.isHidden, let qrImage = hostSession.connectionInformation?.qrCode?.image
@@ -360,13 +464,21 @@ import MessageUI
 			
 			if P2PClientSession.isConnected
 			{
-				connectionSegmentedControl.selectedSegmentIndex = 1
+				selectConnectionState(.joined)
 				onlineStatusView.isHidden = false
 			}
 			else
 			{
-				connectionSegmentedControl.selectedSegmentIndex = joining ? 1 : 0
 				onlineStatusView.isHidden = true
+				
+				if joining
+				{
+					selectConnectionState(.joined, isProcessing: true)
+				}
+				else
+				{
+					selectConnectionState(.disconnected)
+				}
 			}
 		}
 		
