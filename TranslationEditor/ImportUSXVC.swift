@@ -11,13 +11,13 @@ import UIKit
 // TODO: Refactor. Also, create a way to name the imported translations
 
 // This VC is used for importing new books / updating existing data from USX files
-class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDataSource, FilteredSingleSelectionDelegate, SelectBookTableControllerDelegate, StackDismissable
+class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDataSource, SimpleSingleSelectionViewDelegate, SelectBookTableControllerDelegate, StackDismissable
 {
 	// OUTLETS	--------------
 	
 	@IBOutlet weak var bookLabel: UILabel!
 	@IBOutlet weak var paragraphTableView: UITableView!
-	@IBOutlet weak var selectLanguageView: FilteredSingleSelection!
+	@IBOutlet weak var selectLanguageView: SimpleSingleSelectionView!
 	@IBOutlet weak var selectBookTableView: UITableView!
 	@IBOutlet weak var insertSwitch: UISwitch!
 	@IBOutlet weak var nicknameField: UITextField!
@@ -28,6 +28,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var topBar: TopBarUIView!
+	@IBOutlet weak var inputStackView: SquishableStackView!
 	
 	
 	// ATTRIBUTES	---------
@@ -37,6 +38,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	
 	private var languages = [Language]()
 	private var selectedLanguage: Language?
+	private var languageName = ""
 	
 	private var paragraphs = [Paragraph]()
 	private var bookTableController: SelectBookTableController?
@@ -60,7 +62,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
         super.viewDidLoad()
 		
 		topBar.configure(hostVC: self, title: "Import USX File", leftButtonText: "Cancel", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
-		contentView.configure(mainView: view, elements: [selectLanguageView, insertSwitch, nicknameField, okButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint)
+		contentView.configure(mainView: view, elements: [selectLanguageView, insertSwitch, nicknameField, okButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish, squishedElements: [inputStackView])
 		
 		// Reads paragraph data first
 		guard let usxURL = usxURL else
@@ -232,31 +234,9 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		bookToOverwrite = nil
 	}
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+	func onValueChanged(_ newValue: String, selectedAt index: Int?)
 	{
-		return paragraphs.count
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-	{
-		let cell = tableView.dequeueReusableCell(withIdentifier: ParagraphCell.identifier, for: indexPath) as! ParagraphCell
-		cell.configure(paragraph: paragraphs[indexPath.row])
-		
-		return cell
-	}
-	
-	func labelForOption(atIndex index: Int) -> String
-	{
-		return languages[index].name
-	}
-	
-	func indexIsIncludedInFilter(index: Int, filter: String) -> Bool
-	{
-		return labelForOption(atIndex: index).contains(filter)
-	}
-	
-	func onItemSelected(index: Int)
-	{
+		languageName = newValue
 		bookToOverwrite = nil
 		
 		guard let projectId = Session.instance.projectId else
@@ -273,7 +253,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				return
 			}
 			
-			selectedLanguage = languages[index]
+			selectedLanguage = index.map { languages[$0] } ?? languages.first(where: { $0.name.lowercased() == newValue.lowercased() })
 			
 			// Checks if the selected language was the target language for the project
 			targetLanguageIsSelected = selectedLanguage?.idString == project.languageId
@@ -292,14 +272,19 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 					setInsertStatus(true, lock: true)
 				}
 			}
-			else
+			else if let selectedLanguage = selectedLanguage
 			{
-				// If some other language is targeted, finds the existing books
-				let books = try ProjectBooksView.instance.booksQuery(projectId: projectId, languageId: selectedLanguage!.idString, code: book?.code).resultObjects()
+				// If some other existing language is targeted, finds the existing books
+				let books = try ProjectBooksView.instance.booksQuery(projectId: projectId, languageId: selectedLanguage.idString, code: book?.code).resultObjects()
 				bookTableController?.update(books: books)
 				
 				// If there are no books, forces insert
 				setInsertStatus(books.isEmpty ? true : insertSwitch.isOn, lock: books.isEmpty)
+			}
+			else
+			{
+				// If a completely new language is used, forces insert
+				setInsertStatus(true, lock: true)
 			}
 			
 			updateOkButtonStatus()
@@ -310,28 +295,22 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		}
 	}
 	
-	func insertItem(named: String) -> Int?
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		// Checks if there already exists a language with the provided name
-		if let existingIndex = languages.index(where: { $0.name.lowercased() == named.lowercased() })
-		{
-			return existingIndex
-		}
-		else
-		{
-			do
-			{
-				let newLanguage = try LanguageView.instance.language(withName: named)
-				languages.add(newLanguage)
-				// TODO: Sorting is not done correctly here. Consider other options
-				return languages.count - 1
-			}
-			catch
-			{
-				print("ERROR: Failed to insert a new language")
-				return nil
-			}
-		}
+		return paragraphs.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+	{
+		let cell = tableView.dequeueReusableCell(withIdentifier: ParagraphCell.identifier, for: indexPath) as! ParagraphCell
+		cell.configure(paragraph: paragraphs[indexPath.row])
+		
+		return cell
+	}
+	
+	func labelForOption(atIndex index: Int) -> String
+	{
+		return languages[index].name
 	}
 	
 	func bookSelected(_ book: Book)
@@ -369,7 +348,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		{
 			// If on insert mode, the ok button is available once both language and nickname have been selected
 			// If target language is targeted, doesn't need the nickname for the translation
-			let enabled = selectedLanguage != nil && (targetLanguageIsSelected || (nicknameField.text != nil && !nicknameField.text!.isEmpty))
+			let enabled = !languageName.isEmpty && (targetLanguageIsSelected || !nicknameField.trimmedText.isEmpty)
 			print("STATUS: Updating OK button status. New enabled status: \(enabled)")
 			okButton.isEnabled = enabled
 		}

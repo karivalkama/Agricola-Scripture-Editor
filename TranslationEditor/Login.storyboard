@@ -749,7 +749,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="960" height="632"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="Qn1-aN-GAg">
-                                                <rect key="frame" x="0.0" y="25" width="355" height="582.5"/>
+                                                <rect key="frame" x="0.0" y="20.5" width="355" height="591.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="355" id="f53-5n-HuG"/>
                                                 </constraints>
@@ -788,7 +788,7 @@
                                                                 <rect key="frame" x="0.0" y="28" width="557" height="87"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sG3-be-bJb" id="EcI-Gu-8tF">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="557" height="86.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="557" height="86"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wh2-3I-Lsf" userLabel="Content Stack View">
@@ -836,7 +836,7 @@
                                                                 <rect key="frame" x="0.0" y="115" width="557" height="176"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vde-PQ-RQ0" id="TeY-rK-FQx">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="557" height="175.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="557" height="175"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="A6x-z7-cDy" userLabel="Content Stack View">
@@ -1359,7 +1359,7 @@
                                 </cells>
                             </collectionView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oz8-mI-VI2" userLabel="Password View" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
-                                <rect key="frame" x="318" y="316.5" width="388" height="137"/>
+                                <rect key="frame" x="318" y="315.5" width="388" height="137"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BRS-qN-0CT">
                                         <rect key="frame" x="16" y="16" width="356" height="105"/>
