@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConnectPromptView" customModule="TranslationEditor" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="436" height="172"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2Nk-fi-TQH">
+                    <rect key="frame" x="0.0" y="0.0" width="436" height="172"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PhQ-ys-Jhq">
+                            <rect key="frame" x="0.0" y="0.0" width="436" height="104"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="600" text="Here's how to connect with others" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWk-di-xQ2">
+                                    <rect key="frame" x="0.0" y="0.0" width="436" height="24"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aq-Tb-qgB">
+                                    <rect key="frame" x="0.0" y="28" width="436" height="76"/>
+                                    <string key="text">1) Have a person host a connection
+2) Press the connect button, then JOIN
+3) Scan the QR code on the host's device</string>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VQ5-Td-PPs" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="120" width="436" height="52"/>
+                            <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
+                            <inset key="imageEdgeInsets" minX="-16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Connect" image="connect_small">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isAccessory" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="connectButtonPressed:" destination="-1" eventType="touchUpInside" id="cAr-fl-Tt7"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" priority="900" constant="180" id="4Ay-hX-71a"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" priority="900" constant="512" id="wgO-Mx-A2C"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="2Nk-fi-TQH" secondAttribute="trailing" id="HRJ-6D-x5a"/>
+                <constraint firstAttribute="bottom" secondItem="2Nk-fi-TQH" secondAttribute="bottom" id="JtP-KO-vah"/>
+                <constraint firstItem="2Nk-fi-TQH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jsI-ur-CTi"/>
+                <constraint firstItem="2Nk-fi-TQH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tUH-hA-GtS"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-49" y="-164"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="connect_small" width="44" height="44"/>
+    </resources>
+</document>

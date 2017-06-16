@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConnectPromptNoDataView" customModule="TranslationEditor" customModuleProvider="target">
+            <connections>
+                <outlet property="connectPromptView" destination="C5W-HO-XPm" id="iHs-H7-Lht"/>
+                <outlet property="descriptionLabel" destination="Nr1-AO-hqt" id="rJo-Ca-On5"/>
+                <outlet property="titleLabel" destination="PZs-7A-mdZ" id="adw-JS-nHY"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="666" height="446"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Ws3-5J-nQE">
+                    <rect key="frame" x="77" y="88" width="512" height="270"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="l9Q-pt-35o">
+                            <rect key="frame" x="0.0" y="0.0" width="512" height="58"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="No data was found!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZs-7A-mdZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="512" height="33.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't worry. You can fix this by connecting with another user" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nr1-AO-hqt">
+                                    <rect key="frame" x="0.0" y="37.5" width="512" height="20.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <view contentMode="scaleToFill" horizontalHuggingPriority="500" verticalHuggingPriority="500" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="C5W-HO-XPm" customClass="ConnectPromptView" customModule="TranslationEditor" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="90" width="512" height="180"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Ws3-5J-nQE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" id="5y6-aq-gAd"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ws3-5J-nQE" secondAttribute="trailing" constant="32" id="Jh8-Hu-q2B"/>
+                <constraint firstItem="Ws3-5J-nQE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Jki-RS-MXZ"/>
+                <constraint firstItem="Ws3-5J-nQE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="32" id="MQp-H0-Gfd"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ws3-5J-nQE" secondAttribute="bottom" id="uAl-iA-6lc"/>
+                <constraint firstItem="Ws3-5J-nQE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="usj-4L-uxK"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-11" y="-59"/>
+        </view>
+    </objects>
+</document>

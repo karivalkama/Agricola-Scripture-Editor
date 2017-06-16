@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -27,10 +27,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="C4y-wF-a8Z">
-                    <rect key="frame" x="16" y="0.0" width="756" height="61"/>
+                    <rect key="frame" x="16" y="4" width="756" height="57"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wnD-br-fTf">
-                            <rect key="frame" x="0.0" y="0.0" width="38" height="61"/>
+                            <rect key="frame" x="0.0" y="0.0" width="38" height="57"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                             <state key="normal" title="Back">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -40,15 +40,17 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="zt5-DZ-uy4">
-                            <rect key="frame" x="102" y="0.0" width="310" height="61"/>
+                            <rect key="frame" x="102" y="0.0" width="254" height="57"/>
                             <fontDescription key="fontDescription" name="Alpine-Regular" family="Alpine" pointSize="32"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8w-Wi-SHD">
-                            <rect key="frame" x="476" y="0.0" width="68" height="61"/>
+                        <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="900" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8w-Wi-SHD">
+                            <rect key="frame" x="420" y="0.0" width="128" height="57"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                            <state key="normal" title="Connect">
+                            <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Connect" image="connect_small">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <attributedString key="userComments">
@@ -64,7 +66,7 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" horizontalHuggingPriority="500" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="nSb-ZT-onS" customClass="TopUserView" customModule="TranslationEditor" customModuleProvider="target">
-                            <rect key="frame" x="608" y="0.0" width="148" height="61"/>
+                            <rect key="frame" x="612" y="0.0" width="144" height="57"/>
                             <gestureRecognizers/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" priority="750" constant="192" id="bai-TJ-0tW"/>
@@ -81,7 +83,7 @@
                 <constraint firstItem="C4y-wF-a8Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="0rI-Xc-Oe6"/>
                 <constraint firstAttribute="bottom" secondItem="C4y-wF-a8Z" secondAttribute="bottom" id="Cvc-Nb-O71"/>
                 <constraint firstAttribute="trailing" secondItem="C4y-wF-a8Z" secondAttribute="trailing" constant="40" id="NVr-fV-4hh"/>
-                <constraint firstItem="C4y-wF-a8Z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="mzN-2l-l6d"/>
+                <constraint firstItem="C4y-wF-a8Z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="mzN-2l-l6d"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-55" y="-373.5"/>
@@ -92,4 +94,7 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="connect_small" width="44" height="44"/>
+    </resources>
 </document>

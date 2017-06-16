@@ -199,6 +199,10 @@
 		7CCBEA101EF3AF11001FE7E7 /* DefaultNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBEA0F1EF3AF11001FE7E7 /* DefaultNoDataView.xib */; };
 		7CCBEA121EF3B05E001FE7E7 /* DefaultNoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA111EF3B05E001FE7E7 /* DefaultNoDataView.swift */; };
 		7CCBEA141EF3B35B001FE7E7 /* StatefulStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA131EF3B35B001FE7E7 /* StatefulStackView.swift */; };
+		7CCBEA161EF3EB20001FE7E7 /* ConnectPromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBEA151EF3EB20001FE7E7 /* ConnectPromptView.xib */; };
+		7CCBEA181EF3F07B001FE7E7 /* ConnectPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA171EF3F07B001FE7E7 /* ConnectPromptView.swift */; };
+		7CCBEA1A1EF3F497001FE7E7 /* ConnectPromptNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBEA191EF3F497001FE7E7 /* ConnectPromptNoDataView.xib */; };
+		7CCBEA1C1EF3F958001FE7E7 /* ConnectPromptNoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA1B1EF3F958001FE7E7 /* ConnectPromptNoDataView.swift */; };
 		7CCC00EA1D9BD3FC00F0562E /* VerseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00E91D9BD3FC00F0562E /* VerseError.swift */; };
 		7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00EB1D9D067C00F0562E /* CharData.swift */; };
 		7CCC00EE1D9D193F00F0562E /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00ED1D9D193F00F0562E /* CollectionExtension.swift */; };
@@ -471,6 +475,10 @@
 		7CCBEA0F1EF3AF11001FE7E7 /* DefaultNoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultNoDataView.xib; sourceTree = "<group>"; };
 		7CCBEA111EF3B05E001FE7E7 /* DefaultNoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultNoDataView.swift; sourceTree = "<group>"; };
 		7CCBEA131EF3B35B001FE7E7 /* StatefulStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatefulStackView.swift; sourceTree = "<group>"; };
+		7CCBEA151EF3EB20001FE7E7 /* ConnectPromptView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectPromptView.xib; sourceTree = "<group>"; };
+		7CCBEA171EF3F07B001FE7E7 /* ConnectPromptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectPromptView.swift; sourceTree = "<group>"; };
+		7CCBEA191EF3F497001FE7E7 /* ConnectPromptNoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectPromptNoDataView.xib; sourceTree = "<group>"; };
+		7CCBEA1B1EF3F958001FE7E7 /* ConnectPromptNoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectPromptNoDataView.swift; sourceTree = "<group>"; };
 		7CCC00E91D9BD3FC00F0562E /* VerseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseError.swift; sourceTree = "<group>"; };
 		7CCC00EB1D9D067C00F0562E /* CharData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharData.swift; sourceTree = "<group>"; };
 		7CCC00ED1D9D193F00F0562E /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
@@ -902,6 +910,8 @@
 				7CCBEA091EF2B6B9001FE7E7 /* DefaultLoadingView.swift */,
 				7CCBEA0D1EF3AABA001FE7E7 /* DefaultErrorView.swift */,
 				7CCBEA111EF3B05E001FE7E7 /* DefaultNoDataView.swift */,
+				7CCBEA171EF3F07B001FE7E7 /* ConnectPromptView.swift */,
+				7CCBEA1B1EF3F958001FE7E7 /* ConnectPromptNoDataView.swift */,
 			);
 			name = XibViews;
 			sourceTree = "<group>";
@@ -1008,6 +1018,8 @@
 				7CCBEA071EF2B432001FE7E7 /* DefaultLoadingView.xib */,
 				7CCBEA0B1EF2B954001FE7E7 /* DefaultErrorView.xib */,
 				7CCBEA0F1EF3AF11001FE7E7 /* DefaultNoDataView.xib */,
+				7CCBEA151EF3EB20001FE7E7 /* ConnectPromptView.xib */,
+				7CCBEA191EF3F497001FE7E7 /* ConnectPromptNoDataView.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -1210,7 +1222,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C57EC151E694975000718E9 /* TIT_ENG.usx in Resources */,
+				7CCBEA161EF3EB20001FE7E7 /* ConnectPromptView.xib in Resources */,
 				7C18A1991D8BBEBD00DD1B03 /* LaunchScreen.storyboard in Resources */,
+				7CCBEA1A1EF3F497001FE7E7 /* ConnectPromptNoDataView.xib in Resources */,
 				7CCBE9FC1EF16707001FE7E7 /* SimpleSingleSelection.xib in Resources */,
 				7C57EC0F1E6948FC000718E9 /* TI2_ENG.usx in Resources */,
 				7CB5B2A51ECDB9F70066446F /* TopBar.xib in Resources */,
@@ -1434,6 +1448,7 @@
 				7CDD78101EEFC31A0048C07D /* EditSharedAccountVC.swift in Sources */,
 				7C4A4FF01DFEDA59009F890E /* OptionalExtension.swift in Sources */,
 				7C0130D41E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift in Sources */,
+				7CCBEA181EF3F07B001FE7E7 /* ConnectPromptView.swift in Sources */,
 				7C903F6F1EA760A8008EE1E6 /* ComparableExtension.swift in Sources */,
 				7C4A4FF91E012375009F890E /* ConflictResolver.swift in Sources */,
 				7CAF6D861DB4F9AA00E10597 /* USXBookProcessor.swift in Sources */,
@@ -1443,6 +1458,7 @@
 				7C57EBFE1E66BC2D000718E9 /* LoginVC.swift in Sources */,
 				7C60705D1E5D79D8007718BC /* AvatarCell.swift in Sources */,
 				7C942A2B1E38C7E2000C614A /* PostCommentVC.swift in Sources */,
+				7CCBEA1C1EF3F958001FE7E7 /* ConnectPromptNoDataView.swift in Sources */,
 				7CCC01281DA6501600F0562E /* PotentialVerseRangeable.swift in Sources */,
 				7C532A5D1EA740F9002A7F7C /* USXImportStack.swift in Sources */,
 				7CCC01401DA7D12800F0562E /* USXParaProcessor.swift in Sources */,
