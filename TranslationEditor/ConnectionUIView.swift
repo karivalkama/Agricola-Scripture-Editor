@@ -76,6 +76,7 @@ fileprivate enum ConnectionState
 	@IBOutlet weak var bookSelectionView: UIView!
 	@IBOutlet weak var bookSelectionTableView: UITableView!
 	@IBOutlet weak var connectionSegmentedControl: UISegmentedControl!
+	@IBOutlet weak var sharingView: UIView!
 	
 	
 	// ATTRIBUTES	----------
@@ -173,7 +174,7 @@ fileprivate enum ConnectionState
 		
 		updateStatus()
 		
-		sendEmailButton.isEnabled = /*canSendMail &&*/ !targetTranslations.isEmpty
+		sharingView.isHidden = targetTranslations.isEmpty
 	}
 	
 	

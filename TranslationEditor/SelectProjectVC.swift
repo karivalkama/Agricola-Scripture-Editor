@@ -62,6 +62,12 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		
 		projectContentStackView.register(projectTableView, for: .data)
 		
+		let noDataView = ConnectPromptNoDataView()
+		noDataView.connectButtonAction = { [weak self] in self?.topBar.performConnect(using: self!) }
+		noDataView.title = "You don't have access to any projects"
+		noDataView.hint = "You can join another person's project by connecting with them"
+		projectContentStackView.register(noDataView, for: .empty)
+		
 		// If using a shared account, selects the project automatically
 		guard let accountId = Session.instance.accountId else
 		{

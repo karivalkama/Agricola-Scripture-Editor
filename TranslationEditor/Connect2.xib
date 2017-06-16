@@ -23,6 +23,7 @@
                 <outlet property="qrImageView" destination="E0S-Ci-Q2G" id="10c-So-l3K"/>
                 <outlet property="qrView" destination="hLz-gF-wpJ" id="ypR-bk-YEa"/>
                 <outlet property="sendEmailButton" destination="ywC-sy-aJD" id="qHU-JJ-Wpm"/>
+                <outlet property="sharingView" destination="sqX-J5-9Qs" id="15d-Q7-nHp"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -34,20 +35,20 @@
                     <rect key="frame" x="0.0" y="0.0" width="370" height="985"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="HWV-lb-cQR" userLabel="P2P Stack View">
-                            <rect key="frame" x="0.0" y="0.0" width="370" height="600"/>
+                            <rect key="frame" x="0.0" y="0.0" width="370" height="400.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="YVj-bf-XlU">
-                                    <rect key="frame" x="0.0" y="0.0" width="370" height="58.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="370" height="59.5"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" image="connection" translatesAutoresizingMaskIntoConstraints="NO" id="o7Z-zS-uyN">
-                                            <rect key="frame" x="0.0" y="5.5" width="64" height="48"/>
+                                            <rect key="frame" x="0.0" y="6" width="64" height="48"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="o7Z-zS-uyN" secondAttribute="height" multiplier="4:3" id="7aH-zN-gjp"/>
                                                 <constraint firstAttribute="width" constant="64" id="GBf-Nd-LJT"/>
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="eBE-mA-G5g" userLabel="Title Stack View">
-                                            <rect key="frame" x="80" y="0.0" width="290" height="58.5"/>
+                                            <rect key="frame" x="80" y="0.5" width="290" height="58.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Current Peer-to-Peer Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kab-Dc-k04">
                                                     <rect key="frame" x="0.0" y="0.0" width="290" height="24"/>
@@ -80,9 +81,12 @@
                                             </subviews>
                                         </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="59.5" id="6kV-LO-Vgt"/>
+                                    </constraints>
                                 </stackView>
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0dg-mf-037">
-                                    <rect key="frame" x="0.0" y="74.5" width="370" height="33"/>
+                                    <rect key="frame" x="0.0" y="75.5" width="370" height="33"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="32" id="0G9-Fm-AqO"/>
                                     </constraints>
@@ -104,7 +108,7 @@
                                     </connections>
                                 </segmentedControl>
                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="775" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUM-Ds-Tzn">
-                                    <rect key="frame" x="0.0" y="122.5" width="370" height="46.5"/>
+                                    <rect key="frame" x="0.0" y="123.5" width="370" height="46.5"/>
                                     <string key="text">A single person should HOST a connection.
 Multiple people can JOIN (camera required).
 All data will be transferred until DISCONNECTED.</string>
@@ -121,20 +125,20 @@ All data will be transferred until DISCONNECTED.</string>
                                     </attributedString>
                                 </label>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="150" translatesAutoresizingMaskIntoConstraints="NO" id="hLz-gF-wpJ" userLabel="QR View">
-                                    <rect key="frame" x="0.0" y="185" width="370" height="349"/>
+                                    <rect key="frame" x="0.0" y="186" width="370" height="148.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="150" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Y0M-Rn-uMd" userLabel="QR Stack View">
-                                            <rect key="frame" x="0.0" y="0.0" width="370" height="349"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="148.5"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="175" verticalCompressionResistancePriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="E0S-Ci-Q2G">
-                                                    <rect key="frame" x="20" y="0.0" width="330.5" height="330.5"/>
+                                                    <rect key="frame" x="120" y="0.0" width="130" height="130"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="E0S-Ci-Q2G" secondAttribute="height" multiplier="1:1" id="CRj-YZ-mVD"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="64" id="Mn4-Kc-u1p"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Others can join by scanning this code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Etb-rQ-sxz">
-                                                    <rect key="frame" x="79" y="334.5" width="212.5" height="14.5"/>
+                                                    <rect key="frame" x="79" y="134" width="212.5" height="14.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -159,10 +163,10 @@ All data will be transferred until DISCONNECTED.</string>
                                     </constraints>
                                 </view>
                                 <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="uQe-Nj-WfS" customClass="OnlineStatusView" customModule="TranslationEditor" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="542" width="370" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="342.5" width="370" height="0.0"/>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3DA-nC-mob" userLabel="Host Info View">
-                                    <rect key="frame" x="0.0" y="550" width="370" height="50"/>
+                                    <rect key="frame" x="0.0" y="350.5" width="370" height="50"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="t01-pa-i1z" userLabel="Host Info Stack View">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="50"/>
@@ -204,75 +208,22 @@ All data will be transferred until DISCONNECTED.</string>
                                 </view>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VrN-XR-ScU" userLabel="Sharing Stack View">
-                            <rect key="frame" x="0.0" y="624" width="370" height="361"/>
+                        <view contentMode="scaleToFill" verticalHuggingPriority="400" verticalCompressionResistancePriority="600" translatesAutoresizingMaskIntoConstraints="NO" id="sqX-J5-9Qs">
+                            <rect key="frame" x="0.0" y="424.5" width="370" height="560.5"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="jPy-rx-dMQ" userLabel="Title Stack View">
-                                    <rect key="frame" x="0.0" y="0.0" width="370" height="58.5"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="400" verticalCompressionResistancePriority="600" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VrN-XR-ScU" userLabel="Sharing Stack View">
+                                    <rect key="frame" x="0.0" y="0.0" width="370" height="560.5"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="USX File Sharing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Weh-hb-yWn">
-                                            <rect key="frame" x="0.0" y="0.0" width="370" height="24"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                            <attributedString key="userComments">
-                                                <fragment content="Title for USX file sharing options in connect view">
-                                                    <attributes>
-                                                        <font key="NSFont" metaFont="smallSystem"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Translation data can be exported in USX format which is readable by Agricola and Paratext" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hrx-ho-8Cg">
-                                            <rect key="frame" x="0.0" y="28" width="370" height="30.5"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                            <attributedString key="userComments">
-                                                <fragment content="Short description for USX file sharing">
-                                                    <attributes>
-                                                        <font key="NSFont" metaFont="smallSystem"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                        </label>
-                                    </subviews>
-                                </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywC-sy-aJD" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="74.5" width="370" height="37"/>
-                                    <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                    <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
-                                    <state key="normal" title="Share">
-                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    </state>
-                                    <attributedString key="userComments">
-                                        <fragment content="Button for sharing exported usx files">
-                                            <attributes>
-                                                <font key="NSFont" metaFont="smallSystem"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                    <connections>
-                                        <action selector="sendEmailButtonPressed:" destination="-1" eventType="touchUpInside" id="iLa-tx-S0d"/>
-                                    </connections>
-                                </button>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vte-HM-q87">
-                                    <rect key="frame" x="0.0" y="127.5" width="370" height="233.5"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5C7-Wu-Wo9" userLabel="Book Selection Stack View">
-                                            <rect key="frame" x="0.0" y="0.0" width="370" height="233.5"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="jPy-rx-dMQ" userLabel="Title Stack View">
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="58.5"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Select a book to send" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWM-C5-yTC">
-                                                    <rect key="frame" x="0.0" y="0.0" width="370" height="20.5"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="USX File Sharing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Weh-hb-yWn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="370" height="24"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <attributedString key="userComments">
-                                                        <fragment content="Export book selection title">
+                                                        <fragment content="Title for USX file sharing options in connect view">
                                                             <attributes>
                                                                 <font key="NSFont" metaFont="smallSystem"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -280,47 +231,112 @@ All data will be transferred until DISCONNECTED.</string>
                                                         </fragment>
                                                     </attributedString>
                                                 </label>
-                                                <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="200" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="csU-si-Gvc">
-                                                    <rect key="frame" x="0.0" y="28.5" width="370" height="160"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="900" constant="64" id="fvg-dd-DMK"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="300" constant="160" id="or2-gd-jPl"/>
-                                                    </constraints>
-                                                </tableView>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ild-dz-aQ2" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="196.5" width="370" height="37"/>
-                                                    <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
-                                                    <state key="normal" title="Cancel Sharing">
-                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    </state>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Translation data can be exported in USX format which is readable by Agricola and Paratext" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hrx-ho-8Cg">
+                                                    <rect key="frame" x="0.0" y="28" width="370" height="30.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
                                                     <attributedString key="userComments">
-                                                        <fragment content="Cancel sharing -button">
+                                                        <fragment content="Short description for USX file sharing">
                                                             <attributes>
                                                                 <font key="NSFont" metaFont="smallSystem"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
-                                                    <connections>
-                                                        <action selector="cancelSendButtonPressed:" destination="-1" eventType="touchUpInside" id="cpv-Nn-ja9"/>
-                                                    </connections>
-                                                </button>
+                                                </label>
                                             </subviews>
                                         </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywC-sy-aJD" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="66.5" width="370" height="37"/>
+                                            <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
+                                            <state key="normal" title="Share">
+                                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            </state>
+                                            <attributedString key="userComments">
+                                                <fragment content="Button for sharing exported usx files">
+                                                    <attributes>
+                                                        <font key="NSFont" metaFont="smallSystem"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <connections>
+                                                <action selector="sendEmailButtonPressed:" destination="-1" eventType="touchUpInside" id="iLa-tx-S0d"/>
+                                            </connections>
+                                        </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vte-HM-q87">
+                                            <rect key="frame" x="0.0" y="111.5" width="370" height="449"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5C7-Wu-Wo9" userLabel="Book Selection Stack View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="370" height="449"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Select a book to send" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWM-C5-yTC">
+                                                            <rect key="frame" x="0.0" y="0.0" width="370" height="20.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <attributedString key="userComments">
+                                                                <fragment content="Export book selection title">
+                                                                    <attributes>
+                                                                        <font key="NSFont" metaFont="smallSystem"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                        </label>
+                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="200" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="csU-si-Gvc">
+                                                            <rect key="frame" x="0.0" y="28.5" width="370" height="375.5"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="900" constant="64" id="fvg-dd-DMK"/>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="300" constant="160" id="or2-gd-jPl"/>
+                                                            </constraints>
+                                                        </tableView>
+                                                        <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ild-dz-aQ2" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="412" width="370" height="37"/>
+                                                            <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
+                                                            <state key="normal" title="Cancel Sharing">
+                                                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            </state>
+                                                            <attributedString key="userComments">
+                                                                <fragment content="Cancel sharing -button">
+                                                                    <attributes>
+                                                                        <font key="NSFont" metaFont="smallSystem"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                    </attributes>
+                                                                </fragment>
+                                                            </attributedString>
+                                                            <connections>
+                                                                <action selector="cancelSendButtonPressed:" destination="-1" eventType="touchUpInside" id="cpv-Nn-ja9"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="5C7-Wu-Wo9" secondAttribute="trailing" id="9tH-OZ-M4g"/>
+                                                <constraint firstItem="5C7-Wu-Wo9" firstAttribute="top" secondItem="vte-HM-q87" secondAttribute="top" id="Kpd-Ri-8br"/>
+                                                <constraint firstItem="5C7-Wu-Wo9" firstAttribute="leading" secondItem="vte-HM-q87" secondAttribute="leading" id="dXf-mW-kyh"/>
+                                                <constraint firstAttribute="bottom" secondItem="5C7-Wu-Wo9" secondAttribute="bottom" priority="999" id="vBR-zk-kOp"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="5C7-Wu-Wo9" secondAttribute="trailing" id="9tH-OZ-M4g"/>
-                                        <constraint firstItem="5C7-Wu-Wo9" firstAttribute="top" secondItem="vte-HM-q87" secondAttribute="top" id="Kpd-Ri-8br"/>
-                                        <constraint firstItem="5C7-Wu-Wo9" firstAttribute="leading" secondItem="vte-HM-q87" secondAttribute="leading" id="dXf-mW-kyh"/>
-                                        <constraint firstAttribute="bottom" secondItem="5C7-Wu-Wo9" secondAttribute="bottom" priority="999" id="vBR-zk-kOp"/>
-                                    </constraints>
-                                </view>
+                                </stackView>
                             </subviews>
-                        </stackView>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="VrN-XR-ScU" firstAttribute="leading" secondItem="sqX-J5-9Qs" secondAttribute="leading" id="P9v-aw-gXb"/>
+                                <constraint firstAttribute="trailing" secondItem="VrN-XR-ScU" secondAttribute="trailing" id="bd7-Eg-tkr"/>
+                                <constraint firstAttribute="bottom" secondItem="VrN-XR-ScU" secondAttribute="bottom" priority="999" id="g85-cm-WFl"/>
+                                <constraint firstItem="VrN-XR-ScU" firstAttribute="top" secondItem="sqX-J5-9Qs" secondAttribute="top" id="kgR-vs-7lB"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="370" id="2z7-Tg-f8B"/>
@@ -334,7 +350,7 @@ All data will be transferred until DISCONNECTED.</string>
                 <constraint firstItem="iZD-A2-D8C" firstAttribute="leading" secondItem="YTI-vb-zZs" secondAttribute="leading" id="HkB-Rq-8L4"/>
                 <constraint firstItem="iZD-A2-D8C" firstAttribute="top" secondItem="YTI-vb-zZs" secondAttribute="top" id="iyr-Ph-zpZ"/>
                 <constraint firstAttribute="trailing" secondItem="iZD-A2-D8C" secondAttribute="trailing" id="ql4-kG-pXM"/>
-                <constraint firstAttribute="bottom" secondItem="iZD-A2-D8C" secondAttribute="bottom" priority="500" id="wFB-h3-0zM"/>
+                <constraint firstAttribute="bottom" secondItem="iZD-A2-D8C" secondAttribute="bottom" priority="700" id="wFB-h3-0zM"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -61,17 +61,7 @@ import UIKit
 			return
 		}
 		
-		if let completionHandler = connectionCompletionHandler
-		{
-			viewController.displayAlert(withIdentifier: ConnectionVC.identifier, storyBoardId: "Common")
-			{
-				($0 as! ConnectionVC).configure(completion: completionHandler)
-			}
-		}
-		else
-		{
-			viewController.displayAlert(withIdentifier: ConnectionVC.identifier, storyBoardId: "Common")
-		}
+		performConnect(using: viewController)
 	}
 	
 	@IBAction func userViewTapped(_ sender: Any)
@@ -123,6 +113,21 @@ import UIKit
 	{
 		leftSideAction = action
 		leftSideButton.isEnabled = true
+	}
+	
+	func performConnect(using viewController: UIViewController)
+	{
+		if let completionHandler = connectionCompletionHandler
+		{
+			viewController.displayAlert(withIdentifier: ConnectionVC.identifier, storyBoardId: "Common")
+			{
+				($0 as! ConnectionVC).configure(completion: completionHandler)
+			}
+		}
+		else
+		{
+			viewController.displayAlert(withIdentifier: ConnectionVC.identifier, storyBoardId: "Common")
+		}
 	}
 	
 	func updateUserView()
