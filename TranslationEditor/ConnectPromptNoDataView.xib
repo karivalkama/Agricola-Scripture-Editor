@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Ws3-5J-nQE">
-                    <rect key="frame" x="77" y="88" width="512" height="270"/>
+                    <rect key="frame" x="77" y="87" width="512" height="272.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="l9Q-pt-35o">
                             <rect key="frame" x="0.0" y="0.0" width="512" height="58"/>
@@ -42,7 +42,7 @@
                             </subviews>
                         </stackView>
                         <view contentMode="scaleToFill" horizontalHuggingPriority="500" verticalHuggingPriority="500" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="C5W-HO-XPm" customClass="ConnectPromptView" customModule="TranslationEditor" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="90" width="512" height="180"/>
+                            <rect key="frame" x="0.0" y="90" width="512" height="182.5"/>
                         </view>
                     </subviews>
                 </stackView>
