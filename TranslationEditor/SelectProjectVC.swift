@@ -26,6 +26,7 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	@IBOutlet weak var contentView: KeyboardReactiveView!
 	@IBOutlet weak var createProjectButton: BasicButton!
 	@IBOutlet weak var topBar: TopBarUIView!
+	@IBOutlet weak var projectContentStackView: StatefulStackView!
 	
 	
 	// ATTRIBUTES	--------------
@@ -59,13 +60,17 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 		}
 		topBar.connectionCompletionHandler = onConnectionDialogClose
 		
+		projectContentStackView.register(projectTableView, for: .data)
+		
 		// If using a shared account, selects the project automatically
 		guard let accountId = Session.instance.accountId else
 		{
 			print("ERROR: No logged account -> Cannot find any projects.")
+			projectContentStackView.setState(.error)
 			return
 		}
 		
+		projectContentStackView.setState(.loading)
 		queryManager = ProjectView.instance.projectQuery(forContributorId: accountId).liveQueryManager
 		queryManager?.addListener(AnyLiveQueryListener(self))
 		
@@ -182,11 +187,13 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 				}
 			}
 			
+			projectContentStackView.dataLoaded(isEmpty: projects.isEmpty)
 			projectTableView.reloadData()
 		}
 		catch
 		{
 			print("ERROR: Failed to read project data from DB. \(error)")
+			projectContentStackView.errorOccurred()
 		}
 		
 		if let accountId = Session.instance.accountId

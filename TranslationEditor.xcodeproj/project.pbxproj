@@ -194,6 +194,11 @@
 		7CCBEA041EF278BB001FE7E7 /* SquishableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA031EF278BB001FE7E7 /* SquishableStackView.swift */; };
 		7CCBEA081EF2B432001FE7E7 /* DefaultLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBEA071EF2B432001FE7E7 /* DefaultLoadingView.xib */; };
 		7CCBEA0A1EF2B6B9001FE7E7 /* DefaultLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA091EF2B6B9001FE7E7 /* DefaultLoadingView.swift */; };
+		7CCBEA0C1EF2B954001FE7E7 /* DefaultErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBEA0B1EF2B954001FE7E7 /* DefaultErrorView.xib */; };
+		7CCBEA0E1EF3AABA001FE7E7 /* DefaultErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA0D1EF3AABA001FE7E7 /* DefaultErrorView.swift */; };
+		7CCBEA101EF3AF11001FE7E7 /* DefaultNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBEA0F1EF3AF11001FE7E7 /* DefaultNoDataView.xib */; };
+		7CCBEA121EF3B05E001FE7E7 /* DefaultNoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA111EF3B05E001FE7E7 /* DefaultNoDataView.swift */; };
+		7CCBEA141EF3B35B001FE7E7 /* StatefulStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA131EF3B35B001FE7E7 /* StatefulStackView.swift */; };
 		7CCC00EA1D9BD3FC00F0562E /* VerseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00E91D9BD3FC00F0562E /* VerseError.swift */; };
 		7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00EB1D9D067C00F0562E /* CharData.swift */; };
 		7CCC00EE1D9D193F00F0562E /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00ED1D9D193F00F0562E /* CollectionExtension.swift */; };
@@ -461,6 +466,11 @@
 		7CCBEA031EF278BB001FE7E7 /* SquishableStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquishableStackView.swift; sourceTree = "<group>"; };
 		7CCBEA071EF2B432001FE7E7 /* DefaultLoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultLoadingView.xib; sourceTree = "<group>"; };
 		7CCBEA091EF2B6B9001FE7E7 /* DefaultLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLoadingView.swift; sourceTree = "<group>"; };
+		7CCBEA0B1EF2B954001FE7E7 /* DefaultErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultErrorView.xib; sourceTree = "<group>"; };
+		7CCBEA0D1EF3AABA001FE7E7 /* DefaultErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultErrorView.swift; sourceTree = "<group>"; };
+		7CCBEA0F1EF3AF11001FE7E7 /* DefaultNoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultNoDataView.xib; sourceTree = "<group>"; };
+		7CCBEA111EF3B05E001FE7E7 /* DefaultNoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultNoDataView.swift; sourceTree = "<group>"; };
+		7CCBEA131EF3B35B001FE7E7 /* StatefulStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatefulStackView.swift; sourceTree = "<group>"; };
 		7CCC00E91D9BD3FC00F0562E /* VerseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseError.swift; sourceTree = "<group>"; };
 		7CCC00EB1D9D067C00F0562E /* CharData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharData.swift; sourceTree = "<group>"; };
 		7CCC00ED1D9D193F00F0562E /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
@@ -857,6 +867,7 @@
 				7C1515141E94BEDC00419DEA /* CircleImage.swift */,
 				7CCBEA011EF277A5001FE7E7 /* Squishable.swift */,
 				7CCBEA031EF278BB001FE7E7 /* SquishableStackView.swift */,
+				7CCBEA131EF3B35B001FE7E7 /* StatefulStackView.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -889,6 +900,8 @@
 				7CE062651EDFFF7B00A998E4 /* ChapterHeaderCell.swift */,
 				7CCBE9FD1EF1691B001FE7E7 /* SimpleSingleSelectionView.swift */,
 				7CCBEA091EF2B6B9001FE7E7 /* DefaultLoadingView.swift */,
+				7CCBEA0D1EF3AABA001FE7E7 /* DefaultErrorView.swift */,
+				7CCBEA111EF3B05E001FE7E7 /* DefaultNoDataView.swift */,
 			);
 			name = XibViews;
 			sourceTree = "<group>";
@@ -993,6 +1006,8 @@
 				7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */,
 				7CCBE9FB1EF16707001FE7E7 /* SimpleSingleSelection.xib */,
 				7CCBEA071EF2B432001FE7E7 /* DefaultLoadingView.xib */,
+				7CCBEA0B1EF2B954001FE7E7 /* DefaultErrorView.xib */,
+				7CCBEA0F1EF3AF11001FE7E7 /* DefaultNoDataView.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -1200,11 +1215,13 @@
 				7C57EC0F1E6948FC000718E9 /* TI2_ENG.usx in Resources */,
 				7CB5B2A51ECDB9F70066446F /* TopBar.xib in Resources */,
 				7C936C151E9E582C00AC06BF /* FilteredSingleSelection.xib in Resources */,
+				7CCBEA101EF3AF11001FE7E7 /* DefaultNoDataView.xib in Resources */,
 				7C2E27A21EE6D6DB003602B0 /* Connect2.xib in Resources */,
 				7C18A1961D8BBEBD00DD1B03 /* Assets.xcassets in Resources */,
 				7C9BB7E31E8536AA0010DE5C /* MainMenu.storyboard in Resources */,
 				7C6070561E5C601D007718BC /* Login.storyboard in Resources */,
 				7CE062641EDFFE4C00A998E4 /* ChapterHeaderCell.xib in Resources */,
+				7CCBEA0C1EF2B954001FE7E7 /* DefaultErrorView.xib in Resources */,
 				7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */,
 				7CD8EA5F1DB61A3C00364B70 /* MAT.usx in Resources */,
 				7C9BB7E51E8538730010DE5C /* TopUserDisplay.xib in Resources */,
@@ -1510,6 +1527,7 @@
 				7CA1BAB41E31F09200611FED /* PostCell.swift in Sources */,
 				7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */,
 				7C57ECAA1E6D5EDA000718E9 /* SelectProjectVC.swift in Sources */,
+				7CCBEA121EF3B05E001FE7E7 /* DefaultNoDataView.swift in Sources */,
 				7C57EC071E6709A2000718E9 /* Server.swift in Sources */,
 				7C936C111E9DF6AF00AC06BF /* TranslationCellAction.swift in Sources */,
 				7C4A4F8B1DEEC4BD009F890E /* View.swift in Sources */,
@@ -1532,6 +1550,7 @@
 				7CB5B29E1ECC7D0B0066446F /* ConnectionUIView.swift in Sources */,
 				7C0130D11E4DB92C0053C5C2 /* ConnectionListener.swift in Sources */,
 				7C936C171E9F48C900AC06BF /* FilteredSingleSelection.swift in Sources */,
+				7CCBEA0E1EF3AABA001FE7E7 /* DefaultErrorView.swift in Sources */,
 				7C55A1FF1E7970A70038C122 /* CreateAvatarView.swift in Sources */,
 				7C82CE8E1DE6E29500C054EB /* PropertyValue.swift in Sources */,
 				7C506B7F1E892FA400ACB5AC /* MainMenuVC.swift in Sources */,
@@ -1564,6 +1583,7 @@
 				7C4A4F871DEEC0A6009F890E /* RowParseError.swift in Sources */,
 				7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */,
 				7C4A4FB21DF95FE3009F890E /* ParagraphEdit.swift in Sources */,
+				7CCBEA141EF3B35B001FE7E7 /* StatefulStackView.swift in Sources */,
 				7C40DF701DEC6AB00035B92E /* Id.swift in Sources */,
 				7C6B7B231E6565CC0005AD43 /* CustomXibView.swift in Sources */,
 				7C4A4F8F1DEEF891009F890E /* ParagraphView.swift in Sources */,

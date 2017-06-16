@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DefaultErrorView" customModule="TranslationEditor" customModuleProvider="target">
+            <connections>
+                <outlet property="descriptionLabel" destination="ESd-yb-D10" id="4bA-Pa-9vX"/>
+                <outlet property="titleLabel" destination="SxV-SH-wpj" id="TkP-Iz-0a8"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="664" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="6Bg-o0-thN">
+                    <rect key="frame" x="98" y="176" width="468" height="128"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="300" verticalCompressionResistancePriority="300" image="error" translatesAutoresizingMaskIntoConstraints="NO" id="5RN-92-iuS">
+                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="5RN-92-iuS" secondAttribute="height" multiplier="1:1" id="XRu-St-Jnt"/>
+                            </constraints>
+                        </imageView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IbS-Fg-NZt">
+                            <rect key="frame" x="144" y="33" width="324" height="62"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="1000" text="An Error Occurred!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SxV-SH-wpj">
+                                    <rect key="frame" x="0.0" y="0.0" width="324" height="33.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Failed to load data due to an internal error!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ESd-yb-D10">
+                                    <rect key="frame" x="0.0" y="41.5" width="324" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="900" constant="128" id="TBl-rM-hvb"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="6Bg-o0-thN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="F40-7l-zri"/>
+                <constraint firstItem="6Bg-o0-thN" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="eOV-Yi-Gum"/>
+                <constraint firstItem="6Bg-o0-thN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" id="fjy-8P-NXj"/>
+                <constraint firstItem="6Bg-o0-thN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" id="hbc-qT-mHL"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6Bg-o0-thN" secondAttribute="bottom" id="iSc-Al-Hxn"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6Bg-o0-thN" secondAttribute="trailing" id="xw2-Fo-XXF"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="60" y="-42"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="error" width="610" height="582"/>
+    </resources>
+</document>

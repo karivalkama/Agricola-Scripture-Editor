@@ -9,12 +9,20 @@
 import UIKit
 
 // This is the default implementation for a view that displays loading status
-class DefaultLoadingView: CustomXibView
+@IBDesignable class DefaultLoadingView: CustomXibView
 {
 	// OUTLETS	--------------------
 	
 	@IBOutlet weak var titleLabel: UILabel!
-	@IBOutlet weak var progressBar: UIProgressView!
+	
+	
+	// COMPUTED PROPERTIES	--------
+	
+	var title: String
+	{
+		get { return titleLabel.text ?? "" }
+		set { titleLabel.text = NSLocalizedString(newValue, comment: "A label describing loading screen status") }
+	}
 	
 	
 	// LOAD	------------------------
@@ -29,19 +37,5 @@ class DefaultLoadingView: CustomXibView
 	{
 		super.init(coder: coder)
 		setupXib(nibName: "DefaultLoadingView")
-	}
-	
-	
-	// OTHER METHODS	------------
-	
-	func setTitle(_ title: String)
-	{
-		titleLabel.text = NSLocalizedString(title, comment: "A label describing loading screen status")
-	}
-	
-	func setProgress(_ progress: Double)
-	{
-		progressBar.progress = Float(progress)
-		progressBar.isHidden = false
 	}
 }
