@@ -95,8 +95,10 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		passwordView.configure(mainView: view, elements: [loginButton, errorLabel, passwordField])
     }
 	
-	override func viewDidAppear(_ animated: Bool)
+	override func viewWillAppear(_ animated: Bool)
 	{
+		super.viewWillAppear(animated)
+		
 		hidePasswordView()
 		topBar.updateUserView()
 		
@@ -104,7 +106,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		if Session.instance.projectId != nil
 		{
 			// Sets up the top bar
-			let title = "Select User"
+			let title = usesSharedAccount ? "Select User" : "Select Avatar"
 			if let presentingViewController = presentingViewController
 			{
 				if let presentingViewController = presentingViewController as? SelectProjectVC
@@ -238,6 +240,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 				else
 				{
 					avatarsStackView.dataLoaded()
+					createAvatar()
 				}
 			}
 		}
@@ -279,16 +282,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			// If the last cell was selected, displays a view for adding a new avatar
 			if indexPath.row == avatarData.count
 			{
-				displayAlert(withIdentifier: "EditAvatar", storyBoardId: "MainMenu")
-				{
-					($0 as! EditAvatarVC).configureForCreate()
-					{
-						avatar, _ in
-						
-						Session.instance.avatarId = avatar.idString
-						self.proceed()
-					}
-				}
+				createAvatar()
 			}
 			else
 			{
@@ -328,6 +322,20 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		}
 
 		present(controller, animated: animated, completion: nil)
+	}
+	
+	private func createAvatar()
+	{
+		displayAlert(withIdentifier: "EditAvatar", storyBoardId: "MainMenu")
+		{
+			($0 as! EditAvatarVC).configureForCreate()
+			{
+				avatar, _ in
+					
+				Session.instance.avatarId = avatar.idString
+				self.proceed()
+			}
+		}
 	}
 	
 	private func hidePasswordView()
