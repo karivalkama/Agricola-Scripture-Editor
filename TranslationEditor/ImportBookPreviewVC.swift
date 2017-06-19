@@ -20,6 +20,7 @@ class ImportBookPreviewVC: UIViewController
 	@IBOutlet weak var errorLabel: UILabel!
 	@IBOutlet weak var topConstraint: NSLayoutConstraint!
 	@IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var previewDataStackView: StatefulStackView!
 	
 	
 	// ATTRIBUTES	-------------------
@@ -46,11 +47,14 @@ class ImportBookPreviewVC: UIViewController
 		
 		contentView.configure(mainView: view, elements: [bookNameField, errorLabel, importButton], topConstraint: topConstraint, bottomConstraint: bottomConstraint, style: .squish)
 		
+		previewDataStackView.register(previewTableView, for: .data)
+		previewDataStackView.setState(.loading)
+		
 		previewTableView.register(UINib(nibName: "ParagraphCell", bundle: nil), forCellReuseIdentifier: ParagraphCell.identifier)
 		previewTableView.rowHeight = UITableViewAutomaticDimension
 		previewTableView.estimatedRowHeight = 160
 		
-		previewDS = TranslationTableViewDS(tableView: previewTableView, bookId: book.idString, configureCell: configureCell)
+		previewDS = TranslationTableViewDS(tableView: previewTableView, bookId: book.idString, stateView: previewDataStackView, configureCell: configureCell)
 		previewTableView.dataSource = previewDS
 		
 		importButton.isEnabled = false

@@ -18,6 +18,7 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	
 	// ATTRIBUTES	-----------------
 	
+	private weak var stateView: StatefulStackView?
 	private weak var tableView: UITableView!
 	
 	// Path id -> Chapter index + index in current data array
@@ -43,8 +44,9 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	
 	// TODO: Change book id to translation range
 	// Activation must be called separately
-	init(tableView: UITableView, bookId: String, configureCell: @escaping (UITableView, IndexPath, Paragraph) -> UITableViewCell, prepareUpdate: (() -> ())? = nil)
+	init(tableView: UITableView, bookId: String, stateView: StatefulStackView? = nil, configureCell: @escaping (UITableView, IndexPath, Paragraph) -> UITableViewCell, prepareUpdate: (() -> ())? = nil)
 	{
+		self.stateView = stateView
 		self.tableView = tableView
 		self.configureCell = configureCell
 		self.prepareUpdate = prepareUpdate
@@ -77,6 +79,12 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 			{
 				pathIndex[paragraphs[i].pathId] = (chapterIndex: chapterIndex, index: i)
 			}
+		}
+		
+		// Updates the state view, if possible
+		if let stateView = stateView
+		{
+			stateView.dataLoaded(isEmpty: paragraphs.isEmpty)
 		}
 		
 		prepareUpdate?()

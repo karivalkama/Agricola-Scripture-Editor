@@ -64,10 +64,15 @@
                                                             </fragment>
                                                         </attributedString>
                                                     </label>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WJ6-DU-FQN">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="290-1b-bH3" customClass="StatefulStackView" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="34.5" width="856" height="451"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </tableView>
+                                                        <subviews>
+                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WJ6-DU-FQN">
+                                                                <rect key="frame" x="0.0" y="0.0" width="856" height="451"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </tableView>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="YUW-EO-vRL">
@@ -188,6 +193,7 @@
                         <outlet property="contentView" destination="9Tf-cI-tRF" id="yRh-EL-nQc"/>
                         <outlet property="errorLabel" destination="eTa-9T-igA" id="Qry-AV-L8O"/>
                         <outlet property="importButton" destination="YVT-oJ-eUv" id="0pC-Zx-iHZ"/>
+                        <outlet property="previewDataStackView" destination="290-1b-bH3" id="fUw-CZ-Lsk"/>
                         <outlet property="previewTableView" destination="WJ6-DU-FQN" id="lLC-Xh-zWx"/>
                         <outlet property="topConstraint" destination="a51-Iv-0Aa" id="BDn-pi-2HR"/>
                     </connections>
