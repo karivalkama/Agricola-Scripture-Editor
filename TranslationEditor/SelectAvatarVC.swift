@@ -239,8 +239,25 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 				}
 				else
 				{
-					avatarsStackView.dataLoaded()
-					createAvatar()
+					do
+					{
+						if let accountId = Session.instance.accountId, let account = try AgricolaAccount.get(accountId)
+						{
+							avatarsStackView.dataLoaded()
+							createAvatar(withName: account.username)
+						}
+						else
+						{
+							print("ERROR: No account data available")
+							avatarsStackView.errorOccurred(title: "Can't create a new user", description: "Account data was not found")
+							return
+						}
+					}
+					catch
+					{
+						print("ERROR: Failed to read account data. \(error)")
+						avatarsStackView.errorOccurred(title: "Can't create a new user", canContinueWithData: false)
+					}
 				}
 			}
 		}
@@ -324,14 +341,14 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		present(controller, animated: animated, completion: nil)
 	}
 	
-	private func createAvatar()
+	private func createAvatar(withName avatarName: String? = nil)
 	{
 		displayAlert(withIdentifier: "EditAvatar", storyBoardId: "MainMenu")
 		{
-			($0 as! EditAvatarVC).configureForCreate()
+			($0 as! EditAvatarVC).configureForCreate(avatarName: avatarName)
 			{
 				avatar, _ in
-					
+				
 				Session.instance.avatarId = avatar.idString
 				self.proceed()
 			}

@@ -977,128 +977,133 @@ Project Account</string>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="P9P-Go-YGR" userLabel="Content Stack View">
                                         <rect key="frame" x="16" y="16" width="648" height="524"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="200" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rMh-As-6XX">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dg3-2K-gsK" customClass="StatefulStackView" customModule="TranslationEditor" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="648" height="412"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" rowHeight="50" id="c4X-LY-Oow" customClass="UserCell" customModule="TranslationEditor" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="648" height="50"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
-                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c4X-LY-Oow" id="szy-1l-exz">
-                                                            <rect key="frame" x="0.0" y="0.0" width="648" height="49.5"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="DCF-01-Sq9">
-                                                                    <rect key="frame" x="0.0" y="8" width="648" height="33.5"/>
+                                                <subviews>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="200" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rMh-As-6XX">
+                                                        <rect key="frame" x="0.0" y="0.0" width="648" height="412"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <prototypes>
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" rowHeight="50" id="c4X-LY-Oow" customClass="UserCell" customModule="TranslationEditor" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="28" width="648" height="50"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c4X-LY-Oow" id="szy-1l-exz">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="648" height="49.5"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Arc-cq-r2n">
-                                                                            <rect key="frame" x="0.0" y="6.5" width="227.5" height="20.5"/>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="DCF-01-Sq9">
+                                                                            <rect key="frame" x="0.0" y="8" width="648" height="33.5"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="900" text="Test User" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26J-Co-4s9">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="73.5" height="20.5"/>
-                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                                    <nil key="textColor"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="3.4.2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m63-gu-E22">
-                                                                                    <rect key="frame" x="89.5" y="0.0" width="138" height="20.5"/>
-                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                                    <nil key="textColor"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
-                                                                            </subviews>
-                                                                        </stackView>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DUW-yL-C5Q">
-                                                                            <rect key="frame" x="275.5" y="1.5" width="110.5" height="31"/>
-                                                                            <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Admin:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNv-np-Ouh">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="53.5" height="31"/>
-                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                                    <nil key="textColor"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                    <attributedString key="userComments">
-                                                                                        <fragment content="Label for switch that determines whether the user has administrator rights or not">
-                                                                                            <attributes>
-                                                                                                <font key="NSFont" metaFont="smallSystem"/>
-                                                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                            </attributes>
-                                                                                        </fragment>
-                                                                                    </attributedString>
-                                                                                </label>
-                                                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wO8-8d-fzr">
-                                                                                    <rect key="frame" x="61.5" y="0.0" width="51" height="31"/>
-                                                                                    <color key="onTintColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                    <connections>
-                                                                                        <action selector="adminValueChanged:" destination="c4X-LY-Oow" eventType="valueChanged" id="MEd-Mk-fDt"/>
-                                                                                    </connections>
-                                                                                </switch>
-                                                                            </subviews>
-                                                                        </stackView>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0oY-bb-06Z">
-                                                                            <rect key="frame" x="434" y="0.0" width="214" height="33.5"/>
-                                                                            <subviews>
-                                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ef0-I2-3bp" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="135" height="33.5"/>
-                                                                                    <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                                    <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
-                                                                                    <state key="normal" title="Clear Password">
-                                                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                                    </state>
-                                                                                    <attributedString key="userComments">
-                                                                                        <fragment content="Button used for resetting / clearing a user's password (in case of the user has forgot their password)">
-                                                                                            <attributes>
-                                                                                                <font key="NSFont" metaFont="smallSystem"/>
-                                                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                            </attributes>
-                                                                                        </fragment>
-                                                                                    </attributedString>
-                                                                                    <connections>
-                                                                                        <action selector="clearPasswordPressed:" destination="c4X-LY-Oow" eventType="touchUpInside" id="v94-fg-6T6"/>
-                                                                                    </connections>
-                                                                                </button>
-                                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aFn-c2-1Bu" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                                                    <rect key="frame" x="143" y="0.0" width="71" height="33.5"/>
-                                                                                    <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                                    <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
-                                                                                    <state key="normal" title="Delete!">
-                                                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                                    </state>
-                                                                                    <attributedString key="userComments">
-                                                                                        <fragment content="Button used for deleting user data">
-                                                                                            <attributes>
-                                                                                                <font key="NSFont" metaFont="smallSystem"/>
-                                                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                                            </attributes>
-                                                                                        </fragment>
-                                                                                    </attributedString>
-                                                                                    <connections>
-                                                                                        <action selector="deletePressed:" destination="c4X-LY-Oow" eventType="touchUpInside" id="kjT-Sd-fAS"/>
-                                                                                    </connections>
-                                                                                </button>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Arc-cq-r2n">
+                                                                                    <rect key="frame" x="0.0" y="6.5" width="227.5" height="20.5"/>
+                                                                                    <subviews>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="900" text="Test User" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26J-Co-4s9">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="73.5" height="20.5"/>
+                                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                                            <nil key="textColor"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="3.4.2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m63-gu-E22">
+                                                                                            <rect key="frame" x="89.5" y="0.0" width="138" height="20.5"/>
+                                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                                            <nil key="textColor"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                    </subviews>
+                                                                                </stackView>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DUW-yL-C5Q">
+                                                                                    <rect key="frame" x="275.5" y="1.5" width="110.5" height="31"/>
+                                                                                    <subviews>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Admin:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNv-np-Ouh">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="53.5" height="31"/>
+                                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                                            <nil key="textColor"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                            <attributedString key="userComments">
+                                                                                                <fragment content="Label for switch that determines whether the user has administrator rights or not">
+                                                                                                    <attributes>
+                                                                                                        <font key="NSFont" metaFont="smallSystem"/>
+                                                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                                    </attributes>
+                                                                                                </fragment>
+                                                                                            </attributedString>
+                                                                                        </label>
+                                                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wO8-8d-fzr">
+                                                                                            <rect key="frame" x="61.5" y="0.0" width="51" height="31"/>
+                                                                                            <color key="onTintColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                            <connections>
+                                                                                                <action selector="adminValueChanged:" destination="c4X-LY-Oow" eventType="valueChanged" id="MEd-Mk-fDt"/>
+                                                                                            </connections>
+                                                                                        </switch>
+                                                                                    </subviews>
+                                                                                </stackView>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0oY-bb-06Z">
+                                                                                    <rect key="frame" x="434" y="0.0" width="214" height="33.5"/>
+                                                                                    <subviews>
+                                                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ef0-I2-3bp" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="135" height="33.5"/>
+                                                                                            <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                                            <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                                                                            <state key="normal" title="Clear Password">
+                                                                                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                                            </state>
+                                                                                            <attributedString key="userComments">
+                                                                                                <fragment content="Button used for resetting / clearing a user's password (in case of the user has forgot their password)">
+                                                                                                    <attributes>
+                                                                                                        <font key="NSFont" metaFont="smallSystem"/>
+                                                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                                    </attributes>
+                                                                                                </fragment>
+                                                                                            </attributedString>
+                                                                                            <connections>
+                                                                                                <action selector="clearPasswordPressed:" destination="c4X-LY-Oow" eventType="touchUpInside" id="v94-fg-6T6"/>
+                                                                                            </connections>
+                                                                                        </button>
+                                                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aFn-c2-1Bu" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
+                                                                                            <rect key="frame" x="143" y="0.0" width="71" height="33.5"/>
+                                                                                            <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                                            <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                                                                            <state key="normal" title="Delete!">
+                                                                                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                                            </state>
+                                                                                            <attributedString key="userComments">
+                                                                                                <fragment content="Button used for deleting user data">
+                                                                                                    <attributes>
+                                                                                                        <font key="NSFont" metaFont="smallSystem"/>
+                                                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                                    </attributes>
+                                                                                                </fragment>
+                                                                                            </attributedString>
+                                                                                            <connections>
+                                                                                                <action selector="deletePressed:" destination="c4X-LY-Oow" eventType="touchUpInside" id="kjT-Sd-fAS"/>
+                                                                                            </connections>
+                                                                                        </button>
+                                                                                    </subviews>
+                                                                                </stackView>
                                                                             </subviews>
                                                                         </stackView>
                                                                     </subviews>
-                                                                </stackView>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="DCF-01-Sq9" firstAttribute="top" secondItem="szy-1l-exz" secondAttribute="top" constant="8" id="4xD-k3-SBs"/>
-                                                                <constraint firstAttribute="bottom" secondItem="DCF-01-Sq9" secondAttribute="bottom" constant="8" id="LcW-MQ-k52"/>
-                                                                <constraint firstItem="DCF-01-Sq9" firstAttribute="leading" secondItem="szy-1l-exz" secondAttribute="leading" id="fPT-2R-83s"/>
-                                                                <constraint firstAttribute="trailing" secondItem="DCF-01-Sq9" secondAttribute="trailing" id="kPh-A2-M8O"/>
-                                                            </constraints>
-                                                        </tableViewCellContentView>
-                                                        <connections>
-                                                            <outlet property="clearPasswordButton" destination="ef0-I2-3bp" id="fEF-wH-pug"/>
-                                                            <outlet property="createdLabel" destination="m63-gu-E22" id="RsN-dl-2WN"/>
-                                                            <outlet property="deleteButton" destination="aFn-c2-1Bu" id="XPY-YD-DGP"/>
-                                                            <outlet property="isAdminSwitch" destination="wO8-8d-fzr" id="Z0C-zE-TrJ"/>
-                                                            <outlet property="nameLabel" destination="26J-Co-4s9" id="sFQ-jm-noW"/>
-                                                        </connections>
-                                                    </tableViewCell>
-                                                </prototypes>
-                                            </tableView>
+                                                                    <constraints>
+                                                                        <constraint firstItem="DCF-01-Sq9" firstAttribute="top" secondItem="szy-1l-exz" secondAttribute="top" constant="8" id="4xD-k3-SBs"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="DCF-01-Sq9" secondAttribute="bottom" constant="8" id="LcW-MQ-k52"/>
+                                                                        <constraint firstItem="DCF-01-Sq9" firstAttribute="leading" secondItem="szy-1l-exz" secondAttribute="leading" id="fPT-2R-83s"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="DCF-01-Sq9" secondAttribute="trailing" id="kPh-A2-M8O"/>
+                                                                    </constraints>
+                                                                </tableViewCellContentView>
+                                                                <connections>
+                                                                    <outlet property="clearPasswordButton" destination="ef0-I2-3bp" id="fEF-wH-pug"/>
+                                                                    <outlet property="createdLabel" destination="m63-gu-E22" id="RsN-dl-2WN"/>
+                                                                    <outlet property="deleteButton" destination="aFn-c2-1Bu" id="XPY-YD-DGP"/>
+                                                                    <outlet property="isAdminSwitch" destination="wO8-8d-fzr" id="Z0C-zE-TrJ"/>
+                                                                    <outlet property="nameLabel" destination="26J-Co-4s9" id="sFQ-jm-noW"/>
+                                                                </connections>
+                                                            </tableViewCell>
+                                                        </prototypes>
+                                                    </tableView>
+                                                </subviews>
+                                            </stackView>
                                             <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="500" verticalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="sxU-WS-cLv">
                                                 <rect key="frame" x="0.0" y="428" width="648" height="40"/>
                                                 <subviews>
@@ -1233,6 +1238,7 @@ Project Account</string>
                     </view>
                     <connections>
                         <outlet property="confirmView" destination="sxU-WS-cLv" id="NxZ-jN-XUs"/>
+                        <outlet property="userDataStackView" destination="dg3-2K-gsK" id="3kY-2l-uTf"/>
                         <outlet property="userTableView" destination="rMh-As-6XX" id="3P6-Yq-uy5"/>
                     </connections>
                 </viewController>
@@ -1344,10 +1350,10 @@ Project Account</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="NzD-Hx-uxn" secondAttribute="bottom" constant="16" id="07b-Mx-8dw"/>
+                                    <constraint firstAttribute="bottom" secondItem="NzD-Hx-uxn" secondAttribute="bottom" priority="999" constant="16" id="07b-Mx-8dw"/>
                                     <constraint firstItem="NzD-Hx-uxn" firstAttribute="leading" secondItem="dDj-dm-OwG" secondAttribute="leading" constant="16" id="RL8-4f-P7l"/>
                                     <constraint firstItem="NzD-Hx-uxn" firstAttribute="top" secondItem="dDj-dm-OwG" secondAttribute="top" constant="16" id="Z38-L5-u24"/>
-                                    <constraint firstAttribute="trailing" secondItem="NzD-Hx-uxn" secondAttribute="trailing" constant="16" id="zTq-An-VGm"/>
+                                    <constraint firstAttribute="trailing" secondItem="NzD-Hx-uxn" secondAttribute="trailing" priority="999" constant="16" id="zTq-An-VGm"/>
                                 </constraints>
                             </view>
                         </subviews>

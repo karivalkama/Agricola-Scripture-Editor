@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -59,7 +59,7 @@
                                 </imageView>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="5uB-qx-JCO">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="5uB-qx-JCO">
                             <rect key="frame" x="268" y="20.5" width="320" height="283.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="j5K-AH-1wv">
@@ -132,15 +132,9 @@
                                                             </connections>
                                                         </switch>
                                                     </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" priority="750" constant="32" id="bDh-x2-2g8"/>
-                                                    </constraints>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="505" text="Whether this user should be available in the shared project account" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trZ-g5-vnc">
                                                     <rect key="frame" x="0.0" y="31" width="320" height="30.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="wg3-nR-guo"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -157,8 +151,8 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="zRF-vK-fhs" secondAttribute="bottom" id="Fqe-ad-bPj"/>
-                                        <constraint firstAttribute="trailing" secondItem="zRF-vK-fhs" secondAttribute="trailing" id="GIT-yE-wKS"/>
+                                        <constraint firstAttribute="bottom" secondItem="zRF-vK-fhs" secondAttribute="bottom" priority="999" id="Fqe-ad-bPj"/>
+                                        <constraint firstAttribute="trailing" secondItem="zRF-vK-fhs" secondAttribute="trailing" priority="999" id="GIT-yE-wKS"/>
                                         <constraint firstItem="zRF-vK-fhs" firstAttribute="top" secondItem="Zyl-Wo-T87" secondAttribute="top" id="dtZ-PV-Zc6"/>
                                         <constraint firstItem="zRF-vK-fhs" firstAttribute="leading" secondItem="Zyl-Wo-T87" secondAttribute="leading" id="y9q-Xt-CBm"/>
                                     </constraints>
@@ -224,32 +218,27 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="bpx-US-sPa" firstAttribute="leading" secondItem="Oyp-if-Ab5" secondAttribute="leading" id="8KM-jb-Ty2"/>
-                                        <constraint firstAttribute="bottom" secondItem="bpx-US-sPa" secondAttribute="bottom" id="9Xk-Tf-emr"/>
+                                        <constraint firstAttribute="bottom" secondItem="bpx-US-sPa" secondAttribute="bottom" priority="999" id="9Xk-Tf-emr"/>
                                         <constraint firstItem="bpx-US-sPa" firstAttribute="top" secondItem="Oyp-if-Ab5" secondAttribute="top" id="dU7-Ds-6nM"/>
-                                        <constraint firstAttribute="trailing" secondItem="bpx-US-sPa" secondAttribute="trailing" id="pGM-z1-1bf"/>
+                                        <constraint firstAttribute="trailing" secondItem="bpx-US-sPa" secondAttribute="trailing" priority="999" id="pGM-z1-1bf"/>
                                     </constraints>
                                 </view>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="Oyp-if-Ab5" secondAttribute="trailing" id="6Za-Kq-2PO"/>
-                                <constraint firstAttribute="trailing" secondItem="Zyl-Wo-T87" secondAttribute="trailing" id="89n-YI-wA3"/>
-                                <constraint firstAttribute="trailing" secondItem="j5K-AH-1wv" secondAttribute="trailing" id="OUU-V6-tNL"/>
-                                <constraint firstItem="Oyp-if-Ab5" firstAttribute="leading" secondItem="5uB-qx-JCO" secondAttribute="leading" id="b8w-dc-Uoq"/>
-                                <constraint firstItem="Zyl-Wo-T87" firstAttribute="leading" secondItem="5uB-qx-JCO" secondAttribute="leading" id="iH8-5v-f2n"/>
-                                <constraint firstItem="j5K-AH-1wv" firstAttribute="leading" secondItem="5uB-qx-JCO" secondAttribute="leading" id="jEA-t6-iY6"/>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="sRe-DU-yHD"/>
                             </constraints>
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5uB-qx-JCO" secondAttribute="bottom" id="HpP-W7-5lZ"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5uB-qx-JCO" secondAttribute="bottom" priority="999" id="HpP-W7-5lZ"/>
                     </constraints>
                 </stackView>
             </subviews>
             <constraints>
                 <constraint firstItem="BM0-l6-qW0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3D9-Pc-BhR"/>
-                <constraint firstAttribute="trailing" secondItem="BM0-l6-qW0" secondAttribute="trailing" id="D5w-6k-c6G"/>
+                <constraint firstAttribute="trailing" secondItem="BM0-l6-qW0" secondAttribute="trailing" priority="999" id="D5w-6k-c6G"/>
                 <constraint firstItem="BM0-l6-qW0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H5n-iP-O6F"/>
-                <constraint firstAttribute="bottom" secondItem="BM0-l6-qW0" secondAttribute="bottom" id="XkA-kD-WpA"/>
+                <constraint firstAttribute="bottom" secondItem="BM0-l6-qW0" secondAttribute="bottom" priority="999" id="XkA-kD-WpA"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

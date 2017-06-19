@@ -15,6 +15,7 @@ class ManageUsersVC: UIViewController, UITableViewDataSource
 	
 	@IBOutlet weak var userTableView: UITableView!
 	@IBOutlet weak var confirmView: UIView!
+	@IBOutlet weak var userDataStackView: StatefulStackView!
 	
 	
 	// ATTRIBUTES	------------------
@@ -30,7 +31,11 @@ class ManageUsersVC: UIViewController, UITableViewDataSource
     override func viewDidLoad()
 	{
         super.viewDidLoad()
-
+		
+		userDataStackView.register(userTableView, for: .data)
+		userDataStackView.registerDefaultNoDataView(heading: "You have no other users in the project", description: "You can add more users by using the shared project account and by connecting with people.")
+		userDataStackView.setState(.loading)
+		
 		userTableView.dataSource = self
     }
 	
@@ -41,17 +46,24 @@ class ManageUsersVC: UIViewController, UITableViewDataSource
 		guard let projectId = Session.instance.projectId, let avatarId = Session.instance.avatarId else
 		{
 			print("ERROR: Project and avatar must be selected before managing users")
+			userDataStackView.errorOccurred()
 			return
 		}
 		
-		// Loads avatar data
-		do
+		// Loads avatar data (asynchronous)
+		DispatchQueue.main.async
 		{
-			avatars = try AvatarView.instance.avatarQuery(projectId: projectId).resultObjects().filter { $0.idString != avatarId }.flatMap { avatar in avatar.isDisabled ? nil : try avatar.info().map { (avatar, $0) } }
-		}
-		catch
-		{
-			print("ERROR: Failed to read avatar data. \(error)")
+			do
+			{
+				self.avatars = try AvatarView.instance.avatarQuery(projectId: projectId).resultObjects().filter { $0.idString != avatarId }.flatMap { avatar in avatar.isDisabled ? nil : try avatar.info().map { (avatar, $0) } }
+				self.userDataStackView.dataLoaded(isEmpty: self.avatars.isEmpty)
+				self.userTableView.reloadData()
+			}
+			catch
+			{
+				print("ERROR: Failed to read avatar data. \(error)")
+				self.userDataStackView.errorOccurred()
+			}
 		}
 	}
 	
@@ -92,6 +104,11 @@ class ManageUsersVC: UIViewController, UITableViewDataSource
 				
 				avatars.remove(at: index)
 				userTableView.reloadData()
+				
+				if avatars.isEmpty
+				{
+					userDataStackView.setState(.empty)
+				}
 			}
 			catch
 			{

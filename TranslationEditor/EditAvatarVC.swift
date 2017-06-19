@@ -27,6 +27,7 @@ class EditAvatarVC: UIViewController
 	
 	private var editedInfo: (Avatar, AvatarInfo)?
 	private var completionHandler: ((Avatar, AvatarInfo) -> ())?
+	private var presetName: String?
 	
 	
 	// LOAD	----------------------
@@ -61,6 +62,11 @@ class EditAvatarVC: UIViewController
 		// If creating a new avatar, those created for shared accounts must be shared
 		else
 		{
+			if let presetName = presetName
+			{
+				createAvatarView.avatarName = presetName
+			}
+			
 			do
 			{
 				guard let accountId = Session.instance.accountId, let account = try AgricolaAccount.get(accountId) else
@@ -219,8 +225,9 @@ class EditAvatarVC: UIViewController
 		self.completionHandler = successHandler
 	}
 	
-	func configureForCreate(successHandler: @escaping (Avatar, AvatarInfo) -> ())
+	func configureForCreate(avatarName: String? = nil, successHandler: @escaping (Avatar, AvatarInfo) -> ())
 	{
+		self.presetName = avatarName
 		self.completionHandler = successHandler
 	}
 }
