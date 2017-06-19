@@ -152,6 +152,7 @@ fileprivate enum ConnectionState
 			if let projectId = Session.instance.projectId, let project = try Project.get(projectId)
 			{
 				targetTranslations = try project.targetTranslationQuery().resultObjects()
+				targetTranslations.sort(by: { $0.0.code < $0.1.code })
 				projectFound = true
 			}
 		}
@@ -182,8 +183,10 @@ fileprivate enum ConnectionState
 	
 	@IBAction func connectionModeChanged(_ sender: Any)
 	{
-		// 1 = Join
-		if connectionSegmentedControl.selectedSegmentIndex == 1
+		let newState = stateForIndex(connectionSegmentedControl.selectedSegmentIndex)
+		
+		// Join
+		if newState == .joined
 		{
 			guard let viewController = viewController else
 			{
@@ -211,8 +214,8 @@ fileprivate enum ConnectionState
 			P2PClientSession.stop()
 		}
 		
-		// 2 = Hosting
-		if connectionSegmentedControl.selectedSegmentIndex == 2
+		// Hosting
+		if newState == .hosting
 		{
 			if P2PHostSession.instance == nil
 			{
@@ -427,6 +430,29 @@ fileprivate enum ConnectionState
 	
 	
 	// OTHER METHODS	-----
+	
+	private func stateForIndex(_ index: Int) -> ConnectionState
+	{
+		if index <= 0
+		{
+			return .disconnected
+		}
+		else if index == 2
+		{
+			return .hosting
+		}
+		else
+		{
+			if canJoin
+			{
+				return .joined
+			}
+			else
+			{
+				return .hosting
+			}
+		}
+	}
 	
 	private func selectConnectionState(_ selectedState: ConnectionState, isProcessing: Bool = false)
 	{

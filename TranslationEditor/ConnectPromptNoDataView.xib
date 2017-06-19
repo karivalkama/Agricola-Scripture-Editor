@@ -49,11 +49,11 @@
             </subviews>
             <constraints>
                 <constraint firstItem="Ws3-5J-nQE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" id="5y6-aq-gAd"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ws3-5J-nQE" secondAttribute="trailing" constant="32" id="Jh8-Hu-q2B"/>
-                <constraint firstItem="Ws3-5J-nQE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Jki-RS-MXZ"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ws3-5J-nQE" secondAttribute="trailing" priority="999" constant="32" id="Jh8-Hu-q2B"/>
+                <constraint firstItem="Ws3-5J-nQE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" priority="999" id="Jki-RS-MXZ"/>
                 <constraint firstItem="Ws3-5J-nQE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="32" id="MQp-H0-Gfd"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ws3-5J-nQE" secondAttribute="bottom" id="uAl-iA-6lc"/>
-                <constraint firstItem="Ws3-5J-nQE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="usj-4L-uxK"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ws3-5J-nQE" secondAttribute="bottom" priority="999" id="uAl-iA-6lc"/>
+                <constraint firstItem="Ws3-5J-nQE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" priority="999" id="usj-4L-uxK"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
