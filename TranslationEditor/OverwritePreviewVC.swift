@@ -17,6 +17,9 @@ class OverwritePreviewVC: UIViewController
 	@IBOutlet weak var newVersionTable: UITableView!
 	@IBOutlet weak var topBar: TopBarUIView!
 	
+	@IBOutlet weak var previewDataStackView: StatefulStackView!
+	@IBOutlet weak var previewView: UIView!
+	
 	
 	// ATTRIBUTES	------------
 	
@@ -47,50 +50,19 @@ class OverwritePreviewVC: UIViewController
 		
 		topBar.configure(hostVC: self, title: "Preview Changes")
 		
-		// Loads the old paragraphs from the database
-		do
+		previewDataStackView.register(previewView, for: .data)
+		previewDataStackView.setState(.loading)
+		
+		// Loads the data and finalizes view asynchronously
+		DispatchQueue.main.async
 		{
-			oldParagraphs = try ParagraphView.instance.latestParagraphQuery(bookId: oldBook.idString).resultObjects()
-		}
-		catch
-		{
-			print("ERROR: Failed to load old version data")
-		}
-		
-		// print("STATUS: Found \(oldParagraphs.count) old paragraphs")
-		
-		// Sets up the paragraph tables
-		let tables = [oldVersionTable, newVersionTable]
-		tables.forEach { $0?.register(UINib(nibName: "ParagraphCell", bundle: nil), forCellReuseIdentifier: ParagraphCell.identifier) }
-		tables.forEach { $0?.rowHeight = UITableViewAutomaticDimension }
-		tables.forEach { $0?.estimatedRowHeight = 160 }
-		
-		matches = match(oldParagraphs, and: newParagraphs)
-		oldSideDS = VersionTableDS(paragraphs: oldParagraphs, matches: matches)
-		newSideDS = VersionTableDS(paragraphs: newParagraphs, matches: matches.map { ($0.1, $0.0) })
-		
-		oldVersionTable.dataSource = oldSideDS
-		newVersionTable.dataSource = newSideDS
-		
-		// Adds scroll sync
-		scrollManager = ScrollSyncManager(leftTable: oldVersionTable, rightTable: newVersionTable, leftResourceId: "old", rightResourceId: "new")
-		{
-			tableView, oppositePathId in
-			
-			if tableView == self.oldVersionTable
-			{
-				return self.oldSideDS.indexPaths(forOppositePathId: oppositePathId)
-			}
-			else
-			{
-				return self.newSideDS.indexPaths(forOppositePathId: oppositePathId)
-			}
+			self.loadData()
 		}
     }
 	
-	override func viewDidAppear(_ animated: Bool)
+	override func viewWillAppear(_ animated: Bool)
 	{
-		super.viewDidAppear(animated)
+		super.viewWillAppear(animated)
 		
 		let title = "Preview Changes"
 		if let presentingViewController = presentingViewController
@@ -133,6 +105,51 @@ class OverwritePreviewVC: UIViewController
 		self.newParagraphs = newParagraphs
 		
 		self.configured = true
+	}
+	
+	private func loadData()
+	{
+		// Loads the old paragraphs from the database
+		do
+		{
+			oldParagraphs = try ParagraphView.instance.latestParagraphQuery(bookId: oldBook.idString).resultObjects()
+		}
+		catch
+		{
+			print("ERROR: Failed to load old version data")
+			previewDataStackView.errorOccurred()
+			return
+		}
+		
+		previewDataStackView.dataLoaded(isEmpty: oldParagraphs.isEmpty && newParagraphs.isEmpty)
+		
+		// Sets up the paragraph tables
+		let tables = [oldVersionTable, newVersionTable]
+		tables.forEach { $0?.register(UINib(nibName: "ParagraphCell", bundle: nil), forCellReuseIdentifier: ParagraphCell.identifier) }
+		tables.forEach { $0?.rowHeight = UITableViewAutomaticDimension }
+		tables.forEach { $0?.estimatedRowHeight = 160 }
+		
+		matches = match(oldParagraphs, and: newParagraphs)
+		oldSideDS = VersionTableDS(paragraphs: oldParagraphs, matches: matches)
+		newSideDS = VersionTableDS(paragraphs: newParagraphs, matches: matches.map { ($0.1, $0.0) })
+		
+		oldVersionTable.dataSource = oldSideDS
+		newVersionTable.dataSource = newSideDS
+		
+		// Adds scroll sync
+		scrollManager = ScrollSyncManager(leftTable: oldVersionTable, rightTable: newVersionTable, leftResourceId: "old", rightResourceId: "new")
+		{
+			tableView, oppositePathId in
+			
+			if tableView == self.oldVersionTable
+			{
+				return self.oldSideDS.indexPaths(forOppositePathId: oppositePathId)
+			}
+			else
+			{
+				return self.newSideDS.indexPaths(forOppositePathId: oppositePathId)
+			}
+		}
 	}
 	
 	private func closeImport()
