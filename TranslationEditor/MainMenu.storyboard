@@ -455,57 +455,62 @@
                                                     </fragment>
                                                 </attributedString>
                                             </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="200" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nmh-Sf-zta">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Wqk-kC-PyS" customClass="StatefulStackView" customModule="TranslationEditor" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28.5" width="776" height="616"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" rowHeight="50" id="X1P-0t-QRE" customClass="BookCell" customModule="TranslationEditor" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="776" height="50"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
-                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X1P-0t-QRE" id="mvV-WX-iNg">
-                                                            <rect key="frame" x="0.0" y="0.0" width="776" height="49.5"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="NUP-IX-Jos">
-                                                                    <rect key="frame" x="16" y="4" width="744" height="41.5"/>
+                                                <subviews>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="200" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nmh-Sf-zta">
+                                                        <rect key="frame" x="0.0" y="0.0" width="776" height="616"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <prototypes>
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" rowHeight="50" id="X1P-0t-QRE" customClass="BookCell" customModule="TranslationEditor" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="28" width="776" height="50"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X1P-0t-QRE" id="mvV-WX-iNg">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="776" height="49.5"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Galatians" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6m-fe-4P3">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="160" height="41.5"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="160" id="CR7-jw-EMn"/>
-                                                                            </constraints>
-                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Test Translation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ow-aM-d4X">
-                                                                            <rect key="frame" x="184" y="0.0" width="296" height="41.5"/>
-                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <view contentMode="scaleToFill" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fUX-EV-Slg" customClass="BookProgressUIView" customModule="TranslationEditor" customModuleProvider="target">
-                                                                            <rect key="frame" x="504" y="0.0" width="240" height="41.5"/>
-                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        </view>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="NUP-IX-Jos">
+                                                                            <rect key="frame" x="16" y="4" width="744" height="41.5"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Galatians" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6m-fe-4P3">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="41.5"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="160" id="CR7-jw-EMn"/>
+                                                                                    </constraints>
+                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Test Translation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ow-aM-d4X">
+                                                                                    <rect key="frame" x="184" y="0.0" width="296" height="41.5"/>
+                                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <view contentMode="scaleToFill" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fUX-EV-Slg" customClass="BookProgressUIView" customModule="TranslationEditor" customModuleProvider="target">
+                                                                                    <rect key="frame" x="504" y="0.0" width="240" height="41.5"/>
+                                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                </view>
+                                                                            </subviews>
+                                                                        </stackView>
                                                                     </subviews>
-                                                                </stackView>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="NUP-IX-Jos" secondAttribute="trailing" constant="16" id="6ab-Xx-X8X"/>
-                                                                <constraint firstAttribute="bottom" secondItem="NUP-IX-Jos" secondAttribute="bottom" constant="4" id="E8F-3F-k5S"/>
-                                                                <constraint firstItem="NUP-IX-Jos" firstAttribute="leading" secondItem="mvV-WX-iNg" secondAttribute="leading" constant="16" id="Ifh-XF-Rlv"/>
-                                                                <constraint firstItem="NUP-IX-Jos" firstAttribute="top" secondItem="mvV-WX-iNg" secondAttribute="top" constant="4" id="Kdp-UB-wYM"/>
-                                                            </constraints>
-                                                        </tableViewCellContentView>
-                                                        <connections>
-                                                            <outlet property="bookNameLabel" destination="4Ow-aM-d4X" id="nKm-yi-8xd"/>
-                                                            <outlet property="codeLabel" destination="R6m-fe-4P3" id="dkC-3T-OJZ"/>
-                                                            <outlet property="progressView" destination="fUX-EV-Slg" id="qv2-IG-d9J"/>
-                                                        </connections>
-                                                    </tableViewCell>
-                                                </prototypes>
-                                            </tableView>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="trailing" secondItem="NUP-IX-Jos" secondAttribute="trailing" constant="16" id="6ab-Xx-X8X"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="NUP-IX-Jos" secondAttribute="bottom" constant="4" id="E8F-3F-k5S"/>
+                                                                        <constraint firstItem="NUP-IX-Jos" firstAttribute="leading" secondItem="mvV-WX-iNg" secondAttribute="leading" constant="16" id="Ifh-XF-Rlv"/>
+                                                                        <constraint firstItem="NUP-IX-Jos" firstAttribute="top" secondItem="mvV-WX-iNg" secondAttribute="top" constant="4" id="Kdp-UB-wYM"/>
+                                                                    </constraints>
+                                                                </tableViewCellContentView>
+                                                                <connections>
+                                                                    <outlet property="bookNameLabel" destination="4Ow-aM-d4X" id="nKm-yi-8xd"/>
+                                                                    <outlet property="codeLabel" destination="R6m-fe-4P3" id="dkC-3T-OJZ"/>
+                                                                    <outlet property="progressView" destination="fUX-EV-Slg" id="qv2-IG-d9J"/>
+                                                                </connections>
+                                                            </tableViewCell>
+                                                        </prototypes>
+                                                    </tableView>
+                                                </subviews>
+                                            </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.33000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="TIP: Connect with others and open .USX files with Agricola to add new books" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ck9-ie-R4l">
                                                 <rect key="frame" x="0.0" y="652.5" width="776" height="19.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
@@ -663,6 +668,7 @@ Project Account</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bookDataStackView" destination="Wqk-kC-PyS" id="4Yx-sW-Hep"/>
                         <outlet property="bookTableView" destination="Nmh-Sf-zta" id="q3N-LD-4sf"/>
                         <outlet property="manageSharedAccountButton" destination="kWz-6Y-pnt" id="8RP-Pw-pXs"/>
                         <outlet property="manageUsersButton" destination="GOG-9c-Tto" id="Od9-ms-Dp0"/>

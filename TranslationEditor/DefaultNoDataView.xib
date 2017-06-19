@@ -39,11 +39,11 @@
                 </stackView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JVU-4S-I4i" secondAttribute="trailing" constant="32" id="Jzh-KP-koT"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JVU-4S-I4i" secondAttribute="trailing" priority="999" constant="32" id="Jzh-KP-koT"/>
                 <constraint firstItem="JVU-4S-I4i" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="32" id="RWh-zy-Wb6"/>
                 <constraint firstItem="JVU-4S-I4i" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="oAj-O2-cy3"/>
-                <constraint firstItem="JVU-4S-I4i" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="oln-hc-Vxq"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="JVU-4S-I4i" secondAttribute="bottom" id="x4Y-aq-RHA"/>
+                <constraint firstItem="JVU-4S-I4i" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" priority="999" id="oln-hc-Vxq"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="JVU-4S-I4i" secondAttribute="bottom" priority="999" id="x4Y-aq-RHA"/>
                 <constraint firstItem="JVU-4S-I4i" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" id="xg0-EQ-dqO"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

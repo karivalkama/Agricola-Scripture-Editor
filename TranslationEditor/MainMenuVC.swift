@@ -24,6 +24,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 	@IBOutlet weak var bookTableView: UITableView!
 	@IBOutlet weak var manageUsersButton: BasicButton!
 	@IBOutlet weak var manageSharedAccountButton: BasicButton!
+	@IBOutlet weak var bookDataStackView: StatefulStackView!
 	
 	
 	// ATTRIBUTES	--------------
@@ -41,6 +42,10 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		
 		topBar.configure(hostVC: self, title: "Main Menu")
 		
+		bookDataStackView.register(bookTableView, for: .data)
+		bookDataStackView.registerDefaultNoDataView(heading: "No Books Found", description: "You can add books by:\n1) Using the 'Import Book from Another Project' -feature\n2) Opening USX files using Agricola\n\nPlease note that the structure of a new translation is based on the first read book so add first those which have the best structure.")
+		bookDataStackView.setState(.loading)
+		
 		// Sets up the table
 		// bookTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
 		bookTableView.dataSource = self
@@ -51,12 +56,14 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 			guard let projectId = Session.instance.projectId else
 			{
 				print("ERROR: No project selected when in main menu")
+				bookDataStackView.errorOccurred()
 				return
 			}
 			
 			guard let project = try Project.get(projectId) else
 			{
 				print("ERROR: Couldn't find correct project data")
+				bookDataStackView.errorOccurred()
 				return
 			}
 			
@@ -70,9 +77,9 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		}
     }
 	
-	override func viewDidAppear(_ animated: Bool)
+	override func viewWillAppear(_ animated: Bool)
 	{
-		super.viewDidAppear(animated)
+		super.viewWillAppear(animated)
 		
 		// Sets up the top bar
 		let title = "Main Menu"
@@ -107,15 +114,18 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 			return
 		}
 		
-		// Updates the book progress status
-		do
+		// Updates the book progress status (asynchronous)
+		DispatchQueue.main.async
 		{
-			progress = try BookProgressView.instance.progressForProjectBooks(projectId: projectId)
-			bookTableView.reloadData()
-		}
-		catch
-		{
-			print("ERROR: Failed to read book progress status")
+			do
+			{
+				self.progress = try BookProgressView.instance.progressForProjectBooks(projectId: projectId)
+				self.bookTableView.reloadData()
+			}
+			catch
+			{
+				print("ERROR: Failed to read book progress status")
+			}
 		}
 		
 		// Admin tools are only enabled for admin users
@@ -194,6 +204,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		do
 		{
 			books = try rows.map { try $0.object() }.sorted { $0.0.code < $0.1.code}
+			bookDataStackView.dataLoaded(isEmpty: books.isEmpty)
 			bookTableView.reloadData()
 		}
 		catch

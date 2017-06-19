@@ -21,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="666" height="446"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Ws3-5J-nQE">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Ws3-5J-nQE">
                     <rect key="frame" x="77" y="87" width="512" height="272.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="l9Q-pt-35o">
@@ -45,6 +45,9 @@
                             <rect key="frame" x="0.0" y="90" width="512" height="182.5"/>
                         </view>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="l9Q-pt-35o" firstAttribute="leading" secondItem="Ws3-5J-nQE" secondAttribute="leading" id="pP7-P5-tVo"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <constraints>

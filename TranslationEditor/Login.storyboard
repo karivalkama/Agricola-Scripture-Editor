@@ -260,7 +260,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="lc9-4f-cax" userLabel="Content Stack View">
                                                 <rect key="frame" x="62.5" y="257" width="480" height="486"/>
                                                 <subviews>
-                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPe-GH-K3z">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPe-GH-K3z">
                                                         <rect key="frame" x="7.5" y="0.0" width="465" height="152.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="7X2-Hd-R1C" userLabel="Auth Stack View">
@@ -422,23 +422,23 @@
                                                             <constraint firstItem="7X2-Hd-R1C" firstAttribute="top" secondItem="cPe-GH-K3z" secondAttribute="top" id="w0c-iu-sAH"/>
                                                         </constraints>
                                                     </view>
-                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qd-S5-tOh">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qd-S5-tOh">
                                                         <rect key="frame" x="0.0" y="184.5" width="480" height="301.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="U6h-rz-zDK">
                                                                 <rect key="frame" x="0.0" y="0.0" width="480" height="301.5"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="USQ-In-Umd">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="480" height="47"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="480" height="245.5"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It seems like you have no data on this device" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0D-0a-p0C">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="480" height="26.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="480" height="225"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can connect with others to fix that" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUh-vV-lT5">
-                                                                                <rect key="frame" x="0.0" y="26.5" width="480" height="20.5"/>
+                                                                                <rect key="frame" x="0.0" y="225" width="480" height="20.5"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
@@ -446,7 +446,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CV0-i9-ZLz" customClass="ConnectPromptView" customModule="TranslationEditor" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="63" width="480" height="182.5"/>
+                                                                        <rect key="frame" x="0.0" y="253.5" width="480" height="0.0"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     </view>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="zrG-oF-BTt">
@@ -849,7 +849,7 @@
                                                                         <rect key="frame" x="0.0" y="28" width="557" height="87"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sG3-be-bJb" id="EcI-Gu-8tF">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="557" height="86.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="557" height="86"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wh2-3I-Lsf" userLabel="Content Stack View">
@@ -897,7 +897,7 @@
                                                                         <rect key="frame" x="0.0" y="115" width="557" height="176"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vde-PQ-RQ0" id="TeY-rK-FQx">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="557" height="175.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="557" height="175"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="A6x-z7-cDy" userLabel="Content Stack View">
