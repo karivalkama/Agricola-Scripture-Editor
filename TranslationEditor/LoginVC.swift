@@ -40,6 +40,7 @@ class LoginVC: UIViewController
 		topBar.connectionCompletionHandler = handleConnectionChange
 		
 		errorLabel.text = nil
+		// errorLabel.isHidden = true
 		loginView.isHidden = true
 		noDataView.isHidden = true
 		

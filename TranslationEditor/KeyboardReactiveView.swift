@@ -297,6 +297,7 @@ class KeyboardReactiveView: UIView
 					}
 					else if disabledTopConstraint == nil
 					{
+						print("STATUS: Generates a height constraint for new temporary layout")
 						generatedHeightConstraint = heightAnchor.constraint(equalToConstant: frame.height)
 						NSLayoutConstraint.activate([generatedHeightConstraint!])
 						
