@@ -25,6 +25,10 @@ class LoginVC: UIViewController
 	@IBOutlet weak var centeringConstraint: NSLayoutConstraint!
 	@IBOutlet weak var contentView: KeyboardReactiveView!
 	
+	@IBOutlet weak var loginView: UIView!
+	@IBOutlet weak var noDataView: UIView!
+	@IBOutlet weak var noDataConnectPromptView: ConnectPromptView!
+	
 	
 	// INIT	------------------------
 	
@@ -36,8 +40,29 @@ class LoginVC: UIViewController
 		topBar.connectionCompletionHandler = handleConnectionChange
 		
 		errorLabel.text = nil
+		loginView.isHidden = true
+		noDataView.isHidden = true
 		
 		contentView.configure(mainView: view, elements: [userNameField, passwordField, errorLabel, loginButton, continueButton])
+		
+		// If there is data present on this device, presents login, otherwise presents connection prompt
+		do
+		{
+			if try AccountView.instance.createQuery(ofType: .noObjects).firstResultRow() == nil
+			{
+				noDataConnectPromptView.connectButtonAction = { [weak self] in self?.topBar.performConnect(using: self!) }
+				noDataView.isHidden = false
+			}
+			else
+			{
+				loginView.isHidden = false
+			}
+		}
+		catch
+		{
+			print("ERROR: Couldn't check if there was any data available or not")
+			// TODO: Present error view or something
+		}
     }
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -140,22 +165,12 @@ class LoginVC: UIViewController
 	
 	@IBAction func continueButtonPressed(_ sender: Any)
 	{
-		// Moves to the create account view
-		// ConnectionManager.instance.removeListener(self)
-		// performSegue(withIdentifier: "CreateUser", sender: nil)
-		displayAlert(withIdentifier: "CreateAccount", storyBoardId: "Login")
-		{
-			accountVC in
-			
-			if let accountVC = accountVC as? CreateAccountVC
-			{
-				accountVC.configure
-				{
-					self.checkP2PProjectAccess(for: $0)
-					self.proceed()
-				}
-			}
-		}
+		createAccount()
+	}
+	
+	@IBAction func startNewButtonPressed(_ sender: Any)
+	{
+		createAccount()
 	}
 	
 	
@@ -216,6 +231,26 @@ class LoginVC: UIViewController
 
 	
 	// OTHER METHODS	-----------
+	
+	private func createAccount()
+	{
+		// Moves to the create account view
+		// ConnectionManager.instance.removeListener(self)
+		// performSegue(withIdentifier: "CreateUser", sender: nil)
+		displayAlert(withIdentifier: "CreateAccount", storyBoardId: "Login")
+		{
+			accountVC in
+			
+			if let accountVC = accountVC as? CreateAccountVC
+			{
+				accountVC.configure
+					{
+						self.checkP2PProjectAccess(for: $0)
+						self.proceed()
+				}
+			}
+		}
+	}
 	
 	private func checkP2PProjectAccess(for account: AgricolaAccount)
 	{

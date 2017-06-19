@@ -62,8 +62,8 @@
                 </stackView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="2Nk-fi-TQH" secondAttribute="trailing" id="HRJ-6D-x5a"/>
-                <constraint firstAttribute="bottom" secondItem="2Nk-fi-TQH" secondAttribute="bottom" id="JtP-KO-vah"/>
+                <constraint firstAttribute="trailing" secondItem="2Nk-fi-TQH" secondAttribute="trailing" priority="999" id="HRJ-6D-x5a"/>
+                <constraint firstAttribute="bottom" secondItem="2Nk-fi-TQH" secondAttribute="bottom" priority="999" id="JtP-KO-vah"/>
                 <constraint firstItem="2Nk-fi-TQH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jsI-ur-CTi"/>
                 <constraint firstItem="2Nk-fi-TQH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tUH-hA-GtS"/>
             </constraints>
