@@ -29,6 +29,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
 	@IBOutlet weak var topBar: TopBarUIView!
 	@IBOutlet weak var inputStackView: SquishableStackView!
+	@IBOutlet weak var previewDataStackView: StatefulStackView!
 	
 	
 	// ATTRIBUTES	---------
@@ -64,6 +65,9 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		topBar.configure(hostVC: self, title: "Import USX File", leftButtonText: "Cancel", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
 		contentView.configure(mainView: view, elements: [selectLanguageView, insertSwitch, nicknameField, okButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish, squishedElements: [inputStackView])
 		
+		previewDataStackView.register(paragraphTableView, for: .data)
+		previewDataStackView.setState(.loading)
+		
 		// Reads paragraph data first
 		guard let usxURL = usxURL else
 		{
@@ -73,108 +77,148 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 		guard let projectId = Session.instance.projectId else
 		{
 			print("ERROR: Project must be defined before USX import")
+			previewDataStackView.errorOccurred()
 			return
 		}
 		
 		guard let avatarId = Session.instance.avatarId else
 		{
 			print("ERROR: Avatar must be selected before USX import")
+			previewDataStackView.errorOccurred()
 			return
 		}
 		
 		guard let parser = XMLParser(contentsOf: usxURL) else
 		{
 			print("ERROR: Couldn't create an XML parser")
+			previewDataStackView.errorOccurred()
 			return
 		}
 		
-		// Language is set afterwards
-		let usxParserDelegate = USXParser(projectId: projectId, userId: avatarId, languageId: "")
-		parser.delegate = usxParserDelegate
-		parser.parse()
-		
-		guard usxParserDelegate.success else
+		// Parses the data asynchronously
+		DispatchQueue.main.async
 		{
-			// TODO: Display error message on failure
-			print("ERROR: USX parsing failed. \(usxParserDelegate.error!)")
-			return
-		}
-		
-		// Only picks the first parsed book
-		// TODO: Add handling for USX files that contain multiple books
-		guard let bookData = usxParserDelegate.parsedBooks.first else
-		{
-			print("ERROR: Couldn't parse any book data")
-			return
-		}
-		
-		if usxParserDelegate.parsedBooks.count > 1
-		{
-			print("WARNING: Multiple books were read. Only the first one is used.")
-		}
-		
-		book = bookData.book
-		paragraphs = bookData.paragraphs
-		
-		// Checks if there already exists a book with an identical identifier, in which case rest of the next view is presented eventually
-		do
-		{
-			try ProjectBooksView.instance.booksQuery(projectId: projectId).enumerateResultObjects
+			// Language is set afterwards
+			let usxParserDelegate = USXParser(projectId: projectId, userId: avatarId, languageId: "")
+			parser.delegate = usxParserDelegate
+			parser.parse()
+			
+			guard usxParserDelegate.success else
 			{
-				existingBook in
+				// TODO: Display error message on failure
+				print("ERROR: USX parsing failed. \(usxParserDelegate.error!)")
 				
-				if existingBook.code == bookData.book.code && existingBook.identifier == bookData.book.identifier
+				var message = "Parsing failed for some reason"
+				
+				if let error = usxParserDelegate.error as? USXParseError
 				{
-					print("STATUS: Found a matching identfier")
-					
-					bookToOverwrite = existingBook
-					book?.languageId = existingBook.languageId
-					foundMatchWithIdentifier = true
-					return false
+					switch error
+					{
+					case .verseIndexNotFound: message = "A verse number is missing"
+					case .verseIndexParsingFailed: message = "Verse number parsing failed"
+					case .verseRangeParsingFailed: message = "Verse number parsing failed"
+					case .chapterIndexNotFound: message = "No chapter marker found"
+					case .bookNameNotSpecified: message = "No book name found"
+					case .bookCodeNotFound: message = "Book code is missing"
+					case .attributeMissing: message = "Required usx-attribute is missing"
+					case .unknownNoteStyle: message = "Unrecognized note style"
+					}
 				}
-				else
+				
+				self.previewDataStackView.errorOccurred(title: "Couldn't read the USX file", description: message)
+				
+				return
+			}
+			
+			// Only picks the first parsed book
+			// TODO: Add handling for USX files that contain multiple books
+			guard let bookData = usxParserDelegate.parsedBooks.first else
+			{
+				print("ERROR: Couldn't parse any book data")
+				self.previewDataStackView.dataLoaded(isEmpty: true)
+				return
+			}
+			
+			self.previewDataStackView.dataLoaded()
+			
+			if usxParserDelegate.parsedBooks.count > 1
+			{
+				print("WARNING: Multiple books were read. Only the first one is used.")
+			}
+			
+			self.book = bookData.book
+			self.paragraphs = bookData.paragraphs
+			
+			// Checks if there already exists a book with an identical identifier, in which case rest of the next view is presented eventually
+			do
+			{
+				try ProjectBooksView.instance.booksQuery(projectId: projectId).enumerateResultObjects
 				{
-					return true
+					existingBook in
+					
+					if existingBook.code == bookData.book.code && existingBook.identifier == bookData.book.identifier
+					{
+						print("STATUS: Found a matching identfier")
+						
+						self.bookToOverwrite = existingBook
+						self.book?.languageId = existingBook.languageId
+						self.foundMatchWithIdentifier = true
+						return false
+					}
+					else
+					{
+						return true
+					}
+				}
+				
+				// The view proceeds once the data is read. If it was read before the view appeared, the transition is performed there instead
+				if self.foundMatchWithIdentifier && self.presentingViewController != nil
+				{
+					self.continueToOverwrite()
 				}
 			}
+			catch
+			{
+				print("ERROR: Failed to check if there exists a book with an identical identifier. \(error)")
+			}
+			
+			// Sets up the paragraph table
+			self.paragraphTableView.register(UINib(nibName: "ParagraphCell", bundle: nil), forCellReuseIdentifier: ParagraphCell.identifier)
+			//paragraphTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
+			self.paragraphTableView.rowHeight = UITableViewAutomaticDimension
+			self.paragraphTableView.estimatedRowHeight = 160
+			self.paragraphTableView.dataSource = self
+			
+			// Sets up other views
+			self.bookLabel.text = "\(self.book!.code): \(self.book!.identifier)"
+			self.setInsertStatus(true, lock: true) // Insert mode is used by default. It cannot be changed before language is selected
+			self.updateOkButtonStatus()
+			
+			self.selectBookTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
+			self.bookTableController = SelectBookTableController(table: self.selectBookTableView, newIdentifier: self.book!.identifier)
+			self.bookTableController?.delegate = self
 		}
-		catch
+		
+		// Also retrieves languages (asynchronously)
+		DispatchQueue.main.async
 		{
-			print("ERROR: Failed to check if there exists a book with an identical identifier. \(error)")
-		}
-		
-		// Sets up the paragraph table
-		paragraphTableView.register(UINib(nibName: "ParagraphCell", bundle: nil), forCellReuseIdentifier: ParagraphCell.identifier)
-		//paragraphTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
-		paragraphTableView.rowHeight = UITableViewAutomaticDimension
-		paragraphTableView.estimatedRowHeight = 160
-		paragraphTableView.dataSource = self
-		
-		// Sets up other views
-		bookLabel.text = "\(book!.code): \(book!.identifier)"
-		setInsertStatus(true, lock: true) // Insert mode is used by default. It cannot be changed before language is selected
-		updateOkButtonStatus()
-		
-		selectBookTableView.register(UINib(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: LabelCell.identifier)
-		bookTableController = SelectBookTableController(table: selectBookTableView, newIdentifier: book!.identifier)
-		bookTableController?.delegate = self
-		
-		do
-		{
-			languages = try LanguageView.instance.createQuery().resultObjects()
-			selectLanguageView.datasource = self
-			selectLanguageView.delegate = self
-			selectLanguageView.reloadData()
-		}
-		catch
-		{
-			print("ERROR: Couldn't read language data from the database")
+			do
+			{
+				self.languages = try LanguageView.instance.createQuery().resultObjects()
+				self.selectLanguageView.datasource = self
+				self.selectLanguageView.delegate = self
+				self.selectLanguageView.reloadData()
+			}
+			catch
+			{
+				print("ERROR: Couldn't read language data from the database")
+			}
 		}
     }
 	
-	override func viewDidAppear(_ animated: Bool)
+	override func viewWillAppear(_ animated: Bool)
 	{
-		super.viewDidAppear(animated)
+		super.viewWillAppear(animated)
 		
 		topBar.updateUserView()
 		

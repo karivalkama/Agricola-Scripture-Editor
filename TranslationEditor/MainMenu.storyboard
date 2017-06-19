@@ -718,10 +718,15 @@ Project Account</string>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ksg-fs-xvJ">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6e3-Ne-EV4" customClass="StatefulStackView" customModule="TranslationEditor" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="34.5" width="628" height="656.5"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </tableView>
+                                                        <subviews>
+                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ksg-fs-xvJ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="628" height="656.5"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </tableView>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ACR-y9-OSh" userLabel="Selection Stack View" customClass="SquishableStackView" customModule="TranslationEditor" customModuleProvider="target">
@@ -924,6 +929,7 @@ Project Account</string>
                         <outlet property="nicknameView" destination="LVq-tY-5Q5" id="pMY-lq-Ie9"/>
                         <outlet property="okButton" destination="Atq-XX-P0r" id="Sri-hY-04B"/>
                         <outlet property="paragraphTableView" destination="ksg-fs-xvJ" id="PCs-7u-fiZ"/>
+                        <outlet property="previewDataStackView" destination="6e3-Ne-EV4" id="AcR-g3-WWE"/>
                         <outlet property="selectBookTableView" destination="40j-tK-L8p" id="qXn-gR-t0l"/>
                         <outlet property="selectBookView" destination="ope-ql-dz9" id="3XG-Wy-b8c"/>
                         <outlet property="selectLanguageView" destination="fUH-YQ-xZW" id="Svg-nk-mWC"/>
