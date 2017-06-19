@@ -20,6 +20,7 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	@IBOutlet weak var topBar: TopBarUIView!
 	@IBOutlet weak var languageFilterField: UITextField!
 	@IBOutlet weak var bookFilterField: UITextField!
+	@IBOutlet weak var bookDataStackView: StatefulStackView!
 	
 	
 	// TYPES	------------------
@@ -41,6 +42,9 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	private var languageFilter: String?
 	private var bookFilter: String?
 	
+	private var importedIdsLoaded = false
+	private var booksLoaded = false
+	
 	private var displayedOptions = [(book: Book, languageName: String, projectName: String, progress: BookProgressStatus?)]()
 	
 	private var bookQueryManager: LiveQueryManager<ProjectBooksView>?
@@ -55,39 +59,53 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		
 		topBar.configure(hostVC: self, title: "Import Book", leftButtonText: "Cancel", leftButtonAction: { self.dismiss(animated: true, completion: nil) })
 		
-		bookQueryManager = ProjectBooksView.instance.createQuery().liveQueryManager
-		
 		bookSelectionTable.dataSource = self
 		bookSelectionTable.delegate = self
 		
 		contentView.configure(mainView: view, elements: [languageFilterField, bookFilterField], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish)
 		
+		bookDataStackView.register(bookSelectionTable, for: .data)
+		bookDataStackView.setState(.loading)
+		
+		let noDataView = ConnectPromptNoDataView()
+		noDataView.title = "No Books to Import"
+		noDataView.hint = "Connect with people from other projects to make the data available"
+		noDataView.connectButtonAction = { [weak self] in self?.topBar.performConnect(using: self!) }
+		bookDataStackView.register(noDataView, for: .empty)
+		
 		guard let projectId = Session.instance.projectId else
 		{
 			print("ERROR: No project selected")
+			bookDataStackView.errorOccurred()
 			return
 		}
 		
+		bookQueryManager = ProjectBooksView.instance.createQuery().liveQueryManager
 		resourceQueryManager = ResourceCollectionView.instance.collectionQuery(projectId: projectId).liveQueryManager
     }
 	
-	override func viewDidAppear(_ animated: Bool)
+	override func viewWillAppear(_ animated: Bool)
 	{
+		super.viewWillAppear(animated)
+		
 		bookQueryManager?.addListener(AnyLiveQueryListener(self))
 		bookQueryManager?.start()
 		
 		resourceQueryManager?.addListener(calling: resourceRowsUpdated)
 		resourceQueryManager?.start()
 		
-		// Updates the book progress data
-		do
+		// Updates the book progress data (asynchronous)
+		DispatchQueue.main.async
 		{
-			progress = try BookProgressView.instance.progressForAllBooks()
-			update()
-		}
-		catch
-		{
-			print("ERROR: Failed to retrieve book progress data. \(error)")
+			do
+			{
+				self.progress = try BookProgressView.instance.progressForAllBooks()
+				self.update()
+			}
+			catch
+			{
+				print("ERROR: Failed to retrieve book progress data. \(error)")
+			}
 		}
 		
 		contentView.startKeyboardListening()
@@ -157,11 +175,17 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		do
 		{
 			books = try rows.map { try $0.object() }
-			update()
+			booksLoaded = true
+			
+			if importedIdsLoaded
+			{
+				updateDataState()
+			}
 		}
 		catch
 		{
 			print("ERROR: Failed to read through book data. \(error)")
+			bookDataStackView.errorOccurred()
 		}
 	}
 	
@@ -173,11 +197,31 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 		do
 		{
 			alreadyImportedIds = try rows.flatMap { $0.id }.flatMap { try ParagraphBinding.get(resourceCollectionId: $0)?.sourceBookId }
-			update()
+			importedIdsLoaded = true
+			
+			if booksLoaded
+			{
+				updateDataState()
+			}
 		}
 		catch
 		{
 			print("ERROR: Failed to read through imported resource data. \(error)")
+			bookDataStackView.errorOccurred()
+		}
+	}
+	
+	private func updateDataState()
+	{
+		if books.map({ $0.idString }).forAll({ alreadyImportedIds.contains($0) })
+		{
+			// If no new books were found, displays the no data -view
+			bookDataStackView.dataLoaded(isEmpty: true)
+		}
+		else
+		{
+			bookDataStackView.dataLoaded()
+			update()
 		}
 	}
 	
