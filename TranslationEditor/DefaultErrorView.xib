@@ -55,11 +55,11 @@
             </subviews>
             <constraints>
                 <constraint firstItem="6Bg-o0-thN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="F40-7l-zri"/>
-                <constraint firstItem="6Bg-o0-thN" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="eOV-Yi-Gum"/>
+                <constraint firstItem="6Bg-o0-thN" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" priority="999" id="eOV-Yi-Gum"/>
                 <constraint firstItem="6Bg-o0-thN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" id="fjy-8P-NXj"/>
                 <constraint firstItem="6Bg-o0-thN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" id="hbc-qT-mHL"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6Bg-o0-thN" secondAttribute="bottom" id="iSc-Al-Hxn"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6Bg-o0-thN" secondAttribute="trailing" id="xw2-Fo-XXF"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6Bg-o0-thN" secondAttribute="bottom" priority="999" id="iSc-Al-Hxn"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6Bg-o0-thN" secondAttribute="trailing" priority="999" id="xw2-Fo-XXF"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -36,10 +36,15 @@ class StatefulStackView: UIStackView
 		setState(isEmpty ? .empty : .data)
 	}
 	
-	func errorOccurred(canContinueWithData: Bool = true)
+	func errorOccurred(title: String? = nil, description: String? = nil, canContinueWithData: Bool = true)
 	{
 		if !canContinueWithData || lastState != .data
 		{
+			if title != nil || description != nil
+			{
+				registerDefaultErrorView(heading: title, description: description)
+			}
+			
 			setState(.error)
 		}
 	}

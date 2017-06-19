@@ -24,6 +24,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet weak var passwordView: KeyboardReactiveView!
 	@IBOutlet weak var errorLabel: UILabel!
 	@IBOutlet weak var topBar: TopBarUIView!
+	@IBOutlet weak var avatarsStackView: StatefulStackView!
 	
 	
 	// ATTRIBUTES	---------------
@@ -48,15 +49,20 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		
 		topBar.configure(hostVC: self, title: "Select User")
 		
+		avatarsStackView.register(avatarCollectionView, for: .data)
+		avatarsStackView.setState(.loading)
+		
 		guard let projectId = Session.instance.projectId else
 		{
 			print("ERROR: No selected project -> No available avatar data")
+			avatarsStackView.errorOccurred()
 			return
 		}
 		
 		guard let accountId = Session.instance.accountId else
 		{
 			print("ERROR: No account information available.")
+			avatarsStackView.errorOccurred()
 			return
 		}
 		
@@ -210,6 +216,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 					}
 				}
 				
+				avatarsStackView.dataLoaded()
 				avatarCollectionView.reloadData()
 			}
 			// Otherwise just finds the first applicable avatar and uses that
@@ -228,11 +235,16 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 					Session.instance.avatarId = avatar.idString
 					proceed()
 				}
+				else
+				{
+					avatarsStackView.dataLoaded()
+				}
 			}
 		}
 		catch
 		{
 			print("ERROR: Failed to process avatar data. \(error)")
+			avatarsStackView.errorOccurred()
 		}
 	}
 	
