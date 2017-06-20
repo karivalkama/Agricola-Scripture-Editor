@@ -21,6 +21,8 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	private weak var stateView: StatefulStackView?
 	private weak var tableView: UITableView!
 	
+	private var isLoaded = false
+	
 	// Path id -> Chapter index + index in current data array
 	private var pathIndex = [String : (chapterIndex: Int, index: Int)]()
 	private var queryManager: LiveQueryManager<QueryTarget>
@@ -82,10 +84,8 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 		}
 		
 		// Updates the state view, if possible
-		if let stateView = stateView
-		{
-			stateView.dataLoaded(isEmpty: paragraphs.isEmpty)
-		}
+		isLoaded = true
+		stateView?.dataLoaded(isEmpty: paragraphs.isEmpty)
 		
 		prepareUpdate?()
 		tableView.reloadData()
@@ -131,16 +131,23 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	// Activates the live querying and makes this the active data source for the table view
 	func activate()
 	{
-		//tableView.dataSource = self
-		queryManager.start()
+		if !isLoaded
+		{
+			stateView?.setState(.loading)
+		}
 		
-		print("STATUS: Paragraph data retrieval started")
+		queryManager.start()
 	}
 	
 	// Temporarily pauses the live querying
 	func pause()
 	{
 		queryManager.pause()
+		
+		if !isLoaded
+		{
+			stateView?.setState(.empty)
+		}
 	}
 	
 	func paragraphForPath(_ pathId: String) -> Paragraph?

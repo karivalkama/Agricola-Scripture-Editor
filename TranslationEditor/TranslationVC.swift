@@ -24,6 +24,8 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	@IBOutlet weak var resourceSegmentControl: UISegmentedControl!
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var topBar: TopBarUIView!
+	@IBOutlet weak var resourceStateStackView: StatefulStackView!
+	@IBOutlet weak var translationStateStackView: StatefulStackView!
 	
 	
 	// PROPERTIES	---------
@@ -87,6 +89,12 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		
 		commitButton.isEnabled = false
 		
+		translationStateStackView.register(translationTableView, for: .data)
+		translationStateStackView.setState(.loading)
+		
+		resourceStateStackView.register(resourceTableView, for: .data)
+		resourceStateStackView.setState(.loading)
+		
 		// (Epic hack which) Makes table view cells have automatic height
 		translationTableView.rowHeight = UITableViewAutomaticDimension
 		translationTableView.estimatedRowHeight = 320
@@ -94,10 +102,10 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		resourceTableView.rowHeight = UITableViewAutomaticDimension
 		resourceTableView.estimatedRowHeight = 320
 		
-		targetTranslationDS = TranslationTableViewDS(tableView: translationTableView, bookId: book.idString, configureCell: configureTargetTranslationCell, prepareUpdate: prepareForTargetUpdate)
+		targetTranslationDS = TranslationTableViewDS(tableView: translationTableView, bookId: book.idString, stateView: translationStateStackView, configureCell: configureTargetTranslationCell, prepareUpdate: prepareForTargetUpdate)
 		translationTableView.dataSource = targetTranslationDS
 		
-		resourceManager = ResourceManager(resourceTableView: resourceTableView, targetBookId: book.idString, addNotesDelegate: self, threadStatusListener: self, updateListener: self)
+		resourceManager = ResourceManager(resourceTableView: resourceTableView, targetBookId: book.idString, addNotesDelegate: self, threadStatusListener: self, updateListener: self, stateView: resourceStateStackView)
 		
 		// Makes resource manager listen to paragraph content changes
 		targetTranslationDS.contentListeners = [self, resourceManager]

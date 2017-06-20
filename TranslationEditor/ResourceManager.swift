@@ -34,6 +34,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 	// ATTRIBUTES	-----------
 	
 	private weak var resourceTableView: UITableView!
+	private weak var stateView: StatefulStackView?
 	private weak var addNotesDelegate: AddNotesDelegate!
 	private weak var threadStatusListener: OpenThreadListener?
 	private weak var updateListener: ResourceUpdateListener?
@@ -91,13 +92,14 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 	
 	// INIT	-------------------
 	
-	init(resourceTableView: UITableView, targetBookId: String, addNotesDelegate: AddNotesDelegate, threadStatusListener: OpenThreadListener?, updateListener: ResourceUpdateListener?)
+	init(resourceTableView: UITableView, targetBookId: String, addNotesDelegate: AddNotesDelegate, threadStatusListener: OpenThreadListener?, updateListener: ResourceUpdateListener?, stateView: StatefulStackView? = nil)
 	{
 		self.targetBookId = targetBookId
 		self.updateListener = updateListener
 		self.resourceTableView = resourceTableView
 		self.addNotesDelegate = addNotesDelegate
 		self.threadStatusListener = threadStatusListener
+		self.stateView = stateView
 		
 		if let avatarId = Session.instance.avatarId
 		{
@@ -138,7 +140,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 				
 				if let binding = try ParagraphBinding.get(resourceCollectionId: resource.idString)
 				{
-					return BookResourceData(resource: resource, binding: binding, datasource: TranslationTableViewDS(tableView: resourceTableView!, bookId: binding.sourceBookId, configureCell: configureSourceCell))
+					return BookResourceData(resource: resource, binding: binding, datasource: TranslationTableViewDS(tableView: resourceTableView!, bookId: binding.sourceBookId, stateView: stateView, configureCell: configureSourceCell))
 				}
 				else
 				{
@@ -146,7 +148,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 				}
 			}
 			
-			allNotes = notesResources.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString, threadListener: self.threadStatusListener)) }
+			allNotes = notesResources.map { NotesData(resource: $0, datasource: NotesTableDS(tableView: resourceTableView!, resourceCollectionId: $0.idString, threadListener: self.threadStatusListener, stateView: self.stateView)) }
 		}
 		catch
 		{

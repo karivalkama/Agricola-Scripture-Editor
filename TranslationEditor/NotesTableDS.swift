@@ -56,12 +56,12 @@ fileprivate class UpdateListener<QueryTarget: View>: LiveQueryListener
 	}
 }
 
-// TODO: Remove showlistener protocol
 class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationParagraphListener
 {
 	// ATTRIBUTES	---------
 	
 	private weak var tableView: UITableView!
+	private weak var stateView: StatefulStackView?
 	
 	private let resourceCollectionId: String
 	
@@ -93,6 +93,7 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 	private let threadQueryManager: LiveQueryManager<NotesThreadView>
 	private let postQueryManager: LiveQueryManager<NotesPostView>
 	
+	private var isLoaded = false
 	private var isActive = false
 	
 	private weak var openThreadListener: OpenThreadListener?
@@ -101,11 +102,12 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 	// INIT	-----------------
 	
 	// TODO: Add chapter parameters after translation range is used
-	init(tableView: UITableView, resourceCollectionId: String, threadListener: OpenThreadListener?)
+	init(tableView: UITableView, resourceCollectionId: String, threadListener: OpenThreadListener?, stateView: StatefulStackView? = nil)
 	{
 		self.resourceCollectionId = resourceCollectionId
 		self.tableView = tableView
 		self.openThreadListener = threadListener
+		self.stateView = stateView
 		
 		notesQueryManager = ParagraphNotesView.instance.notesQuery(collectionId: resourceCollectionId).liveQueryManager
 		threadQueryManager = NotesThreadView.instance.threadQuery(collectionId: resourceCollectionId).liveQueryManager
@@ -119,6 +121,13 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 			
 			print("STATUS: Received input of \(notes.count) notes")
 			self.notes = notes.toDictionary { ($0.pathId, $0) }
+			
+			self.isLoaded = true
+			if self.isActive
+			{
+				self.stateView?.dataLoaded(isEmpty: notes.isEmpty)
+			}
+			
 			self.update()
 		}))
 		
@@ -337,6 +346,11 @@ class NotesTableDS: NSObject, UITableViewDataSource, LiveResource, TranslationPa
 	
 	func activate()
 	{
+		if !isLoaded
+		{
+			stateView?.setState(.loading)
+		}
+		
 		isActive = true
 		postQueryManager.start()
 	}
