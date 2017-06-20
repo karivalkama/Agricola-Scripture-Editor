@@ -251,8 +251,8 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		switch action
 		{
 		// For a open notes action, opens a new resource and performs the sync scrolling
-		case .openNotes(let index):
-			switchToResource(atIndex: index)
+		case .openNotes(let resourceId):
+			switchToResource(withId: resourceId)
 			scrollManager.scrollToAnchor(cell: cell)
 		// For conflicts, displays the conflict resolve VC
 		case .resolveConflict:
@@ -465,16 +465,9 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 			action = .resolveConflict
 		}
 		// If there are no conflicts, checks for notes
-		else if let openResourceIds = cell.pathId.flatMap({ self.openThreadStatus[$0] })
+		else if let openResourceIds = cell.pathId.flatMap({ self.openThreadStatus[$0] }), !openResourceIds.isEmpty
 		{
-			for resourceId in openResourceIds
-			{
-				if let resourceIndex = resourceManager.indexForResource(withId: resourceId)
-				{
-					action = TranslationCellAction.openNotes(atIndex: resourceIndex)
-					break
-				}
-			}
+			action = TranslationCellAction.openNotes(withId: openResourceIds.first!)
 		}
 			
 		cell.configure(showsHistory: displaysHistory, inputListener: self, scrollManager: scrollManager, action: action)
@@ -524,13 +517,17 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 	
 	private func switchToResource(atIndex index: Int)
 	{
-		resourceSegmentControl.selectedSegmentIndex = index
-		resourceManager.selectResource(atIndex: index)
-		if let newTitle = resourceSegmentControl.titleForSegment(at: index)
+		if let id = resourceManager.resourceIdForIndex(index)
 		{
-			print("STATUS: Switching to \(newTitle)")
-			scrollManager.leftResourceId = newTitle
+			switchToResource(withId: id)
 		}
+	}
+	
+	private func switchToResource(withId resourceId: String)
+	{
+		resourceSegmentControl.selectedSegmentIndex = resourceManager.indexForResource(withId: resourceId) ?? -1
+		resourceManager.selectResource(withId: resourceId)
+		scrollManager.leftResourceId = resourceId
 		scrollManager.syncScrollToRight()
 	}
 	

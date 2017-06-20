@@ -12,7 +12,7 @@ import Foundation
 // Since UI space is often limited, a cell is supposed to have only up to one primary action at a time
 enum TranslationCellAction
 {
-	case openNotes(atIndex: Int)
+	case openNotes(withId: String)
 	case resolveConflict
 	
 	

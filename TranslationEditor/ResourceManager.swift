@@ -236,8 +236,14 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 		}
 	}
 	
-	func selectResource(atIndex index: Int)
+	func selectResource(withId resourceId: String)
 	{
+		guard let index = indexForResource(withId: resourceId) else
+		{
+			print("ERROR: Trying to open a non-existing resource")
+			return
+		}
+		
 		guard index != currentResourceIndex else
 		{
 			return
@@ -272,12 +278,6 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 		resourceTableView.reloadData()
 	}
 	
-	// Retrieves the index of a resource (collection) with the specified id
-	func indexForResource(withId resourceId: String) -> Int?
-	{
-		return displayedSourceBooks.index(where: { $0.resource.idString == resourceId }) ?? displayedNotes.index(where: { $0.resource.idString == resourceId }).map { $0 + displayedSourceBooks.count }
-	}
-	
 	func pause()
 	{
 		currentLiveResource?.pause()
@@ -306,6 +306,32 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 		}
 	}
 	
+	// Retrieves the index of a resource (collection) with the specified id
+	func indexForResource(withId resourceId: String) -> Int?
+	{
+		return displayedSourceBooks.index(where: { $0.resource.idString == resourceId }) ?? displayedNotes.index(where: { $0.resource.idString == resourceId }).map { $0 + displayedSourceBooks.count }
+	}
+	
+	func resourceIdForIndex(_ index: Int) -> String?
+	{
+		if index < 0
+		{
+			return nil
+		}
+		else if index < displayedSourceBooks.count
+		{
+			return displayedSourceBooks[index].resource.idString
+		}
+		else if index < displayedSourceBooks.count + displayedNotes.count
+		{
+			return displayedNotes[index - displayedSourceBooks.count].resource.idString
+		}
+		else
+		{
+			return nil
+		}
+	}
+	
 	private func updateDisplayedResources()
 	{
 		if let carousel = carousel
@@ -319,7 +345,10 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 			displayedNotes = allNotes
 		}
 		
-		selectResource(atIndex: 0)
+		if let resourceId = displayedSourceBooks.first?.resource.idString ?? displayedNotes.first?.resource.idString
+		{
+			selectResource(withId: resourceId)
+		}
 		updateListener?.onResourcesUpdated(optionLabels: resourceTitles)
 	}
 	
