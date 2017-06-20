@@ -166,6 +166,11 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 		updatePostButtonStatus()
 	}
 	
+	@IBAction func commentLabelTapped(_ sender: Any)
+	{
+		commentTextView.becomeFirstResponder()
+	}
+	
 	
 	// IMPLEMENTED METHODS	---
 	

@@ -841,8 +841,9 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="uVH-Gx-WId" userLabel="Comment Stack View">
                                                                 <rect key="frame" x="0.0" y="63.5" width="768" height="88.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Comment text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AX9-9x-VWK">
+                                                                    <label opaque="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Comment text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AX9-9x-VWK">
                                                                         <rect key="frame" x="0.0" y="0.0" width="768" height="20.5"/>
+                                                                        <gestureRecognizers/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -854,6 +855,9 @@
                                                                                 </attributes>
                                                                             </fragment>
                                                                         </attributedString>
+                                                                        <connections>
+                                                                            <outletCollection property="gestureRecognizers" destination="CRy-pt-ZN2" appends="YES" id="Ue6-77-6bt"/>
+                                                                        </connections>
                                                                     </label>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.84999999999999998" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="chp-yY-mzi">
                                                                         <rect key="frame" x="0.0" y="24.5" width="768" height="64"/>
@@ -1044,6 +1048,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZn-Ac-Mc0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="CRy-pt-ZN2" userLabel="Comment Text Tap Recognizer">
+                    <connections>
+                        <action selector="commentLabelTapped:" destination="cTi-QG-SMh" id="Spn-Sd-lrC"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="739.453125" y="125"/>
         </scene>
@@ -1116,8 +1125,9 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uPd-1Y-7km" userLabel="Comment Stack View">
                                                                 <rect key="frame" x="444" y="0.0" width="420" height="259.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Your Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgy-5O-C4S">
+                                                                    <label opaque="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Your Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgy-5O-C4S">
                                                                         <rect key="frame" x="0.0" y="0.0" width="420" height="20.5"/>
+                                                                        <gestureRecognizers/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -1129,6 +1139,9 @@
                                                                                 </attributes>
                                                                             </fragment>
                                                                         </attributedString>
+                                                                        <connections>
+                                                                            <outletCollection property="gestureRecognizers" destination="siR-ez-wdV" appends="YES" id="a1P-ml-G3r"/>
+                                                                        </connections>
                                                                     </label>
                                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.84999999999999998" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YNg-Zm-nWP">
                                                                         <rect key="frame" x="0.0" y="20.5" width="420" height="239"/>
@@ -1238,13 +1251,18 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YC9-qK-NkO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="siR-ez-wdV" userLabel="Comment Label Tap Recognizer">
+                    <connections>
+                        <action selector="commentLabelTapped:" destination="ZWf-Ws-2dy" id="Tbh-Cu-11R"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1365" y="125"/>
         </scene>
     </scenes>
     <resources>
         <image name="arrowright" width="128" height="128"/>
-        <image name="flag" width="200" height="311"/>
+        <image name="flag" width="48" height="74"/>
         <image name="starfilled" width="37" height="35"/>
         <image name="userIcon" width="150" height="150"/>
     </resources>

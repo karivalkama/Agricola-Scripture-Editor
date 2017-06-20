@@ -32,7 +32,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSing
 	static let identifier = "CreateProject"
 	
 	private var newSharedAccount: AgricolaAccount?
-	private var completion: ((Bool) -> ())?
+	private var completion: ((Project?) -> ())?
 	
 	private var languages = [Language]()
 	private var selectedLanguage: Language?
@@ -94,12 +94,12 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSing
 	
 	@IBAction func cancelButtonPressed(_ sender: Any)
 	{
-		dismiss(animated: true, completion: { self.completion?(false) })
+		dismiss(animated: true, completion: { self.completion?(nil) })
 	}
 	
 	@IBAction func backgroundButtonTapped(_ sender: Any)
 	{
-		dismiss(animated: true, completion: { self.completion?(false) })
+		dismiss(animated: true, completion: { self.completion?(nil) })
 	}
 	
 	@IBAction func projectNameUpdated(_ sender: Any)
@@ -163,7 +163,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSing
 				try project.push()
 			}
 			
-			dismiss(animated: true, completion: { self.completion?(true) })
+			dismiss(animated: true, completion: { self.completion?(project) })
 		}
 		catch
 		{
@@ -196,7 +196,12 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSing
 	
 	// OTHER METHODS	---------
 	
-	func configureForSharedAccountCreation(newAccount: AgricolaAccount, completion: ((Bool) -> ())? = nil)
+	func configure(completion: @escaping (Project?) -> ())
+	{
+		self.completion = completion
+	}
+	
+	func configureForSharedAccountCreation(newAccount: AgricolaAccount, completion: ((Project?) -> ())? = nil)
 	{
 		self.newSharedAccount = newAccount
 		self.completion = completion

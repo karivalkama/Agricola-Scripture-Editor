@@ -173,6 +173,11 @@ class PostCommentVC: UIViewController, UITextViewDelegate
 		dismiss(animated: true, completion: nil)
 	}
 	
+	@IBAction func commentLabelTapped(_ sender: Any)
+	{
+		commentTextView.becomeFirstResponder()
+	}
+	
 	
 	// IMPLEMENTED METHODS	----
 	

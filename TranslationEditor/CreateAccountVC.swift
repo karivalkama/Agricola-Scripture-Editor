@@ -118,8 +118,9 @@ class CreateAccountVC: UIViewController
 				{
 					vc in (vc as! CreateProjectVC).configureForSharedAccountCreation(newAccount: newAccount)
 					{
-						if $0
+						if let project = $0
 						{
+							Session.instance.projectId = project.idString
 							self.loginAndClose(newAccount: newAccount, userName: name, password: password)
 						}
 					}

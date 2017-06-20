@@ -216,16 +216,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WYz-Uf-C1K" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
-                                <rect key="frame" x="209.5" y="12.5" width="605" height="743"/>
+                                <rect key="frame" x="209.5" y="14" width="605" height="740"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="6iV-fs-Bhb" userLabel="Content Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="605" height="743"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="605" height="740"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tTQ-ez-qc3" userLabel="Title Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="605" height="209"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="605" height="206"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Agricola" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Gc-vw-NKc">
-                                                        <rect key="frame" x="0.0" y="0.0" width="605" height="189.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="605" height="186.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="605" id="X3I-qc-rdp"/>
                                                         </constraints>
@@ -242,7 +242,7 @@
                                                         </attributedString>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Scripture Editor for iPad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gI2-5n-LQN">
-                                                        <rect key="frame" x="216" y="189.5" width="173" height="19.5"/>
+                                                        <rect key="frame" x="216" y="186.5" width="173" height="19.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                         <color key="textColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -258,7 +258,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="lc9-4f-cax" userLabel="Content Stack View">
-                                                <rect key="frame" x="62.5" y="257" width="480" height="486"/>
+                                                <rect key="frame" x="62.5" y="254" width="480" height="486"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPe-GH-K3z">
                                                         <rect key="frame" x="7.5" y="0.0" width="465" height="152.5"/>

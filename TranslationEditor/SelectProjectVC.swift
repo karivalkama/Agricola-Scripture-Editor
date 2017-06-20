@@ -145,6 +145,16 @@ class SelectProjectVC: UIViewController, LiveQueryListener, UITableViewDataSourc
 	@IBAction func createProjectPressed(_ sender: Any)
 	{
 		displayAlert(withIdentifier: "CreateProject", storyBoardId: "Login")
+		{
+			vc in (vc as! CreateProjectVC).configure
+			{
+				if let project = $0
+				{
+					Session.instance.projectId = project.idString
+					self.performSegue(withIdentifier: "SelectAvatar", sender: nil)
+				}
+			}
+		}
 	}
 	
 	
