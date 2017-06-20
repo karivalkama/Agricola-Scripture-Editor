@@ -204,6 +204,76 @@ extension UIStackView
 	}
 }
 
+extension CGSize
+{
+	static func *(size: CGSize, scaling: CGFloat) -> CGSize
+	{
+		return CGSize(width: size.width * scaling, height: size.height * scaling)
+	}
+}
+
+extension UIImage
+{
+	func downscaled(maxWidth: CGFloat) -> UIImage?
+	{
+		if size.width <= maxWidth
+		{
+			return self
+		}
+		else
+		{
+			return scaled(maxWidth / size.width)
+		}
+	}
+	
+	func downscaled(maxHeight: CGFloat) -> UIImage?
+	{
+		if size.height <= maxHeight
+		{
+			return self
+		}
+		else
+		{
+			return scaled(maxHeight / size.height)
+		}
+	}
+	
+	func scaledToFit(_ maxSize: CGSize) -> UIImage?
+	{
+		if size.width <= maxSize.width && size.height <= maxSize.height
+		{
+			return self
+		}
+		else
+		{
+			return scaled(min(maxSize.width / size.width, maxSize.height / size.height))
+		}
+	}
+	
+	func scaled(_ scaling: CGFloat) -> UIImage?
+	{
+		return scaled(toSize: size * scaling)
+	}
+	
+	// See: https://stackoverflow.com/questions/31966885/ios-swift-resize-image-to-200x200pt-px
+	func scaled(toSize newSize: CGSize) -> UIImage?
+	{
+		let newRect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height).integral
+		UIGraphicsBeginImageContextWithOptions(newSize, false, 0)
+		if let context = UIGraphicsGetCurrentContext()
+		{
+			context.interpolationQuality = .high
+			let flipVertical = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: newSize.height)
+			context.concatenate(flipVertical)
+			context.draw(self.cgImage!, in: newRect)
+			let newImage = UIImage(cgImage: context.makeImage()!)
+			UIGraphicsEndImageContext()
+			return newImage
+		}
+		return nil
+	}
+}
+
 extension UIFont
 {
 	var isBold: Bool { return hasTrait(.traitBold) }

@@ -135,7 +135,7 @@ class EditAvatarVC: UIViewController
 			// Makes the necessary modifications to the avatar
 			if let (avatar, info) = editedInfo
 			{
-				if let newImage = createAvatarView.avatarImage, info.image != newImage
+				if let newImage = createAvatarView.avatarImage?.scaledToFit(CGSize(width: 320, height: 320)), info.image != newImage
 				{
 					try info.setImage(newImage)
 				}
