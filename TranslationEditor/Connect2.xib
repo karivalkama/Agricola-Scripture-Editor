@@ -35,7 +35,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="370" height="985"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="HWV-lb-cQR" userLabel="P2P Stack View">
-                            <rect key="frame" x="0.0" y="0.0" width="370" height="400.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="370" height="464.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="YVj-bf-XlU">
                                     <rect key="frame" x="0.0" y="0.0" width="370" height="59.5"/>
@@ -125,20 +125,20 @@ All data will be transferred until DISCONNECTED.</string>
                                     </attributedString>
                                 </label>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="150" translatesAutoresizingMaskIntoConstraints="NO" id="hLz-gF-wpJ" userLabel="QR View">
-                                    <rect key="frame" x="0.0" y="186" width="370" height="148.5"/>
+                                    <rect key="frame" x="0.0" y="186" width="370" height="212.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="150" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Y0M-Rn-uMd" userLabel="QR Stack View">
-                                            <rect key="frame" x="0.0" y="0.0" width="370" height="148.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="212.5"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="175" verticalCompressionResistancePriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="E0S-Ci-Q2G">
-                                                    <rect key="frame" x="120" y="0.0" width="130" height="130"/>
+                                                    <rect key="frame" x="88" y="0.0" width="194" height="194"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="E0S-Ci-Q2G" secondAttribute="height" multiplier="1:1" id="CRj-YZ-mVD"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="64" id="Mn4-Kc-u1p"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Others can join by scanning this code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Etb-rQ-sxz">
-                                                    <rect key="frame" x="79" y="134" width="212.5" height="14.5"/>
+                                                    <rect key="frame" x="79" y="198" width="212.5" height="14.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -163,10 +163,10 @@ All data will be transferred until DISCONNECTED.</string>
                                     </constraints>
                                 </view>
                                 <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="uQe-Nj-WfS" customClass="OnlineStatusView" customModule="TranslationEditor" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="342.5" width="370" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="406.5" width="370" height="0.0"/>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3DA-nC-mob" userLabel="Host Info View">
-                                    <rect key="frame" x="0.0" y="350.5" width="370" height="50"/>
+                                    <rect key="frame" x="0.0" y="414.5" width="370" height="50"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="t01-pa-i1z" userLabel="Host Info Stack View">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="50"/>
@@ -209,10 +209,10 @@ All data will be transferred until DISCONNECTED.</string>
                             </subviews>
                         </stackView>
                         <view contentMode="scaleToFill" verticalHuggingPriority="400" verticalCompressionResistancePriority="600" translatesAutoresizingMaskIntoConstraints="NO" id="sqX-J5-9Qs">
-                            <rect key="frame" x="0.0" y="424.5" width="370" height="560.5"/>
+                            <rect key="frame" x="0.0" y="488.5" width="370" height="496.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="400" verticalCompressionResistancePriority="600" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VrN-XR-ScU" userLabel="Sharing Stack View">
-                                    <rect key="frame" x="0.0" y="0.0" width="370" height="560.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="370" height="496.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="jPy-rx-dMQ" userLabel="Title Stack View">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="58.5"/>
@@ -268,10 +268,10 @@ All data will be transferred until DISCONNECTED.</string>
                                             </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vte-HM-q87">
-                                            <rect key="frame" x="0.0" y="111.5" width="370" height="449"/>
+                                            <rect key="frame" x="0.0" y="111.5" width="370" height="385"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5C7-Wu-Wo9" userLabel="Book Selection Stack View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="370" height="449"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="370" height="385"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Select a book to send" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWM-C5-yTC">
                                                             <rect key="frame" x="0.0" y="0.0" width="370" height="20.5"/>
@@ -288,7 +288,7 @@ All data will be transferred until DISCONNECTED.</string>
                                                             </attributedString>
                                                         </label>
                                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="200" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="csU-si-Gvc">
-                                                            <rect key="frame" x="0.0" y="28.5" width="370" height="375.5"/>
+                                                            <rect key="frame" x="0.0" y="28.5" width="370" height="311.5"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="900" constant="64" id="fvg-dd-DMK"/>
@@ -296,7 +296,7 @@ All data will be transferred until DISCONNECTED.</string>
                                                             </constraints>
                                                         </tableView>
                                                         <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ild-dz-aQ2" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="412" width="370" height="37"/>
+                                                            <rect key="frame" x="0.0" y="348" width="370" height="37"/>
                                                             <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
@@ -359,6 +359,6 @@ All data will be transferred until DISCONNECTED.</string>
     </objects>
     <resources>
         <image name="connection" width="482" height="375"/>
-        <image name="userIcon" width="512" height="512"/>
+        <image name="userIcon" width="150" height="150"/>
     </resources>
 </document>

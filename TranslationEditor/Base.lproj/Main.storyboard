@@ -1246,7 +1246,7 @@
         <image name="arrowright" width="128" height="128"/>
         <image name="flag" width="200" height="311"/>
         <image name="starfilled" width="37" height="35"/>
-        <image name="userIcon" width="512" height="512"/>
+        <image name="userIcon" width="150" height="150"/>
     </resources>
     <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
