@@ -23,7 +23,7 @@ fileprivate func handleSingleMatch(existing: Paragraph, newVersion: Paragraph) t
 @available(*, deprecated)
 fileprivate func handleSingleMatches(_ matches: [(Paragraph, Paragraph)]) throws
 {
-	try matches.forEach{ existing, newVersion in try handleSingleMatch(existing: existing, newVersion: newVersion) }
+	try matches.forEach{ (arg) in let (existing, newVersion) = arg; try handleSingleMatch(existing: existing, newVersion: newVersion) }
 }
 
 @available(*, deprecated)

@@ -19,7 +19,7 @@ class TargetTranslationCell: UITableViewCell, ParagraphAssociated, UITextViewDel
 	// ATTRIBUTES	------
 	
 	static let identifier = "TranslationCell"
-	private static let copiedAttributeNames = [NSFontAttributeName, IsNoteAttributeName, CharStyleAttributeName, ParaStyleAttributeName, NSParagraphStyleAttributeName]
+	private static let copiedAttributeNames = [NSAttributedStringKey.font, IsNoteAttributeName, CharStyleAttributeName, ParaStyleAttributeName, NSAttributedStringKey.paragraphStyle]
 	
 	private var originalParagraph: Paragraph?
 	
@@ -99,7 +99,7 @@ class TargetTranslationCell: UITableViewCell, ParagraphAssociated, UITextViewDel
 			return false
 		}
 		
-		var newAttributes = [String: Any]()
+		var newAttributes = [NSAttributedStringKey: Any]()
 		
 		// In case of replacing text, just copies the attributes from the original
 		// Otherwise copies from the left of the replaced text
@@ -116,8 +116,8 @@ class TargetTranslationCell: UITableViewCell, ParagraphAssociated, UITextViewDel
 		newAttributes[IsNoteAttributeName] = textView.attributedText.attribute(IsNoteAttributeName, surrounding: range)
 		
 		// The color attribute is always overwritten
-		newAttributes[NSForegroundColorAttributeName] = Colour.Primary.dark.asColour
-		inputTextField.typingAttributes = newAttributes
+		newAttributes[NSAttributedStringKey.foregroundColor] = Colour.Primary.dark.asColour
+		inputTextField.typingAttributes = newAttributes.mapKeys { $0.rawValue }
 		return true
 	}
 	

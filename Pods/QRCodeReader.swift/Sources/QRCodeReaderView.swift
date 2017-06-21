@@ -71,7 +71,7 @@ final class QRCodeReaderView: UIView, QRCodeReaderDisplayable {
     return ttb
   }()
 
-  func setupComponents(_ showCancelButton: Bool, showSwitchCameraButton: Bool, showTorchButton: Bool, showOverlayView: Bool) {
+  func setupComponents(showCancelButton: Bool, showSwitchCameraButton: Bool, showTorchButton: Bool, showOverlayView: Bool) {
     translatesAutoresizingMaskIntoConstraints = false
 
     addComponents()
@@ -136,7 +136,7 @@ final class QRCodeReaderView: UIView, QRCodeReaderDisplayable {
 
   // MARK: - Convenience Methods
 
-  fileprivate func addComponents() {
+  private func addComponents() {
     addSubview(cameraView)
 
     if let ov = overlayView {

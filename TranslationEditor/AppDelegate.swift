@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		
 		navigationBarAppearance.tintColor = barTheme.textColour
 		navigationBarAppearance.barTintColor = barTheme.colour
-		navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName : barTheme.textColour]
+		navigationBarAppearance.titleTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue : barTheme.textColour]
 		
 		// Sets up the conflict handler
 		ConflictResolver.instance.addMerger

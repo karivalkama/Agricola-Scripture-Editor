@@ -263,7 +263,7 @@ final class ParagraphHistoryView: View
 		{
 			let idsWithTimes = conflictIds.map { ($0, Paragraph.created(fromId: $0)) }
 			// Only keeps the most recent version
-			let mostRecentId = idsWithTimes.max { $0.0.1 <= $0.1.1 }!.0
+			let mostRecentId = idsWithTimes.max { $0.1 <= $1.1 }!.0
 			
 			// Deprecates until common ancestor
 			let commonAncestorId = try ParagraphHistoryView.instance.commonAncestorOf(paragraphIds: conflictIds)?.idString

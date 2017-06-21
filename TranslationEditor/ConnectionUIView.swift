@@ -92,7 +92,7 @@ fileprivate enum ConnectionState
 	{
 		let builder = QRCodeReaderViewControllerBuilder
 		{
-			$0.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObjectTypeQRCode], captureDevicePosition: .back)
+			$0.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObject.ObjectType.qr.rawValue], captureDevicePosition: .back)
 		}
 		
 		return QRCodeReaderViewController(builder: builder)
@@ -152,7 +152,7 @@ fileprivate enum ConnectionState
 			if let projectId = Session.instance.projectId, let project = try Project.get(projectId)
 			{
 				targetTranslations = try project.targetTranslationQuery().resultObjects()
-				targetTranslations.sort(by: { $0.0.code < $0.1.code })
+				targetTranslations.sort(by: { $0.code < $1.code })
 				projectFound = true
 			}
 		}

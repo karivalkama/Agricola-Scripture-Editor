@@ -9,23 +9,23 @@
 import Foundation
 
 // the value of a charStyle attribute should be a CharStyle
-let CharStyleAttributeName = "charStyle"
+let CharStyleAttributeName = NSAttributedStringKey("charStyle")
 
 // IsNoteAttribute is used for marking areas in string that contain note data
 // The value should be a boolean determining whether this area should be considered to be a note (no attribute is considered false)
-let IsNoteAttributeName = "isNote"
+let IsNoteAttributeName = NSAttributedStringKey("isNote")
 // NoteMarkerAttribute value determines whether the marker is considered to be a start (true) or end (false) of a note
-let NoteMarkerAttributeName = "noteMarker"
+let NoteMarkerAttributeName = NSAttributedStringKey("noteMarker")
 
 // the value of a verseIndexMarker attribute should be the verse index as an integer
-let VerseIndexMarkerAttributeName = "verseIndexMarker"
+let VerseIndexMarkerAttributeName = NSAttributedStringKey("verseIndexMarker")
 
 // Para marker and para style have the para style as values
-let ParaMarkerAttributeName = "paraMarker"
-let ParaStyleAttributeName = "paraStyle"
+let ParaMarkerAttributeName = NSAttributedStringKey("paraMarker")
+let ParaStyleAttributeName = NSAttributedStringKey("paraStyle")
 
 // The value of this attribute should be the chapter index
-let ChapterMarkerAttributeName = "chapterMarker"
+let ChapterMarkerAttributeName = NSAttributedStringKey("chapterMarker")
 
 
 let chapterMarkerFont = UIFont(name: "Arial", size: 32.0)!

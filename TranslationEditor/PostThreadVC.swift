@@ -213,7 +213,7 @@ class PostThreadVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelega
 	{
 		if let title = verseTitle(forRow: row)
 		{
-			return NSAttributedString(string: title, attributes: [NSForegroundColorAttributeName: Colour.Primary.dark.asColour])
+			return NSAttributedString(string: title, attributes: [NSAttributedStringKey.foregroundColor: Colour.Primary.dark.asColour])
 		}
 		else
 		{

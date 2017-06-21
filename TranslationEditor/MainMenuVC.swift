@@ -203,7 +203,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 	{
 		do
 		{
-			books = try rows.map { try $0.object() }.sorted { $0.0.code < $0.1.code}
+			books = try rows.map { try $0.object() }.sorted { $0.code < $1.code}
 			bookDataStackView.dataLoaded(isEmpty: books.isEmpty)
 			bookTableView.reloadData()
 		}

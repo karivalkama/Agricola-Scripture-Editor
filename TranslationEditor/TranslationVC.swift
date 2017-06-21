@@ -369,7 +369,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		switchToResource(atIndex: resourceSegmentControl.selectedSegmentIndex)
 	}
 	
-	func targetTableSwiped(recognizer: UISwipeGestureRecognizer)
+	@objc func targetTableSwiped(recognizer: UISwipeGestureRecognizer)
 	{
 		// First finds the targeted cell
 		guard let index = translationTableView.indexPathForRow(at: recognizer.location(in: translationTableView)) else
@@ -408,7 +408,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		}
 	}
 	
-	func sourceTableSwiped(recognizer: UISwipeGestureRecognizer)
+	@objc func sourceTableSwiped(recognizer: UISwipeGestureRecognizer)
 	{
 		// Switches a resource that is displayed
 		var newIndex = resourceSegmentControl.selectedSegmentIndex

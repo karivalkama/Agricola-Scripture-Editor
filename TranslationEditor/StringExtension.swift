@@ -160,7 +160,7 @@ extension String
 extension NSAttributedString
 {
 	// Checks whether 'self' contains an attribute with 'attrName' in 'range'
-	func containsAttribute(_ attrName: String, in range: NSRange) -> Bool
+	func containsAttribute(_ attrName: NSAttributedStringKey, in range: NSRange) -> Bool
 	{
 		var attributeFound = false
 		enumerateAttribute(attrName, in: range, options: [])
@@ -179,7 +179,7 @@ extension NSAttributedString
 	
 	// Finds the attribute value containing and surrounding the provided 'range' in 'self'
 	// Nil is returned if there is no value and when the value doesn't span the required range
-	func attribute(_ attrName: String, surrounding range: NSRange) -> Any?
+	func attribute(_ attrName: NSAttributedStringKey, surrounding range: NSRange) -> Any?
 	{
 		// There are no surrounding attributes at the start and end of the string
 		if range.location <= 0 || range.location + range.length >= length

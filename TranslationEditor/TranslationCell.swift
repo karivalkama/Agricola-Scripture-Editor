@@ -47,8 +47,8 @@ class TranslationCell: UITableViewCell, ParagraphAssociated
 			{
 				switch attrName
 				{
-				case ChapterMarkerAttributeName: newText.addAttribute(NSFontAttributeName, value: TranslationCell.chapterMarkerFont, range: range)
-				case VerseIndexMarkerAttributeName, ParaMarkerAttributeName: newText.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: range)
+				case ChapterMarkerAttributeName: newText.addAttribute(NSAttributedStringKey.font, value: TranslationCell.chapterMarkerFont, range: range)
+				case VerseIndexMarkerAttributeName, ParaMarkerAttributeName: newText.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.gray, range: range)
 				case CharStyleAttributeName:
 					if let style = value as? CharStyle
 					{
@@ -56,13 +56,13 @@ class TranslationCell: UITableViewCell, ParagraphAssociated
 						{
 						// TODO: This font is just for testing purposes
 						case .quotation:
-							newText.addAttribute(NSFontAttributeName, value: UIFont(name: "Chalkduster", size: 18.0)!, range: range)
+							newText.addAttribute(NSAttributedStringKey.font, value: UIFont(name: "Chalkduster", size: 18.0)!, range: range)
 						// TODO: Add exhaustive cases
 						default: break
 						}
 					}
 				// TODO: Add handling of paraStyle
-				default: newText.addAttribute(NSFontAttributeName, value: TranslationCell.defaultFont, range: range)
+				default: newText.addAttribute(NSAttributedStringKey.font, value: TranslationCell.defaultFont, range: range)
 				}
 			}
 		}

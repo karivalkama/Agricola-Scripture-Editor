@@ -59,7 +59,7 @@ class HTag: UIButton {
     
     
     
-    func tagClicked(){
+    @objc func tagClicked(){
         if withCancelButton{
             delegate?.tagCancelled(self)
         }else{

@@ -87,7 +87,7 @@ public final class ToggleTorchButton: UIButton {
     circlePath.stroke()
   }
 
-  fileprivate func linePathWithStartPoint(_ startPoint: CGPoint, endPoint: CGPoint, thickness: CGFloat) -> UIBezierPath {
+  private func linePathWithStartPoint(_ startPoint: CGPoint, endPoint: CGPoint, thickness: CGFloat) -> UIBezierPath {
     let linePath = UIBezierPath()
 
     linePath.move(to: startPoint)
@@ -117,8 +117,8 @@ public final class ToggleTorchButton: UIButton {
     setNeedsDisplay()
   }
 
-  public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    super.touchesCancelled(touches, with: event)
+  public override func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
+    super.touchesCancelled(touches!, with: event)
     
     setNeedsDisplay()
   }

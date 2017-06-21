@@ -78,7 +78,7 @@ final class BookProgressView: View
 				}
 				
 				// Merges the results
-				return values.reduce(ReduceResult(0, 0, 0)) { ReduceResult(mostRecentFilled: $0.0.mostRecentFilled + $0.1.mostRecentFilled, mostRecentTotal: $0.0.mostRecentTotal + $0.1.mostRecentTotal, historyFilled: $0.0.historyFilled + $0.1.historyFilled) }
+				return values.reduce(ReduceResult(0, 0, 0)) { ReduceResult(mostRecentFilled: $0.mostRecentFilled + $1.mostRecentFilled, mostRecentTotal: $0.mostRecentTotal + $1.mostRecentTotal, historyFilled: $0.historyFilled + $1.historyFilled) }
 			}
 			else
 			{
@@ -146,7 +146,7 @@ final class BookProgressView: View
 		return try collectProgressResults(query: createQuery(ofType: .reduce), groupByKey: BookProgressView.KEY_BOOK, valueToKey: { $0.string() })
 	}
 	
-	private func collectProgressResults<T: Hashable>(query: MyQuery, groupByKey: String, valueToKey: (PropertyValue) -> T) throws -> [T: BookProgressStatus]
+	private func collectProgressResults<T>(query: MyQuery, groupByKey: String, valueToKey: (PropertyValue) -> T) throws -> [T: BookProgressStatus]
 	{
 		var groupedQuery = query
 		groupedQuery.groupByKey = groupByKey

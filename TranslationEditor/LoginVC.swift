@@ -268,7 +268,7 @@ class LoginVC: UIViewController
 						try project.push()
 					}
 					
-					Session.instance.projectId = projectId
+					// Session.instance.projectId = projectId
 				}
 			}
 			catch

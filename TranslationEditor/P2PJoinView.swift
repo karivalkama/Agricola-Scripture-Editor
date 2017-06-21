@@ -43,7 +43,7 @@ import QRCodeReader
 	{
 		let builder = QRCodeReaderViewControllerBuilder
 		{
-			$0.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObjectTypeQRCode], captureDevicePosition: .back)
+			$0.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObject.ObjectType.qr.rawValue], captureDevicePosition: .back)
 		}
 		
 		return QRCodeReaderViewController(builder: builder)

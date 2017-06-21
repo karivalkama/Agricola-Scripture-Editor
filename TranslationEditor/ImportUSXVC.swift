@@ -503,7 +503,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				{
 					vc in
 					
-					let translationString = targetTranslations.dropFirst().reduce("\(targetTranslations.first!.code)", { "\($0.0), \($0.1)" })
+					let translationString = targetTranslations.dropFirst().reduce("\(targetTranslations.first!.code)", { "\($0), \($1)" })
 					
 					(vc as! ErrorAlertVC).configure(heading: "Conflicts in Target Translation", text: "There are conflicts in target translation of: \(translationString)\nPlease resolve the conflicts and import the file again afterwards") { self.dismiss(animated: true, completion: nil) }
 				}

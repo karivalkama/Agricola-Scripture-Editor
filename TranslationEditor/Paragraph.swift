@@ -299,7 +299,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 			}
 			
 			
-			var attributes = [ParaStyleAttributeName : para.style] as [String : Any]
+			var attributes = [ParaStyleAttributeName : para.style] as [NSAttributedStringKey : Any]
 			if isFirstInChapter
 			{
 				attributes[ChapterMarkerAttributeName] = chapterIndex

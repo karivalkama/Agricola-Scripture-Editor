@@ -57,8 +57,8 @@ public final class QRCodeReader: NSObject, AVCaptureMetadataOutputObjectsDelegat
     return nil
   }()
 
-  var metadataOutput = AVCaptureMetadataOutput()
-  var session        = AVCaptureSession()
+  public var metadataOutput = AVCaptureMetadataOutput()
+  var session               = AVCaptureSession()
 
   // MARK: - Managing the Properties
 
@@ -79,7 +79,7 @@ public final class QRCodeReader: NSObject, AVCaptureMetadataOutputObjectsDelegat
   public var didFindCode: ((QRCodeReaderResult) -> Void)?
 
   /// Block is executed when a found metadata object string could not be decoded.
-  public var didFailDecoding: ((Void) -> Void)?
+	public var didFailDecoding: (() -> ())?
 
   // MARK: - Creating the Code Reade
 
@@ -119,12 +119,12 @@ public final class QRCodeReader: NSObject, AVCaptureMetadataOutputObjectsDelegat
 
     super.init()
 
-    configureDefaultComponents(captureDevicePosition)
+    configureDefaultComponents(withCaptureDevicePosition: captureDevicePosition)
   }
 
   // MARK: - Initializing the AV Components
 
-  fileprivate func configureDefaultComponents(_ withCaptureDevicePosition: AVCaptureDevicePosition) {
+  private func configureDefaultComponents(withCaptureDevicePosition: AVCaptureDevicePosition) {
     session.addOutput(metadataOutput)
 
     switch withCaptureDevicePosition {

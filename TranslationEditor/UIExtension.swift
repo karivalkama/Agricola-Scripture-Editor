@@ -65,7 +65,7 @@ extension UITextView
 		let wholeTextRange = NSMakeRange(0, newText.length)
 		
 		// Adds different fonts / etc. based on attribute values
-		newText.addAttribute(NSFontAttributeName, value: defaultParagraphFont, range: wholeTextRange)
+		newText.addAttribute(NSAttributedStringKey.font, value: defaultParagraphFont, range: wholeTextRange)
 		usxString.enumerateAttribute(ParaStyleAttributeName, in: wholeTextRange, options: [])
 		{
 			style, range, _ in
@@ -74,7 +74,7 @@ extension UITextView
 			{
 				if style.isHeaderStyle()
 				{
-					newText.addAttribute(NSFontAttributeName, value: headingFont, range: range)
+					newText.addAttribute(NSAttributedStringKey.font, value: headingFont, range: range)
 				}
 				
 				var paragraphStyling: ParagraphStyling?
@@ -94,7 +94,7 @@ extension UITextView
 				
 				if let paragraphStyling = paragraphStyling
 				{
-					newText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyling.style, range: range)
+					newText.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyling.style, range: range)
 				}
 			}
 		}
@@ -104,7 +104,7 @@ extension UITextView
 			
 			if isNote as? Bool ?? false
 			{
-				newText.addAttribute(NSFontAttributeName, value: notesFont, range: range)
+				newText.addAttribute(NSAttributedStringKey.font, value: notesFont, range: range)
 			}
 		}
 		usxString.enumerateAttribute(CharStyleAttributeName, in: wholeTextRange, options: [])
@@ -115,7 +115,7 @@ extension UITextView
 			{
 				if style == .quotation
 				{
-					newText.addAttribute(NSFontAttributeName, value: quotationFont, range: range)
+					newText.addAttribute(NSAttributedStringKey.font, value: quotationFont, range: range)
 				}
 			}
 		}
@@ -125,7 +125,7 @@ extension UITextView
 			
 			if marker != nil
 			{
-				newText.addAttribute(NSFontAttributeName, value: chapterMarkerFont, range: range)
+				newText.addAttribute(NSAttributedStringKey.font, value: chapterMarkerFont, range: range)
 			}
 		}
 		
@@ -136,7 +136,7 @@ extension UITextView
 			
 			if attributes.containsKey(VerseIndexMarkerAttributeName) || attributes.containsKey(ParaMarkerAttributeName) || attributes.containsKey(NoteMarkerAttributeName) || attributes.containsKey(ChapterMarkerAttributeName)
 			{
-				newText.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: range)
+				newText.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.gray, range: range)
 			}
 		}
 		

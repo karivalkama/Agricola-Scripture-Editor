@@ -74,7 +74,7 @@ extension Array
 	// Converts the array into a dictionary
 	// If there are duplicate keys, only the latter will remain in effect
 	// The provided function returns key value pair for each element
-	func toDictionary<Key: Hashable, Value>(using converter: (Element) -> (Key, Value)) -> [Key : Value]
+	func toDictionary<Key, Value>(using converter: (Element) -> (Key, Value)) -> [Key : Value]
 	{
 		var dict = [Key : Value]()
 		
@@ -90,7 +90,7 @@ extension Array
 	// Converts the array into a dictionary that supports multiple values for a single key
 	// The provided function returns key value pair for each element
 	// If the converter returns nil for any element, that element is skipped
-	func toArrayDictionary<Key: Hashable, Value>(using converter: (Element) -> (Key, Value)?) -> [Key : [Value]]
+	func toArrayDictionary<Key, Value>(using converter: (Element) -> (Key, Value)?) -> [Key : [Value]]
 	{
 		var dict = [Key : [Value]]()
 		
