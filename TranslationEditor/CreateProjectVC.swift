@@ -9,7 +9,7 @@
 import UIKit
 
 // This view controller is used for adding of new projects
-class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSingleSelectionViewDelegate
+class CreateProjectVC: UIViewController, LanguageSelectionHandlerDelegate
 {
 	// OUTLETS	---------------------
 	
@@ -34,14 +34,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSing
 	private var newSharedAccount: AgricolaAccount?
 	private var completion: ((Project?) -> ())?
 	
-	private var languages = [Language]()
-	private var selectedLanguage: Language?
-	private var languageName = ""
-	
-	
-	// COMPUTED PROPERTIES	---------
-	
-	var numberOfOptions: Int { return languages.count }
+	private var languageHandler = LanguageSelectionHandler()
 	
 	
 	// LOAD	-------------------------
@@ -53,8 +46,8 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSing
 		errorLabel.text = nil
 		createProjectButton.isEnabled = false
 		
-		selectLanguageView.delegate = self
-		selectLanguageView.datasource = self
+		selectLanguageView.delegate = languageHandler
+		selectLanguageView.datasource = languageHandler
 		
 		contentView.configure(mainView: view, elements: [projectNameField, defaultBookIdentifierField, errorLabel, selectLanguageView, createProjectButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish, squishedElements: [contentStackView, inputStackView], switchedStackViews: [projectNameStackView, translationNameStackView])
     }
@@ -66,7 +59,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSing
 		// Loads the language data
 		do
 		{
-			languages = try LanguageView.instance.createQuery().resultObjects()
+			try languageHandler.updateLanguageOptions()
 			selectLanguageView.reloadData()
 		}
 		catch
@@ -85,8 +78,6 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSing
 	{
 		super.viewDidDisappear(animated)
 		contentView.endKeyboardListening()
-		
-		languages = []
 	}
 
 	
@@ -124,7 +115,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSing
 			return
 		}
 		
-		guard !languageName.isEmpty else
+		guard !languageHandler.isEmpty else
 		{
 			errorLabel.text = NSLocalizedString("Please select the target language", comment: "An error message when the user hasn't selected project language when trying to create a project")
 			return
@@ -141,19 +132,7 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSing
 		do
 		{
 			// May need to insert the language as a new instance
-			var language: Language!
-			if let selectedLanguage = selectedLanguage
-			{
-				language = selectedLanguage
-			}
-			else if let matchingLanguage = languages.first(where: { $0.name.lowercased().contains(languageName.lowercased()) })
-			{
-				language = matchingLanguage
-			}
-			else
-			{
-				language = try LanguageView.instance.language(withName: languageName.capitalized)
-			}
+			let language = try languageHandler.getOrInsertLanguage()!
 			
 			let project = Project(name: projectName, languageId: language.idString, ownerId: currentAccountId, contributorIds: [currentAccountId], defaultBookIdentifier: translationName, sharedAccountId: newSharedAccount?.idString)
 			
@@ -176,20 +155,13 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSing
 	
 	// IMPLEMENTED METHODS	--------
 	
-	func labelForOption(atIndex index: Int) -> String
+	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, newLanguageNameInserted languageName: String)
 	{
-		return languages[index].name
+		updateCreateButtonStatus()
 	}
 	
-	func onValueChanged(_ newValue: String, selectedAt index: Int?)
+	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, languageSelected: Language)
 	{
-		languageName = newValue
-		
-		if let index = index
-		{
-			selectedLanguage = languages[index]
-		}
-		
 		updateCreateButtonStatus()
 	}
 	
@@ -209,6 +181,6 @@ class CreateProjectVC: UIViewController, FilteredSelectionDataSource, SimpleSing
 	
 	private func updateCreateButtonStatus()
 	{
-		createProjectButton.isEnabled = !projectNameField.trimmedText.isEmpty && !defaultBookIdentifierField.trimmedText.isEmpty && !languageName.isEmpty
+		createProjectButton.isEnabled = !projectNameField.trimmedText.isEmpty && !defaultBookIdentifierField.trimmedText.isEmpty && !languageHandler.isEmpty
 	}
 }

@@ -20,6 +20,10 @@
 		7C0130D11E4DB92C0053C5C2 /* ConnectionListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D01E4DB92C0053C5C2 /* ConnectionListener.swift */; };
 		7C0130D41E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D31E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift */; };
 		7C0130D71E4DF97D0053C5C2 /* ScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */; };
+		7C076D9F1EFB9FE700B5D2D3 /* USXImportAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C076D9E1EFB9FE700B5D2D3 /* USXImportAlertVC.swift */; };
+		7C076DA11EFBA99200B5D2D3 /* ParseSuccessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C076DA01EFBA99200B5D2D3 /* ParseSuccessCell.swift */; };
+		7C076DA31EFBAAB000B5D2D3 /* ParseFailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C076DA21EFBAAB000B5D2D3 /* ParseFailCell.swift */; };
+		7C076DA51EFBD58600B5D2D3 /* LanguageSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C076DA41EFBD58600B5D2D3 /* LanguageSelectionHandler.swift */; };
 		7C1515151E94BEDC00419DEA /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1515141E94BEDC00419DEA /* CircleImage.swift */; };
 		7C1515181E94D58000419DEA /* USXWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1515171E94D58000419DEA /* USXWriter.swift */; };
 		7C15151A1E961B6300419DEA /* P2PJoinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1515191E961B6300419DEA /* P2PJoinView.xib */; };
@@ -289,6 +293,10 @@
 		7C0130D01E4DB92C0053C5C2 /* ConnectionListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionListener.swift; sourceTree = "<group>"; };
 		7C0130D31E4DB9BA0053C5C2 /* ConnectionStatusLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionStatusLogger.swift; sourceTree = "<group>"; };
 		7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewExtension.swift; sourceTree = "<group>"; };
+		7C076D9E1EFB9FE700B5D2D3 /* USXImportAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USXImportAlertVC.swift; sourceTree = "<group>"; };
+		7C076DA01EFBA99200B5D2D3 /* ParseSuccessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseSuccessCell.swift; sourceTree = "<group>"; };
+		7C076DA21EFBAAB000B5D2D3 /* ParseFailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseFailCell.swift; sourceTree = "<group>"; };
+		7C076DA41EFBD58600B5D2D3 /* LanguageSelectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionHandler.swift; sourceTree = "<group>"; };
 		7C1515141E94BEDC00419DEA /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		7C1515171E94D58000419DEA /* USXWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXWriter.swift; sourceTree = "<group>"; };
 		7C1515191E961B6300419DEA /* P2PJoinView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = P2PJoinView.xib; sourceTree = "<group>"; };
@@ -876,6 +884,8 @@
 				7CCBEA011EF277A5001FE7E7 /* Squishable.swift */,
 				7CCBEA031EF278BB001FE7E7 /* SquishableStackView.swift */,
 				7CCBEA131EF3B35B001FE7E7 /* StatefulStackView.swift */,
+				7C076DA01EFBA99200B5D2D3 /* ParseSuccessCell.swift */,
+				7C076DA21EFBAAB000B5D2D3 /* ParseFailCell.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1041,6 +1051,8 @@
 			children = (
 				7CB5B2A21ECDB43E0066446F /* ConnectionVC.swift */,
 				7CDD780F1EEFC31A0048C07D /* EditSharedAccountVC.swift */,
+				7C076D9E1EFB9FE700B5D2D3 /* USXImportAlertVC.swift */,
+				7C076DA41EFBD58600B5D2D3 /* LanguageSelectionHandler.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1422,6 +1434,7 @@
 				7C0130BC1E3F1DFB0053C5C2 /* Carousel.swift in Sources */,
 				7C541D421EB8AA8B0035CDF0 /* CreateProjectVC.swift in Sources */,
 				7CA1BAA81E30C15B00611FED /* NotesTableDS.swift in Sources */,
+				7C076DA31EFBAAB000B5D2D3 /* ParseFailCell.swift in Sources */,
 				7CDBD6F21E2E3BEC00912320 /* NotesThread.swift in Sources */,
 				7C20D7E31D8BF8D000E84BA5 /* TargetTranslationCell.swift in Sources */,
 				7CDBD6EA1E28FCD400912320 /* ParagraphAssociated.swift in Sources */,
@@ -1544,6 +1557,7 @@
 				7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */,
 				7C57ECAA1E6D5EDA000718E9 /* SelectProjectVC.swift in Sources */,
 				7CCBEA121EF3B05E001FE7E7 /* DefaultNoDataView.swift in Sources */,
+				7C076DA51EFBD58600B5D2D3 /* LanguageSelectionHandler.swift in Sources */,
 				7C57EC071E6709A2000718E9 /* Server.swift in Sources */,
 				7C936C111E9DF6AF00AC06BF /* TranslationCellAction.swift in Sources */,
 				7C4A4F8B1DEEC4BD009F890E /* View.swift in Sources */,
@@ -1563,6 +1577,7 @@
 				7C4A4FA61DF835E1009F890E /* LiveQueryManager.swift in Sources */,
 				7CA1BAC81E35E72E00611FED /* TranslationParagraphListener.swift in Sources */,
 				7C94961C1EAF41180063EA83 /* TextWithNotes.swift in Sources */,
+				7C076DA11EFBA99200B5D2D3 /* ParseSuccessCell.swift in Sources */,
 				7CB5B29E1ECC7D0B0066446F /* ConnectionUIView.swift in Sources */,
 				7C0130D11E4DB92C0053C5C2 /* ConnectionListener.swift in Sources */,
 				7C936C171E9F48C900AC06BF /* FilteredSingleSelection.swift in Sources */,
@@ -1599,6 +1614,7 @@
 				7C4A4F871DEEC0A6009F890E /* RowParseError.swift in Sources */,
 				7C18A18F1D8BBEBD00DD1B03 /* AppDelegate.swift in Sources */,
 				7C4A4FB21DF95FE3009F890E /* ParagraphEdit.swift in Sources */,
+				7C076D9F1EFB9FE700B5D2D3 /* USXImportAlertVC.swift in Sources */,
 				7CCBEA141EF3B35B001FE7E7 /* StatefulStackView.swift in Sources */,
 				7C40DF701DEC6AB00035B92E /* Id.swift in Sources */,
 				7C6B7B231E6565CC0005AD43 /* CustomXibView.swift in Sources */,
@@ -1829,7 +1845,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TranslationEditor/TranslationEditorTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TranslationEditor.app/TranslationEditor";
 			};
@@ -1848,7 +1864,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TranslationEditor/TranslationEditorTests-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TranslationEditor.app/TranslationEditor";
 			};
@@ -1867,7 +1883,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TranslationEditor/TranslationEditorUITests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = TranslationEditor;
 			};
@@ -1885,7 +1901,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = aaconsulting.fi.TranslationEditorUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TranslationEditor/TranslationEditorUITests-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = TranslationEditor;
 			};
