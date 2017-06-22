@@ -52,16 +52,17 @@ class LanguageSelectionHandler: FilteredSelectionDataSource, SimpleSingleSelecti
 			selectedLanguage = languages[index]
 			languageName = selectedLanguage!.name
 		}
+			/*
 		else if newValue.isEmpty
 		{
 			selectedLanguage = nil
 			languageName = newValue
-		}
+			}
 		else if let matchingLanguage = languages.first(where: { $0.name.lowercased().contains(newValue.lowercased()) })
 		{
 			selectedLanguage = matchingLanguage
 			languageName = matchingLanguage.name
-		}
+		}*/
 		else
 		{
 			selectedLanguage = nil

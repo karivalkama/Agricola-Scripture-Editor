@@ -65,12 +65,18 @@ protocol SimpleSingleSelectionViewDelegate: class
 	{
 		value = insertField.trimmedText
 		selectedIndex = nil
+		
 		selectionTableView.selectRow(at: nil, animated: false, scrollPosition: .none)
 		reloadData()
 	}
 	
 	@IBAction func valueEditingEnded(_ sender: Any)
 	{
+		if let matchingIndex = displayedIndices.first(where: { datasource?.labelForOption(atIndex: $0).lowercased().contains(value.lowercased()) ?? false })
+		{
+			selectedIndex = matchingIndex
+		}
+		
 		informDelegate()
 	}
 	

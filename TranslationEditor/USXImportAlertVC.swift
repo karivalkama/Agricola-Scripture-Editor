@@ -147,7 +147,7 @@ final class USXImport
 }
 
 // This view controller is used for parsing and presenting an overview of incoming usx file data
-class USXImportAlertVC: UIViewController
+class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelectionHandlerDelegate, FilteredSelectionDataSource
 {
 	// OUTLETS	---------------------
 	
@@ -168,14 +168,67 @@ class USXImportAlertVC: UIViewController
 	
 	static let identifier = "USXImportAlert"
 	
+	private var existingBooks = [Book]()
+	private var existingResources = [ResourceCollection]()
+	
+	private var languageHandler = LanguageSelectionHandler()
+	
+	
+	// COMPUTED PROPERTIES	---------
+	
+	// TODO
+	var numberOfOptions: Int { return 0 }
+	
+	private var containsSuccesses: Bool { return !USXImport.instance.parseSuccesses.isEmpty }
+	
+	private var containsFailures: Bool { return !USXImport.instance.parseFailures.isEmpty }
+	
+	private var sectionForSuccess: Int?
+	{
+		if containsSuccesses
+		{
+			return containsFailures ? 1 : 0
+		}
+		else
+		{
+			return nil
+		}
+	}
+	
+	private var sectionForFailure: Int? { return containsFailures ? 0 : nil }
+	
+	
 	// LOAD	-------------------------
 	
     override func viewDidLoad()
 	{
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+		
+		dataTableView.dataSource = self
+		selectLanguageView.datasource = languageHandler
+		selectLanguageView.delegate = languageHandler
     }
+	
+	override func viewWillAppear(_ animated: Bool)
+	{
+		super.viewWillAppear(animated)
+		
+		do
+		{
+			try languageHandler.updateLanguageOptions()
+			selectLanguageView.reloadData()
+			
+			if let projectId = Session.instance.projectId
+			{
+				existingBooks = try ProjectBooksView.instance.booksQuery(projectId: projectId).resultObjects()
+				existingResources = try ResourceCollectionView.instance.collectionQuery(projectId: projectId).resultObjects()
+			}
+		}
+		catch
+		{
+			print("ERROR: USX Import setup failed. \(error)")
+		}
+	}
 	
 	
 	// ACTIONS	---------------------
@@ -196,11 +249,79 @@ class USXImportAlertVC: UIViewController
 	}
 	
 	
+	// IMPLEMENTED METHODS	---------
+	
+	func numberOfSections(in tableView: UITableView) -> Int
+	{
+		if containsFailures
+		{
+			return containsSuccesses ? 2 : 1
+		}
+		else
+		{
+			return containsSuccesses ? 1 : 0
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+	{
+		if section == sectionForFailure
+		{
+			return USXImport.instance.parseFailures.count
+		}
+		else
+		{
+			return USXImport.instance.parseSuccesses.count
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+	{
+		if indexPath.section == sectionForFailure
+		{
+			let cell = tableView.dequeueReusableCell(withIdentifier: ParseFailCell.identifier, for: indexPath) as! ParseFailCell
+			let failureData = USXImport.instance.parseFailures[indexPath.row]
+			cell.configure(fileName: failureData.fileName, errorDescription: failureData.message)
+			return cell
+		}
+		else
+		{
+			let cell = tableView.dequeueReusableCell(withIdentifier: ParseSuccessCell.identifier, for: indexPath) as! ParseSuccessCell
+			let book = USXImport.instance.parseSuccesses[indexPath.row].book
+			cell.configure(code: book.code, identifier: book.identifier, didFindOlderVersion: oldVersion(for: book) != nil)
+			return cell
+		}
+	}
+	
+	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, newLanguageNameInserted languageName: String)
+	{
+		// TODO: Update nickname options
+		// TODO: Update ok button status
+	}
+	
+	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, languageSelected: Language)
+	{
+		// TODO: Update nickname options
+		// TODO: Update ok button status
+	}
+	
+	func labelForOption(atIndex index: Int) -> String
+	{
+		// TODO
+		return ""
+	}
+	
+	
 	// OTHER METHODS	-------------
 	
 	fileprivate func update()
 	{
 		
+	}
+	
+	private func oldVersion(for book: Book) -> Book?
+	{
+		return existingBooks.first(where: { $0.code == book.code && $0.identifier == book.identifier })
 	}
 }
 
