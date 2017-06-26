@@ -128,9 +128,17 @@ protocol SimpleSingleSelectionViewDelegate: class
 		
 		selectionTableView.reloadData()
 		
-		if let selectedIndex = selectedIndex, let selectedTableIndex = displayedIndices.index(where: { $0 == selectedIndex })
+		if let newSelectedIndex = findMatchingIndex(for: value)
 		{
-			selectionTableView.selectRow(at: IndexPath(row: selectedTableIndex, section: 0), animated: false, scrollPosition: .top)
+			selectionTableView.selectRow(at: IndexPath(row: newSelectedIndex, section: 0), animated: false, scrollPosition: .top)
+			selectedIndex = newSelectedIndex
+			informDelegate()
+		}
+		else if selectedIndex != nil
+		{
+			selectionTableView.selectRow(at: nil, animated: false, scrollPosition: .none)
+			selectedIndex = nil
+			informDelegate()
 		}
 	}
 	
@@ -151,5 +159,10 @@ protocol SimpleSingleSelectionViewDelegate: class
 	private func informDelegate()
 	{
 		delegate?.onValueChanged(value, selectedAt: selectedIndex)
+	}
+	
+	private func findMatchingIndex(for item: String) -> Int?
+	{
+		return displayedIndices.first(where: { datasource?.labelForOption(atIndex: $0).lowercased() == item.lowercased() })
 	}
 }

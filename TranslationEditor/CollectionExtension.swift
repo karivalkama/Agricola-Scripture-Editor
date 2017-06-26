@@ -143,6 +143,22 @@ extension Array
 
 extension Array where Element: Equatable
 {
+	// Creates a new array that doesn't contain any of the elements twice
+	var withoutDuplicates: [Element]
+	{
+		var copy = [Element]()
+		self.forEach { copy.add(unique: $0) }
+		return copy
+	}
+	
+	mutating func add(unique element: Element)
+	{
+		if !contains(element)
+		{
+			add(element)
+		}
+	}
+	
 	// Returns an array without the specified element
 	static func - (array: Array<Element>, element: Element) -> Array<Element>
 	{

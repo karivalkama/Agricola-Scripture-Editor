@@ -16,6 +16,7 @@ final class USXImport
 	
 	fileprivate var parseSuccesses = [BookData]()
 	fileprivate var parseFailures = [(fileName: String, message: String)]()
+	fileprivate var parsedFileAmount = 0
 	
 	private var pendingURLs = [URL]()
 	
@@ -44,6 +45,8 @@ final class USXImport
 		
 		for url in pendingURLs
 		{
+			parsedFileAmount += 1
+			
 			do
 			{
 				if let parser = XMLParser(contentsOf: url)
@@ -106,6 +109,7 @@ final class USXImport
 		pendingURLs = []
 		parseSuccesses = []
 		parseFailures = []
+		parsedFileAmount = 0
 	}
 	
 	fileprivate func close()
@@ -147,7 +151,7 @@ final class USXImport
 }
 
 // This view controller is used for parsing and presenting an overview of incoming usx file data
-class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelectionHandlerDelegate, FilteredSelectionDataSource
+class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelectionHandlerDelegate, FilteredSelectionDataSource, SimpleSingleSelectionViewDelegate
 {
 	// OUTLETS	---------------------
 	
@@ -162,6 +166,8 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	@IBOutlet weak var contentView: KeyboardReactiveView!
 	@IBOutlet weak var previewSwitchStackView: UIStackView!
 	@IBOutlet weak var selectionStackView: UIStackView!
+	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
 	
 	
 	// ATTRIBUTES	-----------------
@@ -170,14 +176,17 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	
 	private var existingBooks = [Book]()
 	private var existingResources = [ResourceCollection]()
+	private var existingNicknames = [String]()
 	
 	private var languageHandler = LanguageSelectionHandler()
+	
+	private var selectedNickName: String?
+	private var newNickname = ""
 	
 	
 	// COMPUTED PROPERTIES	---------
 	
-	// TODO
-	var numberOfOptions: Int { return 0 }
+	var numberOfOptions: Int { return existingNicknames.count }
 	
 	private var containsSuccesses: Bool { return !USXImport.instance.parseSuccesses.isEmpty }
 	
@@ -204,9 +213,15 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	{
         super.viewDidLoad()
 		
+		contentView.configure(mainView: view, elements: [fileAmountLabel, dataTableView, selectLanguageView, selectNicknameField, previewSwitch, okButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish, switchedStackViews: [inputStackView])
+		
 		dataTableView.dataSource = self
 		selectLanguageView.datasource = languageHandler
 		selectLanguageView.delegate = languageHandler
+		selectNicknameField.datasource = self
+		selectNicknameField.delegate = self
+		
+		update()
     }
 	
 	override func viewWillAppear(_ animated: Bool)
@@ -222,6 +237,9 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 			{
 				existingBooks = try ProjectBooksView.instance.booksQuery(projectId: projectId).resultObjects()
 				existingResources = try ResourceCollectionView.instance.collectionQuery(projectId: projectId).resultObjects()
+				updateNickNames()
+				
+				selectNicknameField.reloadData()
 			}
 		}
 		catch
@@ -295,20 +313,28 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	
 	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, newLanguageNameInserted languageName: String)
 	{
-		// TODO: Update nickname options
-		// TODO: Update ok button status
+		updateNickNames()
+		updateOKButtonStatus()
 	}
 	
 	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, languageSelected: Language)
 	{
-		// TODO: Update nickname options
-		// TODO: Update ok button status
+		updateNickNames()
+		updateOKButtonStatus()
 	}
 	
 	func labelForOption(atIndex index: Int) -> String
 	{
-		// TODO
-		return ""
+		return existingNicknames[index]
+	}
+	
+	func onValueChanged(_ newValue: String, selectedAt index: Int?)
+	{
+		newNickname = newValue
+		selectedNickName = index.map { existingNicknames[$0] }
+		updateOKButtonStatus()
+		
+		overwriteInfoLabel.isHidden = selectedNickName == nil
 	}
 	
 	
@@ -316,12 +342,42 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	
 	fileprivate func update()
 	{
+		dataTableView.reloadData()
 		
+		// Sets some elements hidden / visible if successful parsing was done
+		let hasSuccesses = !USXImport.instance.parseSuccesses.isEmpty
+		selectionStackView.isHidden = !hasSuccesses
+		previewSwitchStackView.isHidden = !hasSuccesses
+		
+		fileAmountLabel.text = "\(USXImport.instance.parsedFileAmount) \(NSLocalizedString("File(s)", comment: "A label presented next to the amount of parsed files in usx import view"))"
+		
+		updateOKButtonStatus()
 	}
 	
 	private func oldVersion(for book: Book) -> Book?
 	{
 		return existingBooks.first(where: { $0.code == book.code && $0.identifier == book.identifier })
+	}
+	
+	private func updateNickNames()
+	{
+		if let selectedLanguageId = languageHandler.selectedLanguage?.idString
+		{
+			existingNicknames = existingResources.filter { $0.languageId == selectedLanguageId }.map { $0.name }.withoutDuplicates
+		}
+		else
+		{
+			existingNicknames = []
+		}
+		
+		selectNicknameField.reloadData()
+	}
+	
+	private func updateOKButtonStatus()
+	{
+		// For OK-button to be enabled, one must have at least a single successful parse
+		// Language and nickname must both be set (non-empty) as well
+		okButton.isEnabled = !USXImport.instance.parseSuccesses.isEmpty && !languageHandler.isEmpty && !newNickname.isEmpty
 	}
 }
 

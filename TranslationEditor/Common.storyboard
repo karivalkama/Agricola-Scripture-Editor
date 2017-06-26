@@ -47,17 +47,17 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUM-R1-CTj">
-                                <rect key="frame" x="0.0" y="36" width="0.0" height="700"/>
+                                <rect key="frame" x="570" y="36" width="418" height="700"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Ihe-oP-hey">
-                                        <rect key="frame" x="0.0" y="16" width="0.0" height="668"/>
+                                        <rect key="frame" x="24" y="16" width="370" height="668"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xk0-G6-g8V" customClass="ConnectionUIView" customModule="TranslationEditor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="604"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="370" height="604"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbp-A2-kJ8" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="628" width="0.0" height="40"/>
+                                                <rect key="frame" x="0.0" y="628" width="370" height="40"/>
                                                 <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Q7p-YL-laZ"/>
@@ -400,6 +400,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contentBottomConstraint" destination="zuf-9X-jqc" id="Y9i-cH-MKo"/>
+                        <outlet property="contentTopConstraint" destination="SUP-1r-7Lb" id="NqS-5d-g30"/>
                         <outlet property="contentView" destination="W3o-7J-OpW" id="Zo3-FI-7dx"/>
                         <outlet property="dataTableView" destination="ZhW-PX-KPa" id="GU4-AU-JqI"/>
                         <outlet property="fileAmountLabel" destination="8I5-ni-SGB" id="es0-18-bBy"/>

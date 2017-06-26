@@ -985,17 +985,17 @@ Project Account</string>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" rowHeight="50" id="c4X-LY-Oow" customClass="UserCell" customModule="TranslationEditor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="464" height="50"/>
+                                                                <rect key="frame" x="0.0" y="28" width="648" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c4X-LY-Oow" id="szy-1l-exz">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="464" height="50"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="648" height="49.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="DCF-01-Sq9">
-                                                                            <rect key="frame" x="0.0" y="8" width="464" height="33.5"/>
+                                                                            <rect key="frame" x="0.0" y="8" width="648" height="33.5"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Arc-cq-r2n">
-                                                                                    <rect key="frame" x="0.0" y="6.5" width="89" height="20.5"/>
+                                                                                    <rect key="frame" x="0.0" y="6.5" width="227.5" height="20.5"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="900" text="Test User" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26J-Co-4s9">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="73" height="20.5"/>
@@ -1004,7 +1004,7 @@ Project Account</string>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="3.4.2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m63-gu-E22">
-                                                                                            <rect key="frame" x="89" y="0.0" width="0.0" height="20.5"/>
+                                                                                            <rect key="frame" x="89" y="0.0" width="138.5" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1012,10 +1012,10 @@ Project Account</string>
                                                                                     </subviews>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DUW-yL-C5Q">
-                                                                                    <rect key="frame" x="137" y="1.5" width="65" height="31"/>
+                                                                                    <rect key="frame" x="275.5" y="1.5" width="110.5" height="31"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Admin:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNv-np-Ouh">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="8" height="31"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="53.5" height="31"/>
                                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1029,7 +1029,7 @@ Project Account</string>
                                                                                             </attributedString>
                                                                                         </label>
                                                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wO8-8d-fzr">
-                                                                                            <rect key="frame" x="16" y="0.0" width="51" height="31"/>
+                                                                                            <rect key="frame" x="61.5" y="0.0" width="51" height="31"/>
                                                                                             <color key="onTintColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                             <connections>
                                                                                                 <action selector="adminValueChanged:" destination="c4X-LY-Oow" eventType="valueChanged" id="MEd-Mk-fDt"/>
@@ -1038,7 +1038,7 @@ Project Account</string>
                                                                                     </subviews>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0oY-bb-06Z">
-                                                                                    <rect key="frame" x="250" y="0.0" width="214" height="33.5"/>
+                                                                                    <rect key="frame" x="434" y="0.0" width="214" height="33.5"/>
                                                                                     <subviews>
                                                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ef0-I2-3bp" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="135" height="33.5"/>
@@ -1282,25 +1282,25 @@ Project Account</string>
                                 <color key="backgroundColor" red="1" green="0.76470588240000004" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDj-dm-OwG" userLabel="Content View" customClass="KeyboardReactiveView" customModule="TranslationEditor" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="908" height="540"/>
+                                <rect key="frame" x="474" y="28" width="518" height="540"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="NzD-Hx-uxn" userLabel="Content Stack View">
-                                        <rect key="frame" x="0.0" y="16" width="0.0" height="508"/>
+                                        <rect key="frame" x="16" y="16" width="486" height="508"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Yi2-g3-zAs" customClass="CreateAvatarView" customModule="TranslationEditor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="415.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="486" height="415.5"/>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Errors are displayed here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3S4-fY-xGT">
-                                                <rect key="frame" x="0.0" y="431.5" width="0.0" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="431.5" width="486" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="7Jy-Xk-xai">
-                                                <rect key="frame" x="0.0" y="468" width="0.0" height="40"/>
+                                                <rect key="frame" x="0.0" y="468" width="486" height="40"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pbo-Z6-pUu" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="40"/>
                                                         <color key="backgroundColor" red="0.98039215690000003" green="0.47450980390000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                         <state key="normal" title="Cancel">
@@ -1319,7 +1319,7 @@ Project Account</string>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lyw-Ql-b3R" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
+                                                        <rect key="frame" x="251" y="0.0" width="235" height="40"/>
                                                         <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="o4N-pV-pQp"/>
