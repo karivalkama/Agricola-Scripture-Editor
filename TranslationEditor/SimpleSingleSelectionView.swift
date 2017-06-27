@@ -35,6 +35,13 @@ protocol SimpleSingleSelectionViewDelegate: class
 	private(set) var selectedIndex: Int?
 	private var displayedIndices = [Int]()
 	
+	private var intrinsicHeight = 228
+	
+	
+	// COMPUTED PROPERTIES	---
+	
+	override var intrinsicContentSize: CGSize { return CGSize(width: 320, height: intrinsicHeight) }
+	
 	
 	// INIT	------------------
 	
@@ -42,12 +49,14 @@ protocol SimpleSingleSelectionViewDelegate: class
 	{
 		super.init(frame: frame)
 		setupXib(nibName: "SimpleSingleSelection")
+		invalidateIntrinsicContentSize()
 	}
 	
 	required init?(coder: NSCoder)
 	{
 		super.init(coder: coder)
 		setupXib(nibName: "SimpleSingleSelection")
+		invalidateIntrinsicContentSize()
 	}
 	
 	override func awakeFromNib()
@@ -140,6 +149,12 @@ protocol SimpleSingleSelectionViewDelegate: class
 			selectedIndex = nil
 			informDelegate()
 		}
+	}
+	
+	func setIntrinsicHeight(_ height: Int)
+	{
+		intrinsicHeight = height
+		invalidateIntrinsicContentSize()
 	}
 	
 	private func select(index: Int)

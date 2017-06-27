@@ -33,14 +33,15 @@ final class USXImport
 	func open(url: URL)
 	{
 		pendingURLs.add(url)
-		processPendingURLs()
+		_ = processPendingURLs()
 	}
 	
-	func processPendingURLs()
+	// Returns whether usx import is open after this operation
+	func processPendingURLs() -> Bool
 	{
 		guard !pendingURLs.isEmpty, let projectId = Session.instance.projectId, let avatarId = Session.instance.avatarId else
 		{
-			return
+			return false
 		}
 		
 		for url in pendingURLs
@@ -102,6 +103,8 @@ final class USXImport
 				self.viewController = $0 as? USXImportAlertVC
 			}
 		}
+		
+		return true
 	}
 	
 	fileprivate func discardData()
@@ -168,6 +171,9 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	@IBOutlet weak var selectionStackView: UIStackView!
 	@IBOutlet weak var contentBottomConstraint: NSLayoutConstraint!
 	@IBOutlet weak var contentTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var nicknameStackView: UIStackView!
+	@IBOutlet weak var isTargetTranslationSwitch: UISwitch!
+	@IBOutlet weak var isTargetTranslationStackView: UIStackView!
 	
 	
 	// ATTRIBUTES	-----------------
@@ -182,6 +188,11 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	
 	private var selectedNickName: String?
 	private var newNickname = ""
+	
+	private var identifierFoundForAll = false
+	private var targetLanguageSelected = false
+	
+	// TODO: Removed the feature that there could be target language resources. It may be added back later (main menu and other features don't support it yet)
 	
 	
 	// COMPUTED PROPERTIES	---------
@@ -221,6 +232,10 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 		selectNicknameField.datasource = self
 		selectNicknameField.delegate = self
 		
+		selectLanguageView.setIntrinsicHeight(160)
+		selectNicknameField.setIntrinsicHeight(160)
+		
+		updateNicknameVisibility()
 		update()
     }
 	
@@ -236,7 +251,7 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 			if let projectId = Session.instance.projectId
 			{
 				existingBooks = try ProjectBooksView.instance.booksQuery(projectId: projectId).resultObjects()
-				existingResources = try ResourceCollectionView.instance.collectionQuery(projectId: projectId).resultObjects()
+				existingResources = try ResourceCollectionView.instance.collectionQuery(projectId: projectId).resultObjects().filter { $0.category == .sourceTranslation }
 				updateNickNames()
 				
 				selectNicknameField.reloadData()
@@ -251,8 +266,15 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	
 	// ACTIONS	---------------------
 	
+	@IBAction func targetTranslationSwitchPressed(_ sender: Any)
+	{
+		nicknameStackView.isHidden = isTargetTranslationSwitch.isOn
+		updateOKButtonStatus()
+	}
+	
 	@IBAction func backgroundTapped(_ sender: Any)
 	{
+		// TODO: Keep data in buffer?
 		USXImport.instance.close()
 	}
 	
@@ -263,7 +285,109 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	
 	@IBAction func okButtonPressed(_ sender: Any)
 	{
-		// TODO: Either insert books or go though preview for each
+		do
+		{
+			// Language id is required if not all of the books were matched with identifier
+			guard let languageId = identifierFoundForAll ? "" : try languageHandler.getOrInsertLanguage()?.idString else
+			{
+				print("ERROR: No language selected")
+				return
+			}
+			
+			guard identifierFoundForAll || targetLanguageSelected || !newNickname.isEmpty else
+			{
+				print("ERROR: No nickname selected")
+				return
+			}
+			
+			// Versions with an existing identifier are always overwritten
+			var booksToOverwrite = [(oldBook: Book, newBookData: BookData)]()
+			var remainingBooks = [BookData]()
+			
+			for bookData in USXImport.instance.parseSuccesses
+			{
+				if let oldVersion = oldVersion(for: bookData.book)
+				{
+					booksToOverwrite.add((oldBook: oldVersion, newBookData: bookData))
+				}
+				else
+				{
+					remainingBooks.add(bookData)
+				}
+			}
+			
+			// TODO: Add handling for target translation imports
+			
+			var booksToInsert = [BookData]()
+			
+			// If writing target translation, overwrites existing books based on code, inserts the rest
+			if targetLanguageSelected
+			{
+				guard let projectId = Session.instance.projectId, let project = try Project.get(projectId) else
+				{
+					print("Error: No project data available")
+					return
+				}
+				
+				for bookData in remainingBooks
+				{
+					if let oldVersion = try project.targetTranslationQuery(bookCode: bookData.book.code).firstResultObject()
+					{
+						booksToOverwrite.add((oldBook: oldVersion, newBookData: bookData))
+					}
+					else
+					{
+						booksToInsert.add(bookData)
+					}
+				}
+			}
+			// If a nickname was selected, also overwrites any books with the provided nickname (+ language + code)
+			else if selectedNickName != nil
+			{
+				let associatedResources = existingResources.filter { $0.name == newNickname && $0.languageId == languageId }
+				let associatedSources = try associatedResources.flatMap { try ParagraphBinding.get(resourceCollectionId: $0.idString) }.flatMap { try Book.get($0.sourceBookId) }
+				
+				for bookData in remainingBooks
+				{
+					if let oldVersion = associatedSources.first(where: { $0.code == bookData.book.code })
+					{
+						booksToOverwrite.add((oldBook: oldVersion, newBookData: bookData))
+					}
+					else
+					{
+						booksToInsert.add(bookData)
+					}
+				}
+			}
+			// Otherwise inserts all remaining books as new
+			else
+			{
+				booksToInsert = remainingBooks
+			}
+			
+			// Presents a preview or just imports all the books
+			if previewSwitch.isOn
+			{
+				displayAlert(withIdentifier: USXImportPreviewVC.idedntifier, storyBoardId: "Common")
+				{
+					($0 as! USXImportPreviewVC).configure(translationName: self.newNickname, languageId: languageId, booksToOverwrite: booksToOverwrite, booksToInsert: booksToInsert, completion: USXImport.instance.close)
+				}
+			}
+			else
+			{
+				try booksToOverwrite.forEach { try USXImportPreviewVC.overwrite(oldBook: $0.oldBook, newData: $0.newBookData) }
+				booksToInsert.forEach { USXImportPreviewVC.insert(bookData: $0, languageId: languageId, nickName: self.newNickname, hostVC: self) }
+				USXImport.instance.close()
+			}
+		}
+		catch
+		{
+			print("ERROR: USX Import failed. \(error)")
+			displayAlert(withIdentifier: ErrorAlertVC.identifier, storyBoardId: "MainMenu")
+			{
+				($0 as! ErrorAlertVC).configure(heading: NSLocalizedString("USX Import Failed!", comment: "USX Import error heading"), text: NSLocalizedString("An unexpected internal error caused the import process to (partially) fail", comment: "USX import error description in case of some lower level error"), completion: USXImport.instance.close)
+			}
+		}
 	}
 	
 	
@@ -314,12 +438,14 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, newLanguageNameInserted languageName: String)
 	{
 		updateNickNames()
+		updateNicknameVisibility()
 		updateOKButtonStatus()
 	}
 	
 	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, languageSelected: Language)
 	{
 		updateNickNames()
+		updateNicknameVisibility()
 		updateOKButtonStatus()
 	}
 	
@@ -346,12 +472,56 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 		
 		// Sets some elements hidden / visible if successful parsing was done
 		let hasSuccesses = !USXImport.instance.parseSuccesses.isEmpty
-		selectionStackView.isHidden = !hasSuccesses
 		previewSwitchStackView.isHidden = !hasSuccesses
+		
+		// Language and nickname selection are also disabled when all books are already recognized
+		identifierFoundForAll = USXImport.instance.parseSuccesses.forAll { oldVersion(for: $0.book) != nil }
+		selectionStackView.isHidden = !hasSuccesses || identifierFoundForAll
 		
 		fileAmountLabel.text = "\(USXImport.instance.parsedFileAmount) \(NSLocalizedString("File(s)", comment: "A label presented next to the amount of parsed files in usx import view"))"
 		
 		updateOKButtonStatus()
+	}
+	
+	private func updateNicknameVisibility()
+	{
+		targetLanguageSelected = false // default
+		
+		// While language is not selected, just displays the language selection
+		if languageHandler.isEmpty
+		{
+			nicknameStackView.isHidden = true
+			// isTargetTranslationStackView.isHidden = true
+		}
+		else
+		{
+			do
+			{
+				// If the selected language is the same as the project language, the role of the books is specified via switch
+				if let selectedLanguageId = languageHandler.selectedLanguage?.idString
+				{
+					if let projectId = Session.instance.projectId, let project = try Project.get(projectId), project.languageId == selectedLanguageId
+					{
+						//isTargetTranslationStackView.isHidden = false
+						//nicknameStackView.isHidden = isTargetTranslationSwitch.isOn
+						targetLanguageSelected = true
+						nicknameStackView.isHidden = true
+					}
+				}
+				else
+				{
+					// If another language or a new language was selected, displays the nickname field for the resource
+					// isTargetTranslationSwitch.isHidden = true
+					nicknameStackView.isHidden = false
+				}
+			}
+			catch
+			{
+				print("ERROR: Couldn't read project data. \(error)")
+				// isTargetTranslationSwitch.isHidden = true
+				nicknameStackView.isHidden = false
+			}
+		}
 	}
 	
 	private func oldVersion(for book: Book) -> Book?
@@ -376,15 +546,7 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	private func updateOKButtonStatus()
 	{
 		// For OK-button to be enabled, one must have at least a single successful parse
-		// Language and nickname must both be set (non-empty) as well
-		okButton.isEnabled = !USXImport.instance.parseSuccesses.isEmpty && !languageHandler.isEmpty && !newNickname.isEmpty
+		// Language and nickname must both be set (non-empty) as well (if they are visible)
+		okButton.isEnabled = !USXImport.instance.parseSuccesses.isEmpty && (identifierFoundForAll || (!languageHandler.isEmpty && (isTargetTranslationSwitch.isOn || !newNickname.isEmpty)))
 	}
 }
-
-/*
-fileprivate protocol LanguageSelectionDelegate: class
-{
-	func existingLanguageSelected(language: Language)
-	
-	func newLanguageSelected(languageName: String)
-}*/

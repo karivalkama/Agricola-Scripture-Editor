@@ -48,6 +48,7 @@ class CreateProjectVC: UIViewController, LanguageSelectionHandlerDelegate
 		
 		selectLanguageView.delegate = languageHandler
 		selectLanguageView.datasource = languageHandler
+		languageHandler.delegate = self
 		
 		contentView.configure(mainView: view, elements: [projectNameField, defaultBookIdentifierField, errorLabel, selectLanguageView, createProjectButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish, squishedElements: [contentStackView, inputStackView], switchedStackViews: [projectNameStackView, translationNameStackView])
     }

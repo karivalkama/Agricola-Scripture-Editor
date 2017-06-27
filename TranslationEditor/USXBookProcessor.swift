@@ -80,6 +80,8 @@ class USXBookProcessor: USXContentProcessor
 	
 	func getParser(_ caller: USXContentParser<Generated, Processed>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[Processed]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
 	{
+		// print("STATUS: \(elementName)")
+		
 		// On chapter elements, parses using a chapter parser
 		if elementName == USXMarkerElement.chapter.rawValue
 		{
@@ -129,6 +131,8 @@ class USXBookProcessor: USXContentProcessor
 		// Wraps the collected data into a book data
 		let paragraphs = content.flatMap { chapter in return chapter.flatMap { $0 } }
 		let bookData = BookData(book: book, paragraphs: paragraphs)
+		
+		print("STATUS: Parsed book \(book.identifier) with \(content.count) chapters")
 		
 		// Resets status for reuse
 		introductionParas = []

@@ -12,6 +12,7 @@ class TemporaryXMLParser: NSObject, XMLParserDelegate
 {
 	// ATTRIBUTES	--------
 	
+	// TODO: Reference should be weak?
 	private let caller: XMLParserDelegate
 	
 	
@@ -51,6 +52,52 @@ class TemporaryXMLParser: NSObject, XMLParserDelegate
 		caller.parser?(parser, foundCharacters: characters)
 	}
 }
+
+class TemporaryXMLParserTEST: NSObject, XMLParserDelegate
+{
+	// ATTRIBUTES	--------
+	/*
+	// TODO: Reference should be weak?
+	private let caller: XMLParserDelegate
+	
+	
+	// INIT	----------------
+	
+	init(caller: XMLParserDelegate)
+	{
+		self.caller = caller
+	}
+	
+	
+	// OTHER	------------
+	
+	// Moves the parsing responsibility back to the original delegate
+	func endParsing(parser: XMLParser)
+	{
+		parser.delegate = caller
+	}
+	
+	// Ends the temporary parser's responsibility and calls start element of the original parser delegate
+	func endParsingOnStartElement(parser: XMLParser, elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
+	{
+		endParsing(parser: parser)
+		caller.parser?(parser, didStartElement: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
+	}
+	
+	// Ends the temporary parser's responsibility and calls end element of the original parser delegate
+	func endParsingOnEndElement(parser: XMLParser, elementName: String, namespaceURI: String?, qualifiedName qName: String?)
+	{
+		endParsing(parser: parser)
+		caller.parser?(parser, didEndElement: elementName, namespaceURI: namespaceURI, qualifiedName: qName)
+	}
+	
+	func endParsingOnCharacters(parser: XMLParser, characters: String)
+	{
+		endParsing(parser: parser)
+		caller.parser?(parser, foundCharacters: characters)
+	}*/
+}
+
 
 // This parser ignores all data until an element with a specific name is found, at which point the parsing is returned to the original delegate
 class MoveToElementWithNameParser: TemporaryXMLParser
@@ -121,5 +168,13 @@ class SkipOverElementParser: TemporaryXMLParser
 				endParsing(parser: parser)
 			}
 		}
+	}
+}
+
+class TestPrintXMLParseDelegate: NSObject, XMLParserDelegate
+{
+	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
+	{
+		print("STATUS: Test parser found start element '\(elementName)'")
 	}
 }

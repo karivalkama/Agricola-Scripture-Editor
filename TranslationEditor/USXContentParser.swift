@@ -50,23 +50,26 @@ class AnyUSXContentProcessor<G, P>: USXContentProcessor
 	
 	func generate(from content: [P], using errorHandler: @escaping ErrorHandler) -> G?
 	{
+		//print("STATUS: GENERATE CALLED")
 		return _generate(content, errorHandler)
 	}
 	
 	func getParser(_ caller: USXContentParser<G, P>, forElement elementName: String, attributes: [String : String], into targetPointer: UnsafeMutablePointer<[P]>, using errorHandler: @escaping ErrorHandler) -> (XMLParserDelegate, Bool)?
 	{
+		//print("STATUS: GET PARSER CALLED")
 		return _getParser(caller, elementName, attributes, targetPointer, errorHandler)
 	}
 	
 	func getCharacterParser(_ caller: USXContentParser<G, P>, forCharacters string: String, into targetPointer: UnsafeMutablePointer<[P]>, using errorHandler: @escaping ErrorHandler) -> XMLParserDelegate?
 	{
+		//print("STATUS: GET CHAR PARSER CALLED")
 		return _getCharacterParser(caller, string, targetPointer, errorHandler)
 	}
 }
 
 // USX Content parsers are used for parsing through most of the USX content.
 // A USX Content parser needs a USX Content processor in order to generate content
-class USXContentParser<Generated, Contained>: TemporaryXMLParser
+class USXContentParser<Generated, Contained>: NSObject, XMLParserDelegate // If extends temporary xml parser, no delegate methods get called
 {
 	// ATTRIBUTES	---------
 	
@@ -93,13 +96,15 @@ class USXContentParser<Generated, Contained>: TemporaryXMLParser
 	
 	init(caller: XMLParserDelegate, containingElement: USXContainerElement, lowestBreakMarker: USXMarkerElement, targetPointer: UnsafeMutablePointer<[Generated]>,using errorHandler: @escaping ErrorHandler)
 	{
+		print("STATUS: Instantiated new USX content parser")
+		
 		self.errorHandler = errorHandler
 		self.targetPointer = targetPointer
 		
 		self.containingElement = containingElement
 		self.lowestBreakMarker = lowestBreakMarker
 		
-		super.init(caller: caller)
+		//super.init(caller: caller)
 	}
 	
 	
@@ -107,7 +112,13 @@ class USXContentParser<Generated, Contained>: TemporaryXMLParser
 	
 	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
 	{
-		// print("STATUS: New element: '\(elementName)'")
+		print("STATUS: New element: \(elementName)")
+	}
+	
+	/*
+	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
+	{
+		print("STATUS: New element: '\(elementName)'")
 		
 		// The parser may be set to stop parsing at a start of a certain marker
 		// Also ends parsing when finding a higher level 'marker' element
@@ -136,10 +147,12 @@ class USXContentParser<Generated, Contained>: TemporaryXMLParser
 				endParsingOnStartElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
 			}
 		}
-	}
-	
+	}*/
+	/*
 	func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
 	{
+		print("STATUS: END ELEMENT \(elementName)")
+		
 		// Ends parsing at the end of the containing element
 		// Also may be set to end parsing at the end of a certain container element
 		if let element = USXContainerElement(rawValue: elementName), element == containingElement || element == nextStopContainer
@@ -151,6 +164,8 @@ class USXContentParser<Generated, Contained>: TemporaryXMLParser
 	
 	func parser(_ parser: XMLParser, foundCharacters string: String)
 	{
+		print("STATUS: CHARACTERS")
+		
 		// Ignores characters which consist only of whitespace
 		if !string.trimmingCharacters(in: CharacterSet(charactersIn: " \t\n\r")).isEmpty
 		{
@@ -172,10 +187,9 @@ class USXContentParser<Generated, Contained>: TemporaryXMLParser
 	
 	func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error)
 	{
+		print("ERROR: Parse error occurred. \(parseError)")
 		errorHandler(parseError)
-	}
-	
-	
+	}*/
 	
 	
 	// OTHER	-------------

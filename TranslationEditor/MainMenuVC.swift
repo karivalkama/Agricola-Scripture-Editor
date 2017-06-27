@@ -145,7 +145,7 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 		manageSharedAccountButton.isEnabled = adminToolsEnabled
 		
 		// If there are USX files waiting for processing, displays import view
-		if let usxUrl = USXImportStack.instance.pop()
+		/*if let usxUrl = USXImportStack.instance.pop()
 		{
 			if let controller = UIStoryboard(name: "MainMenu", bundle: nil).instantiateViewController(withIdentifier: "ImportUSX") as? ImportUSXVC
 			{
@@ -156,6 +156,10 @@ class MainMenuVC: UIViewController, LiveQueryListener, UITableViewDataSource, UI
 			{
 				print("ERROR: Failed to open USX import view")
 			}
+		}*/
+		if USXImport.instance.processPendingURLs()
+		{
+			Session.instance.bookId = nil
 		}
 		else if let bookId = Session.instance.bookId
 		{

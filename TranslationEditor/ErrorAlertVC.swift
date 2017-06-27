@@ -19,6 +19,8 @@ class ErrorAlertVC: UIViewController
 	
 	// ATTRIBUTES	---------------
 	
+	static let identifier = "ErrorAlert"
+	
 	private var configured = false
 	private var heading: String!
 	private var text: String!

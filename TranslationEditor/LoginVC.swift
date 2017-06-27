@@ -53,6 +53,12 @@ class LoginVC: UIViewController
 			{
 				noDataConnectPromptView.connectButtonAction = { [weak self] in self?.topBar.performConnect(using: self!) }
 				noDataView.isHidden = false
+				
+				// Keychain is emptied too
+				Session.instance.bookId = nil
+				Session.instance.avatarId = nil
+				Session.instance.projectId = nil
+				Session.instance.logout()
 			}
 			else
 			{

@@ -43,14 +43,18 @@ class USXParser: NSObject, XMLParserDelegate
 	
 	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
 	{
+		print("STATUS: FOUND ELEMENT \(elementName)")
+		
 		// When a book element is found, parses the book code and starts parsing it
 		// (as long as the parsing hasn't failed previously)
 		if elementName == USXMarkerElement.book.rawValue && success
 		{
 			if let code = attributeDict["code"]
 			{
+				//print("STATUS: Found book with code: \(code)")
+				
 				// Delegates parsing to book parser
-				contentParser = USXBookProcessor.createBookParser(caller: self, projectId: projectId, userId: userId, languageId: languageId, bookCode: BookCode.of(code: code), targetPointer: &parsedBooks, using: parsingFailed)
+				contentParser = USXBookProcessor.createBookParser(caller: self, projectId: projectId, userId: userId, languageId: languageId, bookCode: BookCode.of(code: code), targetPointer: &parsedBooks, using: parsingFailed) // TestPrintXMLParseDelegate()
 				parser.delegate = contentParser
 			}
 			else

@@ -25,7 +25,7 @@ final class Paragraph: AttributedStringConvertible, PotentialVerseRangeable, Sto
 	
 	static let type = "paragraph"
 	
-	let bookId: String
+	var bookId: String
 	let pathId: String
 	
 	let chapterIndex: Int

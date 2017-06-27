@@ -86,7 +86,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 	
 	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool
 	{
+		USXImport.instance.open(url: url)
+		
 		// If a session is open, displays the USX import view
+		/*
 		var didPresentController = false
 		if Session.instance.avatarId != nil && Session.instance.projectId != nil
 		{
@@ -112,6 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		{
 			USXImportStack.instance.push(url)
 		}
+		*/
 		
 		return true
 	}

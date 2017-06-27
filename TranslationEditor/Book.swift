@@ -21,9 +21,9 @@ final class Book: Storable
 	
 	static let idIndexMap: IdIndexMap = [PROPERTY_PROJECT, PROPERTY_CODE, "book_uid"]
 	
-	let uid: String
-	let code: BookCode
-	let projectId: String
+	private(set) var uid: String
+	private(set) var code: BookCode
+	private(set) var projectId: String
 	
 	var identifier: String
 	var languageId: String
@@ -78,6 +78,13 @@ final class Book: Storable
 	
 	
 	// OTHER METHODS	--------
+	
+	func setId(_ idString: String)
+	{
+		code = Book.code(fromId: idString)
+		projectId = Book.projectId(fromId: idString)
+		uid = Book.property(withName: "book_uid", fromId: idString).string()
+	}
 	
 	// Creates a copy of this book that contains the same paragraph formatting but none of the original content
 	// The resulting book data is saved into database as part of this operation
