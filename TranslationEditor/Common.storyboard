@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -330,13 +330,13 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" verticalCompressionResistancePriority="100" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="160" translatesAutoresizingMaskIntoConstraints="NO" id="TbI-ol-Zc9" customClass="SimpleSingleSelectionView" customModule="TranslationEditor" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="24.5" width="322" height="128"/>
+                                                                        <rect key="frame" x="0.0" y="24.5" width="322" height="146.5"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="128" id="sJH-Ln-3Pb"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Existing books may be overwritten" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ior-Fu-R1R">
-                                                                        <rect key="frame" x="0.0" y="156.5" width="322" height="14.5"/>
+                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Existing books may be overwritten" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ior-Fu-R1R">
+                                                                        <rect key="frame" x="0.0" y="171" width="322" height="14.5"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>

@@ -178,6 +178,6 @@ protocol SimpleSingleSelectionViewDelegate: class
 	
 	private func findMatchingIndex(for item: String) -> Int?
 	{
-		return displayedIndices.first(where: { datasource?.labelForOption(atIndex: $0).lowercased() == item.lowercased() })
+		return displayedIndices.index(where: { datasource?.labelForOption(atIndex: $0).lowercased() == item.lowercased() })
 	}
 }

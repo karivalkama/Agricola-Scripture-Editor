@@ -22,6 +22,8 @@ final class USXImport
 	
 	private weak var viewController: USXImportAlertVC?
 	
+	private var preparingToOpen = false
+	
 	
 	// INIT	-------------------------
 	
@@ -33,7 +35,16 @@ final class USXImport
 	func open(url: URL)
 	{
 		pendingURLs.add(url)
-		_ = processPendingURLs()
+		
+		if !preparingToOpen
+		{
+			preparingToOpen = true
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.1)
+			{
+				self.preparingToOpen = false
+				_ = self.processPendingURLs()
+			}
+		}
 	}
 	
 	// Returns whether usx import is open after this operation

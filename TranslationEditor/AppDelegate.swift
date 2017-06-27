@@ -86,6 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 	
 	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool
 	{
+		print("STATUS: Received URL: \(url)")
 		USXImport.instance.open(url: url)
 		
 		// If a session is open, displays the USX import view

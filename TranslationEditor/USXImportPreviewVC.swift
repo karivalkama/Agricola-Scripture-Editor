@@ -186,6 +186,8 @@ class USXImportPreviewVC: UIViewController
 	
 	static func insert(bookData: BookData, languageId: String, nickName: String, hostVC: UIViewController)
 	{
+		print("STATUS: Starting insert")
+		
 		guard let avatarId = Session.instance.avatarId else
 		{
 			print("ERROR: Cannot save new data without user being selected")
@@ -193,6 +195,7 @@ class USXImportPreviewVC: UIViewController
 		}
 		
 		// Inserts the collected data as a totally new entry
+		print("STATUS: New book language: \(languageId)")
 		bookData.book.languageId = languageId
 		
 		do
@@ -237,7 +240,7 @@ class USXImportPreviewVC: UIViewController
 				newBindings.add(ParagraphBinding(resourceCollectionId: resource.idString, sourceBookId: bookData.book.idString, targetBookId: targetBook.idString, bindings: bindings, creatorId: avatarId))
 			}
 			
-			print("STATUS: Saving new book data")
+			print("STATUS: Saving new (book) data: \(newResources.count) new resources and \(newBindings.count) new bindings")
 			
 			// Saves the new data to the database
 			try DATABASE.tryTransaction
@@ -252,8 +255,12 @@ class USXImportPreviewVC: UIViewController
 			// Or, if this book was the first target translation version, creates notes
 			if targetTranslations.isEmpty
 			{
+				print("STATUS: No target translation for the imported book")
+				
 				if languageId == project.languageId
 				{
+					print("STATUS: Imported book became the new target translation, creates notes")
+					
 					let notesResource = ResourceCollection(languageId: languageId, bookId: bookData.book.idString, category: .notes, name: NSLocalizedString("Notes", comment: "The generated name of the notes resource"))
 					let notes = bookData.paragraphs.map { ParagraphNotes(collectionId: notesResource.idString, chapterIndex: $0.chapterIndex, pathId: $0.pathId) }
 					
@@ -266,7 +273,7 @@ class USXImportPreviewVC: UIViewController
 				else
 				{
 					print("STATUS: Creates a new target translation for the book")
-					_ = try bookData.book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: languageId, userId: avatarId, resourceName: nickName)
+					_ = try bookData.book.makeEmptyCopy(projectId: projectId, identifier: project.defaultBookIdentifier, languageId: project.languageId, userId: avatarId, resourceName: nickName)
 				}
 			}
 		}
