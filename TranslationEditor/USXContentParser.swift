@@ -73,6 +73,8 @@ class USXContentParser<Generated, Contained>: NSObject, XMLParserDelegate // If 
 {
 	// ATTRIBUTES	---------
 	
+	private let returner: XMLParsingReturner
+	
 	private let errorHandler: ErrorHandler
 	private let targetPointer: UnsafeMutablePointer<[Generated]>
 	
@@ -96,7 +98,7 @@ class USXContentParser<Generated, Contained>: NSObject, XMLParserDelegate // If 
 	
 	init(caller: XMLParserDelegate, containingElement: USXContainerElement, lowestBreakMarker: USXMarkerElement, targetPointer: UnsafeMutablePointer<[Generated]>,using errorHandler: @escaping ErrorHandler)
 	{
-		print("STATUS: Instantiated new USX content parser")
+		//print("STATUS: Instantiated new USX content parser")
 		
 		self.errorHandler = errorHandler
 		self.targetPointer = targetPointer
@@ -104,7 +106,7 @@ class USXContentParser<Generated, Contained>: NSObject, XMLParserDelegate // If 
 		self.containingElement = containingElement
 		self.lowestBreakMarker = lowestBreakMarker
 		
-		//super.init(caller: caller)
+		self.returner = XMLParsingReturner(originalDelegate: caller)
 	}
 	
 	
@@ -112,20 +114,14 @@ class USXContentParser<Generated, Contained>: NSObject, XMLParserDelegate // If 
 	
 	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
 	{
-		print("STATUS: New element: \(elementName)")
-	}
-	
-	/*
-	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
-	{
-		print("STATUS: New element: '\(elementName)'")
+		//print("STATUS: New element: '\(elementName)'")
 		
 		// The parser may be set to stop parsing at a start of a certain marker
 		// Also ends parsing when finding a higher level 'marker' element
 		if let marker = USXMarkerElement(rawValue: elementName), marker >= lowestBreakMarker || marker == nextStopMarker
 		{
 			closeCurrentElement()
-			endParsingOnStartElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
+			returner.endParsingOnStartElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
 		}
 		// Otherwise delegates parsing to another temporary parser (processor's decision)
 		else
@@ -144,27 +140,27 @@ class USXContentParser<Generated, Contained>: NSObject, XMLParserDelegate // If 
 			{
 				// TODO: there's a risk of stackoverflow here since calling super parser start element may lead to calling this parser again. At least a single element should always be parsed before setting the flag.
 				closeCurrentElement()
-				endParsingOnStartElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
+				returner.endParsingOnStartElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
 			}
 		}
-	}*/
-	/*
+	}
+	
 	func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
 	{
-		print("STATUS: END ELEMENT \(elementName)")
+		//print("STATUS: END ELEMENT \(elementName)")
 		
 		// Ends parsing at the end of the containing element
 		// Also may be set to end parsing at the end of a certain container element
 		if let element = USXContainerElement(rawValue: elementName), element == containingElement || element == nextStopContainer
 		{
 			closeCurrentElement()
-			endParsingOnEndElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName)
+			returner.endParsingOnEndElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName)
 		}
 	}
 	
 	func parser(_ parser: XMLParser, foundCharacters string: String)
 	{
-		print("STATUS: CHARACTERS")
+		//print("STATUS: CHARACTERS")
 		
 		// Ignores characters which consist only of whitespace
 		if !string.trimmingCharacters(in: CharacterSet(charactersIn: " \t\n\r")).isEmpty
@@ -180,16 +176,16 @@ class USXContentParser<Generated, Contained>: NSObject, XMLParserDelegate // If 
 			if stopsAfterCurrentParse
 			{
 				closeCurrentElement()
-				endParsingOnCharacters(parser: parser, characters: string)
+				returner.endParsingOnCharacters(parser: parser, characters: string)
 			}
 		}
 	}
 	
 	func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error)
 	{
-		print("ERROR: Parse error occurred. \(parseError)")
+		//print("ERROR: Parse error occurred. \(parseError)")
 		errorHandler(parseError)
-	}*/
+	}
 	
 	
 	// OTHER	-------------

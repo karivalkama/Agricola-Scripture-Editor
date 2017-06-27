@@ -132,7 +132,7 @@ class USXBookProcessor: USXContentProcessor
 		let paragraphs = content.flatMap { chapter in return chapter.flatMap { $0 } }
 		let bookData = BookData(book: book, paragraphs: paragraphs)
 		
-		print("STATUS: Parsed book \(book.identifier) with \(content.count) chapters")
+		//print("STATUS: Parsed book \(book.identifier) with \(content.count) chapters")
 		
 		// Resets status for reuse
 		introductionParas = []

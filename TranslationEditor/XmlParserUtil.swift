@@ -8,19 +8,21 @@
 
 import Foundation
 
-class TemporaryXMLParser: NSObject, XMLParserDelegate
+// This class used to be a super class until swift 4 and breakdown of pretty much everything
+// Now this class offers utility methods that return the parsing to the original xml parser delegate
+class XMLParsingReturner
 {
 	// ATTRIBUTES	--------
 	
 	// TODO: Reference should be weak?
-	private let caller: XMLParserDelegate
+	private weak var caller: XMLParserDelegate?
 	
 	
 	// INIT	----------------
 	
-	init(caller: XMLParserDelegate)
+	init(originalDelegate: XMLParserDelegate)
 	{
-		self.caller = caller
+		self.caller = originalDelegate
 	}
 	
 	
@@ -36,75 +38,31 @@ class TemporaryXMLParser: NSObject, XMLParserDelegate
 	func endParsingOnStartElement(parser: XMLParser, elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
 	{
 		endParsing(parser: parser)
-		caller.parser?(parser, didStartElement: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
+		caller?.parser?(parser, didStartElement: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
 	}
 	
 	// Ends the temporary parser's responsibility and calls end element of the original parser delegate
 	func endParsingOnEndElement(parser: XMLParser, elementName: String, namespaceURI: String?, qualifiedName qName: String?)
 	{
 		endParsing(parser: parser)
-		caller.parser?(parser, didEndElement: elementName, namespaceURI: namespaceURI, qualifiedName: qName)
+		caller?.parser?(parser, didEndElement: elementName, namespaceURI: namespaceURI, qualifiedName: qName)
 	}
 	
 	func endParsingOnCharacters(parser: XMLParser, characters: String)
 	{
 		endParsing(parser: parser)
-		caller.parser?(parser, foundCharacters: characters)
+		caller?.parser?(parser, foundCharacters: characters)
 	}
-}
-
-class TemporaryXMLParserTEST: NSObject, XMLParserDelegate
-{
-	// ATTRIBUTES	--------
-	/*
-	// TODO: Reference should be weak?
-	private let caller: XMLParserDelegate
-	
-	
-	// INIT	----------------
-	
-	init(caller: XMLParserDelegate)
-	{
-		self.caller = caller
-	}
-	
-	
-	// OTHER	------------
-	
-	// Moves the parsing responsibility back to the original delegate
-	func endParsing(parser: XMLParser)
-	{
-		parser.delegate = caller
-	}
-	
-	// Ends the temporary parser's responsibility and calls start element of the original parser delegate
-	func endParsingOnStartElement(parser: XMLParser, elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
-	{
-		endParsing(parser: parser)
-		caller.parser?(parser, didStartElement: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
-	}
-	
-	// Ends the temporary parser's responsibility and calls end element of the original parser delegate
-	func endParsingOnEndElement(parser: XMLParser, elementName: String, namespaceURI: String?, qualifiedName qName: String?)
-	{
-		endParsing(parser: parser)
-		caller.parser?(parser, didEndElement: elementName, namespaceURI: namespaceURI, qualifiedName: qName)
-	}
-	
-	func endParsingOnCharacters(parser: XMLParser, characters: String)
-	{
-		endParsing(parser: parser)
-		caller.parser?(parser, foundCharacters: characters)
-	}*/
 }
 
 
 // This parser ignores all data until an element with a specific name is found, at which point the parsing is returned to the original delegate
-class MoveToElementWithNameParser: TemporaryXMLParser
+class MoveToElementWithNameParser: NSObject, XMLParserDelegate
 {
 	// ATTRIBUTES	--------
 	
 	private let searchedName: String
+	private let returner: XMLParsingReturner
 	
 	
 	// INIT	----------------
@@ -112,8 +70,7 @@ class MoveToElementWithNameParser: TemporaryXMLParser
 	init(find elementName: String, caller: XMLParserDelegate)
 	{
 		self.searchedName = elementName
-		
-		super.init(caller: caller)
+		returner = XMLParsingReturner(originalDelegate: caller)
 	}
 	
 	
@@ -123,16 +80,17 @@ class MoveToElementWithNameParser: TemporaryXMLParser
 	{
 		if elementName == searchedName
 		{
-			endParsingOnStartElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
+			returner.endParsingOnStartElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
 		}
 	}
 }
 
 // This parser ignores all data until the end of the (current) element is reached. Afterwards the parsing is returned to the original delegate. Doesn't call the endElement method of the original delegate upon ending
-class SkipOverElementParser: TemporaryXMLParser
+class SkipOverElementParser: NSObject, XMLParserDelegate
 {
 	// ATTRIBUTES	-----
 	
+	private let returner: XMLParsingReturner
 	private let elementName: String
 	private var depth = 0
 	
@@ -142,8 +100,7 @@ class SkipOverElementParser: TemporaryXMLParser
 	init(elementName: String, caller: XMLParserDelegate)
 	{
 		self.elementName = elementName
-		
-		super.init(caller: caller)
+		returner = XMLParsingReturner(originalDelegate: caller)
 	}
 	
 	
@@ -165,7 +122,7 @@ class SkipOverElementParser: TemporaryXMLParser
 			
 			if depth < 0
 			{
-				endParsing(parser: parser)
+				returner.endParsing(parser: parser)
 			}
 		}
 	}

@@ -43,7 +43,7 @@ class USXParser: NSObject, XMLParserDelegate
 	
 	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
 	{
-		print("STATUS: FOUND ELEMENT \(elementName)")
+		// print("STATUS: FOUND ELEMENT \(elementName)")
 		
 		// When a book element is found, parses the book code and starts parsing it
 		// (as long as the parsing hasn't failed previously)

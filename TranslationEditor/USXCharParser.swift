@@ -11,9 +11,11 @@ import Foundation
 // This parser collects character data. Functions properly only within para elements.
 // Should be called on the start of a verse element or after the start of a para element
 // Returns either to the start of a new verse element or at the end of a para element
-class USXCharParser: TemporaryXMLParser
+class USXCharParser: NSObject, XMLParserDelegate
 {
 	// ATTRIBUTES	---------
+	
+	private let returner: XMLParsingReturner
 	
 	private let charDataPointer: UnsafeMutablePointer<[CharData]>
 	
@@ -26,7 +28,7 @@ class USXCharParser: TemporaryXMLParser
 	init(caller: XMLParserDelegate, targetData: UnsafeMutablePointer<[CharData]>)
 	{
 		self.charDataPointer = targetData
-		super.init(caller: caller)
+		self.returner = XMLParsingReturner(originalDelegate: caller)
 	}
 	
 	
@@ -40,7 +42,7 @@ class USXCharParser: TemporaryXMLParser
 		case "verse", "note":
 			// When a new verse starts, ends parsing
 			closeCurrentChar()
-			endParsingOnStartElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
+			returner.endParsingOnStartElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName, attributes: attributeDict)
 		case "char":
 			// When a new char element starts, closes the previous one and starts a new one
 			closeCurrentChar()
@@ -62,7 +64,7 @@ class USXCharParser: TemporaryXMLParser
 		case "para", "note":
 			// When a containing para or note element ends, quits parsing
 			closeCurrentChar()
-			endParsingOnEndElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName)
+			returner.endParsingOnEndElement(parser: parser, elementName: elementName, namespaceURI: namespaceURI, qualifiedName: qName)
 		default: break
 		}
 	}

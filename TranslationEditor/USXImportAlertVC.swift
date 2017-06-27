@@ -235,6 +235,8 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 		selectLanguageView.setIntrinsicHeight(160)
 		selectNicknameField.setIntrinsicHeight(160)
 		
+		languageHandler.delegate = self
+		
 		updateNicknameVisibility()
 		update()
     }
@@ -242,6 +244,8 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	override func viewWillAppear(_ animated: Bool)
 	{
 		super.viewWillAppear(animated)
+		
+		contentView.startKeyboardListening()
 		
 		do
 		{
@@ -261,6 +265,12 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 		{
 			print("ERROR: USX Import setup failed. \(error)")
 		}
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		super.viewDidDisappear(animated)
+		contentView.endKeyboardListening()
 	}
 	
 	
@@ -486,6 +496,7 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	private func updateNicknameVisibility()
 	{
 		targetLanguageSelected = false // default
+		//print("STATUS: Updating nick name visibility")
 		
 		// While language is not selected, just displays the language selection
 		if languageHandler.isEmpty
@@ -498,18 +509,17 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 			do
 			{
 				// If the selected language is the same as the project language, the role of the books is specified via switch
-				if let selectedLanguageId = languageHandler.selectedLanguage?.idString
+				if let selectedLanguageId = languageHandler.selectedLanguage?.idString, let projectId = Session.instance.projectId, let project = try Project.get(projectId), project.languageId == selectedLanguageId
 				{
-					if let projectId = Session.instance.projectId, let project = try Project.get(projectId), project.languageId == selectedLanguageId
-					{
-						//isTargetTranslationStackView.isHidden = false
-						//nicknameStackView.isHidden = isTargetTranslationSwitch.isOn
-						targetLanguageSelected = true
-						nicknameStackView.isHidden = true
-					}
+					//print("STATUS: Target language selected")
+					//isTargetTranslationStackView.isHidden = false
+					//nicknameStackView.isHidden = isTargetTranslationSwitch.isOn
+					targetLanguageSelected = true
+					nicknameStackView.isHidden = true
 				}
 				else
 				{
+					//print("STATUS: Shows nickname field")
 					// If another language or a new language was selected, displays the nickname field for the resource
 					// isTargetTranslationSwitch.isHidden = true
 					nicknameStackView.isHidden = false
@@ -517,7 +527,7 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 			}
 			catch
 			{
-				print("ERROR: Couldn't read project data. \(error)")
+				//print("ERROR: Couldn't read project data. \(error)")
 				// isTargetTranslationSwitch.isHidden = true
 				nicknameStackView.isHidden = false
 			}
@@ -547,6 +557,6 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	{
 		// For OK-button to be enabled, one must have at least a single successful parse
 		// Language and nickname must both be set (non-empty) as well (if they are visible)
-		okButton.isEnabled = !USXImport.instance.parseSuccesses.isEmpty && (identifierFoundForAll || (!languageHandler.isEmpty && (isTargetTranslationSwitch.isOn || !newNickname.isEmpty)))
+		okButton.isEnabled = !USXImport.instance.parseSuccesses.isEmpty && (identifierFoundForAll || (!languageHandler.isEmpty && (targetLanguageSelected || !newNickname.isEmpty)))
 	}
 }

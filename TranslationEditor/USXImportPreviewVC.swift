@@ -125,12 +125,23 @@ class USXImportPreviewVC: UIViewController
 	
 	private func update()
 	{
-		if nextIndex < booksToOverwrite.count
+		let overwriteAmount = booksToOverwrite.count
+		let insertAmount = booksToInsert.count
+		let totalAmount = overwriteAmount + insertAmount
+		
+		translationNameLabel.text = translationName
+		progressLabel.text = "\(nextIndex + 1) / \(totalAmount)"
+		
+		if nextIndex < overwriteAmount
 		{
+			// CASE: Overwrite
 			let (oldData, newData, matches) = booksToOverwrite[nextIndex]
 			
 			oldVersionDS = VersionTableDS(paragraphs: oldData.paragraphs, matches: matches)
 			newVersionDS = VersionTableDS(paragraphs: newData.paragraphs, matches: matches.map { ($0.1, $0.0) })
+			
+			oldVersionTableView.dataSource = oldVersionDS
+			newVersionTableView.dataSource = newVersionDS
 			
 			scrollManager = ScrollSyncManager(leftTable: oldVersionTableView, rightTable: newVersionTableView, leftResourceId: "old", rightResourceId: "new")
 			{
@@ -146,16 +157,22 @@ class USXImportPreviewVC: UIViewController
 				}
 			}
 		}
-		else if nextIndex < booksToOverwrite.count + booksToInsert.count
+		else if nextIndex < totalAmount
 		{
+			oldVersionTableView.dataSource = nil
 			oldVersionDS = nil
-			newVersionDS = VersionTableDS(paragraphs: booksToInsert[nextIndex - booksToOverwrite.count].paragraphs, matches: [])
+			
+			newVersionDS = VersionTableDS(paragraphs: booksToInsert[nextIndex - overwriteAmount].paragraphs, matches: [])
+			newVersionTableView.dataSource = newVersionDS
 			scrollManager = nil
 			
 			oldVersionStackView.isHidden = true
 		}
 		else
 		{
+			oldVersionTableView.dataSource = nil
+			newVersionTableView.dataSource = nil
+			
 			oldVersionDS = nil
 			newVersionDS = nil
 			scrollManager = nil
