@@ -97,10 +97,10 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 		
 		// (Epic hack which) Makes table view cells have automatic height
 		translationTableView.rowHeight = UITableViewAutomaticDimension
-		translationTableView.estimatedRowHeight = 320
+		translationTableView.estimatedRowHeight = 400
 		
 		resourceTableView.rowHeight = UITableViewAutomaticDimension
-		resourceTableView.estimatedRowHeight = 320
+		resourceTableView.estimatedRowHeight = 400
 		
 		targetTranslationDS = TranslationTableViewDS(tableView: translationTableView, bookId: book.idString, stateView: translationStateStackView, configureCell: configureTargetTranslationCell, prepareUpdate: prepareForTargetUpdate)
 		translationTableView.dataSource = targetTranslationDS

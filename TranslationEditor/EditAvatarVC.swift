@@ -225,7 +225,7 @@ class EditAvatarVC: UIViewController
 		self.completionHandler = successHandler
 	}
 	
-	func configureForCreate(avatarName: String? = nil, successHandler: @escaping (Avatar, AvatarInfo) -> ())
+	func configureForCreate(avatarName: String? = nil, successHandler: ((Avatar, AvatarInfo) -> ())? = nil)
 	{
 		self.presetName = avatarName
 		self.completionHandler = successHandler

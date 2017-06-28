@@ -80,7 +80,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	// ResourceId -> ( Index -> Height )
 	private var cellHeights: [String : [IndexPath : CGFloat]]
-	private let defaultCellHeight: CGFloat = 640
+	private var defaultCellHeight: CGFloat = 400
 	private var currentHeightIds: [Side : String]
 	
 	private var cellSelectionListeners = [TableCellSelectionListener]()
@@ -302,8 +302,9 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		// Matches either the top or the middle of the two tables
 		// This is decided based on whether the virtual keyboard is displayed or not
 		let anchorPosition = MatchPosition.current
-		
 		let scrolledTable = tableOfSide(anchorSide)
+		
+		// TODO: THIS CAUSES JITTERING
 		guard let newCell = anchorCell(atPosition: anchorPosition, inTable: scrolledTable/*, withVelocity: velocity, andAcceleration: acceleration*/) else
 		{
 			print("ERROR: No visible cells at \(anchorSide)")
@@ -339,15 +340,22 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	private func updateVisibleRowHeights(forTable tableView: UITableView)
 	{
-		let heightId = currentHeightIds[sideOfTable(tableView)]!
-		
-		if let paths = tableView.indexPathsForVisibleRows
+		guard let visibleRowIndices = tableView.indexPathsForVisibleRows else
 		{
-			for indexPath in paths
-			{
-				cellHeights[heightId]?[indexPath] = tableView.rectForRow(at: indexPath).height
-			}
+			return
 		}
+		
+		let heightId = currentHeightIds[sideOfTable(tableView)]!
+		var totalHeight: CGFloat = 0
+		
+		for indexPath in visibleRowIndices
+		{
+			let height = tableView.rectForRow(at: indexPath).height
+			cellHeights[heightId]?[indexPath] = height
+			totalHeight += height
+		}
+		
+		defaultCellHeight = totalHeight / CGFloat(visibleRowIndices.count)
 	}
 	
 	private func sideOfTable(_ table: AnyObject) -> Side
@@ -412,16 +420,15 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	private func anchorCell(atPosition position: MatchPosition, inTable tableView: UITableView/*, withVelocity velocity: CGFloat, andAcceleration acceleration: CGFloat*/) -> UITableViewCell?
 	{
 		// Finds the index path of each cell
-		let indexPaths = tableView.indexPathsForVisibleRows.or([])
-		
-		guard !indexPaths.isEmpty else
+		guard let indexPaths = tableView.indexPathsForVisibleRows, !indexPaths.isEmpty else
 		{
 			print("ERROR: No visible cells available")
 			return nil
 		}
 		
 		// Finds the height of each cell
-		let cellHeights = indexPaths.map { tableView.rectForRow(at: $0).height }
+		let side = sideOfTable(tableView)
+		let cellHeights = indexPaths.map { cellHeight(side: side, index: $0)/*tableView.rectForRow(at: $0).height*/ }
 		
 		// Calculates the velocity modifier, which depends from dragging state, velocity and deceleration values
 		//let duration: CGFloat = isDragging ? 0 : 0.5
@@ -437,7 +444,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		let anchorY = position.targetY(ofHeight: totalHeight) //max(0, min(position.targetY(ofHeight: totalHeight) + travelDistance, totalHeight - 1))
 		
 		// Finds the anchor cell
-		var y = tableView.rectForRow(at: indexPaths.first!).minY - tableView.contentOffset.y
+		var y: CGFloat = 0/*tableView.rectForRow(at: indexPaths.first!).minY - tableView.contentOffset.y*/ // TODO: Can't use rect for row here
 		for i in 0 ..< cellHeights.count
 		{
 			let nextY = y + cellHeights[i]
@@ -450,7 +457,9 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 			y = nextY
 		}
 		
-		print("ERROR: Couldn't find a cell that would contain y of \(anchorY)")
-		return nil
+		//return tableView.cellForRow(at: indexPaths[indexPaths.count / 2])
+		
+		// print("ERROR: Couldn't find a cell that would contain y of \(anchorY)")
+		return tableView.cellForRow(at: indexPaths.last!)
 	}
 }

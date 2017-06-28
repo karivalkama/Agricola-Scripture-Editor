@@ -346,12 +346,6 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		displayAlert(withIdentifier: "EditAvatar", storyBoardId: "MainMenu")
 		{
 			($0 as! EditAvatarVC).configureForCreate(avatarName: avatarName)
-			{
-				avatar, _ in
-				
-				Session.instance.avatarId = avatar.idString
-				self.proceed()
-			}
 		}
 	}
 	
