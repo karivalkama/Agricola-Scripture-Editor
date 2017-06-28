@@ -20,6 +20,8 @@ class USXImportPreviewVC: UIViewController
 	@IBOutlet weak var progressLabel: UILabel!
 	@IBOutlet weak var stateView: StatefulStackView!
 	@IBOutlet weak var tablesStackView: UIStackView!
+	@IBOutlet weak var noOverwriteLabel: UILabel!
+	@IBOutlet weak var importButton: BasicButton!
 	
 	
 	// ATTRIBUTES	----------------
@@ -148,6 +150,9 @@ class USXImportPreviewVC: UIViewController
 		let insertAmount = booksToInsert.count
 		let totalAmount = overwriteAmount + insertAmount
 		
+		noOverwriteLabel.isHidden = true
+		importButton.isEnabled = true
+		
 		translationNameLabel.text = ""
 		progressLabel.text = "\(nextIndex + 1) / \(totalAmount)"
 		
@@ -176,6 +181,13 @@ class USXImportPreviewVC: UIViewController
 				{
 					return self.newVersionDS?.indexPaths(forOppositePathId: oppositePathId) ?? []
 				}
+			}
+			
+			// Overwrite is not allowed for books from other projects
+			if oldData.book.projectId != newData.book.projectId
+			{
+				noOverwriteLabel.isHidden = false
+				importButton.isEnabled = false
 			}
 		}
 		else if nextIndex < totalAmount
@@ -320,6 +332,13 @@ class USXImportPreviewVC: UIViewController
 	// The target translation should be checked for conflicts before this
 	static func overwrite(oldData: BookData, newData: BookData, matches: [(Paragraph, Paragraph)])
 	{
+		// Cannot overwrite a book from another project
+		guard oldData.book.projectId == newData.book.projectId else
+		{
+			print("ERROR: Cannot overwrite a book from another project")
+			return
+		}
+		
 		guard let avatarId = Session.instance.avatarId else
 		{
 			print("ERROR: Cannot save new data without a selected avatar")

@@ -121,7 +121,7 @@ final class USXImport
 		// Either displays or updates the view controller to show the new data
 		if let viewController = viewController//, viewController.isBeingPresented
 		{
-			print("STATUS: Updates existing VC")
+			//print("STATUS: Updates existing VC")
 			viewController.update()
 		}
 		else if let topVC = getTopmostVC()
@@ -131,7 +131,7 @@ final class USXImport
 				self.viewController = $0 as? USXImportAlertVC
 			}
 			
-			print("STATUS: Saved VC \(viewController == nil ? "Not Found" : "Found")")
+			//print("STATUS: Saved VC \(viewController == nil ? "Not Found" : "Found")")
 		}
 		
 		return true
@@ -273,7 +273,7 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 		languageHandler.delegate = self
 		
 		updateNicknameVisibility()
-		update()
+		// update()
     }
 	
 	override func viewWillAppear(_ animated: Bool)
@@ -292,6 +292,7 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 				existingBooks = try ProjectBooksView.instance.booksQuery(projectId: projectId).resultObjects()
 				existingResources = try ResourceCollectionView.instance.collectionQuery(projectId: projectId).resultObjects().filter { $0.category == .sourceTranslation }
 				updateNickNames()
+				update()
 				
 				selectNicknameField.reloadData()
 			}
