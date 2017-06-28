@@ -439,12 +439,13 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		
 		// Calculates the height of the visible area
 		let totalHeight = tableView.visibleContentHeight //cellHeights.reduce(0, { result, h in return result + h })
+		let cellHeightsTotal = cellHeights.reduce(0, +)
 		
 		// Velocity is also taken into account when determining the anchor cell position (counts 0.5 second reaction time)
 		let anchorY = position.targetY(ofHeight: totalHeight) //max(0, min(position.targetY(ofHeight: totalHeight) + travelDistance, totalHeight - 1))
 		
 		// Finds the anchor cell
-		var y: CGFloat = 0/*tableView.rectForRow(at: indexPaths.first!).minY - tableView.contentOffset.y*/ // TODO: Can't use rect for row here
+		var y: CGFloat = (totalHeight - cellHeightsTotal) * cellHeightDistributionModifier(for: cellHeights) /*tableView.rectForRow(at: indexPaths.first!).minY - tableView.contentOffset.y*/ // Can't use rect for row here
 		for i in 0 ..< cellHeights.count
 		{
 			let nextY = y + cellHeights[i]
@@ -461,5 +462,39 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 		
 		// print("ERROR: Couldn't find a cell that would contain y of \(anchorY)")
 		return tableView.cellForRow(at: indexPaths.last!)
+	}
+	
+	private func cellHeightDistributionModifier(for cellHeights: [CGFloat]) -> CGFloat
+	{
+		var upperSideTotal: CGFloat = 1
+		var lowerSideTotal: CGFloat = 1
+		
+		if cellHeights.count < 2
+		{
+			// If 0-1 cells, no real distribution change
+			return 0.5
+		}
+		else if cellHeights.count == 2
+		{
+			// 2 Cells, distribution between those two
+			upperSideTotal = cellHeights[0]
+			lowerSideTotal = cellHeights[1]
+		}
+		else if cellHeights.count % 2 == 0
+		{
+			// 4, 6, 8, ... cells, distribution between first and second half
+			let splitIndex = cellHeights.count / 2 // Belongs to the latter half
+			upperSideTotal = cellHeights[0 ..< splitIndex].reduce(0, +)
+			lowerSideTotal = cellHeights[splitIndex ..< cellHeights.count].reduce(0, +)
+		}
+		else
+		{
+			// 3, 5, 7, ... cells, excludes center cells and checks distribution against others
+			let splitIndex = cellHeights.count / 2 // excluded
+			upperSideTotal = cellHeights[0 ..< splitIndex].reduce(0, +)
+			lowerSideTotal = cellHeights[splitIndex + 1 ..< cellHeights.count].reduce(0, +)
+		}
+		
+		return upperSideTotal / (upperSideTotal + lowerSideTotal)
 	}
 }
