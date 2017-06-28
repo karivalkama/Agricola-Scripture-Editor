@@ -29,6 +29,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="continue"/>
                             <connections>
+                                <action selector="fieldPrimaryActionTriggered:" destination="-1" eventType="primaryActionTriggered" id="rH6-UO-lmU"/>
                                 <action selector="valueChanged:" destination="-1" eventType="editingChanged" id="voz-1w-N0w"/>
                                 <action selector="valueEditingEnded:" destination="-1" eventType="editingDidEnd" id="Frr-dK-ijd"/>
                             </connections>

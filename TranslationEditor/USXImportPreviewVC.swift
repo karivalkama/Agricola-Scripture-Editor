@@ -18,6 +18,8 @@ class USXImportPreviewVC: UIViewController
 	@IBOutlet weak var oldVersionTableView: UITableView!
 	@IBOutlet weak var newVersionTableView: UITableView!
 	@IBOutlet weak var progressLabel: UILabel!
+	@IBOutlet weak var stateView: StatefulStackView!
+	@IBOutlet weak var tablesStackView: UIStackView!
 	
 	
 	// ATTRIBUTES	----------------
@@ -43,6 +45,10 @@ class USXImportPreviewVC: UIViewController
 	{
         super.viewDidLoad()
 		
+		stateView.register(tablesStackView, for: .data)
+		stateView.registerDefaultLoadingView(title: "Processing...")
+		stateView.setState(.data)
+		
 		let tables = [oldVersionTableView, newVersionTableView]
 		tables.forEach { $0?.register(UINib(nibName: "ParagraphCell", bundle: nil), forCellReuseIdentifier: ParagraphCell.identifier) }
 		tables.forEach { $0?.rowHeight = UITableViewAutomaticDimension }
@@ -62,18 +68,31 @@ class USXImportPreviewVC: UIViewController
 	
 	@IBAction func importPressed(_ sender: Any)
 	{
+		// Loading screen is displayed while import is in progress
+		stateView.setState(.loading)
+		
 		// Either imports or overwrites the current item, then proceeds to next one
 		if nextIndex < booksToOverwrite.count
 		{
-			let (oldData, newData, matches) = booksToOverwrite[nextIndex]
-			USXImportPreviewVC.overwrite(oldData: oldData, newData: newData, matches: matches)
+			//DispatchQueue.main.async
+			//{
+				let (oldData, newData, matches) = self.booksToOverwrite[self.nextIndex]
+				USXImportPreviewVC.overwrite(oldData: oldData, newData: newData, matches: matches)
+				self.proceed()
+			//}
 		}
 		else if nextIndex < booksToInsert.count, let languageId = languageId, let translationName = translationName
 		{
-			USXImportPreviewVC.insert(bookData: booksToInsert[nextIndex - booksToOverwrite.count], languageId: languageId, nickName: translationName, hostVC: self)
+			//DispatchQueue.main.async
+			//{
+				USXImportPreviewVC.insert(bookData: self.booksToInsert[self.nextIndex - self.booksToOverwrite.count], languageId: languageId, nickName: translationName, hostVC: self)
+				self.proceed()
+			//}
 		}
-		
-		proceed()
+		else
+		{
+			proceed()
+		}
 	}
 	
 	@IBAction func backgroundTapped(_ sender: Any)
@@ -129,13 +148,15 @@ class USXImportPreviewVC: UIViewController
 		let insertAmount = booksToInsert.count
 		let totalAmount = overwriteAmount + insertAmount
 		
-		translationNameLabel.text = translationName
+		translationNameLabel.text = ""
 		progressLabel.text = "\(nextIndex + 1) / \(totalAmount)"
 		
 		if nextIndex < overwriteAmount
 		{
 			// CASE: Overwrite
 			let (oldData, newData, matches) = booksToOverwrite[nextIndex]
+			
+			translationNameLabel.text = oldData.book.code.name
 			
 			oldVersionDS = VersionTableDS(paragraphs: oldData.paragraphs, matches: matches)
 			newVersionDS = VersionTableDS(paragraphs: newData.paragraphs, matches: matches.map { ($0.1, $0.0) })
@@ -162,7 +183,10 @@ class USXImportPreviewVC: UIViewController
 			oldVersionTableView.dataSource = nil
 			oldVersionDS = nil
 			
-			newVersionDS = VersionTableDS(paragraphs: booksToInsert[nextIndex - overwriteAmount].paragraphs, matches: [])
+			let newData = booksToInsert[nextIndex - overwriteAmount]
+			translationNameLabel.text = newData.book.code.name
+			
+			newVersionDS = VersionTableDS(paragraphs: newData.paragraphs, matches: [])
 			newVersionTableView.dataSource = newVersionDS
 			scrollManager = nil
 			
@@ -182,6 +206,8 @@ class USXImportPreviewVC: UIViewController
 		
 		oldVersionTableView.reloadData()
 		newVersionTableView.reloadData()
+		
+		stateView.setState(.data)
 	}
 	
 	static func insert(bookData: BookData, languageId: String, nickName: String, hostVC: UIViewController)

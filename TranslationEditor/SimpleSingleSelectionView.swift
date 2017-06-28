@@ -81,12 +81,12 @@ protocol SimpleSingleSelectionViewDelegate: class
 	
 	@IBAction func valueEditingEnded(_ sender: Any)
 	{
-		if let matchingIndex = displayedIndices.first(where: { datasource?.labelForOption(atIndex: $0).lowercased().contains(value.lowercased()) ?? false })
-		{
-			selectedIndex = matchingIndex
-		}
-		
-		informDelegate()
+		checkValueForDelegate()
+	}
+	
+	@IBAction func fieldPrimaryActionTriggered(_ sender: Any)
+	{
+		checkValueForDelegate()
 	}
 	
 	
@@ -155,6 +155,16 @@ protocol SimpleSingleSelectionViewDelegate: class
 	{
 		intrinsicHeight = height
 		invalidateIntrinsicContentSize()
+	}
+	
+	private func checkValueForDelegate()
+	{
+		if let matchingIndex = displayedIndices.first(where: { datasource?.labelForOption(atIndex: $0).lowercased().contains(value.lowercased()) ?? false })
+		{
+			selectedIndex = matchingIndex
+		}
+		
+		informDelegate()
 	}
 	
 	private func select(index: Int)

@@ -204,6 +204,7 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	@IBOutlet weak var nicknameStackView: UIStackView!
 	@IBOutlet weak var isTargetTranslationSwitch: UISwitch!
 	@IBOutlet weak var isTargetTranslationStackView: UIStackView!
+	@IBOutlet weak var stateView: StatefulStackView!
 	
 	
 	// ATTRIBUTES	-----------------
@@ -255,6 +256,10 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
         super.viewDidLoad()
 		
 		contentView.configure(mainView: view, elements: [fileAmountLabel, dataTableView, selectLanguageView, selectNicknameField, previewSwitch, okButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish, switchedStackViews: [inputStackView])
+		
+		stateView.register(inputStackView, for: .data)
+		stateView.registerDefaultLoadingView(title: "Processing...")
+		stateView.setState(.loading)
 		
 		dataTableView.dataSource = self
 		selectLanguageView.datasource = languageHandler
@@ -325,18 +330,22 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	
 	@IBAction func okButtonPressed(_ sender: Any)
 	{
+		stateView.setState(.loading)
+		
 		do
 		{
 			// Language id is required if not all of the books were matched with identifier
 			guard let languageId = identifierFoundForAll ? "" : try languageHandler.getOrInsertLanguage()?.idString else
 			{
 				print("ERROR: No language selected")
+				stateView.setState(.data)
 				return
 			}
 			
 			guard identifierFoundForAll || targetLanguageSelected || !newNickname.isEmpty else
 			{
 				print("ERROR: No nickname selected")
+				stateView.setState(.data)
 				return
 			}
 			
@@ -366,6 +375,7 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 				guard let projectId = Session.instance.projectId, let project = try Project.get(projectId) else
 				{
 					print("Error: No project data available")
+					stateView.errorOccurred(title: "Import Process Failed", description: "There is no project data available", canContinueWithData: false)
 					return
 				}
 				
@@ -423,10 +433,7 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 		catch
 		{
 			print("ERROR: USX Import failed. \(error)")
-			displayAlert(withIdentifier: ErrorAlertVC.identifier, storyBoardId: "MainMenu")
-			{
-				($0 as! ErrorAlertVC).configure(heading: NSLocalizedString("USX Import Failed!", comment: "USX Import error heading"), text: NSLocalizedString("An unexpected internal error caused the import process to (partially) fail", comment: "USX import error description in case of some lower level error"), completion: USXImport.instance.close)
-			}
+			stateView.errorOccurred(title: "USX Import Failed!", description: "An unexpected internal error caused the import process to (partially) fail", canContinueWithData: false)
 		}
 	}
 	
@@ -472,6 +479,18 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 			let book = USXImport.instance.parseSuccesses[indexPath.row].book
 			cell.configure(code: book.code, identifier: book.identifier, didFindOlderVersion: oldVersion(for: book) != nil)
 			return cell
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+	{
+		if section == sectionForFailure
+		{
+			return NSLocalizedString("Failed Cases", comment: "A table heading for failed usx-import cases")
+		}
+		else
+		{
+			return NSLocalizedString("Success Cases", comment: "A table heading for succesfull usx-import cases")
 		}
 	}
 	
@@ -521,6 +540,8 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 		fileAmountLabel.text = "\(USXImport.instance.parsedFileAmount) \(NSLocalizedString("File(s)", comment: "A label presented next to the amount of parsed files in usx import view"))"
 		
 		updateOKButtonStatus()
+		
+		stateView.dataLoaded()
 	}
 	
 	private func updateNicknameVisibility()

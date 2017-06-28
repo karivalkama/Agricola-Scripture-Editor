@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,16 +28,16 @@
                             <rect key="frame" x="0.0" y="0.0" width="193" height="35"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xud-wW-2UF">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="35"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="59.5" height="35"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.88" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="30 %" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39R-Zu-5HQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="60" height="20.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="59.5" height="20.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.87999999523162842" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Translated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buS-jf-q8u">
-                                            <rect key="frame" x="0.0" y="20.5" width="60" height="14.5"/>
+                                            <rect key="frame" x="0.0" y="20.5" width="59.5" height="14.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -53,16 +53,16 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pPS-yh-3Im">
-                                    <rect key="frame" x="68" y="0.0" width="125" height="35"/>
+                                    <rect key="frame" x="67.5" y="0.0" width="125.5" height="35"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.87999999523162842" contentMode="left" horizontalHuggingPriority="100" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="~2 Versions" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5W-tq-BdH">
-                                            <rect key="frame" x="0.0" y="0.0" width="125" height="20.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="125.5" height="20.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.87999999523162842" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="per Paragraph" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmT-Kl-qhl">
-                                            <rect key="frame" x="0.0" y="20.5" width="125" height="14.5"/>
+                                            <rect key="frame" x="0.0" y="20.5" width="125.5" height="14.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -88,13 +88,13 @@
             </subviews>
             <constraints>
                 <constraint firstItem="Otn-cj-Vdi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FzH-PZ-bDB"/>
-                <constraint firstAttribute="trailing" secondItem="Otn-cj-Vdi" secondAttribute="trailing" id="UoK-jm-xQi"/>
-                <constraint firstAttribute="bottom" secondItem="Otn-cj-Vdi" secondAttribute="bottom" id="Y2N-KL-LtS"/>
+                <constraint firstAttribute="trailing" secondItem="Otn-cj-Vdi" secondAttribute="trailing" priority="999" id="UoK-jm-xQi"/>
+                <constraint firstAttribute="bottom" secondItem="Otn-cj-Vdi" secondAttribute="bottom" priority="999" id="Y2N-KL-LtS"/>
                 <constraint firstItem="Otn-cj-Vdi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZnQ-5W-V4m"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="275" y="-104"/>
+            <point key="canvasLocation" x="274.5" y="-104.5"/>
         </view>
     </objects>
 </document>
