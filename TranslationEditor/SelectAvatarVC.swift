@@ -106,7 +106,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 		if Session.instance.projectId != nil
 		{
 			// Sets up the top bar
-			let title = usesSharedAccount ? "Select User" : "Select Avatar"
+			let title = "Select User"
 			if let presentingViewController = presentingViewController
 			{
 				if let presentingViewController = presentingViewController as? SelectProjectVC

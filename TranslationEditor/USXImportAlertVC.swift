@@ -23,6 +23,7 @@ final class USXImport
 	private weak var viewController: USXImportAlertVC?
 	
 	private var preparingToOpen = false
+	private var receivedFilesWhileWaiting = false
 	
 	
 	// INIT	-------------------------
@@ -39,11 +40,23 @@ final class USXImport
 		if !preparingToOpen
 		{
 			preparingToOpen = true
+			receivedFilesWhileWaiting = false
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.1)
 			{
+				while self.receivedFilesWhileWaiting
+				{
+					self.receivedFilesWhileWaiting = false
+					usleep(100000)
+				}
+				
+				// TODO: This is not very thread safe still
 				self.preparingToOpen = false
 				_ = self.processPendingURLs()
 			}
+		}
+		else
+		{
+			receivedFilesWhileWaiting = true
 		}
 	}
 	
@@ -55,7 +68,10 @@ final class USXImport
 			return false
 		}
 		
-		for url in pendingURLs
+		let urlBuffer = pendingURLs
+		pendingURLs = []
+		
+		for url in urlBuffer
 		{
 			parsedFileAmount += 1
 			
@@ -103,8 +119,9 @@ final class USXImport
 		}
 		
 		// Either displays or updates the view controller to show the new data
-		if let viewController = viewController, viewController.isBeingPresented
+		if let viewController = viewController//, viewController.isBeingPresented
 		{
+			print("STATUS: Updates existing VC")
 			viewController.update()
 		}
 		else if let topVC = getTopmostVC()
@@ -113,6 +130,8 @@ final class USXImport
 			{
 				self.viewController = $0 as? USXImportAlertVC
 			}
+			
+			print("STATUS: Saved VC \(viewController == nil ? "Not Found" : "Found")")
 		}
 		
 		return true
