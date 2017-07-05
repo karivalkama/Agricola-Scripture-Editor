@@ -49,7 +49,6 @@
 		7C25180D1E8B8A930089E1FD /* ProjectBooksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C25180C1E8B8A930089E1FD /* ProjectBooksView.swift */; };
 		7C25180F1E8D0F8A0089E1FD /* EditAvatarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C25180E1E8D0F8A0089E1FD /* EditAvatarVC.swift */; };
 		7C2518111E8E39F50089E1FD /* StackDismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518101E8E39F50089E1FD /* StackDismissable.swift */; };
-		7C2E27A21EE6D6DB003602B0 /* Connect2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2E27A11EE6D6DB003602B0 /* Connect2.xib */; };
 		7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF5A1DE718DA0035B92E /* Storable.swift */; };
 		7C40DF5F1DE71E490035B92E /* DatabaseUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */; };
 		7C40DF631DEC14C80035B92E /* JSONConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF621DEC14C80035B92E /* JSONConvertible.swift */; };
@@ -142,11 +141,19 @@
 		7C88A3041F0CD76600ACD6B6 /* TopUserDisplay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C88A3061F0CD76600ACD6B6 /* TopUserDisplay.xib */; };
 		7C88A3091F0CD7B300ACD6B6 /* P2PJoinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C88A30B1F0CD7B300ACD6B6 /* P2PJoinView.xib */; };
 		7C88A30E1F0CD7C400ACD6B6 /* FilteredSingleSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C88A3101F0CD7C400ACD6B6 /* FilteredSingleSelection.xib */; };
+		7C88A3131F0CD7FB00ACD6B6 /* BookProgressUIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C88A3151F0CD7FB00ACD6B6 /* BookProgressUIView.xib */; };
+		7C88A3181F0CD86600ACD6B6 /* TopBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C88A31A1F0CD86600ACD6B6 /* TopBar.xib */; };
+		7C88A31D1F0CD88200ACD6B6 /* Connect2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C88A31F1F0CD88200ACD6B6 /* Connect2.xib */; };
+		7C88A3221F0CD93000ACD6B6 /* DefaultLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C88A3241F0CD93000ACD6B6 /* DefaultLoadingView.xib */; };
+		7C88A3271F0CD95600ACD6B6 /* DefaultErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C88A3291F0CD95600ACD6B6 /* DefaultErrorView.xib */; };
+		7C88A32C1F0CD9AC00ACD6B6 /* DefaultNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C88A32E1F0CD9AC00ACD6B6 /* DefaultNoDataView.xib */; };
+		7C88A3311F0CD9C100ACD6B6 /* ConnectPromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C88A3331F0CD9C100ACD6B6 /* ConnectPromptView.xib */; };
+		7C88A3361F0CD9F400ACD6B6 /* ConnectPromptNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C88A3381F0CD9F400ACD6B6 /* ConnectPromptNoDataView.xib */; };
+		7C88A33D1F0CDB6F00ACD6B6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C88A33F1F0CDB6F00ACD6B6 /* Localizable.strings */; };
 		7C8F4AF71EC050BB00F9B25F /* CrossReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8F4AF61EC050BB00F9B25F /* CrossReference.swift */; };
 		7C8F4AF91EC084F700F9B25F /* USXCrossReferenceProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8F4AF81EC084F700F9B25F /* USXCrossReferenceProcessor.swift */; };
 		7C8F4AFB1EC09C7700F9B25F /* BookProgressStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8F4AFA1EC09C7700F9B25F /* BookProgressStatus.swift */; };
 		7C8F4AFD1EC1920400F9B25F /* BookProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8F4AFC1EC1920400F9B25F /* BookProgressView.swift */; };
-		7C8F4AFF1EC1D75400F9B25F /* BookProgressUIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8F4AFE1EC1D75400F9B25F /* BookProgressUIView.xib */; };
 		7C8F4B011EC1E13F00F9B25F /* BookProgressUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8F4B001EC1E13F00F9B25F /* BookProgressUIView.swift */; };
 		7C8F4B031EC1F08C00F9B25F /* ImportBookVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8F4B021EC1F08C00F9B25F /* ImportBookVC.swift */; };
 		7C8F4B051EC42E6700F9B25F /* OverwritePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8F4B041EC42E6700F9B25F /* OverwritePreviewVC.swift */; };
@@ -191,22 +198,16 @@
 		7CAF6D8A1DB5F5FB00E10597 /* USXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF6D891DB5F5FB00E10597 /* USXParser.swift */; };
 		7CB5B29E1ECC7D0B0066446F /* ConnectionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5B29D1ECC7D0B0066446F /* ConnectionUIView.swift */; };
 		7CB5B2A31ECDB43E0066446F /* ConnectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5B2A21ECDB43E0066446F /* ConnectionVC.swift */; };
-		7CB5B2A51ECDB9F70066446F /* TopBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB5B2A41ECDB9F70066446F /* TopBar.xib */; };
 		7CB5B2A71ECEBEB30066446F /* TopBarUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5B2A61ECEBEB30066446F /* TopBarUIView.swift */; };
 		7CCBE9FC1EF16707001FE7E7 /* SimpleSingleSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBE9FB1EF16707001FE7E7 /* SimpleSingleSelection.xib */; };
 		7CCBE9FE1EF1691B001FE7E7 /* SimpleSingleSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBE9FD1EF1691B001FE7E7 /* SimpleSingleSelectionView.swift */; };
 		7CCBEA021EF277A5001FE7E7 /* Squishable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA011EF277A5001FE7E7 /* Squishable.swift */; };
 		7CCBEA041EF278BB001FE7E7 /* SquishableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA031EF278BB001FE7E7 /* SquishableStackView.swift */; };
-		7CCBEA081EF2B432001FE7E7 /* DefaultLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBEA071EF2B432001FE7E7 /* DefaultLoadingView.xib */; };
 		7CCBEA0A1EF2B6B9001FE7E7 /* DefaultLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA091EF2B6B9001FE7E7 /* DefaultLoadingView.swift */; };
-		7CCBEA0C1EF2B954001FE7E7 /* DefaultErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBEA0B1EF2B954001FE7E7 /* DefaultErrorView.xib */; };
 		7CCBEA0E1EF3AABA001FE7E7 /* DefaultErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA0D1EF3AABA001FE7E7 /* DefaultErrorView.swift */; };
-		7CCBEA101EF3AF11001FE7E7 /* DefaultNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBEA0F1EF3AF11001FE7E7 /* DefaultNoDataView.xib */; };
 		7CCBEA121EF3B05E001FE7E7 /* DefaultNoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA111EF3B05E001FE7E7 /* DefaultNoDataView.swift */; };
 		7CCBEA141EF3B35B001FE7E7 /* StatefulStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA131EF3B35B001FE7E7 /* StatefulStackView.swift */; };
-		7CCBEA161EF3EB20001FE7E7 /* ConnectPromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBEA151EF3EB20001FE7E7 /* ConnectPromptView.xib */; };
 		7CCBEA181EF3F07B001FE7E7 /* ConnectPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA171EF3F07B001FE7E7 /* ConnectPromptView.swift */; };
-		7CCBEA1A1EF3F497001FE7E7 /* ConnectPromptNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CCBEA191EF3F497001FE7E7 /* ConnectPromptNoDataView.xib */; };
 		7CCBEA1C1EF3F958001FE7E7 /* ConnectPromptNoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBEA1B1EF3F958001FE7E7 /* ConnectPromptNoDataView.swift */; };
 		7CCC00EA1D9BD3FC00F0562E /* VerseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00E91D9BD3FC00F0562E /* VerseError.swift */; };
 		7CCC00EC1D9D067C00F0562E /* CharData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC00EB1D9D067C00F0562E /* CharData.swift */; };
@@ -329,7 +330,6 @@
 		7C25180C1E8B8A930089E1FD /* ProjectBooksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectBooksView.swift; sourceTree = "<group>"; };
 		7C25180E1E8D0F8A0089E1FD /* EditAvatarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAvatarVC.swift; sourceTree = "<group>"; };
 		7C2518101E8E39F50089E1FD /* StackDismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackDismissable.swift; sourceTree = "<group>"; };
-		7C2E27A11EE6D6DB003602B0 /* Connect2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Connect2.xib; sourceTree = "<group>"; };
 		7C40DF5A1DE718DA0035B92E /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseUtilities.swift; sourceTree = "<group>"; };
 		7C40DF621DEC14C80035B92E /* JSONConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONConvertible.swift; sourceTree = "<group>"; };
@@ -433,11 +433,28 @@
 		7C88A30A1F0CD7B300ACD6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/P2PJoinView.xib; sourceTree = "<group>"; };
 		7C88A30D1F0CD7B500ACD6B6 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/P2PJoinView.strings; sourceTree = "<group>"; };
 		7C88A30F1F0CD7C400ACD6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FilteredSingleSelection.xib; sourceTree = "<group>"; };
+		7C88A3121F0CD7DD00ACD6B6 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/FilteredSingleSelection.strings; sourceTree = "<group>"; };
+		7C88A3141F0CD7FB00ACD6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BookProgressUIView.xib; sourceTree = "<group>"; };
+		7C88A3171F0CD80E00ACD6B6 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/BookProgressUIView.strings; sourceTree = "<group>"; };
+		7C88A3191F0CD86600ACD6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TopBar.xib; sourceTree = "<group>"; };
+		7C88A31C1F0CD86800ACD6B6 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/TopBar.strings; sourceTree = "<group>"; };
+		7C88A31E1F0CD88200ACD6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Connect2.xib; sourceTree = "<group>"; };
+		7C88A3211F0CD8A800ACD6B6 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Connect2.strings; sourceTree = "<group>"; };
+		7C88A3231F0CD93000ACD6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DefaultLoadingView.xib; sourceTree = "<group>"; };
+		7C88A3261F0CD93C00ACD6B6 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/DefaultLoadingView.strings; sourceTree = "<group>"; };
+		7C88A3281F0CD95600ACD6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DefaultErrorView.xib; sourceTree = "<group>"; };
+		7C88A32B1F0CD96C00ACD6B6 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/DefaultErrorView.strings; sourceTree = "<group>"; };
+		7C88A32D1F0CD9AC00ACD6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DefaultNoDataView.xib; sourceTree = "<group>"; };
+		7C88A3301F0CD9AF00ACD6B6 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/DefaultNoDataView.strings; sourceTree = "<group>"; };
+		7C88A3321F0CD9C100ACD6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ConnectPromptView.xib; sourceTree = "<group>"; };
+		7C88A3351F0CD9D700ACD6B6 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/ConnectPromptView.strings; sourceTree = "<group>"; };
+		7C88A3371F0CD9F400ACD6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ConnectPromptNoDataView.xib; sourceTree = "<group>"; };
+		7C88A33A1F0CDA0700ACD6B6 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/ConnectPromptNoDataView.strings; sourceTree = "<group>"; };
+		7C88A33E1F0CDB6F00ACD6B6 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C8F4AF61EC050BB00F9B25F /* CrossReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossReference.swift; sourceTree = "<group>"; };
 		7C8F4AF81EC084F700F9B25F /* USXCrossReferenceProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXCrossReferenceProcessor.swift; sourceTree = "<group>"; };
 		7C8F4AFA1EC09C7700F9B25F /* BookProgressStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookProgressStatus.swift; sourceTree = "<group>"; };
 		7C8F4AFC1EC1920400F9B25F /* BookProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookProgressView.swift; sourceTree = "<group>"; };
-		7C8F4AFE1EC1D75400F9B25F /* BookProgressUIView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookProgressUIView.xib; sourceTree = "<group>"; };
 		7C8F4B001EC1E13F00F9B25F /* BookProgressUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookProgressUIView.swift; sourceTree = "<group>"; };
 		7C8F4B021EC1F08C00F9B25F /* ImportBookVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportBookVC.swift; sourceTree = "<group>"; };
 		7C8F4B041EC42E6700F9B25F /* OverwritePreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverwritePreviewVC.swift; sourceTree = "<group>"; };
@@ -482,22 +499,16 @@
 		7CAF6D891DB5F5FB00E10597 /* USXParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USXParser.swift; sourceTree = "<group>"; };
 		7CB5B29D1ECC7D0B0066446F /* ConnectionUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionUIView.swift; sourceTree = "<group>"; };
 		7CB5B2A21ECDB43E0066446F /* ConnectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionVC.swift; sourceTree = "<group>"; };
-		7CB5B2A41ECDB9F70066446F /* TopBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopBar.xib; sourceTree = "<group>"; };
 		7CB5B2A61ECEBEB30066446F /* TopBarUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBarUIView.swift; sourceTree = "<group>"; };
 		7CCBE9FB1EF16707001FE7E7 /* SimpleSingleSelection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleSingleSelection.xib; sourceTree = "<group>"; };
 		7CCBE9FD1EF1691B001FE7E7 /* SimpleSingleSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleSingleSelectionView.swift; sourceTree = "<group>"; };
 		7CCBEA011EF277A5001FE7E7 /* Squishable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Squishable.swift; sourceTree = "<group>"; };
 		7CCBEA031EF278BB001FE7E7 /* SquishableStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquishableStackView.swift; sourceTree = "<group>"; };
-		7CCBEA071EF2B432001FE7E7 /* DefaultLoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultLoadingView.xib; sourceTree = "<group>"; };
 		7CCBEA091EF2B6B9001FE7E7 /* DefaultLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLoadingView.swift; sourceTree = "<group>"; };
-		7CCBEA0B1EF2B954001FE7E7 /* DefaultErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultErrorView.xib; sourceTree = "<group>"; };
 		7CCBEA0D1EF3AABA001FE7E7 /* DefaultErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultErrorView.swift; sourceTree = "<group>"; };
-		7CCBEA0F1EF3AF11001FE7E7 /* DefaultNoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultNoDataView.xib; sourceTree = "<group>"; };
 		7CCBEA111EF3B05E001FE7E7 /* DefaultNoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultNoDataView.swift; sourceTree = "<group>"; };
 		7CCBEA131EF3B35B001FE7E7 /* StatefulStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatefulStackView.swift; sourceTree = "<group>"; };
-		7CCBEA151EF3EB20001FE7E7 /* ConnectPromptView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectPromptView.xib; sourceTree = "<group>"; };
 		7CCBEA171EF3F07B001FE7E7 /* ConnectPromptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectPromptView.swift; sourceTree = "<group>"; };
-		7CCBEA191EF3F497001FE7E7 /* ConnectPromptNoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectPromptNoDataView.xib; sourceTree = "<group>"; };
 		7CCBEA1B1EF3F958001FE7E7 /* ConnectPromptNoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectPromptNoDataView.swift; sourceTree = "<group>"; };
 		7CCC00E91D9BD3FC00F0562E /* VerseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseError.swift; sourceTree = "<group>"; };
 		7CCC00EB1D9D067C00F0562E /* CharData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharData.swift; sourceTree = "<group>"; };
@@ -639,6 +650,7 @@
 				7C82CE801DE6D91100C054EB /* TranslationEditor-Bridging-Header.h */,
 				7C82CE811DE6D91100C054EB /* TranslationEditorTests-Bridging-Header.h */,
 				7C82CE821DE6D91100C054EB /* TranslationEditorUITests-Bridging-Header.h */,
+				7C88A33F1F0CDB6F00ACD6B6 /* Localizable.strings */,
 			);
 			path = TranslationEditor;
 			sourceTree = "<group>";
@@ -1032,16 +1044,16 @@
 				7C88A30B1F0CD7B300ACD6B6 /* P2PJoinView.xib */,
 				7C88A3101F0CD7C400ACD6B6 /* FilteredSingleSelection.xib */,
 				7C7FD6591EA5E18600ED2364 /* ParagraphCell.xib */,
-				7C8F4AFE1EC1D75400F9B25F /* BookProgressUIView.xib */,
-				7CB5B2A41ECDB9F70066446F /* TopBar.xib */,
-				7C2E27A11EE6D6DB003602B0 /* Connect2.xib */,
+				7C88A3151F0CD7FB00ACD6B6 /* BookProgressUIView.xib */,
+				7C88A31A1F0CD86600ACD6B6 /* TopBar.xib */,
+				7C88A31F1F0CD88200ACD6B6 /* Connect2.xib */,
 				7CE062631EDFFE4C00A998E4 /* ChapterHeaderCell.xib */,
 				7CCBE9FB1EF16707001FE7E7 /* SimpleSingleSelection.xib */,
-				7CCBEA071EF2B432001FE7E7 /* DefaultLoadingView.xib */,
-				7CCBEA0B1EF2B954001FE7E7 /* DefaultErrorView.xib */,
-				7CCBEA0F1EF3AF11001FE7E7 /* DefaultNoDataView.xib */,
-				7CCBEA151EF3EB20001FE7E7 /* ConnectPromptView.xib */,
-				7CCBEA191EF3F497001FE7E7 /* ConnectPromptNoDataView.xib */,
+				7C88A3241F0CD93000ACD6B6 /* DefaultLoadingView.xib */,
+				7C88A3291F0CD95600ACD6B6 /* DefaultErrorView.xib */,
+				7C88A32E1F0CD9AC00ACD6B6 /* DefaultNoDataView.xib */,
+				7C88A3331F0CD9C100ACD6B6 /* ConnectPromptView.xib */,
+				7C88A3381F0CD9F400ACD6B6 /* ConnectPromptNoDataView.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -1248,27 +1260,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C57EC151E694975000718E9 /* TIT_ENG.usx in Resources */,
-				7CCBEA161EF3EB20001FE7E7 /* ConnectPromptView.xib in Resources */,
+				7C88A3311F0CD9C100ACD6B6 /* ConnectPromptView.xib in Resources */,
 				7C18A1991D8BBEBD00DD1B03 /* LaunchScreen.storyboard in Resources */,
-				7CCBEA1A1EF3F497001FE7E7 /* ConnectPromptNoDataView.xib in Resources */,
+				7C88A3361F0CD9F400ACD6B6 /* ConnectPromptNoDataView.xib in Resources */,
 				7CCBE9FC1EF16707001FE7E7 /* SimpleSingleSelection.xib in Resources */,
 				7C57EC0F1E6948FC000718E9 /* TI2_ENG.usx in Resources */,
-				7CB5B2A51ECDB9F70066446F /* TopBar.xib in Resources */,
+				7C88A3181F0CD86600ACD6B6 /* TopBar.xib in Resources */,
 				7C88A30E1F0CD7C400ACD6B6 /* FilteredSingleSelection.xib in Resources */,
-				7CCBEA101EF3AF11001FE7E7 /* DefaultNoDataView.xib in Resources */,
-				7C2E27A21EE6D6DB003602B0 /* Connect2.xib in Resources */,
+				7C88A32C1F0CD9AC00ACD6B6 /* DefaultNoDataView.xib in Resources */,
+				7C88A31D1F0CD88200ACD6B6 /* Connect2.xib in Resources */,
 				7C18A1961D8BBEBD00DD1B03 /* Assets.xcassets in Resources */,
 				7C7D25551F0CD5D9005438A5 /* MainMenu.storyboard in Resources */,
 				7C7D25521F0CD45F005438A5 /* Login.storyboard in Resources */,
+				7C88A33D1F0CDB6F00ACD6B6 /* Localizable.strings in Resources */,
 				7CE062641EDFFE4C00A998E4 /* ChapterHeaderCell.xib in Resources */,
-				7CCBEA0C1EF2B954001FE7E7 /* DefaultErrorView.xib in Resources */,
+				7C88A3271F0CD95600ACD6B6 /* DefaultErrorView.xib in Resources */,
 				7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */,
 				7CD8EA5F1DB61A3C00364B70 /* MAT.usx in Resources */,
 				7C88A3041F0CD76600ACD6B6 /* TopUserDisplay.xib in Resources */,
 				7CD8EA661DB644E300364B70 /* GAL.usx in Resources */,
 				7C60704D1E533ED3007718BC /* VerseDataCell.xib in Resources */,
-				7CCBEA081EF2B432001FE7E7 /* DefaultLoadingView.xib in Resources */,
-				7C8F4AFF1EC1D75400F9B25F /* BookProgressUIView.xib in Resources */,
+				7C88A3221F0CD93000ACD6B6 /* DefaultLoadingView.xib in Resources */,
+				7C88A3131F0CD7FB00ACD6B6 /* BookProgressUIView.xib in Resources */,
 				7C7FD65A1EA5E18600ED2364 /* ParagraphCell.xib in Resources */,
 				7C88A3091F0CD7B300ACD6B6 /* P2PJoinView.xib in Resources */,
 				7C88A2FB1F0CD67C00ACD6B6 /* CreateAvatar.xib in Resources */,
@@ -1765,8 +1778,89 @@
 			isa = PBXVariantGroup;
 			children = (
 				7C88A30F1F0CD7C400ACD6B6 /* Base */,
+				7C88A3121F0CD7DD00ACD6B6 /* id */,
 			);
 			name = FilteredSingleSelection.xib;
+			sourceTree = "<group>";
+		};
+		7C88A3151F0CD7FB00ACD6B6 /* BookProgressUIView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C88A3141F0CD7FB00ACD6B6 /* Base */,
+				7C88A3171F0CD80E00ACD6B6 /* id */,
+			);
+			name = BookProgressUIView.xib;
+			sourceTree = "<group>";
+		};
+		7C88A31A1F0CD86600ACD6B6 /* TopBar.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C88A3191F0CD86600ACD6B6 /* Base */,
+				7C88A31C1F0CD86800ACD6B6 /* id */,
+			);
+			name = TopBar.xib;
+			sourceTree = "<group>";
+		};
+		7C88A31F1F0CD88200ACD6B6 /* Connect2.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C88A31E1F0CD88200ACD6B6 /* Base */,
+				7C88A3211F0CD8A800ACD6B6 /* id */,
+			);
+			name = Connect2.xib;
+			sourceTree = "<group>";
+		};
+		7C88A3241F0CD93000ACD6B6 /* DefaultLoadingView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C88A3231F0CD93000ACD6B6 /* Base */,
+				7C88A3261F0CD93C00ACD6B6 /* id */,
+			);
+			name = DefaultLoadingView.xib;
+			sourceTree = "<group>";
+		};
+		7C88A3291F0CD95600ACD6B6 /* DefaultErrorView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C88A3281F0CD95600ACD6B6 /* Base */,
+				7C88A32B1F0CD96C00ACD6B6 /* id */,
+			);
+			name = DefaultErrorView.xib;
+			sourceTree = "<group>";
+		};
+		7C88A32E1F0CD9AC00ACD6B6 /* DefaultNoDataView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C88A32D1F0CD9AC00ACD6B6 /* Base */,
+				7C88A3301F0CD9AF00ACD6B6 /* id */,
+			);
+			name = DefaultNoDataView.xib;
+			sourceTree = "<group>";
+		};
+		7C88A3331F0CD9C100ACD6B6 /* ConnectPromptView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C88A3321F0CD9C100ACD6B6 /* Base */,
+				7C88A3351F0CD9D700ACD6B6 /* id */,
+			);
+			name = ConnectPromptView.xib;
+			sourceTree = "<group>";
+		};
+		7C88A3381F0CD9F400ACD6B6 /* ConnectPromptNoDataView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C88A3371F0CD9F400ACD6B6 /* Base */,
+				7C88A33A1F0CDA0700ACD6B6 /* id */,
+			);
+			name = ConnectPromptNoDataView.xib;
+			sourceTree = "<group>";
+		};
+		7C88A33F1F0CDB6F00ACD6B6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C88A33E1F0CDB6F00ACD6B6 /* id */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
