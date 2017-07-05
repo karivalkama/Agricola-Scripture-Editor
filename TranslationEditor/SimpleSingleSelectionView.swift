@@ -113,7 +113,7 @@ protocol SimpleSingleSelectionViewDelegate: class
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 	{
-		print("STATUS: Simple selection item \(indexPath.row) selected")
+		// print("STATUS: Simple selection item \(indexPath.row) selected")
 		select(index: displayedIndices[indexPath.row])
 	}
 	
@@ -158,7 +158,7 @@ protocol SimpleSingleSelectionViewDelegate: class
 	
 	private func select(index: Int)
 	{
-		print("STATUS: Selects index \(index)")
+		// print("STATUS: Selects index \(index)")
 		selectedIndex = index
 		
 		if let datasource = datasource

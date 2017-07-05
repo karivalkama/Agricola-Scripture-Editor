@@ -47,7 +47,7 @@ class LanguageSelectionHandler: FilteredSelectionDataSource, SimpleSingleSelecti
 	
 	func onValueChanged(_ newValue: String, selectedAt index: Int?)
 	{
-		print("STATUS: Language selection changed. New value: \(newValue), selected at index: \(index ?? -1)")
+		// print("STATUS: Language selection changed. New value: \(newValue), selected at index: \(index ?? -1)")
 		
 		if let index = index
 		{

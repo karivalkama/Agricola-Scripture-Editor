@@ -495,7 +495,7 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	
 	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, newLanguageNameInserted languageName: String)
 	{
-		print("STATUS: Inserted \(languageName)")
+		// print("STATUS: Inserted \(languageName)")
 		
 		updateNickNames()
 		updateNicknameVisibility()
@@ -504,7 +504,7 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 	
 	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, languageSelected: Language)
 	{
-		print("STATUS: Selected \(languageSelected.name)")
+		// print("STATUS: Selected \(languageSelected.name)")
 		
 		updateNickNames()
 		updateNicknameVisibility()
@@ -598,12 +598,12 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 		if let selectedLanguageId = languageHandler.selectedLanguage?.idString
 		{
 			existingNicknames = existingResources.filter { $0.languageId == selectedLanguageId }.map { $0.name }.withoutDuplicates
-			print("STATUS: Found nicknames for \(selectedLanguageId):\(existingNicknames.reduce("", { $0 + " " + $1 }))")
+			// print("STATUS: Found nicknames for \(selectedLanguageId):\(existingNicknames.reduce("", { $0 + " " + $1 }))")
 		}
 		else
 		{
 			existingNicknames = []
-			print("STATUS: New language -> No nicknames")
+			// print("STATUS: New language -> No nicknames")
 		}
 		
 		selectNicknameField.reloadData()
