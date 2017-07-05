@@ -340,7 +340,7 @@ class ScrollSyncManager: NSObject, UITableViewDelegate
 	
 	private func updateVisibleRowHeights(forTable tableView: UITableView)
 	{
-		guard let visibleRowIndices = tableView.indexPathsForVisibleRows else
+		guard let visibleRowIndices = tableView.indexPathsForVisibleRows, !visibleRowIndices.isEmpty else
 		{
 			return
 		}

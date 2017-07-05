@@ -115,7 +115,6 @@
 		7C60704D1E533ED3007718BC /* VerseDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C60704C1E533ED3007718BC /* VerseDataCell.xib */; };
 		7C6070501E55860B007718BC /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60704F1E55860B007718BC /* Keyboard.swift */; };
 		7C6070531E570C0B007718BC /* OpenThreadStatusListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070521E570C0B007718BC /* OpenThreadStatusListener.swift */; };
-		7C6070561E5C601D007718BC /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6070551E5C601D007718BC /* Login.storyboard */; };
 		7C6070591E5C7BE0007718BC /* SelectAvatarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6070581E5C7BE0007718BC /* SelectAvatarVC.swift */; };
 		7C60705B1E5D705B007718BC /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60705A1E5D705B007718BC /* AvatarView.swift */; };
 		7C60705D1E5D79D8007718BC /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60705C1E5D79D8007718BC /* AvatarCell.swift */; };
@@ -133,6 +132,7 @@
 		7C7767211EE675C700952D5B /* ManageUsersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7767201EE675C700952D5B /* ManageUsersVC.swift */; };
 		7C7767231EE67D0000952D5B /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7767221EE67D0000952D5B /* UserCell.swift */; };
 		7C7834CB1E977D1C000556B0 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7834CA1E977D1C000556B0 /* BookCell.swift */; };
+		7C7D25521F0CD45F005438A5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C7D25541F0CD45F005438A5 /* Login.storyboard */; };
 		7C7FD65A1EA5E18600ED2364 /* ParagraphCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7FD6591EA5E18600ED2364 /* ParagraphCell.xib */; };
 		7C7FD65C1EA5E5D400ED2364 /* ParagraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7FD65B1EA5E5D400ED2364 /* ParagraphCell.swift */; };
 		7C7FD65E1EA620BA00ED2364 /* ParagraphUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7FD65D1EA620BA00ED2364 /* ParagraphUtils.swift */; };
@@ -393,7 +393,6 @@
 		7C60704C1E533ED3007718BC /* VerseDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerseDataCell.xib; sourceTree = "<group>"; };
 		7C60704F1E55860B007718BC /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		7C6070521E570C0B007718BC /* OpenThreadStatusListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenThreadStatusListener.swift; sourceTree = "<group>"; };
-		7C6070551E5C601D007718BC /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		7C6070581E5C7BE0007718BC /* SelectAvatarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAvatarVC.swift; sourceTree = "<group>"; };
 		7C60705A1E5D705B007718BC /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		7C60705C1E5D79D8007718BC /* AvatarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
@@ -413,6 +412,7 @@
 		7C7834CA1E977D1C000556B0 /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		7C7D25501F0CCD6A005438A5 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		7C7D25511F0CCD6A005438A5 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Main.strings; sourceTree = "<group>"; };
+		7C7D25531F0CD45F005438A5 /* id */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = id; path = id.lproj/Login.storyboard; sourceTree = "<group>"; };
 		7C7FD6591EA5E18600ED2364 /* ParagraphCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParagraphCell.xib; sourceTree = "<group>"; };
 		7C7FD65B1EA5E5D400ED2364 /* ParagraphCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphCell.swift; sourceTree = "<group>"; };
 		7C7FD65D1EA620BA00ED2364 /* ParagraphUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphUtils.swift; sourceTree = "<group>"; };
@@ -1005,7 +1005,7 @@
 			children = (
 				7C18A1971D8BBEBD00DD1B03 /* LaunchScreen.storyboard */,
 				7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */,
-				7C6070551E5C601D007718BC /* Login.storyboard */,
+				7C7D25541F0CD45F005438A5 /* Login.storyboard */,
 				7C9BB7E21E8536AA0010DE5C /* MainMenu.storyboard */,
 				7CB5B29F1ECD94600066446F /* Common.storyboard */,
 			);
@@ -1250,7 +1250,7 @@
 				7C2E27A21EE6D6DB003602B0 /* Connect2.xib in Resources */,
 				7C18A1961D8BBEBD00DD1B03 /* Assets.xcassets in Resources */,
 				7C9BB7E31E8536AA0010DE5C /* MainMenu.storyboard in Resources */,
-				7C6070561E5C601D007718BC /* Login.storyboard in Resources */,
+				7C7D25521F0CD45F005438A5 /* Login.storyboard in Resources */,
 				7CE062641EDFFE4C00A998E4 /* ChapterHeaderCell.xib in Resources */,
 				7CCBEA0C1EF2B954001FE7E7 /* DefaultErrorView.xib in Resources */,
 				7C18A1941D8BBEBD00DD1B03 /* Main.storyboard in Resources */,
@@ -1678,6 +1678,14 @@
 				7C7D25501F0CCD6A005438A5 /* id */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7C7D25541F0CD45F005438A5 /* Login.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C7D25531F0CD45F005438A5 /* id */,
+			);
+			name = Login.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
