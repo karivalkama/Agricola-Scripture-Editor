@@ -49,7 +49,7 @@ class USXParser: NSObject, XMLParserDelegate
 		// (as long as the parsing hasn't failed previously)
 		if elementName == USXMarkerElement.book.rawValue && success
 		{
-			if let code = attributeDict["code"]
+			if let code = attributeDict["code"], !code.isEmpty
 			{
 				//print("STATUS: Found book with code: \(code)")
 				
