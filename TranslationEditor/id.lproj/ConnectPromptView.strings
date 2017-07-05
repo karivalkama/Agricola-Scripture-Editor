@@ -1,0 +1,9 @@
+
+/* Class = "UILabel"; text = "1) Have a person host a connection (they must have a project open, then press Connect, then Host)\n2) Press the connect button, then JOIN\n3) Scan the QR code on the host's device"; ObjectID = "1aq-Tb-qgB"; */
+"1aq-Tb-qgB.text" = "1) Have a person host a connection (they must have a project open, then press Connect, then Host)\n2) Press the connect button, then JOIN\n3) Scan the QR code on the host's device";
+
+/* Class = "UIButton"; normalTitle = "Connect"; ObjectID = "VQ5-Td-PPs"; */
+"VQ5-Td-PPs.normalTitle" = "Connect";
+
+/* Class = "UILabel"; text = "Here's how to connect with others"; ObjectID = "XWk-di-xQ2"; */
+"XWk-di-xQ2.text" = "Here's how to connect with others";

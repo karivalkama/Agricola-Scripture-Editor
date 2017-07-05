@@ -1,0 +1,42 @@
+
+/* Class = "UILabel"; text = "Joined Teemu"; ObjectID = "0Ks-59-8MK"; */
+"0Ks-59-8MK.text" = "Joined Teemu";
+
+/* Class = "UISegmentedControl"; 0dg-mf-037.segmentTitles[0] = "Disconnected"; ObjectID = "0dg-mf-037"; Note = "Segmented control for P2P status"; */
+"0dg-mf-037.segmentTitles[0]" = "Disconnected";
+
+/* Class = "UISegmentedControl"; 0dg-mf-037.segmentTitles[1] = "Joined"; ObjectID = "0dg-mf-037"; Note = "Segmented control for P2P status"; */
+"0dg-mf-037.segmentTitles[1]" = "Joined";
+
+/* Class = "UISegmentedControl"; 0dg-mf-037.segmentTitles[2] = "Hosting"; ObjectID = "0dg-mf-037"; Note = "Segmented control for P2P status"; */
+"0dg-mf-037.segmentTitles[2]" = "Hosting";
+
+/* Class = "UILabel"; text = "Others can join by scanning this code"; ObjectID = "Etb-rQ-sxz"; Note = "Description for hosting qr code"; */
+"Etb-rQ-sxz.text" = "Others can join by scanning this code";
+
+/* Class = "UILabel"; text = "Translation data can be exported in USX format which is readable by Agricola and Paratext"; ObjectID = "Hrx-ho-8Cg"; Note = "Short description for USX file sharing"; */
+"Hrx-ho-8Cg.text" = "Translation data can be exported in USX format which is readable by Agricola and Paratext";
+
+/* Class = "UIButton"; normalTitle = "Cancel Sharing"; ObjectID = "Ild-dz-aQ2"; Note = "Cancel sharing -button"; */
+"Ild-dz-aQ2.normalTitle" = "Cancel Sharing";
+
+/* Class = "UILabel"; text = "Peer-to-peer is used for synchronizing all data between two Agricola programs."; ObjectID = "IuX-qw-Wig"; Note = "Short description of peer-to-peer functionality"; */
+"IuX-qw-Wig.text" = "Peer-to-peer is used for synchronizing all data between two Agricola programs.";
+
+/* Class = "UILabel"; text = "Current Peer-to-Peer Status"; ObjectID = "Kab-Dc-k04"; Note = "Title for P2P Connection controls"; */
+"Kab-Dc-k04.text" = "Current Peer-to-Peer Status";
+
+/* Class = "UILabel"; text = "on project: Test Project"; ObjectID = "OKQ-ia-PKp"; */
+"OKQ-ia-PKp.text" = "on project: Test Project";
+
+/* Class = "UILabel"; text = "USX File Sharing"; ObjectID = "Weh-hb-yWn"; Note = "Title for USX file sharing options in connect view"; */
+"Weh-hb-yWn.text" = "USX File Sharing";
+
+/* Class = "UILabel"; text = "A single person should HOST a connection.\nMultiple people can JOIN (camera required).\nAll data will be transferred until DISCONNECTED."; ObjectID = "dUM-Ds-Tzn"; Note = "A description for different P2P statuses"; */
+"dUM-Ds-Tzn.text" = "A single person should HOST a connection.\nMultiple people can JOIN (camera required).\nAll data will be transferred until DISCONNECTED.";
+
+/* Class = "UILabel"; text = "Select a book to send"; ObjectID = "sWM-C5-yTC"; Note = "Export book selection title"; */
+"sWM-C5-yTC.text" = "Select a book to send";
+
+/* Class = "UIButton"; normalTitle = "Share"; ObjectID = "ywC-sy-aJD"; Note = "Button for sharing exported usx files"; */
+"ywC-sy-aJD.normalTitle" = "Share";
