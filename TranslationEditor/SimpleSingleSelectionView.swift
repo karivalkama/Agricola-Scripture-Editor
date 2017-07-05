@@ -79,6 +79,7 @@ protocol SimpleSingleSelectionViewDelegate: class
 		reloadData()
 	}
 	
+	/*
 	@IBAction func valueEditingEnded(_ sender: Any)
 	{
 		checkValueForDelegate()
@@ -88,6 +89,7 @@ protocol SimpleSingleSelectionViewDelegate: class
 	{
 		checkValueForDelegate()
 	}
+*/
 	
 	
 	// IMPLEMENTED METHODS	----
@@ -111,6 +113,7 @@ protocol SimpleSingleSelectionViewDelegate: class
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 	{
+		print("STATUS: Simple selection item \(indexPath.row) selected")
 		select(index: displayedIndices[indexPath.row])
 	}
 	
@@ -118,6 +121,68 @@ protocol SimpleSingleSelectionViewDelegate: class
 	// OTHER METHODS	-------
 	
 	func reloadData()
+	{
+		// Updates the displayed indices
+		refreshDisplay()
+		
+		// If there's a match available, selects that
+		if selectedIndex == nil, let newSelectedIndex = findMatchingIndex(for: value)
+		{
+			selectionTableView.selectRow(at: IndexPath(row: newSelectedIndex, section: 0), animated: false, scrollPosition: .top)
+			selectedIndex = displayedIndices[newSelectedIndex]
+		}
+		
+		informDelegate()
+	}
+	
+	func setIntrinsicHeight(_ height: Int)
+	{
+		intrinsicHeight = height
+		invalidateIntrinsicContentSize()
+	}
+	
+	/*
+	private func checkValueForDelegate()
+	{
+		if !value.isEmpty, let matchingIndex = findMatchingIndex(for: value)
+		{
+			selectedIndex = displayedIndices[matchingIndex]
+		}
+		else
+		{
+			selectedIndex = nil
+		}
+		
+		informDelegate()
+	}*/
+	
+	private func select(index: Int)
+	{
+		print("STATUS: Selects index \(index)")
+		selectedIndex = index
+		
+		if let datasource = datasource
+		{
+			value = datasource.labelForOption(atIndex: index)
+			insertField.text = value
+			refreshDisplay()
+		}
+		
+		informDelegate()
+	}
+	
+	private func informDelegate()
+	{
+		delegate?.onValueChanged(value, selectedAt: selectedIndex)
+	}
+	
+	// NB: Returns the matching index in the table, not in the items
+	private func findMatchingIndex(for item: String) -> Int?
+	{
+		return displayedIndices.index(where: { datasource?.labelForOption(atIndex: $0).lowercased() == item.lowercased() })
+	}
+	
+	private func refreshDisplay()
 	{
 		guard let datasource = datasource else
 		{
@@ -137,57 +202,14 @@ protocol SimpleSingleSelectionViewDelegate: class
 		
 		selectionTableView.reloadData()
 		
-		if let newSelectedIndex = findMatchingIndex(for: value)
+		if let selectedIndex = selectedIndex, let selectedTableIndex = displayedIndices.index(where: { $0 == selectedIndex })
 		{
-			selectionTableView.selectRow(at: IndexPath(row: newSelectedIndex, section: 0), animated: false, scrollPosition: .top)
-			selectedIndex = newSelectedIndex
-			informDelegate()
+			selectionTableView.selectRow(at: IndexPath(row: selectedTableIndex, section: 0), animated: false, scrollPosition: .top)
 		}
-		else if selectedIndex != nil
+		else
 		{
 			selectionTableView.selectRow(at: nil, animated: false, scrollPosition: .none)
 			selectedIndex = nil
-			informDelegate()
 		}
-	}
-	
-	func setIntrinsicHeight(_ height: Int)
-	{
-		intrinsicHeight = height
-		invalidateIntrinsicContentSize()
-	}
-	
-	private func checkValueForDelegate()
-	{
-		if let matchingIndex = displayedIndices.first(where: { datasource?.labelForOption(atIndex: $0).lowercased().contains(value.lowercased()) ?? false })
-		{
-			selectedIndex = matchingIndex
-		}
-		
-		informDelegate()
-	}
-	
-	private func select(index: Int)
-	{
-		selectedIndex = index
-		
-		if let datasource = datasource
-		{
-			value = datasource.labelForOption(atIndex: index)
-			insertField.text = value
-			reloadData()
-		}
-		
-		informDelegate()
-	}
-	
-	private func informDelegate()
-	{
-		delegate?.onValueChanged(value, selectedAt: selectedIndex)
-	}
-	
-	private func findMatchingIndex(for item: String) -> Int?
-	{
-		return displayedIndices.index(where: { datasource?.labelForOption(atIndex: $0).lowercased() == item.lowercased() })
 	}
 }
