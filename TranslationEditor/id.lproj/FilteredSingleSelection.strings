@@ -1,12 +1,12 @@
-
 /* Class = "UILabel"; text = "Select"; ObjectID = "WhJ-Qj-qgG"; Note = "Select single title"; */
-"WhJ-Qj-qgG.text" = "Select";
+"WhJ-Qj-qgG.text" = "Memilih";
 
 /* Class = "UIButton"; normalTitle = "Add"; ObjectID = "aYl-LP-tPf"; Note = "Add a new element to list -button"; */
-"aYl-LP-tPf.normalTitle" = "Add";
+"aYl-LP-tPf.normalTitle" = "Tambah";
 
 /* Class = "UITextField"; placeholder = "Search"; ObjectID = "jh9-jK-56R"; Note = "Input field used for filtering available selection"; */
-"jh9-jK-56R.placeholder" = "Search";
+"jh9-jK-56R.placeholder" = "Mencari";
 
 /* Class = "UILabel"; text = "Or Insert New"; ObjectID = "osC-dE-sxa"; Note = "Title indicating option for inserting new elements"; */
-"osC-dE-sxa.text" = "Or Insert New";
+"osC-dE-sxa.text" = "Atau tambah baru";
+

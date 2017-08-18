@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08D4BF5C1F471CCD00B05392 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08D4BF5E1F471CCD00B05392 /* InfoPlist.strings */; };
 		2DEB79E49FA6ACD739858FC4 /* Pods_TranslationEditorUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2CCD571AB68ECBDE6770270 /* Pods_TranslationEditorUITests.framework */; };
 		7C0130B51E3B5A100053C5C2 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130B41E3B5A100053C5C2 /* Project.swift */; };
 		7C0130B81E3B6A1D0053C5C2 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130B71E3B6A1D0053C5C2 /* Avatar.swift */; };
@@ -277,6 +278,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		084DE9D71F4712C000423620 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		084DE9D81F4712C400423620 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		084DE9DA1F4716AD00423620 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		08D4BF5D1F471CCD00B05392 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		118498FEE6B91FD449F5070B /* Pods-TranslationEditor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslationEditor.release.xcconfig"; path = "Pods/Target Support Files/Pods-TranslationEditor/Pods-TranslationEditor.release.xcconfig"; sourceTree = "<group>"; };
 		23A5C1BE2FD3B1EEAAC0DBBE /* Pods-TranslationEditorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslationEditorTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		25759A7A73415E872B68474D /* Pods-TranslationEditorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslationEditorTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -637,6 +642,7 @@
 		7C18A18D1D8BBEBD00DD1B03 /* TranslationEditor */ = {
 			isa = PBXGroup;
 			children = (
+				08D4BF5E1F471CCD00B05392 /* InfoPlist.strings */,
 				7C57EC011E66C043000718E9 /* TranslationEditor.entitlements */,
 				7C60705E1E5D89BD007718BC /* Resources */,
 				7C6070541E5C5FE5007718BC /* UI */,
@@ -1290,6 +1296,7 @@
 				7C88A2F81F0CD66E00ACD6B6 /* OnlineStatusView.xib in Resources */,
 				7C6B7B1C1E6554920005AD43 /* LabelCell.xib in Resources */,
 				7C6070601E5D89E0007718BC /* Alpine.ttf in Resources */,
+				08D4BF5C1F471CCD00B05392 /* InfoPlist.strings in Resources */,
 				7C57EC121E694939000718E9 /* TI1_ENG.usx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1684,11 +1691,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		08D4BF5E1F471CCD00B05392 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				08D4BF5D1F471CCD00B05392 /* id */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		7C18A1921D8BBEBD00DD1B03 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7C18A1931D8BBEBD00DD1B03 /* Base */,
 				7C7D25511F0CCD6A005438A5 /* id */,
+				084DE9DA1F4716AD00423620 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1859,6 +1875,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				7C88A33E1F0CDB6F00ACD6B6 /* id */,
+				084DE9D71F4712C000423620 /* Base */,
+				084DE9D81F4712C400423620 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

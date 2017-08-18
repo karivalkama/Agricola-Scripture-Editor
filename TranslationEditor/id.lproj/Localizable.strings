@@ -1,48 +1,109 @@
-/* 
-  Localizable.strings
-  TranslationEditor
+/* Online status when provided credentials don't match the required */
+"Access Denied" = "Hubungan ditolak";
 
-  Created by Mikko Hilpinen on 5.7.2017.
-  Copyright © 2017 SIL. All rights reserved.
-*/
+/* An error message displayed when trying to create a duplicate account */
+"Account with a similar name already exists!" = "Nama akun ini sudah ada";
 
-// Left = Key (in code), Right = Indonesian value
-"Failed Cases" = "Tidak bisa diimpor"; // "A table heading for failed usx-import cases"
-"Success Cases" = "Impor berhasil"; // "A table heading for succesfull usx-import cases")
-"Please fill in the required fields" = "Tolong mengisi semua informasi yang diperlukan"; // "An error message displayed when trying to create new avatar without first filling all required fields")
-"The passwords don't match!" = "Sandi-sandi berbeda"; //  "An error message displayed when new avatar password is not repeated correctly")
-"No user data available!" = "Data pengguna tidak ada"; //  "An error displayed when avatar was not selected in book import (which shouldn't ever happen if program is workin)")
-"Internal error occurred!" = "Kesalahan internal"; // "An error message when book import fails due to some unexpected error"
-"Please provide an account name" = "Tolong memberikan nama akun"; // "An error message shown when username / account name is missing in login"
-"Please provide a password" = "Tolong memberikan sandi"; // "An error message shown when password is missing in login"
-"Invalid account name" = "Nama akun tidak diterima"; // "An error message shown when trying to login with non-existing account"
-"Invalid password" = "Sandi tidak diterima"; // "An error message shown when user provides an invalid password in login"
-"Account with a similar name already exists!" = "Nama akun ini sudah ada"; // "An error message displayed when trying to create a duplicate account")
-"Internal error occurred. Please try again." = "Kesalahan internal. Tolong coba lagi."; // "An error message displayed when account creation fails due to an unexpected error"
-"Internal error occurred while saving data." = "Kesalahan internal. Data tidak dapat disimpan";// "An error message displayed when account creation fails due to an unexpected error"
-"Please select the target language" = "Tolong memilih bahasa sasaran"; // "An error message when the user hasn't selected project language when trying to create a project"
-"Cannot create project if not logged in!" = "Untuk membuat akun, harus masuk dulu"; // "An error message displayed when trying to create a new project without an account"
-"Someone" = "Salah seorang"; // "A placeholder for comment author title. Used when no user name is available"
-"wrote" = "menulis"; // "a portion of a comment's title. Something like 'this and this wrote:'"
-"wrote" = "menulis"; // "Part of conflict version description. Preceeded by author name"
-"Someone" = "Orang yang tidak dikenal"; // "A replacement string used when conflicting version author is not recognizable"
-"Chapter"= "Pasal"; // "A section header in translation table. Followed by the chapter number."
-"Chapter" = "Pasal"; // "A Bible chapter"
-"Books" = "Buku-buku"; // "A section header for book / source translation resources"
-"Notes" = "Catatan"; // "The generated name of the notes resource"
-"Notes" = "Catatan-catatan"; // "A section header for notes resource(s)"
-"Heading" = "Judul"; // "A title for heading note sections where the translation is still empty"
-"Original:" = "Versi lama:"; // "A title for the original version of a paragraph / paragraph portion in comment context"
-"Current:" = "Versi terbaru:"; //  "A title for the curent version of a paragraph / paragraph portion in comment context"
-"Establishing Connection" = "Sedang berusaha menyambunkan"; // "Online status while the system is connecting"
-"Transferring" = "Data sedang dipindahkan"; // "Online status when data is being transferred between devices"
-"Transfer Complete" = "Data selesai dipindahkan"; // "Online status when a single time transaction has been completed"
-"Transfer Failed" = "Data tidak dapat dipindahkan"; // "Online status when a single time transaction failed with an error"
-"Off" = "Tidak ada hubungan"; // "Online status when connection is disconnected and there are no attempts of changing it"
-"No Connection" = "Tidak ada koneksi"; // "Online status when connection is offline"
-"Access Denied" = "Hubungan ditolak"; // "Online status when provided credentials don't match the required"
-"Waiting for Updates" = "Sedang tunggu pemutakhiran"; // "Online status when the connection is up to date"
-"Versions" = "Versi-versi"; // "n Average number of versions (per paragraph)"
-"Joined" = "Disambung dengan"; // "Part of host info desciption. Followed by host user name."
-"on project:" = "proyek"; // "Part of host info description. Followed by project name"
+/* A section header for book / source translation resources */
+"Books" = "Buku-buku";
+
+/* An error message displayed when trying to create a new project without an account */
+"Cannot create project if not logged in!" = "Untuk membuat akun, harus masuk dulu";
+
+/* A Bible chapter
+   A section header in translation table. Followed by the chapter number. */
+"Chapter" = "Pasal";
+
+/* A title for the curent version of a paragraph / paragraph portion in comment context */
+"Current:" = "Versi terbaru:";
+
+/* Online status while the system is connecting */
+"Establishing Connection" = "Sedang berusaha menyambunkan";
+
+/* A table heading for failed usx-import cases */
+"Failed Cases" = "Tidak bisa diimpor";
+
+/* A title for heading note sections where the translation is still empty */
+"Heading" = "Judul";
+
+/* An error message displayed when account creation fails due to an unexpected error */
+"Internal error occurred while saving data." = "Kesalahan internal. Data tidak dapat disimpan";
+
+/* An error message displayed when project creation fails due to an unexpected error
+   An error message shown when login fails due to an internal error
+   An error message when book import fails due to some unexpected error */
+"Internal error occurred!" = "Kesalahan internal";
+
+/* An error message displayed when account creation fails due to an unexpected error */
+"Internal error occurred. Please try again." = "Kesalahan internal. Tolong coba lagi.";
+
+/* An error message shown when trying to login with non-existing account */
+"Invalid account name" = "Nama akun tidak diterima";
+
+/* An error message shown when user provides an invalid password in login */
+"Invalid password" = "Sandi tidak diterima";
+
+/* Part of host info desciption. Followed by host user name. */
+"Joined" = "Disambung dengan";
+
+/* Online status when connection is offline */
+"No Connection" = "Tidak ada koneksi";
+
+/* An error displayed when avatar was not selected in book import (which shouldn't ever happen if program is workin) */
+"No user data available!" = "Data pengguna tidak ada";
+
+/* A section header for notes resource(s)
+   The generated name of the notes resource */
+"Notes" = "Catatan-catatan";
+
+/* Online status when connection is disconnected and there are no attempts of changing it */
+"Off" = "Tidak ada hubungan";
+
+/* A title for the original version of a paragraph / paragraph portion in comment context */
+"Original:" = "Versi lama:";
+
+/* An error message displayed when trying to create new avatar without first filling all required fields */
+"Please fill in the required fields" = "Tolong mengisi semua informasi yang diperlukan";
+
+/* An error message shown when password is missing in login */
+"Please provide a password" = "Tolong memberikan sandi";
+
+/* An error message shown when username / account name is missing in login */
+"Please provide an account name" = "Tolong memberikan nama akun";
+
+/* An error message when the user hasn't selected project language when trying to create a project */
+"Please select the target language" = "Tolong memilih bahasa sasaran";
+
+/* A placeholder for comment author title. Used when no user name is available
+   A replacement string used when conflicting version author is not recognizable */
+"Someone" = "Orang yang tidak dikenal";
+
+/* A table heading for succesfull usx-import cases */
+"Success Cases" = "Impor berhasil";
+
+/* An error message displayed when new avatar password is not repeated correctly
+   An error message displayed when two passwords fields contents don't match */
+"The passwords don't match!" = "Sandi-sandi berbeda";
+
+/* Online status when a single time transaction has been completed */
+"Transfer Complete" = "Data selesai dipindahkan";
+
+/* Online status when a single time transaction failed with an error */
+"Transfer Failed" = "Data tidak dapat dipindahkan";
+
+/* Online status when data is being transferred between devices */
+"Transferring" = "Data sedang dipindahkan";
+
+/* n Average number of versions (per paragraph) */
+"Versions" = "Versi-versi";
+
+/* Online status when the connection is up to date */
+"Waiting for Updates" = "Sedang tunggu pemutakhiran";
+
+/* Part of host info description. Followed by project name */
+"on project:" = "proyek";
+
+/* a portion of a comment's title. Something like 'this and this wrote:'
+   Part of conflict version description. Preceeded by author name */
+"wrote" = "menulis";
 

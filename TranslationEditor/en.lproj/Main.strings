@@ -1,26 +1,27 @@
-/* Class = "UILabel"; text = "Target Translation"; ObjectID = "6vN-kF-8Bu"; */
-"6vN-kF-8Bu.text" = "Terjemahan sasaran";
-
-/* Class = "UILabel"; text = "Subject"; ObjectID = "9Y1-0T-HKm"; Note = "Note thread subject title"; */
-"9Y1-0T-HKm.text" = "Subjek";
 
 /* Class = "UILabel"; text = "1: 3 - 8"; ObjectID = "64G-83-vHx"; */
 "64G-83-vHx.text" = "1: 3 - 8";
 
+/* Class = "UILabel"; text = "Target Translation"; ObjectID = "6vN-kF-8Bu"; */
+"6vN-kF-8Bu.text" = "Target Translation";
+
+/* Class = "UILabel"; text = "Subject"; ObjectID = "9Y1-0T-HKm"; Note = "Note thread subject title"; */
+"9Y1-0T-HKm.text" = "Subject";
+
 /* Class = "UILabel"; text = "Comment text"; ObjectID = "AX9-9x-VWK"; Note = "Note thread initial comment title"; */
-"AX9-9x-VWK.text" = "Isi usulan";
+"AX9-9x-VWK.text" = "Comment text";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Bgn-o0-ynq"; Note = "Cancel comment post button"; */
-"Bgn-o0-ynq.normalTitle" = "Batalkan";
+"Bgn-o0-ynq.normalTitle" = "Cancel";
 
 /* Class = "UILabel"; text = "Syalom Wrote"; ObjectID = "D8U-Gs-CEk"; */
-"D8U-Gs-CEk.text" = "Syalom menulis";
+"D8U-Gs-CEk.text" = "Syalom Wrote";
 
 /* Class = "UILabel"; text = "Translation for Keruso?"; ObjectID = "EEv-dU-6C3"; */
 "EEv-dU-6C3.text" = "Translation for Keruso?";
 
 /* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "EbA-yd-hUR"; */
-"EbA-yd-hUR.normalTitle" = "Menyunting";
+"EbA-yd-hUR.normalTitle" = "Edit";
 
 /* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."; ObjectID = "Fps-Dv-Nlj"; */
 "Fps-Dv-Nlj.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
@@ -29,67 +30,67 @@
 "HeG-UF-hqZ.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
 /* Class = "UILabel"; text = "Your Comment"; ObjectID = "Lgy-5O-C4S"; Note = "Title for comment text area"; */
-"Lgy-5O-C4S.text" = "Usulan Anda";
+"Lgy-5O-C4S.text" = "Your Comment";
 
 /* Class = "UILabel"; text = "3 Mar 2017"; ObjectID = "M3h-im-03Q"; */
 "M3h-im-03Q.text" = "3 Mar 2017";
 
 /* Class = "UILabel"; text = "Tags"; ObjectID = "NBK-4j-7oq"; */
-"NBK-4j-7oq.text" = "Tag-tag";
+"NBK-4j-7oq.text" = "Tags";
 
 /* Class = "UIButton"; normalTitle = "Close"; ObjectID = "Ndl-zU-w1a"; */
-"Ndl-zU-w1a.normalTitle" = "Tutup";
+"Ndl-zU-w1a.normalTitle" = "Close";
 
 /* Class = "UILabel"; text = "English"; ObjectID = "SMb-y4-mUj"; */
-"SMb-y4-mUj.text" = "Inggeris";
+"SMb-y4-mUj.text" = "English";
 
 /* Class = "UIButton"; normalTitle = "Post ★"; ObjectID = "UQD-g1-7N1"; Note = "Button for posting a new thread"; */
-"UQD-g1-7N1.normalTitle" = "Mengunggah ★";
+"UQD-g1-7N1.normalTitle" = "Post ★";
 
 /* Class = "UILabel"; text = "Good News"; ObjectID = "UXl-eu-CQS"; */
-"UXl-eu-CQS.text" = "Kabar Baik";
+"UXl-eu-CQS.text" = "Good News";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "WSr-DF-Ya5"; Note = "Cancel conflict solve button"; */
-"WSr-DF-Ya5.normalTitle" = "Batalkan";
+"WSr-DF-Ya5.normalTitle" = "Cancel";
 
 /* Class = "UILabel"; text = "Verse"; ObjectID = "Z2Z-BH-ajr"; Note = "Target verse (number) selection"; */
-"Z2Z-BH-ajr.text" = "Ayat";
+"Z2Z-BH-ajr.text" = "Verse";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "cRH-uF-zec"; Note = "Cancel thread post button"; */
-"cRH-uF-zec.normalTitle" = "Batalkan";
+"cRH-uF-zec.normalTitle" = "Cancel";
 
 /* Class = "UILabel"; text = "Syalom"; ObjectID = "cWh-s1-66p"; */
 "cWh-s1-66p.text" = "Syalom";
 
 /* Class = "UIButton"; normalTitle = "Post ★"; ObjectID = "ehV-CF-i1b"; Note = "Post new thread button"; */
-"ehV-CF-i1b.normalTitle" = "Mengunggah ★";
+"ehV-CF-i1b.normalTitle" = "Post ★";
 
 /* Class = "UILabel"; text = "Otsikkoteksti"; ObjectID = "fwx-Qq-EA7"; */
-"fwx-Qq-EA7.text" = "Judul";
+"fwx-Qq-EA7.text" = "Otsikkoteksti";
 
 /* Class = "UILabel"; text = "Pending"; ObjectID = "gib-9y-P1o"; Note = "Whether a note is open or closed"; */
-"gib-9y-P1o.text" = "Sedang diusahakan";
+"gib-9y-P1o.text" = "Pending";
 
 /* Class = "UIButton"; normalTitle = "Edit project tags"; ObjectID = "hTk-pD-MSL"; */
-"hTk-pD-MSL.normalTitle" = "Menyunting tag-tag projek";
+"hTk-pD-MSL.normalTitle" = "Edit project tags";
 
 /* Class = "UILabel"; text = "Please pick a version to solve the conflict"; ObjectID = "iR3-fi-nN8"; Note = "Conflict resolve dialog hint text"; */
-"iR3-fi-nN8.text" = "Tolong memilih satu versi untuk mengatasi soal ini";
+"iR3-fi-nN8.text" = "Please pick a version to solve the conflict";
 
 /* Class = "UILabel"; text = "Reorder and toggle resources on and off"; ObjectID = "mOq-FG-LnZ"; */
-"mOq-FG-LnZ.text" = "Ganti urutan buku-buku atau membuat mereka aktif atau inaktif";
+"mOq-FG-LnZ.text" = "Reorder and toggle resources on and off";
 
 /* Class = "UILabel"; text = "12.3.2017"; ObjectID = "nt7-kO-jlq"; */
 "nt7-kO-jlq.text" = "12.3.2017";
 
 /* Class = "UILabel"; text = "Teemu wrote"; ObjectID = "q0x-F5-TX8"; */
-"q0x-F5-TX8.text" = "Teemu menulis";
+"q0x-F5-TX8.text" = "Teemu wrote";
 
 /* Class = "UISegmentedControl"; ree-vj-F6F.segmentTitles[0] = "Source Material"; ObjectID = "ree-vj-F6F"; */
-"ree-vj-F6F.segmentTitles[0]" = "Bahan sumber";
+"ree-vj-F6F.segmentTitles[0]" = "Source Material";
 
 /* Class = "UISegmentedControl"; ree-vj-F6F.segmentTitles[1] = "Notes"; ObjectID = "ree-vj-F6F"; */
-"ree-vj-F6F.segmentTitles[1]" = "Catatan";
+"ree-vj-F6F.segmentTitles[1]" = "Notes";
 
 /* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."; ObjectID = "rq5-NO-vJ8"; */
 "rq5-NO-vJ8.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
@@ -98,8 +99,7 @@
 "sMQ-kq-8ka.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
 /* Class = "UITextView"; text = "I used this and this word, but it seems there might be a better alternative. Any thoughs?"; ObjectID = "wQC-qP-041"; */
-"wQC-qP-041.text" = "Saya memaki kata-kata ini, tetapi ada kemungkinan besar ada kata yang lebih cocok. Apa pemikiran Anda?";
+"wQC-qP-041.text" = "I used this and this word, but it seems there might be a better alternative. Any thoughs?";
 
 /* Class = "UIButton"; normalTitle = "Save ★"; ObjectID = "yfA-HO-Uct"; Note = "Save / commit button"; */
-"yfA-HO-Uct.normalTitle" = "Simpan ★";
-
+"yfA-HO-Uct.normalTitle" = "Save ★";

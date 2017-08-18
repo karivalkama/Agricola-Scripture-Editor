@@ -1,6 +1,3 @@
-
-/* Class = "UILabel"; text = "Don't worry. You can fix this by connecting with another user"; ObjectID = "Nr1-AO-hqt"; */
-"Nr1-AO-hqt.text" = "Don't worry. You can fix this by connecting with another user";
-
 /* Class = "UILabel"; text = "No data was found!"; ObjectID = "PZs-7A-mdZ"; */
-"PZs-7A-mdZ.text" = "No data was found!";
+"PZs-7A-mdZ.text" = "Data tidak ditemukan!";
+
