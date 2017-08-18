@@ -3,7 +3,8 @@
   TranslationEditor
 
   Created by Mikko Hilpinen on 5.7.2017.
-  Copyright © 2017 Mikko Hilpinen. All rights reserved.
+  Copyright © 2017 SIL. All rights reserved.
 */
 
 // Left = Key (in code), Right = Indonesian value
+"Failed Cases" = "Tidak bisa diimpor"; // "A table heading for failed usx-import cases"

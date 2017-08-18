@@ -3,7 +3,7 @@
 //  TranslationEditor
 //
 //  Created by Mikko Hilpinen on 13.4.2017.
-//  Copyright © 2017 Mikko Hilpinen. All rights reserved.
+//  Copyright © 2017 SIL. All rights reserved.
 //
 
 import UIKit
