@@ -25,6 +25,7 @@ protocol View
 	var view: CBLView {get}
 }
 
+// TODO: Update the view to use indexes. emit(CBLTextKey(longText), value);
 extension View
 {	
 	// Calling this function will set the map function of the view

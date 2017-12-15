@@ -256,6 +256,7 @@
 		7CE062681EE132F400A998E4 /* SelectResourcesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE062671EE132F400A998E4 /* SelectResourcesVC.swift */; };
 		7CE0626A1EE135A900A998E4 /* ResourceSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE062691EE135A900A998E4 /* ResourceSelectionCell.swift */; };
 		7CE0E2C01EC5CD97008D7A6E /* KeyboardReactiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0E2BF1EC5CD97008D7A6E /* KeyboardReactiveView.swift */; };
+		83EB457B1FE44915004A1EDD /* ReadableDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EB457A1FE44915004A1EDD /* ReadableDict.swift */; };
 		89DB5B1F0997FCC7DC1FE193 /* Pods_TranslationEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A629A8BBB661036AD32A63 /* Pods_TranslationEditor.framework */; };
 		E34ED533901B5B0626CD192D /* Pods_TranslationEditorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D52CD448467628FBD04BFD /* Pods_TranslationEditorTests.framework */; };
 /* End PBXBuildFile section */
@@ -557,6 +558,7 @@
 		7CE062671EE132F400A998E4 /* SelectResourcesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectResourcesVC.swift; sourceTree = "<group>"; };
 		7CE062691EE135A900A998E4 /* ResourceSelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceSelectionCell.swift; sourceTree = "<group>"; };
 		7CE0E2BF1EC5CD97008D7A6E /* KeyboardReactiveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardReactiveView.swift; sourceTree = "<group>"; };
+		83EB457A1FE44915004A1EDD /* ReadableDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableDict.swift; sourceTree = "<group>"; };
 		C1D52CD448467628FBD04BFD /* Pods_TranslationEditorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2CCD571AB68ECBDE6770270 /* Pods_TranslationEditorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A629A8BBB661036AD32A63 /* Pods_TranslationEditor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranslationEditor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -832,6 +834,7 @@
 				7C0130C41E3F3DFB0053C5C2 /* PropertyValueWrapable.swift */,
 				7C0130C71E3F64900053C5C2 /* IdIndex.swift */,
 				7CA3B9BE1E8512F4002A6C48 /* Attachment.swift */,
+				83EB457A1FE44915004A1EDD /* ReadableDict.swift */,
 			);
 			name = Documents;
 			sourceTree = "<group>";
@@ -1581,6 +1584,7 @@
 				7C7FD65E1EA620BA00ED2364 /* ParagraphUtils.swift in Sources */,
 				7C936C1F1E9FA81800AC06BF /* ImportUSXVC.swift in Sources */,
 				7CD9ACF31E0914470032A7F8 /* DatabaseExtension.swift in Sources */,
+				83EB457B1FE44915004A1EDD /* ReadableDict.swift in Sources */,
 				7CDBD6D11E28E53500912320 /* ScrollSyncManager.swift in Sources */,
 				7C4A4FCC1DFACC58009F890E /* Copyable.swift in Sources */,
 				7CE062661EDFFF7B00A998E4 /* ChapterHeaderCell.swift in Sources */,
