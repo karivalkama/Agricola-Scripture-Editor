@@ -85,10 +85,12 @@ struct PropertySet: CustomStringConvertible, PropertyValueWrapable
 			}
 		}
 		
+        /*
 		set
 		{
 			properties[propertyName.lowercased()] = newValue
 		}
+         */
 	}
 	
 	
@@ -120,10 +122,10 @@ struct PropertySet: CustomStringConvertible, PropertyValueWrapable
 	// Creates a new property set with one value appended
 	static func +(_ set: PropertySet, _ property: (String, PropertyValue)) -> PropertySet
 	{
-		var newSet = set
-		newSet[property.0] = property.1
-		
-		return newSet
+        var newProperties = set.properties
+        newProperties[property.0] = property.1
+        
+        return PropertySet(newProperties)
 	}
 	
 	// Combines two property sets together to form a single larger set.

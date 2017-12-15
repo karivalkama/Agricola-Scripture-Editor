@@ -51,11 +51,19 @@ final class ParagraphHistoryView: View
 				let key = [paragraph.bookId, paragraph.chapterIndex, paragraph.pathId, paragraph.created] as [Any]
 				
 				// Value = most recent + id
-				var value = PropertySet()
+                let value = [
+                    ParagraphHistoryView.VALUE_MOST_RECENT: paragraph.isMostRecent,
+                    ParagraphHistoryView.VALUE_ID: paragraph.idString
+                    ] as [String : Any]
+                
+                // TODO: This was the old version, why it was made like this is beyond me?
+				/*var value = PropertySet()
 				value[ParagraphHistoryView.VALUE_MOST_RECENT] = PropertyValue(paragraph.isMostRecent)
 				value[ParagraphHistoryView.VALUE_ID] = PropertyValue(paragraph.idString)
-				
-				emit(key, value.toDict)
+                */
+ 
+                // Was value.toDict
+				emit(key, value)
 			}
 			
 		}, reduce:
