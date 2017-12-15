@@ -17,7 +17,7 @@ struct PropertySet: CustomStringConvertible, PropertyValueWrapable
 	
 	static let empty = PropertySet()
 	
-	private(set) var properties = [String : PropertyValue]()
+    let properties: [String : PropertyValue]
 	
 	
 	// COMP. PROPERTIES	-------
@@ -98,7 +98,7 @@ struct PropertySet: CustomStringConvertible, PropertyValueWrapable
 	
 	init()
 	{
-		// Empty initialiser
+        self.properties = [:]
 	}
 	
 	init(_ properties: [String : PropertyValue])
