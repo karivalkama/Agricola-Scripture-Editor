@@ -66,7 +66,8 @@ struct VerseIndex: JSONConvertible, Comparable, ExpressibleByIntegerLiteral
 	{
 		if let letterIndex = string.rangeOfCharacter(from: CharacterSet.letters)?.lowerBound
 		{
-			if let index = Int(string.substring(to: letterIndex))
+            
+			if let index = Int(string.prefix(upTo: letterIndex))
 			{
 				return VerseIndex(index, midVerse: true)
 			}

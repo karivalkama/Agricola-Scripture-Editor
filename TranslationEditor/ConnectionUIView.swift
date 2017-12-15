@@ -92,7 +92,7 @@ fileprivate enum ConnectionState
 	{
 		let builder = QRCodeReaderViewControllerBuilder
 		{
-			$0.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObject.ObjectType.qr.rawValue], captureDevicePosition: .back)
+			$0.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObject.ObjectType.qr], captureDevicePosition: .back)
 		}
 		
 		return QRCodeReaderViewController(builder: builder)
