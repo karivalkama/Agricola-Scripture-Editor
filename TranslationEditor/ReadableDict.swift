@@ -9,20 +9,15 @@
 import Foundation
 
 // This is just a common protocol for dictionaries and dictionary-like tools (read only)
-protocol ReadableDict
+protocol PropertyDict
 {
-    // The type of the key in this dictionary
-    associatedtype Key
-    // The type of the value in this dictionary
-    associatedtype Value
-    
     // Retrieves a value from this dictionary
-    func get(_ key: Key) -> Value?
+    func get(_ key: String) -> PropertyValue?
 }
 
-extension Dictionary: ReadableDict
+extension Dictionary: PropertyDict where Key == String, Value == PropertyValue
 {
-    func get(_ key: Key) -> Value?
+    func get(_ key: String) -> PropertyValue?
     {
         return self[key]
     }
