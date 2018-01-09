@@ -3,7 +3,7 @@
 //  TranslationEditor
 //
 //  Created by Mikko Hilpinen on 27.9.2016.
-//  Copyright © 2016 Mikko Hilpinen. All rights reserved.
+//  Copyright © 2017 SIL. All rights reserved.
 //
 
 import Foundation
@@ -66,7 +66,8 @@ struct VerseIndex: JSONConvertible, Comparable, ExpressibleByIntegerLiteral
 	{
 		if let letterIndex = string.rangeOfCharacter(from: CharacterSet.letters)?.lowerBound
 		{
-			if let index = Int(string.substring(to: letterIndex))
+            
+			if let index = Int(string.prefix(upTo: letterIndex))
 			{
 				return VerseIndex(index, midVerse: true)
 			}

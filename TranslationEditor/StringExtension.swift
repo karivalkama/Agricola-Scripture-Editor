@@ -3,7 +3,7 @@
 //  TranslationEditor
 //
 //  Created by Mikko Hilpinen on 27.9.2016.
-//  Copyright © 2016 Mikko Hilpinen. All rights reserved.
+//  Copyright © 2017 SIL. All rights reserved.
 //
 
 import Foundation
@@ -132,7 +132,7 @@ extension String
 	// Returns a version of this string that contains only specified characters
 	func limited(toCharacterSet characterSet: Set<Character>) -> String
 	{
-		return String(characters.filter { characterSet.contains($0) })
+		return String(filter { characterSet.contains($0) })
 	}
 	
 	// The last n characters of this string

@@ -1,12 +1,12 @@
-
 /* Class = "UILabel"; text = "30 %"; ObjectID = "39R-Zu-5HQ"; */
 "39R-Zu-5HQ.text" = "30 %";
 
 /* Class = "UILabel"; text = "Translated"; ObjectID = "buS-jf-q8u"; Note = "Completion % description / specification"; */
-"buS-jf-q8u.text" = "Translated";
+"buS-jf-q8u.text" = "Diterjemahkan";
 
 /* Class = "UILabel"; text = "per Paragraph"; ObjectID = "qmT-Kl-qhl"; Note = "Version amount description / specification"; */
-"qmT-Kl-qhl.text" = "per Paragraph";
+"qmT-Kl-qhl.text" = "per Paragraf";
 
 /* Class = "UILabel"; text = "~2 Versions"; ObjectID = "y5W-tq-BdH"; */
-"y5W-tq-BdH.text" = "~2 Versions";
+"y5W-tq-BdH.text" = "~2 Versi-versi";
+

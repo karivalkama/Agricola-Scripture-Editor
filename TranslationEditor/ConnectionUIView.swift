@@ -3,7 +3,7 @@
 //  TranslationEditor
 //
 //  Created by Mikko Hilpinen on 17.5.2017.
-//  Copyright © 2017 Mikko Hilpinen. All rights reserved.
+//  Copyright © 2017 SIL. All rights reserved.
 //
 
 import Foundation
@@ -92,7 +92,7 @@ fileprivate enum ConnectionState
 	{
 		let builder = QRCodeReaderViewControllerBuilder
 		{
-			$0.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObject.ObjectType.qr.rawValue], captureDevicePosition: .back)
+			$0.reader = QRCodeReader(metadataObjectTypes: [AVMetadataObject.ObjectType.qr], captureDevicePosition: .back)
 		}
 		
 		return QRCodeReaderViewController(builder: builder)

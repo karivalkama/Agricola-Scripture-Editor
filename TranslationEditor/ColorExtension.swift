@@ -3,7 +3,7 @@
 //  TranslationEditor
 //
 //  Created by Mikko Hilpinen on 9.12.2016.
-//  Copyright © 2016 Mikko Hilpinen. All rights reserved.
+//  Copyright © 2017 SIL. All rights reserved.
 //
 
 import Foundation
@@ -19,7 +19,7 @@ extension UIColor
 			cString.remove(at: cString.startIndex)
 		}
 		
-		if ((cString.characters.count) != 6)
+		if ((cString.count) != 6)
 		{
 			self.init(red: 0, green: 0, blue: 0, alpha: alpha)
 		}

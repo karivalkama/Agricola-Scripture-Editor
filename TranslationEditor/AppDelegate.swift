@@ -3,7 +3,7 @@
 //  TranslationEditor
 //
 //  Created by Mikko Hilpinen on 16.9.2016.
-//  Copyright © 2016 Mikko Hilpinen. All rights reserved.
+//  Copyright © 2017 SIL. All rights reserved.
 //
 
 import UIKit
@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		
 		navigationBarAppearance.tintColor = barTheme.textColour
 		navigationBarAppearance.barTintColor = barTheme.colour
-		navigationBarAppearance.titleTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue : barTheme.textColour]
+        navigationBarAppearance.titleTextAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue) : barTheme.textColour]
 		
 		// Sets up the conflict handler
 		ConflictResolver.instance.addMerger

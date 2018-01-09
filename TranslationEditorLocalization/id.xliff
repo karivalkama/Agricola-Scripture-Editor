@@ -1,0 +1,1453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="TranslationEditor/Base.lproj/BookProgressUIView.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="39R-Zu-5HQ.text">
+        <source>30 %</source>
+        <target>30 %</target>
+        <note>Class = "UILabel"; text = "30 %"; ObjectID = "39R-Zu-5HQ";</note>
+      </trans-unit>
+      <trans-unit id="buS-jf-q8u.text">
+        <source>Translated</source>
+        <target>Diterjemahkan</target>
+        <note>Class = "UILabel"; text = "Translated"; ObjectID = "buS-jf-q8u"; Note = "Completion % description / specification";</note>
+      </trans-unit>
+      <trans-unit id="qmT-Kl-qhl.text">
+        <source>per Paragraph</source>
+        <target>per Paragraf</target>
+        <note>Class = "UILabel"; text = "per Paragraph"; ObjectID = "qmT-Kl-qhl"; Note = "Version amount description / specification";</note>
+      </trans-unit>
+      <trans-unit id="y5W-tq-BdH.text">
+        <source>~2 Versions</source>
+        <target>~2 Versi-versi</target>
+        <note>Class = "UILabel"; text = "~2 Versions"; ObjectID = "y5W-tq-BdH";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/Common.storyboard" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="6hP-4n-aXZ.text">
+        <source>Text Language*</source>
+        <target>Bahasa*</target>
+        <note>Class = "UILabel"; text = "Text Language*"; ObjectID = "6hP-4n-aXZ";</note>
+      </trans-unit>
+      <trans-unit id="7KE-XC-dXS.text">
+        <source>Found older version</source>
+        <target>Versi lama yang ditemukan</target>
+        <note>Class = "UILabel"; text = "Found older version"; ObjectID = "7KE-XC-dXS";</note>
+      </trans-unit>
+      <trans-unit id="7ee-XJ-Ceg.text">
+        <source>Parsing Failed!</source>
+        <target>Parsing gagal!</target>
+        <note>Class = "UILabel"; text = "Parsing Failed!"; ObjectID = "7ee-XJ-Ceg";</note>
+      </trans-unit>
+      <trans-unit id="7oz-p6-Nbn.text">
+        <source>Preview Before Import</source>
+        <target>Meninjau sebelum memasukkan</target>
+        <note>Class = "UILabel"; text = "Preview Before Import"; ObjectID = "7oz-p6-Nbn";</note>
+      </trans-unit>
+      <trans-unit id="8I5-ni-SGB.text">
+        <source>7 File(s)</source>
+        <target>7 File-file</target>
+        <note>Class = "UILabel"; text = "7 File(s)"; ObjectID = "8I5-ni-SGB";</note>
+      </trans-unit>
+      <trans-unit id="29p-ee-NQq.text">
+        <source>Shared Account Password*</source>
+        <target>Sandi* akun bersama</target>
+        <note>Class = "UILabel"; text = "Shared Account Password*"; ObjectID = "29p-ee-NQq"; Note = "Label for shared account creation password input";</note>
+      </trans-unit>
+      <trans-unit id="AXe-sD-DXW.text">
+        <source>Can't overwrite a book from another project</source>
+        <target>Tidak bisa mengubah buku dari proyek orang lain</target>
+        <note>Class = "UILabel"; text = "Can't overwrite a book from another project"; ObjectID = "AXe-sD-DXW";</note>
+      </trans-unit>
+      <trans-unit id="AyF-os-xLN.text">
+        <source>New Version</source>
+        <target>Versi terbaru</target>
+        <note>Class = "UILabel"; text = "New Version"; ObjectID = "AyF-os-xLN";</note>
+      </trans-unit>
+      <trans-unit id="Euc-n7-nhV.text">
+        <source>This and this book id</source>
+        <target>Id untuk buku-buku ini</target>
+        <note>Class = "UILabel"; text = "This and this book id"; ObjectID = "Euc-n7-nhV";</note>
+      </trans-unit>
+      <trans-unit id="P91-EO-QBx.text">
+        <source>Shared Account Name*</source>
+        <target>Nama* akun bersama</target>
+        <note>Class = "UILabel"; text = "Shared Account Name*"; ObjectID = "P91-EO-QBx"; Note = "Label for shared account creation account name input";</note>
+      </trans-unit>
+      <trans-unit id="RJP-av-qG3.text">
+        <source>Old Version</source>
+        <target>Versi lama</target>
+        <note>Class = "UILabel"; text = "Old Version"; ObjectID = "RJP-av-qG3";</note>
+      </trans-unit>
+      <trans-unit id="Req-aL-FGV.text">
+        <source>Book Name</source>
+        <target>Nama buku</target>
+        <note>Class = "UILabel"; text = "Book Name"; ObjectID = "Req-aL-FGV";</note>
+      </trans-unit>
+      <trans-unit id="SZB-cS-erc.normalTitle">
+        <source>Skip</source>
+        <target>Lanjut</target>
+        <note>Class = "UIButton"; normalTitle = "Skip"; ObjectID = "SZB-cS-erc";</note>
+      </trans-unit>
+      <trans-unit id="THO-ly-nZW.text">
+        <source>Read Data</source>
+        <target>Membaca data</target>
+        <note>Class = "UILabel"; text = "Read Data"; ObjectID = "THO-ly-nZW";</note>
+      </trans-unit>
+      <trans-unit id="W0m-OU-vop.text">
+        <source>Preview</source>
+        <target>Meninjau</target>
+        <note>Class = "UILabel"; text = "Preview"; ObjectID = "W0m-OU-vop";</note>
+      </trans-unit>
+      <trans-unit id="XZd-9u-Tlv.normalTitle">
+        <source>Cancel</source>
+        <target>Batal</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "XZd-9u-Tlv";</note>
+      </trans-unit>
+      <trans-unit id="Xbp-A2-kJ8.normalTitle">
+        <source>Close</source>
+        <target>Tutup</target>
+        <note>Class = "UIButton"; normalTitle = "Close"; ObjectID = "Xbp-A2-kJ8"; Note = "Close connection dialog -button";</note>
+      </trans-unit>
+      <trans-unit id="Zng-fH-PJW.text">
+        <source>A shared account is always tied to a single project. Use a shared account when you have multiple users on the same device.</source>
+        <target>Akun bersama dipakai untuk satu proyek saja. Akun bersama dipakai kalau beberapa penerjemah memakai satu alat.</target>
+        <note>Class = "UILabel"; text = "A shared account is always tied to a single project. Use a shared account when you have multiple users on the same device."; ObjectID = "Zng-fH-PJW"; Note = "A description of the idea of a shared project account";</note>
+      </trans-unit>
+      <trans-unit id="bQJ-1F-s9D.text">
+        <source>This is the translation we're writing</source>
+        <target>Inilah terjemahan kita sedang menulis</target>
+        <note>Class = "UILabel"; text = "This is the translation we're writing"; ObjectID = "bQJ-1F-s9D";</note>
+      </trans-unit>
+      <trans-unit id="bjc-il-f29.text">
+        <source>Translation Nickname*</source>
+        <target>Singkatan* terjemahan</target>
+        <note>Class = "UILabel"; text = "Translation Nickname*"; ObjectID = "bjc-il-f29";</note>
+      </trans-unit>
+      <trans-unit id="dxC-8r-qfX.text">
+        <source>No paragraphs read</source>
+        <target>Paragraf belum dibaca</target>
+        <note>Class = "UILabel"; text = "No paragraphs read"; ObjectID = "dxC-8r-qfX";</note>
+      </trans-unit>
+      <trans-unit id="gNa-Ve-hCi.text">
+        <source>Repeat Password*</source>
+        <target>Ulangi sandi*</target>
+        <note>Class = "UILabel"; text = "Repeat Password*"; ObjectID = "gNa-Ve-hCi"; Note = "Label for shared account creation password repeat field";</note>
+      </trans-unit>
+      <trans-unit id="hXu-HX-ft6.text">
+        <source>example.usx</source>
+        <target>contoh.usx</target>
+        <note>Class = "UILabel"; text = "example.usx"; ObjectID = "hXu-HX-ft6";</note>
+      </trans-unit>
+      <trans-unit id="ior-Fu-R1R.text">
+        <source>Existing books may be overwritten</source>
+        <target>Terjemahan buku-buku yang ada bisa hilang</target>
+        <note>Class = "UILabel"; text = "Existing books may be overwritten"; ObjectID = "ior-Fu-R1R";</note>
+      </trans-unit>
+      <trans-unit id="kZH-U1-Pso.text">
+        <source>Import USX Files</source>
+        <target>Impor file-file USX</target>
+        <note>Class = "UILabel"; text = "Import USX Files"; ObjectID = "kZH-U1-Pso";</note>
+      </trans-unit>
+      <trans-unit id="kz5-Le-784.text">
+        <source>(1 / 3)</source>
+        <target>(1 / 3)</target>
+        <note>Class = "UILabel"; text = "(1 / 3)"; ObjectID = "kz5-Le-784";</note>
+      </trans-unit>
+      <trans-unit id="nOj-65-g3n.text">
+        <source>Galatians</source>
+        <target>Galatia</target>
+        <note>Class = "UILabel"; text = "Galatians"; ObjectID = "nOj-65-g3n";</note>
+      </trans-unit>
+      <trans-unit id="tPs-jY-mfW.text">
+        <source>Error Label</source>
+        <target>Judul kesalahan</target>
+        <note>Class = "UILabel"; text = "Error Label"; ObjectID = "tPs-jY-mfW";</note>
+      </trans-unit>
+      <trans-unit id="tbZ-H8-YFE.normalTitle">
+        <source>OK</source>
+        <target>OK</target>
+        <note>Class = "UIButton"; normalTitle = "OK"; ObjectID = "tbZ-H8-YFE"; Note = "Button that saves shared account changes and closes the view";</note>
+      </trans-unit>
+      <trans-unit id="xno-SJ-mzv.normalTitle">
+        <source>Cancel</source>
+        <target>Batal</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "xno-SJ-mzv"; Note = "Button closes shared account management view without saving changes";</note>
+      </trans-unit>
+      <trans-unit id="yR6-V6-nUm.normalTitle">
+        <source>Import</source>
+        <target>Impor</target>
+        <note>Class = "UIButton"; normalTitle = "Import"; ObjectID = "yR6-V6-nUm";</note>
+      </trans-unit>
+      <trans-unit id="zBA-6k-Q2Q.normalTitle">
+        <source>OK!</source>
+        <target>OK!</target>
+        <note>Class = "UIButton"; normalTitle = "OK!"; ObjectID = "zBA-6k-Q2Q";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/Connect2.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="0Ks-59-8MK.text">
+        <source>Joined Teemu</source>
+        <target>Bergabung dengan Teemu</target>
+        <note>Class = "UILabel"; text = "Joined Teemu"; ObjectID = "0Ks-59-8MK";</note>
+      </trans-unit>
+      <trans-unit id="0dg-mf-037.segmentTitles[0]">
+        <source>Disconnected</source>
+        <target>Hubungan terputus</target>
+        <note>Class = "UISegmentedControl"; 0dg-mf-037.segmentTitles[0] = "Disconnected"; ObjectID = "0dg-mf-037"; Note = "Segmented control for P2P status";</note>
+      </trans-unit>
+      <trans-unit id="0dg-mf-037.segmentTitles[1]">
+        <source>Joined</source>
+        <target>Ada hubungan</target>
+        <note>Class = "UISegmentedControl"; 0dg-mf-037.segmentTitles[1] = "Joined"; ObjectID = "0dg-mf-037"; Note = "Segmented control for P2P status";</note>
+      </trans-unit>
+      <trans-unit id="0dg-mf-037.segmentTitles[2]">
+        <source>Hosting</source>
+        <target>Tuan rumah / Sumber</target>
+        <note>Class = "UISegmentedControl"; 0dg-mf-037.segmentTitles[2] = "Hosting"; ObjectID = "0dg-mf-037"; Note = "Segmented control for P2P status";</note>
+      </trans-unit>
+      <trans-unit id="Etb-rQ-sxz.text">
+        <source>Others can join by scanning this code</source>
+        <target>Bergabung dengan memindai kode ini</target>
+        <note>Class = "UILabel"; text = "Others can join by scanning this code"; ObjectID = "Etb-rQ-sxz"; Note = "Description for hosting qr code";</note>
+      </trans-unit>
+      <trans-unit id="Hrx-ho-8Cg.text">
+        <source>Translation data can be exported in USX format which is readable by Agricola and Paratext</source>
+        <target>Terjemahan-terjemahan bisa diekspor dalam format USX, yang bisa dibaca oleh Agricola dan Paratext</target>
+        <note>Class = "UILabel"; text = "Translation data can be exported in USX format which is readable by Agricola and Paratext"; ObjectID = "Hrx-ho-8Cg"; Note = "Short description for USX file sharing";</note>
+      </trans-unit>
+      <trans-unit id="Ild-dz-aQ2.normalTitle">
+        <source>Cancel Sharing</source>
+        <target>Batalkan kebersamaan</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel Sharing"; ObjectID = "Ild-dz-aQ2"; Note = "Cancel sharing -button";</note>
+      </trans-unit>
+      <trans-unit id="IuX-qw-Wig.text">
+        <source>Peer-to-peer is used for synchronizing all data between two Agricola programs.</source>
+        <target>Peer-to-peer dipakai untuk disinkronkan semua terjemahan di antara dua pemakai Agricola.</target>
+        <note>Class = "UILabel"; text = "Peer-to-peer is used for synchronizing all data between two Agricola programs."; ObjectID = "IuX-qw-Wig"; Note = "Short description of peer-to-peer functionality";</note>
+      </trans-unit>
+      <trans-unit id="Kab-Dc-k04.text">
+        <source>Current Peer-to-Peer Status</source>
+        <target>Status Peer-to-Peer sekarang</target>
+        <note>Class = "UILabel"; text = "Current Peer-to-Peer Status"; ObjectID = "Kab-Dc-k04"; Note = "Title for P2P Connection controls";</note>
+      </trans-unit>
+      <trans-unit id="OKQ-ia-PKp.text">
+        <source>on project: Test Project</source>
+        <target>proyek: Proyek Percobaan</target>
+        <note>Class = "UILabel"; text = "on project: Test Project"; ObjectID = "OKQ-ia-PKp";</note>
+      </trans-unit>
+      <trans-unit id="Weh-hb-yWn.text">
+        <source>USX File Sharing</source>
+        <target>Membagi-bagi file USX</target>
+        <note>Class = "UILabel"; text = "USX File Sharing"; ObjectID = "Weh-hb-yWn"; Note = "Title for USX file sharing options in connect view";</note>
+      </trans-unit>
+      <trans-unit id="dUM-Ds-Tzn.text">
+        <source>A single person should HOST a connection.
+Multiple people can JOIN (camera required).
+All data will be transferred until DISCONNECTED.</source>
+        <target>Satu penerjemah menjadi tuan rumah hubungan.
+Beberapa penerjemah lain boleh bergabung (kamera iPad diperlukan).
+Semua terjemahan dan catatan akan dikirim selama berkoneksi.</target>
+        <note>Class = "UILabel"; text = "A single person should HOST a connection.\nMultiple people can JOIN (camera required).\nAll data will be transferred until DISCONNECTED."; ObjectID = "dUM-Ds-Tzn"; Note = "A description for different P2P statuses";</note>
+      </trans-unit>
+      <trans-unit id="sWM-C5-yTC.text">
+        <source>Select a book to send</source>
+        <target>Tolong memilih buku yang mau dikirim</target>
+        <note>Class = "UILabel"; text = "Select a book to send"; ObjectID = "sWM-C5-yTC"; Note = "Export book selection title";</note>
+      </trans-unit>
+      <trans-unit id="ywC-sy-aJD.normalTitle">
+        <source>Share</source>
+        <target>Membagi-bagi</target>
+        <note>Class = "UIButton"; normalTitle = "Share"; ObjectID = "ywC-sy-aJD"; Note = "Button for sharing exported usx files";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/ConnectPromptNoDataView.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="Nr1-AO-hqt.text">
+        <source>Don't worry. You can fix this by connecting with another user.</source>
+        <target>Jangan khawatir. Anda bisa mengatasi soal ini dengan berkoneksi dengan pemakai lain.</target>
+        <note>Class = "UILabel"; text = "Don't worry. You can fix this by connecting with another user"; ObjectID = "Nr1-AO-hqt";</note>
+      </trans-unit>
+      <trans-unit id="PZs-7A-mdZ.text">
+        <source>No data was found!</source>
+        <target>Data tidak ditemukan!</target>
+        <note>Class = "UILabel"; text = "No data was found!"; ObjectID = "PZs-7A-mdZ";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/ConnectPromptView.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="1aq-Tb-qgB.text">
+        <source>1) Have a person host a connection (they must have a project open, then press Connect, then Host)
+2) Press the connect button, then JOIN
+3) Scan the QR code on the host's device</source>
+        <target>1) Satu penerjemah menjadi tuan rumah koneksi (proyek mereka harus sedang terbuka, kemudian tindis tombol Connect, baru tindis tombol Host)
+2) Tindis tombol connect button, baru tindis tombol JOIN
+3) Tolong memindai kode QR pada iPad tuan rumah</target>
+        <note>Class = "UILabel"; text = "1) Have a person host a connection (they must have a project open, then press Connect, then Host)\n2) Press the connect button, then JOIN\n3) Scan the QR code on the host's device"; ObjectID = "1aq-Tb-qgB";</note>
+      </trans-unit>
+      <trans-unit id="VQ5-Td-PPs.normalTitle">
+        <source>Connect</source>
+        <target>Connect</target>
+        <note>Class = "UIButton"; normalTitle = "Connect"; ObjectID = "VQ5-Td-PPs";</note>
+      </trans-unit>
+      <trans-unit id="XWk-di-xQ2.text">
+        <source>Here's how to connect with others</source>
+        <target>Begini caranya berhubungan dengan penerjemah lain</target>
+        <note>Class = "UILabel"; text = "Here's how to connect with others"; ObjectID = "XWk-di-xQ2";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/CreateAvatar.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="1gy-WG-rBF.text">
+        <source>Sharing Allowed</source>
+        <target>Pembagian dibolehkan</target>
+        <note>Class = "UILabel"; text = "Sharing Allowed"; ObjectID = "1gy-WG-rBF"; Note = "Avatar sharing switch label";</note>
+      </trans-unit>
+      <trans-unit id="4AE-l3-t94.text">
+        <source>Select User Image</source>
+        <target>Memilih gambar pemakai</target>
+        <note>Class = "UILabel"; text = "Select User Image"; ObjectID = "4AE-l3-t94"; Note = "Avatar image selection title label";</note>
+      </trans-unit>
+      <trans-unit id="fCP-7Q-H96.text">
+        <source>This name can be viewed by other project members</source>
+        <target>Nama ini boleh ditinjau oleh penerjemah lain</target>
+        <note>Class = "UILabel"; text = "This name can be viewed by other project members"; ObjectID = "fCP-7Q-H96"; Note = "Avatar sharing description / hint";</note>
+      </trans-unit>
+      <trans-unit id="koK-wI-NjB.text">
+        <source>New User Password</source>
+        <target>Sandi baru</target>
+        <note>Class = "UILabel"; text = "New User Password"; ObjectID = "koK-wI-NjB"; Note = "Input label for user / avatar password";</note>
+      </trans-unit>
+      <trans-unit id="trZ-g5-vnc.text">
+        <source>Whether this user should be available in the shared project account</source>
+        <target>Apakah akun pemakai ini termasuk akun yang diikut-sertakan</target>
+        <note>Class = "UILabel"; text = "Whether this user should be available in the shared project account"; ObjectID = "trZ-g5-vnc"; Note = "Avatar sharing description / hint";</note>
+      </trans-unit>
+      <trans-unit id="xmK-bB-319.text">
+        <source>Repeat New Password</source>
+        <target>Menulis ulang Sandi baru</target>
+        <note>Class = "UILabel"; text = "Repeat New Password"; ObjectID = "xmK-bB-319"; Note = "Input label for repeating user / avatar password";</note>
+      </trans-unit>
+      <trans-unit id="zzN-Av-RhD.text">
+        <source>Name*</source>
+        <target>Nama*</target>
+        <note>Class = "UILabel"; text = "Name*"; ObjectID = "zzN-Av-RhD"; Note = "Avatar name input label";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/DefaultErrorView.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="ESd-yb-D10.text">
+        <source>Failed to load data due to an internal error!</source>
+        <target>Tidak berhasil ambil data oleh karena kesalahan internal!</target>
+        <note>Class = "UILabel"; text = "Failed to load data due to an internal error!"; ObjectID = "ESd-yb-D10";</note>
+      </trans-unit>
+      <trans-unit id="SxV-SH-wpj.text">
+        <source>An Error Occurred!</source>
+        <target>Kesalahan terjadi!</target>
+        <note>Class = "UILabel"; text = "An Error Occurred!"; ObjectID = "SxV-SH-wpj";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/DefaultLoadingView.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="5EY-sy-FFz.text">
+        <source>Loading...</source>
+        <target>Sedang ambil data ...</target>
+        <note>Class = "UILabel"; text = "Loading..."; ObjectID = "5EY-sy-FFz";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/DefaultNoDataView.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="9eP-k7-eZ6.text">
+        <source>No data was found!</source>
+        <target>Data tidak ditemukan!</target>
+        <note>Class = "UILabel"; text = "No data was found!"; ObjectID = "9eP-k7-eZ6";</note>
+      </trans-unit>
+      <trans-unit id="R75-ki-h2H.text">
+        <source>It looks like there's nothing to show here...</source>
+        <target>Ternyata tidak ada yang bisa diperlihatkan di sini ...</target>
+        <note>Class = "UILabel"; text = "It looks like there's nothing to show here..."; ObjectID = "R75-ki-h2H";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/FilteredMultiSelection.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="r7a-mh-Tjm.placeholder">
+        <source>Search</source>
+        <target>Mencari</target>
+        <note>Class = "UITextField"; placeholder = "Search"; ObjectID = "r7a-mh-Tjm";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/FilteredSingleSelection.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="WhJ-Qj-qgG.text">
+        <source>Select</source>
+        <target>Memilih</target>
+        <note>Class = "UILabel"; text = "Select"; ObjectID = "WhJ-Qj-qgG"; Note = "Select single title";</note>
+      </trans-unit>
+      <trans-unit id="aYl-LP-tPf.normalTitle">
+        <source>Add</source>
+        <target>Tambah</target>
+        <note>Class = "UIButton"; normalTitle = "Add"; ObjectID = "aYl-LP-tPf"; Note = "Add a new element to list -button";</note>
+      </trans-unit>
+      <trans-unit id="jh9-jK-56R.placeholder">
+        <source>Search</source>
+        <target>Mencari</target>
+        <note>Class = "UITextField"; placeholder = "Search"; ObjectID = "jh9-jK-56R"; Note = "Input field used for filtering available selection";</note>
+      </trans-unit>
+      <trans-unit id="osC-dE-sxa.text">
+        <source>Or Insert New</source>
+        <target>Atau tambah baru</target>
+        <note>Class = "UILabel"; text = "Or Insert New"; ObjectID = "osC-dE-sxa"; Note = "Title indicating option for inserting new elements";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/LaunchScreen.storyboard" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body/>
+  </file>
+  <file original="TranslationEditor/Base.lproj/Login.storyboard" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="0df-tq-SiK.text">
+        <source>Errors are displayed here!</source>
+        <target>Kesalahan-kesalahan dipertunjukkan di sini!</target>
+        <note>Class = "UILabel"; text = "Errors are displayed here!"; ObjectID = "0df-tq-SiK";</note>
+      </trans-unit>
+      <trans-unit id="3OS-MG-og8.normalTitle">
+        <source>Create Project</source>
+        <target>Menciptakan proyek</target>
+        <note>Class = "UIButton"; normalTitle = "Create Project"; ObjectID = "3OS-MG-og8"; Note = "Proceed and create new project -button";</note>
+      </trans-unit>
+      <trans-unit id="3ZJ-zz-hVS.text">
+        <source>12.1.2017</source>
+        <target>12.1.2017</target>
+        <note>Class = "UILabel"; text = "12.1.2017"; ObjectID = "3ZJ-zz-hVS";</note>
+      </trans-unit>
+      <trans-unit id="3cy-Fb-A1P.normalTitle">
+        <source>No, I want to use my private account</source>
+        <target>Bukan, Saya mau memakai akun pribadi saya</target>
+        <note>Class = "UIButton"; normalTitle = "No, I want to use my private account"; ObjectID = "3cy-Fb-A1P"; Note = "a button for dismissing auto-login option";</note>
+      </trans-unit>
+      <trans-unit id="6T3-e3-ZHR.normalTitle">
+        <source>Cancel</source>
+        <target>Batalkan</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "6T3-e3-ZHR"; Note = "Cancel project creation -button";</note>
+      </trans-unit>
+      <trans-unit id="7Og-qR-wba.text">
+        <source>Account Name*</source>
+        <target>Nama* akun</target>
+        <note>Class = "UILabel"; text = "Account Name*"; ObjectID = "7Og-qR-wba"; Note = "New account name input label";</note>
+      </trans-unit>
+      <trans-unit id="8EW-FA-pFd.normalTitle">
+        <source>Log In</source>
+        <target>Masuk</target>
+        <note>Class = "UIButton"; normalTitle = "Log In"; ObjectID = "8EW-FA-pFd"; Note = "Button for checking username and password and logging in";</note>
+      </trans-unit>
+      <trans-unit id="8Gc-vw-NKc.text">
+        <source>Agricola</source>
+        <target>Agricola</target>
+        <note>Class = "UILabel"; text = "Agricola"; ObjectID = "8Gc-vw-NKc"; Note = "Program title label";</note>
+      </trans-unit>
+      <trans-unit id="96C-BS-KEw.text">
+        <source>Finnish</source>
+        <target>Finnish</target>
+        <note>Class = "UILabel"; text = "Finnish"; ObjectID = "96C-BS-KEw";</note>
+      </trans-unit>
+      <trans-unit id="ACo-ny-lib.text">
+        <source>Finnish</source>
+        <target>Finnish</target>
+        <note>Class = "UILabel"; text = "Finnish"; ObjectID = "ACo-ny-lib";</note>
+      </trans-unit>
+      <trans-unit id="BNV-wk-4tL.normalTitle">
+        <source>Yes, log me in with the shared project account</source>
+        <target>Ya, memasukkan saya ke dalam akun bersama</target>
+        <note>Class = "UIButton"; normalTitle = "Yes, log me in with the shared project account"; ObjectID = "BNV-wk-4tL"; Note = "Button that enables auto-login with a shared project account";</note>
+      </trans-unit>
+      <trans-unit id="Bpb-GQ-vJC.text">
+        <source>Project Name*</source>
+        <target>Nama* proyek</target>
+        <note>Class = "UILabel"; text = "Project Name*"; ObjectID = "Bpb-GQ-vJC"; Note = "Input label for new project name";</note>
+      </trans-unit>
+      <trans-unit id="BvU-lB-5ab.text">
+        <source>Select an existing project</source>
+        <target>Memilih proyek yang ada</target>
+        <note>Class = "UILabel"; text = "Select an existing project"; ObjectID = "BvU-lB-5ab"; Note = "Project selection label";</note>
+      </trans-unit>
+      <trans-unit id="DfV-UO-F3l.text">
+        <source>Use Shared Project Account?</source>
+        <target>Mau memakai akun proyek bersama?</target>
+        <note>Class = "UILabel"; text = "Use Shared Project Account?"; ObjectID = "DfV-UO-F3l"; Note = "Connection auto-login prompt title";</note>
+      </trans-unit>
+      <trans-unit id="Ed3-25-IDt.text">
+        <source>Errors are displayed here!</source>
+        <target>Kesalahan-kesalahan dipertunjukkan di sini!</target>
+        <note>Class = "UILabel"; text = "Errors are displayed here!"; ObjectID = "Ed3-25-IDt";</note>
+      </trans-unit>
+      <trans-unit id="GYb-5k-q4F.text">
+        <source>TIP: Use shared accounts when multiple people use this device</source>
+        <target>NASEHAT: Memakai akun bersama kalau beberapa penerjemah akan memakai iPad ini</target>
+        <note>Class = "UILabel"; text = "TIP: Use shared accounts when multiple people use this device"; ObjectID = "GYb-5k-q4F"; Note = "A tip / short description of the idea of shared accounts / options in auto-login prompt";</note>
+      </trans-unit>
+      <trans-unit id="I3k-Bi-vbz.text">
+        <source>Syalom</source>
+        <target>Syalom</target>
+        <note>Class = "UILabel"; text = "Syalom"; ObjectID = "I3k-Bi-vbz";</note>
+      </trans-unit>
+      <trans-unit id="Itv-Lg-4xh.text">
+        <source>You can also</source>
+        <target>Anda bisa juga</target>
+        <note>Class = "UILabel"; text = "You can also"; ObjectID = "Itv-Lg-4xh"; Note = "Label indicating option for project selection";</note>
+      </trans-unit>
+      <trans-unit id="L73-tV-GnT.normalTitle">
+        <source>Cancel</source>
+        <target>Batalkan</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "L73-tV-GnT"; Note = "Cancel using this avatar -button";</note>
+      </trans-unit>
+      <trans-unit id="Lwf-p5-Miv.text">
+        <source>Password*</source>
+        <target>Sandi*</target>
+        <note>Class = "UILabel"; text = "Password*"; ObjectID = "Lwf-p5-Miv"; Note = "New account password input label";</note>
+      </trans-unit>
+      <trans-unit id="M0d-2V-9K6.normalTitle">
+        <source>Continue</source>
+        <target>Melanjutkan</target>
+        <note>Class = "UIButton"; normalTitle = "Continue"; ObjectID = "M0d-2V-9K6"; Note = "Button for registering new user";</note>
+      </trans-unit>
+      <trans-unit id="N2t-uR-2dT.text">
+        <source>Nobody to connect with?</source>
+        <target>Tidak ada yang bisa digabunkan?</target>
+        <note>Class = "UILabel"; text = "Nobody to connect with?"; ObjectID = "N2t-uR-2dT";</note>
+      </trans-unit>
+      <trans-unit id="Obr-6h-dYp.normalTitle">
+        <source>Start New Project</source>
+        <target>Memulai proyek baru</target>
+        <note>Class = "UIButton"; normalTitle = "Start New Project"; ObjectID = "Obr-6h-dYp"; Note = "Button for creating a new project";</note>
+      </trans-unit>
+      <trans-unit id="Pgb-QY-eyn.text">
+        <source>Target Language*</source>
+        <target>Bahasa* sasaran</target>
+        <note>Class = "UILabel"; text = "Target Language*"; ObjectID = "Pgb-QY-eyn"; Note = "Project target language selection label";</note>
+      </trans-unit>
+      <trans-unit id="QVL-8I-UDc.text">
+        <source>Epic Common Project</source>
+        <target>Epic Proyek Bersama</target>
+        <note>Class = "UILabel"; text = "Epic Common Project"; ObjectID = "QVL-8I-UDc";</note>
+      </trans-unit>
+      <trans-unit id="Qn1-aN-GAg.text">
+        <source>A</source>
+        <target>A</target>
+        <note>Class = "UILabel"; text = "A"; ObjectID = "Qn1-aN-GAg";</note>
+      </trans-unit>
+      <trans-unit id="RXF-ZI-Jgt.text">
+        <source>Translation Name*</source>
+        <target>Nama* terjemahan</target>
+        <note>Class = "UILabel"; text = "Translation Name*"; ObjectID = "RXF-ZI-Jgt"; Note = "Input label for identifiers used for books generated by the new project";</note>
+      </trans-unit>
+      <trans-unit id="U0D-0a-p0C.text">
+        <source>It seems like you have no data on this device</source>
+        <target>Ternyata Anda tidak mempunyai data dalam iPad ini</target>
+        <note>Class = "UILabel"; text = "It seems like you have no data on this device"; ObjectID = "U0D-0a-p0C";</note>
+      </trans-unit>
+      <trans-unit id="V2V-ii-I6u.text">
+        <source>You are currently connected with another project member. Do you wish to quickly access the project using the shared project account?</source>
+        <target>Anda sedang berhubungan dengan penerjemah lain. Apakah Anda ingin mengakses proyek itu dengan memakai akun proyek bersama?</target>
+        <note>Class = "UITextView"; text = "You are currently connected with another project member. Do you wish to quickly access the project using the shared project account?"; ObjectID = "V2V-ii-I6u"; Note = "Connection auto login prompt description";</note>
+      </trans-unit>
+      <trans-unit id="V7n-6d-wMW.normalTitle">
+        <source>Create Account</source>
+        <target>Menciptakan akun</target>
+        <note>Class = "UIButton"; normalTitle = "Create Account"; ObjectID = "V7n-6d-wMW"; Note = "Create account and proceed -button";</note>
+      </trans-unit>
+      <trans-unit id="XPg-eE-ds2.text">
+        <source>My First Translation Project</source>
+        <target>Proyek penerjemahan pertama saya</target>
+        <note>Class = "UILabel"; text = "My First Translation Project"; ObjectID = "XPg-eE-ds2";</note>
+      </trans-unit>
+      <trans-unit id="YoC-p0-0Hc.text">
+        <source>Account Name*</source>
+        <target>Nama* akun</target>
+        <note>Class = "UILabel"; text = "Account Name*"; ObjectID = "YoC-p0-0Hc"; Note = "Unique user account name input label";</note>
+      </trans-unit>
+      <trans-unit id="aDg-Gw-FuI.text">
+        <source>Don't have an account yet?</source>
+        <target>Anda belum punya akun?</target>
+        <note>Class = "UILabel"; text = "Don't have an account yet?"; ObjectID = "aDg-Gw-FuI"; Note = "Hint for registering with a new account";</note>
+      </trans-unit>
+      <trans-unit id="eZ1-s9-RZ2.text">
+        <source>Invitation from Teemu (Lorenzo)</source>
+        <target>Undangan dari Teemu (Lorenzo)</target>
+        <note>Class = "UILabel"; text = "Invitation from Teemu (Lorenzo)"; ObjectID = "eZ1-s9-RZ2";</note>
+      </trans-unit>
+      <trans-unit id="gI2-5n-LQN.text">
+        <source>Scripture Editor for iPad</source>
+        <target>Editor penerjemahan Alkitab untuk iPad</target>
+        <note>Class = "UILabel"; text = "Scripture Editor for iPad"; ObjectID = "gI2-5n-LQN"; Note = "Extra description for 'Agricola'";</note>
+      </trans-unit>
+      <trans-unit id="gTA-NZ-vcG.text">
+        <source>Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</source>
+        <target>Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</target>
+        <note>Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."; ObjectID = "gTA-NZ-vcG";</note>
+      </trans-unit>
+      <trans-unit id="jZr-uV-CHp.text">
+        <source>Invalid account name and/or password!</source>
+        <target>Nama akun atau sandi tidak diterima!</target>
+        <note>Class = "UILabel"; text = "Invalid account name and/or password!"; ObjectID = "jZr-uV-CHp"; Note = "Error displayed when username or password are invalid in login";</note>
+      </trans-unit>
+      <trans-unit id="kAG-ma-c5g.normalTitle">
+        <source>Start from Scratch</source>
+        <target>Mulai dari awal</target>
+        <note>Class = "UIButton"; normalTitle = "Start from Scratch"; ObjectID = "kAG-ma-c5g";</note>
+      </trans-unit>
+      <trans-unit id="lJY-Jk-sFC.text">
+        <source>I share this device with other users</source>
+        <target>iPad ini akan dipakai oleh penerjemah lain juga</target>
+        <note>Class = "UILabel"; text = "I share this device with other users"; ObjectID = "lJY-Jk-sFC"; Note = "A label next to a switch that defines whether the account will be shared (multiple users per device) or private";</note>
+      </trans-unit>
+      <trans-unit id="mBi-ep-ibD.text">
+        <source>You will be granted access to the project when you log in</source>
+        <target>Anda dapat izin kerja dalam proyek ini sesudah Anda masuk</target>
+        <note>Class = "UILabel"; text = "You will be granted access to the project when you log in"; ObjectID = "mBi-ep-ibD"; Note = "A hint / description for auto-login dismiss button";</note>
+      </trans-unit>
+      <trans-unit id="oap-hn-qB3.text">
+        <source>30.2.2017</source>
+        <target>30.2.2017</target>
+        <note>Class = "UILabel"; text = "30.2.2017"; ObjectID = "oap-hn-qB3";</note>
+      </trans-unit>
+      <trans-unit id="pUh-vV-lT5.text">
+        <source>You can connect with others to fix that</source>
+        <target>Anda bisa berkoneksi dengan penerjamah lain untuk mengatasi hali itu</target>
+        <note>Class = "UILabel"; text = "You can connect with others to fix that"; ObjectID = "pUh-vV-lT5";</note>
+      </trans-unit>
+      <trans-unit id="pbg-QG-CKs.text">
+        <source>a shared account will be created. It will be tied to the project you create</source>
+        <target>akan diciptakan akun bersama. Akun itu terikat dengan proyek yang Anda sedang menciptakan</target>
+        <note>Class = "UILabel"; text = "a shared account will be created, It will be tied to the project you create"; ObjectID = "pbg-QG-CKs"; Note = "A short description for shared accounts on account creation";</note>
+      </trans-unit>
+      <trans-unit id="pwq-WR-SZL.text">
+        <source>Password*</source>
+        <target>Sandi*</target>
+        <note>Class = "UILabel"; text = "Password*"; ObjectID = "pwq-WR-SZL"; Note = "Account password input label";</note>
+      </trans-unit>
+      <trans-unit id="rLK-gF-P4Y.normalTitle">
+        <source>Cancel</source>
+        <target>Batalkan</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "rLK-gF-P4Y"; Note = "Cancel account creation -button";</note>
+      </trans-unit>
+      <trans-unit id="sbS-kH-iir.text">
+        <source>Repeat Password*</source>
+        <target>Mengulangi sandi*</target>
+        <note>Class = "UILabel"; text = "Repeat Password*"; ObjectID = "sbS-kH-iir"; Note = "Input field label for account password repeat";</note>
+      </trans-unit>
+      <trans-unit id="uC0-5u-oCf.normalTitle">
+        <source>Login</source>
+        <target>Masuk</target>
+        <note>Class = "UIButton"; normalTitle = "Login"; ObjectID = "uC0-5u-oCf"; Note = "Try logging in with this avatar and password -button";</note>
+      </trans-unit>
+      <trans-unit id="vpM-Am-WMV.normalTitle">
+        <source>Accept</source>
+        <target>Menerima</target>
+        <note>Class = "UIButton"; normalTitle = "Accept"; ObjectID = "vpM-Am-WMV";</note>
+      </trans-unit>
+      <trans-unit id="wyh-KK-oHX.text">
+        <source>Password*</source>
+        <target>Sandi*</target>
+        <note>Class = "UILabel"; text = "Password*"; ObjectID = "wyh-KK-oHX"; Note = "Input label for user / avatar password";</note>
+      </trans-unit>
+      <trans-unit id="zjy-Eb-Ez7.text">
+        <source>The password was incorrect</source>
+        <target>Sandi itu tidak diterima</target>
+        <note>Class = "UILabel"; text = "The password was incorrect"; ObjectID = "zjy-Eb-Ez7"; Note = "Error displayed when avatar / user password was invalid";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/Main.storyboard" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="6vN-kF-8Bu.text">
+        <source>Target Translation</source>
+        <target>Terjemahan sasaran</target>
+        <note>Class = "UILabel"; text = "Target Translation"; ObjectID = "6vN-kF-8Bu";</note>
+      </trans-unit>
+      <trans-unit id="9Y1-0T-HKm.text">
+        <source>Subject</source>
+        <target>Subjek</target>
+        <note>Class = "UILabel"; text = "Subject"; ObjectID = "9Y1-0T-HKm"; Note = "Note thread subject title";</note>
+      </trans-unit>
+      <trans-unit id="64G-83-vHx.text">
+        <source>1: 3 - 8</source>
+        <target>1: 3 - 8</target>
+        <note>Class = "UILabel"; text = "1: 3 - 8"; ObjectID = "64G-83-vHx";</note>
+      </trans-unit>
+      <trans-unit id="AX9-9x-VWK.text">
+        <source>Comment text</source>
+        <target>Isi usulan</target>
+        <note>Class = "UILabel"; text = "Comment text"; ObjectID = "AX9-9x-VWK"; Note = "Note thread initial comment title";</note>
+      </trans-unit>
+      <trans-unit id="Bgn-o0-ynq.normalTitle">
+        <source>Cancel</source>
+        <target>Batalkan</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Bgn-o0-ynq"; Note = "Cancel comment post button";</note>
+      </trans-unit>
+      <trans-unit id="D8U-Gs-CEk.text">
+        <source>Syalom Wrote</source>
+        <target>Syalom menulis</target>
+        <note>Class = "UILabel"; text = "Syalom Wrote"; ObjectID = "D8U-Gs-CEk";</note>
+      </trans-unit>
+      <trans-unit id="EEv-dU-6C3.text">
+        <source>Translation for Keruso?</source>
+        <target>Translation for Keruso?</target>
+        <note>Class = "UILabel"; text = "Translation for Keruso?"; ObjectID = "EEv-dU-6C3";</note>
+      </trans-unit>
+      <trans-unit id="EbA-yd-hUR.normalTitle">
+        <source>Edit</source>
+        <target>Menyunting</target>
+        <note>Class = "UIButton"; normalTitle = "Edit"; ObjectID = "EbA-yd-hUR";</note>
+      </trans-unit>
+      <trans-unit id="Fps-Dv-Nlj.text">
+        <source>Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</source>
+        <target>Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</target>
+        <note>Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."; ObjectID = "Fps-Dv-Nlj";</note>
+      </trans-unit>
+      <trans-unit id="HeG-UF-hqZ.text">
+        <source>Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</source>
+        <target>Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</target>
+        <note>Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."; ObjectID = "HeG-UF-hqZ";</note>
+      </trans-unit>
+      <trans-unit id="Lgy-5O-C4S.text">
+        <source>Your Comment</source>
+        <target>Usulan Anda</target>
+        <note>Class = "UILabel"; text = "Your Comment"; ObjectID = "Lgy-5O-C4S"; Note = "Title for comment text area";</note>
+      </trans-unit>
+      <trans-unit id="M3h-im-03Q.text">
+        <source>3 Mar 2017</source>
+        <target>3 Mar 2017</target>
+        <note>Class = "UILabel"; text = "3 Mar 2017"; ObjectID = "M3h-im-03Q";</note>
+      </trans-unit>
+      <trans-unit id="NBK-4j-7oq.text">
+        <source>Tags</source>
+        <target>Tag-tag</target>
+        <note>Class = "UILabel"; text = "Tags"; ObjectID = "NBK-4j-7oq";</note>
+      </trans-unit>
+      <trans-unit id="Ndl-zU-w1a.normalTitle">
+        <source>Close</source>
+        <target>Tutup</target>
+        <note>Class = "UIButton"; normalTitle = "Close"; ObjectID = "Ndl-zU-w1a";</note>
+      </trans-unit>
+      <trans-unit id="SMb-y4-mUj.text">
+        <source>English</source>
+        <target>Inggeris</target>
+        <note>Class = "UILabel"; text = "English"; ObjectID = "SMb-y4-mUj";</note>
+      </trans-unit>
+      <trans-unit id="UQD-g1-7N1.normalTitle">
+        <source>Post ★</source>
+        <target>Mengunggah ★</target>
+        <note>Class = "UIButton"; normalTitle = "Post ★"; ObjectID = "UQD-g1-7N1"; Note = "Button for posting a new thread";</note>
+      </trans-unit>
+      <trans-unit id="UXl-eu-CQS.text">
+        <source>Good News</source>
+        <target>Kabar Baik</target>
+        <note>Class = "UILabel"; text = "Good News"; ObjectID = "UXl-eu-CQS";</note>
+      </trans-unit>
+      <trans-unit id="WSr-DF-Ya5.normalTitle">
+        <source>Cancel</source>
+        <target>Batalkan</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "WSr-DF-Ya5"; Note = "Cancel conflict solve button";</note>
+      </trans-unit>
+      <trans-unit id="Z2Z-BH-ajr.text">
+        <source>Verse</source>
+        <target>Ayat</target>
+        <note>Class = "UILabel"; text = "Verse"; ObjectID = "Z2Z-BH-ajr"; Note = "Target verse (number) selection";</note>
+      </trans-unit>
+      <trans-unit id="cRH-uF-zec.normalTitle">
+        <source>Cancel</source>
+        <target>Batalkan</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "cRH-uF-zec"; Note = "Cancel thread post button";</note>
+      </trans-unit>
+      <trans-unit id="cWh-s1-66p.text">
+        <source>Syalom</source>
+        <target>Syalom</target>
+        <note>Class = "UILabel"; text = "Syalom"; ObjectID = "cWh-s1-66p";</note>
+      </trans-unit>
+      <trans-unit id="ehV-CF-i1b.normalTitle">
+        <source>Post ★</source>
+        <target>Mengunggah ★</target>
+        <note>Class = "UIButton"; normalTitle = "Post ★"; ObjectID = "ehV-CF-i1b"; Note = "Post new thread button";</note>
+      </trans-unit>
+      <trans-unit id="fwx-Qq-EA7.text">
+        <source>Otsikkoteksti</source>
+        <target>Judul</target>
+        <note>Class = "UILabel"; text = "Otsikkoteksti"; ObjectID = "fwx-Qq-EA7";</note>
+      </trans-unit>
+      <trans-unit id="gib-9y-P1o.text">
+        <source>Pending</source>
+        <target>Sedang diusahakan</target>
+        <note>Class = "UILabel"; text = "Pending"; ObjectID = "gib-9y-P1o"; Note = "Whether a note is open or closed";</note>
+      </trans-unit>
+      <trans-unit id="hTk-pD-MSL.normalTitle">
+        <source>Edit project tags</source>
+        <target>Menyunting tag-tag projek</target>
+        <note>Class = "UIButton"; normalTitle = "Edit project tags"; ObjectID = "hTk-pD-MSL";</note>
+      </trans-unit>
+      <trans-unit id="iR3-fi-nN8.text">
+        <source>Please pick a version to solve the conflict</source>
+        <target>Tolong memilih satu versi untuk mengatasi soal ini</target>
+        <note>Class = "UILabel"; text = "Please pick a version to solve the conflict"; ObjectID = "iR3-fi-nN8"; Note = "Conflict resolve dialog hint text";</note>
+      </trans-unit>
+      <trans-unit id="mOq-FG-LnZ.text">
+        <source>Reorder and toggle resources on and off</source>
+        <target>Ganti urutan buku-buku atau membuat mereka aktif atau inaktif</target>
+        <note>Class = "UILabel"; text = "Reorder and toggle resources on and off"; ObjectID = "mOq-FG-LnZ";</note>
+      </trans-unit>
+      <trans-unit id="nt7-kO-jlq.text">
+        <source>12.3.2017</source>
+        <target>12.3.2017</target>
+        <note>Class = "UILabel"; text = "12.3.2017"; ObjectID = "nt7-kO-jlq";</note>
+      </trans-unit>
+      <trans-unit id="q0x-F5-TX8.text">
+        <source>Teemu wrote</source>
+        <target>Teemu menulis</target>
+        <note>Class = "UILabel"; text = "Teemu wrote"; ObjectID = "q0x-F5-TX8";</note>
+      </trans-unit>
+      <trans-unit id="ree-vj-F6F.segmentTitles[0]">
+        <source>Source Material</source>
+        <target>Bahan sumber</target>
+        <note>Class = "UISegmentedControl"; ree-vj-F6F.segmentTitles[0] = "Source Material"; ObjectID = "ree-vj-F6F";</note>
+      </trans-unit>
+      <trans-unit id="ree-vj-F6F.segmentTitles[1]">
+        <source>Notes</source>
+        <target>Catatan</target>
+        <note>Class = "UISegmentedControl"; ree-vj-F6F.segmentTitles[1] = "Notes"; ObjectID = "ree-vj-F6F";</note>
+      </trans-unit>
+      <trans-unit id="rq5-NO-vJ8.text">
+        <source>Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</source>
+        <target>Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</target>
+        <note>Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."; ObjectID = "rq5-NO-vJ8";</note>
+      </trans-unit>
+      <trans-unit id="sMQ-kq-8ka.text">
+        <source>Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</source>
+        <target>Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</target>
+        <note>Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."; ObjectID = "sMQ-kq-8ka";</note>
+      </trans-unit>
+      <trans-unit id="wQC-qP-041.text">
+        <source>I used this and this word, but it seems there might be a better alternative. Any thoughs?</source>
+        <target>Saya memaki kata-kata ini, tetapi ada kemungkinan besar ada kata yang lebih cocok. Apa pemikiran Anda?</target>
+        <note>Class = "UITextView"; text = "I used this and this word, but it seems there might be a better alternative. Any thoughs?"; ObjectID = "wQC-qP-041";</note>
+      </trans-unit>
+      <trans-unit id="yfA-HO-Uct.normalTitle">
+        <source>Save ★</source>
+        <target>Simpan ★</target>
+        <note>Class = "UIButton"; normalTitle = "Save ★"; ObjectID = "yfA-HO-Uct"; Note = "Save / commit button";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/MainMenu.storyboard" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="0OD-u7-rre.text">
+        <source>New Version</source>
+        <target>Versi baru</target>
+        <note>Class = "UILabel"; text = "New Version"; ObjectID = "0OD-u7-rre"; Note = "New book version preview label";</note>
+      </trans-unit>
+      <trans-unit id="2DL-Ye-dYg.text">
+        <source>Test Project</source>
+        <target>Proyek percobaan</target>
+        <note>Class = "UILabel"; text = "Test Project"; ObjectID = "2DL-Ye-dYg";</note>
+      </trans-unit>
+      <trans-unit id="3S4-fY-xGT.text">
+        <source>Errors are displayed here</source>
+        <target>Kesalahan-kesalahan dipertunjukkan di sini</target>
+        <note>Class = "UILabel"; text = "Errors are displayed here"; ObjectID = "3S4-fY-xGT";</note>
+      </trans-unit>
+      <trans-unit id="3fB-Zb-gDD.normalTitle">
+        <source>No</source>
+        <target>Tidak</target>
+        <note>Class = "UIButton"; normalTitle = "No"; ObjectID = "3fB-Zb-gDD"; Note = "Button that cancels user data removal";</note>
+      </trans-unit>
+      <trans-unit id="4Ow-aM-d4X.text">
+        <source>Test Translation</source>
+        <target>Penerjemahan percobaan</target>
+        <note>Class = "UILabel"; text = "Test Translation"; ObjectID = "4Ow-aM-d4X";</note>
+      </trans-unit>
+      <trans-unit id="6KA-NN-qeU.normalTitle">
+        <source>OK!</source>
+        <target>OK!</target>
+        <note>Class = "UIButton"; normalTitle = "OK!"; ObjectID = "6KA-NN-qeU"; Note = "Close error dialog button";</note>
+      </trans-unit>
+      <trans-unit id="8Ny-gG-O9i.text">
+        <source>Search By Language</source>
+        <target>Mencari berdasarkan bahasa</target>
+        <note>Class = "UILabel"; text = "Search By Language"; ObjectID = "8Ny-gG-O9i"; Note = "Language filter hint text";</note>
+      </trans-unit>
+      <trans-unit id="26J-Co-4s9.text">
+        <source>Test User</source>
+        <target>Pemakai percobaan</target>
+        <note>Class = "UILabel"; text = "Test User"; ObjectID = "26J-Co-4s9";</note>
+      </trans-unit>
+      <trans-unit id="Atq-XX-P0r.normalTitle">
+        <source>OK!</source>
+        <target>OK!</target>
+        <note>Class = "UIButton"; normalTitle = "OK!"; ObjectID = "Atq-XX-P0r"; Note = "Proceed with book import -button";</note>
+      </trans-unit>
+      <trans-unit id="CT7-Xc-Iak.text">
+        <source>Select Book to Overwrite*</source>
+        <target>Memilih buku untuk diganti* dengan buku ini</target>
+        <note>Class = "UILabel"; text = "Select Book to Overwrite*"; ObjectID = "CT7-Xc-Iak"; Note = "Existing book overwrite selection label";</note>
+      </trans-unit>
+      <trans-unit id="Ck9-ie-R4l.text">
+        <source>TIP: Connect with others and open .USX files with Agricola to add new books</source>
+        <target>NASEHAT: Tolong berkoneksi dengan penerjemah lain dan membuka file-file .USX dengan Agricola untuk menambah buku-buku baru</target>
+        <note>Class = "UILabel"; text = "TIP: Connect with others and open .USX files with Agricola to add new books"; ObjectID = "Ck9-ie-R4l"; Note = "Tip for adding new books";</note>
+      </trans-unit>
+      <trans-unit id="Dlr-O0-wvd.text">
+        <source>Are you sure you want to delete this user?</source>
+        <target>Apakah Anda yakin mau menghilangkan pemakai ini?</target>
+        <note>Class = "UILabel"; text = "Are you sure you want to delete this user?"; ObjectID = "Dlr-O0-wvd"; Note = "A confirmation question displayed when the user is about to delete user data";</note>
+      </trans-unit>
+      <trans-unit id="EgS-5U-bC2.text">
+        <source>Manage Project</source>
+        <target>Manage Proyek</target>
+        <note>Class = "UILabel"; text = "Manage Project"; ObjectID = "EgS-5U-bC2"; Note = "Project management features -hint text";</note>
+      </trans-unit>
+      <trans-unit id="GAM-73-JEj.normalTitle">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "GAM-73-JEj"; Note = "a button for cancelling out of an import of a book (based on preview)";</note>
+      </trans-unit>
+      <trans-unit id="GOG-9c-Tto.normalTitle">
+        <source>Manage Users</source>
+        <target>Mengurus pemakai</target>
+        <note>Class = "UIButton"; normalTitle = "Manage Users"; ObjectID = "GOG-9c-Tto";</note>
+      </trans-unit>
+      <trans-unit id="GSn-jc-wRB.normalTitle">
+        <source>Yes</source>
+        <target>Ya</target>
+        <note>Class = "UIButton"; normalTitle = "Yes"; ObjectID = "GSn-jc-wRB"; Note = "Button that proceeds with user data removal";</note>
+      </trans-unit>
+      <trans-unit id="HJe-Np-pPo.text">
+        <source>Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</source>
+        <target>Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</target>
+        <note>Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."; ObjectID = "HJe-Np-pPo";</note>
+      </trans-unit>
+      <trans-unit id="Hgw-PE-EAt.text">
+        <source>Admin Tools</source>
+        <target>Alat untuk administrator</target>
+        <note>Class = "UILabel"; text = "Admin Tools"; ObjectID = "Hgw-PE-EAt"; Note = "Project management features -hint text";</note>
+      </trans-unit>
+      <trans-unit id="IJE-Tt-HfA.normalTitle">
+        <source>Abort</source>
+        <target>Menghentikan</target>
+        <note>Class = "UIButton"; normalTitle = "Abort"; ObjectID = "IJE-Tt-HfA"; Note = "Cancel import / keep the old version button";</note>
+      </trans-unit>
+      <trans-unit id="LNv-np-Ouh.text">
+        <source>Admin:</source>
+        <target>Administrator:</target>
+        <note>Class = "UILabel"; text = "Admin:"; ObjectID = "LNv-np-Ouh"; Note = "Label for switch that determines whether the user has administrator rights or not";</note>
+      </trans-unit>
+      <trans-unit id="OaF-XV-X24.text">
+        <source>Text Language*</source>
+        <target>Bahasa*</target>
+        <note>Class = "UILabel"; text = "Text Language*"; ObjectID = "OaF-XV-X24"; Note = "Book language selection label";</note>
+      </trans-unit>
+      <trans-unit id="Pbo-Z6-pUu.normalTitle">
+        <source>Cancel</source>
+        <target>Batalkan</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Pbo-Z6-pUu"; Note = "Cancel user / avatar edit button";</note>
+      </trans-unit>
+      <trans-unit id="R6m-fe-4P3.text">
+        <source>Galatians</source>
+        <target>Galatia</target>
+        <note>Class = "UILabel"; text = "Galatians"; ObjectID = "R6m-fe-4P3";</note>
+      </trans-unit>
+      <trans-unit id="TXo-zG-QkS.text">
+        <source>Previous Version</source>
+        <target>Versi lama</target>
+        <note>Class = "UILabel"; text = "Previous Version"; ObjectID = "TXo-zG-QkS"; Note = "Previous book version preview label";</note>
+      </trans-unit>
+      <trans-unit id="U9D-Pp-6Ns.text">
+        <source>Nickname for the Book*</source>
+        <target>Singkatan Buku*</target>
+        <note>Class = "UILabel"; text = "Nickname for the Book*"; ObjectID = "U9D-Pp-6Ns"; Note = "A label for book / resource nickname input";</note>
+      </trans-unit>
+      <trans-unit id="WCx-AJ-uv9.normalTitle">
+        <source>Accept</source>
+        <target>Menerima</target>
+        <note>Class = "UIButton"; normalTitle = "Accept"; ObjectID = "WCx-AJ-uv9"; Note = "Proceed with import / overwrite old version button";</note>
+      </trans-unit>
+      <trans-unit id="XhR-5a-cmL.title">
+        <source>EditAvatar</source>
+        <target>Mengedit avatar</target>
+        <note>Class = "UIViewController"; title = "EditAvatar"; ObjectID = "XhR-5a-cmL";</note>
+      </trans-unit>
+      <trans-unit id="YF1-xu-qS8.text">
+        <source>Preview</source>
+        <target>Peninjauan</target>
+        <note>Class = "UILabel"; text = "Preview"; ObjectID = "YF1-xu-qS8"; Note = "A title for the preview imported book view";</note>
+      </trans-unit>
+      <trans-unit id="YLW-Pl-X9f.text">
+        <source>Search By Book</source>
+        <target>Mencari berdasarkan buku</target>
+        <note>Class = "UILabel"; text = "Search By Book"; ObjectID = "YLW-Pl-X9f"; Note = "Language filter hint text";</note>
+      </trans-unit>
+      <trans-unit id="YVT-oJ-eUv.normalTitle">
+        <source>Import</source>
+        <target>Impor</target>
+        <note>Class = "UIButton"; normalTitle = "Import"; ObjectID = "YVT-oJ-eUv"; Note = "A button for accepting a resource / preview and importing it as a new book to project";</note>
+      </trans-unit>
+      <trans-unit id="aFn-c2-1Bu.normalTitle">
+        <source>Delete!</source>
+        <target>Menghilankan!</target>
+        <note>Class = "UIButton"; normalTitle = "Delete!"; ObjectID = "aFn-c2-1Bu"; Note = "Button used for deleting user data";</note>
+      </trans-unit>
+      <trans-unit id="cXu-Cd-2hg.text">
+        <source>Insert as a new Translation</source>
+        <target>Memasukkan sebagai terjemahan baru</target>
+        <note>Class = "UILabel"; text = "Insert as a new Translation"; ObjectID = "cXu-Cd-2hg"; Note = "Insert / overwrite switch label";</note>
+      </trans-unit>
+      <trans-unit id="eA8-T4-Rce.text">
+        <source>Error heading here!</source>
+        <target>Judul kesalahan!</target>
+        <note>Class = "UILabel"; text = "Error heading here!"; ObjectID = "eA8-T4-Rce";</note>
+      </trans-unit>
+      <trans-unit id="eTa-9T-igA.text">
+        <source>Errors are displayed here</source>
+        <target>Kesalahan-kesalahan dipertunjukkan di sini</target>
+        <note>Class = "UILabel"; text = "Errors are displayed here"; ObjectID = "eTa-9T-igA";</note>
+      </trans-unit>
+      <trans-unit id="ef0-I2-3bp.normalTitle">
+        <source>Clear Password</source>
+        <target>Menghapus sandi</target>
+        <note>Class = "UIButton"; normalTitle = "Clear Password"; ObjectID = "ef0-I2-3bp"; Note = "Button used for resetting / clearing a user's password (in case of the user has forgot their password)";</note>
+      </trans-unit>
+      <trans-unit id="h6j-jQ-28W.text">
+        <source>English</source>
+        <target>Inggeris</target>
+        <note>Class = "UILabel"; text = "English"; ObjectID = "h6j-jQ-28W";</note>
+      </trans-unit>
+      <trans-unit id="iIs-bE-bB4.text">
+        <source>Translation Nickname*</source>
+        <target>Singkatan* terjemahan</target>
+        <note>Class = "UILabel"; text = "Translation Nickname*"; ObjectID = "iIs-bE-bB4"; Note = "Book / translation nickname label";</note>
+      </trans-unit>
+      <trans-unit id="jCu-Gm-Vhp.placeholder">
+        <source>Search</source>
+        <target></target>
+        <note>Class = "UITextField"; placeholder = "Search"; ObjectID = "jCu-Gm-Vhp";</note>
+      </trans-unit>
+      <trans-unit id="kWz-6Y-pnt.normalTitle">
+        <source>Manage Shared Project Account</source>
+        <target>Mengurus akun bersama</target>
+        <note>Class = "UIButton"; normalTitle = "Manage Shared\nProject Account"; ObjectID = "kWz-6Y-pnt";</note>
+      </trans-unit>
+      <trans-unit id="lyw-Ql-b3R.normalTitle">
+        <source>Save</source>
+        <target>Simpan</target>
+        <note>Class = "UIButton"; normalTitle = "Save"; ObjectID = "lyw-Ql-b3R"; Note = "Save new avatar / user data / edits";</note>
+      </trans-unit>
+      <trans-unit id="m63-gu-E22.text">
+        <source>3.4.2017</source>
+        <target>3.4.2017</target>
+        <note>Class = "UILabel"; text = "3.4.2017"; ObjectID = "m63-gu-E22";</note>
+      </trans-unit>
+      <trans-unit id="n2m-GN-bIw.text">
+        <source>Galatians</source>
+        <target>Galatia</target>
+        <note>Class = "UILabel"; text = "Galatians"; ObjectID = "n2m-GN-bIw";</note>
+      </trans-unit>
+      <trans-unit id="qYb-eo-8RK.text">
+        <source>Read Book Data</source>
+        <target>Membaca buku</target>
+        <note>Class = "UILabel"; text = "Read Book Data"; ObjectID = "qYb-eo-8RK";</note>
+      </trans-unit>
+      <trans-unit id="r4Z-lS-bkp.normalTitle">
+        <source>Close</source>
+        <target>Menutup</target>
+        <note>Class = "UIButton"; normalTitle = "Close"; ObjectID = "r4Z-lS-bkp"; Note = "Button that closes user management view";</note>
+      </trans-unit>
+      <trans-unit id="uBO-FF-jAs.placeholder">
+        <source>Search</source>
+        <target>Mencari</target>
+        <note>Class = "UITextField"; placeholder = "Search"; ObjectID = "uBO-FF-jAs";</note>
+      </trans-unit>
+      <trans-unit id="wUz-AU-6vT.text">
+        <source>Test Translation</source>
+        <target>Terjemahan percobaan</target>
+        <note>Class = "UILabel"; text = "Test Translation"; ObjectID = "wUz-AU-6vT";</note>
+      </trans-unit>
+      <trans-unit id="yjb-YB-WnE.text">
+        <source>Select a Book to Work on</source>
+        <target>Memilih buku yang mau dikerjakan</target>
+        <note>Class = "UILabel"; text = "Select a Book to Work on"; ObjectID = "yjb-YB-WnE"; Note = "Main menu book selection hint";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/OnlineStatusView.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="sDP-cm-UQy.text">
+        <source>Not connected</source>
+        <target>Belum berkoneksi</target>
+        <note>Class = "UILabel"; text = "Not connected"; ObjectID = "sDP-cm-UQy";</note>
+      </trans-unit>
+      <trans-unit id="xIf-1Q-NKZ.text">
+        <source>Online Status:</source>
+        <target>Status online:</target>
+        <note>Class = "UILabel"; text = "Online Status:"; ObjectID = "xIf-1Q-NKZ"; Note = "Online status title label";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/P2PJoinView.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="NG8-QU-zed.text">
+        <source>Camera is required for peer-to-peer join</source>
+        <target>Kamera diperlukan untuk hubungan peer-to-peer</target>
+        <note>Class = "UILabel"; text = "Camera is required for peer-to-peer join"; ObjectID = "NG8-QU-zed";</note>
+      </trans-unit>
+      <trans-unit id="UXs-3m-v6d.normalTitle">
+        <source>Disconnect</source>
+        <target>Memutuskan hubungan</target>
+        <note>Class = "UIButton"; normalTitle = "Disconnect"; ObjectID = "UXs-3m-v6d";</note>
+      </trans-unit>
+      <trans-unit id="YOQ-gA-osA.normalTitle">
+        <source>Join</source>
+        <target>Bergabung</target>
+        <note>Class = "UIButton"; normalTitle = "Join"; ObjectID = "YOQ-gA-osA";</note>
+      </trans-unit>
+      <trans-unit id="efh-hd-N3A.text">
+        <source>Connect with Others</source>
+        <target>Mengoneksi dengan penerjemah lain</target>
+        <note>Class = "UILabel"; text = "Connect with Others"; ObjectID = "efh-hd-N3A";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/TopBar.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="g8w-Wi-SHD.normalTitle">
+        <source>Connect</source>
+        <target>Mengoneksi</target>
+        <note>Class = "UIButton"; normalTitle = "Connect"; ObjectID = "g8w-Wi-SHD"; Note = "Button for opening connection dialog which allows P2P join, host and usx export";</note>
+      </trans-unit>
+      <trans-unit id="wnD-br-fTf.normalTitle">
+        <source>Back</source>
+        <target>Kembali</target>
+        <note>Class = "UIButton"; normalTitle = "Back"; ObjectID = "wnD-br-fTf";</note>
+      </trans-unit>
+      <trans-unit id="zt5-DZ-uy4.text">
+        <source>Title</source>
+        <target>Judul</target>
+        <note>Class = "UILabel"; text = "Title"; ObjectID = "zt5-DZ-uy4";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Base.lproj/TopUserDisplay.xib" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="395-aB-Ga5.text">
+        <source>Project Name</source>
+        <target>Nama proyek</target>
+        <note>Class = "UILabel"; text = "Project Name"; ObjectID = "395-aB-Ga5";</note>
+      </trans-unit>
+      <trans-unit id="dWj-1Y-Idg.text">
+        <source>Username</source>
+        <target>Nama pengguna</target>
+        <note>Class = "UILabel"; text = "Username"; ObjectID = "dWj-1Y-Idg";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Info.plist" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+      </trans-unit>
+      <trans-unit id="NSCameraUsageDescription">
+        <source>The camera is needed for scanning QR codes</source>
+      </trans-unit>
+      <trans-unit id="NSPhotoLibraryUsageDescription">
+        <source>Your photo library is needed for setting new profile image</source>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditor/Localizable.strings" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="Access Denied">
+        <source>Access Denied</source>
+        <target>Hubungan ditolak</target>
+        <note>Online status when provided credentials don't match the required</note>
+      </trans-unit>
+      <trans-unit id="Account with a similar name already exists!">
+        <source>Account with a similar name already exists!</source>
+        <target>Nama akun ini sudah ada</target>
+        <note>An error message displayed when trying to create a duplicate account</note>
+      </trans-unit>
+      <trans-unit id="Books">
+        <source>Books</source>
+        <target>Buku-buku</target>
+        <note>A section header for book / source translation resources</note>
+      </trans-unit>
+      <trans-unit id="Cannot create project if not logged in!">
+        <source>Cannot create project if not logged in!</source>
+        <target>Untuk membuat akun, harus masuk dulu</target>
+        <note>An error message displayed when trying to create a new project without an account</note>
+      </trans-unit>
+      <trans-unit id="Chapter">
+        <source>Chapter</source>
+        <target>Pasal</target>
+        <note>A Bible chapter
+   A section header in translation table. Followed by the chapter number.</note>
+      </trans-unit>
+      <trans-unit id="Current:">
+        <source>Current:</source>
+        <target>Versi terbaru:</target>
+        <note>A title for the curent version of a paragraph / paragraph portion in comment context</note>
+      </trans-unit>
+      <trans-unit id="Establishing Connection">
+        <source>Establishing Connection</source>
+        <target>Sedang berusaha menyambunkan</target>
+        <note>Online status while the system is connecting</note>
+      </trans-unit>
+      <trans-unit id="Failed Cases">
+        <source>Failed Cases</source>
+        <target>Tidak bisa diimpor</target>
+        <note>A table heading for failed usx-import cases</note>
+      </trans-unit>
+      <trans-unit id="File(s)">
+        <source>File(s)</source>
+        <target>File-file</target>
+        <note>A label presented next to the amount of parsed files in usx import view</note>
+      </trans-unit>
+      <trans-unit id="Heading">
+        <source>Heading</source>
+        <target>Judul</target>
+        <note>A title for heading note sections where the translation is still empty</note>
+      </trans-unit>
+      <trans-unit id="Internal error occurred while saving data.">
+        <source>Internal error occurred while saving data.</source>
+        <target>Kesalahan internal. Data tidak dapat disimpan</target>
+        <note>An error message displayed when account creation fails due to an unexpected error</note>
+      </trans-unit>
+      <trans-unit id="Internal error occurred!">
+        <source>Internal error occurred!</source>
+        <target>Kesalahan internal</target>
+        <note>An error message displayed when project creation fails due to an unexpected error
+   An error message shown when login fails due to an internal error
+   An error message when book import fails due to some unexpected error</note>
+      </trans-unit>
+      <trans-unit id="Internal error occurred. Please try again.">
+        <source>Internal error occurred. Please try again.</source>
+        <target>Kesalahan internal. Tolong coba lagi.</target>
+        <note>An error message displayed when account creation fails due to an unexpected error</note>
+      </trans-unit>
+      <trans-unit id="Invalid account name">
+        <source>Invalid account name</source>
+        <target>Nama akun tidak diterima</target>
+        <note>An error message shown when trying to login with non-existing account</note>
+      </trans-unit>
+      <trans-unit id="Invalid password">
+        <source>Invalid password</source>
+        <target>Sandi tidak diterima</target>
+        <note>An error message shown when user provides an invalid password in login</note>
+      </trans-unit>
+      <trans-unit id="Joined">
+        <source>Joined</source>
+        <target>Disambung dengan</target>
+        <note>Part of host info desciption. Followed by host user name.</note>
+      </trans-unit>
+      <trans-unit id="No Connection">
+        <source>No Connection</source>
+        <target>Tidak ada koneksi</target>
+        <note>Online status when connection is offline</note>
+      </trans-unit>
+      <trans-unit id="No user data available!">
+        <source>No user data available!</source>
+        <target>Data pengguna tidak ada</target>
+        <note>An error displayed when avatar was not selected in book import (which shouldn't ever happen if program is workin)</note>
+      </trans-unit>
+      <trans-unit id="Notes">
+        <source>Notes</source>
+        <target>Catatan-catatan</target>
+        <note>A section header for notes resource(s)
+   The generated name of the notes resource</note>
+      </trans-unit>
+      <trans-unit id="Off">
+        <source>Off</source>
+        <target>Tidak ada hubungan</target>
+        <note>Online status when connection is disconnected and there are no attempts of changing it</note>
+      </trans-unit>
+      <trans-unit id="Original:">
+        <source>Original:</source>
+        <target>Versi lama:</target>
+        <note>A title for the original version of a paragraph / paragraph portion in comment context</note>
+      </trans-unit>
+      <trans-unit id="Please fill all required fields">
+        <source>Please fill all required fields</source>
+        <target>Tolong mengisi semua informasi yang diperlukan</target>
+        <note>An error displayed when some required fields are left empty
+   An error message displayed when some of the required fields are left empty</note>
+      </trans-unit>
+      <trans-unit id="Please fill in the required fields">
+        <source>Please fill in the required fields</source>
+        <target>Tolong mengisi semua informasi yang diperlukan</target>
+        <note>An error message displayed when trying to create new avatar without first filling all required fields</note>
+      </trans-unit>
+      <trans-unit id="Please provide a password">
+        <source>Please provide a password</source>
+        <target>Tolong memberikan sandi</target>
+        <note>An error message shown when password is missing in login</note>
+      </trans-unit>
+      <trans-unit id="Please provide an account name">
+        <source>Please provide an account name</source>
+        <target>Tolong memberikan nama akun</target>
+        <note>An error message shown when username / account name is missing in login</note>
+      </trans-unit>
+      <trans-unit id="Please select the target language">
+        <source>Please select the target language</source>
+        <target>Tolong memilih bahasa sasaran</target>
+        <note>An error message when the user hasn't selected project language when trying to create a project</note>
+      </trans-unit>
+      <trans-unit id="Someone">
+        <source>Someone</source>
+        <target>Orang yang tidak dikenal</target>
+        <note>A placeholder for comment author title. Used when no user name is available
+   A replacement string used when conflicting version author is not recognizable</note>
+      </trans-unit>
+      <trans-unit id="Success Cases">
+        <source>Success Cases</source>
+        <target>Impor berhasil</target>
+        <note>A table heading for succesfull usx-import cases</note>
+      </trans-unit>
+      <trans-unit id="The passwords don't match!">
+        <source>The passwords don't match!</source>
+        <target>Sandi-sandi berbeda</target>
+        <note>An error message displayed when new avatar password is not repeated correctly
+   An error message displayed when two passwords fields contents don't match</note>
+      </trans-unit>
+      <trans-unit id="Transfer Complete">
+        <source>Transfer Complete</source>
+        <target>Data selesai dipindahkan</target>
+        <note>Online status when a single time transaction has been completed</note>
+      </trans-unit>
+      <trans-unit id="Transfer Failed">
+        <source>Transfer Failed</source>
+        <target>Data tidak dapat dipindahkan</target>
+        <note>Online status when a single time transaction failed with an error</note>
+      </trans-unit>
+      <trans-unit id="Transferring">
+        <source>Transferring</source>
+        <target>Data sedang dipindahkan</target>
+        <note>Online status when data is being transferred between devices</note>
+      </trans-unit>
+      <trans-unit id="USX Export">
+        <source>USX Export</source>
+        <note>Part of the default export email subject</note>
+      </trans-unit>
+      <trans-unit id="Versions">
+        <source>Versions</source>
+        <target>Versi-versi</target>
+        <note>n Average number of versions (per paragraph)</note>
+      </trans-unit>
+      <trans-unit id="Waiting for Updates">
+        <source>Waiting for Updates</source>
+        <target>Sedang tunggu pemutakhiran</target>
+        <note>Online status when the connection is up to date</note>
+      </trans-unit>
+      <trans-unit id="on project:">
+        <source>on project:</source>
+        <target>proyek</target>
+        <note>Part of host info description. Followed by project name</note>
+      </trans-unit>
+      <trans-unit id="wrote">
+        <source>wrote</source>
+        <target>menulis</target>
+        <note>a portion of a comment's title. Something like 'this and this wrote:'
+   Part of conflict version description. Preceeded by author name</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditorTests/Info.plist" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="TranslationEditorUITests/Info.plist" source-language="en" datatype="plaintext" target-language="id">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.0" build-num="9M137d"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

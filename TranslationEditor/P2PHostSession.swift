@@ -3,7 +3,7 @@
 //  TranslationEditor
 //
 //  Created by Mikko Hilpinen on 28.3.2017.
-//  Copyright © 2017 Mikko Hilpinen. All rights reserved.
+//  Copyright © 2017 SIL. All rights reserved.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import Foundation
 fileprivate func randomAlphaNumericString(length: Int) -> String
 {
 	let allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-	let allowedCharsCount = UInt32(allowedChars.characters.count)
+	let allowedCharsCount = UInt32(allowedChars.count)
 	var randomString = ""
 	
 	for _ in 0 ..< length

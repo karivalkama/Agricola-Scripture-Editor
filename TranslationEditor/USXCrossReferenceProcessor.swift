@@ -3,7 +3,7 @@
 //  TranslationEditor
 //
 //  Created by Mikko Hilpinen on 8.5.2017.
-//  Copyright © 2017 Mikko Hilpinen. All rights reserved.
+//  Copyright © 2017 SIL. All rights reserved.
 //
 
 import Foundation
@@ -77,11 +77,11 @@ class USXCrossReferenceProcessor: USXContentProcessor
 		{
 			if let startIndex = originReference.text.range(of: ".")?.upperBound
 			{
-				let remaining = originReference.text.substring(from: startIndex)
+				let remaining = originReference.text.suffix(from: startIndex)
 				
 				if let endIndex = remaining.rangeOfCharacter(from: CharacterSet(charactersIn: ",. :-"))?.lowerBound
 				{
-					originIndex = VerseIndex.parse(from: remaining.substring(to: endIndex)) ?? originIndex
+					originIndex = VerseIndex.parse(from: String(remaining.prefix(upTo: endIndex))) ?? originIndex
 				}
 			}
 		}
