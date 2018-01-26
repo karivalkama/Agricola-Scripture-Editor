@@ -106,3 +106,58 @@
 /* a portion of a comment's title. Something like 'this and this wrote:'
    Part of conflict version description. Preceeded by author name */
 "wrote" = "menulis";
+
+
+// Project view connection prompt
+"You don’t have access to any projects" = "Anda belum ada hubungan dengan proyek yang ada";
+"You can join another person’s project by connecting with them" = "Anda boleh mengoneksi projek orang lain";
+"Connect" = "Mengoneksi";
+"You can also" = "Anda boleh juga";
+"Start New Project" = "Mulai proyek baru";
+
+// New account creation
+"Account name" = "Nama akun";
+"Password" = "Sandi";
+"Repeat Password" = "Ulangi sandi";
+"I share this device with other users" = "iPad ini dipakai orang lain juga";
+"Create Account" = "Mencipatakan akun baru";
+
+// Connect view
+"Disconnected" = "Hubungan terputus";
+"Join" = "Menghubungkan";
+"Close" = "Tutup";
+
+// Login view
+"Log In" = "Masuk";
+"Don’t have account yet?" = "Anda belum ada akun?";
+"Continue" = "Menciptakan akun baru";
+
+// Project creation
+"Project Name" = "Nama proyek";
+"Translation Name" = "Nama terjemahan";
+"Target Language" = "Bahasa sasaran";
+"Cancel" = "Batal";
+"Create Project" = "Mencipatakan proyek";
+
+// Main Menu
+"Manage Project" = "Mengelola poryek";
+"Import Book from Another Project" = "Impor buku dari proyek yang lain";
+"Admin tools" = "Alat administrasi";
+"Manage Shared Project Account" = "Mengelola akun proyek bersama";
+"TIP: Connect with others and open .USX files with Agricola to add new books" = "NASEHAT: Kalau anda mau menambah buku baru, tolong mengoneksi dengan penerjemah lain dan membuka file-file .USX di dalam Agricola";
+
+// Book import
+"Search By Language" = "Cari berdasarkan bahasa";
+"Search By Book" = "Cari berdasarkan buku";
+
+// No users notification
+"You have no other users in the project" = "Tidak ada penerjemah lain dalam proyek ini";
+"You can add more users by using the shared project account and by connecting with people." = "Penerjemah lain boleh ditambah melalui akun proyek bersama atau dengan mengoneksi dengan orang lain.";
+
+// Shared account creation
+"A shared account is always tied to a single project. Use a shared account when you have multiple users on the same device." = "Akun bersama selalu terikat pada satu pryek. Pakailah akun bersama bilamana lebih dari satu penerjemah memakai iPad ini.";
+"Shared Account Name" = "Nama akun bersama";
+"Shared Account Password" = "Sandi akun bersama";
+
+
+

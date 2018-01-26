@@ -2,7 +2,7 @@
 "1aq-Tb-qgB.text" = "1) Satu penerjemah menjadi tuan rumah koneksi (proyek mereka harus sedang terbuka, kemudian tindis tombol Connect, baru tindis tombol Host)\n2) Tindis tombol connect button, baru tindis tombol JOIN\n3) Tolong memindai kode QR pada iPad tuan rumah";
 
 /* Class = "UIButton"; normalTitle = "Connect"; ObjectID = "VQ5-Td-PPs"; */
-"VQ5-Td-PPs.normalTitle" = "Connect";
+"VQ5-Td-PPs.normalTitle" = "Mengoneksi";
 
 /* Class = "UILabel"; text = "Here's how to connect with others"; ObjectID = "XWk-di-xQ2"; */
 "XWk-di-xQ2.text" = "Begini caranya berhubungan dengan penerjemah lain";

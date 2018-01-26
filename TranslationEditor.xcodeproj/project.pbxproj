@@ -335,6 +335,9 @@
 		7C25180C1E8B8A930089E1FD /* ProjectBooksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectBooksView.swift; sourceTree = "<group>"; };
 		7C25180E1E8D0F8A0089E1FD /* EditAvatarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAvatarVC.swift; sourceTree = "<group>"; };
 		7C2518101E8E39F50089E1FD /* StackDismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackDismissable.swift; sourceTree = "<group>"; };
+		7C3B4747201B235B00FB4DE9 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Login.strings; sourceTree = "<group>"; };
+		7C3B4748201B238700FB4DE9 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		7C3B4749201B239C00FB4DE9 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Common.strings; sourceTree = "<group>"; };
 		7C40DF5A1DE718DA0035B92E /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseUtilities.swift; sourceTree = "<group>"; };
 		7C40DF621DEC14C80035B92E /* JSONConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONConvertible.swift; sourceTree = "<group>"; };
@@ -413,9 +416,6 @@
 		7C7834CA1E977D1C000556B0 /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		7C7D25501F0CCD6A005438A5 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		7C7D25511F0CCD6A005438A5 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Main.strings; sourceTree = "<group>"; };
-		7C7D25531F0CD45F005438A5 /* id */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = id; path = id.lproj/Login.storyboard; sourceTree = "<group>"; };
-		7C7D25561F0CD5D9005438A5 /* id */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = id; path = id.lproj/MainMenu.storyboard; sourceTree = "<group>"; };
-		7C7D25591F0CD5EA005438A5 /* id */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = id; path = id.lproj/Common.storyboard; sourceTree = "<group>"; };
 		7C7D255C1F0CD627005438A5 /* id */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = id; path = id.lproj/FilteredMultiSelection.xib; sourceTree = "<group>"; };
 		7C7FD6591EA5E18600ED2364 /* ParagraphCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParagraphCell.xib; sourceTree = "<group>"; };
 		7C7FD65B1EA5E5D400ED2364 /* ParagraphCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParagraphCell.swift; sourceTree = "<group>"; };
@@ -1773,8 +1773,8 @@
 		7C7D25541F0CD45F005438A5 /* Login.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7C7D25531F0CD45F005438A5 /* id */,
 				7C88A2FE1F0CD6AE00ACD6B6 /* Base */,
+				7C3B4747201B235B00FB4DE9 /* id */,
 			);
 			name = Login.storyboard;
 			sourceTree = "<group>";
@@ -1782,8 +1782,8 @@
 		7C7D25571F0CD5D9005438A5 /* MainMenu.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7C7D25561F0CD5D9005438A5 /* id */,
 				7C88A2FF1F0CD6C700ACD6B6 /* Base */,
+				7C3B4748201B238700FB4DE9 /* id */,
 			);
 			name = MainMenu.storyboard;
 			sourceTree = "<group>";
@@ -1791,8 +1791,8 @@
 		7C7D255A1F0CD5EA005438A5 /* Common.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7C7D25591F0CD5EA005438A5 /* id */,
 				7C88A3001F0CD6CF00ACD6B6 /* Base */,
+				7C3B4749201B239C00FB4DE9 /* id */,
 			);
 			name = Common.storyboard;
 			sourceTree = "<group>";

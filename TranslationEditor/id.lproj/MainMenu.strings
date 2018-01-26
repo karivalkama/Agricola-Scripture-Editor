@@ -1,0 +1,141 @@
+
+/* Class = "UILabel"; text = "New Version"; ObjectID = "0OD-u7-rre"; Note = "New book version preview label"; */
+"0OD-u7-rre.text" = "New Version";
+
+/* Class = "UILabel"; text = "Test User"; ObjectID = "26J-Co-4s9"; */
+"26J-Co-4s9.text" = "Test User";
+
+/* Class = "UILabel"; text = "Test Project"; ObjectID = "2DL-Ye-dYg"; */
+"2DL-Ye-dYg.text" = "Test Project";
+
+/* Class = "UILabel"; text = "Errors are displayed here"; ObjectID = "3S4-fY-xGT"; */
+"3S4-fY-xGT.text" = "Errors are displayed here";
+
+/* Class = "UIButton"; normalTitle = "No"; ObjectID = "3fB-Zb-gDD"; Note = "Button that cancels user data removal"; */
+"3fB-Zb-gDD.normalTitle" = "No";
+
+/* Class = "UILabel"; text = "Test Translation"; ObjectID = "4Ow-aM-d4X"; */
+"4Ow-aM-d4X.text" = "Test Translation";
+
+/* Class = "UIButton"; normalTitle = "OK!"; ObjectID = "6KA-NN-qeU"; Note = "Close error dialog button"; */
+"6KA-NN-qeU.normalTitle" = "OK!";
+
+/* Class = "UILabel"; text = "Search By Language"; ObjectID = "8Ny-gG-O9i"; Note = "Language filter hint text"; */
+"8Ny-gG-O9i.text" = "Cari berdasarkan bahasa";
+
+/* Class = "UIButton"; normalTitle = "OK!"; ObjectID = "Atq-XX-P0r"; Note = "Proceed with book import -button"; */
+"Atq-XX-P0r.normalTitle" = "OK!";
+
+/* Class = "UILabel"; text = "Select Book to Overwrite*"; ObjectID = "CT7-Xc-Iak"; Note = "Existing book overwrite selection label"; */
+"CT7-Xc-Iak.text" = "Select Book to Overwrite*";
+
+/* Class = "UILabel"; text = "TIP: Connect with others and open .USX files with Agricola to add new books"; ObjectID = "Ck9-ie-R4l"; Note = "Tip for adding new books"; */
+"Ck9-ie-R4l.text" = "NASEHAT: Kalau anda mau menambah buku baru, tolong mengoneksi dengan penerjemah lain dan membuka file-file .USX di dalam Agricola";
+
+/* Class = "UILabel"; text = "Are you sure you want to delete this user?"; ObjectID = "Dlr-O0-wvd"; Note = "A confirmation question displayed when the user is about to delete user data"; */
+"Dlr-O0-wvd.text" = "Are you sure you want to delete this user?";
+
+/* Class = "UILabel"; text = "Manage Project"; ObjectID = "EgS-5U-bC2"; Note = "Project management features -hint text"; */
+"EgS-5U-bC2.text" = "Mengelola poryek";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "GAM-73-JEj"; Note = "a button for cancelling out of an import of a book (based on preview)"; */
+"GAM-73-JEj.normalTitle" = "Cancel";
+
+/* Class = "UIButton"; normalTitle = "Manage Users"; ObjectID = "GOG-9c-Tto"; */
+"GOG-9c-Tto.normalTitle" = "Manage Users";
+
+/* Class = "UIButton"; normalTitle = "Yes"; ObjectID = "GSn-jc-wRB"; Note = "Button that proceeds with user data removal"; */
+"GSn-jc-wRB.normalTitle" = "Yes";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."; ObjectID = "HJe-Np-pPo"; */
+"HJe-Np-pPo.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+
+/* Class = "UILabel"; text = "Admin Tools"; ObjectID = "Hgw-PE-EAt"; Note = "Project management features -hint text"; */
+"Hgw-PE-EAt.text" = "Alat administrasi";
+
+/* Class = "UIButton"; normalTitle = "Abort"; ObjectID = "IJE-Tt-HfA"; Note = "Cancel import / keep the old version button"; */
+"IJE-Tt-HfA.normalTitle" = "Abort";
+
+/* Class = "UILabel"; text = "Admin:"; ObjectID = "LNv-np-Ouh"; Note = "Label for switch that determines whether the user has administrator rights or not"; */
+"LNv-np-Ouh.text" = "Admin:";
+
+/* Class = "UILabel"; text = "Text Language*"; ObjectID = "OaF-XV-X24"; Note = "Book language selection label"; */
+"OaF-XV-X24.text" = "Text Language*";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Pbo-Z6-pUu"; Note = "Cancel user / avatar edit button"; */
+"Pbo-Z6-pUu.normalTitle" = "Cancel";
+
+/* Class = "UILabel"; text = "Galatians"; ObjectID = "R6m-fe-4P3"; */
+"R6m-fe-4P3.text" = "Galatians";
+
+/* Class = "UILabel"; text = "Previous Version"; ObjectID = "TXo-zG-QkS"; Note = "Previous book version preview label"; */
+"TXo-zG-QkS.text" = "Previous Version";
+
+/* Class = "UILabel"; text = "Nickname for the Book*"; ObjectID = "U9D-Pp-6Ns"; Note = "A label for book / resource nickname input"; */
+"U9D-Pp-6Ns.text" = "Nickname for the Book*";
+
+/* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "WCx-AJ-uv9"; Note = "Proceed with import / overwrite old version button"; */
+"WCx-AJ-uv9.normalTitle" = "Accept";
+
+/* Class = "UIViewController"; title = "EditAvatar"; ObjectID = "XhR-5a-cmL"; */
+"XhR-5a-cmL.title" = "EditAvatar";
+
+/* Class = "UILabel"; text = "Preview"; ObjectID = "YF1-xu-qS8"; Note = "A title for the preview imported book view"; */
+"YF1-xu-qS8.text" = "Preview";
+
+/* Class = "UILabel"; text = "Search By Book"; ObjectID = "YLW-Pl-X9f"; Note = "Language filter hint text"; */
+"YLW-Pl-X9f.text" = "Cari berdasarkan buku";
+
+/* Class = "UIButton"; normalTitle = "Import"; ObjectID = "YVT-oJ-eUv"; Note = "A button for accepting a resource / preview and importing it as a new book to project"; */
+"YVT-oJ-eUv.normalTitle" = "Import";
+
+/* Class = "UIButton"; normalTitle = "Delete!"; ObjectID = "aFn-c2-1Bu"; Note = "Button used for deleting user data"; */
+"aFn-c2-1Bu.normalTitle" = "Delete!";
+
+/* Class = "UILabel"; text = "Insert as a new Translation"; ObjectID = "cXu-Cd-2hg"; Note = "Insert / overwrite switch label"; */
+"cXu-Cd-2hg.text" = "Insert as a new Translation";
+
+/* Class = "UILabel"; text = "Error heading here!"; ObjectID = "eA8-T4-Rce"; */
+"eA8-T4-Rce.text" = "Error heading here!";
+
+/* Class = "UILabel"; text = "Errors are displayed here"; ObjectID = "eTa-9T-igA"; */
+"eTa-9T-igA.text" = "Errors are displayed here";
+
+/* Class = "UIButton"; normalTitle = "Clear Password"; ObjectID = "ef0-I2-3bp"; Note = "Button used for resetting / clearing a user's password (in case of the user has forgot their password)"; */
+"ef0-I2-3bp.normalTitle" = "Clear Password";
+
+/* Class = "UILabel"; text = "English"; ObjectID = "h6j-jQ-28W"; */
+"h6j-jQ-28W.text" = "English";
+
+/* Class = "UILabel"; text = "Translation Nickname*"; ObjectID = "iIs-bE-bB4"; Note = "Book / translation nickname label"; */
+"iIs-bE-bB4.text" = "Translation Nickname*";
+
+/* Class = "UITextField"; placeholder = "Search"; ObjectID = "jCu-Gm-Vhp"; */
+"jCu-Gm-Vhp.placeholder" = "Search";
+
+/* Class = "UIButton"; normalTitle = "Manage Shared\nProject Account"; ObjectID = "kWz-6Y-pnt"; */
+"kWz-6Y-pnt.normalTitle" = "Mengelola akun\nproyek bersama";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "lyw-Ql-b3R"; Note = "Save new avatar / user data / edits"; */
+"lyw-Ql-b3R.normalTitle" = "Save";
+
+/* Class = "UILabel"; text = "3.4.2017"; ObjectID = "m63-gu-E22"; */
+"m63-gu-E22.text" = "3.4.2017";
+
+/* Class = "UILabel"; text = "Galatians"; ObjectID = "n2m-GN-bIw"; */
+"n2m-GN-bIw.text" = "Galatians";
+
+/* Class = "UILabel"; text = "Read Book Data"; ObjectID = "qYb-eo-8RK"; */
+"qYb-eo-8RK.text" = "Read Book Data";
+
+/* Class = "UIButton"; normalTitle = "Close"; ObjectID = "r4Z-lS-bkp"; Note = "Button that closes user management view"; */
+"r4Z-lS-bkp.normalTitle" = "Close";
+
+/* Class = "UITextField"; placeholder = "Search"; ObjectID = "uBO-FF-jAs"; */
+"uBO-FF-jAs.placeholder" = "Search";
+
+/* Class = "UILabel"; text = "Test Translation"; ObjectID = "wUz-AU-6vT"; */
+"wUz-AU-6vT.text" = "Test Translation";
+
+/* Class = "UILabel"; text = "Select a Book to Work on"; ObjectID = "yjb-YB-WnE"; Note = "Main menu book selection hint"; */
+"yjb-YB-WnE.text" = "Select a Book to Work on";
