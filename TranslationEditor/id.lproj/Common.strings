@@ -3,94 +3,94 @@
 "29p-ee-NQq.text" = "Sandi akun bersama*";
 
 /* Class = "UILabel"; text = "Text Language*"; ObjectID = "6hP-4n-aXZ"; */
-"6hP-4n-aXZ.text" = "Text Language*";
+"6hP-4n-aXZ.text" = "Teks/buku ini dalam bahasa*";
 
 /* Class = "UILabel"; text = "Found older version"; ObjectID = "7KE-XC-dXS"; */
-"7KE-XC-dXS.text" = "Found older version";
+"7KE-XC-dXS.text" = "Versi tua ditemukan";
 
 /* Class = "UILabel"; text = "Parsing Failed!"; ObjectID = "7ee-XJ-Ceg"; */
-"7ee-XJ-Ceg.text" = "Parsing Failed!";
+"7ee-XJ-Ceg.text" = "Tidak jadi diparse/dimasukkan!";
 
 /* Class = "UILabel"; text = "Preview Before Import"; ObjectID = "7oz-p6-Nbn"; */
-"7oz-p6-Nbn.text" = "Preview Before Import";
+"7oz-p6-Nbn.text" = "Meninjau sebelum dimasukkan";
 
 /* Class = "UILabel"; text = "7 File(s)"; ObjectID = "8I5-ni-SGB"; */
 "8I5-ni-SGB.text" = "7 File(s)";
 
 /* Class = "UILabel"; text = "Can't overwrite a book from another project"; ObjectID = "AXe-sD-DXW"; */
-"AXe-sD-DXW.text" = "Can't overwrite a book from another project";
+"AXe-sD-DXW.text" = "Buku dari proyek lain tidak bisa diganti";
 
 /* Class = "UILabel"; text = "New Version"; ObjectID = "AyF-os-xLN"; */
-"AyF-os-xLN.text" = "New Version";
+"AyF-os-xLN.text" = "Versi baru";
 
 /* Class = "UILabel"; text = "This and this book id"; ObjectID = "Euc-n7-nhV"; */
-"Euc-n7-nhV.text" = "This and this book id";
+"Euc-n7-nhV.text" = "Ini dan id buku ini";
 
 /* Class = "UILabel"; text = "Shared Account Name*"; ObjectID = "P91-EO-QBx"; Note = "Label for shared account creation account name input"; */
 "P91-EO-QBx.text" = "Nama akun bersama*";
 
 /* Class = "UILabel"; text = "Old Version"; ObjectID = "RJP-av-qG3"; */
-"RJP-av-qG3.text" = "Old Version";
+"RJP-av-qG3.text" = "Versi tua";
 
 /* Class = "UILabel"; text = "Book Name"; ObjectID = "Req-aL-FGV"; */
-"Req-aL-FGV.text" = "Book Name";
+"Req-aL-FGV.text" = "Nama buku";
 
 /* Class = "UIButton"; normalTitle = "Skip"; ObjectID = "SZB-cS-erc"; */
 "SZB-cS-erc.normalTitle" = "Skip";
 
 /* Class = "UILabel"; text = "Read Data"; ObjectID = "THO-ly-nZW"; */
-"THO-ly-nZW.text" = "Read Data";
+"THO-ly-nZW.text" = "Membaca isi buku";
 
 /* Class = "UILabel"; text = "Preview"; ObjectID = "W0m-OU-vop"; */
-"W0m-OU-vop.text" = "Preview";
+"W0m-OU-vop.text" = "Meninjau";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "XZd-9u-Tlv"; */
-"XZd-9u-Tlv.normalTitle" = "Cancel";
+"XZd-9u-Tlv.normalTitle" = "Batalkan";
 
 /* Class = "UIButton"; normalTitle = "Close"; ObjectID = "Xbp-A2-kJ8"; Note = "Close connection dialog -button"; */
-"Xbp-A2-kJ8.normalTitle" = "Close";
+"Xbp-A2-kJ8.normalTitle" = "Tutup";
 
 /* Class = "UILabel"; text = "A shared account is always tied to a single project. Use a shared account when you have multiple users on the same device."; ObjectID = "Zng-fH-PJW"; Note = "A description of the idea of a shared project account"; */
-"Zng-fH-PJW.text" = "Akun bersama selalu terikat pada satu pryek. Pakailah akun bersama bilamana lebih dari satu penerjemah memakai iPad ini.";
+"Zng-fH-PJW.text" = "Akun bersama selalu terikat pada satu proyek. Pakailah akun bersama bilamana lebih dari satu penerjemah memakai iPad ini.";
 
 /* Class = "UILabel"; text = "This is the translation we're writing"; ObjectID = "bQJ-1F-s9D"; */
-"bQJ-1F-s9D.text" = "This is the translation we're writing";
+"bQJ-1F-s9D.text" = "Inilah terjemahan kita membuat";
 
 /* Class = "UILabel"; text = "Translation Nickname*"; ObjectID = "bjc-il-f29"; */
-"bjc-il-f29.text" = "Translation Nickname*";
+"bjc-il-f29.text" = "Nama singka terjemahan*";
 
 /* Class = "UILabel"; text = "No paragraphs read"; ObjectID = "dxC-8r-qfX"; */
-"dxC-8r-qfX.text" = "No paragraphs read";
+"dxC-8r-qfX.text" = "Tidak ada paragraph yang dibaca";
 
 /* Class = "UILabel"; text = "Repeat Password*"; ObjectID = "gNa-Ve-hCi"; Note = "Label for shared account creation password repeat field"; */
-"gNa-Ve-hCi.text" = "Repeat Password*";
+"gNa-Ve-hCi.text" = "Tolong ulangi kata sandi*";
 
 /* Class = "UILabel"; text = "example.usx"; ObjectID = "hXu-HX-ft6"; */
 "hXu-HX-ft6.text" = "example.usx";
 
 /* Class = "UILabel"; text = "Existing books may be overwritten"; ObjectID = "ior-Fu-R1R"; */
-"ior-Fu-R1R.text" = "Existing books may be overwritten";
+"ior-Fu-R1R.text" = "Buku yang mungkin akan diganti";
 
 /* Class = "UILabel"; text = "Import USX Files"; ObjectID = "kZH-U1-Pso"; */
-"kZH-U1-Pso.text" = "Import USX Files";
+"kZH-U1-Pso.text" = "Memasukkan File USX";
 
 /* Class = "UILabel"; text = "(1 / 3)"; ObjectID = "kz5-Le-784"; */
 "kz5-Le-784.text" = "(1 / 3)";
 
 /* Class = "UILabel"; text = "Galatians"; ObjectID = "nOj-65-g3n"; */
-"nOj-65-g3n.text" = "Galatians";
+"nOj-65-g3n.text" = "Surat Galatia";
 
 /* Class = "UILabel"; text = "Error Label"; ObjectID = "tPs-jY-mfW"; */
-"tPs-jY-mfW.text" = "Error Label";
+"tPs-jY-mfW.text" = "Judul kesalahan";
 
 /* Class = "UIButton"; normalTitle = "OK"; ObjectID = "tbZ-H8-YFE"; Note = "Button that saves shared account changes and closes the view"; */
 "tbZ-H8-YFE.normalTitle" = "OK";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "xno-SJ-mzv"; Note = "Button closes shared account management view without saving changes"; */
-"xno-SJ-mzv.normalTitle" = "Cancel";
+"xno-SJ-mzv.normalTitle" = "Batalkan";
 
 /* Class = "UIButton"; normalTitle = "Import"; ObjectID = "yR6-V6-nUm"; */
-"yR6-V6-nUm.normalTitle" = "Import";
+"yR6-V6-nUm.normalTitle" = "Memasukkan/Mengimpor";
 
 /* Class = "UIButton"; normalTitle = "OK!"; ObjectID = "zBA-6k-Q2Q"; */
 "zBA-6k-Q2Q.normalTitle" = "OK!";

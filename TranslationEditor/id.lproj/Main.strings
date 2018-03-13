@@ -1,11 +1,11 @@
+/* Class = "UILabel"; text = "1: 3 - 8"; ObjectID = "64G-83-vHx"; */
+"64G-83-vHx.text" = "1: 3 - 8";
+
 /* Class = "UILabel"; text = "Target Translation"; ObjectID = "6vN-kF-8Bu"; */
 "6vN-kF-8Bu.text" = "Terjemahan sasaran";
 
 /* Class = "UILabel"; text = "Subject"; ObjectID = "9Y1-0T-HKm"; Note = "Note thread subject title"; */
 "9Y1-0T-HKm.text" = "Subjek";
-
-/* Class = "UILabel"; text = "1: 3 - 8"; ObjectID = "64G-83-vHx"; */
-"64G-83-vHx.text" = "1: 3 - 8";
 
 /* Class = "UILabel"; text = "Comment text"; ObjectID = "AX9-9x-VWK"; Note = "Note thread initial comment title"; */
 "AX9-9x-VWK.text" = "Isi usulan";
@@ -98,7 +98,7 @@
 "sMQ-kq-8ka.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
 /* Class = "UITextView"; text = "I used this and this word, but it seems there might be a better alternative. Any thoughs?"; ObjectID = "wQC-qP-041"; */
-"wQC-qP-041.text" = "Saya memaki kata-kata ini, tetapi ada kemungkinan besar ada kata yang lebih cocok. Apa pemikiran Anda?";
+"wQC-qP-041.text" = "Saya memakai kata-kata ini, tetapi ada kemungkinan besar ada kata yang lebih cocok. Apa pemikiran Anda?";
 
 /* Class = "UIButton"; normalTitle = "Save ★"; ObjectID = "yfA-HO-Uct"; Note = "Save / commit button"; */
 "yfA-HO-Uct.normalTitle" = "Simpan ★";

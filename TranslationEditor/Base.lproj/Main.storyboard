@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -250,10 +250,10 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zFj-Ji-pr4">
-                                                                            <rect key="frame" x="8" y="4" width="464" height="20.5"/>
+                                                                            <rect key="frame" x="8" y="4" width="464" height="35.5"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1: 3 - 8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64G-83-vHx">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="464" height="20.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="464" height="35.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="40" id="jZ9-M9-Kqv"/>
                                                                                     </constraints>
@@ -283,24 +283,24 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4sB-RW-ygB">
-                                                                            <rect key="frame" x="16" y="8" width="456" height="32"/>
+                                                                            <rect key="frame" x="16" y="8" width="456" height="34.5"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowright" translatesAutoresizingMaskIntoConstraints="NO" id="Uc7-Nk-ypu">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="32" height="34.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="32" id="GbE-wv-1dS"/>
                                                                                         <constraint firstAttribute="width" constant="32" id="pN5-QA-J5s"/>
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag" translatesAutoresizingMaskIntoConstraints="NO" id="bcF-P5-kbW">
-                                                                                    <rect key="frame" x="40" y="0.0" width="32" height="32"/>
+                                                                                    <rect key="frame" x="40" y="0.0" width="32" height="34.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="32" id="9xy-MM-xXF"/>
                                                                                         <constraint firstAttribute="width" constant="32" id="YYg-Y9-Frv"/>
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translation for Keruso?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEv-dU-6C3">
-                                                                                    <rect key="frame" x="80" y="0.0" width="247" height="32"/>
+                                                                                    <rect key="frame" x="80" y="0.0" width="247" height="34.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="32" id="ouQ-U5-Bo9"/>
                                                                                     </constraints>
@@ -309,7 +309,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gib-9y-P1o">
-                                                                                    <rect key="frame" x="335" y="0.0" width="64" height="32"/>
+                                                                                    <rect key="frame" x="335" y="0.0" width="64" height="34.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="64" id="aGY-16-zNo"/>
                                                                                     </constraints>
@@ -326,7 +326,7 @@
                                                                                     </attributedString>
                                                                                 </label>
                                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVC-vC-rFM">
-                                                                                    <rect key="frame" x="407" y="0.0" width="51" height="32"/>
+                                                                                    <rect key="frame" x="407" y="0.0" width="51" height="34.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="49" id="N3C-JC-VmC"/>
                                                                                     </constraints>
@@ -389,7 +389,7 @@
                                                                             </constraints>
                                                                         </stackView>
                                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" editable="NO" text="I used this and this word, but it seems there might be a better alternative. Any thoughs?" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQC-qP-041">
-                                                                            <rect key="frame" x="40" y="48" width="432" height="81"/>
+                                                                            <rect key="frame" x="40" y="48" width="432" height="79"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <color key="tintColor" red="0.92156862750000001" green="0.33725490200000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>

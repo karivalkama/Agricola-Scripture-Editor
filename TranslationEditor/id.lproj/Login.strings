@@ -1,6 +1,6 @@
 
 /* Class = "UILabel"; text = "Errors are displayed here!"; ObjectID = "0df-tq-SiK"; */
-"0df-tq-SiK.text" = "Errors are displayed here!";
+"0df-tq-SiK.text" = "Kesalahan-kesalahan diperlihatkan di sini!";
 
 /* Class = "UIButton"; normalTitle = "Create Project"; ObjectID = "3OS-MG-og8"; Note = "Proceed and create new project -button"; */
 "3OS-MG-og8.normalTitle" = "Mencipatakan proyek";
@@ -9,13 +9,13 @@
 "3ZJ-zz-hVS.text" = "12.1.2017";
 
 /* Class = "UIButton"; normalTitle = "No, I want to use my private account"; ObjectID = "3cy-Fb-A1P"; Note = "a button for dismissing auto-login option"; */
-"3cy-Fb-A1P.normalTitle" = "No, I want to use my private account";
+"3cy-Fb-A1P.normalTitle" = "Tidak, saya ingin memakai akun pribadi saya.";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "6T3-e3-ZHR"; Note = "Cancel project creation -button"; */
-"6T3-e3-ZHR.normalTitle" = "Cancel";
+"6T3-e3-ZHR.normalTitle" = "Batalkan";
 
 /* Class = "UILabel"; text = "Account Name*"; ObjectID = "7Og-qR-wba"; Note = "New account name input label"; */
-"7Og-qR-wba.text" = "Account Name*";
+"7Og-qR-wba.text" = "Nama akun*";
 
 /* Class = "UIButton"; normalTitle = "Log In"; ObjectID = "8EW-FA-pFd"; Note = "Button for checking username and password and logging in"; */
 "8EW-FA-pFd.normalTitle" = "Masuk";
@@ -30,49 +30,49 @@
 "ACo-ny-lib.text" = "Finnish";
 
 /* Class = "UIButton"; normalTitle = "Yes, log me in with the shared project account"; ObjectID = "BNV-wk-4tL"; Note = "Button that enables auto-login with a shared project account"; */
-"BNV-wk-4tL.normalTitle" = "Yes, log me in with the shared project account";
+"BNV-wk-4tL.normalTitle" = "Ya, Yes, log me in with the shared project account";
 
 /* Class = "UILabel"; text = "Project Name*"; ObjectID = "Bpb-GQ-vJC"; Note = "Input label for new project name"; */
 "Bpb-GQ-vJC.text" = "Nama proyek*";
 
 /* Class = "UILabel"; text = "Select an existing project"; ObjectID = "BvU-lB-5ab"; Note = "Project selection label"; */
-"BvU-lB-5ab.text" = "Select an existing project";
+"BvU-lB-5ab.text" = "Memilih proyek yang sudah ada";
 
 /* Class = "UILabel"; text = "Use Shared Project Account?"; ObjectID = "DfV-UO-F3l"; Note = "Connection auto-login prompt title"; */
-"DfV-UO-F3l.text" = "Use Shared Project Account?";
+"DfV-UO-F3l.text" = "Memakai akun proyek bersama?";
 
 /* Class = "UILabel"; text = "Errors are displayed here!"; ObjectID = "Ed3-25-IDt"; */
-"Ed3-25-IDt.text" = "Errors are displayed here!";
+"Ed3-25-IDt.text" = "Kesalahan-kesalahan diperlihatkan di sini!";
 
 /* Class = "UILabel"; text = "TIP: Use shared accounts when multiple people use this device"; ObjectID = "GYb-5k-q4F"; Note = "A tip / short description of the idea of shared accounts / options in auto-login prompt"; */
-"GYb-5k-q4F.text" = "TIP: Use shared accounts when multiple people use this device";
+"GYb-5k-q4F.text" = "Petunjuk: kalau beberapa oran mamakai iPad ini, tolong memilih akun bersama";
 
 /* Class = "UILabel"; text = "Syalom"; ObjectID = "I3k-Bi-vbz"; */
 "I3k-Bi-vbz.text" = "Syalom";
 
 /* Class = "UILabel"; text = "You can also"; ObjectID = "Itv-Lg-4xh"; Note = "Label indicating option for project selection"; */
-"Itv-Lg-4xh.text" = "You can also";
+"Itv-Lg-4xh.text" = "Anda boleh juga";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "L73-tV-GnT"; Note = "Cancel using this avatar -button"; */
-"L73-tV-GnT.normalTitle" = "Cancel";
+"L73-tV-GnT.normalTitle" = "Batalkan";
 
 /* Class = "UILabel"; text = "Password*"; ObjectID = "Lwf-p5-Miv"; Note = "New account password input label"; */
-"Lwf-p5-Miv.text" = "Password*";
+"Lwf-p5-Miv.text" = "Kata sandi*";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "M0d-2V-9K6"; Note = "Button for registering new user"; */
 "M0d-2V-9K6.normalTitle" = "Menciptakan akun baru";
 
 /* Class = "UILabel"; text = "Nobody to connect with?"; ObjectID = "N2t-uR-2dT"; */
-"N2t-uR-2dT.text" = "Nobody to connect with?";
+"N2t-uR-2dT.text" = "Tidak ada orang mengoneksi?";
 
 /* Class = "UIButton"; normalTitle = "Start New Project"; ObjectID = "Obr-6h-dYp"; Note = "Button for creating a new project"; */
-"Obr-6h-dYp.normalTitle" = "Start New Project";
+"Obr-6h-dYp.normalTitle" = "Memulai proyek baru";
 
 /* Class = "UILabel"; text = "Target Language*"; ObjectID = "Pgb-QY-eyn"; Note = "Project target language selection label"; */
 "Pgb-QY-eyn.text" = "Bahasa sasaran*";
 
 /* Class = "UILabel"; text = "Epic Common Project"; ObjectID = "QVL-8I-UDc"; */
-"QVL-8I-UDc.text" = "Epic Common Project";
+"QVL-8I-UDc.text" = "proyek bersama Epic";
 
 /* Class = "UILabel"; text = "A"; ObjectID = "Qn1-aN-GAg"; */
 "Qn1-aN-GAg.text" = "A";
@@ -81,70 +81,70 @@
 "RXF-ZI-Jgt.text" = "Nama terjemahan*";
 
 /* Class = "UILabel"; text = "It seems like you have no data on this device"; ObjectID = "U0D-0a-p0C"; */
-"U0D-0a-p0C.text" = "It seems like you have no data on this device";
+"U0D-0a-p0C.text" = "Ternyata Anda belum punya data di dalam iPad ini";
 
 /* Class = "UITextView"; text = "You are currently connected with another project member. Do you wish to quickly access the project using the shared project account?"; ObjectID = "V2V-ii-I6u"; Note = "Connection auto login prompt description"; */
-"V2V-ii-I6u.text" = "You are currently connected with another project member. Do you wish to quickly access the project using the shared project account?";
+"V2V-ii-I6u.text" = "Anda sudah terkoneksi dengan anggota proyek. Apakah Anda mau mengakses proyeknya dengan memakai akun proyek bersama?";
 
 /* Class = "UIButton"; normalTitle = "Create Account"; ObjectID = "V7n-6d-wMW"; Note = "Create account and proceed -button"; */
-"V7n-6d-wMW.normalTitle" = "Create Account";
+"V7n-6d-wMW.normalTitle" = "Menciptakan akun";
 
 /* Class = "UILabel"; text = "My First Translation Project"; ObjectID = "XPg-eE-ds2"; */
-"XPg-eE-ds2.text" = "My First Translation Project";
+"XPg-eE-ds2.text" = "Proyek terjemahan pertama saya";
 
 /* Class = "UILabel"; text = "Account Name*"; ObjectID = "YoC-p0-0Hc"; Note = "Unique user account name input label"; */
-"YoC-p0-0Hc.text" = "Account Name*";
+"YoC-p0-0Hc.text" = "Nama akun*";
 
 /* Class = "UILabel"; text = "Don't have an account yet?"; ObjectID = "aDg-Gw-FuI"; Note = "Hint for registering with a new account"; */
 "aDg-Gw-FuI.text" = "Anda belum ada akun?";
 
 /* Class = "UILabel"; text = "Invitation from Teemu (Lorenzo)"; ObjectID = "eZ1-s9-RZ2"; */
-"eZ1-s9-RZ2.text" = "Invitation from Teemu (Lorenzo)";
+"eZ1-s9-RZ2.text" = "Undangan dari Teemu (Lorenzo)";
 
 /* Class = "UILabel"; text = "Scripture Editor for iPad"; ObjectID = "gI2-5n-LQN"; Note = "Extra description for 'Agricola'"; */
-"gI2-5n-LQN.text" = "Scripture Editor for iPad";
+"gI2-5n-LQN.text" = "Editor terjemahan Alkitab untuk iPad";
 
 /* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."; ObjectID = "gTA-NZ-vcG"; */
 "gTA-NZ-vcG.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
 /* Class = "UILabel"; text = "Invalid account name and/or password!"; ObjectID = "jZr-uV-CHp"; Note = "Error displayed when username or password are invalid in login"; */
-"jZr-uV-CHp.text" = "Invalid account name and/or password!";
+"jZr-uV-CHp.text" = "Nama akun atau sandi salah!";
 
 /* Class = "UIButton"; normalTitle = "Start from Scratch"; ObjectID = "kAG-ma-c5g"; */
-"kAG-ma-c5g.normalTitle" = "Start from Scratch";
+"kAG-ma-c5g.normalTitle" = "Mulai dari permulaan";
 
 /* Class = "UILabel"; text = "I share this device with other users"; ObjectID = "lJY-Jk-sFC"; Note = "A label next to a switch that defines whether the account will be shared (multiple users per device) or private"; */
-"lJY-Jk-sFC.text" = "I share this device with other users";
+"lJY-Jk-sFC.text" = "iPad ini dipakai oleh orang lain juga";
 
 /* Class = "UILabel"; text = "You will be granted access to the project when you log in"; ObjectID = "mBi-ep-ibD"; Note = "A hint / description for auto-login dismiss button"; */
-"mBi-ep-ibD.text" = "You will be granted access to the project when you log in";
+"mBi-ep-ibD.text" = "Anda boleh mengakses proyek sesudah anda log in";
 
 /* Class = "UILabel"; text = "30.2.2017"; ObjectID = "oap-hn-qB3"; */
 "oap-hn-qB3.text" = "30.2.2017";
 
 /* Class = "UILabel"; text = "You can connect with others to fix that"; ObjectID = "pUh-vV-lT5"; */
-"pUh-vV-lT5.text" = "You can connect with others to fix that";
+"pUh-vV-lT5.text" = "Anda boleh berkoneksi dengan anggota yang lain untuk mengatasi persoalan itu";
 
 /* Class = "UILabel"; text = "a shared account will be created, It will be tied to the project you create"; ObjectID = "pbg-QG-CKs"; Note = "A short description for shared accounts on account creation"; */
-"pbg-QG-CKs.text" = "a shared account will be created, It will be tied to the project you create";
+"pbg-QG-CKs.text" = "Akan diciptakan akun bersama, yang diikat dengan proyek yang Anda menciptakan";
 
 /* Class = "UILabel"; text = "Password*"; ObjectID = "pwq-WR-SZL"; Note = "Account password input label"; */
-"pwq-WR-SZL.text" = "Password*";
+"pwq-WR-SZL.text" = "Kata sandi*";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "rLK-gF-P4Y"; Note = "Cancel account creation -button"; */
-"rLK-gF-P4Y.normalTitle" = "Batal";
+"rLK-gF-P4Y.normalTitle" = "Batalkan";
 
 /* Class = "UILabel"; text = "Repeat Password*"; ObjectID = "sbS-kH-iir"; Note = "Input field label for account password repeat"; */
-"sbS-kH-iir.text" = "Repeat Password*";
+"sbS-kH-iir.text" = "Tolong ulangi kata sandi*";
 
 /* Class = "UIButton"; normalTitle = "Login"; ObjectID = "uC0-5u-oCf"; Note = "Try logging in with this avatar and password -button"; */
-"uC0-5u-oCf.normalTitle" = "Login";
+"uC0-5u-oCf.normalTitle" = "Log in";
 
 /* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "vpM-Am-WMV"; */
-"vpM-Am-WMV.normalTitle" = "Accept";
+"vpM-Am-WMV.normalTitle" = "Terima";
 
 /* Class = "UILabel"; text = "Password*"; ObjectID = "wyh-KK-oHX"; Note = "Input label for user / avatar password"; */
-"wyh-KK-oHX.text" = "Password*";
+"wyh-KK-oHX.text" = "Kata sandi*";
 
 /* Class = "UILabel"; text = "The password was incorrect"; ObjectID = "zjy-Eb-Ez7"; Note = "Error displayed when avatar / user password was invalid"; */
-"zjy-Eb-Ez7.text" = "The password was incorrect";
+"zjy-Eb-Ez7.text" = "Kata sandi salah";
