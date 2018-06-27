@@ -1,5 +1,6 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '9.0'
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
 
 target 'TranslationEditor' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
@@ -11,6 +12,7 @@ target 'TranslationEditor' do
   pod 'SCrypto'
   pod 'QRCodeReader.swift'
   pod 'QRCode'
+  pod 'Alamofire', '~> 4.7'
 
   target 'TranslationEditorTests' do
     inherit! :search_paths
@@ -19,6 +21,7 @@ target 'TranslationEditor' do
     pod 'SCrypto'
     pod 'QRCodeReader.swift'
     pod 'QRCode'
+    pod 'Alamofire', '~> 4.7'
   end
 
   target 'TranslationEditorUITests' do
@@ -28,6 +31,7 @@ target 'TranslationEditor' do
     pod 'SCrypto'
     pod 'QRCodeReader.swift'
     pod 'QRCode'
+    pod 'Alamofire', '~> 4.7'
   end
 
 end
