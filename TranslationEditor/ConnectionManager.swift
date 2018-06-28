@@ -155,7 +155,7 @@ class ConnectionManager
 			}
 			else if replications.contains(where: { $0.status == .stopped })
 			{
-				if let error = replications.flatMap({ $0.lastError }).first
+				if let error = replications.compactMap({ $0.lastError }).first
 				{
 					print("ERROR: Database transfer failed with error: \(error)")
 					status = .failed
