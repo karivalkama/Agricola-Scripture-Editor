@@ -13,6 +13,7 @@ target 'TranslationEditor' do
   pod 'QRCodeReader.swift'
   pod 'QRCode'
   pod 'Alamofire', '~> 4.7'
+  pod 'SwiftyJSON', '~> 4.0'
 
   target 'TranslationEditorTests' do
     inherit! :search_paths
@@ -22,6 +23,7 @@ target 'TranslationEditor' do
     pod 'QRCodeReader.swift'
     pod 'QRCode'
     pod 'Alamofire', '~> 4.7'
+    pod 'SwiftyJSON', '~> 4.0'
   end
 
   target 'TranslationEditorUITests' do
@@ -32,6 +34,7 @@ target 'TranslationEditor' do
     pod 'QRCodeReader.swift'
     pod 'QRCode'
     pod 'Alamofire', '~> 4.7'
+    pod 'SwiftyJSON', '~> 4.0'
   end
 
 end
