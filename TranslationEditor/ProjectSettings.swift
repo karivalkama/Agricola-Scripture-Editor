@@ -69,11 +69,11 @@ final class ProjectSettings: Storable
 	{
 		if let projectPath = properties["project_path"].array
 		{
-			self.projectPath = projectPath.flatMap { $0.string }
+			self.projectPath = projectPath.compactMap { $0.string }
 		}
 		if let avatarIds = properties["avatars"].array
 		{
-			self.avatarIds = avatarIds.flatMap { $0.string }
+			self.avatarIds = avatarIds.compactMap { $0.string }
 		}
 		if let rights = properties["rights"].object
 		{

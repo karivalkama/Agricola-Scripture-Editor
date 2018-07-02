@@ -87,7 +87,7 @@ final class NotesThread: Storable
 		}
 		if let tags = properties["tags"].array
 		{
-			self.tags = tags.flatMap { $0.string }
+			self.tags = tags.compactMap { $0.string }
 		}
 	}
 

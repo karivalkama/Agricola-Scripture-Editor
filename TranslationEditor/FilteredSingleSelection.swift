@@ -144,7 +144,7 @@ protocol FilteredSingleSelectionDelegate: class
 		// Updates the displayed indices
 		if let filter = filterField.text, !filter.isEmpty
 		{
-			displayedIndices = (0 ..< datasource.numberOfOptions).flatMap { datasource.indexIsIncludedInFilter(index: $0, filter: filter) ? $0 : nil }
+			displayedIndices = (0 ..< datasource.numberOfOptions).compactMap { datasource.indexIsIncludedInFilter(index: $0, filter: filter) ? $0 : nil }
 		}
 		else
 		{

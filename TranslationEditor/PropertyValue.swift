@@ -415,7 +415,7 @@ struct PropertyValue: CustomStringConvertible, ExpressibleByIntegerLiteral, Expr
 	{
 		if let array = array
 		{
-			return try array.flatMap(f)
+			return try array.compactMap(f)
 		}
 		else
 		{

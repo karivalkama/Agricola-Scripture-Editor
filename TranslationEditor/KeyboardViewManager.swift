@@ -16,7 +16,7 @@ class KeyboardViewManager
 	
 	private weak var mainView: UIView!
 	private let _importantElements: [Weak<UIView>]
-	private var importantElements: [UIView] { return _importantElements.flatMap { $0.value } }
+	private var importantElements: [UIView] { return _importantElements.compactMap { $0.value } }
 	
 	private let margin: CGFloat
 	

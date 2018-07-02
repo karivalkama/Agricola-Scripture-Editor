@@ -89,7 +89,7 @@ final class Project: Storable
 		}
 		if let contributorData = properties["contributors"].array
 		{
-			self.contributorIds = contributorData.flatMap { $0.string }
+			self.contributorIds = contributorData.compactMap { $0.string }
 		}
 		if let sharedAccountId = properties["shared_account"].string
 		{

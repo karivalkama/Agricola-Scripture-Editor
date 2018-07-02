@@ -60,7 +60,7 @@ final class Carousel: Storable
 	{
 		if let resourceData = properties["resources"].array
 		{
-			self.resourceIds = resourceData.flatMap { $0.string }
+			self.resourceIds = resourceData.compactMap { $0.string }
 		}
 		if let updated = properties["updated"].double
 		{

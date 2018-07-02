@@ -440,7 +440,7 @@ class ImportUSXVC: UIViewController, UITableViewDataSource, FilteredSelectionDat
 				return
 			}
 			
-			let targetTranslationIds = try project.targetTranslationQuery(bookCode: bookToOverwrite.code).resultRows().flatMap { $0.id }.filter { $0 != bookToOverwrite.idString }
+			let targetTranslationIds = try project.targetTranslationQuery(bookCode: bookToOverwrite.code).resultRows().compactMap { $0.id }.filter { $0 != bookToOverwrite.idString }
 			guard try targetTranslationIds.forAll({ try !ParagraphHistoryView.instance.rangeContainsConflicts(bookId: $0) }) else
 			{
 				displayError(heading: "Conflicts in Target Translations", message: "Target translation of \(bookToOverwrite.code) contain conflicts. Please resolve them and try importing again afterwards.")

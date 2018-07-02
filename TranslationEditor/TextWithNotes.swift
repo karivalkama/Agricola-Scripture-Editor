@@ -200,11 +200,11 @@ final class TextWithNotes: USXConvertible, JSONConvertible, AttributedStringConv
 		
 		// Updates the content with the new data
 		var content = self.content
-		for i in 0 ..< content.count
+		for i in 0 ..< self.content.count
 		{
 			if i < charData.count
 			{
-				content[i].charData = CharData.update(content[i].charData, with: charData[i])
+				content[i].charData = CharData.update(self.content[i].charData, with: charData[i])
 			}
 			else
 			{

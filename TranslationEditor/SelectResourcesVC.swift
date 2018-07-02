@@ -205,7 +205,7 @@ class SelectResourcesVC: UIViewController, UITableViewDataSource, UITableViewDel
 			// If there's an existing carousel, uses ordering and states from that one
 			if let carousel = try Carousel.get(avatarId: avatarId, bookCode: Book.code(fromId: bookId))
 			{
-				filteredResources = carousel.resourceIds.flatMap { id in allResources.first(where: { $0.idString == id }).map { ($0, true) } } + allResources.filter { !carousel.resourceIds.contains($0.idString) }.map { ($0, false) }
+				filteredResources = carousel.resourceIds.compactMap { id in allResources.first(where: { $0.idString == id }).map { ($0, true) } } + allResources.filter { !carousel.resourceIds.contains($0.idString) }.map { ($0, false) }
 			}
 			else
 			{
@@ -244,7 +244,7 @@ class SelectResourcesVC: UIViewController, UITableViewDataSource, UITableViewDel
 		
 		do
 		{
-			try Carousel.push(avatarId: avatarId, bookCode: Book.code(fromId: bookId), resourceIds: (booksResources + notesResources).flatMap { $0.state ? $0.resource.idString : nil } )
+			try Carousel.push(avatarId: avatarId, bookCode: Book.code(fromId: bookId), resourceIds: (booksResources + notesResources).compactMap { $0.state ? $0.resource.idString : nil } )
 		}
 		catch
 		{

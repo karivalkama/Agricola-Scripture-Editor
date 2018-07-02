@@ -134,7 +134,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 			let bookResources = resources.filter { $0.category == .sourceTranslation }
 			let notesResources = resources.filter { $0.category == .notes }
 			
-			try allSourceBooks = bookResources.flatMap
+			try allSourceBooks = bookResources.compactMap
 			{
 				resource in
 				
@@ -209,7 +209,7 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 		// Uses bindings to find source index paths from book data
 		if let currentSourceBookData = currentSourceBookData
 		{
-			return currentSourceBookData.binding.sourcesForTarget(targetPathId).flatMap { currentSourceBookData.datasource.indexForPath($0) }
+			return currentSourceBookData.binding.sourcesForTarget(targetPathId).compactMap { currentSourceBookData.datasource.indexForPath($0) }
 		}
 		// Notes table data sources keep track of path indices
 		else if let currentNotesData = currentNotesData
@@ -336,8 +336,8 @@ class ResourceManager: TranslationParagraphListener, TableCellSelectionListener,
 	{
 		if let carousel = carousel
 		{
-			displayedSourceBooks = carousel.resourceIds.flatMap { id in self.allSourceBooks.first(where: { $0.resource.idString == id }) }
-			displayedNotes = carousel.resourceIds.flatMap { id in self.allNotes.first(where: { $0.resource.idString == id }) }
+			displayedSourceBooks = carousel.resourceIds.compactMap { id in self.allSourceBooks.first(where: { $0.resource.idString == id }) }
+			displayedNotes = carousel.resourceIds.compactMap { id in self.allNotes.first(where: { $0.resource.idString == id }) }
 		}
 		else
 		{

@@ -24,7 +24,7 @@ class KeyboardReactiveView: UIView
 	{
 		get
 		{
-			return _importantElements.flatMap { $0.value }
+			return _importantElements.compactMap { $0.value }
 		}
 		set
 		{

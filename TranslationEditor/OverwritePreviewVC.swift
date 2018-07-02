@@ -290,7 +290,7 @@ class OverwritePreviewVC: UIViewController
 				// Records all changed notes so that the changes can be made all at once
 				var notesToBeSaved = [ParagraphNotes]()
 				
-				let notesCollectionIds = try ResourceCollectionView.instance.collectionQuery(bookId: bookId, category: .notes).resultRows().flatMap { $0.id }
+				let notesCollectionIds = try ResourceCollectionView.instance.collectionQuery(bookId: bookId, category: .notes).resultRows().compactMap { $0.id }
 				for notesCollectionId in notesCollectionIds
 				{
 					// Creates a new note for each new inserted paragraph

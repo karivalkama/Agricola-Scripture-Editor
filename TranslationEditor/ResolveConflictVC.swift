@@ -51,7 +51,7 @@ class ResolveConflictVC: UIViewController, UICollectionViewDelegate, UICollectio
 		// Loads the data for the collection view
 		do
 		{
-			versions = try versionIds.flatMap { try Paragraph.get($0) }
+			versions = try versionIds.compactMap { try Paragraph.get($0) }
 			
 			for version in versions
 			{

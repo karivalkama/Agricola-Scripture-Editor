@@ -196,7 +196,7 @@ class ImportBookVC: UIViewController, UITableViewDataSource, LiveQueryListener, 
 	{
 		do
 		{
-			alreadyImportedIds = try rows.flatMap { $0.id }.flatMap { try ParagraphBinding.get(resourceCollectionId: $0)?.sourceBookId }
+			alreadyImportedIds = try rows.compactMap { $0.id }.compactMap { try ParagraphBinding.get(resourceCollectionId: $0)?.sourceBookId }
 			importedIdsLoaded = true
 			
 			if booksLoaded

@@ -146,7 +146,7 @@ protocol FilteredMultiSelectionDelegate: class
 		
 		if let filter = searchField.text, !filter.isEmpty
 		{
-			displayedIndices = (0 ..< dataSouce.numberOfOptions).flatMap { dataSouce.indexIsIncludedInFilter(index: $0, filter: filter) ? $0 : nil }
+			displayedIndices = (0 ..< dataSouce.numberOfOptions).compactMap { dataSouce.indexIsIncludedInFilter(index: $0, filter: filter) ? $0 : nil }
 		}
 		else
 		{

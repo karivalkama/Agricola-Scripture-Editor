@@ -34,7 +34,7 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	private var _contentListeners = [Weak<TranslationParagraphListener>]()
 	var contentListeners: [TranslationParagraphListener]
 	{
-		get { return _contentListeners.flatMap { $0.value } }
+		get { return _contentListeners.compactMap { $0.value } }
 		set { _contentListeners = newValue.weakReference }
 	}
 	
@@ -69,7 +69,7 @@ class TranslationTableViewDS: NSObject, UITableViewDataSource, LiveQueryListener
 	func rowsUpdated(rows: [Row<ParagraphView>])
 	{
 		// Updates paragraph data
-		let paragraphs = rows.flatMap { try? $0.object() }
+		let paragraphs = rows.compactMap { try? $0.object() }
 		
 		currentData = paragraphs.toArrayDictionary { ($0.chapterIndex, $0) }
 		

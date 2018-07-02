@@ -72,7 +72,7 @@ final class AgricolaAccount: Storable
 		}
 		if let deviceArray = properties["devices"].array
 		{
-			self.devices = deviceArray.flatMap { $0.string }
+			self.devices = deviceArray.compactMap { $0.string }
 		}
 	}
 	

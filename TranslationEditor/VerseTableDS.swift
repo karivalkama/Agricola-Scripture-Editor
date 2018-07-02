@@ -97,7 +97,7 @@ class VerseTableDS: NSObject, UITableViewDataSource
 	{
 		if let targetVerseIndex = targetVerseIndex
 		{
-			filteredData = data.flatMap
+			filteredData = data.compactMap
 			{
 				let paragraph = $0.paragraph.copy()
 				for para in paragraph.content

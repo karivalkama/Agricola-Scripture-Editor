@@ -55,7 +55,7 @@ class ManageUsersVC: UIViewController, UITableViewDataSource
 		{
 			do
 			{
-				self.avatars = try AvatarView.instance.avatarQuery(projectId: projectId).resultObjects().filter { $0.idString != avatarId }.flatMap { avatar in avatar.isDisabled ? nil : try avatar.info().map { (avatar, $0) } }
+				self.avatars = try AvatarView.instance.avatarQuery(projectId: projectId).resultObjects().filter { $0.idString != avatarId }.compactMap { avatar in avatar.isDisabled ? nil : try avatar.info().map { (avatar, $0) } }
 				self.userDataStackView.dataLoaded(isEmpty: self.avatars.isEmpty)
 				self.userTableView.reloadData()
 			}

@@ -193,7 +193,7 @@ protocol SimpleSingleSelectionViewDelegate: class
 		// Updates the displayed indices
 		if !value.isEmpty
 		{
-			displayedIndices = (0 ..< datasource.numberOfOptions).flatMap { ($0 == selectedIndex || datasource.indexIsIncludedInFilter(index: $0, filter: value)) ? $0 : nil }
+			displayedIndices = (0 ..< datasource.numberOfOptions).compactMap { ($0 == selectedIndex || datasource.indexIsIncludedInFilter(index: $0, filter: value)) ? $0 : nil }
 		}
 		else
 		{

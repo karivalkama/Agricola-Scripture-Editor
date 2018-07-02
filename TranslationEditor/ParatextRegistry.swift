@@ -19,6 +19,8 @@ class ParatextRegistry
 			.authenticate(user: userName, password: registrationCode)
 			.responseJSON { response in
 				
+				
+				
 				debugPrint(response)
 		}
 	}

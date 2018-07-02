@@ -121,7 +121,7 @@ class TranslationVC: UIViewController, CellInputListener, AppStatusListener, Add
 			}
 			else
 			{
-				return self.resourceManager.targetPathsForSourcePath(oppositePathId).flatMap { self.targetTranslationDS.indexForPath($0) }
+				return self.resourceManager.targetPathsForSourcePath(oppositePathId).compactMap { self.targetTranslationDS.indexForPath($0) }
 			}
 		}
 		

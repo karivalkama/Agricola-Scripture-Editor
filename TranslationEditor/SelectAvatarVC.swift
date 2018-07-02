@@ -204,7 +204,7 @@ class SelectAvatarVC: UIViewController, UICollectionViewDataSource, UICollection
 			// If using a shared account, presents all viable options in the collection view
 			if usesSharedAccount
 			{
-				avatarData = try rows.map { try $0.object() }.flatMap
+				avatarData = try rows.map { try $0.object() }.compactMap
 				{
 					avatar in
 					

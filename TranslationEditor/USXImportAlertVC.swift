@@ -394,7 +394,7 @@ class USXImportAlertVC: UIViewController, UITableViewDataSource, LanguageSelecti
 			else if selectedNickName != nil
 			{
 				let associatedResources = existingResources.filter { $0.name == newNickname && $0.languageId == languageId }
-				let associatedSources = try associatedResources.flatMap { try ParagraphBinding.get(resourceCollectionId: $0.idString) }.flatMap { try Book.get($0.sourceBookId) }
+				let associatedSources = try associatedResources.compactMap { try ParagraphBinding.get(resourceCollectionId: $0.idString) }.compactMap { try Book.get($0.sourceBookId) }
 				
 				for bookData in remainingBooks
 				{
