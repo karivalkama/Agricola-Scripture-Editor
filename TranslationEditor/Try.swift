@@ -13,8 +13,8 @@ class Try<T>
 {
 	// ATTRIBUTES	-----------------
 	
-	private let success: T?
-	private let failure: Error?
+	let success: T?
+	let failure: Error?
 	
 	
 	// COMPUTED	---------------------
@@ -125,6 +125,19 @@ class Try<T>
 		else
 		{
 			return Try.failure(error!)
+		}
+	}
+	
+	// Maps this try using one of two mapping functions
+	func handleMap<B>(onSuccess successMap: (T) -> B, onFailure failureMap: (Error) -> B) -> B
+	{
+		if (isSuccess)
+		{
+			return successMap(success!)
+		}
+		else
+		{
+			return failureMap(failure!)
 		}
 	}
 	
