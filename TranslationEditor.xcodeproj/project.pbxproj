@@ -52,6 +52,9 @@
 		7C2518111E8E39F50089E1FD /* StackDismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2518101E8E39F50089E1FD /* StackDismissable.swift */; };
 		7C3406B320E4CAEA00DF2679 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3406B220E4CAEA00DF2679 /* Constants.swift */; };
 		7C3406B520E4CCAC00DF2679 /* ParatextRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3406B420E4CCAC00DF2679 /* ParatextRegistry.swift */; };
+		7C36E3332101D6F1009224B3 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36E3322101D6F1009224B3 /* Future.swift */; };
+		7C36E3352101E43A009224B3 /* Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36E3342101E43A009224B3 /* Completion.swift */; };
+		7C36E3372101ECF9009224B3 /* Try.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36E3362101ECF9009224B3 /* Try.swift */; };
 		7C40DF5B1DE718DA0035B92E /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF5A1DE718DA0035B92E /* Storable.swift */; };
 		7C40DF5F1DE71E490035B92E /* DatabaseUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF5E1DE71E490035B92E /* DatabaseUtilities.swift */; };
 		7C40DF631DEC14C80035B92E /* JSONConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DF621DEC14C80035B92E /* JSONConvertible.swift */; };
@@ -341,6 +344,9 @@
 		7C2518101E8E39F50089E1FD /* StackDismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackDismissable.swift; sourceTree = "<group>"; };
 		7C3406B220E4CAEA00DF2679 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7C3406B420E4CCAC00DF2679 /* ParatextRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParatextRegistry.swift; sourceTree = "<group>"; };
+		7C36E3322101D6F1009224B3 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
+		7C36E3342101E43A009224B3 /* Completion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Completion.swift; sourceTree = "<group>"; };
+		7C36E3362101ECF9009224B3 /* Try.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Try.swift; sourceTree = "<group>"; };
 		7C3B4747201B235B00FB4DE9 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Login.strings; sourceTree = "<group>"; };
 		7C3B4748201B238700FB4DE9 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		7C3B4749201B239C00FB4DE9 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Common.strings; sourceTree = "<group>"; };
@@ -738,6 +744,7 @@
 		7C20D7FD1D9A939400E84BA5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				7C36E3312101D67C009224B3 /* AsyncTools */,
 				7C4A4FA01DF595B6009F890E /* Globals */,
 				7C4A4FFC1E01677E009F890E /* Extensions */,
 				7C4A4F9F1DF59594009F890E /* Errors */,
@@ -748,6 +755,16 @@
 				7CE0E2BF1EC5CD97008D7A6E /* KeyboardReactiveView.swift */,
 			);
 			name = Util;
+			sourceTree = "<group>";
+		};
+		7C36E3312101D67C009224B3 /* AsyncTools */ = {
+			isa = PBXGroup;
+			children = (
+				7C36E3322101D6F1009224B3 /* Future.swift */,
+				7C36E3342101E43A009224B3 /* Completion.swift */,
+				7C36E3362101ECF9009224B3 /* Try.swift */,
+			);
+			name = AsyncTools;
 			sourceTree = "<group>";
 		};
 		7C4A4F9E1DF594FB009F890E /* Views */ = {
@@ -1535,6 +1552,7 @@
 				7CA1BAA01E2F9C2100611FED /* NotesThreadView.swift in Sources */,
 				7C4A4FAE1DF93B75009F890E /* AnyLiveQueryListener.swift in Sources */,
 				7C936C131E9DF87700AC06BF /* TranslationCellDelegate.swift in Sources */,
+				7C36E3352101E43A009224B3 /* Completion.swift in Sources */,
 				7CDBD6A81E238A0200912320 /* ResourceCategory.swift in Sources */,
 				7C20D7EC1D8C1B7200E84BA5 /* CellContentListener.swift in Sources */,
 				7C25180F1E8D0F8A0089E1FD /* EditAvatarVC.swift in Sources */,
@@ -1610,6 +1628,7 @@
 				7C57ECAC1E6D6651000718E9 /* ProjectCell.swift in Sources */,
 				7CA1BAB01E31E8DD00611FED /* ThreadCell.swift in Sources */,
 				7CDBD6BC1E2657F900912320 /* ParagraphBindingView.swift in Sources */,
+				7C36E3372101ECF9009224B3 /* Try.swift in Sources */,
 				7C936C1B1E9F7F1E00AC06BF /* USXBookFinder.swift in Sources */,
 				7CB5B2A31ECDB43E0066446F /* ConnectionVC.swift in Sources */,
 				7C903F711EA8DBDE008EE1E6 /* ErrorAlertVC.swift in Sources */,
@@ -1699,6 +1718,7 @@
 				7C8F4B051EC42E6700F9B25F /* OverwritePreviewVC.swift in Sources */,
 				7C7834CB1E977D1C000556B0 /* BookCell.swift in Sources */,
 				7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */,
+				7C36E3332101D6F1009224B3 /* Future.swift in Sources */,
 				7C3406B320E4CAEA00DF2679 /* Constants.swift in Sources */,
 				7C6B7B1E1E6555140005AD43 /* LabelCell.swift in Sources */,
 				7C4A4F871DEEC0A6009F890E /* RowParseError.swift in Sources */,

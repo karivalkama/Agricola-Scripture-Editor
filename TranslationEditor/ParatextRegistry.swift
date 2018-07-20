@@ -12,23 +12,31 @@ import SwiftyJSON
 
 class ParatextRegistry
 {
-	private let address = "https://registry-dev.paratext.org/api8/"
+	private static let address = "https://registry-dev.paratext.org/api8/"
 	
 	// Authenticates the user and returns an access token. May fail.
-	func authenticate(userName: String, registrationCode: String) throws -> String
+	static func authenticate(userName: String, registrationCode: String) throws -> String
 	{
 		var token: String? = nil
 		var readError: Error? = nil
 		
 		Alamofire.request(address + "token")
 			.authenticate(user: userName, password: registrationCode)
-			.responseJSON { response in
+			.responseJSON
+			{ response in
+				
+				print("Response found")
+				print(response)
 				
 				if let data = response.data
 				{
+					print("Found data")
 					do
 					{
 						let json = try JSON(data: data)
+						
+						print(json)
+						
 						token = json["access_token"].string
 					}
 					catch
@@ -38,7 +46,12 @@ class ParatextRegistry
 				}
 				else if let error = response.error
 				{
+					print("Read error")
 					readError = error
+				}
+				else
+				{
+					print("No data and no error")
 				}
 				
 				debugPrint(response)
@@ -46,14 +59,17 @@ class ParatextRegistry
 		
 		if let token = token
 		{
+			print("Returns token")
 			return token
 		}
 		else if let error = readError
 		{
+			print("Throws error")
 			throw error
 		}
 		else
 		{
+			print("No data was found")
 			throw DataNotFoundError(message: "Access token not provided in response")
 		}
 	}

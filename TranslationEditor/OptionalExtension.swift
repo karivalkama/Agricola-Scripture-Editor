@@ -10,6 +10,19 @@ import Foundation
 
 extension Optional
 {
+	// Whether this optional value is nil
+	var isEmpty: Bool
+	{
+		switch (self)
+		{
+		case .none: return true
+		case .some(_): return false
+		}
+	}
+	
+	// Whether this optional contains a value
+	var isDefined: Bool { return !isEmpty }
+	
 	// Returns the optional's value, if present - or the provided default value
 	func or(_ defaultValue: Wrapped) -> Wrapped
 	{
@@ -28,6 +41,15 @@ extension Optional
 		{
 		case .none: return false
 		case .some(let value): return try condition(value)
+		}
+	}
+	
+	// Performs an operation for each 0-1 values in this optional
+	func forEach(_ operation: (Wrapped) throws -> ()) rethrows
+	{
+		if (isDefined)
+		{
+			try operation(self!)
 		}
 	}
 }

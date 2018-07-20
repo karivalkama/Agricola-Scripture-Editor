@@ -24,6 +24,24 @@ class TranslationEditorTests: XCTestCase
         super.tearDown()
     }
 	
+	func testArrays()
+	{
+		let arr1 = [1, 2, 3]
+		let arr2 = arr1.map { $0 + 1 }
+		
+		print(arr2)
+		assert(arr2 == [2, 3, 4])
+	}
+	
+	func testParatextAuth()
+	{
+		let paraName = "Mikko Hilpinen"
+		let registrationCode = "XG99P1-4CYTEN-XGQ895-QFRGRR-Y1UFJE"
+		
+		print("Sending auth request")
+		print(try! ParatextRegistry.authenticate(userName: paraName, registrationCode: registrationCode))
+	}
+	
 	func testString()
 	{
 		let numberRegex = try! NSRegularExpression(pattern: "[0-9\\-]", options: [])
@@ -400,8 +418,9 @@ class TranslationEditorTests: XCTestCase
 			for paragraph in paragraphs
 			{
 				let text = paragraph.text
-				let maxIndex = text.index(text.startIndex, offsetBy: min(text.characters.count, 32))
-				print("\t- \(paragraph.chapterIndex).\(paragraph.sectionIndex).\(paragraph.index): \(paragraph.text.substring(to: maxIndex))")
+				let maxIndex = text.index(text.startIndex, offsetBy: min(text.count, 32))
+				
+				print("\t- \(paragraph.chapterIndex).\(paragraph.sectionIndex).\(paragraph.index): \(paragraph.text.prefix(upTo: maxIndex))")
 			}
 			
 			let editAmount = try! ParagraphEditView.instance.editsForRangeQuery(bookId: book.idString).resultRows().count
