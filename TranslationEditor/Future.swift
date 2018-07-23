@@ -21,7 +21,7 @@ class Future<T>
 	// COMPUTED	----------------------
 	
 	// Whether this future hasn't been fulfilled
-	var isEmpty: Bool { return currentItem != nil }
+	var isEmpty: Bool { return currentItem == nil }
 	
 	// Whether this future has already been fulfilled
 	var isFulfilled: Bool { return !isEmpty }

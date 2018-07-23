@@ -148,3 +148,35 @@ class Try<T>
 		error.forEach(errorHandler)
 	}
 }
+
+// Tries can be converted to strings if the content can be converted
+extension Try: CustomStringConvertible where T: CustomStringConvertible
+{
+	var description: String
+	{
+		if (isSuccess)
+		{
+			return "Success(" + success!.description + ")"
+		}
+		else
+		{
+			return "Failure(" + failure!.localizedDescription + ")"
+		}
+	}
+}
+
+/*
+extension Try: CustomStringConvertible where T == String
+{
+	var description: String
+	{
+		if (isSuccess)
+		{
+			return "Success(" + success! + ")"
+		}
+		else
+		{
+			return "Failure(" + failure!.localizedDescription + ")"
+		}
+	}
+}*/

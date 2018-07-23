@@ -6,6 +6,7 @@
 //  Copyright © 2017 SIL. All rights reserved.
 //
 import XCTest
+import Alamofire
 @testable import TranslationEditor
 // import Pods_TranslationEditor
 
@@ -33,13 +34,58 @@ class TranslationEditorTests: XCTestCase
 		assert(arr2 == [2, 3, 4])
 	}
 	
+	func testAlamofire()
+	{
+		let p = Promise<String>()
+		Alamofire.request("https://www.google.fi/", method: .get)
+			.validate()
+			.response(queue: DispatchQueue.global(), completionHandler: { response in
+				
+				if let error = response.error
+				{
+					print("Received Error Response")
+					p.fail(with: error)
+				}
+				else
+				{
+					print("Received Success Response")
+					p.succeed(with: "Response received")
+				}
+			})
+		
+		
+		print("Waiting for promise to complete")
+		// p.doOnceFulfilled { print($0) }
+		p.waitFor().handle(onSuccess: {print($0)}, onFailure: {print($0)})
+		// sleep(20)
+		// print("Ending test after timeout")
+		// p.currentItem.forEach { print($0) }
+		print("Test ends")
+	}
+	
+	func testFuture()
+	{
+		let f = Future<String>()
+		
+		DispatchQueue.global().async
+		{
+			print("Sleeping for 5 seconds")
+			sleep(5)
+			print("Sleep done")
+			f.fulfill(with: "Completed")
+		}
+		
+		print("Waiting for future to complete...")
+		print(f.waitFor())
+	}
+	
 	func testParatextAuth()
 	{
-		let paraName = "Mikko Hilpinen"
-		let registrationCode = "XG99P1-4CYTEN-XGQ895-QFRGRR-Y1UFJE"
+		let paraName = "..."
+		let registrationCode = "..."
 		
-		print("Sending auth request")
-		print(try! ParatextRegistry.authenticate(userName: paraName, registrationCode: registrationCode))
+		print("Sending auth request...")
+		print(ParatextRegistry.authenticate(userName: paraName, registrationCode: registrationCode).waitFor().description)
 	}
 	
 	func testString()

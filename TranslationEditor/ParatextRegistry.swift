@@ -15,13 +15,13 @@ class ParatextRegistry
 	private static let address = "https://registry-dev.paratext.org/api8/"
 	
 	// Authenticates the user and returns an access token. May fail.
-	static func authenticate(userName: String, registrationCode: String) throws -> String
+	static func authenticate(userName: String, registrationCode: String) -> Promise<String>
 	{
-		var token: String? = nil
-		var readError: Error? = nil
+		let promise = Promise<String>()
 		
-		Alamofire.request(address + "token")
+		Alamofire.request(address + "token", method: .post)
 			.authenticate(user: userName, password: registrationCode)
+			.validate()
 			.responseJSON
 			{ response in
 				
@@ -37,40 +37,30 @@ class ParatextRegistry
 						
 						print(json)
 						
-						token = json["access_token"].string
+						if let token = json["access_token"].string
+						{
+							promise.succeed(with: token)
+						}
+						else
+						{
+							promise.fail(with: DataNotFoundError(message: "No access token in response body"))
+						}
 					}
 					catch
 					{
-						readError = error
+						promise.fail(with: error)
 					}
 				}
 				else if let error = response.error
 				{
-					print("Read error")
-					readError = error
+					promise.fail(with: error)
 				}
 				else
 				{
-					print("No data and no error")
+					promise.fail(with: DataNotFoundError(message: "No data and no error in response"))
 				}
-				
-				debugPrint(response)
-		}
+			}
 		
-		if let token = token
-		{
-			print("Returns token")
-			return token
-		}
-		else if let error = readError
-		{
-			print("Throws error")
-			throw error
-		}
-		else
-		{
-			print("No data was found")
-			throw DataNotFoundError(message: "Access token not provided in response")
-		}
+		return promise
 	}
 }
