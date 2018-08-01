@@ -14,7 +14,6 @@ class XMLParsingReturner
 {
 	// ATTRIBUTES	--------
 	
-	// TODO: Reference should be weak?
 	private weak var caller: XMLParserDelegate?
 	
 	
@@ -53,8 +52,13 @@ class XMLParsingReturner
 		endParsing(parser: parser)
 		caller?.parser?(parser, foundCharacters: characters)
 	}
+	
+	func endParsingOnError(parser: XMLParser, error: Error)
+	{
+		endParsing(parser: parser)
+		caller?.parser?(parser, parseErrorOccurred: error)
+	}
 }
-
 
 // This parser ignores all data until an element with a specific name is found, at which point the parsing is returned to the original delegate
 class MoveToElementWithNameParser: NSObject, XMLParserDelegate

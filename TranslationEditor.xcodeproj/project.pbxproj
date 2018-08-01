@@ -132,6 +132,8 @@
 		7C6C3C1A1E373959001D56F4 /* PostThreadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C191E373959001D56F4 /* PostThreadVC.swift */; };
 		7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */; };
 		7C741310210733B80082E42F /* ParatextProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74130F210733B80082E42F /* ParatextProject.swift */; };
+		7C741313211199880082E42F /* XmlElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C741312211199880082E42F /* XmlElement.swift */; };
+		7C7413152111A1810082E42F /* XmlElementParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7413142111A1810082E42F /* XmlElementParser.swift */; };
 		7C7767211EE675C700952D5B /* ManageUsersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7767201EE675C700952D5B /* ManageUsersVC.swift */; };
 		7C7767231EE67D0000952D5B /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7767221EE67D0000952D5B /* UserCell.swift */; };
 		7C7834CB1E977D1C000556B0 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7834CA1E977D1C000556B0 /* BookCell.swift */; };
@@ -427,6 +429,8 @@
 		7C6C3C191E373959001D56F4 /* PostThreadVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostThreadVC.swift; sourceTree = "<group>"; };
 		7C6C3C201E3762E5001D56F4 /* AddNotesDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNotesDelegate.swift; sourceTree = "<group>"; };
 		7C74130F210733B80082E42F /* ParatextProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParatextProject.swift; sourceTree = "<group>"; };
+		7C741312211199880082E42F /* XmlElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmlElement.swift; sourceTree = "<group>"; };
+		7C7413142111A1810082E42F /* XmlElementParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmlElementParser.swift; sourceTree = "<group>"; };
 		7C7767201EE675C700952D5B /* ManageUsersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageUsersVC.swift; sourceTree = "<group>"; };
 		7C7767221EE67D0000952D5B /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		7C7834CA1E977D1C000556B0 /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
@@ -721,10 +725,10 @@
 		7C20D7E11D8BF89200E84BA5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7C741311211199500082E42F /* XML */,
 				7C8B54ED20E37226007BE57C /* VC */,
 				7C8B54EC20E37207007BE57C /* Paratext */,
 				7C4A4FF71E012328009F890E /* Database */,
-				7C8B54EE20E37282007BE57C /* USX */,
 				7C4A4FB91DF99490009F890E /* ProgramStatusListener.swift */,
 				7C57EC021E66E293000718E9 /* Session.swift */,
 				7C506B801E8939A100ACB5AC /* P2PClientSession.swift */,
@@ -894,7 +898,6 @@
 		7C4CC1711DB0ED6200BCF24B /* USXParsing */ = {
 			isa = PBXGroup;
 			children = (
-				7CCC01331DA7964000F0562E /* XmlParserUtil.swift */,
 				7CCC011F1DA646F900F0562E /* USXContentParser.swift */,
 				7CAF6D891DB5F5FB00E10597 /* USXParser.swift */,
 				7CAF6D851DB4F9AA00E10597 /* USXBookProcessor.swift */,
@@ -1035,6 +1038,17 @@
 				7C74130F210733B80082E42F /* ParatextProject.swift */,
 			);
 			name = Paratext;
+			sourceTree = "<group>";
+		};
+		7C741311211199500082E42F /* XML */ = {
+			isa = PBXGroup;
+			children = (
+				7C8B54EE20E37282007BE57C /* USX */,
+				7CCC01331DA7964000F0562E /* XmlParserUtil.swift */,
+				7C741312211199880082E42F /* XmlElement.swift */,
+				7C7413142111A1810082E42F /* XmlElementParser.swift */,
+			);
+			name = XML;
 			sourceTree = "<group>";
 		};
 		7C7834C91E977CF2000556B0 /* Main Menu */ = {
@@ -1629,6 +1643,8 @@
 				7C8F4B071EC4916900F9B25F /* ResourceUpdateListener.swift in Sources */,
 				7C4CC1731DB0EDA200BCF24B /* USXMarkerElement.swift in Sources */,
 				7C2518071E8A6CB60089E1FD /* P2PHostSession.swift in Sources */,
+				7C7413152111A1810082E42F /* XmlElementParser.swift in Sources */,
+				7C741313211199880082E42F /* XmlElement.swift in Sources */,
 				7C4A4FE41DFE7C87009F890E /* UIExtension.swift in Sources */,
 				7C942A2E1E38DD80000C614A /* AgricolaAccount.swift in Sources */,
 				7CDBD6EE1E2E30DD00912320 /* ParagraphNotes.swift in Sources */,

@@ -52,4 +52,17 @@ extension Optional
 			try operation(self!)
 		}
 	}
+	
+	// Filters this optional, returning it only if it fulfills the provided condition
+	func filter(_ check: (Wrapped) throws -> Bool) rethrows -> Optional<Wrapped>
+	{
+		if (try exists(check))
+		{
+			return self
+		}
+		else
+		{
+			return nil
+		}
+	}
 }
