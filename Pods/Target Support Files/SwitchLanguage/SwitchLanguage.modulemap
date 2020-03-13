@@ -1,0 +1,6 @@
+framework module SwitchLanguage {
+  umbrella header "SwitchLanguage-umbrella.h"
+
+  export *
+  module * { export * }
+}
