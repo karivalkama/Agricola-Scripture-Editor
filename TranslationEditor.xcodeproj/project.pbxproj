@@ -10,6 +10,7 @@
 		08D4BF5C1F471CCD00B05392 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08D4BF5E1F471CCD00B05392 /* InfoPlist.strings */; };
 		2DEB79E49FA6ACD739858FC4 /* Pods_TranslationEditorUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2CCD571AB68ECBDE6770270 /* Pods_TranslationEditorUITests.framework */; };
 		6365262B241BF0C70081731C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6365262D241BF0C70081731C /* Main.storyboard */; };
+		63652632241BF46D0081731C /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63652631241BF46D0081731C /* BundleExtension.swift */; };
 		7C0130B51E3B5A100053C5C2 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130B41E3B5A100053C5C2 /* Project.swift */; };
 		7C0130B81E3B6A1D0053C5C2 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130B71E3B6A1D0053C5C2 /* Avatar.swift */; };
 		7C0130BC1E3F1DFB0053C5C2 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0130BB1E3F1DFB0053C5C2 /* Carousel.swift */; };
@@ -303,6 +304,7 @@
 		63652624241BEEF70081731C /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/TopUserDisplay.strings; sourceTree = "<group>"; };
 		6365262C241BF0C70081731C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63652630241BF10A0081731C /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Main.strings; sourceTree = "<group>"; };
+		63652631241BF46D0081731C /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		7C0130B41E3B5A100053C5C2 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		7C0130B71E3B6A1D0053C5C2 /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		7C0130BB1E3F1DFB0053C5C2 /* Carousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
@@ -847,6 +849,7 @@
 				7CA1BAB71E31F33000611FED /* DateExtension.swift */,
 				7C0130D61E4DF97D0053C5C2 /* ScrollViewExtension.swift */,
 				7C903F6E1EA760A8008EE1E6 /* ComparableExtension.swift */,
+				63652631241BF46D0081731C /* BundleExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1754,6 +1757,7 @@
 				7C8F4B051EC42E6700F9B25F /* OverwritePreviewVC.swift in Sources */,
 				7C7834CB1E977D1C000556B0 /* BookCell.swift in Sources */,
 				7C6C3C211E3762E5001D56F4 /* AddNotesDelegate.swift in Sources */,
+				63652632241BF46D0081731C /* BundleExtension.swift in Sources */,
 				7C36E3332101D6F1009224B3 /* Future.swift in Sources */,
 				7C3406B320E4CAEA00DF2679 /* Constants.swift in Sources */,
 				7C6B7B1E1E6555140005AD43 /* LabelCell.swift in Sources */,

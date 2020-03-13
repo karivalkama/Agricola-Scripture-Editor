@@ -7,9 +7,9 @@
 //
 
 import UIKit
-
+import SwitchLanguage
 // This view controller is used for adding of new projects
-class CreateProjectVC: UIViewController, LanguageSelectionHandlerDelegate
+class CreateProjectVC: UIViewController
 {
 	// OUTLETS	---------------------
 	
@@ -34,7 +34,7 @@ class CreateProjectVC: UIViewController, LanguageSelectionHandlerDelegate
 	private var newSharedAccount: AgricolaAccount?
 	private var completion: ((Project?) -> ())?
 	
-	private var languageHandler = LanguageSelectionHandler()
+//	private var languageHandler = LanguageSelectionHandler()
 	
 	
 	// LOAD	-------------------------
@@ -46,9 +46,9 @@ class CreateProjectVC: UIViewController, LanguageSelectionHandlerDelegate
 		errorLabel.text = nil
 		createProjectButton.isEnabled = false
 		
-		selectLanguageView.delegate = languageHandler
-		selectLanguageView.datasource = languageHandler
-		languageHandler.delegate = self
+//		selectLanguageView.delegate = languageHandler
+//		selectLanguageView.datasource = languageHandler
+//		languageHandler.delegate = self
 		
 		contentView.configure(mainView: view, elements: [projectNameField, defaultBookIdentifierField, errorLabel, selectLanguageView, createProjectButton], topConstraint: contentTopConstraint, bottomConstraint: contentBottomConstraint, style: .squish, squishedElements: [contentStackView, inputStackView], switchedStackViews: [projectNameStackView, translationNameStackView])
     }
@@ -58,15 +58,15 @@ class CreateProjectVC: UIViewController, LanguageSelectionHandlerDelegate
 		super.viewWillAppear(animated)
 		
 		// Loads the language data
-		do
-		{
-			try languageHandler.updateLanguageOptions()
-			selectLanguageView.reloadData()
-		}
-		catch
-		{
-			print("ERROR: Failed to load language data. \(error)")
-		}
+//		do
+//		{
+//			try languageHandler.updateLanguageOptions()
+//			selectLanguageView.reloadData()
+//		}
+//		catch
+//		{
+//			print("ERROR: Failed to load language data. \(error)")
+//		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -116,11 +116,11 @@ class CreateProjectVC: UIViewController, LanguageSelectionHandlerDelegate
 			return
 		}
 		
-		guard !languageHandler.isEmpty else
-		{
-			errorLabel.text = NSLocalizedString("Please select the target language", comment: "An error message when the user hasn't selected project language when trying to create a project")
-			return
-		}
+//		guard !languageHandler.isEmpty else
+//		{
+//			errorLabel.text = NSLocalizedString("Please select the target language", comment: "An error message when the user hasn't selected project language when trying to create a project")
+//			return
+//		}
 		
 		guard let currentAccountId = Session.instance.accountId ?? newSharedAccount?.idString else
 		{
@@ -133,9 +133,9 @@ class CreateProjectVC: UIViewController, LanguageSelectionHandlerDelegate
 		do
 		{
 			// May need to insert the language as a new instance
-			let language = try languageHandler.getOrInsertLanguage()!
+//			let language = try languageHandler.getOrInsertLanguage()!
 			
-			let project = Project(name: projectName, languageId: language.idString, ownerId: currentAccountId, contributorIds: [currentAccountId], defaultBookIdentifier: translationName, sharedAccountId: newSharedAccount?.idString)
+            let project = Project(name: projectName, languageId: Language.getCurrentLanguage() , ownerId: currentAccountId, contributorIds: [currentAccountId], defaultBookIdentifier: translationName, sharedAccountId: newSharedAccount?.idString)
 			
 			try DATABASE.tryTransaction
 			{
@@ -156,15 +156,15 @@ class CreateProjectVC: UIViewController, LanguageSelectionHandlerDelegate
 	
 	// IMPLEMENTED METHODS	--------
 	
-	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, newLanguageNameInserted languageName: String)
-	{
-		updateCreateButtonStatus()
-	}
-	
-	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, languageSelected: Language)
-	{
-		updateCreateButtonStatus()
-	}
+//	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, newLanguageNameInserted languageName: String)
+//	{
+//		updateCreateButtonStatus()
+//	}
+//
+//	func languageSelectionHandler(_ selectionHandler: LanguageSelectionHandler, languageSelected: Language)
+//	{
+//		updateCreateButtonStatus()
+//	}
 	
 	
 	// OTHER METHODS	---------
@@ -182,6 +182,6 @@ class CreateProjectVC: UIViewController, LanguageSelectionHandlerDelegate
 	
 	private func updateCreateButtonStatus()
 	{
-		createProjectButton.isEnabled = !projectNameField.trimmedText.isEmpty && !defaultBookIdentifierField.trimmedText.isEmpty && !languageHandler.isEmpty
+		createProjectButton.isEnabled = !projectNameField.trimmedText.isEmpty && !defaultBookIdentifierField.trimmedText.isEmpty
 	}
 }
