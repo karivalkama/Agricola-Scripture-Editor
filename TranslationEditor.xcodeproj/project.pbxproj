@@ -298,9 +298,6 @@
 		41540BD188D4991E5C3B6D2F /* Pods-TranslationEditorUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslationEditorUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TranslationEditorUITests/Pods-TranslationEditorUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		44B3C4C46D2ADCA1D174BBF6 /* Pods-TranslationEditor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslationEditor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TranslationEditor/Pods-TranslationEditor.debug.xcconfig"; sourceTree = "<group>"; };
 		4F5FEC13745EFF5B25DB3C75 /* Pods-TranslationEditorUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranslationEditorUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TranslationEditorUITests/Pods-TranslationEditorUITests.release.xcconfig"; sourceTree = "<group>"; };
-		63652621241BEDE80081731C /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/FilteredMultiSelection.strings; sourceTree = "<group>"; };
-		63652622241BEE020081731C /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/OnlineStatusView.strings; sourceTree = "<group>"; };
-		63652623241BEE300081731C /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/CreateAvatar.strings; sourceTree = "<group>"; };
 		63652624241BEEF70081731C /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/TopUserDisplay.strings; sourceTree = "<group>"; };
 		6365262C241BF0C70081731C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63652630241BF10A0081731C /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Main.strings; sourceTree = "<group>"; };
@@ -324,6 +321,9 @@
 		63652654241C19E20081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ConnectPromptView.strings; sourceTree = "<group>"; };
 		63652656241C19E50081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ConnectPromptNoDataView.strings; sourceTree = "<group>"; };
 		63652657241C19F20081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6365265A241C26810081731C /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/OnlineStatusView.strings; sourceTree = "<group>"; };
+		6365265C241C26EB0081731C /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/FilteredMultiSelection.strings; sourceTree = "<group>"; };
+		6365265E241C27130081731C /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/CreateAvatar.strings; sourceTree = "<group>"; };
 		7C0130B41E3B5A100053C5C2 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		7C0130B71E3B6A1D0053C5C2 /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		7C0130BB1E3F1DFB0053C5C2 /* Carousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
@@ -1887,8 +1887,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				7C88A3011F0CD6DB00ACD6B6 /* Base */,
-				63652621241BEDE80081731C /* id */,
 				6365263C241C19B20081731C /* en */,
+				6365265C241C26EB0081731C /* id */,
 			);
 			name = FilteredMultiSelection.xib;
 			sourceTree = "<group>";
@@ -1897,8 +1897,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				7C88A3021F0CD6E500ACD6B6 /* Base */,
-				63652622241BEE020081731C /* id */,
 				6365263E241C19B60081731C /* en */,
+				6365265A241C26810081731C /* id */,
 			);
 			name = OnlineStatusView.xib;
 			sourceTree = "<group>";
@@ -1907,8 +1907,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				7C88A3031F0CD6EB00ACD6B6 /* Base */,
-				63652623241BEE300081731C /* id */,
 				63652640241C19B90081731C /* en */,
+				6365265E241C27130081731C /* id */,
 			);
 			name = CreateAvatar.xib;
 			sourceTree = "<group>";
