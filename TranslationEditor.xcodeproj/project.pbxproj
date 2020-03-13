@@ -1412,13 +1412,14 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TranslationEditor/Pods-TranslationEditor-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TranslationEditor/Pods-TranslationEditor-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/HTagView/HTagView.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCode/QRCode.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
 				"${BUILT_PRODUCTS_DIR}/SCrypto/SCrypto.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwitchLanguage/SwitchLanguage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1428,10 +1429,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCrypto.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwitchLanguage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TranslationEditor/Pods-TranslationEditor-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TranslationEditor/Pods-TranslationEditor-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8CE6260F99ECEB1302FA2F19 /* [CP] Embed Pods Frameworks */ = {
@@ -1440,13 +1442,14 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TranslationEditorUITests/Pods-TranslationEditorUITests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TranslationEditorUITests/Pods-TranslationEditorUITests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/HTagView/HTagView.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCode/QRCode.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
 				"${BUILT_PRODUCTS_DIR}/SCrypto/SCrypto.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwitchLanguage/SwitchLanguage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1456,10 +1459,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCrypto.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwitchLanguage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TranslationEditorUITests/Pods-TranslationEditorUITests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TranslationEditorUITests/Pods-TranslationEditorUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A54C92249DB0099A5435BF2C /* [CP] Check Pods Manifest.lock */ = {
@@ -1504,13 +1508,14 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/HTagView/HTagView.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCode/QRCode.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
 				"${BUILT_PRODUCTS_DIR}/SCrypto/SCrypto.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwitchLanguage/SwitchLanguage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1520,10 +1525,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCrypto.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwitchLanguage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TranslationEditorTests/Pods-TranslationEditorTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FA1CE695DEC867BF42B3769D /* [CP] Check Pods Manifest.lock */ = {
