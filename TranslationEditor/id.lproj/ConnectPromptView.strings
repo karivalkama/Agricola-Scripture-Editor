@@ -1,9 +1,9 @@
 /* Class = "UILabel"; text = "1) Have a person host a connection (they must have a project open, then press Connect, then Host)\n2) Press the connect button, then JOIN\n3) Scan the QR code on the host's device"; ObjectID = "1aq-Tb-qgB"; */
-"1aq-Tb-qgB.text" = "1) Satu penerjemah menjadi tuan rumah koneksi (proyek mereka harus sedang terbuka, kemudian tindis tombol Connect, baru tindis tombol Host)\n2) Tindis tombol connect button, baru tindis tombol JOIN\n3) Tolong memindai kode QR pada iPad tuan rumah";
+"1aq-Tb-qgB.text" = "1) Minta satu pengguna menjadi penghubung. Proyeknya harus sedang terbuka, baru dia tekan tombol Menghubungkan. Kemudian dia tekan tombol Menjadi Penghubung.\n2)Anda tekan tombol Menghubungkan, baru tekan tombol Bergabung.\n3) Memindai kode QR di iPadnya Penghubung.";
 
 /* Class = "UIButton"; normalTitle = "Connect"; ObjectID = "VQ5-Td-PPs"; */
-"VQ5-Td-PPs.normalTitle" = "Mengoneksi";
+"VQ5-Td-PPs.normalTitle" = "Menghubungkan";
 
 /* Class = "UILabel"; text = "Here's how to connect with others"; ObjectID = "XWk-di-xQ2"; */
-"XWk-di-xQ2.text" = "Begini caranya berhubungan dengan penerjemah lain";
+"XWk-di-xQ2.text" = "Beginilah caranya untuk menyambung dengan orang yang lainnya:";
 

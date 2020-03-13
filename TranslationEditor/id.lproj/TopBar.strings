@@ -1,5 +1,5 @@
 /* Class = "UIButton"; normalTitle = "Connect"; ObjectID = "g8w-Wi-SHD"; Note = "Button for opening connection dialog which allows P2P join, host and usx export"; */
-"g8w-Wi-SHD.normalTitle" = "Mengoneksi";
+"g8w-Wi-SHD.normalTitle" = "Menghubungkan";
 
 /* Class = "UIButton"; normalTitle = "Back"; ObjectID = "wnD-br-fTf"; */
 "wnD-br-fTf.normalTitle" = "Kembali";

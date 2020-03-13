@@ -1,6 +1,6 @@
 /* Class = "UILabel"; text = "Failed to load data due to an internal error!"; ObjectID = "ESd-yb-D10"; */
-"ESd-yb-D10.text" = "Tidak berhasil ambil data oleh karena kesalahan internal!";
+"ESd-yb-D10.text" = "Gagal dimuat data karena kesalahan internal!";
 
 /* Class = "UILabel"; text = "An Error Occurred!"; ObjectID = "SxV-SH-wpj"; */
-"SxV-SH-wpj.text" = "Kesalahan terjadi!";
+"SxV-SH-wpj.text" = "Terjadi kesalahan!";
 

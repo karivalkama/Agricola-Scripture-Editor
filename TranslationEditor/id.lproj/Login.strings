@@ -30,7 +30,7 @@
 "ACo-ny-lib.text" = "Finnish";
 
 /* Class = "UIButton"; normalTitle = "Yes, log me in with the shared project account"; ObjectID = "BNV-wk-4tL"; Note = "Button that enables auto-login with a shared project account"; */
-"BNV-wk-4tL.normalTitle" = "Ya, Yes, log me in with the shared project account";
+"BNV-wk-4tL.normalTitle" = "Ya, memasukkan saya di akun proyek yang telah dibagi";
 
 /* Class = "UILabel"; text = "Project Name*"; ObjectID = "Bpb-GQ-vJC"; Note = "Input label for new project name"; */
 "Bpb-GQ-vJC.text" = "Nama proyek*";
@@ -63,7 +63,7 @@
 "M0d-2V-9K6.normalTitle" = "Menciptakan akun baru";
 
 /* Class = "UILabel"; text = "Nobody to connect with?"; ObjectID = "N2t-uR-2dT"; */
-"N2t-uR-2dT.text" = "Tidak ada orang mengoneksi?";
+"N2t-uR-2dT.text" = "Apakah tidak ada yang bisa dihubungkan?";
 
 /* Class = "UIButton"; normalTitle = "Start New Project"; ObjectID = "Obr-6h-dYp"; Note = "Button for creating a new project"; */
 "Obr-6h-dYp.normalTitle" = "Memulai proyek baru";
@@ -111,19 +111,19 @@
 "jZr-uV-CHp.text" = "Nama akun atau sandi salah!";
 
 /* Class = "UIButton"; normalTitle = "Start from Scratch"; ObjectID = "kAG-ma-c5g"; */
-"kAG-ma-c5g.normalTitle" = "Mulai dari permulaan";
+"kAG-ma-c5g.normalTitle" = "Mulai dari awal";
 
 /* Class = "UILabel"; text = "I share this device with other users"; ObjectID = "lJY-Jk-sFC"; Note = "A label next to a switch that defines whether the account will be shared (multiple users per device) or private"; */
 "lJY-Jk-sFC.text" = "iPad ini dipakai oleh orang lain juga";
 
 /* Class = "UILabel"; text = "You will be granted access to the project when you log in"; ObjectID = "mBi-ep-ibD"; Note = "A hint / description for auto-login dismiss button"; */
-"mBi-ep-ibD.text" = "Anda boleh mengakses proyek sesudah anda log in";
+"mBi-ep-ibD.text" = "Anda akan diberikan izin untuk mengedit proyek ini, ketika Anda masuk";
 
 /* Class = "UILabel"; text = "30.2.2017"; ObjectID = "oap-hn-qB3"; */
 "oap-hn-qB3.text" = "30.2.2017";
 
 /* Class = "UILabel"; text = "You can connect with others to fix that"; ObjectID = "pUh-vV-lT5"; */
-"pUh-vV-lT5.text" = "Anda boleh berkoneksi dengan anggota yang lain untuk mengatasi persoalan itu";
+"pUh-vV-lT5.text" = "Menghubungkan dengan yang lainnya untuk memperbaikinya";
 
 /* Class = "UILabel"; text = "a shared account will be created, It will be tied to the project you create"; ObjectID = "pbg-QG-CKs"; Note = "A short description for shared accounts on account creation"; */
 "pbg-QG-CKs.text" = "Akan diciptakan akun bersama, yang diikat dengan proyek yang Anda menciptakan";
@@ -148,3 +148,6 @@
 
 /* Class = "UILabel"; text = "The password was incorrect"; ObjectID = "zjy-Eb-Ez7"; Note = "Error displayed when avatar / user password was invalid"; */
 "zjy-Eb-Ez7.text" = "Kata sandi salah";
+
+/*Select Language*/
+"dWF-a9-8XA.text" = "Memilih bahasa";

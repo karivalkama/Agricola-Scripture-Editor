@@ -1,12 +1,12 @@
 /* Class = "UILabel"; text = "Camera is required for peer-to-peer join"; ObjectID = "NG8-QU-zed"; */
-"NG8-QU-zed.text" = "Kamera diperlukan untuk hubungan peer-to-peer";
+"NG8-QU-zed.text" = "Untuk menghubungkan dengan pengguna lainnya (peer-to-peer), dibutuhkan kamera";
 
 /* Class = "UIButton"; normalTitle = "Disconnect"; ObjectID = "UXs-3m-v6d"; */
-"UXs-3m-v6d.normalTitle" = "Memutuskan hubungan";
+"UXs-3m-v6d.normalTitle" = "Tidak terhubung ";
 
 /* Class = "UIButton"; normalTitle = "Join"; ObjectID = "YOQ-gA-osA"; */
-"YOQ-gA-osA.normalTitle" = "Bergabung";
+"YOQ-gA-osA.normalTitle" = "Menghubungkan ";
 
 /* Class = "UILabel"; text = "Connect with Others"; ObjectID = "efh-hd-N3A"; */
-"efh-hd-N3A.text" = "Mengoneksi dengan penerjemah lain";
+"efh-hd-N3A.text" = "Terhubung dengan Orang Lain";
 

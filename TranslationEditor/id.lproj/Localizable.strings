@@ -129,6 +129,7 @@
 
 // Login view
 "Log In" = "Masuk";
+"Login" = "Masuk";
 "Don’t have account yet?" = "Anda belum ada akun?";
 "Continue" = "Menciptakan akun baru";
 
@@ -141,7 +142,7 @@
 
 // Main Menu
 "Manage Project" = "Mengelola poryek";
-"Import Book from Another Project" = "Impor buku dari proyek yang lain";
+"Import Book from Another Project" = "Mengimpor Buku dari Proyek lain";
 "Admin tools" = "Alat administrasi";
 "Manage Shared Project Account" = "Mengelola akun proyek bersama";
 "TIP: Connect with others and open .USX files with Agricola to add new books" = "NASEHAT: Kalau anda mau menambah buku baru, tolong mengoneksi dengan penerjemah lain dan membuka file-file .USX di dalam Agricola";
@@ -158,6 +159,3 @@
 "A shared account is always tied to a single project. Use a shared account when you have multiple users on the same device." = "Akun bersama selalu terikat pada satu pryek. Pakailah akun bersama bilamana lebih dari satu penerjemah memakai iPad ini.";
 "Shared Account Name" = "Nama akun bersama";
 "Shared Account Password" = "Sandi akun bersama";
-
-
-
