@@ -29,7 +29,7 @@ public extension String {
 
           @return The localized string.
      */
-    public func localized() -> String {
+    func localized() -> String {
         return localized(using: Language.getTableName())
     }
     
@@ -42,7 +42,7 @@ public extension String {
      
      @return The localized string.
      */
-    public func localized(using tableName: String, in bundle: Bundle = .main) -> String {
+    func localized(using tableName: String, in bundle: Bundle = .main) -> String {
         if let path = bundle.path(forResource: Language.getCurrentLanguage(), ofType: "lproj"),
             let bundle = Bundle(path: path) {
             return bundle.localizedString(forKey: self, value: nil, table: tableName)

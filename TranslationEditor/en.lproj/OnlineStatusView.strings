@@ -1,0 +1,6 @@
+
+/* Class = "UILabel"; text = "Not connected"; ObjectID = "sDP-cm-UQy"; */
+"sDP-cm-UQy.text" = "Not connected";
+
+/* Class = "UILabel"; text = "Online Status:"; ObjectID = "xIf-1Q-NKZ"; Note = "Online status title label"; */
+"xIf-1Q-NKZ.text" = "Online Status:";

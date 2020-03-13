@@ -1,0 +1,161 @@
+/* Online status when provided credentials don't match the required */
+"Access Denied" = "Access Denied";
+
+/* An error message displayed when trying to create a duplicate account */
+"Account with a similar name already exists!" = "Account with a similar name already exists!";
+
+/* A section header for book / source translation resources */
+"Books" = "Books";
+
+/* An error message displayed when trying to create a new project without an account */
+"Cannot create project if not logged in!" = "Cannot create project if not logged in!";
+
+/* A Bible chapter
+   A section header in translation table. Followed by the chapter number. */
+"Chapter" = "Chapter";
+
+/* A title for the curent version of a paragraph / paragraph portion in comment context */
+"Current:" = "Current:";
+
+/* Online status while the system is connecting */
+"Establishing Connection" = "Establishing Connection";
+
+/* A table heading for failed usx-import cases */
+"Failed Cases" = "Failed Cases";
+
+/* A title for heading note sections where the translation is still empty */
+"Heading" = "Heading";
+
+/* An error message displayed when account creation fails due to an unexpected error */
+"Internal error occurred while saving data." = "Internal error occurred while saving data.";
+
+/* An error message displayed when project creation fails due to an unexpected error
+   An error message shown when login fails due to an internal error
+   An error message when book import fails due to some unexpected error */
+"Internal error occurred!" = "Internal error occurred!";
+
+/* An error message displayed when account creation fails due to an unexpected error */
+"Internal error occurred. Please try again." = "Internal error occurred. Please try again.";
+
+/* An error message shown when trying to login with non-existing account */
+"Invalid account name" = "Invalid account name";
+
+/* An error message shown when user provides an invalid password in login */
+"Invalid password" = "Invalid password";
+
+/* Part of host info desciption. Followed by host user name. */
+"Joined" = "Joined";
+
+/* Online status when connection is offline */
+"No Connection" = "No Connection";
+
+/* An error displayed when avatar was not selected in book import (which shouldn't ever happen if program is workin) */
+"No user data available!" = "No user data available!";
+
+/* A section header for notes resource(s)
+   The generated name of the notes resource */
+"Notes" = "Notes";
+
+/* Online status when connection is disconnected and there are no attempts of changing it */
+"Off" = "Off";
+
+/* A title for the original version of a paragraph / paragraph portion in comment context */
+"Original:" = "Original:";
+
+/* An error message displayed when trying to create new avatar without first filling all required fields */
+"Please fill in the required fields" = "Please fill in the required fields";
+
+/* An error message shown when password is missing in login */
+"Please provide a password" = "Please provide a password";
+
+/* An error message shown when username / account name is missing in login */
+"Please provide an account name" = "Please provide an account name";
+
+/* An error message when the user hasn't selected project language when trying to create a project */
+"Please select the target language" = "Please select the target language";
+
+/* A placeholder for comment author title. Used when no user name is available
+   A replacement string used when conflicting version author is not recognizable */
+"Someone" = "Someone";
+
+/* A table heading for succesfull usx-import cases */
+"Success Cases" = "Success Cases";
+
+/* An error message displayed when new avatar password is not repeated correctly
+   An error message displayed when two passwords fields contents don't match */
+"The passwords don't match!" = "The passwords don't match!";
+
+/* Online status when a single time transaction has been completed */
+"Transfer Complete" = "Transfer Complete";
+
+/* Online status when a single time transaction failed with an error */
+"Transfer Failed" = "Transfer Failed";
+
+/* Online status when data is being transferred between devices */
+"Transferring" = "Transferring";
+
+/* n Average number of versions (per paragraph) */
+"Versions" = "Versions";
+
+/* Online status when the connection is up to date */
+"Waiting for Updates" = "Waiting for Updates";
+
+/* Part of host info description. Followed by project name */
+"on project:" = "on project:";
+
+/* a portion of a comment's title. Something like 'this and this wrote:'
+   Part of conflict version description. Preceeded by author name */
+"wrote" = "wrote";
+
+
+// Project view connection prompt
+"You don’t have access to any projects" = "You don’t have access to any projects";
+"You can join another person’s project by connecting with them" = "You can join another person’s project by connecting with them";
+"Connect" = "Connect";
+"You can also" = "You can also";
+"Start New Project" = "Start New Project";
+
+// New account creation
+"Account name" = "Account name";
+"Password" = "Password";
+"Repeat Password" = "Repeat Password";
+"I share this device with other users" = "I share this device with other users";
+"Create Account" = "Create Account";
+
+// Connect view
+"Disconnected" = "Disconnected";
+"Join" = "Join";
+"Close" = "Close";
+
+// Login view
+"Log In" = "Log In";
+"Login" = "Login";
+"Don’t have account yet?" = "Don’t have account yet?";
+"Continue" = "Continue";
+
+// Project creation
+"Project Name" = "Project Name";
+"Translation Name" = "Translation Name";
+"Target Language" = "Target Language";
+"Cancel" = "Cancel";
+"Create Project" = "Create Project";
+
+// Main Menu
+"Manage Project" = "Manage Project";
+"Import Book from Another Project" = "Import Book from Another Project";
+"Admin tools" = "Admin tools";
+"Manage Shared Project Account" = "Manage Shared Project Account";
+"TIP: Connect with others and open .USX files with Agricola to add new books" = "TIP: Connect with others and open .USX files with Agricola to add new books";
+
+// Book import
+"Search By Language" = "Search By Language";
+"Search By Book" = "Search By Book";
+
+// No users notification
+"You have no other users in the project" = "You have no other users in the project";
+"You can add more users by using the shared project account and by connecting with people." = "You can add more users by using the shared project account and by connecting with people.";
+
+// Shared account creation
+"A shared account is always tied to a single project. Use a shared account when you have multiple users on the same device." = "A shared account is always tied to a single project. Use a shared account when you have multiple users on the same device.";
+"Shared Account Name" = "Shared Account Name";
+"Shared Account Password" = "Shared Account Password";

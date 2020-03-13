@@ -39,7 +39,7 @@ class ResolveConflictVC: UIViewController, UICollectionViewDelegate, UICollectio
 		}
 		
 		cellWidth = versionCollectionView.frame.width / 2 - CGFloat(32)
-		print("STATUS: Estimated cell withd: \(cellWidth)")
+        print("STATUS: Estimated cell withd: \(String(describing: cellWidth))")
 		
 		if let flowLayout = versionCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
 		{

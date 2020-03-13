@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "Sharing Allowed"; ObjectID = "1gy-WG-rBF"; Note = "Avatar sharing switch label"; */
+"1gy-WG-rBF.text" = "Sharing Allowed";
+
+/* Class = "UILabel"; text = "Select User Image"; ObjectID = "4AE-l3-t94"; Note = "Avatar image selection title label"; */
+"4AE-l3-t94.text" = "Select User Image";
+
+/* Class = "UILabel"; text = "This name can be viewed by other project members"; ObjectID = "fCP-7Q-H96"; Note = "Avatar sharing description / hint"; */
+"fCP-7Q-H96.text" = "This name can be viewed by other project members";
+
+/* Class = "UILabel"; text = "New User Password"; ObjectID = "koK-wI-NjB"; Note = "Input label for user / avatar password"; */
+"koK-wI-NjB.text" = "New User Password";
+
+/* Class = "UILabel"; text = "Whether this user should be available in the shared project account"; ObjectID = "trZ-g5-vnc"; Note = "Avatar sharing description / hint"; */
+"trZ-g5-vnc.text" = "Whether this user should be available in the shared project account";
+
+/* Class = "UILabel"; text = "Repeat New Password"; ObjectID = "xmK-bB-319"; Note = "Input label for repeating user / avatar password"; */
+"xmK-bB-319.text" = "Repeat New Password";
+
+/* Class = "UILabel"; text = "Name*"; ObjectID = "zzN-Av-RhD"; Note = "Avatar name input label"; */
+"zzN-Av-RhD.text" = "Name*";

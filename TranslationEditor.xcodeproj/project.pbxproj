@@ -305,6 +305,25 @@
 		6365262C241BF0C70081731C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63652630241BF10A0081731C /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Main.strings; sourceTree = "<group>"; };
 		63652631241BF46D0081731C /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
+		63652634241C19580081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
+		63652636241C19A20081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		63652638241C19A60081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Common.strings; sourceTree = "<group>"; };
+		6365263A241C19AB0081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		6365263C241C19B20081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FilteredMultiSelection.strings; sourceTree = "<group>"; };
+		6365263E241C19B60081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OnlineStatusView.strings; sourceTree = "<group>"; };
+		63652640241C19B90081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CreateAvatar.strings; sourceTree = "<group>"; };
+		63652642241C19BC0081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TopUserDisplay.strings; sourceTree = "<group>"; };
+		63652644241C19C10081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/P2PJoinView.strings; sourceTree = "<group>"; };
+		63652646241C19C50081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FilteredSingleSelection.strings; sourceTree = "<group>"; };
+		63652648241C19CD0081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BookProgressUIView.strings; sourceTree = "<group>"; };
+		6365264A241C19D10081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TopBar.strings; sourceTree = "<group>"; };
+		6365264C241C19D40081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Connect2.strings; sourceTree = "<group>"; };
+		6365264E241C19D90081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DefaultLoadingView.strings; sourceTree = "<group>"; };
+		63652650241C19DC0081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DefaultErrorView.strings; sourceTree = "<group>"; };
+		63652652241C19DF0081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DefaultNoDataView.strings; sourceTree = "<group>"; };
+		63652654241C19E20081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ConnectPromptView.strings; sourceTree = "<group>"; };
+		63652656241C19E50081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ConnectPromptNoDataView.strings; sourceTree = "<group>"; };
+		63652657241C19F20081731C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C0130B41E3B5A100053C5C2 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		7C0130B71E3B6A1D0053C5C2 /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		7C0130BB1E3F1DFB0053C5C2 /* Carousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
@@ -1820,6 +1839,7 @@
 			children = (
 				6365262C241BF0C70081731C /* Base */,
 				63652630241BF10A0081731C /* id */,
+				6365263A241C19AB0081731C /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1838,6 +1858,7 @@
 			children = (
 				7C88A2FE1F0CD6AE00ACD6B6 /* Base */,
 				7C3B4747201B235B00FB4DE9 /* id */,
+				63652634241C19580081731C /* en */,
 			);
 			name = Login.storyboard;
 			sourceTree = "<group>";
@@ -1847,6 +1868,7 @@
 			children = (
 				7C88A2FF1F0CD6C700ACD6B6 /* Base */,
 				7C3B4748201B238700FB4DE9 /* id */,
+				63652636241C19A20081731C /* en */,
 			);
 			name = MainMenu.storyboard;
 			sourceTree = "<group>";
@@ -1856,6 +1878,7 @@
 			children = (
 				7C88A3001F0CD6CF00ACD6B6 /* Base */,
 				7C3B4749201B239C00FB4DE9 /* id */,
+				63652638241C19A60081731C /* en */,
 			);
 			name = Common.storyboard;
 			sourceTree = "<group>";
@@ -1865,6 +1888,7 @@
 			children = (
 				7C88A3011F0CD6DB00ACD6B6 /* Base */,
 				63652621241BEDE80081731C /* id */,
+				6365263C241C19B20081731C /* en */,
 			);
 			name = FilteredMultiSelection.xib;
 			sourceTree = "<group>";
@@ -1874,6 +1898,7 @@
 			children = (
 				7C88A3021F0CD6E500ACD6B6 /* Base */,
 				63652622241BEE020081731C /* id */,
+				6365263E241C19B60081731C /* en */,
 			);
 			name = OnlineStatusView.xib;
 			sourceTree = "<group>";
@@ -1883,6 +1908,7 @@
 			children = (
 				7C88A3031F0CD6EB00ACD6B6 /* Base */,
 				63652623241BEE300081731C /* id */,
+				63652640241C19B90081731C /* en */,
 			);
 			name = CreateAvatar.xib;
 			sourceTree = "<group>";
@@ -1892,6 +1918,7 @@
 			children = (
 				7C88A3051F0CD76600ACD6B6 /* Base */,
 				63652624241BEEF70081731C /* id */,
+				63652642241C19BC0081731C /* en */,
 			);
 			name = TopUserDisplay.xib;
 			sourceTree = "<group>";
@@ -1901,6 +1928,7 @@
 			children = (
 				7C88A30A1F0CD7B300ACD6B6 /* Base */,
 				7C88A30D1F0CD7B500ACD6B6 /* id */,
+				63652644241C19C10081731C /* en */,
 			);
 			name = P2PJoinView.xib;
 			sourceTree = "<group>";
@@ -1910,6 +1938,7 @@
 			children = (
 				7C88A30F1F0CD7C400ACD6B6 /* Base */,
 				7C88A3121F0CD7DD00ACD6B6 /* id */,
+				63652646241C19C50081731C /* en */,
 			);
 			name = FilteredSingleSelection.xib;
 			sourceTree = "<group>";
@@ -1919,6 +1948,7 @@
 			children = (
 				7C88A3141F0CD7FB00ACD6B6 /* Base */,
 				7C88A3171F0CD80E00ACD6B6 /* id */,
+				63652648241C19CD0081731C /* en */,
 			);
 			name = BookProgressUIView.xib;
 			sourceTree = "<group>";
@@ -1928,6 +1958,7 @@
 			children = (
 				7C88A3191F0CD86600ACD6B6 /* Base */,
 				7C88A31C1F0CD86800ACD6B6 /* id */,
+				6365264A241C19D10081731C /* en */,
 			);
 			name = TopBar.xib;
 			sourceTree = "<group>";
@@ -1937,6 +1968,7 @@
 			children = (
 				7C88A31E1F0CD88200ACD6B6 /* Base */,
 				7C88A3211F0CD8A800ACD6B6 /* id */,
+				6365264C241C19D40081731C /* en */,
 			);
 			name = Connect2.xib;
 			sourceTree = "<group>";
@@ -1946,6 +1978,7 @@
 			children = (
 				7C88A3231F0CD93000ACD6B6 /* Base */,
 				7C88A3261F0CD93C00ACD6B6 /* id */,
+				6365264E241C19D90081731C /* en */,
 			);
 			name = DefaultLoadingView.xib;
 			sourceTree = "<group>";
@@ -1955,6 +1988,7 @@
 			children = (
 				7C88A3281F0CD95600ACD6B6 /* Base */,
 				7C88A32B1F0CD96C00ACD6B6 /* id */,
+				63652650241C19DC0081731C /* en */,
 			);
 			name = DefaultErrorView.xib;
 			sourceTree = "<group>";
@@ -1964,6 +1998,7 @@
 			children = (
 				7C88A32D1F0CD9AC00ACD6B6 /* Base */,
 				7C88A3301F0CD9AF00ACD6B6 /* id */,
+				63652652241C19DF0081731C /* en */,
 			);
 			name = DefaultNoDataView.xib;
 			sourceTree = "<group>";
@@ -1973,6 +2008,7 @@
 			children = (
 				7C88A3321F0CD9C100ACD6B6 /* Base */,
 				7C88A3351F0CD9D700ACD6B6 /* id */,
+				63652654241C19E20081731C /* en */,
 			);
 			name = ConnectPromptView.xib;
 			sourceTree = "<group>";
@@ -1982,6 +2018,7 @@
 			children = (
 				7C88A3371F0CD9F400ACD6B6 /* Base */,
 				7C88A33A1F0CDA0700ACD6B6 /* id */,
+				63652656241C19E50081731C /* en */,
 			);
 			name = ConnectPromptNoDataView.xib;
 			sourceTree = "<group>";
@@ -1991,6 +2028,7 @@
 			children = (
 				7C88A33E1F0CDB6F00ACD6B6 /* id */,
 				084DE9D71F4712C000423620 /* Base */,
+				63652657241C19F20081731C /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2121,6 +2159,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TranslationEditor/TranslationEditor.entitlements;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 4QFE6EUS3B;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2128,12 +2167,14 @@
 				);
 				INFOPLIST_FILE = TranslationEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = agricola.TranslationEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TranslationEditor/TranslationEditor-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -2145,6 +2186,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TranslationEditor/TranslationEditor.entitlements;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 4QFE6EUS3B;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2152,11 +2194,13 @@
 				);
 				INFOPLIST_FILE = TranslationEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = agricola.TranslationEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TranslationEditor/TranslationEditor-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

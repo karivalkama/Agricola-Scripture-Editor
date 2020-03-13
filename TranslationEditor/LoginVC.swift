@@ -38,6 +38,7 @@ class LoginVC: UIViewController
     {
         super.viewDidLoad()
 //        defaults.set(selectedLang, forKey: "SelectedLang")
+        
         selectedLang = Language.getCurrentLanguage()
         print(selectedLang)
         topBar.configure(hostVC: self, title: "Login".localized() )
@@ -370,17 +371,17 @@ class LoginVC: UIViewController
         {
         case 0:
             selectedLang = "en"
-            defaults.set(selectedLang, forKey: "SelectedLang")
+//            defaults.set(selectedLang, forKey: "AppleLanguages")
             Language.setCurrentLanguage(selectedLang)
             languageButtonAction()
-            setLangSegment(lang: selectedLang)
+//            setLangSegment(lang: selectedLang)
             print(selectedLang)
         case 1:
             selectedLang = "id"
-            defaults.set(selectedLang, forKey: "SelectedLang")
+//            defaults.set(selectedLang, forKey: "AppleLanguages")
             Language.setCurrentLanguage(selectedLang)
             languageButtonAction()
-            setLangSegment(lang: selectedLang)
+//            setLangSegment(lang: selectedLang)
             print(selectedLang)
         default:
             break
@@ -390,6 +391,7 @@ class LoginVC: UIViewController
     func languageButtonAction() {
         // This is done so that network calls now have the Accept-Language as Language.getCurrentLanguage() (Using Alamofire) Check if you can remove these
         UserDefaults.standard.set([Language.getCurrentLanguage()], forKey: "AppleLanguages")
+//        UserDefaults.standard.set(selectedLang, forKey: "AppleLanguages")
         UserDefaults.standard.synchronize()
         
         // Update the language by swaping bundle
@@ -397,8 +399,8 @@ class LoginVC: UIViewController
 //        Bundle.setLanguage(selectedLang)
         // Done to reintantiate the storyboards instantly
         let storyboard = UIStoryboard.init(name: "Login", bundle: nil)
-        UIApplication.shared.keyWindow?.rootViewController = storyboard.instantiateInitialViewController()
-        //         UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController = storyboard.instantiateInitialViewController()
+//        UIApplication.shared.keyWindow?.rootViewController = storyboard.instantiateInitialViewController()
+                 UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController = storyboard.instantiateInitialViewController()
 
     }
     func setLangSegment(lang: String){
@@ -408,7 +410,7 @@ class LoginVC: UIViewController
               else{
                    langselectionseg.selectedSegmentIndex = 1
               }
-//         languageButtonAction()
+//        languageButtonAction()
     }
     
 }
