@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -41,6 +39,9 @@
                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="500" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VQ5-Td-PPs" customClass="BasicButton" customModule="TranslationEditor" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="140" width="436" height="52"/>
                             <color key="backgroundColor" red="1" green="0.0" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="436" id="zcf-yZ-EeH"/>
+                            </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <inset key="contentEdgeInsets" minX="8" minY="4" maxX="8" maxY="4"/>
                             <inset key="imageEdgeInsets" minX="-16" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -56,7 +57,6 @@
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" priority="900" constant="188" id="4Ay-hX-71a"/>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" priority="900" constant="512" id="wgO-Mx-A2C"/>
                     </constraints>
                 </stackView>

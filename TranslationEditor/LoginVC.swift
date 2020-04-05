@@ -32,13 +32,13 @@ class LoginVC: UIViewController
     
     var selectedLang = "en"
     let defaults = UserDefaults.standard
-    // INIT    ------------------------
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
 //        defaults.set(selectedLang, forKey: "SelectedLang")
-        
+//        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+//        UIDevice.current.setValue(value, forKey: "orientation")
         selectedLang = Language.getCurrentLanguage()
         print(selectedLang)
         topBar.configure(hostVC: self, title: "Login".localized() )
@@ -48,7 +48,7 @@ class LoginVC: UIViewController
         //        loginView.isHidden = true
         //        noDataView.isHidden = true
         
-        contentView.configure(mainView: view, elements: [userNameField, passwordField, errorLabel, loginButton, continueButton])
+//        contentView.configure(mainView: view, elements: [userNameField, passwordField, errorLabel, loginButton, continueButton])
         
         // If there is data present on this device, presents login, otherwise presents connection prompt
         do
@@ -76,7 +76,14 @@ class LoginVC: UIViewController
         }
        
     }
-    
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//        return .landscapeLeft
+//    }
+//
+//    override var shouldAutorotate: Bool {
+//        return true
+//    }
+
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
@@ -94,7 +101,7 @@ class LoginVC: UIViewController
         }
         
         // viewManager.startKeyboardListening()
-        contentView.startKeyboardListening()
+//        contentView.startKeyboardListening()
         
         topBar.updateUserView()
         setLangSegment(lang: selectedLang)
@@ -103,7 +110,7 @@ class LoginVC: UIViewController
     override func viewDidDisappear(_ animated: Bool)
     {
         // viewManager.endKeyboardListening()
-        contentView.endKeyboardListening()
+//        contentView.endKeyboardListening()
     }
     
     

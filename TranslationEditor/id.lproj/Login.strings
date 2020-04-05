@@ -60,7 +60,7 @@
 "Lwf-p5-Miv.text" = "Kata sandi*";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "M0d-2V-9K6"; Note = "Button for registering new user"; */
-"M0d-2V-9K6.normalTitle" = "Menciptakan akun baru";
+"M0d-2V-9K6.normalTitle" = "Meneruskan";
 
 /* Class = "UILabel"; text = "Nobody to connect with?"; ObjectID = "N2t-uR-2dT"; */
 "N2t-uR-2dT.text" = "Apakah tidak ada yang bisa dihubungkan?";
